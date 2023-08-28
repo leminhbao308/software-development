@@ -1,52 +1,19 @@
-# Project Sofware Development
+# Group Homework
 
-## Mô tả dự án
+### *Tất cả đều phải hoàn thành bài tập qua các link dưới đây:*
 
-Dự án Quản lý bán hàng tại cửa hàng quần áo thời trang là một ứng dụng phần mềm được phát triển nhằm giúp cửa hàng quần
-áo thời trang quản lý các hoạt động kinh doanh một cách hiệu quả. <br> Ứng dụng này sẽ giúp cửa hàng theo dõi, quản lý hàng
-tồn kho, thực hiện giao dịch bán hàng, quản lý thông tin khách hàng, và cung cấp các báo cáo thống kê để hỗ trợ quá
-trình ra quyết định.
+## Click để xem [mẫu bài tập](https://docs.google.com/document/d/14hk33oM2aDcpUn_CNFxAKPfS5ClEBAM9/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-## Thành viên tham gia
+### Click để xem [Bài tập 1](https://docs.google.com/document/d/14e5uA3qoT-XlE4242bDILngW7PMWJDF7/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-| **Họ Tên**      | **Mã Số Sinh Viên** |
-|-----------------|:-------------------:|
-| Lê Minh Bảo     |      21007881       |
-| Lê Hoàng Nam    |      21002211       |
-| Trương Quốc Bảo |      21017351       |
+### Click để xem [Bài tập 2](https://docs.google.com/document/d/14rt_O8VXXncSkwGc5PfduOZo27dNB14I/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-## Cài đặt và sử dụng
+### Click để xem [Bài tập 3](https://docs.google.com/document/d/14gGc-NVDj9Rd-ZYxgtkUmP_BzzKuV7rt/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-### Yêu cầu hệ thống:
+### Click để xem [Bài tập 4](https://docs.google.com/document/d/14cCrGzTx1gvlRxWtVRHpakR1-teIJtgz/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-- Hệ điều hành: `Windows 10+, macOS, hoặc Linux.`
-- Cài đặt Java `JDK 17+ và Maven mới nhất.`
-- IDE: `IntelliJ IDEA, Eclipse, hoặc NetBeans.`
-- Hệ quản trị cơ sở dữ liệu: `MongoDB mới nhất.`
+### Click để xem [Bài tập 5](https://docs.google.com/document/d/14aNBjzVv-1onYshuwsX_WFxBumg7BxbW/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-### Cài đặt:
+### Click để xem [Bài tập 6](https://docs.google.com/document/d/14lEdwxlAlSe30rBRyWVpWHGB7viXodbZ/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
 
-```
-
-git clone https://github.com/your-username/quan-ly-ban-hang.git
-
-```
-
-### Build Project:
-
-```
-
-mvn clean package
-java -jar target/software-development-1.0.0.jar
-
-```
-
-## Đóng góp:
-- Đây là một dự án cho môn học Phát Triển Ứng Dụng. <br>
-- Nếu có lỗi, hãy tạo một issue mới tại [đây](https://github.com/leminhbao308/software-development/issues). <br>
-- Đóng góp ý tưởng mới tại [đây](https://github.com/leminhbao308/software-development/issues).
-
-## Liên hệ:
-- Email: <a>leminhbao.work@gmail.com</a>
-- Facebook: [Lê Minh Bảo](https://www.facebook.com/lmbao.Broseidon308/)
-- Phone: (+84) 399 405 711
+### Click để xem [Bài tập 7](https://docs.google.com/document/d/14jDKDjWGl4rSGHo9U_e1Ckf11w0jwW0P/edit?usp=sharing&ouid=113054172689021485387&rtpof=true&sd=true)
