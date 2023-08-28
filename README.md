@@ -22,6 +22,7 @@ trình ra quyết định.
 - Hệ điều hành: `Windows 10+, macOS, hoặc Linux.`
 - Cài đặt Java `JDK 17+ và Maven mới nhất.`
 - IDE: `IntelliJ IDEA, Eclipse, hoặc NetBeans.`
+- Hệ quản trị cơ sở dữ liệu: `MongoDB mới nhất.`
 
 ### Cài đặt:
 
@@ -42,8 +43,8 @@ java -jar target/software-development-1.0.0.jar
 
 ## Đóng góp:
 - Đây là một dự án cho môn học Phát Triển Ứng Dụng. <br>
-- Nếu có lỗi, hãy tạo một issue mới tại [đây](github.com/your-username/quan-ly-ban-hang/issues). <br>
-- Đóng góp ý tưởng mới tại [đây](github.com/your-username/quan-ly-ban-hang/issue).
+- Nếu có lỗi, hãy tạo một issue mới tại [đây](https://github.com/leminhbao308/software-development/issues). <br>
+- Đóng góp ý tưởng mới tại [đây](https://github.com/leminhbao308/software-development/issues).
 
 ## Liên hệ:
 - Email: <a>leminhbao.work@gmail.com</a>
