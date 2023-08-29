@@ -1,6 +1,7 @@
 package org.group06.utils;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ColorConstant {
     // Màu chữ
@@ -25,6 +26,15 @@ public class ColorConstant {
 
     private ColorConstant() {
         // Để ngăn việc tạo đối tượng instance của lớp này
+    }
+
+    public static ArrayList<Color> generateColorPalette(int numberOfColors) {
+        ArrayList<Color> colorPalette = new ArrayList<>();
+        float hueStep = 1.0f / numberOfColors;
+        for (int i = 0; i < numberOfColors; i++) {
+            colorPalette.add(Color.getHSBColor(i * hueStep, 1.0f, 1.0f));
+        }
+        return colorPalette;
     }
 }
 

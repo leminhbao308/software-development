@@ -1,5 +1,7 @@
 package org.group06.view.components.charts;
 
+import org.group06.utils.ColorConstant;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class PieChart extends JPanel {
         this.data = data;
     }
 
-    private static JPanel createLegendPanel(LinkedHashMap<String, Double> data, ArrayList<Color> colorPalette) {
+    public JPanel createLegendPanel(LinkedHashMap<String, Double> data, ArrayList<Color> colorPalette) {
         JPanel legendPanel = new JPanel(new GridLayout(data.size(), 1));
         int index = 0;
 
@@ -35,30 +37,6 @@ public class PieChart extends JPanel {
         return legendPanel;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LinkedHashMap<String, Double> data = new LinkedHashMap<>();
-            data.put("Category 01", 400.0);
-            data.put("Category 02", 1204.0);
-            data.put("Category 03", 499.0);
-            data.put("Category 04", 200.0);
-            data.put("Category 05", 400.0);
-
-            JFrame frame = new JFrame("Pie Chart Example");
-            frame.setSize(600, 400);
-            PieChart pieChartPanel = new PieChart(data);
-            frame.add(pieChartPanel, BorderLayout.CENTER);
-
-            JPanel legendPanel = createLegendPanel(data, pieChartPanel.generateColorPalette(data.size()));
-            frame.add(legendPanel, BorderLayout.EAST);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(pieChartPanel);
-
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -68,7 +46,7 @@ public class PieChart extends JPanel {
             totalValue += value;
         }
 
-        ArrayList<Color> colorPalette = generateColorPalette(data.size());
+        ArrayList<Color> colorPalette = ColorConstant.generateColorPalette(data.size());
         double currentAngle = 90;
 
         int radius = Math.min(getWidth(), getHeight()) / 2;
@@ -111,14 +89,5 @@ public class PieChart extends JPanel {
             g.setColor(color);
             g.fillPolygon(xPoints, yPoints, 3);
         }
-    }
-
-    private ArrayList<Color> generateColorPalette(int numberOfColors) {
-        ArrayList<Color> colorPalette = new ArrayList<>();
-        float hueStep = 1.0f / numberOfColors;
-        for (int i = 0; i < numberOfColors; i++) {
-            colorPalette.add(Color.getHSBColor(i * hueStep, 1.0f, 1.0f));
-        }
-        return colorPalette;
     }
 }
