@@ -19,8 +19,4 @@ public class Main {
             }
         });
     }
-
-    public static Main getInstance() {
-        return new Main();
-    }
 }
