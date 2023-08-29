@@ -21,6 +21,7 @@ trình ra quyết định.
 
 - Hệ điều hành: `Windows 10+, macOS, hoặc Linux.`
 - Cài đặt Java `JDK 17+ và Maven mới nhất.`
+- Cài đặt Maven `Phiên bản Maven mới nhất.`
 - IDE: `IntelliJ IDEA, Eclipse, hoặc NetBeans.`
 - Hệ quản trị cơ sở dữ liệu: `MongoDB mới nhất.`
 
