@@ -59,6 +59,14 @@ public class RoundButton extends JButton {
         });
     }
 
+    /**
+     * Khởi tạo button bo góc với tiêu đề và màu
+     *
+     * @param name         Tiêu đề
+     * @param colorDefault Màu mặc định
+     * @param colorOver    Màu khi di chuột vào
+     * @param colorClick   Màu khi click
+     */
     public RoundButton(String name, Color colorDefault, Color colorOver, Color colorClick) {
         super(name);
         this.colorDefault = colorDefault;

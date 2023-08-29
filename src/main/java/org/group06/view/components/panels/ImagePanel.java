@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+/**
+ * Lớp ImagePanel dùng để hiển thị hình ảnh lên panel
+ *
+ * @author Lê Minh Bảo
+ */
 public class ImagePanel extends JPanel {
     private Image image;
 
