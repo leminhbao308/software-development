@@ -64,6 +64,7 @@ public class RoundButton extends JButton {
         this.colorDefault = colorDefault;
         this.colorOver = colorOver;
         this.colorClick = colorClick;
+        this.setBackground(colorDefault);
         setBorderPainted(false);
         setOpaque(false);
 
