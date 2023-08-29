@@ -1,12 +1,16 @@
 package org.group06.view.screen;
 
+import org.group06.controller.events.EventLogin;
 import org.group06.utils.ColorConstant;
+import org.group06.utils.ImagePath;
 import org.group06.view.components.buttons.RoundButton;
 import org.group06.view.components.panels.ImagePanel;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
     private RoundButton btnForgotPwd;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
@@ -29,23 +33,22 @@ public class Login extends JFrame {
         pwdPassword = new javax.swing.JPasswordField();
         btnForgotPwd = new RoundButton("Forgot Password", ColorConstant.BUTTON_SECONDARY_NORMAL, ColorConstant.BUTTON_SECONDARY_HOVER, ColorConstant.BUTTON_SECONDARY_CLICK);
         btnLogin = new RoundButton("LOGIN", ColorConstant.BUTTON_NORMAL, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK);
-        pnImage = new ImagePanel("src/main/resources/images/thumbnail/login.jpg", 653, 600);
+        pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 653, 600);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login - Group 06");
-        setIconImage(new ImageIcon("src/main/resources/images/icon/icon.png").getImage());
+        setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
         setResizable(false);
         setMaximumSize(new java.awt.Dimension(1100, 600));
         setMinimumSize(new java.awt.Dimension(1100, 600));
         setPreferredSize(new java.awt.Dimension(1100, 600));
 
-        pnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        pnLogin.setBackground(ColorConstant.BACKGROUND_NORMAL);
         pnLogin.setMaximumSize(new java.awt.Dimension(447, 600));
         pnLogin.setMinimumSize(new java.awt.Dimension(447, 600));
-        pnLogin.setName(""); // NOI18N
         pnLogin.setPreferredSize(new java.awt.Dimension(447, 600));
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 30));
         lblTitle.setText("Login Your Account");
         lblTitle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         lblTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -54,26 +57,27 @@ public class Login extends JFrame {
         lblSubTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblSubTitle.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 18));
         txtUsername.setText("Admin");
         txtUsername.setToolTipText("Enter Username");
-        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Username or Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Username or Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), ColorConstant.TITLE_BORDER));
 
-        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 18));
         pwdPassword.setText("Admin");
         pwdPassword.setToolTipText("Enter Password");
-        pwdPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        pwdPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), ColorConstant.TITLE_BORDER));
         pwdPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnForgotPwd.setToolTipText("Click if you forgot your password");
         btnForgotPwd.setBorderPainted(false);
         btnForgotPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnForgotPwd.addActionListener(this);
 
-        btnLogin.setBackground(new java.awt.Color(64, 204, 111));
-        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnLogin.setForeground(ColorConstant.TEXT_BUTTON);
         btnLogin.setText("LOGIN");
         btnLogin.setToolTipText("Click to login to your account");
+        btnLogin.addActionListener(new EventLogin(this));
 
         javax.swing.GroupLayout pnLoginLayout = new javax.swing.GroupLayout(pnLogin);
         pnLogin.setLayout(pnLoginLayout);
@@ -140,5 +144,13 @@ public class Login extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object o = e.getSource();
+        if (o == btnForgotPwd) {
+            JOptionPane.showMessageDialog(null, "Username: Admin\nPassword: Admin", "Forgot Password", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }
