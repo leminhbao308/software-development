@@ -28,7 +28,7 @@ trình ra quyết định.
 
 ```
 
-git clone https://github.com/your-username/quan-ly-ban-hang.git
+git clone https://github.com/leminhbao308/software-development.git
 
 ```
 
