@@ -11,6 +11,8 @@ public class ColorConstant {
 
     // Màu nền
     public static final Color BACKGROUND_NORMAL = new Color(214, 228, 229);
+    public static final Color BACKGROUND_BLACK = new Color(30, 30, 30);
+    public static final Color BACKGROUND_GRAY = Color.GRAY;
     public static final Color BACKGROUND_HEADER_FOOTER = new Color(73, 113, 116);
 
     // Màu nút
