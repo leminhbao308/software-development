@@ -1,6 +1,7 @@
 package org.group06;
 
 import org.group06.utils.ColorConstant;
+import org.group06.view.components.charts.HistogramChart;
 import org.group06.view.components.charts.data.HistogramData;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -67,9 +68,11 @@ public class Demo {
         plot.setRangeGridlinePaint(ColorConstant.BUTTON_CLICK);
 //        ChartPanel chartPanel = new ChartPanel(chart);
         ChartPanel chartPanel = new ChartPanel(c1);
+        HistogramChart hc = new HistogramChart("Demo", "Category", "Value", hcd, "Test", 10);
         JFrame frame = new JFrame();
-        frame.add(chartPanel, BorderLayout.CENTER);
+//        frame.add(chartPanel, BorderLayout.CENTER);
 //        ChartFrame frame = new ChartFrame("Demo", chart);
+        frame.add(hc, BorderLayout.CENTER);
         frame.setVisible(true);
         frame.setSize(450, 350);
     }
