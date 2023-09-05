@@ -5,20 +5,23 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.buttons.RoundButton;
 import org.group06.view.components.panels.ImagePanel;
+import org.group06.view.components.textFields.PasswordField;
+import org.group06.view.components.textFields.TextField;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame implements ActionListener {
     private RoundButton btnForgotPwd;
-    private javax.swing.JButton btnLogin;
+    private RoundButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
     private javax.swing.JLabel lblTitle;
     private ImagePanel pnImage;
     private javax.swing.JPanel pnLogin;
-    private javax.swing.JPasswordField pwdPassword;
-    private javax.swing.JTextField txtUsername;
+    private PasswordField pwdPassword;
+    private TextField txtUsername;
 
     public Login() {
         initComponents();
@@ -29,8 +32,8 @@ public class Login extends JFrame implements ActionListener {
         pnLogin = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblSubTitle = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        pwdPassword = new javax.swing.JPasswordField();
+        txtUsername = new TextField();
+        pwdPassword = new PasswordField();
         btnForgotPwd = new RoundButton("Forgot Password", ColorConstant.BUTTON_SECONDARY_NORMAL, ColorConstant.BUTTON_SECONDARY_HOVER, ColorConstant.BUTTON_SECONDARY_CLICK);
         btnLogin = new RoundButton("LOGIN", ColorConstant.BUTTON_NORMAL, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK);
         pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 653, 600);
@@ -39,39 +42,44 @@ public class Login extends JFrame implements ActionListener {
         setTitle("Login - Group 06");
         setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
         setResizable(false);
-        setMaximumSize(new java.awt.Dimension(1100, 600));
-        setMinimumSize(new java.awt.Dimension(1100, 600));
-        setPreferredSize(new java.awt.Dimension(1100, 600));
+        setMaximumSize(new java.awt.Dimension(1000, 550));
+        setMinimumSize(new java.awt.Dimension(1000, 550));
+        setPreferredSize(new java.awt.Dimension(1000, 550));
+        setBackground(ColorConstant.TEXT_NORMAL);
 
-        pnLogin.setBackground(ColorConstant.BACKGROUND_NORMAL);
+        pnLogin.setBackground(ColorConstant.BACKGROUND_GRAY);
         pnLogin.setMaximumSize(new java.awt.Dimension(447, 600));
         pnLogin.setMinimumSize(new java.awt.Dimension(447, 600));
         pnLogin.setPreferredSize(new java.awt.Dimension(447, 600));
+        pnLogin.setBackground(ColorConstant.BACKGROUND_BLACK);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 30));
+        lblTitle.setForeground(ColorConstant.TEXT_HEADER_FOOTER);
         lblTitle.setText("Login Your Account");
         lblTitle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         lblTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         lblSubTitle.setText("Please login to your account");
+        lblSubTitle.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 16));
+        lblSubTitle.setForeground(ColorConstant.TEXT_HEADER_FOOTER);
         lblSubTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblSubTitle.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        txtUsername.setText("Admin");
+        txtUsername.setHint("Username or Email");
         txtUsername.setToolTipText("Enter Username");
-        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Username or Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), ColorConstant.TITLE_BORDER));
+        txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        pwdPassword.setText("Admin");
+        pwdPassword.setHint("Password");
         pwdPassword.setToolTipText("Enter Password");
-        pwdPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), ColorConstant.TITLE_BORDER));
         pwdPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnForgotPwd.setToolTipText("Click if you forgot your password");
         btnForgotPwd.setBorderPainted(false);
         btnForgotPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnForgotPwd.addActionListener(this);
+
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14));
         btnLogin.setForeground(ColorConstant.TEXT_BUTTON);
@@ -99,7 +107,7 @@ public class Login extends JFrame implements ActionListener {
         pnLoginLayout.setVerticalGroup(
                 pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnLoginLayout.createSequentialGroup()
-                                .addGap(155, 155, 155)
+                                .addGap(55, 55, 55)
                                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblSubTitle)
@@ -113,8 +121,6 @@ public class Login extends JFrame implements ActionListener {
                                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(119, Short.MAX_VALUE))
         );
-
-        pnImage.setMinimumSize(new java.awt.Dimension(653, 600));
 
         javax.swing.GroupLayout pnImageLayout = new javax.swing.GroupLayout(pnImage);
         pnImage.setLayout(pnImageLayout);
@@ -133,7 +139,6 @@ public class Login extends JFrame implements ActionListener {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(pnImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
