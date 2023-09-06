@@ -2,9 +2,9 @@ package org.group06.view.screen;
 
 import org.group06.model.entity.Customer;
 import org.group06.model.manager.CustomerManager;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.charts.PieChart;
+import org.group06.view.components.charts.data.PieChartData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +20,6 @@ public class MainFrame extends JFrame {
         setResizable(false);
         setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
 
-        LinkedHashMap<String, Double> data = new LinkedHashMap<>();
         ArrayList<Customer> c1 = new ArrayList<>();
         c1.add(new Customer("NV01", "Le Minh Bao", "hcm", "012345678", 100.0));
         c1.add(new Customer("NV02", "Le Minh Beo", "hcm", "012345678", 103.0));
@@ -29,12 +28,16 @@ public class MainFrame extends JFrame {
 
         CustomerManager cm = new CustomerManager(c1);
 
-        for ( Customer c : cm.getCustomers()) {
+        LinkedHashMap<String, Double> data = new LinkedHashMap<>();
+
+        for (Customer c : cm.getCustomers()) {
             data.put(c.getTen(), c.getTongThanhToan());
         }
 
-        PieChart pieChart = new PieChart(data);
-        add(pieChart, BorderLayout.CENTER);
-        add(pieChart.createLegendPanel(data, ColorConstant.generateColorPalette(data.size())), BorderLayout.EAST);
+        PieChartData pData = new PieChartData(data);
+
+        PieChart chart = new PieChart("Pie Chart", "Demo Pie Chart", pData);
+        chart.setScrollable(true);
+        add(chart, BorderLayout.CENTER);
     }
 }
