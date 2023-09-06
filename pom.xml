@@ -26,6 +26,12 @@
             <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-jdesktop-animation-timing</artifactId>
+            <version>1.0-201002281504</version>
+        </dependency>
+
     </dependencies>
 
     <build>
