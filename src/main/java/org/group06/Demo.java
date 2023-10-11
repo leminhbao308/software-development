@@ -65,7 +65,7 @@ public class Demo {
         JFreeChart c1 = ChartFactory.createHistogram("Demo", "Category", "Value", hcd.getDataSet("Test", 10), PlotOrientation.VERTICAL, true, true, true);
         JFreeChart chart = ChartFactory.createBarChart("Demo", "Category", "Value", dataset, PlotOrientation.VERTICAL, false, true, false);
         CategoryPlot plot = chart.getCategoryPlot();
-        plot.setRangeGridlinePaint(ColorConstant.BUTTON_CLICK);
+        plot.setRangeGridlinePaint(ColorConstant.BUTTON_LOGIN_CLICK);
 //        ChartPanel chartPanel = new ChartPanel(chart);
         ChartPanel chartPanel = new ChartPanel(c1);
         HistogramChart hc = new HistogramChart("Demo", "Category", "Value", hcd, "Test", 10);
