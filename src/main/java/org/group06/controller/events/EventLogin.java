@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class EventLogin implements ActionListener {
 
-    private Login loginFrame;
+    private final Login loginFrame;
 
     public EventLogin(Login loginFrame) {
         this.loginFrame = loginFrame;
