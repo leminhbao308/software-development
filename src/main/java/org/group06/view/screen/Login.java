@@ -36,14 +36,14 @@ public class Login extends JFrame implements ActionListener {
         txtUsername = new TextField();
         pwdPassword = new PasswordField();
         btnLogin = new RoundButton("LOGIN", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 820, 620);
+        pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 820, 600);
 
         setUndecorated(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng Nhập - Nhóm 06");
         setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
         setResizable(false);
-        setSize(new java.awt.Dimension(1400, 620));
+        setSize(new java.awt.Dimension(1345, 600));
         setBackground(ColorConstant.BACKGROUND_NORMAL);
 
         pnLogin.setMaximumSize(new java.awt.Dimension(447, 600));
@@ -85,13 +85,13 @@ public class Login extends JFrame implements ActionListener {
         pnLoginLayout.setHorizontalGroup(
                 pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnLoginLayout.createSequentialGroup()
-                                .addContainerGap(78, Short.MAX_VALUE)
+                                .addContainerGap(50,50)
                                 .addGroup(pnLoginLayout.createParallelGroup(GroupLayout.Alignment.CENTER, false)
                                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                                         .addComponent(lblSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(pwdPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(pnLoginLayout.createSequentialGroup().addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnLoginLayout.createSequentialGroup().addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 )
                                 .addGap(51, 51, 51))
         );
