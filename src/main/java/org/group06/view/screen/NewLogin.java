@@ -39,9 +39,9 @@ public class NewLogin extends javax.swing.JFrame {
         pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 800, 508);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(ColorConstant.TEXT_NORMAL);
+        setBackground(ColorConstant.BLACK);
 
-        pnLogin.setBackground(ColorConstant.TEXT_NORMAL);
+        pnLogin.setBackground(ColorConstant.BLACK);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -65,11 +65,11 @@ public class NewLogin extends javax.swing.JFrame {
         });
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnLogin.setForeground(ColorConstant.TEXT_BUTTON);
+        btnLogin.setForeground(ColorConstant.WHITE);
         btnLogin.setText("Login");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        pnImage.setBackground(ColorConstant.TEXT_NORMAL);
+        pnImage.setBackground(ColorConstant.BLACK);
 
         javax.swing.GroupLayout pnImageLayout = new javax.swing.GroupLayout(pnImage);
         pnImage.setLayout(pnImageLayout);

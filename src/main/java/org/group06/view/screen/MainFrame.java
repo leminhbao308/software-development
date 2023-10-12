@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         setResizable(false);
-        setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
+        setIconImage(ImagePath.loadImage(ImagePath.ICON_LOGO));
 
         ArrayList<Customer> c1 = new ArrayList<>();
         c1.add(new Customer("NV01", "Le Minh Bao", "hcm", "012345678", 100.0));
