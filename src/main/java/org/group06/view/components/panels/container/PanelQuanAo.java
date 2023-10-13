@@ -9,11 +9,6 @@ package org.group06.view.components.panels.container;
  */
 public class PanelQuanAo extends javax.swing.JPanel {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-
-
     /**
      * Creates new form PanelQuanAo
      */
@@ -57,5 +52,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
