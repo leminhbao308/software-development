@@ -1,6 +1,7 @@
 package org.group06.view.components.buttons;
 
 import org.group06.utils.ColorConstant;
+import org.group06.view.components.animation.FancyBorderRadius;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,10 @@ public class RoundButton extends JButton {
     Color colorDefault = ColorConstant.BUTTON_LOGIN_NORMAL;
     Color colorOver = ColorConstant.BUTTON_LOGIN_HOVER;
     Color colorClick = ColorConstant.BUTTON_LOGIN_CLICK;
-    Color borderColor = ColorConstant.BUTTON_LOGIN_NORMAL;
+
+    private final RippleEffect rippleEffect;
+    private Shape shape;
+
     boolean over;
 
     /**
@@ -30,10 +34,12 @@ public class RoundButton extends JButton {
         this.colorDefault = colorDefault;
         this.colorOver = colorOver;
         this.colorClick = colorClick;
+
+        rippleEffect = new RippleEffect(this);
+//        setBorder(new EmptyBorder(8, 5, 8, 5));
         this.setBackground(colorDefault);
         setBorderPainted(false);
         setOpaque(false);
-
         setContentAreaFilled(false);
         // Add event mouse
         addMouseListener(new MouseAdapter() {
@@ -73,11 +79,18 @@ public class RoundButton extends JButton {
      */
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        // Paint Border
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 50, 50);
+        g2.setColor(ColorConstant.BUTTON_LOGIN_NORMAL);
+        g2.fill(shape);
+        rippleEffect.reder(g2, shape);
+        g2.dispose();
         super.paintComponent(g);
+    }
+
+    @Override
+    public void setBounds(int i, int i1, int i2, int i3) {
+        super.setBounds(i, i1, i2, i3);
+        shape = new FancyBorderRadius(getWidth(), getHeight(), "10% 10% 10% 10% / 35% 35% 35% 35%").getShape();
     }
 }

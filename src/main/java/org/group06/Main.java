@@ -1,11 +1,14 @@
 package org.group06;
 
-import org.group06.view.screen.Form;
 import org.group06.view.screen.Login;
+import org.group06.view.screen.MainFrame;
 
 import javax.swing.*;
 
 public class Main {
+
+    private static Login loginFrame = new Login();
+    private static MainFrame mainFrame = new MainFrame();
 
     public static void main(String[] args) {
         try {
@@ -17,10 +20,8 @@ public class Main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Login().setVisible(true);
-//                new NewLogin().setVisible(true);
-                new Form().setVisible(true);
-//                new MainFrame().setVisible(true);
+                loginFrame.setVisible(true);
+//                mainFrame.setVisible(true);
             }
         });
     }
