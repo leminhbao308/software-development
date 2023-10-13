@@ -2,6 +2,7 @@ package org.group06.view.screen;
 
 import org.group06.controller.events.EventLogin;
 import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.buttons.RoundButton;
 import org.group06.view.components.panels.ImagePanel;
@@ -13,7 +14,6 @@ import java.awt.*;
 
 public class Login extends JFrame {
 
-//    private RoundButton btnForgotPwd;
     private RoundButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
     private javax.swing.JLabel lblTitle;
@@ -48,29 +48,29 @@ public class Login extends JFrame {
         pnLogin.setPreferredSize(new java.awt.Dimension(447, 600));
         pnLogin.setBackground(ColorConstant.WHITE);
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
+        lblTitle.setFont(FontConstant.FONT_HEADER);
         lblTitle.setForeground(ColorConstant.BLACK);
         lblTitle.setText("Đăng Nhập Tài Khoản");
         lblTitle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         lblTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         lblSubTitle.setText("Vui lòng nhập tài khoản của bạn");
-        lblSubTitle.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 16));
+        lblSubTitle.setFont(FontConstant.FONT_SUB_HEADER);
         lblSubTitle.setForeground(ColorConstant.BLACK);
         lblSubTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblSubTitle.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        txtUsername.setFont(FontConstant.FONT_LABEL);
         txtUsername.setHint("Mã nhân viên");
         txtUsername.setToolTipText("Nhập vào mã nhân viên");
         txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        pwdPassword.setFont(FontConstant.FONT_LABEL);
         pwdPassword.setHint("Mật khẩu");
         pwdPassword.setToolTipText("Nhập vào mật khẩu");
         pwdPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 18));
+        btnLogin.setFont(FontConstant.FONT_BUTTON);
         btnLogin.setForeground(ColorConstant.WHITE);
         btnLogin.setText("Đăng Nhập");
         btnLogin.setToolTipText("Click để đăng nhập");
