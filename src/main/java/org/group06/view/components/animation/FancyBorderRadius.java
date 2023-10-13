@@ -6,9 +6,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-/**
- * @author Raven
- */
 public class FancyBorderRadius {
 
     private double width;

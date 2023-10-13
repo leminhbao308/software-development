@@ -1,5 +1,6 @@
 package org.group06.view.components.textFields;
 
+import lombok.Getter;
 import org.group06.utils.ColorConstant;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -13,13 +14,14 @@ import java.awt.*;
 public class TextField extends JTextField {
 
     private final Animator animator;
+    @Getter
     private String hint = "";
     private float animate;
     private boolean show = true;
     public TextField() {
         setOpaque(false);
         setBorder(new EmptyBorder(9, 1, 9, 1));
-        setForeground(ColorConstant.TEXT_NORMAL);
+        setForeground(ColorConstant.BLACK);
         setSelectionColor(new Color(200, 200, 200, 100));
         animator = new Animator(350, new TimingTargetAdapter() {
             @Override
@@ -72,10 +74,6 @@ public class TextField extends JTextField {
             }
         });
 
-    }
-
-    public String getHint() {
-        return hint;
     }
 
     public void setHint(String hint) {

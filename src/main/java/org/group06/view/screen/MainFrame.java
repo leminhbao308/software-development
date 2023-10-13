@@ -1,43 +1,332 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package org.group06.view.screen;
 
-import org.group06.model.entity.Customer;
-import org.group06.model.manager.CustomerManager;
+import org.group06.utils.ColorConstant;
 import org.group06.utils.ImagePath;
-import org.group06.view.components.charts.PieChart;
-import org.group06.view.components.charts.data.PieChartData;
+import org.group06.view.components.panels.ImagePanel;
+import org.group06.view.components.panels.container.PanelBanHang;
+import org.group06.view.components.panels.container.PanelQuanAo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
-public class MainFrame extends JFrame {
+/**
+ * @author lehoa
+ */
+public class MainFrame extends javax.swing.JFrame {
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnBanHang;
+    private javax.swing.JButton btnDangXuat;
+    private javax.swing.JToggleButton btnHoaDon;
+    private javax.swing.JToggleButton btnKhachHang;
+    private javax.swing.JToggleButton btnNhanVien;
+    private javax.swing.JToggleButton btnPhieuTam;
+    private javax.swing.JToggleButton btnQuanAo;
+    private javax.swing.JToggleButton btnThongKe;
+    private javax.swing.ButtonGroup grpSelect;
+    private javax.swing.JLabel lblAvatar;
+    private javax.swing.JLabel lblChucVu;
+    private javax.swing.JLabel lblHoTen;
+    private javax.swing.JPanel pnChucNang;
+    private javax.swing.JPanel pnContainer;
+    private javax.swing.JPanel pnLogo;
+    private javax.swing.JPanel pnSideBar;
+    private javax.swing.JPanel pnUser;
+    private javax.swing.JSeparator spr01;
+    private javax.swing.JSeparator spr02;
+    private javax.swing.JSeparator spr03;
+    /**
+     * Creates new form Form
+     */
     public MainFrame() {
-        super("Main Frame");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setResizable(false);
-        setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
-
-        ArrayList<Customer> c1 = new ArrayList<>();
-        c1.add(new Customer("NV01", "Le Minh Bao", "hcm", "012345678", 100.0));
-        c1.add(new Customer("NV02", "Le Minh Beo", "hcm", "012345678", 103.0));
-        c1.add(new Customer("NV03", "Le Minh Lon", "hcm", "012345678", 1023.0));
-        c1.add(new Customer("NV04", "Le Minh Nho", "hcm", "012345678", 1450.0));
-
-        CustomerManager cm = new CustomerManager(c1);
-
-        LinkedHashMap<String, Double> data = new LinkedHashMap<>();
-
-        for (Customer c : cm.getCustomers()) {
-            data.put(c.getTen(), c.getTongThanhToan());
-        }
-
-        PieChartData pData = new PieChartData(data);
-
-        PieChart chart = new PieChart("Pie Chart", "Demo Pie Chart", pData);
-        chart.setScrollable(true);
-        add(chart, BorderLayout.CENTER);
+        spr02.setVisible(false);
     }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        grpSelect = new javax.swing.ButtonGroup();
+        pnSideBar = new javax.swing.JPanel();
+        pnLogo = new ImagePanel(ImagePath.THUMBNAIL_LOGO, 150, 100);
+        spr01 = new javax.swing.JSeparator();
+        pnUser = new javax.swing.JPanel();
+        lblAvatar = new javax.swing.JLabel();
+        lblHoTen = new javax.swing.JLabel();
+        lblChucVu = new javax.swing.JLabel();
+        pnChucNang = new javax.swing.JPanel();
+        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        spr02 = new javax.swing.JSeparator();
+        spr03 = new javax.swing.JSeparator();
+        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnDangXuat = new org.group06.view.components.buttons.Button();
+        pnContainer = new PanelBanHang();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Phần Mềm Quản Lý Cửa Hàng");
+        setIconImage(ImagePath.loadImage(ImagePath.ICON_LOGO)
+        );
+        setUndecorated(true);
+
+        pnSideBar.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        pnSideBar.setPreferredSize(new java.awt.Dimension(490, 781));
+
+        pnLogo.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        pnLogo.setMaximumSize(new java.awt.Dimension(490, 166));
+        pnLogo.setMinimumSize(new java.awt.Dimension(490, 166));
+        pnLogo.setPreferredSize(new java.awt.Dimension(490, 166));
+
+        javax.swing.GroupLayout pnLogoLayout = new javax.swing.GroupLayout(pnLogo);
+        pnLogo.setLayout(pnLogoLayout);
+        pnLogoLayout.setHorizontalGroup(
+                pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnLogoLayout.setVerticalGroup(
+                pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        pnUser.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+
+        lblAvatar.setIcon(ImagePath.loadIcon(ImagePath.ICON_USER)
+        );
+
+        lblHoTen.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblHoTen.setForeground(ColorConstant.WHITE);
+        lblHoTen.setText("Le Minh Bao");
+
+        lblChucVu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblChucVu.setForeground(ColorConstant.WHITE);
+        lblChucVu.setText("Nhan Vien Ban Hang");
+
+        javax.swing.GroupLayout pnUserLayout = new javax.swing.GroupLayout(pnUser);
+        pnUser.setLayout(pnUserLayout);
+        pnUserLayout.setHorizontalGroup(
+                pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnUserLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                                .addContainerGap())
+        );
+        pnUserLayout.setVerticalGroup(
+                pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnUserLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(pnUserLayout.createSequentialGroup()
+                                                .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, 0)
+                                                .addComponent(lblChucVu)
+                                                .addGap(0, 18, Short.MAX_VALUE)))
+                                .addContainerGap())
+        );
+
+        pnChucNang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        pnChucNang.setLayout(new java.awt.GridLayout(10, 1));
+
+        grpSelect.add(btnBanHang);
+        btnBanHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_SELL)
+        );
+        btnBanHang.setText("Bán Hàng");
+        btnBanHang.setIconTextGap(15);
+        btnBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBanHangActionPerformed(evt);
+            }
+        });
+        pnChucNang.add(btnBanHang);
+
+        grpSelect.add(btnQuanAo);
+        btnQuanAo.setIcon(ImagePath.loadIcon(ImagePath.ICON_CLOTHES)
+        );
+        btnQuanAo.setText("Quần Áo");
+        btnQuanAo.setIconTextGap(15);
+        btnQuanAo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuanAoActionPerformed(evt);
+            }
+        });
+        pnChucNang.add(btnQuanAo);
+
+        grpSelect.add(btnHoaDon);
+        btnHoaDon.setIcon(ImagePath.loadIcon(ImagePath.ICON_BILL)
+        );
+        btnHoaDon.setText("Hoá Đơn");
+        btnHoaDon.setIconTextGap(15);
+        pnChucNang.add(btnHoaDon);
+
+        grpSelect.add(btnPhieuTam);
+        btnPhieuTam.setIcon(ImagePath.loadIcon(ImagePath.ICON_DRAFT)
+        );
+        btnPhieuTam.setText("Phiếu Tạm");
+        btnPhieuTam.setIconTextGap(15);
+        pnChucNang.add(btnPhieuTam);
+
+        grpSelect.add(btnKhachHang);
+        btnKhachHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_CUSTOMER)
+        );
+        btnKhachHang.setText("Khách Hàng");
+        btnKhachHang.setIconTextGap(15);
+        pnChucNang.add(btnKhachHang);
+
+        grpSelect.add(btnNhanVien);
+        btnNhanVien.setIcon(ImagePath.loadIcon(ImagePath.ICON_EMPLOYEE));
+        btnNhanVien.setText("Nhân Viên");
+        btnNhanVien.setIconTextGap(15);
+        pnChucNang.add(btnNhanVien);
+
+        spr02.setPreferredSize(new java.awt.Dimension(0, 0));
+        pnChucNang.add(spr02);
+        pnChucNang.add(spr03);
+
+        grpSelect.add(btnThongKe);
+        btnThongKe.setIcon(ImagePath.loadIcon(ImagePath.ICON_CHART)
+        );
+        btnThongKe.setText("Thống Kê");
+        btnThongKe.setIconTextGap(15);
+        pnChucNang.add(btnThongKe);
+
+        btnDangXuat.setIcon(ImagePath.loadIcon(ImagePath.ICON_LOGOUT)
+        );
+        btnDangXuat.setText("Đăng Xuất");
+        btnDangXuat.setIconTextGap(15);
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+        pnChucNang.add(btnDangXuat);
+
+        javax.swing.GroupLayout pnSideBarLayout = new javax.swing.GroupLayout(pnSideBar);
+        pnSideBar.setLayout(pnSideBarLayout);
+        pnSideBarLayout.setHorizontalGroup(
+                pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(spr01))
+                        .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                                                .addGap(170, 170, 170)
+                                                .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 6, Short.MAX_VALUE))
+        );
+        pnSideBarLayout.setVerticalGroup(
+                pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                                .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnSideBar, java.awt.BorderLayout.WEST);
+
+        pnContainer.setBackground(ColorConstant.BACKGROUND_CONTAINER);
+
+        javax.swing.GroupLayout pnContainerLayout = new javax.swing.GroupLayout(pnContainer);
+        pnContainer.setLayout(pnContainerLayout);
+        pnContainerLayout.setHorizontalGroup(
+                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 2956, Short.MAX_VALUE)
+        );
+        pnContainerLayout.setVerticalGroup(
+                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 781, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(pnContainer, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // Đóng cửa sổ chính
+        this.dispose();
+        // Mở Login Frame
+        Login loginFrame = new Login();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelBanHang();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnBanHangActionPerformed
+
+    private void btnQuanAoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanAoActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelQuanAo();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnQuanAoActionPerformed
+    // End of variables declaration//GEN-END:variables
 }

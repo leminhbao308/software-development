@@ -2,6 +2,7 @@ package org.group06.view.screen;
 
 import org.group06.controller.events.EventLogin;
 import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.buttons.RoundButton;
 import org.group06.view.components.panels.ImagePanel;
@@ -10,12 +11,9 @@ import org.group06.view.components.textFields.TextField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Login extends JFrame implements ActionListener {
+public class Login extends JFrame {
 
-//    private RoundButton btnForgotPwd;
     private RoundButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
     private javax.swing.JLabel lblTitle;
@@ -37,8 +35,7 @@ public class Login extends JFrame implements ActionListener {
         pwdPassword = new PasswordField();
         btnLogin = new RoundButton("LOGIN", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 820, 600);
-
-        setUndecorated(true);
+//        setUndecorated(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng Nhập - Nhóm 06");
         setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
@@ -49,32 +46,32 @@ public class Login extends JFrame implements ActionListener {
         pnLogin.setMaximumSize(new java.awt.Dimension(447, 600));
         pnLogin.setMinimumSize(new java.awt.Dimension(447, 600));
         pnLogin.setPreferredSize(new java.awt.Dimension(447, 600));
-        pnLogin.setBackground(ColorConstant.BACKGROUND_WHITE);
+        pnLogin.setBackground(ColorConstant.WHITE);
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
-        lblTitle.setForeground(ColorConstant.TEXT_HEADER_FOOTER);
+        lblTitle.setFont(FontConstant.FONT_HEADER);
+        lblTitle.setForeground(ColorConstant.BLACK);
         lblTitle.setText("Đăng Nhập Tài Khoản");
         lblTitle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         lblTitle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         lblSubTitle.setText("Vui lòng nhập tài khoản của bạn");
-        lblSubTitle.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 16));
-        lblSubTitle.setForeground(ColorConstant.TEXT_HEADER_FOOTER);
+        lblSubTitle.setFont(FontConstant.FONT_SUB_HEADER);
+        lblSubTitle.setForeground(ColorConstant.BLACK);
         lblSubTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblSubTitle.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        txtUsername.setFont(FontConstant.FONT_LABEL);
         txtUsername.setHint("Mã nhân viên");
         txtUsername.setToolTipText("Nhập vào mã nhân viên");
         txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        pwdPassword.setFont(FontConstant.FONT_LABEL);
         pwdPassword.setHint("Mật khẩu");
         pwdPassword.setToolTipText("Nhập vào mật khẩu");
         pwdPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        btnLogin.setForeground(ColorConstant.TEXT_BUTTON);
+        btnLogin.setFont(FontConstant.FONT_BUTTON);
+        btnLogin.setForeground(ColorConstant.WHITE);
         btnLogin.setText("Đăng Nhập");
         btnLogin.setToolTipText("Click để đăng nhập");
         btnLogin.addActionListener(new EventLogin(this));
@@ -91,8 +88,7 @@ public class Login extends JFrame implements ActionListener {
                                         .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                                         .addComponent(lblSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(pwdPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(pnLoginLayout.createSequentialGroup().addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                )
+                                        .addGroup(pnLoginLayout.createSequentialGroup().addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(51, 51, 51))
         );
         pnLoginLayout.setVerticalGroup(
@@ -110,8 +106,7 @@ public class Login extends JFrame implements ActionListener {
                                 .addGap(70, 70, 70)
                                 .addGroup(pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(90, Short.MAX_VALUE)
-                                )
+                                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnImageLayout = new javax.swing.GroupLayout(pnImage);
@@ -141,10 +136,5 @@ public class Login extends JFrame implements ActionListener {
 
         pack();
         setLocationRelativeTo(null);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

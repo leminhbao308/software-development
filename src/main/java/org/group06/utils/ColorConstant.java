@@ -1,21 +1,15 @@
 package org.group06.utils;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ColorConstant {
     // Màu chữ
-    public static final Color TEXT_HEADER_FOOTER = new Color(0, 0, 0);
-    public static final Color TEXT_NORMAL = new Color(0, 0, 0);
+    public static final Color BLACK = new Color(0, 0, 0);
     public static final Color TEXT_PLACEHOLDER = new Color(153, 153, 153);
-    public static final Color TEXT_BUTTON = new Color(255, 255, 255);
+    public static final Color WHITE = new Color(255, 255, 255);
 
     // Màu nền
     public static final Color BACKGROUND_NORMAL = new Color(214, 228, 229);
-    public static final Color BACKGROUND_BLACK = new Color(30, 30, 30);
-    public static final Color BACKGROUND_GRAY = Color.GRAY;
-    public static final Color BACKGROUND_HEADER_FOOTER = new Color(73, 113, 116);
-    public static final Color BACKGROUND_WHITE = new Color(255, 255, 255);
     public static final Color BACKGROUND_SIDEBAR = new Color(17, 57, 70);
     public static final Color BACKGROUND_CONTAINER = new Color(188, 163, 127);
 
@@ -34,15 +28,6 @@ public class ColorConstant {
 
     private ColorConstant() {
         // Để ngăn việc tạo đối tượng instance của lớp này
-    }
-
-    public static ArrayList<Color> generateColorPalette(int numberOfColors) {
-        ArrayList<Color> colorPalette = new ArrayList<>();
-        float hueStep = 1.0f / numberOfColors;
-        for (int i = 0; i < numberOfColors; i++) {
-            colorPalette.add(Color.getHSBColor(i * hueStep, 1.0f, 1.0f));
-        }
-        return colorPalette;
     }
 }
 

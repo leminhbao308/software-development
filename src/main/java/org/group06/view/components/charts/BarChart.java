@@ -12,7 +12,7 @@ public class BarChart extends ChartPanel {
 
     public BarChart(String title, String xLabel, String yLabel, BarChartData data) throws Exception {
         super(ChartFactory.createBarChart(title, xLabel, yLabel, data.getDataSet()), true, true, true, true, true);
-        super.getChart().getCategoryPlot().setRangeGridlinePaint(ColorConstant.TEXT_NORMAL);
+        super.getChart().getCategoryPlot().setRangeGridlinePaint(ColorConstant.BLACK);
 
         // Đảm bảo xLabel của BarChartData phải trùng với xLabel của BarChart
         if (!xLabel.equals(data.getXLabel())) {

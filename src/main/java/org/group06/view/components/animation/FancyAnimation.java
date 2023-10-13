@@ -1,8 +1,5 @@
 package org.group06.view.components.animation;
 
-/**
- * @author Raven
- */
 public class FancyAnimation {
 
     private float start[];
