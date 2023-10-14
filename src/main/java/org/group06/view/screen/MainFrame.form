@@ -216,13 +216,17 @@
                   <Connection code="ImagePath.loadIcon(ImagePath.ICON_SELL)&#xd;&#xa;" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="B&#xe1;n H&#xe0;ng"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="15"/>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[2, 40, 3, 14]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBanHangActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnQuanAo">
@@ -240,7 +244,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuanAoActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnHoaDon">
@@ -255,7 +259,7 @@
                 <Property name="iconTextGap" type="int" value="15"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnPhieuTam">
@@ -270,7 +274,7 @@
                 <Property name="iconTextGap" type="int" value="15"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnKhachHang">
@@ -285,7 +289,7 @@
                 <Property name="iconTextGap" type="int" value="15"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnNhanVien">
@@ -300,7 +304,7 @@
                 <Property name="iconTextGap" type="int" value="15"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JSeparator" name="spr02">
@@ -324,7 +328,7 @@
                 <Property name="iconTextGap" type="int" value="15"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE)"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="btnDangXuat">

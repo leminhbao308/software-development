@@ -82,7 +82,7 @@ public class PanelBanHang extends javax.swing.JPanel {
 
         pnInfo.setBackground(org.group06.utils.ColorConstant.BACKGROUND_CONTAINER);
 
-        lblTitleSanPham.setFont(org.group06.utils.FontConstant.FONT_TABLE_HEADER);
+        lblTitleSanPham.setFont(org.group06.utils.FontConstant.FONT_HEADER);
         lblTitleSanPham.setForeground(org.group06.utils.ColorConstant.WHITE);
         lblTitleSanPham.setText("Sản Phẩm");
 
@@ -335,15 +335,14 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addComponent(pnInfoKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitleSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnInfoLayout.createSequentialGroup()
-                        .addComponent(lblTitleSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(pnInfoLayout.createSequentialGroup()
-                        .addComponent(scrQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                        .addComponent(scrQuanAo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnSoLuong_KhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnTimQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(pnSoLuong_KhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnTimQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         pnInfoLayout.setVerticalGroup(
             pnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,21 +352,19 @@ public class PanelBanHang extends javax.swing.JPanel {
                     .addGroup(pnInfoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblTitleSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addGroup(pnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnInfoLayout.createSequentialGroup()
                                 .addComponent(pnTimQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(5, 5, 5)
                                 .addComponent(pnSoLuong_KhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnInfoLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(scrQuanAo)))))
+                            .addComponent(scrQuanAo))))
                 .addContainerGap())
         );
 
         pnHoaDon.setBackground(org.group06.utils.ColorConstant.BACKGROUND_CONTAINER);
 
-        lblTitleHoaDon.setFont(org.group06.utils.FontConstant.FONT_TABLE_HEADER);
+        lblTitleHoaDon.setFont(org.group06.utils.FontConstant.FONT_HEADER);
         lblTitleHoaDon.setForeground(org.group06.utils.ColorConstant.WHITE);
         lblTitleHoaDon.setText("Thông Tin Hoá Đơn");
 
@@ -608,9 +605,9 @@ public class PanelBanHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(pnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

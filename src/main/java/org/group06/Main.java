@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel( new FlatLightLaf());
-            UIManager.put("TableHeader.font", FontConstant.FONT_BUTTON);
+            UIManager.put("TableHeader.font", org.group06.utils.FontConstant.FONT_TABLE_HEADER);
             UIManager.put("TableHeader.opaque", true);
             UIManager.put("TableHeader.background", ColorConstant.BUTTON_ACTIVE);
         } catch (UnsupportedLookAndFeelException ex) {
