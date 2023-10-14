@@ -29,7 +29,7 @@ public class RippleButton extends JButton {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBackground(colorDefault);
         setForeground(ColorConstant.WHITE);
-        setFont(FontConstant.FONT_BUTTON);
+        setFont(FontConstant.FONT_TABLE_HEADER);
 
         addMouseListener(new MouseAdapter() {
             @Override

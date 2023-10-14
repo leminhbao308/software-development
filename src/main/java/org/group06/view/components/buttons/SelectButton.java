@@ -21,7 +21,7 @@ public class SelectButton extends JToggleButton {
         setBorderPainted(false);
         setOpaque(false);
         setContentAreaFilled(false);
-        setFont(FontConstant.FONT_BUTTON);
+        setFont(FontConstant.FONT_TABLE_HEADER);
         this.normalColor = normal;
         this.hoverColor = hover;
         this.clickColor = click;

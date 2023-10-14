@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ImagePath {
+
     // Icon path
     public static final URL ICON_LOGO = ImagePath.class.getResource("/images/icon/icon.png");
     public static final URL ICON_USER = ImagePath.class.getResource("/images/icon/user.png");
@@ -24,6 +25,8 @@ public class ImagePath {
     public static final URL THUMBNAIL_LOGIN = ImagePath.class.getResource("/images/thumbnail/login.jpg");
     public static final URL THUMBNAIL_LOGO = ImagePath.class.getResource("/images/logo/logo.png");
 
+//    Product path
+    public static final URL PRODUCT_EXAMPLE = ImagePath.class.getResource("/images/product/example.jpg");
     private ImagePath() {
         // Để ngăn việc tạo đối tượng instance của lớp này
     }

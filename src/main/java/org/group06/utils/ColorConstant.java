@@ -28,6 +28,7 @@ public class ColorConstant {
     //
     public static final Color TITLE_BORDER = new Color(102, 102, 102);
     public static final Color TITLE_BACKGROUND = new Color(234, 215, 187);
+    public static final Color DETAIL_PRODUCT_BACKGROUND = new Color(234, 215, 187);
 
     private ColorConstant() {
         // Để ngăn việc tạo đối tượng instance của lớp này

@@ -124,6 +124,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnThemMoiKH.setFont(FontConstant.FONT_BUTTON);
         btnThemMoiKH.setForeground(ColorConstant.WHITE);
         btnThemMoiKH.setText("Thêm Mới");
+        btnThemMoiKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemMoiKH.setEnabled(false);
 
         javax.swing.GroupLayout pnInfoKhachHangLayout = new javax.swing.GroupLayout(pnInfoKhachHang);
@@ -190,21 +191,18 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblQuanAo.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"abc", "def", "ghi", "klm"},
-                {"nop", "qrs", "tuv", "wxy"},
-                {"zab", "cde", "fgh", "ilkadsadsfadfafasdfádfasdfasdfadsfadsfadsfasdfadsfadsfadfasdfasdfasdfasdfad"},
-                {"nmo", "pqr", "stu", "vwx"}
+                {"QA01", "Đầm dạ hội", "Trắng", "Doris",  new Double(125000.0)}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã", "Tên", "Màu Sắc", "Thương Hiệu", "Giá Bán"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
         tblQuanAo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -215,11 +213,20 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblQuanAo.setSelectionBackground(org.group06.utils.ColorConstant.BACKGROUND_SIDEBAR);
         tblQuanAo.setSelectionForeground(org.group06.utils.ColorConstant.WHITE);
         tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblQuanAo.setShowGrid(true);
         tblQuanAo.setShowHorizontalLines(true);
-        tblQuanAo.setShowVerticalLines(false);
         tblQuanAo.getTableHeader().setResizingAllowed(false);
         tblQuanAo.getTableHeader().setReorderingAllowed(false);
         scrQuanAo.setViewportView(tblQuanAo);
+        if (tblQuanAo.getColumnModel().getColumnCount() > 0) {
+            tblQuanAo.getColumnModel().getColumn(0).setResizable(false);
+            tblQuanAo.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblQuanAo.getColumnModel().getColumn(1).setResizable(false);
+            tblQuanAo.getColumnModel().getColumn(2).setResizable(false);
+            tblQuanAo.getColumnModel().getColumn(2).setPreferredWidth(20);
+            tblQuanAo.getColumnModel().getColumn(3).setResizable(false);
+            tblQuanAo.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         pnTimQuanAo.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
         pnTimQuanAo.setPreferredSize(new java.awt.Dimension(331, 0));
@@ -237,6 +244,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnTimQuanAo.setFont(FontConstant.FONT_BUTTON);
         btnTimQuanAo.setForeground(ColorConstant.WHITE);
         btnTimQuanAo.setText("Tìm Kiếm");
+        btnTimQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnTimQuanAoLayout = new javax.swing.GroupLayout(pnTimQuanAo);
         pnTimQuanAo.setLayout(pnTimQuanAoLayout);
@@ -287,6 +295,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnThemSoLuong_KhuyenMai.setFont(FontConstant.FONT_BUTTON);
         btnThemSoLuong_KhuyenMai.setForeground(ColorConstant.WHITE);
         btnThemSoLuong_KhuyenMai.setText("Thêm");
+        btnThemSoLuong_KhuyenMai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemSoLuong_KhuyenMai.setPreferredSize(new java.awt.Dimension(75, 40));
 
         javax.swing.GroupLayout pnSoLuong_KhuyenMaiLayout = new javax.swing.GroupLayout(pnSoLuong_KhuyenMai);
@@ -399,6 +408,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnHuyHD.setFont(FontConstant.FONT_BUTTON);
         btnHuyHD.setForeground(ColorConstant.WHITE);
         btnHuyHD.setText("Huỷ");
+        btnHuyHD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHuyHD.setEnabled(false);
 
         javax.swing.GroupLayout pnInfoHoaDonLayout = new javax.swing.GroupLayout(pnInfoHoaDon);
@@ -538,21 +548,25 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnThanhToan.setFont(FontConstant.FONT_BUTTON);
         btnThanhToan.setForeground(ColorConstant.WHITE);
         btnThanhToan.setText("Thanh Toán");
+        btnThanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThanhToan.setPreferredSize(new java.awt.Dimension(75, 40));
 
         btnLuu.setFont(FontConstant.FONT_BUTTON);
         btnLuu.setForeground(ColorConstant.WHITE);
         btnLuu.setText("Lưu");
+        btnLuu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLuu.setPreferredSize(new java.awt.Dimension(75, 40));
 
         btnXoa.setFont(FontConstant.FONT_BUTTON);
         btnXoa.setForeground(ColorConstant.WHITE);
         btnXoa.setText("Xoá");
+        btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoa.setPreferredSize(new java.awt.Dimension(75, 40));
 
         btnCapNhat.setFont(FontConstant.FONT_BUTTON);
         btnCapNhat.setForeground(ColorConstant.WHITE);
         btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.setPreferredSize(new java.awt.Dimension(75, 40));
 
         javax.swing.GroupLayout pnActionLayout = new javax.swing.GroupLayout(pnAction);
