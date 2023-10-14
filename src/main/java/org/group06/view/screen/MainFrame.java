@@ -81,15 +81,15 @@ public class MainFrame extends javax.swing.JFrame {
         lblHoTen = new javax.swing.JLabel();
         lblChucVu = new javax.swing.JLabel();
         pnChucNang = new javax.swing.JPanel();
-        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
         spr02 = new javax.swing.JSeparator();
         spr03 = new javax.swing.JSeparator();
-        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
         btnDangXuat = new org.group06.view.components.buttons.RippleButton();
         pnContainer = new PanelBanHang();
 
@@ -165,7 +165,9 @@ public class MainFrame extends javax.swing.JFrame {
         btnBanHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_SELL)
         );
         btnBanHang.setText("Bán Hàng");
+        btnBanHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBanHang.setIconTextGap(15);
+        btnBanHang.setMargin(new java.awt.Insets(2, 40, 3, 14));
         btnBanHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBanHangActionPerformed(evt);
