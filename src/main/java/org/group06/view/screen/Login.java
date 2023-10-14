@@ -4,7 +4,7 @@ import org.group06.controller.events.EventLogin;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
-import org.group06.view.components.buttons.RoundButton;
+import org.group06.view.components.buttons.RippleRoundButton;
 import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.components.textFields.PasswordField;
 import org.group06.view.components.textFields.TextField;
@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class Login extends JFrame {
 
-    private RoundButton btnLogin;
+    private RippleRoundButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
     private javax.swing.JLabel lblTitle;
     private ImagePanel pnImage;
@@ -33,7 +33,7 @@ public class Login extends JFrame {
         lblSubTitle = new javax.swing.JLabel();
         txtUsername = new TextField();
         pwdPassword = new PasswordField();
-        btnLogin = new RoundButton("LOGIN", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnLogin = new RippleRoundButton("LOGIN", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 820, 600);
 //        setUndecorated(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,7 +41,7 @@ public class Login extends JFrame {
         setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1345, 600));
-        setBackground(ColorConstant.BACKGROUND_NORMAL);
+        setBackground(ColorConstant.BACKGROUND_LOGIN);
 
         pnLogin.setMaximumSize(new java.awt.Dimension(447, 600));
         pnLogin.setMinimumSize(new java.awt.Dimension(447, 600));
@@ -60,12 +60,12 @@ public class Login extends JFrame {
         lblSubTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblSubTitle.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtUsername.setFont(FontConstant.FONT_LABEL);
+        txtUsername.setFont(FontConstant.FONT_TEXT);
         txtUsername.setHint("Mã nhân viên");
         txtUsername.setToolTipText("Nhập vào mã nhân viên");
         txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        pwdPassword.setFont(FontConstant.FONT_LABEL);
+        pwdPassword.setFont(FontConstant.FONT_TEXT);
         pwdPassword.setHint("Mật khẩu");
         pwdPassword.setToolTipText("Nhập vào mật khẩu");
         pwdPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));

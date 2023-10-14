@@ -90,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         spr02 = new javax.swing.JSeparator();
         spr03 = new javax.swing.JSeparator();
         btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnDangXuat = new org.group06.view.components.buttons.Button();
+        btnDangXuat = new org.group06.view.components.buttons.RippleButton();
         pnContainer = new PanelBanHang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
 
         pnSideBar.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-        pnSideBar.setPreferredSize(new java.awt.Dimension(490, 781));
+        pnSideBar.setPreferredSize(new java.awt.Dimension(380, 781));
 
         pnLogo.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         pnLogo.setMaximumSize(new java.awt.Dimension(490, 166));
@@ -141,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnUserLayout.setVerticalGroup(
@@ -239,25 +239,27 @@ public class MainFrame extends javax.swing.JFrame {
         pnSideBarLayout.setHorizontalGroup(
             pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSideBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(spr01))
-            .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnSideBarLayout.createSequentialGroup()
-                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnSideBarLayout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnSideBarLayout.createSequentialGroup()
+                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSideBarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 6, Short.MAX_VALUE))
+                        .addComponent(spr01))
+                    .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnSideBarLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(pnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(pnSideBarLayout.createSequentialGroup()
+                            .addGap(114, 114, 114)
+                            .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, 0))
         );
         pnSideBarLayout.setVerticalGroup(
             pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSideBarLayout.createSequentialGroup()
                 .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -272,7 +274,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnContainer.setLayout(pnContainerLayout);
         pnContainerLayout.setHorizontalGroup(
             pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1232, Short.MAX_VALUE)
+            .addGap(0, 1342, Short.MAX_VALUE)
         );
         pnContainerLayout.setVerticalGroup(
             pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

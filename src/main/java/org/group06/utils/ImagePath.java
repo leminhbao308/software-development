@@ -18,6 +18,7 @@ public class ImagePath {
     public static final URL ICON_BILL = ImagePath.class.getResource("/images/icon/bill.png");
     public static final URL ICON_CLOTHES = ImagePath.class.getResource("/images/icon/clothes.png");
     public static final URL ICON_SELL = ImagePath.class.getResource("/images/icon/sell.png");
+    public static final URL ICON_SEARCH = ImagePath.class.getResource("/images/icon/search.png");
 
     // Thumbnail path
     public static final URL THUMBNAIL_LOGIN = ImagePath.class.getResource("/images/thumbnail/login.jpg");

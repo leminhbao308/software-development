@@ -3,6 +3,7 @@ package org.group06.view.components.buttons;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.view.components.animation.FancyBorderRadius;
+import org.group06.view.components.animation.RippleEffect;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Button extends JButton {
+public class RippleButton extends JButton {
 
     private final RippleEffect rippleEffect;
     private Shape shape;
@@ -21,7 +22,7 @@ public class Button extends JButton {
 
     boolean over;
 
-    public Button() {
+    public RippleButton() {
         rippleEffect = new RippleEffect(this);
         setContentAreaFilled(false);
         setBorder(new EmptyBorder(8, 5, 8, 5));

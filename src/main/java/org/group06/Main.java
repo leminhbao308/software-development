@@ -1,5 +1,8 @@
 package org.group06;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
 import org.group06.view.screen.Login;
 import org.group06.view.screen.MainFrame;
 
@@ -12,9 +15,11 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel( new FlatLightLaf());
+            UIManager.put("TableHeader.font", FontConstant.FONT_BUTTON);
+            UIManager.put("TableHeader.opaque", true);
+            UIManager.put("TableHeader.background", ColorConstant.BUTTON_ACTIVE);
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
