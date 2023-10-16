@@ -18,27 +18,6 @@ import java.awt.*;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnBanHang;
-    private javax.swing.JButton btnDangXuat;
-    private javax.swing.JToggleButton btnHoaDon;
-    private javax.swing.JToggleButton btnKhachHang;
-    private javax.swing.JToggleButton btnNhanVien;
-    private javax.swing.JToggleButton btnPhieuTam;
-    private javax.swing.JToggleButton btnQuanAo;
-    private javax.swing.JToggleButton btnThongKe;
-    private javax.swing.ButtonGroup grpSelect;
-    private javax.swing.JLabel lblAvatar;
-    private javax.swing.JLabel lblChucVu;
-    private javax.swing.JLabel lblHoTen;
-    private javax.swing.JPanel pnChucNang;
-    private javax.swing.JPanel pnContainer;
-    private javax.swing.JPanel pnLogo;
-    private javax.swing.JPanel pnSideBar;
-    private javax.swing.JPanel pnUser;
-    private javax.swing.JSeparator spr01;
-    private javax.swing.JSeparator spr02;
-    private javax.swing.JSeparator spr03;
     /**
      * Creates new form Form
      */
@@ -102,16 +81,16 @@ public class MainFrame extends javax.swing.JFrame {
         lblHoTen = new javax.swing.JLabel();
         lblChucVu = new javax.swing.JLabel();
         pnChucNang = new javax.swing.JPanel();
-        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
+        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
         spr02 = new javax.swing.JSeparator();
         spr03 = new javax.swing.JSeparator();
-        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_ACTIVE, ColorConstant.BACKGROUND_CONTAINER);
-        btnDangXuat = new org.group06.view.components.buttons.Button();
+        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnDangXuat = new org.group06.view.components.buttons.RippleButton();
         pnContainer = new PanelBanHang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
         setUndecorated(true);
 
         pnSideBar.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-        pnSideBar.setPreferredSize(new java.awt.Dimension(490, 781));
+        pnSideBar.setPreferredSize(new java.awt.Dimension(380, 781));
 
         pnLogo.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         pnLogo.setMaximumSize(new java.awt.Dimension(490, 166));
@@ -131,12 +110,12 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout pnLogoLayout = new javax.swing.GroupLayout(pnLogo);
         pnLogo.setLayout(pnLogoLayout);
         pnLogoLayout.setHorizontalGroup(
-                pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnLogoLayout.setVerticalGroup(
-                pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            pnLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pnUser.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
@@ -155,28 +134,28 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout pnUserLayout = new javax.swing.GroupLayout(pnUser);
         pnUser.setLayout(pnUserLayout);
         pnUserLayout.setHorizontalGroup(
-                pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnUserLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
-                                .addContainerGap())
+            pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnUserLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnUserLayout.setVerticalGroup(
-                pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnUserLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(pnUserLayout.createSequentialGroup()
-                                                .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(lblChucVu)
-                                                .addGap(0, 18, Short.MAX_VALUE)))
-                                .addContainerGap())
+            pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnUserLayout.createSequentialGroup()
+                        .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblChucVu)
+                        .addGap(0, 18, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pnChucNang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
@@ -186,7 +165,9 @@ public class MainFrame extends javax.swing.JFrame {
         btnBanHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_SELL)
         );
         btnBanHang.setText("Bán Hàng");
+        btnBanHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBanHang.setIconTextGap(15);
+        btnBanHang.setMargin(new java.awt.Insets(2, 40, 3, 14));
         btnBanHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBanHangActionPerformed(evt);
@@ -258,31 +239,33 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout pnSideBarLayout = new javax.swing.GroupLayout(pnSideBar);
         pnSideBar.setLayout(pnSideBarLayout);
         pnSideBarLayout.setHorizontalGroup(
-                pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnSideBarLayout.createSequentialGroup()
+            pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSideBarLayout.createSequentialGroup()
+                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSideBarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(spr01))
+                    .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnSideBarLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spr01))
-                        .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(pnSideBarLayout.createSequentialGroup()
-                                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnSideBarLayout.createSequentialGroup()
-                                                .addGap(170, 170, 170)
-                                                .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnSideBarLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 6, Short.MAX_VALUE))
+                            .addGap(114, 114, 114)
+                            .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, 0))
         );
         pnSideBarLayout.setVerticalGroup(
-                pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnSideBarLayout.createSequentialGroup()
-                                .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSideBarLayout.createSequentialGroup()
+                .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnSideBar, java.awt.BorderLayout.WEST);
@@ -292,12 +275,12 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout pnContainerLayout = new javax.swing.GroupLayout(pnContainer);
         pnContainer.setLayout(pnContainerLayout);
         pnContainerLayout.setHorizontalGroup(
-                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2956, Short.MAX_VALUE)
+            pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1342, Short.MAX_VALUE)
         );
         pnContainerLayout.setVerticalGroup(
-                pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 781, Short.MAX_VALUE)
+            pnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 789, Short.MAX_VALUE)
         );
 
         getContentPane().add(pnContainer, java.awt.BorderLayout.CENTER);
@@ -328,5 +311,27 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnQuanAoActionPerformed
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnBanHang;
+    private javax.swing.JButton btnDangXuat;
+    private javax.swing.JToggleButton btnHoaDon;
+    private javax.swing.JToggleButton btnKhachHang;
+    private javax.swing.JToggleButton btnNhanVien;
+    private javax.swing.JToggleButton btnPhieuTam;
+    private javax.swing.JToggleButton btnQuanAo;
+    private javax.swing.JToggleButton btnThongKe;
+    private javax.swing.ButtonGroup grpSelect;
+    private javax.swing.JLabel lblAvatar;
+    private javax.swing.JLabel lblChucVu;
+    private javax.swing.JLabel lblHoTen;
+    private javax.swing.JPanel pnChucNang;
+    private javax.swing.JPanel pnContainer;
+    private javax.swing.JPanel pnLogo;
+    private javax.swing.JPanel pnSideBar;
+    private javax.swing.JPanel pnUser;
+    private javax.swing.JSeparator spr01;
+    private javax.swing.JSeparator spr02;
+    private javax.swing.JSeparator spr03;
     // End of variables declaration//GEN-END:variables
 }

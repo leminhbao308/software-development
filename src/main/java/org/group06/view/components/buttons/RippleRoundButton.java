@@ -2,6 +2,7 @@ package org.group06.view.components.buttons;
 
 import org.group06.utils.ColorConstant;
 import org.group06.view.components.animation.FancyBorderRadius;
+import org.group06.view.components.animation.RippleEffect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serial;
 
-public class RoundButton extends JButton {
+public class RippleRoundButton extends JButton {
     @Serial
     private static final long serialVersionUID = -7128508965765743677L;
     Color colorDefault = ColorConstant.BUTTON_LOGIN_NORMAL;
@@ -29,7 +30,7 @@ public class RoundButton extends JButton {
      * @param colorOver    Màu khi di chuột vào
      * @param colorClick   Màu khi click
      */
-    public RoundButton(String name, Color colorDefault, Color colorOver, Color colorClick) {
+    public RippleRoundButton(String name, Color colorDefault, Color colorOver, Color colorClick) {
         super(name);
         this.colorDefault = colorDefault;
         this.colorOver = colorOver;

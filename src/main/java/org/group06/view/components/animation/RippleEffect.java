@@ -1,4 +1,4 @@
-package org.group06.view.components.buttons;
+package org.group06.view.components.animation;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;

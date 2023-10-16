@@ -19,10 +19,6 @@ public class TextField extends JTextField {
     private float animate;
     private boolean show = true;
     public TextField() {
-        setOpaque(false);
-        setBorder(new EmptyBorder(9, 1, 9, 1));
-        setForeground(ColorConstant.BLACK);
-        setSelectionColor(new Color(200, 200, 200, 100));
         animator = new Animator(350, new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -41,6 +37,38 @@ public class TextField extends JTextField {
             }
 
         });
+        initiate();
+    }
+    
+    public TextField(String hint) {
+        animator = new Animator(350, new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                if (show) {
+                    animate = fraction;
+                } else {
+                    animate = 1f - fraction;
+                }
+                repaint();
+            }
+
+            @Override
+            public void end() {
+                show = !show;
+                repaint();
+            }
+
+        });
+        initiate();
+        setHint(hint);
+    }
+    
+    private void initiate() {
+        setOpaque(false);
+        setBorder(new EmptyBorder(9, 1, 9, 1));
+        setForeground(ColorConstant.BLACK);
+        setSelectionColor(new Color(200, 200, 200, 100));
+        
         animator.setResolution(0);
         animator.setAcceleration(.5f);
         animator.setDeceleration(.5f);
@@ -73,7 +101,6 @@ public class TextField extends JTextField {
 
             }
         });
-
     }
 
     public void setHint(String hint) {
