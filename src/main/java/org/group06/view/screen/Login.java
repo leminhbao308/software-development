@@ -38,7 +38,7 @@ public class Login extends JFrame {
 //        setUndecorated(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng Nhập - Nhóm 06");
-        setIconImage(new ImageIcon(ImagePath.ICON_LOGO).getImage());
+        setIconImage(new ImageIcon(ImagePath.THUMBNAIL_ICON).getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1345, 600));
         setBackground(ColorConstant.BACKGROUND_LOGIN);

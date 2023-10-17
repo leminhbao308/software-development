@@ -34,7 +34,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnInfoKhachHang = new javax.swing.JPanel();
         lblTitleKhachHang = new javax.swing.JLabel();
         txtTimSDT = new org.group06.view.components.textFields.TextField("Số Điện Thoại");
-        btnTimSDT = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnTimSDT = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         lblMaKH = new javax.swing.JLabel();
         txtMaKH = new org.group06.view.components.textFields.TextField();
         lblTenKH = new javax.swing.JLabel();
@@ -96,8 +96,6 @@ public class PanelBanHang extends javax.swing.JPanel {
         txtTimSDT.setFont(FontConstant.FONT_TEXT);
         txtTimSDT.setToolTipText("Nhập số điện thoại cần tìm");
 
-        btnTimSDT.setIcon(ImagePath.loadIcon(ImagePath.ICON_SEARCH)
-        );
         btnTimSDT.setToolTipText("Click để tìm kiếm khách hàng");
         btnTimSDT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -214,7 +212,6 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblQuanAo.setSelectionForeground(org.group06.utils.ColorConstant.WHITE);
         tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblQuanAo.setShowGrid(true);
-        tblQuanAo.setShowHorizontalLines(true);
         tblQuanAo.getTableHeader().setResizingAllowed(false);
         tblQuanAo.getTableHeader().setReorderingAllowed(false);
         scrQuanAo.setViewportView(tblQuanAo);

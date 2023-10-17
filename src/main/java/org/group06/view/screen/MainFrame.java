@@ -24,7 +24,6 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        spr02.setVisible(false);
     }
 
     /**
@@ -75,27 +74,27 @@ public class MainFrame extends javax.swing.JFrame {
         grpSelect = new javax.swing.ButtonGroup();
         pnSideBar = new javax.swing.JPanel();
         pnLogo = new ImagePanel(ImagePath.THUMBNAIL_LOGO, 150, 100);
-        spr01 = new javax.swing.JSeparator();
         pnUser = new javax.swing.JPanel();
         lblAvatar = new javax.swing.JLabel();
         lblHoTen = new javax.swing.JLabel();
         lblChucVu = new javax.swing.JLabel();
         pnChucNang = new javax.swing.JPanel();
-        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        spr02 = new javax.swing.JSeparator();
+        btnBanHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_SELL);
+        btnQuanAo = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_CLOTHES);
+        btnHoaDon = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_BILL);
+        btnPhieuTam = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_DRAFT);
+        btnKhachHang = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_CUSTOMER);
+        btnNhanVien = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_EMPLOYEE);
+        btnNhaCungCap = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_SUPPLIER);
+        btnKhuyenMai = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_SALE);
         spr03 = new javax.swing.JSeparator();
-        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
-        btnDangXuat = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE);
+        btnThongKe = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_CHART);
+        btnDangXuat = new org.group06.view.components.buttons.SelectButton(ColorConstant.BACKGROUND_SIDEBAR, ColorConstant.BUTTON_HOVER, ColorConstant.BUTTON_CLICK, ColorConstant.BUTTON_ACTIVE, ImagePath.ICON_LOGOUT);
         pnContainer = new PanelBanHang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần Mềm Quản Lý Cửa Hàng");
-        setIconImage(ImagePath.loadImage(ImagePath.ICON_LOGO)
+        setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON)
         );
         setUndecorated(true);
 
@@ -118,9 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        spr01.setPreferredSize(new java.awt.Dimension(320, 3));
-
-        pnUser.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        pnUser.setBackground(ColorConstant.BUTTON_LOGIN_HOVER);
         pnUser.setPreferredSize(new java.awt.Dimension(320, 100));
 
         lblAvatar.setIcon(ImagePath.loadIcon(ImagePath.ICON_USER)
@@ -163,11 +160,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnChucNang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         pnChucNang.setPreferredSize(new java.awt.Dimension(320, 230));
-        pnChucNang.setLayout(new java.awt.GridLayout(10, 1));
+        pnChucNang.setLayout(new java.awt.GridLayout(11, 1));
 
         grpSelect.add(btnBanHang);
-        btnBanHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_SELL)
-        );
         btnBanHang.setText("Bán Hàng");
         btnBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBanHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -181,8 +176,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnBanHang);
 
         grpSelect.add(btnQuanAo);
-        btnQuanAo.setIcon(ImagePath.loadIcon(ImagePath.ICON_CLOTHES)
-        );
         btnQuanAo.setText("Quần Áo");
         btnQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuanAo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -196,8 +189,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnQuanAo);
 
         grpSelect.add(btnHoaDon);
-        btnHoaDon.setIcon(ImagePath.loadIcon(ImagePath.ICON_BILL)
-        );
         btnHoaDon.setText("Hoá Đơn");
         btnHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -206,8 +197,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnHoaDon);
 
         grpSelect.add(btnPhieuTam);
-        btnPhieuTam.setIcon(ImagePath.loadIcon(ImagePath.ICON_DRAFT)
-        );
         btnPhieuTam.setText("Phiếu Tạm");
         btnPhieuTam.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPhieuTam.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -216,8 +205,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnPhieuTam);
 
         grpSelect.add(btnKhachHang);
-        btnKhachHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_CUSTOMER)
-        );
         btnKhachHang.setText("Khách Hàng");
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -226,7 +213,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnKhachHang);
 
         grpSelect.add(btnNhanVien);
-        btnNhanVien.setIcon(ImagePath.loadIcon(ImagePath.ICON_EMPLOYEE));
         btnNhanVien.setText("Nhân Viên");
         btnNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -234,13 +220,24 @@ public class MainFrame extends javax.swing.JFrame {
         btnNhanVien.setMargin(new java.awt.Insets(2, 50, 3, 14));
         pnChucNang.add(btnNhanVien);
 
-        spr02.setPreferredSize(new java.awt.Dimension(0, 0));
-        pnChucNang.add(spr02);
+        grpSelect.add(btnNhaCungCap);
+        btnNhaCungCap.setText("Nhà Cung Cấp");
+        btnNhaCungCap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNhaCungCap.setIconTextGap(15);
+        btnNhaCungCap.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        pnChucNang.add(btnNhaCungCap);
+
+        grpSelect.add(btnKhuyenMai);
+        btnKhuyenMai.setText("Khuyến Mãi");
+        btnKhuyenMai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnKhuyenMai.setIconTextGap(15);
+        btnKhuyenMai.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        pnChucNang.add(btnKhuyenMai);
         pnChucNang.add(spr03);
 
         grpSelect.add(btnThongKe);
-        btnThongKe.setIcon(ImagePath.loadIcon(ImagePath.ICON_CHART)
-        );
         btnThongKe.setText("Thống Kê");
         btnThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -249,8 +246,6 @@ public class MainFrame extends javax.swing.JFrame {
         pnChucNang.add(btnThongKe);
 
         grpSelect.add(btnDangXuat);
-        btnDangXuat.setIcon(ImagePath.loadIcon(ImagePath.ICON_LOGOUT)
-        );
         btnDangXuat.setText("Đăng Xuất");
         btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -264,25 +259,19 @@ public class MainFrame extends javax.swing.JFrame {
             pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSideBarLayout.createSequentialGroup()
                 .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSideBarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(pnChucNang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSideBarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnUser, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSideBarLayout.createSequentialGroup()
                         .addGap(84, 84, 84)
-                        .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         pnSideBarLayout.setVerticalGroup(
             pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSideBarLayout.createSequentialGroup()
                 .addComponent(pnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spr01, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addComponent(pnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
@@ -329,6 +318,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnDangXuat;
     private javax.swing.JToggleButton btnHoaDon;
     private javax.swing.JToggleButton btnKhachHang;
+    private javax.swing.JToggleButton btnKhuyenMai;
+    private javax.swing.JToggleButton btnNhaCungCap;
     private javax.swing.JToggleButton btnNhanVien;
     private javax.swing.JToggleButton btnPhieuTam;
     private javax.swing.JToggleButton btnQuanAo;
@@ -342,8 +333,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnLogo;
     private javax.swing.JPanel pnSideBar;
     private javax.swing.JPanel pnUser;
-    private javax.swing.JSeparator spr01;
-    private javax.swing.JSeparator spr02;
     private javax.swing.JSeparator spr03;
     // End of variables declaration//GEN-END:variables
 }
