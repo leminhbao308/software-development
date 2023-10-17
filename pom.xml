@@ -21,12 +21,6 @@
             <version>1.5.4</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-jdesktop-animation-timing</artifactId>
             <version>1.0-201002281504</version>

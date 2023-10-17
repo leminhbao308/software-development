@@ -15,7 +15,7 @@ public class BarChart extends ChartPanel {
         super.getChart().getCategoryPlot().setRangeGridlinePaint(ColorConstant.BLACK);
 
         // Đảm bảo xLabel của BarChartData phải trùng với xLabel của BarChart
-        if (!xLabel.equals(data.getXLabel())) {
+        if (!xLabel.equals(data.getxLabel())) {
             throw new Exception("xLabel is not matched");
         }
     }

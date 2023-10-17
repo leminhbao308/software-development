@@ -1,6 +1,5 @@
 package org.group06.view.components.textFields;
 
-import lombok.Getter;
 import org.group06.utils.ColorConstant;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -14,7 +13,6 @@ import java.awt.*;
 public class PasswordField extends JPasswordField {
 
     private final Animator animator;
-    @Getter
     private String hint = "";
     private float animate;
     private boolean show = true;
@@ -74,6 +72,10 @@ public class PasswordField extends JPasswordField {
             }
         });
 
+    }
+
+    public String getHint() {
+        return hint;
     }
 
     public void setHint(String hint) {

@@ -1,7 +1,5 @@
 package org.group06.view.components.panels;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,8 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-@Getter
-@Setter
 public class AnimatedPanel extends ImagePanel {
 
     private List<URL> imagePaths;
@@ -55,4 +51,37 @@ public class AnimatedPanel extends ImagePanel {
         paint(image.getGraphics());
     }
 
+    public List<URL> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<URL> imagePaths) {
+        this.imagePaths = imagePaths;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }
