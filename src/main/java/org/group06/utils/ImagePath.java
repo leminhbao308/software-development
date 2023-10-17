@@ -9,21 +9,23 @@ import java.net.URL;
 public class ImagePath {
 
     // Icon path
-    public static final URL ICON_LOGO = ImagePath.class.getResource("/images/icon/icon.png");
     public static final URL ICON_USER = ImagePath.class.getResource("/images/icon/user.png");
-    public static final URL ICON_LOGOUT = ImagePath.class.getResource("/images/icon/logout.png");
-    public static final URL ICON_CHART = ImagePath.class.getResource("/images/icon/chart.png");
-    public static final URL ICON_EMPLOYEE = ImagePath.class.getResource("/images/icon/employee.png");
-    public static final URL ICON_CUSTOMER = ImagePath.class.getResource("/images/icon/customer.png");
-    public static final URL ICON_DRAFT = ImagePath.class.getResource("/images/icon/draft.png");
-    public static final URL ICON_BILL = ImagePath.class.getResource("/images/icon/bill.png");
-    public static final URL ICON_CLOTHES = ImagePath.class.getResource("/images/icon/clothes.png");
-    public static final URL ICON_SELL = ImagePath.class.getResource("/images/icon/sell.png");
-    public static final URL ICON_SEARCH = ImagePath.class.getResource("/images/icon/search.png");
+    public static final String ICON_LOGOUT = "logout.png";
+    public static final String ICON_CHART = "chart.png";
+    public static final String ICON_EMPLOYEE = "employee.png";
+    public static final String ICON_CUSTOMER = "customer.png";
+    public static final String ICON_DRAFT = "draft.png";
+    public static final String ICON_BILL = "bill.png";
+    public static final String ICON_CLOTHES = "clothes.png";
+    public static final String ICON_SELL = "sell.png";
+    public static final String ICON_SEARCH = "search.png";
+    public static final String ICON_SALE = "sale.png";
+    public static final String ICON_SUPPLIER = "supplier.png";
 
     // Thumbnail path
     public static final URL THUMBNAIL_LOGIN = ImagePath.class.getResource("/images/thumbnail/login.jpg");
-    public static final URL THUMBNAIL_LOGO = ImagePath.class.getResource("/images/logo/logo.png");
+    public static final URL THUMBNAIL_LOGO = ImagePath.class.getResource("/images/thumbnail/logo.png");
+    public static final URL THUMBNAIL_ICON = ImagePath.class.getResource("/images/thumbnail/icon.png");
 
 //    Product path
     public static final URL PRODUCT_EXAMPLE = ImagePath.class.getResource("/images/product/example.jpg");
@@ -41,5 +43,13 @@ public class ImagePath {
 
     public static Icon loadIcon(URL iconLogo) {
         return new ImageIcon(loadImage(iconLogo));
+    }
+
+    public static Icon loadBlackIcon(String iconPath) {
+        return new ImageIcon(loadImage(ImagePath.class.getResource("/images/icon/black/" + iconPath)));
+    }
+
+    public static Icon loadWhiteIcon(String iconPath) {
+        return new ImageIcon(loadImage(ImagePath.class.getResource("/images/icon/white/" + iconPath)));
     }
 }

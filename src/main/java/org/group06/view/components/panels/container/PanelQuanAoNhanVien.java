@@ -51,7 +51,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         pnListProduct = new javax.swing.JPanel();
         lblTitleSanPham = new javax.swing.JLabel();
         txtTimMaQA = new org.group06.view.components.textFields.TextField("Mã Quần Áo", ColorConstant.BLACK);
-        btnTimMaQA = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnTimMaQA = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         scrQuanAo = new javax.swing.JScrollPane();
         tblQuanAo = new javax.swing.JTable();
 
@@ -217,8 +217,6 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnTimMaQA.setIcon(ImagePath.loadIcon(ImagePath.ICON_SEARCH)
-        );
         btnTimMaQA.setToolTipText("Click để tìm kiếm khách hàng");
         btnTimMaQA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimMaQA.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -302,9 +300,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimMaQA, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnListProductLayout.createSequentialGroup()
-                        .addComponent(scrQuanAo)
-                        .addGap(0, 0, 0))))
+                    .addComponent(scrQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         pnListProductLayout.setVerticalGroup(
             pnListProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -2,6 +2,7 @@ package org.group06.view.components.buttons;
 
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
+import org.group06.utils.ImagePath;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -16,17 +17,20 @@ public class SelectButton extends JToggleButton {
     private Color hoverColor;
     private Color clickColor;
     private Color selectedColor;
+    private String icon;
 
-    public SelectButton(Color normal, Color hover, Color click, Color selected) {
-        setBorderPainted(false);
-        setOpaque(false);
-        setContentAreaFilled(false);
-        setFont(FontConstant.FONT_TABLE_HEADER);
+    public SelectButton(Color normal, Color hover, Color click, Color selected, String iconPath) {
         this.normalColor = normal;
         this.hoverColor = hover;
         this.clickColor = click;
         this.selectedColor = selected;
+        this.icon = iconPath;
 
+        setBorderPainted(false);
+        setOpaque(false);
+        setContentAreaFilled(false);
+        setFont(FontConstant.FONT_TABLE_HEADER);
+        setIcon(ImagePath.loadWhiteIcon(icon));
         setForeground(ColorConstant.WHITE);
         setBackground(normalColor);
 
@@ -36,9 +40,11 @@ public class SelectButton extends JToggleButton {
                 if (isSelected()) {
                     setBackground(selectedColor);
                     setForeground(ColorConstant.BLACK);
+                    setIcon(ImagePath.loadBlackIcon(icon));
                 } else {
                     setBackground(normalColor);
                     setForeground(ColorConstant.WHITE);
+                    setIcon(ImagePath.loadWhiteIcon(icon));
                 }
             }
         });
@@ -48,9 +54,11 @@ public class SelectButton extends JToggleButton {
                 if (isSelected()) {
                     setBackground(selectedColor);
                     setForeground(ColorConstant.BLACK);
+                    setIcon(ImagePath.loadBlackIcon(icon));
                 } else {
                     setBackground(hoverColor);
                     setForeground(ColorConstant.BLACK);
+                    setIcon(ImagePath.loadBlackIcon(icon));
                 }
             }
 
@@ -59,9 +67,11 @@ public class SelectButton extends JToggleButton {
                 if (isSelected()) {
                     setBackground(selectedColor);
                     setForeground(ColorConstant.BLACK);
+                    setIcon(ImagePath.loadBlackIcon(icon));
                 } else {
                     setBackground(normalColor);
                     setForeground(ColorConstant.WHITE);
+                    setIcon(ImagePath.loadWhiteIcon(icon));
                 }
             }
 
@@ -69,6 +79,7 @@ public class SelectButton extends JToggleButton {
             public void mousePressed(MouseEvent e) {
                 setBackground(clickColor);
                 setForeground(ColorConstant.WHITE);
+                setIcon(ImagePath.loadWhiteIcon(icon));
             }
 
             @Override
@@ -76,9 +87,11 @@ public class SelectButton extends JToggleButton {
                 if (isSelected()) {
                     setBackground(selectedColor);
                     setForeground(ColorConstant.BLACK);
+                    setIcon(ImagePath.loadBlackIcon(icon));
                 } else {
                     setBackground(normalColor);
                     setForeground(ColorConstant.WHITE);
+                    setIcon(ImagePath.loadWhiteIcon(icon));
                 }
             }
         });
