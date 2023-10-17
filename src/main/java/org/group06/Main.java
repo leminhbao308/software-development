@@ -7,6 +7,7 @@ import org.group06.view.screen.Login;
 import org.group06.view.screen.MainFrame;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 
 public class Main {
 
@@ -25,8 +26,8 @@ public class Main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                loginFrame.setVisible(true);
-//                mainFrame.setVisible(true);
+//                loginFrame.setVisible(true);
+                mainFrame.setVisible(true);
             }
         });
     }
