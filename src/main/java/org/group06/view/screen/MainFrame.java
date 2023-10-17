@@ -12,6 +12,7 @@ import org.group06.view.components.panels.container.PanelQuanAoNhanVien;
 
 import javax.swing.*;
 import java.awt.*;
+import org.group06.view.components.panels.container.PanelKhachHang;
 
 /**
  * @author lehoa
@@ -210,6 +211,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnKhachHang.setIconTextGap(15);
         btnKhachHang.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnKhachHang);
 
         grpSelect.add(btnNhanVien);
@@ -312,6 +318,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnQuanAoActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelKhachHang();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnKhachHangActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
