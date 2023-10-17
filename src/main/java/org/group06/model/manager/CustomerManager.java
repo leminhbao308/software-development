@@ -1,39 +1,35 @@
 package org.group06.model.manager;
 
-import org.group06.model.entity.Customer;
+import org.group06.model.entity.KhachHang;
 
 import java.util.ArrayList;
 
 public class CustomerManager {
-    private ArrayList<Customer> customers;
+    private ArrayList<KhachHang> customers;
 
     public CustomerManager() {
         this.customers = new ArrayList<>();
     }
 
-    public CustomerManager(ArrayList<Customer> customers) {
+    public CustomerManager(ArrayList<KhachHang> customers) {
         this.customers = customers;
     }
 
     public static void main(String[] args) {
-        ArrayList<Customer> c1 = new ArrayList<>();
-        c1.add(new Customer("NV01", "Le Minh Bao", "hcm", "012345678", 100.0));
-        c1.add(new Customer("NV02", "Le Minh Beo", "hcm", "012345678", 103.0));
-        c1.add(new Customer("NV03", "Le Minh Lon", "hcm", "012345678", 1023.0));
-        c1.add(new Customer("NV04", "Le Minh Nho", "hcm", "012345678", 1450.0));
+        ArrayList<KhachHang> c1 = new ArrayList<>();
 
         CustomerManager cm = new CustomerManager(c1);
 
         System.out.println("Danh sach cac khach hang");
-        for (Customer c : cm.getCustomers()) {
+        for (KhachHang c : cm.getCustomers()) {
             System.out.println(c.toString());
         }
 
         System.out.println("Thuc Hien them mot khach hang");
-        cm.addCustomer(new Customer("NV05", "Le Minh Nho", "hcm", "012345678", 1450.0));
+
         System.out.println("Danh sach cac khach hang sau cap nhat");
 
-        for (Customer c : cm.getCustomers()) {
+        for (KhachHang c : cm.getCustomers()) {
             System.out.println(c.toString());
         }
 
@@ -43,7 +39,7 @@ public class CustomerManager {
         }
         System.out.println("Danh sach cac khach hang sau cap nhat");
 
-        for (Customer c : cm.getCustomers()) {
+        for (KhachHang c : cm.getCustomers()) {
             System.out.println(c.toString());
         }
 
@@ -53,25 +49,25 @@ public class CustomerManager {
         }
         System.out.println("Danh sach cac khach hang sau cap nhat");
 
-        for (Customer c : cm.getCustomers()) {
+        for (KhachHang c : cm.getCustomers()) {
             System.out.println(c.toString());
         }
     }
 
-    public ArrayList<Customer> getCustomers() {
+    public ArrayList<KhachHang> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
+    public void setCustomers(ArrayList<KhachHang> customers) {
         this.customers = customers;
     }
 
-    public boolean addCustomer(Customer customer) {
+    public boolean addCustomer(KhachHang customer) {
         return customers.add(customer);
     }
 
     public boolean removeCustomer(String customerID) {
-        for (Customer c : customers) {
+        for (KhachHang c : customers) {
             if (c.getMaKhachHang().equals(customerID)) {
                 return customers.remove(c);
             }
@@ -80,9 +76,9 @@ public class CustomerManager {
     }
 
     public boolean updateCustomer(String customerID, String data) {
-        for (Customer c : customers) {
+        for (KhachHang c : customers) {
             if (c.getMaKhachHang().equals(customerID)) {
-                c.setTen(data);
+                c.setTenKH(data);
                 return true;
             }
         }
