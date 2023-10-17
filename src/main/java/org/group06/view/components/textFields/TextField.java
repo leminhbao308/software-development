@@ -1,6 +1,5 @@
 package org.group06.view.components.textFields;
 
-import lombok.Getter;
 import org.group06.utils.ColorConstant;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -10,16 +9,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import lombok.Setter;
 
 public class TextField extends JTextField {
 
     private final Animator animator;
-    @Getter
     private String hint = "";
     private float animate;
     private boolean show = true;
-    @Setter
     private Color placeholder_Color = ColorConstant.TEXT_PLACEHOLDER;
 
     public TextField(String hint, Color placeholder_Color) {
@@ -131,9 +127,17 @@ public class TextField extends JTextField {
         });
     }
 
+    public String getHint() {
+        return hint;
+    }
+
     public void setHint(String hint) {
         this.hint = hint;
         repaint();
+    }
+
+    public void setPlaceholder_Color(Color placeholder_Color) {
+        this.placeholder_Color = placeholder_Color;
     }
 
     private void stop() {
@@ -152,7 +156,7 @@ public class TextField extends JTextField {
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(placeholder_Color);
         g2.drawLine(0, getHeight() - 3, getWidth(), getHeight() - 3);
-        if (!hint.equals("")) {
+        if (!hint.isEmpty()) {
             int h = getHeight();
             Insets ins = getInsets();
             FontMetrics fm = g.getFontMetrics();

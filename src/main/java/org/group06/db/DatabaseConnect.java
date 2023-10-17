@@ -1,4 +1,4 @@
-package org.group06.model;
+package org.group06.db;
 
 public class DatabaseConnect {
 }

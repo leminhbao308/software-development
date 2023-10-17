@@ -1,14 +1,16 @@
 package org.group06.view.components.charts.data;
 
-import lombok.AllArgsConstructor;
 import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 
 import java.util.LinkedHashMap;
 
-@AllArgsConstructor
 public class HistogramData {
     private LinkedHashMap<String, Double> data;
+
+    public HistogramData(LinkedHashMap<String, Double> data) {
+        this.data = data;
+    }
 
     public IntervalXYDataset getDataSet(String key, int range) {
         if (range <= 0) {
