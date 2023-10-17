@@ -13,10 +13,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author lemin
  */
-public class StaticRoundButton extends JButton{
+public class StaticRoundButton extends JButton {
     Color colorDefault = ColorConstant.BUTTON_LOGIN_NORMAL;
     Color colorOver = ColorConstant.BUTTON_LOGIN_HOVER;
     Color colorClick = ColorConstant.BUTTON_LOGIN_CLICK;
@@ -89,6 +88,7 @@ public class StaticRoundButton extends JButton{
         setBorderPainted(false);
         setOpaque(false);
         setContentAreaFilled(false);
+        setIcon(ImagePath.loadWhiteIcon(icon));
         // Add event mouse
         addMouseListener(new MouseAdapter() {
             @Override
