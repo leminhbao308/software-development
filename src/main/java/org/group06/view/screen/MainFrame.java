@@ -13,6 +13,7 @@ import org.group06.view.components.panels.container.PanelQuanAoNhanVien;
 import javax.swing.*;
 import java.awt.*;
 import org.group06.view.components.panels.container.PanelKhachHang;
+import org.group06.view.components.panels.container.PanelNhanVien;
 
 /**
  * @author lehoa
@@ -224,6 +225,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnNhanVien.setIconTextGap(15);
         btnNhanVien.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhanVienActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnNhanVien);
 
         grpSelect.add(btnNhaCungCap);
@@ -326,6 +332,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelNhanVien();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnNhanVienActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
