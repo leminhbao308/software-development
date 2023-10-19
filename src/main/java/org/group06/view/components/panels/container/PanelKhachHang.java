@@ -29,7 +29,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         lblTitleKH = new javax.swing.JLabel();
         btnTimSDT = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        txtTimMaQA = new org.group06.view.components.textFields.TextField("Số điện thoại cần tìm", ColorConstant.BLACK);
+        txtTimSDT = new org.group06.view.components.textFields.TextField("Số điện thoại cần tìm", ColorConstant.BLACK);
         scrKhachHang = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
 
@@ -44,11 +44,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
         btnTimSDT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimSDT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        txtTimMaQA.setFont(FontConstant.FONT_TEXT);
-        txtTimMaQA.setToolTipText("Nhập số điện thoại cần tìm");
-        txtTimMaQA.addActionListener(new java.awt.event.ActionListener() {
+        txtTimSDT.setFont(FontConstant.FONT_TEXT);
+        txtTimSDT.setToolTipText("Nhập số điện thoại cần tìm");
+        txtTimSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimMaQAActionPerformed(evt);
+                txtTimSDTActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimMaQA, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -122,7 +122,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTimMaQA, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
@@ -130,9 +130,9 @@ public class PanelKhachHang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTimMaQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimMaQAActionPerformed
+    private void txtTimSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimSDTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimMaQAActionPerformed
+    }//GEN-LAST:event_txtTimSDTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -140,6 +140,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitleKH;
     private javax.swing.JScrollPane scrKhachHang;
     private javax.swing.JTable tblKhachHang;
-    private javax.swing.JTextField txtTimMaQA;
+    private javax.swing.JTextField txtTimSDT;
     // End of variables declaration//GEN-END:variables
 }
