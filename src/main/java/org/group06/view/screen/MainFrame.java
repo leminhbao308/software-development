@@ -98,7 +98,6 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Phần Mềm Quản Lý Cửa Hàng");
         setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON)
         );
-        setUndecorated(true);
 
         pnSideBar.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         pnSideBar.setPreferredSize(new java.awt.Dimension(320, 781));

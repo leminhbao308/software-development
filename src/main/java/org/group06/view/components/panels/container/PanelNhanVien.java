@@ -81,7 +81,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         btnTimMaNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimMaNV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        lblMaNV.setFont(FontConstant.FONT_LABEL);
+        lblMaNV.setFont(FontConstant.FONT_TEXT);
         lblMaNV.setText("Mã nhân viên:");
 
         txtMaNV.setFont(FontConstant.FONT_TEXT);

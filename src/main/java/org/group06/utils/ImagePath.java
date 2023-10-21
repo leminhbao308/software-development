@@ -29,6 +29,7 @@ public class ImagePath {
 
 //    Product path
     public static final URL PRODUCT_EXAMPLE = ImagePath.class.getResource("/images/product/example.jpg");
+    public static final URL UPLOAD_IMG = ImagePath.class.getResource("/images/product/uploadImg.jpg");
     private ImagePath() {
         // Để ngăn việc tạo đối tượng instance của lớp này
     }
