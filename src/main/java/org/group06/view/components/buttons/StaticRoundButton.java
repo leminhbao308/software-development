@@ -111,7 +111,7 @@ public class StaticRoundButton extends JButton {
             public void mousePressed(MouseEvent me) {
                 if (!isEnabled()) return;
                 setBackground(colorClick);
-                setIcon(ImagePath.loadBlackIcon(icon));
+                setIcon(ImagePath.loadWhiteIcon(icon));
             }
 
             @Override
