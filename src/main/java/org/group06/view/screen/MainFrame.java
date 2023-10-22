@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import org.group06.view.components.panels.container.PanelKhachHang;
 import org.group06.view.components.panels.container.PanelKhuyenMai;
+import org.group06.view.components.panels.container.PanelNhaCungCap;
 import org.group06.view.components.panels.container.PanelNhanVien;
 
 /**
@@ -238,6 +239,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnNhaCungCap.setIconTextGap(15);
         btnNhaCungCap.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhaCungCapActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnNhaCungCap);
 
         grpSelect.add(btnKhuyenMai);
@@ -353,6 +359,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaCungCapActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelNhaCungCap();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnNhaCungCapActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
