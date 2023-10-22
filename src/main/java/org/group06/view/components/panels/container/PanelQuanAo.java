@@ -4,10 +4,12 @@
  */
 package org.group06.view.components.panels.container;
 
+import javax.swing.JTextField;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
+import org.group06.view.components.textFields.TextField;
 
 /**
  * @author lemin
@@ -19,8 +21,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
      */
     public PanelQuanAo() {
         initComponents();
-//        tblSize.getTableHeader().setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-//        tblSize.getTableHeader().setForeground(ColorConstant.WHITE);
+        tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
     }
 
     /**
@@ -164,12 +165,16 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblMa.setFont(FontConstant.FONT_LABEL);
         lblMa.setText("Mã:");
 
+        txtMa.setEditable(false);
+        txtMa.setBackground(ColorConstant.DISABLE_FIELD);
         txtMa.setFont(FontConstant.FONT_TEXT);
+        txtMa.setEnabled(false);
 
         lbTen.setFont(FontConstant.FONT_LABEL);
         lbTen.setText("Tên:");
 
         txtTen.setFont(FontConstant.FONT_TEXT);
+        txtTen.setEnabled(false);
 
         lblLoaiQA.setFont(FontConstant.FONT_LABEL);
         lblLoaiQA.setText("Loại Quần Áo:");
@@ -185,27 +190,32 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbLoaiQA.setFont(FontConstant.FONT_TEXT);
         cmbLoaiQA.setForeground(ColorConstant.WHITE);
         cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbLoaiQA.setEnabled(false);
         cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
 
         lblSoLuong.setFont(FontConstant.FONT_LABEL);
         lblSoLuong.setText("Số Lượng:");
 
         txtSoLuong.setFont(FontConstant.FONT_TEXT);
+        txtSoLuong.setEnabled(false);
 
         lblGiaNhap.setFont(FontConstant.FONT_LABEL);
         lblGiaNhap.setText("Giá Nhập:");
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
+        txtGiaNhap.setEnabled(false);
 
         lblLoiNhuan.setFont(FontConstant.FONT_LABEL);
         lblLoiNhuan.setText("Lợi Nhuận:");
 
         txtLoiNhuan.setFont(FontConstant.FONT_TEXT);
+        txtLoiNhuan.setEnabled(false);
 
         lblGiaBan.setFont(FontConstant.FONT_LABEL);
         lblGiaBan.setText("Giá Bán:");
 
         txtGiaBan.setFont(FontConstant.FONT_TEXT);
+        txtGiaBan.setEnabled(false);
 
         lblNhaCungCap.setFont(FontConstant.FONT_LABEL);
         lblNhaCungCap.setText("Nhà Cung Cấp:");
@@ -214,6 +224,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbNhaCungCap.setFont(FontConstant.FONT_TEXT);
         cmbNhaCungCap.setForeground(ColorConstant.WHITE);
         cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbNhaCungCap.setEnabled(false);
         cmbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
 
         javax.swing.GroupLayout pnFieldsLeftLayout = new javax.swing.GroupLayout(pnFieldsLeft);
@@ -314,6 +325,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 "Kích Thước", "Số Lượng"
             }
         ));
+        tblSoLuongVaKichThuoc.setEnabled(false);
         scrKichThuoc_SoLuong.setViewportView(tblSoLuongVaKichThuoc);
 
         lblDinhMucTonKho.setFont(FontConstant.FONT_LABEL);
@@ -323,6 +335,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblDinhMucTonKho.setPreferredSize(new java.awt.Dimension(140, 16));
 
         txtDinhMucTonKho.setFont(FontConstant.FONT_TEXT);
+        txtDinhMucTonKho.setEnabled(false);
 
         lblMoTa.setFont(FontConstant.FONT_LABEL);
         lblMoTa.setText("Mô Tả:");
@@ -333,6 +346,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txaMoTa.setBackground(ColorConstant.BUTTON_CLICK);
         txaMoTa.setColumns(20);
         txaMoTa.setRows(5);
+        txaMoTa.setEnabled(false);
         scrMoTa.setViewportView(txaMoTa);
 
         javax.swing.GroupLayout pnFieldsRightLayout = new javax.swing.GroupLayout(pnFieldsRight);
@@ -560,7 +574,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed

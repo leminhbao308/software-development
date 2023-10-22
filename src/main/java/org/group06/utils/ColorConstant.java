@@ -3,6 +3,7 @@ package org.group06.utils;
 import java.awt.*;
 
 public class ColorConstant {
+
     // Màu chữ
     public static final Color BLACK = new Color(0, 0, 0);
     public static final Color WHITE = new Color(255, 255, 255);
@@ -19,12 +20,15 @@ public class ColorConstant {
     public static final Color BUTTON_HOVER = new Color(255, 242, 216);
     public static final Color BUTTON_CLICK = new Color(241, 210, 164);
     public static final Color BUTTON_LOGIN_NORMAL = new Color(17, 57, 70);
-    public static final Color BUTTON_LOGIN_HOVER = new Color(6,79,102);
-    public static final Color BUTTON_LOGIN_CLICK = new Color(3,107,139);
+    public static final Color BUTTON_LOGIN_HOVER = new Color(6, 79, 102);
+    public static final Color BUTTON_LOGIN_CLICK = new Color(3, 107, 139);
     public static final Color BUTTON_SECONDARY_NORMAL = new Color(200, 200, 200);
     public static final Color BUTTON_SECONDARY_HOVER = new Color(150, 150, 150);
     public static final Color BUTTON_SECONDARY_CLICK = new Color(100, 100, 100);
 
+//    Màu JTextField
+    public static final Color DISABLE_FIELD = new Color(217, 217, 217);
+    
     //
     public static final Color TITLE_BORDER = new Color(102, 102, 102);
     public static final Color TITLE_BACKGROUND = new Color(234, 215, 187);
@@ -34,4 +38,3 @@ public class ColorConstant {
         // Để ngăn việc tạo đối tượng instance của lớp này
     }
 }
-
