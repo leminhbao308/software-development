@@ -30,34 +30,34 @@ public class PanelHoaDon extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitleQA = new javax.swing.JLabel();
-        btnTimMaNV = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        txtTimMaNV = new org.group06.view.components.textFields.TextField("Mã hoá đơn cần tìm", ColorConstant.BLACK);
-        scrQuanAoBan = new javax.swing.JScrollPane();
-        tblQuanAoBan = new javax.swing.JTable();
+        lblTitleHoaDon = new javax.swing.JLabel();
+        btnTimMaHoaDon = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        txtTimMaHoaDon = new org.group06.view.components.textFields.TextField("Mã hoá đơn cần tìm", ColorConstant.BLACK);
+        scrHoaDon = new javax.swing.JScrollPane();
+        tblHoaDon = new javax.swing.JTable();
 
         setBackground(ColorConstant.BACKGROUND_CONTAINER);
 
-        lblTitleQA.setFont(org.group06.utils.FontConstant.FONT_HEADER);
-        lblTitleQA.setForeground(org.group06.utils.ColorConstant.WHITE);
-        lblTitleQA.setText("Thông Tin Hoá Đơn");
+        lblTitleHoaDon.setFont(org.group06.utils.FontConstant.FONT_HEADER);
+        lblTitleHoaDon.setForeground(org.group06.utils.ColorConstant.WHITE);
+        lblTitleHoaDon.setText("Thông Tin Hoá Đơn");
 
-        btnTimMaNV.setToolTipText("Click để tìm kiếm khách hàng");
-        btnTimMaNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTimMaNV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTimMaHoaDon.setToolTipText("Click để tìm kiếm khách hàng");
+        btnTimMaHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTimMaHoaDon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        txtTimMaNV.setFont(FontConstant.FONT_TEXT);
-        txtTimMaNV.setToolTipText("Nhập mã hoá đơn cần tìm");
-        txtTimMaNV.addActionListener(new java.awt.event.ActionListener() {
+        txtTimMaHoaDon.setFont(FontConstant.FONT_TEXT);
+        txtTimMaHoaDon.setToolTipText("Nhập mã hoá đơn cần tìm");
+        txtTimMaHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimMaNVActionPerformed(evt);
+                txtTimMaHoaDonActionPerformed(evt);
             }
         });
 
-        tblQuanAoBan.setAutoCreateRowSorter(true);
-        tblQuanAoBan.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
-        tblQuanAoBan.setFont(org.group06.utils.FontConstant.FONT_TEXT);
-        tblQuanAoBan.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setAutoCreateRowSorter(true);
+        tblHoaDon.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
+        tblHoaDon.setFont(org.group06.utils.FontConstant.FONT_TEXT);
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -76,19 +76,19 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        tblQuanAoBan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tblQuanAoBan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tblQuanAoBan.setFillsViewportHeight(true);
-        tblQuanAoBan.setGridColor(org.group06.utils.ColorConstant.BLACK);
-        tblQuanAoBan.setRowHeight(50);
-        tblQuanAoBan.setSelectionBackground(org.group06.utils.ColorConstant.BACKGROUND_SIDEBAR);
-        tblQuanAoBan.setSelectionForeground(org.group06.utils.ColorConstant.WHITE);
-        tblQuanAoBan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblQuanAoBan.setShowGrid(false);
-        tblQuanAoBan.setShowHorizontalLines(true);
-        tblQuanAoBan.getTableHeader().setResizingAllowed(false);
-        tblQuanAoBan.getTableHeader().setReorderingAllowed(false);
-        scrQuanAoBan.setViewportView(tblQuanAoBan);
+        tblHoaDon.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblHoaDon.setFillsViewportHeight(true);
+        tblHoaDon.setGridColor(org.group06.utils.ColorConstant.BLACK);
+        tblHoaDon.setRowHeight(50);
+        tblHoaDon.setSelectionBackground(org.group06.utils.ColorConstant.BACKGROUND_SIDEBAR);
+        tblHoaDon.setSelectionForeground(org.group06.utils.ColorConstant.WHITE);
+        tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblHoaDon.setShowGrid(false);
+        tblHoaDon.setShowHorizontalLines(true);
+        tblHoaDon.getTableHeader().setResizingAllowed(false);
+        tblHoaDon.getTableHeader().setReorderingAllowed(false);
+        scrHoaDon.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,12 +98,12 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTitleHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTimMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrQuanAoBan, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
+                        .addComponent(btnTimMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,25 +111,25 @@ public class PanelHoaDon extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTimMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTimMaNV)
-                    .addComponent(lblTitleQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTimMaHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTimMaHoaDon)
+                    .addComponent(lblTitleHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrQuanAoBan, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addComponent(scrHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTimMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimMaNVActionPerformed
+    private void txtTimMaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimMaHoaDonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimMaNVActionPerformed
+    }//GEN-LAST:event_txtTimMaHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimMaNV;
-    private javax.swing.JLabel lblTitleQA;
-    private javax.swing.JScrollPane scrQuanAoBan;
-    private javax.swing.JTable tblQuanAoBan;
-    private javax.swing.JTextField txtTimMaNV;
+    private javax.swing.JButton btnTimMaHoaDon;
+    private javax.swing.JLabel lblTitleHoaDon;
+    private javax.swing.JScrollPane scrHoaDon;
+    private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTextField txtTimMaHoaDon;
     // End of variables declaration//GEN-END:variables
 }

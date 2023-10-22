@@ -205,6 +205,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnPhieuTam.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPhieuTam.setIconTextGap(15);
         btnPhieuTam.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnPhieuTam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhieuTamActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnPhieuTam);
 
         grpSelect.add(btnKhachHang);
@@ -375,6 +380,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnPhieuTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuTamActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelPhieuTam();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnPhieuTamActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
