@@ -24,10 +24,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
     public PanelQuanAo() {
         initComponents();
         tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
-//        disableAllBtns();
+
         statusAllFields(false);
-//        statusAllBtns(false);
-        this.btnThemMoi.setEnabled(true);
+        statusAllBtns(false);
+//        this.btnThemMoi.setEnabled(true);
     }
 
     /**
@@ -174,14 +174,12 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txtMa.setEditable(false);
         txtMa.setBackground(ColorConstant.DISABLE_FIELD);
         txtMa.setFont(FontConstant.FONT_TEXT);
-        txtMa.setText("LHN-123123");
         txtMa.setEnabled(false);
 
         lbTen.setFont(FontConstant.FONT_LABEL);
         lbTen.setText("Tên:");
 
         txtTen.setFont(FontConstant.FONT_TEXT);
-        txtTen.setText("123123123");
         txtTen.setEnabled(false);
 
         lblLoaiQA.setFont(FontConstant.FONT_LABEL);
@@ -210,7 +208,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblSoLuong.setText("Số Lượng:");
 
         txtSoLuong.setFont(FontConstant.FONT_TEXT);
-        txtSoLuong.setText("123123");
         txtSoLuong.setEnabled(false);
         txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,21 +219,18 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblGiaNhap.setText("Giá Nhập:");
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
-        txtGiaNhap.setText("123123");
         txtGiaNhap.setEnabled(false);
 
         lblLoiNhuan.setFont(FontConstant.FONT_LABEL);
         lblLoiNhuan.setText("Lợi Nhuận:");
 
         txtLoiNhuan.setFont(FontConstant.FONT_TEXT);
-        txtLoiNhuan.setText("123123");
         txtLoiNhuan.setEnabled(false);
 
         lblGiaBan.setFont(FontConstant.FONT_LABEL);
         lblGiaBan.setText("Giá Bán:");
 
         txtGiaBan.setFont(FontConstant.FONT_TEXT);
-        txtGiaBan.setText("12312312");
         txtGiaBan.setEnabled(false);
         txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -537,17 +531,22 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
 
         tblQuanAo.setBackground(ColorConstant.BUTTON_HOVER);
+        tblQuanAo.setFont(FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {"QA-001", "Quần Hoa", "12", "120000", "10%", "132000", "Quần", "LocalBrand", "Hạnh Thông Tây"},
+                {"QA-002", "Váy Ngắn", "1", "250000", "10%", "275000", "Váy", "No Brand", "Chợ Bến Thành"}
             },
             new String [] {
                 "Mã", "Tên QA", "Tổng SL", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Loại", "Thương Hiệu", "NCC"
             }
         ));
+        tblQuanAo.setRowHeight(30);
+        tblQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuanAoMouseClicked(evt);
+            }
+        });
         scrQuanAo.setViewportView(tblQuanAo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -609,6 +608,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
             this.btnLuu.setBackground(ColorConstant.DISABLE_FIELD);
             this.btnCapNhat.setBackground(ColorConstant.DISABLE_FIELD);
             this.btnHuy.setBackground(ColorConstant.DISABLE_FIELD);
+        } else {
+            this.btnXoaTrang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnLuu.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnCapNhat.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnHuy.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         }
     }
 
@@ -684,6 +688,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         statusAllBtns(false);
         this.btnThemMoi.setEnabled(true);
         this.btnThemMoi.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        xoaTrang();
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiQAActionPerformed
@@ -701,6 +706,27 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaBanActionPerformed
+
+    private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
+        //        Xử lý các button control
+        this.statusAllBtns(true);
+        this.btnThemMoi.setEnabled(false);
+        this.btnThemMoi.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnHuy.setEnabled(false);
+        this.btnHuy.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnLuu.setEnabled(false);
+        this.btnLuu.setBackground(ColorConstant.DISABLE_FIELD);
+
+//      Đổ dữ liệu từ table lên fields
+        int vitri = this.tblQuanAo.getSelectedRow();
+        this.txtMa.setText(tblQuanAo.getValueAt(vitri, 0).toString());
+        this.txtTen.setText(tblQuanAo.getValueAt(vitri, 1).toString());
+        this.txtSoLuong.setText(tblQuanAo.getValueAt(vitri, 2).toString());
+        this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 3).toString());
+        this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 4).toString());
+        this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 5).toString());
+
+    }//GEN-LAST:event_tblQuanAoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
