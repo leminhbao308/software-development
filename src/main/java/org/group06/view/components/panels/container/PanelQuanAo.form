@@ -643,10 +643,10 @@
                           <Connection code="ColorConstant.BUTTON_CLICK" type="code"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="FontConstant.FONT_TABLE_HEADER" type="code"/>
+                          <Connection code="FontConstant.FONT_TEXT" type="code"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="ColorConstant.WHITE" type="code"/>
+                          <Connection code="ColorConstant.BLACK" type="code"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="4">
@@ -711,9 +711,6 @@
                     <Property name="text" type="java.lang.String" value="123123"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDinhMucTonKhoActionPerformed"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.textFields.TextField()"/>
                   </AuxValues>
@@ -748,7 +745,11 @@
                           <Connection code="ColorConstant.BUTTON_CLICK" type="code"/>
                         </Property>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="FontConstant.FONT_TEXT" type="code"/>
+                        </Property>
                         <Property name="rows" type="int" value="5"/>
+                        <Property name="text" type="java.lang.String" value="&#x111;&#xe2;sdasdasd&#xa;"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
