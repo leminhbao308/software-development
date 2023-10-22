@@ -5,6 +5,8 @@
 package org.group06.view.components.panels.container;
 
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
@@ -22,6 +24,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
     public PanelQuanAo() {
         initComponents();
         tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
+
+        statusAllFields(false);
+        statusAllBtns(false);
+//        this.btnThemMoi.setEnabled(true);
     }
 
     /**
@@ -192,12 +198,22 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
         cmbLoaiQA.setEnabled(false);
         cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbLoaiQA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLoaiQAActionPerformed(evt);
+            }
+        });
 
         lblSoLuong.setFont(FontConstant.FONT_LABEL);
         lblSoLuong.setText("Số Lượng:");
 
         txtSoLuong.setFont(FontConstant.FONT_TEXT);
         txtSoLuong.setEnabled(false);
+        txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSoLuongActionPerformed(evt);
+            }
+        });
 
         lblGiaNhap.setFont(FontConstant.FONT_LABEL);
         lblGiaNhap.setText("Giá Nhập:");
@@ -216,6 +232,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         txtGiaBan.setFont(FontConstant.FONT_TEXT);
         txtGiaBan.setEnabled(false);
+        txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGiaBanActionPerformed(evt);
+            }
+        });
 
         lblNhaCungCap.setFont(FontConstant.FONT_LABEL);
         lblNhaCungCap.setText("Nhà Cung Cấp:");
@@ -223,7 +244,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbNhaCungCap.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         cmbNhaCungCap.setFont(FontConstant.FONT_TEXT);
         cmbNhaCungCap.setForeground(ColorConstant.WHITE);
-        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Nhà Cung Cấp", "Chợ Đồng Xuân", "Chợ Bến Thành", "Hạnh Thông Tây" }));
         cmbNhaCungCap.setEnabled(false);
         cmbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
 
@@ -312,14 +333,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
         pnFieldsRight.setPreferredSize(new java.awt.Dimension(420, 0));
 
         tblSoLuongVaKichThuoc.setBackground(ColorConstant.BUTTON_CLICK);
-        tblSoLuongVaKichThuoc.setFont(FontConstant.FONT_TABLE_HEADER);
-        tblSoLuongVaKichThuoc.setForeground(ColorConstant.WHITE);
+        tblSoLuongVaKichThuoc.setFont(FontConstant.FONT_TEXT);
+        tblSoLuongVaKichThuoc.setForeground(ColorConstant.BLACK);
         tblSoLuongVaKichThuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"S", "12"},
+                {"M", "23"},
+                {"L", "23"},
+                {"XL", null}
             },
             new String [] {
                 "Kích Thước", "Số Lượng"
@@ -335,6 +356,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblDinhMucTonKho.setPreferredSize(new java.awt.Dimension(140, 16));
 
         txtDinhMucTonKho.setFont(FontConstant.FONT_TEXT);
+        txtDinhMucTonKho.setText("123123");
         txtDinhMucTonKho.setEnabled(false);
 
         lblMoTa.setFont(FontConstant.FONT_LABEL);
@@ -345,7 +367,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         txaMoTa.setBackground(ColorConstant.BUTTON_CLICK);
         txaMoTa.setColumns(20);
+        txaMoTa.setFont(FontConstant.FONT_TEXT);
         txaMoTa.setRows(5);
+        txaMoTa.setText("đâsdasdasd\n");
         txaMoTa.setEnabled(false);
         scrMoTa.setViewportView(txaMoTa);
 
@@ -507,17 +531,22 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
 
         tblQuanAo.setBackground(ColorConstant.BUTTON_HOVER);
+        tblQuanAo.setFont(FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {"QA-001", "Quần Hoa", "12", "120000", "10%", "132000", "Quần", "LocalBrand", "Hạnh Thông Tây"},
+                {"QA-002", "Váy Ngắn", "1", "250000", "10%", "275000", "Váy", "No Brand", "Chợ Bến Thành"}
             },
             new String [] {
                 "Mã", "Tên QA", "Tổng SL", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Loại", "Thương Hiệu", "NCC"
             }
         ));
+        tblQuanAo.setRowHeight(30);
+        tblQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuanAoMouseClicked(evt);
+            }
+        });
         scrQuanAo.setViewportView(tblQuanAo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -557,6 +586,55 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void statusAllFields(boolean status) {
+        this.txtTen.setEnabled(status);
+        this.cmbLoaiQA.setEnabled(status);
+        this.txtSoLuong.setEnabled(status);
+        this.txtGiaNhap.setEnabled(status);
+        this.txtLoiNhuan.setEnabled(status);
+        this.cmbNhaCungCap.setEnabled(status);
+        this.tblSoLuongVaKichThuoc.setEnabled(status);
+        this.txtDinhMucTonKho.setEnabled(status);
+        this.txaMoTa.setEnabled(status);
+    }
+
+    public void statusAllBtns(boolean status) {
+        this.btnXoaTrang.setEnabled(status);
+        this.btnLuu.setEnabled(status);
+        this.btnCapNhat.setEnabled(status);
+        this.btnHuy.setEnabled(status);
+        if (!status) {
+            this.btnXoaTrang.setBackground(ColorConstant.DISABLE_FIELD);
+            this.btnLuu.setBackground(ColorConstant.DISABLE_FIELD);
+            this.btnCapNhat.setBackground(ColorConstant.DISABLE_FIELD);
+            this.btnHuy.setBackground(ColorConstant.DISABLE_FIELD);
+        } else {
+            this.btnXoaTrang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnLuu.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnCapNhat.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+            this.btnHuy.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        }
+    }
+
+    public void xoaTrang() {
+        this.txtMa.setText("");
+        this.txtTen.setText("");
+        this.cmbLoaiQA.setSelectedIndex(0);
+        this.txtSoLuong.setText("");
+        this.txtGiaNhap.setText("");
+        this.txtLoiNhuan.setText("");
+        this.txtGiaBan.setText("");
+        this.cmbNhaCungCap.setSelectedIndex(0);
+        this.tblSoLuongVaKichThuoc.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Kích Thước", "Số Lượng"
+                }
+        ));
+        this.txtDinhMucTonKho.setText("");
+        this.txaMoTa.setText("");
+    }
+
     private void txtTimQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimQAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimQAActionPerformed
@@ -570,28 +648,85 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUploadImgActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
+        xoaTrang();
+        this.btnXoaTrang.setEnabled(false);
+        this.btnLuu.setEnabled(false);
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-
+        statusAllFields(true);
+        xoaTrang();
+        this.btnThemMoi.setEnabled(false);
+        this.btnThemMoi.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnLuu.setEnabled(true);
+        this.btnLuu.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        this.btnXoaTrang.setEnabled(true);
+        this.btnXoaTrang.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        this.btnHuy.setEnabled(true);
+        this.btnHuy.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
+        xoaTrang();
+        statusAllFields(false);
+        statusAllBtns(false);
+        this.btnThemMoi.setEnabled(true);
+        this.btnThemMoi.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        // TODO add your handling code here:
+        statusAllFields(true);
+        statusAllBtns(true);
+        this.btnThemMoi.setEnabled(false);
+        this.btnThemMoi.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnCapNhat.setEnabled(false);
+        this.btnCapNhat.setBackground(ColorConstant.DISABLE_FIELD);
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
+        statusAllFields(false);
+        statusAllBtns(false);
+        this.btnThemMoi.setEnabled(true);
+        this.btnThemMoi.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        xoaTrang();
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiQAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemLoaiQAActionPerformed
+
+    private void cmbLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLoaiQAActionPerformed
+
+    private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoLuongActionPerformed
+
+    private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGiaBanActionPerformed
+
+    private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
+        //        Xử lý các button control
+        this.statusAllBtns(true);
+        this.btnThemMoi.setEnabled(false);
+        this.btnThemMoi.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnHuy.setEnabled(false);
+        this.btnHuy.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnLuu.setEnabled(false);
+        this.btnLuu.setBackground(ColorConstant.DISABLE_FIELD);
+
+//      Đổ dữ liệu từ table lên fields
+        int vitri = this.tblQuanAo.getSelectedRow();
+        this.txtMa.setText(tblQuanAo.getValueAt(vitri, 0).toString());
+        this.txtTen.setText(tblQuanAo.getValueAt(vitri, 1).toString());
+        this.txtSoLuong.setText(tblQuanAo.getValueAt(vitri, 2).toString());
+        this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 3).toString());
+        this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 4).toString());
+        this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 5).toString());
+
+    }//GEN-LAST:event_tblQuanAoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
