@@ -254,6 +254,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cboViTri.setEnabled(false);
 
         pwdMK.setText("jPasswordField1");
+        pwdMK.setEnabled(false);
 
         tglMK.setText("Show");
 
@@ -285,11 +286,10 @@ public class PanelNhanVien extends javax.swing.JPanel {
             pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRightLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tglMK, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglMK, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,10 +314,15 @@ public class PanelNhanVien extends javax.swing.JPanel {
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.setEnabled(false);
+        btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaTrangActionPerformed(evt);
+            }
+        });
 
         btnThemNV.setFont(FontConstant.FONT_BUTTON);
         btnThemNV.setForeground(ColorConstant.WHITE);
-        btnThemNV.setText("Thêm ");
+        btnThemNV.setText("Thêm");
         btnThemNV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,6 +335,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.setEnabled(false);
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         btnLuu.setFont(FontConstant.FONT_BUTTON);
         btnLuu.setForeground(ColorConstant.WHITE);
@@ -483,10 +493,30 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDiaChiActionPerformed
 
     private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
-        // TODO add your handling code here:
+       if(btnThemNV.getText().equals("Thêm")) {
+           enabledHideOn();
+           xoaTrangAll();
+           this.txtTenNV.requestFocus();
+           
+            btnLuu.setEnabled(true);
+            btnXoaTrang.setEnabled(true);
+            btnThemNV.setText("Hủy thêm");
+       } else {
+           enabledHideOff();
+           btnLuu.setEnabled(false);
+           btnThemNV.setText("Thêm");
+       }
     }//GEN-LAST:event_btnThemNVActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
+        enabledHideOff();
+        btnThemNV.setText("Thêm");
+        btnCapNhat.setText("Cập nhật");
+        btnXoaTrang.setEnabled(true);
+        btnCapNhat.setEnabled(true);
+        btnThemNV.setEnabled(true);
+        btnLuu.setEnabled(false);
+        
         int vitri = tblNhanVien.getSelectedRow();
         txtMaNV.setText(tblNhanVien.getValueAt(vitri, 0).toString());
         txtTenNV.setText(tblNhanVien.getValueAt(vitri, 1).toString());
@@ -504,11 +534,88 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cboTrangThai.setSelectedItem(tblNhanVien.getValueAt(vitri, 7).toString());
         cboViTri.setSelectedItem(tblNhanVien.getValueAt(vitri, 8).toString());
         cboCaLV.setSelectedItem(tblNhanVien.getValueAt(vitri, 9).toString());
+    }//GEN-LAST:event_tblNhanVienMouseClicked
+
+    
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         
-        btnXoaTrang.setEnabled(true);
-        btnCapNhat.setEnabled(true);
+       if(btnCapNhat.getText().equals("Cập nhật")) {
+                enabledHideOn();
+                btnLuu.setEnabled(true);
+                btnThemNV.setEnabled(false);
+                txtTenNV.requestFocus();
+                btnCapNhat.setText("Hủy");
+            } else {
+                enabledHideOff();
+                btnLuu.setEnabled(false);
+                btnThemNV.setEnabled(true);
+                btnCapNhat.setText("Cập nhật");
+            }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+        Object o = evt.getSource();
+        if(o.equals(btnXoaTrang)) {
+            if(btnCapNhat.getText().equals("Hủy")) {
+                xoaTrang();
+                btnCapNhat.setEnabled(true);
+            }
+            else if(btnThemNV.getText().equals("Hủy thêm")){
+                xoaTrang();
+                btnCapNhat.setEnabled(false);
+            }
+            else{
+                xoaTrangAll();
+            }
+        }
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
+    
+    private void luu() {
+        String tenNV = txtTenNV.getText();
+        String mk = pwdMK.getSelectedText();
+        String gioiTinh = "";
+        if(rdoNam.isSelected())
+            gioiTinh = rdoNam.getText();
+        if(rdoNu.isSelected())
+            gioiTinh = rdoNu.getText();
+        String cccd = txtCCCD.getText();
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String trangThai = cboTrangThai.getName().toString();
+        String viTri = cboViTri.getName().toString();
+        String caLamViec = cboCaLV.getName().toString();
+    }
+    
+    private void xoaTrangAll() {
+        txtMaNV.setText("");
+        txtTenNV.setText("");
+        pwdMK.setText("");
+        txtDiaChi.setText("");
+        txtCCCD.setText("");
+        txtSDT.setText("");
+        rdoNam.setSelected(true);
+        cboTrangThai.setSelectedIndex(0);
+        cboCaLV.setSelectedIndex(0);
+        cboViTri.setSelectedIndex(0);
         
+        btnCapNhat.setEnabled(false);
+    }
+    
+    private void xoaTrang() {
+        txtTenNV.setText("");
+        pwdMK.setText("");
+        txtDiaChi.setText("");
+        txtCCCD.setText("");
+        txtSDT.setText("");
+        rdoNam.setSelected(true);
+        cboTrangThai.setSelectedIndex(0);
+        cboCaLV.setSelectedIndex(0);
+        cboViTri.setSelectedIndex(0);
+    }
+    
+    private void enabledHideOn() {
         txtTenNV.setEnabled(true);
+        pwdMK.setEnabled(true);
         txtDiaChi.setEnabled(true);
         txtSDT.setEnabled(true);
         txtCCCD.setEnabled(true);
@@ -517,9 +624,20 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cboCaLV.setEnabled(true);
         cboTrangThai.setEnabled(true);
         cboViTri.setEnabled(true);
-        
-    }//GEN-LAST:event_tblNhanVienMouseClicked
-
+    }
+    
+    private void enabledHideOff() {
+        txtTenNV.setEnabled(false);
+        pwdMK.setEnabled(false);
+        txtDiaChi.setEnabled(false);
+        txtSDT.setEnabled(false);
+        txtCCCD.setEnabled(false);
+        rdoNam.setEnabled(false);
+        rdoNu.setEnabled(false);
+        cboCaLV.setEnabled(false);
+        cboTrangThai.setEnabled(false);
+        cboViTri.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
