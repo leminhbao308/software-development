@@ -22,6 +22,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
     public PanelQuanAo() {
         initComponents();
         tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
+//        disableAllBtns();
+        disableAllFields();
     }
 
     /**
@@ -168,12 +170,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txtMa.setEditable(false);
         txtMa.setBackground(ColorConstant.DISABLE_FIELD);
         txtMa.setFont(FontConstant.FONT_TEXT);
+        txtMa.setText("LHN-123123");
         txtMa.setEnabled(false);
 
         lbTen.setFont(FontConstant.FONT_LABEL);
         lbTen.setText("Tên:");
 
         txtTen.setFont(FontConstant.FONT_TEXT);
+        txtTen.setText("123123123");
         txtTen.setEnabled(false);
 
         lblLoaiQA.setFont(FontConstant.FONT_LABEL);
@@ -192,30 +196,49 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
         cmbLoaiQA.setEnabled(false);
         cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbLoaiQA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLoaiQAActionPerformed(evt);
+            }
+        });
 
         lblSoLuong.setFont(FontConstant.FONT_LABEL);
         lblSoLuong.setText("Số Lượng:");
 
         txtSoLuong.setFont(FontConstant.FONT_TEXT);
+        txtSoLuong.setText("123123");
         txtSoLuong.setEnabled(false);
+        txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSoLuongActionPerformed(evt);
+            }
+        });
 
         lblGiaNhap.setFont(FontConstant.FONT_LABEL);
         lblGiaNhap.setText("Giá Nhập:");
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
+        txtGiaNhap.setText("123123");
         txtGiaNhap.setEnabled(false);
 
         lblLoiNhuan.setFont(FontConstant.FONT_LABEL);
         lblLoiNhuan.setText("Lợi Nhuận:");
 
         txtLoiNhuan.setFont(FontConstant.FONT_TEXT);
+        txtLoiNhuan.setText("123123");
         txtLoiNhuan.setEnabled(false);
 
         lblGiaBan.setFont(FontConstant.FONT_LABEL);
         lblGiaBan.setText("Giá Bán:");
 
         txtGiaBan.setFont(FontConstant.FONT_TEXT);
+        txtGiaBan.setText("12312312");
         txtGiaBan.setEnabled(false);
+        txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGiaBanActionPerformed(evt);
+            }
+        });
 
         lblNhaCungCap.setFont(FontConstant.FONT_LABEL);
         lblNhaCungCap.setText("Nhà Cung Cấp:");
@@ -223,7 +246,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbNhaCungCap.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
         cmbNhaCungCap.setFont(FontConstant.FONT_TEXT);
         cmbNhaCungCap.setForeground(ColorConstant.WHITE);
-        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Nhà Cung Cấp", "Chợ Đồng Xuân", "Chợ Bến Thành", "Hạnh Thông Tây" }));
         cmbNhaCungCap.setEnabled(false);
         cmbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
 
@@ -316,10 +339,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblSoLuongVaKichThuoc.setForeground(ColorConstant.WHITE);
         tblSoLuongVaKichThuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {"S", "12"},
+                {"M", "23"},
+                {"L", "23"},
+                {"XL", null}
             },
             new String [] {
                 "Kích Thước", "Số Lượng"
@@ -335,7 +358,13 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblDinhMucTonKho.setPreferredSize(new java.awt.Dimension(140, 16));
 
         txtDinhMucTonKho.setFont(FontConstant.FONT_TEXT);
+        txtDinhMucTonKho.setText("123123");
         txtDinhMucTonKho.setEnabled(false);
+        txtDinhMucTonKho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDinhMucTonKhoActionPerformed(evt);
+            }
+        });
 
         lblMoTa.setFont(FontConstant.FONT_LABEL);
         lblMoTa.setText("Mô Tả:");
@@ -557,6 +586,55 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void disableAllFields () {
+        this.txtMa.setEnabled(false);
+        this.txtTen.setEnabled(false);
+        this.cmbLoaiQA.setEnabled(false);
+        this.txtSoLuong.setEnabled(false);
+        this.txtGiaNhap.setEnabled(false);
+        this.txtLoiNhuan.setEnabled(false);
+        this.txtGiaBan.setEnabled(false);
+        this.cmbNhaCungCap.setEnabled(false);
+        this.tblSoLuongVaKichThuoc.setEnabled(false);
+        this.txtDinhMucTonKho.setEnabled(false);
+        this.txaMoTa.setEnabled(false);
+    }
+    
+    public void enableAllFields () {
+        this.txtTen.setEnabled(true);
+        this.cmbLoaiQA.setEnabled(true);
+        this.txtSoLuong.setEnabled(true);
+        this.txtGiaNhap.setEnabled(true);
+        this.txtLoiNhuan.setEnabled(true);
+        this.cmbNhaCungCap.setEnabled(true);
+        this.tblSoLuongVaKichThuoc.setEnabled(true);
+        this.txtDinhMucTonKho.setEnabled(true);
+        this.txaMoTa.setEnabled(true);
+    }
+    
+    public void disableAllBtns () {
+        this.btnXoaTrang.setEnabled(false);
+        this.btnXoaTrang.setBackground(ColorConstant.BUTTON_LOGIN_HOVER);
+        this.btnThemMoi.setEnabled(false);
+        this.btnLuu.setEnabled(false);
+        this.btnCapNhat.setEnabled(false);
+        this.btnHuy.setEnabled(false);
+    }
+    
+    public void xoaTrang() {
+        this.txtMa.setText("");
+        this.txtTen.setText("");
+        this.cmbLoaiQA.setSelectedIndex(0);
+        this.txtSoLuong.setText("");
+        this.txtGiaNhap.setText("");
+        this.txtLoiNhuan.setText("");
+        this.txtGiaBan.setText("");
+        this.cmbNhaCungCap.setSelectedIndex(0);
+        this.tblSoLuongVaKichThuoc.setModel(null);
+        this.txtDinhMucTonKho.setText("");
+        this.txaMoTa.setText("");
+    }
+    
     private void txtTimQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimQAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimQAActionPerformed
@@ -574,7 +652,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-
+        enableAllFields();
+        this.btnThemMoi.setEnabled(false);
+        this.btnThemMoi.setBackground(ColorConstant.DISABLE_FIELD);
+        this.btnLuu.setEnabled(true);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -586,12 +667,29 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
+        disableAllFields();
+        disableAllBtns();
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void btnThemLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiQAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemLoaiQAActionPerformed
+
+    private void cmbLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLoaiQAActionPerformed
+
+    private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoLuongActionPerformed
+
+    private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGiaBanActionPerformed
+
+    private void txtDinhMucTonKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDinhMucTonKhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDinhMucTonKhoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
