@@ -12,12 +12,12 @@ import org.group06.view.components.panels.ImagePanel;
 /**
  * @author lemin
  */
-public class PanelQuanAoNhanVien extends javax.swing.JPanel {
+public class PanelQuanAo extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelQuanAo
      */
-    public PanelQuanAoNhanVien() {
+    public PanelQuanAo() {
         initComponents();
 //        tblSize.getTableHeader().setBackground(ColorConstant.BACKGROUND_SIDEBAR);
 //        tblSize.getTableHeader().setForeground(ColorConstant.WHITE);

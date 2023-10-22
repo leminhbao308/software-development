@@ -8,11 +8,12 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.components.panels.container.PanelBanHang;
-import org.group06.view.components.panels.container.PanelQuanAoNhanVien;
+import org.group06.view.components.panels.container.PanelQuanAo;
 
 import javax.swing.*;
 import java.awt.*;
 import org.group06.view.components.panels.container.PanelKhachHang;
+import org.group06.view.components.panels.container.PanelKhuyenMai;
 import org.group06.view.components.panels.container.PanelNhanVien;
 
 /**
@@ -245,6 +246,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnKhuyenMai.setIconTextGap(15);
         btnKhuyenMai.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhuyenMaiActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnKhuyenMai);
         pnChucNang.add(spr03);
 
@@ -318,7 +324,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnQuanAoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanAoActionPerformed
         getContentPane().remove(pnContainer);
-        pnContainer = new PanelQuanAoNhanVien();
+        pnContainer = new PanelQuanAo();
         getContentPane().add(pnContainer, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
@@ -339,6 +345,14 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnNhanVienActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelKhuyenMai();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
