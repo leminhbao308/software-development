@@ -7,15 +7,10 @@ package org.group06.view.screen;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
-import org.group06.view.components.panels.container.PanelBanHang;
-import org.group06.view.components.panels.container.PanelQuanAo;
+import org.group06.view.components.panels.container.*;
 
 import javax.swing.*;
 import java.awt.*;
-import org.group06.view.components.panels.container.PanelKhachHang;
-import org.group06.view.components.panels.container.PanelKhuyenMai;
-import org.group06.view.components.panels.container.PanelNhaCungCap;
-import org.group06.view.components.panels.container.PanelNhanVien;
 
 /**
  * @author lehoa
@@ -197,6 +192,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHoaDon.setIconTextGap(15);
         btnHoaDon.setMargin(new java.awt.Insets(2, 50, 3, 14));
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
         pnChucNang.add(btnHoaDon);
 
         grpSelect.add(btnPhieuTam);
@@ -367,7 +367,15 @@ public class MainFrame extends javax.swing.JFrame {
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnNhaCungCapActionPerformed
-    
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        getContentPane().remove(pnContainer);
+        pnContainer = new PanelHoaDon();
+        getContentPane().add(pnContainer, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
     private javax.swing.JToggleButton btnDangXuat;

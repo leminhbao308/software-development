@@ -30,6 +30,11 @@
             <artifactId>flatlaf</artifactId>
             <version>3.2.1</version>
         </dependency>
+    <dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>12.3.0.jre17-preview</version>
+    </dependency>
     </dependencies>
 
     <build>
