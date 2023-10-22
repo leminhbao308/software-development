@@ -58,8 +58,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblViTri = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
         cboViTri = new javax.swing.JComboBox<>();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        pwdMK = new javax.swing.JPasswordField();
+        tglMK = new javax.swing.JToggleButton();
         pnlCN = new javax.swing.JPanel();
         btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnThemNV = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
@@ -94,7 +94,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblTenNV.setText("Tên nhân viên:");
 
         txtMaNV.setFont(FontConstant.FONT_TEXT);
-        txtMaNV.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMaNV.setEnabled(false);
         txtMaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +102,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         });
 
         txtTenNV.setFont(FontConstant.FONT_TEXT);
-        txtTenNV.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTenNV.setEnabled(false);
 
         lblMaNV.setFont(FontConstant.FONT_TEXT);
@@ -127,7 +125,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblDiaChi.setText("Địa chỉ:");
 
         txtDiaChi.setFont(FontConstant.FONT_TEXT);
-        txtDiaChi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDiaChi.setEnabled(false);
         txtDiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +225,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblMK.setText("Mật khẩu:");
 
         txtCCCD.setFont(FontConstant.FONT_TEXT);
-        txtCCCD.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCCCD.setEnabled(false);
         txtCCCD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +236,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblCCCD.setText("Căn cước công dân:");
 
         txtSDT.setFont(FontConstant.FONT_TEXT);
-        txtSDT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSDT.setEnabled(false);
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,9 +253,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cboViTri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên thu ngân", "Nhân viên quản lí" }));
         cboViTri.setEnabled(false);
 
-        jPasswordField1.setText("jPasswordField1");
+        pwdMK.setText("jPasswordField1");
 
-        jToggleButton1.setText("Show");
+        tglMK.setText("Show");
 
         javax.swing.GroupLayout pnRightLayout = new javax.swing.GroupLayout(pnRight);
         pnRight.setLayout(pnRightLayout);
@@ -281,9 +276,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
                         .addComponent(cboViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 108, Short.MAX_VALUE))
                     .addGroup(pnRightLayout.createSequentialGroup()
-                        .addComponent(jPasswordField1)
+                        .addComponent(pwdMK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1)))
+                        .addComponent(tglMK)))
                 .addContainerGap())
         );
         pnRightLayout.setVerticalGroup(
@@ -292,8 +287,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
                 .addGap(63, 63, 63)
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglMK, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,10 +371,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
         tblNhanVien.setAutoCreateRowSorter(true);
         tblNhanVien.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
-        tblNhanVien.setFont(FontConstant.FONT_TABLE);
+        tblNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"a", "9", "8", "Nam", "6", "5", "4", "3", "2", "1"},
+                {"b", "1", "2", "Nữ", "3", "4", "5", "6", "7", null}
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Mật khẩu", "Giới tính", "Căn cước công dân", "Địa chỉ", "Số điện thoại", "Trạng thái", "Vị trí", "Ca làm việc"
@@ -388,16 +384,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         tblNhanVien.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -411,6 +400,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
         tblNhanVien.setShowGrid(true);
         tblNhanVien.getTableHeader().setResizingAllowed(false);
         tblNhanVien.getTableHeader().setReorderingAllowed(false);
+        tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNhanVienMouseClicked(evt);
+            }
+        });
         scrNhanVien.setViewportView(tblNhanVien);
         if (tblNhanVien.getColumnModel().getColumnCount() > 0) {
             tblNhanVien.getColumnModel().getColumn(0).setResizable(false);
@@ -491,6 +485,23 @@ public class PanelNhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemNVActionPerformed
 
+    private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
+        int vitri = tblNhanVien.getSelectedRow();
+        txtMaNV.setText(tblNhanVien.getValueAt(vitri, 0).toString());
+        txtTenNV.setText(tblNhanVien.getValueAt(vitri, 1).toString());
+        pwdMK.setText(tblNhanVien.getValueAt(vitri, 2).toString());
+        if(tblNhanVien.getValueAt(vitri, 3).toString().equalsIgnoreCase("Nam")) {
+            rdoNam.setSelected(true);
+            rdoNu.setSelected(false);
+        } else {
+          rdoNam.setSelected(false);
+          rdoNu.setSelected(true);
+        }
+        txtCCCD.setText(tblNhanVien.getValueAt(vitri, 4).toString());
+        txtDiaChi.setText(tblNhanVien.getValueAt(vitri, 5).toString());
+        txtSDT.setText(tblNhanVien.getValueAt(vitri, 6).toString());
+    }//GEN-LAST:event_tblNhanVienMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -502,8 +513,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JComboBox<String> cboViTri;
     private javax.swing.ButtonGroup grpGioiTinh;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblCaLV;
     private javax.swing.JLabel lblDiaChi;
@@ -519,10 +528,12 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JPanel pnRight;
     private javax.swing.JPanel pnlCN;
     private javax.swing.JPanel pnlTTNV;
+    private javax.swing.JPasswordField pwdMK;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JScrollPane scrNhanVien;
     private javax.swing.JTable tblNhanVien;
+    private javax.swing.JToggleButton tglMK;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaNV;
