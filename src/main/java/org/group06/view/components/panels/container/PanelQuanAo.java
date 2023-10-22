@@ -42,7 +42,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         pnFields = new javax.swing.JPanel();
         pnFieldsLeft = new javax.swing.JPanel();
         lblMa = new javax.swing.JLabel();
-        txtMa = new org.group06.view.components.textFields.TextField();
+        txtMa = new javax.swing.JTextField();
         lbTen = new javax.swing.JLabel();
         txtTen = new org.group06.view.components.textFields.TextField();
         lblLoaiQA = new javax.swing.JLabel();
@@ -164,7 +164,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblMa.setFont(FontConstant.FONT_LABEL);
         lblMa.setText("Mã:");
 
+        txtMa.setEditable(false);
+        txtMa.setBackground(ColorConstant.DISABLE_FIELD);
         txtMa.setFont(FontConstant.FONT_TEXT);
+        txtMa.setEnabled(false);
 
         lbTen.setFont(FontConstant.FONT_LABEL);
         lbTen.setText("Tên:");
