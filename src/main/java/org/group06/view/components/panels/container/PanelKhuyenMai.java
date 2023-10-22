@@ -54,8 +54,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         btnLuu = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnHuy = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        scrKhuyenMai = new javax.swing.JScrollPane();
+        tblKhuyenMai = new javax.swing.JTable();
 
         setBackground(ColorConstant.BACKGROUND_CONTAINER);
 
@@ -317,8 +317,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jTable1.setBackground(ColorConstant.BUTTON_HOVER);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhuyenMai.setBackground(ColorConstant.BUTTON_HOVER);
+        tblKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -329,7 +329,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 "Mã Khuyến Mãi", "Tên CTKM", "Mức Giảm Giá", "Số Lượt Sử Dụng", "Ngày Bắt Đầu", "Ngày Kết Thúc"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        scrKhuyenMai.setViewportView(tblKhuyenMai);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -350,7 +350,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                         .addComponent(txtTimCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTimCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(scrKhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -369,7 +369,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(pnControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(scrKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -410,8 +410,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimCTKM;
     private javax.swing.JButton btnXoaTrang;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblMa;
     private javax.swing.JLabel lblMucGiamGia;
     private javax.swing.JLabel lblNgayBatDau;
@@ -423,6 +421,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JPanel pnFields;
     private javax.swing.JPanel pnLeft;
     private javax.swing.JPanel pnRight;
+    private javax.swing.JScrollPane scrKhuyenMai;
+    private javax.swing.JTable tblKhuyenMai;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMucGiamGia;
     private javax.swing.JTextField txtNgayBatDau;
