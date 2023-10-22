@@ -153,18 +153,24 @@ public class TextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setColor(placeholder_Color);
-        g2.drawLine(0, getHeight() - 3, getWidth(), getHeight() - 3);
-        if (!hint.isEmpty()) {
-            int h = getHeight();
-            Insets ins = getInsets();
-            FontMetrics fm = g.getFontMetrics();
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        if (this.isEnabled()) {
             g2.setColor(placeholder_Color);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f - animate));
-            g2.drawString(hint, ins.left + (animate * 30), h / 2 + fm.getAscent() / 2 - 1);
+            g2.drawLine(0, getHeight() - 3, getWidth(), getHeight() - 3);
+            if (!hint.isEmpty()) {
+                int h = getHeight();
+                Insets ins = getInsets();
+                FontMetrics fm = g.getFontMetrics();
+                g2.setColor(placeholder_Color);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f - animate));
+                g2.drawString(hint, ins.left + (animate * 30), h / 2 + fm.getAscent() / 2 - 1);
+            }
+            g2.dispose();
+            super.paint(g);
+        } else {
+            g2.setBackground(ColorConstant.DISABLE_FIELD);
+            g2.clearRect(0, 0, getWidth(), getHeight());
         }
-        g2.dispose();
-        super.paint(g);
+
     }
 }
