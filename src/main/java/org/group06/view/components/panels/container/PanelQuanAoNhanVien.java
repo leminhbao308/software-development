@@ -47,7 +47,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         txtTen = new org.group06.view.components.textFields.TextField();
         lblLoaiQA = new javax.swing.JLabel();
         btnThemLoaiQA = new javax.swing.JButton();
-        jcbLoaiQA = new javax.swing.JComboBox<>();
+        cmbLoaiQA = new javax.swing.JComboBox<>();
         lblSoLuong = new javax.swing.JLabel();
         txtSoLuong = new org.group06.view.components.textFields.TextField();
         lblGiaNhap = new javax.swing.JLabel();
@@ -57,22 +57,22 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         lblGiaBan = new javax.swing.JLabel();
         txtGiaBan = new org.group06.view.components.textFields.TextField();
         lblNhaCungCap = new javax.swing.JLabel();
-        jcbNhaCungCap = new javax.swing.JComboBox<>();
+        cmbNhaCungCap = new javax.swing.JComboBox<>();
         pnFieldsRight = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scrKichThuoc_SoLuong = new javax.swing.JScrollPane();
         tblSoLuongVaKichThuoc = new javax.swing.JTable();
         lblDinhMucTonKho = new javax.swing.JLabel();
         txtDinhMucTonKho = new org.group06.view.components.textFields.TextField();
         lblMoTa = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        scrMoTa = new javax.swing.JScrollPane();
+        txaMoTa = new javax.swing.JTextArea();
         pnControl = new javax.swing.JPanel();
         btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnThemMoi = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnLuu = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnHuy = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrQuanAo = new javax.swing.JScrollPane();
         tblQuanAo = new javax.swing.JTable();
 
         setBackground(ColorConstant.BACKGROUND_CONTAINER);
@@ -156,6 +156,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         );
 
         pnFields.setBackground(ColorConstant.BUTTON_HOVER);
+        pnFields.setLayout(new java.awt.GridLayout(1, 2));
 
         pnFieldsLeft.setBackground(ColorConstant.BUTTON_HOVER);
         pnFieldsLeft.setPreferredSize(new java.awt.Dimension(420, 0));
@@ -180,11 +181,11 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
             }
         });
 
-        jcbLoaiQA.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-        jcbLoaiQA.setFont(FontConstant.FONT_TEXT);
-        jcbLoaiQA.setForeground(ColorConstant.WHITE);
-        jcbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
-        jcbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbLoaiQA.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        cmbLoaiQA.setFont(FontConstant.FONT_TEXT);
+        cmbLoaiQA.setForeground(ColorConstant.WHITE);
+        cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
 
         lblSoLuong.setFont(FontConstant.FONT_LABEL);
         lblSoLuong.setText("Số Lượng:");
@@ -209,11 +210,11 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         lblNhaCungCap.setFont(FontConstant.FONT_LABEL);
         lblNhaCungCap.setText("Nhà Cung Cấp:");
 
-        jcbNhaCungCap.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-        jcbNhaCungCap.setFont(FontConstant.FONT_TEXT);
-        jcbNhaCungCap.setForeground(ColorConstant.WHITE);
-        jcbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
-        jcbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbNhaCungCap.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+        cmbNhaCungCap.setFont(FontConstant.FONT_TEXT);
+        cmbNhaCungCap.setForeground(ColorConstant.WHITE);
+        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
 
         javax.swing.GroupLayout pnFieldsLeftLayout = new javax.swing.GroupLayout(pnFieldsLeft);
         pnFieldsLeft.setLayout(pnFieldsLeftLayout);
@@ -235,7 +236,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                         .addGroup(pnFieldsLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMa)
                             .addGroup(pnFieldsLeftLayout.createSequentialGroup()
-                                .addComponent(jcbLoaiQA, 0, 228, Short.MAX_VALUE)
+                                .addComponent(cmbLoaiQA, 0, 228, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnThemLoaiQA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTen)))
@@ -252,7 +253,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                             .addComponent(txtLoiNhuan)
                             .addComponent(txtGiaNhap)
                             .addComponent(txtSoLuong)
-                            .addComponent(jcbNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cmbNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnFieldsLeftLayout.setVerticalGroup(
@@ -268,7 +269,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(pnFieldsLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbLoaiQA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbLoaiQA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLoaiQA)
                     .addComponent(btnThemLoaiQA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -289,10 +290,12 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                     .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnFieldsLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNhaCungCap))
                 .addContainerGap())
         );
+
+        pnFields.add(pnFieldsLeft);
 
         pnFieldsRight.setBackground(ColorConstant.BUTTON_HOVER);
         pnFieldsRight.setPreferredSize(new java.awt.Dimension(420, 0));
@@ -311,7 +314,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                 "Kích Thước", "Số Lượng"
             }
         ));
-        jScrollPane2.setViewportView(tblSoLuongVaKichThuoc);
+        scrKichThuoc_SoLuong.setViewportView(tblSoLuongVaKichThuoc);
 
         lblDinhMucTonKho.setFont(FontConstant.FONT_LABEL);
         lblDinhMucTonKho.setText("Định Mức Tồn Kho:");
@@ -327,10 +330,10 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
         lblMoTa.setMinimumSize(new java.awt.Dimension(140, 16));
         lblMoTa.setPreferredSize(new java.awt.Dimension(140, 16));
 
-        jTextArea1.setBackground(ColorConstant.BUTTON_CLICK);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txaMoTa.setBackground(ColorConstant.BUTTON_CLICK);
+        txaMoTa.setColumns(20);
+        txaMoTa.setRows(5);
+        scrMoTa.setViewportView(txaMoTa);
 
         javax.swing.GroupLayout pnFieldsRightLayout = new javax.swing.GroupLayout(pnFieldsRight);
         pnFieldsRight.setLayout(pnFieldsRightLayout);
@@ -339,20 +342,20 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFieldsRightLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(pnFieldsRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(scrMoTa)
                     .addComponent(lblMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnFieldsRightLayout.createSequentialGroup()
                         .addComponent(lblDinhMucTonKho, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(txtDinhMucTonKho))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                    .addComponent(scrKichThuoc_SoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         pnFieldsRightLayout.setVerticalGroup(
             pnFieldsRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFieldsRightLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrKichThuoc_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnFieldsRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDinhMucTonKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,28 +363,11 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3)
+                .addComponent(scrMoTa)
                 .addGap(20, 20, 20))
         );
 
-        javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
-        pnFields.setLayout(pnFieldsLayout);
-        pnFieldsLayout.setHorizontalGroup(
-            pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFieldsLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(pnFieldsLeft, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(pnFieldsRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        pnFieldsLayout.setVerticalGroup(
-            pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnFieldsRight, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
-                    .addComponent(pnFieldsLeft, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        pnFields.add(pnFieldsRight);
 
         pnControl.setBackground(ColorConstant.BUTTON_HOVER);
 
@@ -518,7 +504,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                 "Mã", "Tên QA", "Tổng SL", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Loại", "Thương Hiệu", "NCC"
             }
         ));
-        jScrollPane1.setViewportView(tblQuanAo);
+        scrQuanAo.setViewportView(tblQuanAo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -535,7 +521,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
             .addComponent(pnInformationFields, javax.swing.GroupLayout.DEFAULT_SIZE, 1473, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(scrQuanAo)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -552,7 +538,7 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnInformationFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(scrQuanAo)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -602,12 +588,8 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btnTimQA;
     private javax.swing.JButton btnUploadImg;
     private javax.swing.JButton btnXoaTrang;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JComboBox<String> jcbLoaiQA;
-    private javax.swing.JComboBox<String> jcbNhaCungCap;
+    private javax.swing.JComboBox<String> cmbLoaiQA;
+    private javax.swing.JComboBox<String> cmbNhaCungCap;
     private javax.swing.JLabel lbTen;
     private javax.swing.JLabel lblDinhMucTonKho;
     private javax.swing.JLabel lblGiaBan;
@@ -626,8 +608,12 @@ public class PanelQuanAoNhanVien extends javax.swing.JPanel {
     private javax.swing.JPanel pnImg;
     private javax.swing.JPanel pnImgUpLoad;
     private javax.swing.JPanel pnInformationFields;
+    private javax.swing.JScrollPane scrKichThuoc_SoLuong;
+    private javax.swing.JScrollPane scrMoTa;
+    private javax.swing.JScrollPane scrQuanAo;
     private javax.swing.JTable tblQuanAo;
     private javax.swing.JTable tblSoLuongVaKichThuoc;
+    private javax.swing.JTextArea txaMoTa;
     private javax.swing.JTextField txtDinhMucTonKho;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;

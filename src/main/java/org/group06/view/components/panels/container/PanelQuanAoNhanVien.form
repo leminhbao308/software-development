@@ -33,7 +33,7 @@
           <Component id="pnInformationFields" alignment="0" pref="1473" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <Component id="scrQuanAo" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -55,7 +55,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnInformationFields" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <Component id="scrQuanAo" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -257,28 +257,9 @@
             </Property>
           </Properties>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="pnFieldsLeft" pref="419" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="pnFieldsRight" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pnFieldsRight" pref="499" max="32767" attributes="0"/>
-                          <Component id="pnFieldsLeft" pref="499" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="2"/>
+            <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="pnFieldsLeft">
@@ -314,7 +295,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtMa" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="jcbLoaiQA" pref="228" max="32767" attributes="0"/>
+                                          <Component id="cmbLoaiQA" pref="228" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnThemLoaiQA" min="-2" pref="36" max="-2" attributes="0"/>
                                       </Group>
@@ -335,7 +316,7 @@
                                       <Component id="txtLoiNhuan" max="32767" attributes="0"/>
                                       <Component id="txtGiaNhap" max="32767" attributes="0"/>
                                       <Component id="txtSoLuong" max="32767" attributes="0"/>
-                                      <Component id="jcbNhaCungCap" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="cmbNhaCungCap" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -358,7 +339,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jcbLoaiQA" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="cmbLoaiQA" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="lblLoaiQA" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnThemLoaiQA" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
@@ -384,7 +365,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jcbNhaCungCap" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="cmbNhaCungCap" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="lblNhaCungCap" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -447,7 +428,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemLoaiQAActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jcbLoaiQA">
+                <Component class="javax.swing.JComboBox" name="cmbLoaiQA">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="ColorConstant.BACKGROUND_SIDEBAR" type="code"/>
@@ -549,7 +530,7 @@
                     <Property name="text" type="java.lang.String" value="Nh&#xe0; Cung C&#x1ea5;p:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jcbNhaCungCap">
+                <Component class="javax.swing.JComboBox" name="cmbNhaCungCap">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="ColorConstant.BACKGROUND_SIDEBAR" type="code"/>
@@ -589,14 +570,14 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane3" max="32767" attributes="0"/>
+                              <Component id="scrMoTa" max="32767" attributes="0"/>
                               <Component id="lblMoTa" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblDinhMucTonKho" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="txtDinhMucTonKho" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane2" alignment="0" pref="380" max="32767" attributes="0"/>
+                              <Component id="scrKichThuoc_SoLuong" alignment="0" pref="379" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
@@ -606,7 +587,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="217" max="-2" attributes="0"/>
+                          <Component id="scrKichThuoc_SoLuong" min="-2" pref="217" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblDinhMucTonKho" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -615,14 +596,14 @@
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="lblMoTa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <Component id="scrMoTa" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                <Container class="javax.swing.JScrollPane" name="scrKichThuoc_SoLuong">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
@@ -711,14 +692,14 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                <Container class="javax.swing.JScrollPane" name="scrMoTa">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="jTextArea1">
+                    <Component class="javax.swing.JTextArea" name="txaMoTa">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="ColorConstant.BUTTON_CLICK" type="code"/>
@@ -924,7 +905,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="scrQuanAo">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
