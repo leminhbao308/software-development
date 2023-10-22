@@ -25,9 +25,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="scrNhanVien" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="pnlTTNV" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -41,7 +42,6 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimMaNV" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="scrQuanAoBan" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -60,8 +60,8 @@
                   <Component id="pnlCN" max="32767" attributes="0"/>
                   <Component id="pnlTTNV" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrQuanAoBan" pref="350" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="scrNhanVien" pref="440" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -115,6 +115,11 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pnLeft">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ColorConstant.BACKGROUND_NORMAL" type="code"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -124,7 +129,7 @@
                       <Component id="rdoNam" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rdoNu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="194" max="32767" attributes="0"/>
+                      <EmptySpace pref="207" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -140,7 +145,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtTenNV" max="32767" attributes="0"/>
-                              <Component id="txtDiaChi" pref="321" max="32767" attributes="0"/>
+                              <Component id="txtDiaChi" pref="334" max="32767" attributes="0"/>
                               <Component id="txtMaNV" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -220,7 +225,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -235,7 +239,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
@@ -245,7 +248,7 @@
             <Component class="javax.swing.JLabel" name="lblMaNV">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="FontConstant.FONT_TEXT" type="code"/>
+                  <Connection code="FontConstant.FONT_LABEL" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n:"/>
               </Properties>
@@ -296,7 +299,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -359,6 +361,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnRight">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ColorConstant.BACKGROUND_NORMAL" type="code"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -374,11 +381,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtCCCD" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtMK" alignment="0" pref="293" max="32767" attributes="0"/>
                           <Component id="txtSDT" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="cboViTri" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="108" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="pwdMK" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tglMK" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -391,7 +402,8 @@
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblMK" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="txtMK" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="pwdMK" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="tglMK" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -408,7 +420,7 @@
                           <Component id="lblViTri" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="cboViTri" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -422,27 +434,11 @@
                 <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtMK">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="FontConstant.FONT_TEXT" type="code"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMKActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.textFields.TextField()"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JTextField" name="txtCCCD">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -465,7 +461,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -508,11 +503,26 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JPasswordField" name="pwdMK">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="tglMK">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Show"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlCN">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ColorConstant.BACKGROUND_NORMAL" type="code"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -534,8 +544,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnThemNV" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLuu" min="-2" pref="52" max="-2" attributes="0"/>
@@ -625,31 +635,130 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="scrQuanAoBan">
+    <Container class="javax.swing.JScrollPane" name="scrNhanVien">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="org.group06.utils.FontConstant.FONT_LABEL" type="code"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblQuanAoBan">
+        <Component class="javax.swing.JTable" name="tblNhanVien">
           <Properties>
             <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="org.group06.utils.ColorConstant.BACKGROUND_NORMAL" type="code"/>
             </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="org.group06.utils.FontConstant.FONT_TEXT" type="code"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+              <Table columnCount="10" rowCount="2">
+                <Column editable="true" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.String">
+                  <Data value="a"/>
+                  <Data value="b"/>
+                </Column>
+                <Column editable="true" title="T&#xea;n nh&#xe2;n vi&#xea;n" type="java.lang.String">
+                  <Data value="9"/>
+                  <Data value="1"/>
+                </Column>
+                <Column editable="true" title="M&#x1ead;t kh&#x1ea9;u" type="java.lang.String">
+                  <Data value="8"/>
+                  <Data value="2"/>
+                </Column>
+                <Column editable="true" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.String">
+                  <Data value="Nam"/>
+                  <Data value="N&#x1eef;"/>
+                </Column>
+                <Column editable="true" title="C&#x103;n c&#x1b0;&#x1edb;c c&#xf4;ng d&#xe2;n" type="java.lang.String">
+                  <Data value="6"/>
+                  <Data value="3"/>
+                </Column>
+                <Column editable="true" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String">
+                  <Data value="5"/>
+                  <Data value="4"/>
+                </Column>
+                <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String">
+                  <Data value="4"/>
+                  <Data value="5"/>
+                </Column>
+                <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String">
+                  <Data value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
+                  <Data value="Ngh&#x1ec9;"/>
+                </Column>
+                <Column editable="true" title="V&#x1ecb; tr&#xed;" type="java.lang.String">
+                  <Data value="Nh&#xe2;n vi&#xea;n thu ng&#xe2;n"/>
+                  <Data value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n l&#xed;"/>
+                </Column>
+                <Column editable="true" title="Ca l&#xe0;m vi&#x1ec7;c" type="java.lang.String">
+                  <Data value="S&#xe1;ng"/>
+                  <Data value="Chi&#x1ec1;u"/>
+                </Column>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="130" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
@@ -665,12 +774,14 @@
               <Connection code="org.group06.utils.ColorConstant.WHITE" type="code"/>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
-            <Property name="showGrid" type="boolean" value="false"/>
-            <Property name="showHorizontalLines" type="boolean" value="true"/>
+            <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblNhanVienMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

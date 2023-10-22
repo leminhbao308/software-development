@@ -376,6 +376,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBanHang;
     private javax.swing.JToggleButton btnDangXuat;
