@@ -104,7 +104,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         txtTenNV.setFont(FontConstant.FONT_TEXT);
         txtTenNV.setEnabled(false);
 
-        lblMaNV.setFont(FontConstant.FONT_TEXT);
+        lblMaNV.setFont(FontConstant.FONT_LABEL);
         lblMaNV.setText("Mã nhân viên:");
 
         lblGioiTinh.setFont(FontConstant.FONT_LABEL);
@@ -374,8 +374,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
         tblNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"a", "9", "8", "Nam", "6", "5", "4", "3", "2", "1"},
-                {"b", "1", "2", "Nữ", "3", "4", "5", "6", "7", null}
+                {"a", "9", "8", "Nam", "6", "5", "4", "Đang làm việc", "Nhân viên thu ngân", "Sáng"},
+                {"b", "1", "2", "Nữ", "3", "4", "5", "Nghỉ", "Nhân viên quản lí", "Chiều"}
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Mật khẩu", "Giới tính", "Căn cước công dân", "Địa chỉ", "Số điện thoại", "Trạng thái", "Vị trí", "Ca làm việc"
@@ -500,6 +500,23 @@ public class PanelNhanVien extends javax.swing.JPanel {
         txtCCCD.setText(tblNhanVien.getValueAt(vitri, 4).toString());
         txtDiaChi.setText(tblNhanVien.getValueAt(vitri, 5).toString());
         txtSDT.setText(tblNhanVien.getValueAt(vitri, 6).toString());
+        cboTrangThai.setSelectedItem(tblNhanVien.getValueAt(vitri, 7).toString());
+        cboViTri.setSelectedItem(tblNhanVien.getValueAt(vitri, 8).toString());
+        cboCaLV.setSelectedItem(tblNhanVien.getValueAt(vitri, 9).toString());
+        
+        btnXoaTrang.setEnabled(true);
+        btnCapNhat.setEnabled(true);
+        
+        txtTenNV.setEnabled(true);
+        txtDiaChi.setEnabled(true);
+        txtSDT.setEnabled(true);
+        txtCCCD.setEnabled(true);
+        rdoNam.setEnabled(true);
+        rdoNu.setEnabled(true);
+        cboCaLV.setEnabled(true);
+        cboTrangThai.setEnabled(true);
+        cboViTri.setEnabled(true);
+        
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
 

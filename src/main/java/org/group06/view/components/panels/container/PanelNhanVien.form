@@ -248,7 +248,7 @@
             <Component class="javax.swing.JLabel" name="lblMaNV">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="FontConstant.FONT_TEXT" type="code"/>
+                  <Connection code="FontConstant.FONT_LABEL" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n:"/>
               </Properties>
@@ -691,16 +691,16 @@
                   <Data value="5"/>
                 </Column>
                 <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String">
-                  <Data value="3"/>
-                  <Data value="6"/>
+                  <Data value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
+                  <Data value="Ngh&#x1ec9;"/>
                 </Column>
                 <Column editable="true" title="V&#x1ecb; tr&#xed;" type="java.lang.String">
-                  <Data value="2"/>
-                  <Data value="7"/>
+                  <Data value="Nh&#xe2;n vi&#xea;n thu ng&#xe2;n"/>
+                  <Data value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n l&#xed;"/>
                 </Column>
                 <Column editable="true" title="Ca l&#xe0;m vi&#x1ec7;c" type="java.lang.String">
-                  <Data value="1"/>
-                  <Data value="null"/>
+                  <Data value="S&#xe1;ng"/>
+                  <Data value="Chi&#x1ec1;u"/>
                 </Column>
               </Table>
             </Property>
