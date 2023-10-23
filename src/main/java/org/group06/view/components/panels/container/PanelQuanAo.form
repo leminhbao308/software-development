@@ -663,7 +663,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="4">
-                            <Column editable="true" title="K&#xed;ch Th&#x1b0;&#x1edb;c" type="java.lang.Object">
+                            <Column editable="false" title="K&#xed;ch Th&#x1b0;&#x1edb;c" type="java.lang.Object">
                               <Data value="S"/>
                               <Data value="M"/>
                               <Data value="L"/>
@@ -695,6 +695,7 @@
                         <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="66" green="66" red="66" type="rgb"/>
                         </Property>
+                        <Property name="rowHeight" type="int" value="40"/>
                         <Property name="showGrid" type="boolean" value="true"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
