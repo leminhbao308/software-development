@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
+import javax.swing.JFrame;
 import org.group06.utils.*;
 //import org.group06.view.components.*;
 /**
@@ -93,6 +94,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setShowGrid(true);
         tblKhachHang.getTableHeader().setResizingAllowed(false);
         tblKhachHang.getTableHeader().setReorderingAllowed(false);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhachHangMouseClicked(evt);
+            }
+        });
         scrKhachHang.setViewportView(tblKhachHang);
         if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
             tblKhachHang.getColumnModel().getColumn(0).setResizable(false);
@@ -133,6 +139,19 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private void txtTimSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimSDTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimSDTActionPerformed
+
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        if(evt.getClickCount() == 2) {
+            JFrame jf = new JFrame();
+            jf.add(new PanelTTKhachHang());
+            jf.getContentPane().add(new PanelTTKhachHang());
+            jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            jf.setLocationRelativeTo(null);
+            jf.setResizable(false);
+            jf.pack();
+            jf.setVisible(true);
+        }
+    }//GEN-LAST:event_tblKhachHangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
