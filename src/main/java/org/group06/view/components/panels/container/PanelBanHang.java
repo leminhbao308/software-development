@@ -47,14 +47,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnTimQuanAo = new javax.swing.JPanel();
         lblTitleTimQuanAo = new javax.swing.JLabel();
         txtTimMaQuanAo = new org.group06.view.components.textFields.TextField("Tìm Theo Mã");
-        txtTimTenQuanAo = new org.group06.view.components.textFields.TextField("Tìm Theo Tên");
         btnTimQuanAo = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         pnSoLuong_KhuyenMai = new javax.swing.JPanel();
         lblTitleSoLuong_KhuyenMai = new javax.swing.JLabel();
         lblSoLuong = new javax.swing.JLabel();
         spnSoLuong = new javax.swing.JSpinner();
-        lblKhuyenMai = new javax.swing.JLabel();
-        spnKhuyenMai = new javax.swing.JSpinner();
         btnThemSoLuong_KhuyenMai = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         pnHoaDon = new javax.swing.JPanel();
         lblTitleHoaDon = new javax.swing.JLabel();
@@ -72,11 +69,14 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblThueVAT = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
         lblVND = new javax.swing.JLabel();
+        lblKhuyenMai = new javax.swing.JLabel();
         pnAction = new javax.swing.JPanel();
         btnThanhToan = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnLuu = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnXoa = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        txtKhuyenMai = new org.group06.view.components.textFields.TextField("Mã khuyến mãi (nếu có)", ColorConstant.WHITE);
+        btnThemKhuyenMai = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
 
         setBackground(org.group06.utils.ColorConstant.BACKGROUND_CONTAINER);
 
@@ -111,6 +111,7 @@ public class PanelBanHang extends javax.swing.JPanel {
 
         txtTenKH.setFont(FontConstant.FONT_TEXT);
         txtTenKH.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTenKH.setEnabled(false);
 
         lblSDT.setFont(FontConstant.FONT_LABEL);
         lblSDT.setText("SĐT");
@@ -236,8 +237,6 @@ public class PanelBanHang extends javax.swing.JPanel {
 
         txtTimMaQuanAo.setFont(FontConstant.FONT_TEXT);
 
-        txtTimTenQuanAo.setFont(FontConstant.FONT_TEXT);
-
         btnTimQuanAo.setFont(FontConstant.FONT_BUTTON);
         btnTimQuanAo.setForeground(ColorConstant.WHITE);
         btnTimQuanAo.setText("Tìm Kiếm");
@@ -252,7 +251,6 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnTimQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTimMaQuanAo)
-                    .addComponent(txtTimTenQuanAo)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTimQuanAoLayout.createSequentialGroup()
                         .addGap(0, 175, Short.MAX_VALUE)
                         .addComponent(btnTimQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -262,11 +260,9 @@ public class PanelBanHang extends javax.swing.JPanel {
             pnTimQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnTimQuanAoLayout.createSequentialGroup()
                 .addComponent(lblTitleTimQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(55, 55, 55)
                 .addComponent(txtTimMaQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimTenQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addComponent(btnTimQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 24, Short.MAX_VALUE))
         );
@@ -276,7 +272,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblTitleSoLuong_KhuyenMai.setBackground(org.group06.utils.ColorConstant.TITLE_BACKGROUND);
         lblTitleSoLuong_KhuyenMai.setFont(org.group06.utils.FontConstant.FONT_TABLE_HEADER);
         lblTitleSoLuong_KhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitleSoLuong_KhuyenMai.setText("Số Lượng và Khuyến Mãi");
+        lblTitleSoLuong_KhuyenMai.setText("Số Lượng Sản Phẩm");
         lblTitleSoLuong_KhuyenMai.setOpaque(true);
 
         lblSoLuong.setFont(FontConstant.FONT_LABEL);
@@ -285,9 +281,6 @@ public class PanelBanHang extends javax.swing.JPanel {
         spnSoLuong.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spnSoLuong.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spnSoLuong.setEditor(new javax.swing.JSpinner.NumberEditor(spnSoLuong, "##"));
-
-        lblKhuyenMai.setFont(FontConstant.FONT_LABEL);
-        lblKhuyenMai.setText("Khuyến Mãi (%)");
 
         btnThemSoLuong_KhuyenMai.setFont(FontConstant.FONT_BUTTON);
         btnThemSoLuong_KhuyenMai.setForeground(ColorConstant.WHITE);
@@ -307,28 +300,20 @@ public class PanelBanHang extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnThemSoLuong_KhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSoLuong_KhuyenMaiLayout.createSequentialGroup()
-                        .addGroup(pnSoLuong_KhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addComponent(lblSoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addGap(25, 25, 25)
-                        .addGroup(pnSoLuong_KhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnSoLuong_KhuyenMaiLayout.setVerticalGroup(
             pnSoLuong_KhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSoLuong_KhuyenMaiLayout.createSequentialGroup()
                 .addComponent(lblTitleSoLuong_KhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(52, 52, 52)
                 .addGroup(pnSoLuong_KhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnSoLuong_KhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(btnThemSoLuong_KhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -499,6 +484,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblVND.setText(" VNĐ");
         lblVND.setOpaque(true);
 
+        lblKhuyenMai.setBackground(ColorConstant.BUTTON_ACTIVE);
+        lblKhuyenMai.setFont(FontConstant.FONT_BUTTON);
+        lblKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblKhuyenMai.setOpaque(true);
+
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
         pnHoaDonLayout.setHorizontalGroup(
@@ -512,12 +502,14 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnHoaDonLayout.createSequentialGroup()
-                        .addComponent(lblThueVAT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblThueVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(lblVND, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrQuanAoBan, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
+                    .addComponent(scrQuanAoBan))
                 .addGap(6, 6, 6))
         );
         pnHoaDonLayout.setVerticalGroup(
@@ -530,7 +522,9 @@ public class PanelBanHang extends javax.swing.JPanel {
                     .addGroup(pnHoaDonLayout.createSequentialGroup()
                         .addComponent(scrQuanAoBan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblThueVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblThueVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addComponent(lblKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblVND))))
@@ -538,7 +532,7 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        pnHoaDonLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblThueVAT, lblTongTien, lblVND});
+        pnHoaDonLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblKhuyenMai, lblThueVAT, lblTongTien, lblVND});
 
         pnAction.setBackground(org.group06.utils.ColorConstant.BACKGROUND_CONTAINER);
 
@@ -566,12 +560,24 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.setPreferredSize(new java.awt.Dimension(75, 40));
 
+        txtKhuyenMai.setFont(FontConstant.FONT_LABEL);
+        txtKhuyenMai.setForeground(ColorConstant.WHITE);
+
+        btnThemKhuyenMai.setFont(FontConstant.FONT_BUTTON);
+        btnThemKhuyenMai.setForeground(ColorConstant.WHITE);
+        btnThemKhuyenMai.setText("Thêm");
+        btnThemKhuyenMai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThemKhuyenMai.setPreferredSize(new java.awt.Dimension(75, 40));
+
         javax.swing.GroupLayout pnActionLayout = new javax.swing.GroupLayout(pnAction);
         pnAction.setLayout(pnActionLayout);
         pnActionLayout.setHorizontalGroup(
             pnActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnActionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnThemKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,11 +599,13 @@ public class PanelBanHang extends javax.swing.JPanel {
                     .addGroup(pnActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThemKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnActionLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCapNhat, btnLuu, btnThanhToan, btnXoa});
+        pnActionLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCapNhat, btnLuu, btnThanhToan, btnThemKhuyenMai, btnXoa, txtKhuyenMai});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -629,6 +637,7 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JButton btnHuyHD;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnThanhToan;
+    private javax.swing.JButton btnThemKhuyenMai;
     private javax.swing.JButton btnThemMoiKH;
     private javax.swing.JButton btnThemSoLuong_KhuyenMai;
     private javax.swing.JButton btnTimQuanAo;
@@ -660,10 +669,10 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel pnTimQuanAo;
     private javax.swing.JScrollPane scrQuanAo;
     private javax.swing.JScrollPane scrQuanAoBan;
-    private javax.swing.JSpinner spnKhuyenMai;
     private javax.swing.JSpinner spnSoLuong;
     private javax.swing.JTable tblQuanAo;
     private javax.swing.JTable tblQuanAoBan;
+    private javax.swing.JTextField txtKhuyenMai;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtNgayLapHD;
@@ -672,6 +681,5 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenNV;
     private javax.swing.JTextField txtTimMaQuanAo;
     private javax.swing.JTextField txtTimSDT;
-    private javax.swing.JTextField txtTimTenQuanAo;
     // End of variables declaration//GEN-END:variables
 }

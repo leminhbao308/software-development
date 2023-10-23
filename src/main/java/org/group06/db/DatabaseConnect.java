@@ -30,4 +30,16 @@ public class DatabaseConnect {
             }
         }
     }
+
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            // Kết nối đến cơ sở dữ liệu
+            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+            connection =  DriverManager.getConnection(DatabaseConstant.JDBC_URL, DatabaseConstant.USERNAME, DatabaseConstant.PASSWORD);
+            return connection;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }
