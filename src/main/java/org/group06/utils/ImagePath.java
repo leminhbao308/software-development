@@ -9,7 +9,7 @@ import java.net.URL;
 public class ImagePath {
 
     // Icon path
-    public static final URL ICON_USER = ImagePath.class.getResource("/images/icon/user.png");
+    public static final String ICON_USER = "user.png";
     public static final String ICON_LOGOUT = "logout.png";
     public static final String ICON_CHART = "chart.png";
     public static final String ICON_EMPLOYEE = "employee.png";
