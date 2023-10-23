@@ -21,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form Form
      */
     public MainFrame() {
+
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
