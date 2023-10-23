@@ -30,7 +30,7 @@
               <Component id="btnTimQA" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnInformationFields" alignment="0" pref="1473" max="32767" attributes="0"/>
+          <Component id="pnInformationFields" alignment="0" pref="1480" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrQuanAo" max="32767" attributes="0"/>
@@ -295,7 +295,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtMa" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="cmbLoaiQA" pref="228" max="32767" attributes="0"/>
+                                          <Component id="cmbLoaiQA" pref="232" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnThemLoaiQA" min="-2" pref="36" max="-2" attributes="0"/>
                                       </Group>
@@ -310,17 +310,22 @@
                                       <Component id="lblGiaBan" max="32767" attributes="0"/>
                                       <Component id="lblNhaCungCap" alignment="0" pref="117" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtGiaBan" max="32767" attributes="0"/>
-                                      <Component id="txtLoiNhuan" max="32767" attributes="0"/>
                                       <Component id="txtGiaNhap" max="32767" attributes="0"/>
                                       <Component id="txtSoLuong" max="32767" attributes="0"/>
                                       <Component id="cmbNhaCungCap" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="txtLoiNhuan" max="32767" attributes="0"/>
+                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -357,6 +362,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblLoiNhuan" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtLoiNhuan" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -573,6 +579,14 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="FontConstant.FONT_HEADER" type="code"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="%"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="pnFieldsRight">
@@ -598,7 +612,7 @@
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="txtDinhMucTonKho" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="scrKichThuoc_SoLuong" alignment="0" pref="379" max="32767" attributes="0"/>
+                              <Component id="scrKichThuoc_SoLuong" alignment="0" pref="383" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
@@ -625,6 +639,11 @@
               </Layout>
               <SubComponents>
                 <Container class="javax.swing.JScrollPane" name="scrKichThuoc_SoLuong">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ColorConstant.BUTTON_CLICK&#xd;&#xa;" type="code"/>
+                    </Property>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
@@ -644,7 +663,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="4">
-                            <Column editable="true" title="K&#xed;ch Th&#x1b0;&#x1edb;c" type="java.lang.Object">
+                            <Column editable="false" title="K&#xed;ch Th&#x1b0;&#x1edb;c" type="java.lang.Object">
                               <Data value="S"/>
                               <Data value="M"/>
                               <Data value="L"/>
@@ -673,6 +692,11 @@
                           </TableColumnModel>
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="66" green="66" red="66" type="rgb"/>
+                        </Property>
+                        <Property name="rowHeight" type="int" value="40"/>
+                        <Property name="showGrid" type="boolean" value="true"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
