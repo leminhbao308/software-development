@@ -1,7 +1,7 @@
 package org.group06.controller.events;
 
+import org.group06.view.screen.Frame;
 import org.group06.view.screen.Login;
-import org.group06.view.screen.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +19,7 @@ public class EventLogin implements ActionListener {
         // Đóng cửa sổ Login
         loginFrame.dispose();
         // Mở JFrame MainFrame
-        MainFrame mainFrame = new MainFrame();
+        Frame mainFrame = new Frame();
         mainFrame.setVisible(true);
     }
 }
