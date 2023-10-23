@@ -4,9 +4,18 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.Image;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.group06.utils.ColorConstant;
@@ -363,9 +372,18 @@ public class PanelQuanAo extends javax.swing.JPanel {
             new String [] {
                 "Kích Thước", "Số Lượng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblSoLuongVaKichThuoc.setEnabled(false);
         tblSoLuongVaKichThuoc.setGridColor(new java.awt.Color(102, 102, 102));
+        tblSoLuongVaKichThuoc.setRowHeight(40);
         tblSoLuongVaKichThuoc.setShowGrid(true);
         scrKichThuoc_SoLuong.setViewportView(tblSoLuongVaKichThuoc);
 
@@ -673,7 +691,41 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTimQAActionPerformed
 
     private void btnUploadImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImgActionPerformed
-        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        JFrame newJF = new JFrame("Chọn Hình Ảnh Quần Áo");
+        newJF.setSize(500, 300);
+        newJF.setLocationRelativeTo(null);
+
+//        Xử lý định dạng các file hình ảnh hợp lệ
+        chooser.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".png") || filename.endsWith(".jpg") || filename.endsWith(".jpeg");
+                }
+            }
+
+            @Override
+            public String getDescription() {
+                return "Image";
+            }
+        });
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = chooser.getSelectedFile();
+                Image img = ImagePath.loadImage(file.toURI().toURL());
+                this.pnImg = new ImagePanel(img);
+//            selectImg = ImagePath.loadImage(chooser.getSelectedFile().toURI().toURL());
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        newJF.add(chooser);
+        newJF.setVisible(true);
     }//GEN-LAST:event_btnUploadImgActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -717,6 +769,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 }));
         this.txtDinhMucTonKho.setText("10");
         this.txaMoTa.setText("Áo này rất là đẹp có màu trắng");
+
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -837,4 +890,5 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimQA;
     // End of variables declaration//GEN-END:variables
+    private Image selectImg = null;
 }
