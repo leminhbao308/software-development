@@ -122,13 +122,13 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="3" rowCount="1">
                 <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.String">
-                  <Data value="QA01"/>
+                  <Data value="KH001"/>
                 </Column>
                 <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.String">
-                  <Data value="&#x110;&#x1ea7;m d&#x1ea1; h&#x1ed9;i"/>
+                  <Data value="L&#xea; Minh B&#x1ea3;o"/>
                 </Column>
                 <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String">
-                  <Data value="Tr&#x1eaf;ng"/>
+                  <Data value="0399405711"/>
                 </Column>
               </Table>
             </Property>
