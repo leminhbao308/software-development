@@ -9,6 +9,7 @@ public class QuanAo {
     private String loaiQuanAo;
     private String kichThuoc;
     private int soLuong;
+    private String thuongHieu;
     private double giaNhap;
     private double loiNhuan;
     private NhaCungCap nhaCungCap;
@@ -22,6 +23,7 @@ public class QuanAo {
         this.loaiQuanAo = "Chưa xác định";
         this.kichThuoc = "Chưa xác định";
         this.soLuong = 0;
+        this.thuongHieu = "Không thương hiệu";
         this.giaNhap = 0;
         this.loiNhuan = 0;
         this.nhaCungCap = new NhaCungCap();
@@ -35,13 +37,14 @@ public class QuanAo {
      * @param loaiQuanAo loại quần áo
      * @param kichThuoc  kích thước
      * @param soLuong    số lượng quần áo
+     * @param thuongHieu thương hiệu của quần áo
      * @param giaNhap    giá nhập
      * @param loiNhuan   tiền lời
-     * @param nhaCungCap nhà cung cấp sản phẩm
-     * @param trangThai  trạng thái của sản phẩm là còn hay hết, còn kinh doanh hay không
+     * @param nhaCungCap nhà cung cấp quần áo
+     * @param trangThai  trạng thái của quần áo là còn kinh doanh hay không
      * @param hinhAnh    đường dẫn của hình ảnh
      */
-    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String kichThuoc, int soLuong, double giaNhap, double loiNhuan, NhaCungCap nhaCungCap, boolean trangThai, String hinhAnh) {
+    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String kichThuoc, int soLuong, String thuongHieu, double giaNhap, double loiNhuan, NhaCungCap nhaCungCap, boolean trangThai, String hinhAnh) {
         this.setMaQA(maQA);
         this.setTenQA(tenQA);
         this.setLoaiQuanAo(loaiQuanAo);
@@ -52,6 +55,7 @@ public class QuanAo {
         this.setNhaCungCap(nhaCungCap);
         this.setTrangThai(trangThai);
         this.setHinhAnh(hinhAnh);
+        this.setThuongHieu(thuongHieu);
     }
 
     public String getMaQA() {
@@ -134,9 +138,29 @@ public class QuanAo {
         this.hinhAnh = hinhAnh;
     }
 
+    public String getThuongHieu() {
+        return thuongHieu;
+    }
+
+    public void setThuongHieu(String thuongHieu) {
+        this.thuongHieu = thuongHieu;
+    }
+
     @Override
     public String toString() {
-        return "QuanAo{" + "maQA='" + maQA + '\'' + ", tenQA='" + tenQA + '\'' + ", loaiQuanAo='" + loaiQuanAo + '\'' + ", kichThuoc='" + kichThuoc + '\'' + ", soLuong=" + soLuong + ", giaNhap=" + giaNhap + ", loiNhuan=" + loiNhuan + ", nhaCungCap=" + nhaCungCap + ", trangThai=" + trangThai + ", hinhAnh='" + hinhAnh + '\'' + '}';
+        return "QuanAo{" +
+                "maQA='" + maQA + '\'' +
+                ", tenQA='" + tenQA + '\'' +
+                ", loaiQuanAo='" + loaiQuanAo + '\'' +
+                ", kichThuoc='" + kichThuoc + '\'' +
+                ", soLuong=" + soLuong +
+                ", thuongHieu='" + thuongHieu + '\'' +
+                ", giaNhap=" + giaNhap +
+                ", loiNhuan=" + loiNhuan +
+                ", nhaCungCap=" + nhaCungCap +
+                ", trangThai=" + trangThai +
+                ", hinhAnh='" + hinhAnh + '\'' +
+                '}';
     }
 }
 

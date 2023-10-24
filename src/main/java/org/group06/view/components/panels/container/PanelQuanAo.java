@@ -39,6 +39,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
         tblQuanAo.getTableHeader().setForeground(ColorConstant.WHITE);
         tblQuanAo.getTableHeader().setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
+        loadDataTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -545,8 +546,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo.setFont(FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"QH-0001", "Quần Hoa", "Quần", "S", "10", "No Brand", "Hạnh Thông Tây", "120000 vnđ", "10 %", "132000 vnđ", "Đang Kinh Doanh"},
-                {"VN-0001", "Váy Ngắn", "Váy", "M", "10", "No Brand", "Chợ Bến Thành", "250000 vnđ", "10 %", "275000 vnđ", "Đang Kinh Doanh"}
+
             },
             new String [] {
                 "Mã QA", "Tên QA", "Loại QA", "Size", "Số Lượng", "Thương Hiệu", "NCC", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Trạng Thái"
@@ -635,7 +635,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }
 
     public String tinhGiaBan(String giaNhap, String loiNhuan) {
-        Double giaBan = parseStringtoInt(giaNhap) + parseStringtoInt(giaNhap) * parseStringtoDouble(loiNhuan) / 100;
+        Double giaBan = parseStringtoDouble(giaNhap) + parseStringtoDouble(giaNhap) * parseStringtoDouble(loiNhuan) / 100;
         DecimalFormat df = new DecimalFormat("##,### VNĐ");
 
         return df.format(giaBan);
@@ -683,7 +683,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
-    
+
     private void btnUploadImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImgActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Chọn hình ảnh quần áo");
@@ -858,9 +858,16 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     private void loadDataTable() {
         ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConnect.getConnection()).getAll();
-        
+        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+        for (QuanAo qa : dsQA) {
+            Object[] data = {qa.getMaQA(), qa.getTenQA(), qa.getLoaiQuanAo(), qa.getKichThuoc(),
+                qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), qa.getGiaNhap(), qa.getLoiNhuan(), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
+//      Thêm dữ liệu vào table
+            modelQuanAo.addRow(data);
+        }
+
     }
-    
+
 //    Load dữ liệu lên fields
     private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
 //      Xử lý đổ dữ liệu từ table lên fields

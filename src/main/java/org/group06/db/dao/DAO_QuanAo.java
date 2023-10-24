@@ -33,6 +33,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
                 quanAo.setKichThuoc(result.getString("KICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
+                quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
                 quanAo.setLoiNhuan(result.getDouble("LOINHUAN"));
                 quanAo.setNhaCungCap(new DAO_NhaCungCap(connection).getByID(result.getString("MANCC")));
@@ -61,6 +62,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
                 quanAo.setKichThuoc(result.getString("KICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
+                quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
                 quanAo.setLoiNhuan(result.getDouble("LOINHUAN"));
                 quanAo.setNhaCungCap(new DAO_NhaCungCap(connection).getByID(result.getString("MANCC")));
@@ -76,18 +78,19 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean add(QuanAo quanAo) {
         try {
-            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, KICHTHUOC, SOLUONG, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, KICHTHUOC, SOLUONG, THUONGHIEU, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getMaQA());
             statement.setString(2, quanAo.getTenQA());
             statement.setString(3, quanAo.getLoaiQuanAo());
             statement.setString(4, quanAo.getKichThuoc());
             statement.setInt(5, quanAo.getSoLuong());
-            statement.setDouble(6, quanAo.getGiaNhap());
-            statement.setDouble(7, quanAo.getLoiNhuan());
-            statement.setString(8, quanAo.getNhaCungCap().getMaNCC());
-            statement.setBoolean(9, quanAo.isTrangThai());
-            statement.setString(10, quanAo.getHinhAnh());
+            statement.setString(6, quanAo.getThuongHieu());
+            statement.setDouble(7, quanAo.getGiaNhap());
+            statement.setDouble(8, quanAo.getLoiNhuan());
+            statement.setString(9, quanAo.getNhaCungCap().getMaNCC());
+            statement.setBoolean(10, quanAo.isTrangThai());
+            statement.setString(11, quanAo.getHinhAnh());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -99,17 +102,18 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean update(QuanAo quanAo) {
         try {
-            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, KICHTHUOC = ?, SOLUONG = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
+            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, KICHTHUOC = ?, SOLUONG = ?, THUONGHIEU = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getTenQA());
             statement.setString(2, quanAo.getLoaiQuanAo());
             statement.setString(3, quanAo.getKichThuoc());
             statement.setInt(4, quanAo.getSoLuong());
-            statement.setDouble(5, quanAo.getGiaNhap());
-            statement.setDouble(6, quanAo.getLoiNhuan());
-            statement.setString(7, quanAo.getNhaCungCap().getMaNCC());
-            statement.setBoolean(8, quanAo.isTrangThai());
-            statement.setString(9, quanAo.getHinhAnh());
+            statement.setString(5, quanAo.getThuongHieu());
+            statement.setDouble(6, quanAo.getGiaNhap());
+            statement.setDouble(7, quanAo.getLoiNhuan());
+            statement.setString(8, quanAo.getNhaCungCap().getMaNCC());
+            statement.setBoolean(9, quanAo.isTrangThai());
+            statement.setString(10, quanAo.getHinhAnh());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

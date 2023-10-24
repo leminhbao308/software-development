@@ -877,51 +877,18 @@
               <Connection code="FontConstant.FONT_TEXT" type="code"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="11" rowCount="2">
-                <Column editable="true" title="M&#xe3; QA" type="java.lang.Object">
-                  <Data value="QH-0001"/>
-                  <Data value="VN-0001"/>
-                </Column>
-                <Column editable="true" title="T&#xea;n QA" type="java.lang.Object">
-                  <Data value="Qu&#x1ea7;n Hoa"/>
-                  <Data value="V&#xe1;y Ng&#x1eaf;n"/>
-                </Column>
-                <Column editable="true" title="Lo&#x1ea1;i QA" type="java.lang.Object">
-                  <Data value="Qu&#x1ea7;n"/>
-                  <Data value="V&#xe1;y"/>
-                </Column>
-                <Column editable="true" title="Size" type="java.lang.Object">
-                  <Data value="S"/>
-                  <Data value="M"/>
-                </Column>
-                <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object">
-                  <Data value="10"/>
-                  <Data value="10"/>
-                </Column>
-                <Column editable="true" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object">
-                  <Data value="No Brand"/>
-                  <Data value="No Brand"/>
-                </Column>
-                <Column editable="true" title="NCC" type="java.lang.Object">
-                  <Data value="H&#x1ea1;nh Th&#xf4;ng T&#xe2;y"/>
-                  <Data value="Ch&#x1ee3; B&#x1ebf;n Th&#xe0;nh"/>
-                </Column>
-                <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object">
-                  <Data value="120000 vn&#x111;"/>
-                  <Data value="250000 vn&#x111;"/>
-                </Column>
-                <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object">
-                  <Data value="10 %"/>
-                  <Data value="10 %"/>
-                </Column>
-                <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object">
-                  <Data value="132000 vn&#x111;"/>
-                  <Data value="275000 vn&#x111;"/>
-                </Column>
-                <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object">
-                  <Data value="&#x110;ang Kinh Doanh"/>
-                  <Data value="&#x110;ang Kinh Doanh"/>
-                </Column>
+              <Table columnCount="11" rowCount="0">
+                <Column editable="true" title="M&#xe3; QA" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xea;n QA" type="java.lang.Object"/>
+                <Column editable="true" title="Lo&#x1ea1;i QA" type="java.lang.Object"/>
+                <Column editable="true" title="Size" type="java.lang.Object"/>
+                <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                <Column editable="true" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object"/>
+                <Column editable="true" title="NCC" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object"/>
+                <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
+                <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
