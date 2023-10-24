@@ -24,7 +24,6 @@ public class Frame extends JFrame {
     //Menu Nhan Vien
     private final JMenuItem mniBanHang = new JMenuItem("Bán Hàng");
     private final JMenuItem mniNhapHang = new JMenuItem("Nhập Hàng");
-    private final JMenuItem mniTraHang = new JMenuItem("Trả Hàng");
     private final JMenuItem mniQuanLyNhanVien = new JMenuItem("Quản Lý Nhân Viên");
 
     //Menu Khach Hang
@@ -51,14 +50,17 @@ public class Frame extends JFrame {
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
     private final JMenuItem mniDangXuat = new JMenuItem("Đăng Xuất");
 
-    private JPanel pnlContainer = new JPanel();
+    private JPanel pnlContainer = new PanelBanHang();
     // </editor-fold>
 
     public Frame() {
         this.setJMenuBar(mnuMain);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTitle("Phần Mềm Quản Lý Cửa Hàng Bán Quần Áo");
+        this.setResizable(false);
+//        this.setTitle("Phần Mềm Quản Lý Cửa Hàng Bán Quần Áo");
+        this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
+        
 
         this.add(pnlContainer, BorderLayout.CENTER);
 
@@ -86,15 +88,6 @@ public class Frame extends JFrame {
         });
 
         mniNhapHang.addActionListener(e -> {
-            mnNhanVien.setSelected(true);
-            getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang();
-            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-            this.revalidate();
-            this.repaint();
-        });
-
-        mniTraHang.addActionListener(e -> {
             mnNhanVien.setSelected(true);
             getContentPane().remove(pnlContainer);
             pnlContainer = new PanelBanHang();
@@ -264,7 +257,6 @@ public class Frame extends JFrame {
         mnTaiKhoan.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniNhapHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        mniTraHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyNhanVien.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -284,7 +276,6 @@ public class Frame extends JFrame {
         //Menu Nhan Vien
         mniBanHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniNhapHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        mniTraHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhanVien.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Khach Hang
@@ -329,7 +320,6 @@ public class Frame extends JFrame {
         //Menu Nhan Vien
         mnNhanVien.add(mniBanHang);
         mnNhanVien.add(mniNhapHang);
-        mnNhanVien.add(mniTraHang);
         mnNhanVien.add(mniQuanLyNhanVien);
 
         //Menu Khach Hang

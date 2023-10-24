@@ -16,9 +16,9 @@ public class ColorConstant {
     public static final Color BACKGROUND_CONTAINER = new Color(188, 163, 127);
 
     // Màu nút
-    public static final Color BUTTON_ACTIVE = new Color(234, 215, 187);
+    public static final Color BUTTON_ACTIVE = new Color(0, 123, 253);
     public static final Color BUTTON_HOVER = new Color(255, 242, 216);
-    public static final Color BUTTON_CLICK = new Color(241, 210, 164);
+    public static final Color BUTTON_CLICK = new Color(160, 233, 255);
     public static final Color BUTTON_LOGIN_NORMAL = new Color(17, 57, 70);
     public static final Color BUTTON_LOGIN_HOVER = new Color(6, 79, 102);
     public static final Color BUTTON_LOGIN_CLICK = new Color(3, 107, 139);

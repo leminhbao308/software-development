@@ -8,6 +8,8 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 
+import javax.swing.*;
+
 /**
  *
  * @author Le Minh Bao
@@ -88,6 +90,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
         tblHoaDon.setShowHorizontalLines(true);
         tblHoaDon.getTableHeader().setResizingAllowed(false);
         tblHoaDon.getTableHeader().setReorderingAllowed(false);
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         scrHoaDon.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -123,6 +130,18 @@ public class PanelHoaDon extends javax.swing.JPanel {
     private void txtTimMaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimMaHoaDonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimMaHoaDonActionPerformed
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        if(evt.getClickCount() == 2) {
+            JFrame jf = new JFrame();
+            jf.add(new PanelTTKhachHang());
+            jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            jf.setLocationRelativeTo(null);
+            jf.setResizable(false);
+//            jf.pack();
+            jf.setVisible(true);
+        }
+    }//GEN-LAST:event_tblHoaDonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
