@@ -10,6 +10,8 @@ import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 
 import javax.swing.*;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_KhachHang;
 //import org.group06.view.components.*;
 /**
  *
@@ -108,6 +110,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         lblTimTheoSDT.setText("Tìm theo số điện thoại");
 
         txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
@@ -115,6 +118,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         });
 
         txtTimTheoTen1.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTen1ActionPerformed(evt);

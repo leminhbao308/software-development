@@ -91,4 +91,84 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public List<NhanVien> getLocTheoPhai(String gioiTinh) {
+        List<NhanVien> dsNhanVien = new ArrayList<>();
+        String sql = "SELECT * FROM NhanVien WHERE GIOITINH = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,gioiTinh);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.setMaNV(resultSet.getString("MANV").trim());
+                nhanVien.setTenNV(resultSet.getString("TENNV"));
+                nhanVien.setMatKhau(resultSet.getString("MATKHAU").trim());
+                nhanVien.setGioiTinh(resultSet.getBoolean("GIOITINH"));
+                nhanVien.setCccd(resultSet.getString("CCCD").trim());
+                nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
+                nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
+                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setChucVu(resultSet.getString("VITRI").trim());
+                dsNhanVien.add(nhanVien);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsNhanVien;
+    }
+    
+    public List<NhanVien> getLocTheoTrangThai(String trangThai) {
+        List<NhanVien> dsNhanVien = new ArrayList<>();
+        String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,trangThai);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.setMaNV(resultSet.getString("MANV").trim());
+                nhanVien.setTenNV(resultSet.getString("TENNV"));
+                nhanVien.setMatKhau(resultSet.getString("MATKHAU").trim());
+                nhanVien.setGioiTinh(resultSet.getBoolean("GIOITINH"));
+                nhanVien.setCccd(resultSet.getString("CCCD").trim());
+                nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
+                nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
+                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setChucVu(resultSet.getString("VITRI").trim());
+                dsNhanVien.add(nhanVien);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsNhanVien;
+    }
+    
+    public List<NhanVien> getByName(String name) {
+        List<NhanVien> dsNhanVien = new ArrayList<>();
+        String sql = "SELECT * FROM KhachHang WHERE TENKH LIKE '?'";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.setMaNV(resultSet.getString("MANV").trim());
+                nhanVien.setTenNV(resultSet.getString("TENNV"));
+                nhanVien.setMatKhau(resultSet.getString("MATKHAU").trim());
+                nhanVien.setGioiTinh(resultSet.getBoolean("GIOITINH"));
+                nhanVien.setCccd(resultSet.getString("CCCD").trim());
+                nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
+                nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
+                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setChucVu(resultSet.getString("VITRI").trim());
+                dsNhanVien.add(nhanVien);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsNhanVien;
+    }
 }

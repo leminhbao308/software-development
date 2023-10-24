@@ -90,7 +90,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
 
     public List<KhachHang> getByName(String name) {
         List<KhachHang> dsKhachHang = new ArrayList<>();
-        String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
+        String sql = "SELECT * FROM KhachHang WHERE TENKH LIKE '?'";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.Color;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
@@ -31,6 +32,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grpGioiTinh = new javax.swing.ButtonGroup();
         pnlThemNV = new javax.swing.JPanel();
         lblMaNV = new javax.swing.JLabel();
         lblTenNV = new javax.swing.JLabel();
@@ -71,9 +73,21 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         lblMK.setText("Mật khẩu");
 
         txtTenNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTenNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTenNV.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtTenNV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenNVFocusLost(evt);
+            }
+        });
+        txtTenNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenNVActionPerformed(evt);
+            }
+        });
 
         txtMaNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtMaNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtMaNV.setEnabled(false);
         txtMaNV.setPreferredSize(new java.awt.Dimension(71, 30));
 
@@ -87,9 +101,11 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         lblDiaChi.setText("Địa chỉ:");
 
         txtDiaChi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDiaChi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtDiaChi.setPreferredSize(new java.awt.Dimension(71, 30));
 
         txtCCCD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCCCD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCCCD.setPreferredSize(new java.awt.Dimension(71, 30));
 
         lblChucVu.setFont(FontConstant.FONT_LABEL);
@@ -102,16 +118,20 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         lblSDT.setText("Số điện thoại:");
 
         txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
 
         pwdMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pwdMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pwdMK.setPreferredSize(new java.awt.Dimension(71, 30));
 
+        grpGioiTinh.add(rdoNam);
         rdoNam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoNam.setSelected(true);
         rdoNam.setText("Nam");
         rdoNam.setPreferredSize(new java.awt.Dimension(98, 30));
 
+        grpGioiTinh.add(rdoNu);
         rdoNu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoNu.setText("Nữ");
         rdoNu.setPreferredSize(new java.awt.Dimension(98, 30));
@@ -309,6 +329,23 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
+    private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenNVActionPerformed
+
+    private void txtTenNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusLost
+        // TODO add your handling code here:
+        if(txtTenNV.getText().equals("123")) {
+            txtTenNV.setBorder(BorderFactory.createLineBorder(Color.RED));
+            txtTenNV.setOpaque(true);
+        } 
+        else {
+            txtTenNV.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+//            txtTenNV.setOpaque(false);
+        }
+        
+    }//GEN-LAST:event_txtTenNVFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -348,6 +385,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JComboBox<String> cmbChucVu;
+    private javax.swing.ButtonGroup grpGioiTinh;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDiaChi;

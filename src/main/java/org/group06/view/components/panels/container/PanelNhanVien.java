@@ -136,6 +136,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblLoc.setText("Lọc");
 
         txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
@@ -143,6 +144,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         });
 
         txtTimTheoTen2.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTen2ActionPerformed(evt);

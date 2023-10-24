@@ -82,18 +82,21 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
 
         txtMaKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMaKH.setText(kh.getMaKhachHang());
+        txtMaKH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtMaKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaKH.setEnabled(false);
         txtMaKH.setPreferredSize(new java.awt.Dimension(71, 30));
 
         txtTenKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTenKH.setText(kh.getTenKH());
+        txtTenKH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTenKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenKH.setEnabled(false);
         txtTenKH.setPreferredSize(new java.awt.Dimension(71, 30));
 
         txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSDT.setText(kh.getSoDienThoai());
+        txtSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
