@@ -23,8 +23,8 @@ public class Main {
             public void run() {
                 Login loginFrame = new Login();
                 Frame frame = new Frame();
-                loginFrame.setVisible(true);
-//                frame.setVisible(true);
+//                loginFrame.setVisible(true);
+                frame.setVisible(true);
             }
         });
     }
