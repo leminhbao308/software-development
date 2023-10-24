@@ -32,41 +32,32 @@ public class PanelKhachHang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitleKH = new javax.swing.JLabel();
-        btnTimSDT = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        txtTimSDT = new org.group06.view.components.textFields.TextField("Số điện thoại cần tìm", ColorConstant.BLACK);
+        lblTitleTTKH = new javax.swing.JLabel();
         scrKhachHang = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
+        pnlCN = new javax.swing.JPanel();
+        lblTimTheoTen = new javax.swing.JLabel();
+        lblTimTheoSDT = new javax.swing.JLabel();
+        txtTimTheoTen = new org.group06.view.components.textFields.TextField();
+        txtTimTheoTen1 = new org.group06.view.components.textFields.TextField();
+        btnThem = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
 
-        setBackground(ColorConstant.BACKGROUND_CONTAINER);
         setToolTipText("");
 
-        lblTitleKH.setFont(FontConstant.FONT_HEADER);
-        lblTitleKH.setForeground(ColorConstant.WHITE);
-        lblTitleKH.setText("Thông tin khách hàng");
-
-        btnTimSDT.setToolTipText("Click để tìm kiếm khách hàng");
-        btnTimSDT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTimSDT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtTimSDT.setFont(FontConstant.FONT_TEXT);
-        txtTimSDT.setToolTipText("Nhập số điện thoại cần tìm");
-        txtTimSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimSDTActionPerformed(evt);
-            }
-        });
+        lblTitleTTKH.setBackground(new java.awt.Color(0, 0, 0));
+        lblTitleTTKH.setFont(FontConstant.FONT_HEADER);
+        lblTitleTTKH.setForeground(ColorConstant.BLACK);
+        lblTitleTTKH.setText("Danh sách khách hàng");
 
         scrKhachHang.setBorder(null);
         scrKhachHang.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrKhachHang.setFont(org.group06.utils.FontConstant.FONT_LABEL);
 
         tblKhachHang.setAutoCreateRowSorter(true);
-        tblKhachHang.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"QA01", "Đầm dạ hội", "Trắng"}
+                {"KH001", "Lê Minh Bảo", "0399405711"}
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
@@ -110,20 +101,78 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTimTheoTen.setText("Tìm theo tên");
+
+        lblTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTimTheoSDT.setText("Tìm theo số điện thoại");
+
+        txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimTheoTenActionPerformed(evt);
+            }
+        });
+
+        txtTimTheoTen1.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimTheoTen1ActionPerformed(evt);
+            }
+        });
+
+        btnThem.setFont(FontConstant.FONT_BUTTON);
+        btnThem.setForeground(ColorConstant.WHITE);
+        btnThem.setText("Thêm");
+        btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCNLayout = new javax.swing.GroupLayout(pnlCN);
+        pnlCN.setLayout(pnlCNLayout);
+        pnlCNLayout.setHorizontalGroup(
+            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCNLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTimTheoTen)
+                .addGap(18, 18, 18)
+                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTimTheoSDT)
+                .addGap(18, 18, 18)
+                .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addGap(9, 9, 9))
+        );
+        pnlCNLayout.setVerticalGroup(
+            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCNLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTheoTen)
+                    .addComponent(txtTimTheoTen1)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrKhachHang)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                        .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,11 +180,10 @@ public class PanelKhachHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                    .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -144,7 +192,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
-    private void callPanelTTKhachHang() {
+    private void callFrameTTKhachHang() {
         FrameTTKhachHang frThemNV = new FrameTTKhachHang(this.getSelectedKH());
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
@@ -153,17 +201,40 @@ public class PanelKhachHang extends javax.swing.JPanel {
     
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         if(evt.getClickCount() == 2) {
-            callPanelTTKhachHang();
+            callFrameTTKhachHang();
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
+    private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimTheoTenActionPerformed
+
+    private void txtTimTheoTen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimTheoTen1ActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        callFrameThemKH();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void callFrameThemKH() {
+        FrameThemKH frThemNV = new FrameThemKH();
+        frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemNV.setResizable(false);
+        frThemNV.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimSDT;
-    private javax.swing.JLabel lblTitleKH;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JLabel lblTimTheoSDT;
+    private javax.swing.JLabel lblTimTheoTen;
+    private javax.swing.JLabel lblTitleTTKH;
+    private javax.swing.JPanel pnlCN;
     private javax.swing.JScrollPane scrKhachHang;
     private javax.swing.JTable tblKhachHang;
-    private javax.swing.JTextField txtTimSDT;
+    private javax.swing.JTextField txtTimTheoTen;
+    private javax.swing.JTextField txtTimTheoTen1;
     // End of variables declaration//GEN-END:variables
     private KhachHang getSelectedKH() {
         if(tblKhachHang.getSelectedRow() == -1)

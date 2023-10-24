@@ -243,14 +243,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
         }
     }
 
-    private void callPanelTTNV() {
+    private void callFrameTTNV() {
         FrameTTNV frTTNV = new FrameTTNV(getSelectedNV());
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
     }
 
-    private void callPanelThemNV() {
+    private void callFrameThemNV() {
         FrameThemNhanVien frThemNV = new FrameThemNhanVien();
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
@@ -259,13 +259,13 @@ public class PanelNhanVien extends javax.swing.JPanel {
     
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         if(evt.getClickCount() == 2) {
-            callPanelTTNV();
+            callFrameTTNV();
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        callPanelThemNV();
+        callFrameThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
