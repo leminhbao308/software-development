@@ -1,6 +1,8 @@
 package org.group06.view.screen;
 
-import org.group06.controller.events.EventLogin;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhanVien;
+import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
@@ -11,8 +13,10 @@ import org.group06.view.components.textFields.TextField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
 
     private RippleRoundButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
@@ -74,7 +78,7 @@ public class Login extends JFrame {
         btnLogin.setForeground(ColorConstant.WHITE);
         btnLogin.setText("Đăng Nhập");
         btnLogin.setToolTipText("Click để đăng nhập");
-        btnLogin.addActionListener(new EventLogin(this));
+        btnLogin.addActionListener(this);
         btnLogin.setCursor(new java.awt.Cursor(Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnLoginLayout = new javax.swing.GroupLayout(pnLogin);
@@ -82,7 +86,7 @@ public class Login extends JFrame {
         pnLoginLayout.setHorizontalGroup(
                 pnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnLoginLayout.createSequentialGroup()
-                                .addContainerGap(50,50)
+                                .addContainerGap(50, 50)
                                 .addGroup(pnLoginLayout.createParallelGroup(GroupLayout.Alignment.CENTER, false)
                                         .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
@@ -136,5 +140,27 @@ public class Login extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Kiểm tra mật khẩu
+        DAO_NhanVien dao_nv = new DAO_NhanVien(DatabaseConnect.getConnection());
+        NhanVien nv = dao_nv.getByID(txtUsername.getText());
+        if (nv == null) {
+            JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại", "Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (nv.getMatKhau().equals(new String(pwdPassword.getPassword()))) {
+            // Đóng cửa sổ Login
+            this.dispose();
+            // Mở JFrame MainFrame
+            Frame mainFrame = new Frame(nv);
+            mainFrame.setVisible(true);
+        } else {
+            // Thông báo lỗi
+            JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

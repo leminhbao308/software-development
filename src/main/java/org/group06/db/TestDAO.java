@@ -1,7 +1,9 @@
 package org.group06.db;
 
 import org.group06.db.dao.DAO_NhaCungCap;
+import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhaCungCap;
+import org.group06.model.entity.NhanVien;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,7 +15,8 @@ public class TestDAO {
         try (Connection connection = DatabaseConnect.getConnection()) {
             if (connection != null) {
                 System.out.println("Kết nối thành công!");
-                testDAO_NhaCungCap(connection);
+//                testDAO_NhaCungCap(connection);
+                testDAO_NhanVien(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -50,6 +53,40 @@ public class TestDAO {
         String supplierIdToDelete = "NCC016";
         supplierDAO.delete(supplierIdToDelete);
         System.out.println("Nhà cung cấp có mã " + supplierIdToDelete + " đã bị xóa.");
+    }
+
+    private static void testDAO_NhanVien(Connection connection) {
+        // Tạo đối tượng NhanVienDAO
+        DAO_NhanVien employeeDAO = new DAO_NhanVien(connection);
+
+        // Lấy danh sách tất cả nhân viên
+        List<NhanVien> employees = employeeDAO.getAll();
+        System.out.println("Danh sách nhân viên:");
+        for (NhanVien employee : employees) {
+            System.out.println(employee);
+        }
+
+        String id = "NV001";
+        NhanVien employee = employeeDAO.getByID(id);
+        System.out.println("Nhân viên có mã " + id + ":" + employee);
+
+        // Thêm một nhân viên mới
+//        NhanVien newEmployee = new NhanVien("NV002", "Nguyễn Văn B", "123456", true, "123456789", "123 Đường A, Quận 1, TP.HCM", "0123456789", true, "Nhân viên bán hàng", 1);
+//        employeeDAO.add(newEmployee);
+//        System.out.println("Nhân viên mới đã được thêm.");
+
+        // Cập nhật thông tin một nhân viên
+//        NhanVien updatedEmployee = employeeDAO.getByID("NV001");
+//        if (updatedEmployee != null) {
+//            updatedEmployee.setTenNV("Nguyễn Văn A");
+//            employeeDAO.update(updatedEmployee);
+//            System.out.println("Thông tin nhân viên đã được cập nhật.");
+//        }
+
+        // Xóa một nhân viên
+//        String employeeIdToDelete = "NV016";
+//        employeeDAO.delete(employeeIdToDelete);
+//        System.out.println("Nhân viên có mã " + employeeIdToDelete + " đã bị xóa.");
     }
 }
 

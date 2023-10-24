@@ -13,10 +13,6 @@ import java.net.URL;
  */
 public class ImagePanel extends JPanel {
     private Image image;
-
-    public ImagePanel(Image image) {
-        setImage(image);
-    }
     
     public ImagePanel(URL imagePath, int width, int height) {
         try {

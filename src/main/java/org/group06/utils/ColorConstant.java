@@ -14,6 +14,7 @@ public class ColorConstant {
     public static final Color BACKGROUND_NORMAL = new Color(255, 242, 216);
     public static final Color BACKGROUND_SIDEBAR = new Color(17, 57, 70);
     public static final Color BACKGROUND_CONTAINER = new Color(188, 163, 127);
+    public static final Color BACKGROUND_TABLEHEADER = new Color(0, 123, 253);
 
     // Màu nút
     public static final Color BUTTON_ACTIVE = new Color(0, 123, 253);
