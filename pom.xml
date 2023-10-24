@@ -35,6 +35,11 @@
         <artifactId>mssql-jdbc</artifactId>
         <version>12.3.0.jre17-preview</version>
     </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE190</version>
+        </dependency>
     </dependencies>
 
     <build>

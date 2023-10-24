@@ -22,40 +22,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="scrKhachHang" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="lblTitleKH" pref="668" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTimSDT" min="-2" pref="380" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnTimSDT" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblTitleTTKH" pref="287" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlCN" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnTimSDT" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtTimSDT" alignment="0" pref="40" max="32767" attributes="0"/>
-                  <Component id="lblTitleKH" max="32767" attributes="0"/>
+                  <Component id="pnlCN" max="32767" attributes="0"/>
+                  <Component id="lblTitleTTKH" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrKhachHang" pref="538" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="scrKhachHang" pref="515" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblTitleKH">
+    <Component class="javax.swing.JLabel" name="lblTitleTTKH">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="FontConstant.FONT_HEADER" type="code"/>
@@ -63,36 +60,8 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="ColorConstant.WHITE" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin kh&#xe1;ch h&#xe0;ng"/>
+        <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch kh&#xe1;ch h&#xe0;ng"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTimSDT">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Click &#x111;&#x1ec3; t&#xec;m ki&#x1ebf;m kh&#xe1;ch h&#xe0;ng"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.StaticRoundButton(&quot;&quot;, ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK)"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtTimSDT">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="FontConstant.FONT_TEXT" type="code"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Nh&#x1ead;p s&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i c&#x1ea7;n t&#xec;m&quot;" type="code"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimSDTActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.textFields.TextField(&quot;S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i c&#x1ea7;n t&#xec;m&quot;, ColorConstant.BLACK)"/>
-      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="scrKhachHang">
       <Properties>
@@ -175,6 +144,67 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblKhachHangMouseClicked"/>
           </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnlCN">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ColorConstant.BACKGROUND_CONTAINER" type="code"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTimTheoTen" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimTheoTen" pref="242" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTimTheoSDT" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimTheoSDT" pref="239" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTimTheoTen" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="txtTimTheoTen" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="txtTimTheoSDT" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lblTimTheoSDT" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblTimTheoTen">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#xec;m theo t&#xea;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTimTheoTen">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTimTheoSDT">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#xec;m theo s&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTimTheoSDT">
         </Component>
       </SubComponents>
     </Container>
