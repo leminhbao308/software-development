@@ -60,7 +60,6 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
-//        this.setTitle("Phần Mềm Quản Lý Cửa Hàng Bán Quần Áo");
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
 
@@ -255,6 +254,7 @@ public class Frame extends JFrame {
         mniNhapHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhanVien.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
+
         //Menu Khach Hang
         mniQuanLyKhachHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
@@ -288,21 +288,24 @@ public class Frame extends JFrame {
         mnuMain.add(mnNhanVien);
         mnuMain.add(mnKhachHang);
         mnuMain.add(mnQuanAo);
-        mnuMain.add(mnHoaDon);
-        mnuMain.add(mnThongKe);
         mnuMain.add(Box.createHorizontalGlue());
         mnuMain.add(mnTaiKhoan);
 
         //Menu Nhan Vien
         mnNhanVien.add(mniBanHang_DatHang);
         mnNhanVien.add(mniNhapHang);
+        mnNhanVien.add(new JSeparator());
         mnNhanVien.add(mniQuanLyNhanVien);
+        mnNhanVien.add(new JSeparator());
+        mnNhanVien.add(mnHoaDon);
+        mnNhanVien.add(mnThongKe);
 
         //Menu Khach Hang
         mnKhachHang.add(mniQuanLyKhachHang);
 
         //Menu Quan Ao
         mnQuanAo.add(mniQuanLyQuanAo);
+        mnQuanAo.add(new JSeparator());
         mnQuanAo.add(mniQuanLyLoaiQuanAo);
         mnQuanAo.add(mniQuanLyNhaCungCap);
         mnQuanAo.add(mniQuanLyKhuyenMai);
