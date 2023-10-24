@@ -4,11 +4,11 @@
  */
 package org.group06.view.components.panels.container;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
+
+import javax.swing.*;
 
 /**
  *

@@ -40,9 +40,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(result.getString("CCCD").trim());
                 nhanVien.setDiaChi(result.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(result.getString("SDT").trim());
-                nhanVien.setTrangThai(result.getBoolean("TRANGTHAI"));
-                nhanVien.setViTri(result.getString("VITRI").trim());
-                nhanVien.setCaLamViec(result.getInt("CALAMVIEC"));
+                nhanVien.setTrangThai(result.getString("TRANGTHAI"));
+                nhanVien.setChucVu(result.getString("VITRI").trim());
                 nhanViens.add(nhanVien);
             }
         } catch (SQLException e) {
@@ -68,9 +67,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(result.getString("CCCD").trim());
                 nhanVien.setDiaChi(result.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(result.getString("SDT").trim());
-                nhanVien.setTrangThai(result.getBoolean("TRANGTHAI"));
-                nhanVien.setViTri(result.getString("VITRI").trim());
-                nhanVien.setCaLamViec(result.getInt("CALAMVIEC"));
+                nhanVien.setTrangThai(result.getString("TRANGTHAI"));
+                nhanVien.setChucVu(result.getString("VITRI").trim());
             }
         } catch (SQLException e) {
             e.printStackTrace();

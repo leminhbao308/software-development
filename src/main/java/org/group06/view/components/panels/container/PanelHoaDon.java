@@ -8,8 +8,6 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 
-import javax.swing.*;
-
 /**
  *
  * @author Le Minh Bao

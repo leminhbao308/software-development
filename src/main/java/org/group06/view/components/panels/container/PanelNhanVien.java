@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-import javax.swing.JFrame;
+
 import org.group06.model.entity.NhanVien;
-import org.group06.utils.*;
+import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
+
+import javax.swing.*;
 
 /**
  *
