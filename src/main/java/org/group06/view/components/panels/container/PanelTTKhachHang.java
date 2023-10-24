@@ -4,6 +4,9 @@
  */
 package org.group06.view.components.panels.container;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
@@ -12,11 +15,12 @@ import org.group06.utils.FontConstant;
  * @author Dell
  */
 public class PanelTTKhachHang extends javax.swing.JPanel {
-
+    private KhachHang kh;
     /**
      * Creates new form PanelTTKhachHang
      */
-    public PanelTTKhachHang() {
+    public PanelTTKhachHang(KhachHang kh) {
+        this.kh = kh;
         initComponents();
         
         
@@ -35,7 +39,6 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         lblMaKH = new javax.swing.JLabel();
         lblTenKH = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
-        btnHuy = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         txtMaKH = new javax.swing.JTextField();
@@ -59,16 +62,6 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         lblSDT.setFont(FontConstant.FONT_LABEL);
         lblSDT.setText("Số điện thoại:");
 
-        btnHuy.setFont(FontConstant.FONT_BUTTON);
-        btnHuy.setForeground(ColorConstant.WHITE);
-        btnHuy.setText("Hủy");
-        btnHuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
-
         btnCapNhat.setFont(FontConstant.FONT_BUTTON);
         btnCapNhat.setForeground(ColorConstant.WHITE);
         btnCapNhat.setText("Cập nhật");
@@ -83,17 +76,29 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         btnXoaTrang.setForeground(ColorConstant.WHITE);
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXoaTrang.setEnabled(false);
         btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaTrangActionPerformed(evt);
             }
         });
 
+        txtMaKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtMaKH.setText(kh.getMaKhachHang());
+        txtMaKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaKH.setEnabled(false);
         txtMaKH.setPreferredSize(new java.awt.Dimension(71, 30));
 
+        txtTenKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTenKH.setText(kh.getTenKH());
+        txtTenKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtTenKH.setEnabled(false);
         txtTenKH.setPreferredSize(new java.awt.Dimension(71, 30));
 
+        txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtSDT.setText(kh.getSoDienThoai());
+        txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -106,11 +111,9 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(lblTitleCNKH, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(143, 143, 143)
                         .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -154,28 +157,44 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHuyActionPerformed
-
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
+        if(btnCapNhat.getText().equals("Cập nhật")){
+            btnCapNhat.setText("Lưu");
+            txtTenKH.requestFocus();
+            btnXoaTrang.setEnabled(true);
+            txtTenKH.setEnabled(true);
+            txtSDT.setEnabled(true);
+        } else {
+            if(txtTenKH.getText().equals("") || txtSDT.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin");
+            } else {
+                btnCapNhat.setText("Cập nhật");
+                btnXoaTrang.setEnabled(false);
+                txtTenKH.setEnabled(false);
+                txtSDT.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
+        xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
+    private void xoaTrang() {
+        txtTenKH.setText("");
+        txtSDT.setText("");
+        txtTenKH.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JLabel lblMaKH;
     private javax.swing.JLabel lblSDT;

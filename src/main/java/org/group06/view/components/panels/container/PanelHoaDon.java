@@ -132,15 +132,15 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimMaHoaDonActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
-        if(evt.getClickCount() == 2) {
-            JFrame jf = new JFrame();
-            jf.add(new PanelTTKhachHang());
-            jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            jf.setLocationRelativeTo(null);
-            jf.setResizable(false);
-//            jf.pack();
-            jf.setVisible(true);
-        }
+//        if(evt.getClickCount() == 2) {
+//            JFrame jf = new JFrame();
+//            jf.add(new PanelTTKhachHang());
+//            jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+//            jf.setLocationRelativeTo(null);
+//            jf.setResizable(false);
+////            jf.pack();
+//            jf.setVisible(true);
+//        }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
 

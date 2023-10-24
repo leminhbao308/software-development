@@ -8,9 +8,8 @@ public class NhanVien {
     private String cccd;
     private String diaChi;
     private String soDienThoai;
-    private boolean trangThai;
-    private String viTri;
-    private int caLamViec;
+    private String trangThai;
+    private String chucVu;
 
     public String getMaNV() {
         return maNV;
@@ -68,35 +67,27 @@ public class NhanVien {
         this.soDienThoai = soDienThoai;
     }
 
-    public boolean isTrangThai() {
+    public String isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 
-    public String getViTri() {
-        return viTri;
+    public String getChucVu() {
+        return chucVu;
     }
 
-    public void setViTri(String viTri) {
-        this.viTri = viTri;
-    }
-
-    public int getCaLamViec() {
-        return caLamViec;
-    }
-
-    public void setCaLamViec(int caLamViec) {
-        this.caLamViec = caLamViec;
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
     }
 
     public NhanVien() {
         this.setTenNV("Tài Khoản");
     }
 
-    public NhanVien(String maNV, String matKhau, String tenNV, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String viTri, int caLamViec) {
+    public NhanVien(String maNV, String matKhau, String tenNV, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, String trangThai, String chucVu) {
         this.maNV = maNV;
         this.matKhau = matKhau;
         this.tenNV = tenNV;
@@ -105,8 +96,7 @@ public class NhanVien {
         this.diaChi = diaChi;
         this.soDienThoai = soDienThoai;
         this.trangThai = trangThai;
-        this.viTri = viTri;
-        this.caLamViec = caLamViec;
+        this.chucVu = chucVu;
     }
 
     @Override
@@ -120,8 +110,7 @@ public class NhanVien {
                 ", diaChi='" + diaChi + '\'' +
                 ", soDienThoai='" + soDienThoai + '\'' +
                 ", trangThai=" + trangThai +
-                ", viTri='" + viTri + '\'' +
-                ", caLamViec=" + caLamViec +
+                ", viTri='" + chucVu + '\'' +
                 '}';
     }
 }

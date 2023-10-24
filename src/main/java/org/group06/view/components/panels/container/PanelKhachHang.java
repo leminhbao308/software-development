@@ -3,12 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-
-import org.group06.utils.ColorConstant;
-import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import org.group06.model.entity.KhachHang;
+import org.group06.utils.*;
 //import org.group06.view.components.*;
 /**
  *
@@ -32,30 +29,21 @@ public class PanelKhachHang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitleKH = new javax.swing.JLabel();
-        btnTimSDT = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        txtTimSDT = new org.group06.view.components.textFields.TextField("Số điện thoại cần tìm", ColorConstant.BLACK);
+        lblTitleTTKH = new javax.swing.JLabel();
         scrKhachHang = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
+        pnlCN = new javax.swing.JPanel();
+        lblTimTheoTen = new javax.swing.JLabel();
+        txtTimTheoTen = new javax.swing.JTextField();
+        lblTimTheoSDT = new javax.swing.JLabel();
+        txtTimTheoSDT = new javax.swing.JTextField();
 
         setBackground(ColorConstant.BACKGROUND_CONTAINER);
         setToolTipText("");
 
-        lblTitleKH.setFont(FontConstant.FONT_HEADER);
-        lblTitleKH.setForeground(ColorConstant.WHITE);
-        lblTitleKH.setText("Thông tin khách hàng");
-
-        btnTimSDT.setToolTipText("Click để tìm kiếm khách hàng");
-        btnTimSDT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTimSDT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtTimSDT.setFont(FontConstant.FONT_TEXT);
-        txtTimSDT.setToolTipText("Nhập số điện thoại cần tìm");
-        txtTimSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimSDTActionPerformed(evt);
-            }
-        });
+        lblTitleTTKH.setFont(FontConstant.FONT_HEADER);
+        lblTitleTTKH.setForeground(ColorConstant.WHITE);
+        lblTitleTTKH.setText("Danh sách khách hàng");
 
         scrKhachHang.setBorder(null);
         scrKhachHang.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -66,7 +54,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"QA01", "Đầm dạ hội", "Trắng"}
+                {"KH001", "Lê Minh Bảo", "0399405711"}
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
@@ -110,20 +98,53 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        pnlCN.setBackground(ColorConstant.BACKGROUND_CONTAINER);
+
+        lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTimTheoTen.setText("Tìm theo tên");
+
+        lblTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTimTheoSDT.setText("Tìm theo số điện thoại");
+
+        javax.swing.GroupLayout pnlCNLayout = new javax.swing.GroupLayout(pnlCN);
+        pnlCN.setLayout(pnlCNLayout);
+        pnlCNLayout.setHorizontalGroup(
+            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCNLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTimTheoTen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTimTheoSDT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimTheoSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlCNLayout.setVerticalGroup(
+            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCNLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrKhachHang)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                        .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTimSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,18 +152,13 @@ public class PanelKhachHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTimSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(lblTitleKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                    .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTimSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimSDTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callPanelTTKhachHang() {
         JFrame jf = new JFrame();
@@ -162,10 +178,23 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimSDT;
-    private javax.swing.JLabel lblTitleKH;
+    private javax.swing.JLabel lblTimTheoSDT;
+    private javax.swing.JLabel lblTimTheoTen;
+    private javax.swing.JLabel lblTitleTTKH;
+    private javax.swing.JPanel pnlCN;
     private javax.swing.JScrollPane scrKhachHang;
     private javax.swing.JTable tblKhachHang;
-    private javax.swing.JTextField txtTimSDT;
+    private javax.swing.JTextField txtTimTheoSDT;
+    private javax.swing.JTextField txtTimTheoTen;
     // End of variables declaration//GEN-END:variables
+
+    private KhachHang getSelectedKH() {
+        if(tblKhachHang.getSelectedRow() == -1)
+            return null;
+        else {
+            return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
+        }
+    }
+
+
 }

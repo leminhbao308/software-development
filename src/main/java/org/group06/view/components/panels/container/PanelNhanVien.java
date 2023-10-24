@@ -3,11 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-
-import org.group06.utils.ColorConstant;
-import org.group06.utils.FontConstant;
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import org.group06.model.entity.NhanVien;
+import org.group06.utils.*;
 
 /**
  *
@@ -127,7 +125,13 @@ public class PanelNhanVien extends javax.swing.JPanel {
         btnThem.setForeground(ColorConstant.WHITE);
         btnThem.setText("Thêm");
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
+        cboLoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cboLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Nam", "Nữ", "Làm việc", "Đã nghỉ" }));
 
         lblLoc.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -156,19 +160,20 @@ public class PanelNhanVien extends javax.swing.JPanel {
         );
         pnlCNLayout.setVerticalGroup(
             pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCNLayout.createSequentialGroup()
+            .addGroup(pnlCNLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTimTheoMa)
-                    .addComponent(txtTimTheoTen)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlCNLayout.createSequentialGroup()
-                        .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTimTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLoc))
+                .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlCNLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTimTheoMa, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTimTheoTen, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlCNLayout.createSequentialGroup()
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cboLoc))
+                    .addComponent(cboLoc, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -201,11 +206,40 @@ public class PanelNhanVien extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private NhanVien getSelectedNV() {
+        boolean gioiTinh = false;
+        if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam"))
+            gioiTinh = true;
+
+        if(tblNhanVien.getSelectedRow() == -1)
+            return null;
+        else {
+            return new NhanVien(
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 1).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 2).toString(),
+                    gioiTinh,
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 4).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 5).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 6).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 8).toString());
+        }
+    }
+
     private void callPanelTTNV() {
         JFrame jf = new JFrame();
-        jf.add(new PanelTTNV());
+        jf.add(new PanelTTNV(this.getSelectedNV()));
         jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//        jf.setLocationRelativeTo(null);
+        jf.setResizable(false);
+        jf.pack();
+        jf.setVisible(true);
+    }
+
+    private void callPanelThemNV() {
+        JFrame jf = new JFrame();
+        jf.add(new PanelThemNhanVien());
+        jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         jf.setResizable(false);
         jf.pack();
         jf.setVisible(true);
@@ -213,10 +247,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
     
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         if(evt.getClickCount() == 2) {
-            System.out.println("check");
             callPanelTTNV();
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        callPanelThemNV();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
