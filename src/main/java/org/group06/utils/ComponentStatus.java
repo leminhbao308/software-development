@@ -4,9 +4,7 @@
  */
 package org.group06.utils;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -14,7 +12,8 @@ import javax.swing.JTextField;
  */
 public class ComponentStatus {
 
-//  
+//
+
     public static void setFieldStatus(java.util.List<JTextField> list, boolean status) {
         for (JTextField item : list) {
             item.setEnabled(status);

@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-import javax.swing.JFrame;
+
 import org.group06.model.entity.KhachHang;
-import org.group06.utils.*;
+import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
+
+import javax.swing.*;
 //import org.group06.view.components.*;
 /**
  *
@@ -162,7 +165,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
     private void callPanelTTKhachHang() {
         JFrame jf = new JFrame();
-        jf.add(new PanelTTKhachHang());
+        jf.add(new PanelTTKhachHang(getSelectedKH()));
         jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         jf.setLocationRelativeTo(null);
         jf.setResizable(false);
