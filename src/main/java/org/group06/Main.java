@@ -15,6 +15,7 @@ public class Main {
         try {
             //<editor-fold desc="FlatLaf Look and Feel">
             UIManager.setLookAndFeel(new FlatMacLightLaf());
+            UIManager.put("TabbedPane:TabbedPaneTab.contentMargins", new Insets(10, 100, 0, 0));
             UIManager.put("TableHeader.font", org.group06.utils.FontConstant.FONT_TABLE_HEADER);
             UIManager.put("Table.selectionBackground", ColorConstant.BUTTON_CLICK);
             UIManager.put("Table.rowHeight", 30);

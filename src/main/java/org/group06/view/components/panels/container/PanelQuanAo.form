@@ -23,40 +23,63 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pnInformationFields" alignment="0" pref="1480" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblTitleQA" max="32767" attributes="0"/>
-                  <Component id="scrQuanAo" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="scrQuanAo" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="572" max="-2" attributes="0"/>
+                      <Component id="lblTimKiemQA" min="-2" pref="159" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtTimKiem" min="-2" pref="717" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="lblTitleQA1" min="-2" pref="469" max="-2" attributes="0"/>
+                  <EmptySpace pref="995" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblTitleQA" min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtTimKiem" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="lblTimKiemQA" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnInformationFields" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrQuanAo" max="32767" attributes="0"/>
+              <Component id="scrQuanAo" pref="422" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="lblTitleQA1" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace pref="935" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblTitleQA">
+    <Component class="javax.swing.JLabel" name="lblTimKiemQA">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="org.group06.utils.FontConstant.FONT_HEADER" type="code"/>
+          <Connection code="org.group06.utils.FontConstant.FONT_SUB_HEADER" type="code"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="org.group06.utils.ColorConstant.BLACK" type="code"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;Th&#xf4;ng Tin Qu&#x1ea7;n &#xc1;o&quot;" type="code"/>
+          <Connection code="&quot;T&#xec;m Ki&#x1ebf;m Qu&#x1ea7;n &#xc1;o&quot;" type="code"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[103, 60]"/>
@@ -854,51 +877,18 @@
               <Connection code="FontConstant.FONT_TEXT" type="code"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="11" rowCount="2">
-                <Column editable="true" title="M&#xe3; QA" type="java.lang.Object">
-                  <Data value="QH-0001"/>
-                  <Data value="VN-0001"/>
-                </Column>
-                <Column editable="true" title="T&#xea;n QA" type="java.lang.Object">
-                  <Data value="Qu&#x1ea7;n Hoa"/>
-                  <Data value="V&#xe1;y Ng&#x1eaf;n"/>
-                </Column>
-                <Column editable="true" title="Lo&#x1ea1;i QA" type="java.lang.Object">
-                  <Data value="Qu&#x1ea7;n"/>
-                  <Data value="V&#xe1;y"/>
-                </Column>
-                <Column editable="true" title="Size" type="java.lang.Object">
-                  <Data value="S"/>
-                  <Data value="M"/>
-                </Column>
-                <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object">
-                  <Data value="10"/>
-                  <Data value="10"/>
-                </Column>
-                <Column editable="true" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object">
-                  <Data value="No Brand"/>
-                  <Data value="No Brand"/>
-                </Column>
-                <Column editable="true" title="NCC" type="java.lang.Object">
-                  <Data value="H&#x1ea1;nh Th&#xf4;ng T&#xe2;y"/>
-                  <Data value="Ch&#x1ee3; B&#x1ebf;n Th&#xe0;nh"/>
-                </Column>
-                <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object">
-                  <Data value="120000 vn&#x111;"/>
-                  <Data value="250000 vn&#x111;"/>
-                </Column>
-                <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object">
-                  <Data value="10 %"/>
-                  <Data value="10 %"/>
-                </Column>
-                <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object">
-                  <Data value="132000 vn&#x111;"/>
-                  <Data value="275000 vn&#x111;"/>
-                </Column>
-                <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object">
-                  <Data value="&#x110;ang Kinh Doanh"/>
-                  <Data value="&#x110;ang Kinh Doanh"/>
-                </Column>
+              <Table columnCount="11" rowCount="0">
+                <Column editable="true" title="M&#xe3; QA" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xea;n QA" type="java.lang.Object"/>
+                <Column editable="true" title="Lo&#x1ea1;i QA" type="java.lang.Object"/>
+                <Column editable="true" title="Size" type="java.lang.Object"/>
+                <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                <Column editable="true" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object"/>
+                <Column editable="true" title="NCC" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object"/>
+                <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
+                <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -978,5 +968,41 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblTitleQA1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="org.group06.utils.FontConstant.FONT_HEADER" type="code"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="org.group06.utils.ColorConstant.BLACK" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Th&#xf4;ng Tin Qu&#x1ea7;n &#xc1;o&quot;" type="code"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[103, 60]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[103, 60]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[103, 60]"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTimKiem">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="FontConstant.FONT_TEXT" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p V&#xe0;o M&#xe3; Qu&#x1ea7;n &#xe1;o"/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTimKiemFocusLost"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

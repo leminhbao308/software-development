@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DAO_NhaCungCap implements DAO_Interface<NhaCungCap>{
 
@@ -18,8 +17,8 @@ public class DAO_NhaCungCap implements DAO_Interface<NhaCungCap>{
     }
 
     @Override
-    public List<NhaCungCap> getAll() {
-        List<NhaCungCap> suppliers = new ArrayList<>();
+    public ArrayList<NhaCungCap> getAll() {
+        ArrayList<NhaCungCap> suppliers = new ArrayList<>();
         try {
             String sql = "SELECT * FROM NhaCungCap";
             PreparedStatement statement = connection.prepareStatement(sql);

@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -25,8 +24,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
     }
 
     @Override
-    public List<NhanVien> getAll() {
-        List<NhanVien> nhanViens = new ArrayList<>();
+    public ArrayList<NhanVien> getAll() {
+        ArrayList<NhanVien> nhanViens = new ArrayList<>();
         try {
             String sql = "SELECT * FROM NhanVien";
             PreparedStatement statement = connection.prepareStatement(sql);

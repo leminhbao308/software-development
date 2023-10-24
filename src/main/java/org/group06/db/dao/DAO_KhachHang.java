@@ -17,8 +17,8 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     }
 
     @Override
-    public List<KhachHang> getAll() {
-        List<KhachHang> dsKhachHang = new ArrayList<>();
+    public ArrayList<KhachHang> getAll() {
+        ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
         String sql = "SELECT * FROM KhachHang";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -88,9 +88,9 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         }
     }
 
-    public List<KhachHang> getByName(String name) {
-        List<KhachHang> dsKhachHang = new ArrayList<>();
-        String sql = "SELECT * FROM KhachHang WHERE TENKH LIKE '?'";
+    public ArrayList<KhachHang> getByName(String name) {
+        ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
+        String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

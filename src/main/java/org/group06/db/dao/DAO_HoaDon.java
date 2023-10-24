@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
@@ -18,8 +17,8 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     }
 
     @Override
-    public List<HoaDon> getAll() {
-        List<HoaDon> hoaDons = new ArrayList<>();
+    public ArrayList<HoaDon> getAll() {
+        ArrayList<HoaDon> hoaDons = new ArrayList<>();
         String sql = "SELECT * FROM HoaDon";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
