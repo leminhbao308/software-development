@@ -207,9 +207,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private NhanVien getSelectedNV() {
-        boolean gt = false;
+        boolean gioiTinh = false;
         if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam"))
-            gt = true;
+            gioiTinh = true;
         
         if(tblNhanVien.getSelectedRow() == -1) 
             return null;
@@ -218,7 +218,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 1).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 2).toString(),
-                    gt,
+                    gioiTinh,
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 4).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 5).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 6).toString(),
@@ -254,7 +254,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         callPanelThemNV();
-        
     }//GEN-LAST:event_btnThemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
