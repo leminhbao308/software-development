@@ -241,21 +241,22 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="txtTimTheoMa" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblTimTheoTen" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <Component id="lblLoc" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="txtTimTheoMa" alignment="1" max="32767" attributes="0"/>
                       <Component id="txtTimTheoTen" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblTimTheoTen" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="btnThem" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="lblTimTheoMa" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="lblLoc" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnThem" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="cboLoc" alignment="1" max="32767" attributes="0"/>
+                      <Component id="lblTimTheoMa" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -296,12 +297,18 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.group06.view.components.buttons.StaticRoundButton(&quot;&quot;, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK)"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboLoc">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
                 <StringItem index="0" value="M&#x1eb7;c &#x111;&#x1ecb;nh"/>

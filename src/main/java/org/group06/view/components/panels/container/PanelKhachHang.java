@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 import javax.swing.JFrame;
+import org.group06.model.entity.KhachHang;
 import org.group06.utils.*;
 //import org.group06.view.components.*;
 /**
@@ -161,7 +162,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
     private void callPanelTTKhachHang() {
         JFrame jf = new JFrame();
-        jf.add(new PanelTTKhachHang());
+        jf.add(new PanelTTKhachHang(this.getSelectedKH()));
         jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         jf.setLocationRelativeTo(null);
         jf.setResizable(false);
@@ -186,4 +187,14 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimTheoSDT;
     private javax.swing.JTextField txtTimTheoTen;
     // End of variables declaration//GEN-END:variables
+    
+    private KhachHang getSelectedKH() {
+        if(tblKhachHang.getSelectedRow() == -1) 
+            return null;
+        else {
+            return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
+        }
+    }
+    
+    
 }
