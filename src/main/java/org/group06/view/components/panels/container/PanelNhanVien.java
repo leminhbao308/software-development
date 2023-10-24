@@ -39,17 +39,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
         tblNhanVien = new javax.swing.JTable();
         pnlCN = new javax.swing.JPanel();
         lblTimTheoTen = new javax.swing.JLabel();
-        txtTimTheoTen = new javax.swing.JTextField();
         lblTimTheoMa = new javax.swing.JLabel();
-        txtTimTheoMa = new javax.swing.JTextField();
         btnThem = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         cboLoc = new javax.swing.JComboBox<>();
         lblLoc = new javax.swing.JLabel();
-
-        setBackground(ColorConstant.BACKGROUND_CONTAINER);
+        txtTimTheoTen = new org.group06.view.components.textFields.TextField();
+        txtTimTheoTen2 = new org.group06.view.components.textFields.TextField();
 
         lblTitleTTNV.setFont(FontConstant.FONT_HEADER);
-        lblTitleTTNV.setForeground(ColorConstant.WHITE);
         lblTitleTTNV.setText("Danh sách nhân viên");
 
         scrNhanVien.setBorder(null);
@@ -57,12 +54,12 @@ public class PanelNhanVien extends javax.swing.JPanel {
         scrNhanVien.setFont(org.group06.utils.FontConstant.FONT_LABEL);
 
         tblNhanVien.setAutoCreateRowSorter(true);
-        tblNhanVien.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
         tblNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"a", "9", "8", "Nam", "6", "5", "4", "Làm việc", "Nhân viên thu ngân"},
-                {"b", "1", "2", "Nữ", "3", "4", "5", "Đã nghỉ", "Nhân viên quản lí"}
+                {"NV01", "Trương Quốc Bảo", "123456789", "Nam", "123456789012", "47/48 đường số 19 phường 8 Gò Vấp", "0762818855", "Làm việc", "Nhân viên thu ngân"},
+                {"NV02", "Lê Minh Bảo", "123456789", "Nam", "123456789999", "XXX/XX ACB XYZ", "0123456789", "Đã nghỉ", "Nhân viên quản lí"},
+                {"NV03", "Lê Hoàng Nam", "999999999", "Nữ", "000000111222", "XX/XXX XYZ ABC", "7774445552", "Làm việc", "Nhân viên quản lí"}
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Mật khẩu", "Giới tính", "Căn cước công dân", "Địa chỉ", "Số điện thoại", "Trạng thái", "Chức vụ"
@@ -116,13 +113,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
             tblNhanVien.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        pnlCN.setBackground(ColorConstant.BACKGROUND_CONTAINER);
-
         lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lblTimTheoTen.setText("Tìm theo tên:");
+        lblTimTheoTen.setText("Tìm theo tên");
 
         lblTimTheoMa.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lblTimTheoMa.setText("Tìm theo mã:");
+        lblTimTheoMa.setText("Tìm theo mã");
 
         btnThem.setFont(FontConstant.FONT_BUTTON);
         btnThem.setForeground(ColorConstant.WHITE);
@@ -140,6 +135,20 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblLoc.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblLoc.setText("Lọc");
 
+        txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimTheoTenActionPerformed(evt);
+            }
+        });
+
+        txtTimTheoTen2.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimTheoTen2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCNLayout = new javax.swing.GroupLayout(pnlCN);
         pnlCN.setLayout(pnlCNLayout);
         pnlCNLayout.setHorizontalGroup(
@@ -147,37 +156,41 @@ public class PanelNhanVien extends javax.swing.JPanel {
             .addGroup(pnlCNLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(31, 31, 31)
                 .addComponent(lblLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(80, 80, 80)
                 .addComponent(lblTimTheoTen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTimTheoMa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txtTimTheoTen2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addGap(81, 81, 81))
         );
         pnlCNLayout.setVerticalGroup(
             pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCNLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlCNLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlCNLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(lblLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtTimTheoMa, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTimTheoTen, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlCNLayout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cboLoc, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTimTheoTen)
+                                .addComponent(lblTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTimTheoTen2)
+                                .addComponent(lblTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(lblLoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -191,7 +204,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
                         .addComponent(scrNhanVien))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(lblTitleTTNV, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                        .addComponent(lblTitleTTNV, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                         .addGap(119, 119, 119)
                         .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -231,21 +244,17 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void callPanelTTNV() {
-        JFrame jf = new JFrame();
-        jf.add(new PanelTTNV(this.getSelectedNV()));
-        jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        jf.setResizable(false);
-        jf.pack();
-        jf.setVisible(true);
+        FrameTTNV frTTNV = new FrameTTNV(getSelectedNV());
+        frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTTNV.setResizable(false);
+        frTTNV.setVisible(true);
     }
 
     private void callPanelThemNV() {
-        JFrame jf = new JFrame();
-        jf.add(new PanelThemNhanVien());
-        jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        jf.setResizable(false);
-        jf.pack();
-        jf.setVisible(true);
+        FrameThemNhanVien frThemNV = new FrameThemNhanVien();
+        frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemNV.setResizable(false);
+        frThemNV.setVisible(true);
     }
     
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -259,6 +268,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
         callPanelThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimTheoTenActionPerformed
+
+    private void txtTimTheoTen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTen2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimTheoTen2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cboLoc;
@@ -270,7 +287,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JPanel pnlCN;
     private javax.swing.JScrollPane scrNhanVien;
     private javax.swing.JTable tblNhanVien;
-    private javax.swing.JTextField txtTimTheoMa;
     private javax.swing.JTextField txtTimTheoTen;
+    private javax.swing.JTextField txtTimTheoTen2;
     // End of variables declaration//GEN-END:variables
 }

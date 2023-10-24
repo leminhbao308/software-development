@@ -37,12 +37,12 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     }
 
     @Override
-    public KhachHang getByID(String id) {
+    public KhachHang getByID(String sdt) {
         KhachHang khachHang = null;
         String sql = "SELECT * FROM KhachHang WHERE SDT = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, id);
+            statement.setString(3, sdt);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 khachHang = new KhachHang();
@@ -86,6 +86,27 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<KhachHang> getByName(String name) {
+        List<KhachHang> dsKhachHang = new ArrayList<>();
+        String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                KhachHang khachHang = new KhachHang();
+                khachHang.setMaKhachHang(resultSet.getString("MAKH"));
+                khachHang.setTenKH(resultSet.getString("TENKH"));
+                khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                dsKhachHang.add(khachHang);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsKhachHang;
     }
 
     @Override
