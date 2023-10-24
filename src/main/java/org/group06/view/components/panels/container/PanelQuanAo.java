@@ -4,25 +4,20 @@
  */
 package org.group06.view.components.panels.container;
 
-import java.awt.Image;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
-import org.group06.view.components.textFields.TextField;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author lemin

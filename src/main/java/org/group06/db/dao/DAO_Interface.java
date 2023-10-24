@@ -1,0 +1,12 @@
+package org.group06.db.dao;
+
+import java.util.List;
+
+public interface DAO_Interface<T> {
+
+    List<T> getAll();
+    T getByID(String id);
+    boolean add(T t);
+    boolean update(T t);
+    boolean delete(String id);
+}

@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-import javax.swing.JFrame;
-import org.group06.utils.*;
+
+import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
+import org.group06.utils.ImagePath;
+
+import javax.swing.*;
 //import org.group06.view.components.*;
 /**
  *
@@ -62,7 +66,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"QA01", "Đầm dạ hội", "Trắng"}
+                {"KH001", "Lê Minh Bảo", "0399405711"}
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
