@@ -2,8 +2,10 @@ package org.group06.db;
 
 import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.db.dao.DAO_NhanVien;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.NhaCungCap;
 import org.group06.model.entity.NhanVien;
+import org.group06.model.entity.QuanAo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +18,8 @@ public class TestDAO {
             if (connection != null) {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
-                testDAO_NhanVien(connection);
+//                testDAO_NhanVien(connection);
+                test_DAO_QuanAo(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -87,6 +90,22 @@ public class TestDAO {
 //        String employeeIdToDelete = "NV016";
 //        employeeDAO.delete(employeeIdToDelete);
 //        System.out.println("Nhân viên có mã " + employeeIdToDelete + " đã bị xóa.");
+    }
+
+    private static void test_DAO_QuanAo(Connection connection) {
+        // Tạo đối tượng QuanAoDAO
+        DAO_QuanAo quanAoDAO = new DAO_QuanAo(connection);
+
+        // Lấy danh sách tất cả nhân viên
+        List<QuanAo> dsQuanAo = quanAoDAO.getAll();
+        System.out.println("Danh sách QuanAo:");
+        for (QuanAo quanAo : dsQuanAo) {
+            System.out.println(quanAo);
+        }
+
+        String id = "ADD-0001-M";
+        QuanAo quanAo = quanAoDAO.getByID(id);
+        System.out.println("Quần Áo có mã " + id + ":" + quanAo);
     }
 }
 

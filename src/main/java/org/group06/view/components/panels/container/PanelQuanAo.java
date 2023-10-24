@@ -42,7 +42,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitleQA = new javax.swing.JLabel();
+        lblTimKiemQA = new javax.swing.JLabel();
         pnInformationFields = new javax.swing.JPanel();
         pnImgUpLoad = new javax.swing.JPanel();
         pnImg = new ImagePanel(ImagePath.UPLOAD_IMG, 400, 400);
@@ -81,15 +81,17 @@ public class PanelQuanAo extends javax.swing.JPanel {
         btnHuy = new javax.swing.JButton();
         scrQuanAo = new javax.swing.JScrollPane();
         tblQuanAo = new javax.swing.JTable();
+        lblTitleQA1 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
 
         setBackground(ColorConstant.WHITE);
 
-        lblTitleQA.setFont(org.group06.utils.FontConstant.FONT_HEADER);
-        lblTitleQA.setForeground(org.group06.utils.ColorConstant.BLACK);
-        lblTitleQA.setText("Thông Tin Quần Áo");
-        lblTitleQA.setMaximumSize(new java.awt.Dimension(103, 60));
-        lblTitleQA.setMinimumSize(new java.awt.Dimension(103, 60));
-        lblTitleQA.setPreferredSize(new java.awt.Dimension(103, 60));
+        lblTimKiemQA.setFont(org.group06.utils.FontConstant.FONT_SUB_HEADER);
+        lblTimKiemQA.setForeground(org.group06.utils.ColorConstant.BLACK);
+        lblTimKiemQA.setText("Tìm Kiếm Quần Áo");
+        lblTimKiemQA.setMaximumSize(new java.awt.Dimension(103, 60));
+        lblTimKiemQA.setMinimumSize(new java.awt.Dimension(103, 60));
+        lblTimKiemQA.setPreferredSize(new java.awt.Dimension(103, 60));
 
         pnInformationFields.setBackground(ColorConstant.WHITE);
         pnInformationFields.setPreferredSize(new java.awt.Dimension(0, 500));
@@ -558,6 +560,22 @@ public class PanelQuanAo extends javax.swing.JPanel {
         });
         scrQuanAo.setViewportView(tblQuanAo);
 
+        lblTitleQA1.setFont(org.group06.utils.FontConstant.FONT_HEADER);
+        lblTitleQA1.setForeground(org.group06.utils.ColorConstant.BLACK);
+        lblTitleQA1.setText("Thông Tin Quần Áo");
+        lblTitleQA1.setMaximumSize(new java.awt.Dimension(103, 60));
+        lblTitleQA1.setMinimumSize(new java.awt.Dimension(103, 60));
+        lblTitleQA1.setPreferredSize(new java.awt.Dimension(103, 60));
+
+        txtTimKiem.setFont(FontConstant.FONT_TEXT);
+        txtTimKiem.setText("Nhập Vào Mã Quần áo");
+        txtTimKiem.setEnabled(true);
+        txtTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTimKiemFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -565,21 +583,38 @@ public class PanelQuanAo extends javax.swing.JPanel {
             .addComponent(pnInformationFields, javax.swing.GroupLayout.DEFAULT_SIZE, 1480, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitleQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrQuanAo))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(572, 572, 572)
+                        .addComponent(lblTimKiemQA, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(lblTitleQA1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(995, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitleQA, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimKiemQA, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnInformationFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrQuanAo)
+                .addComponent(scrQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(lblTitleQA1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(935, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -893,6 +928,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaNhapFocusLost
 
+    private void txtTimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnHuy;
@@ -915,7 +954,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JLabel lblSize;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblThuongHieu;
-    private javax.swing.JLabel lblTitleQA;
+    private javax.swing.JLabel lblTimKiemQA;
+    private javax.swing.JLabel lblTitleQA1;
     private javax.swing.JLabel lblTrangThai;
     private javax.swing.JPanel pnControl;
     private javax.swing.JPanel pnFields;
@@ -933,6 +973,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtSoLuongQA;
     private javax.swing.JTextField txtTenQA;
     private javax.swing.JTextField txtThuongHieu;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
     private void xoaTrang() {
