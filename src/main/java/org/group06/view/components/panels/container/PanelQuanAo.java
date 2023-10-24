@@ -748,7 +748,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 //        if (this.txtTen.getText().isEmpty() || this.txtSoLuong.getText().isEmpty() || this.txtGiaBan.getText().isEmpty() || this.txtDinhMucTonKho.getText().isEmpty() || this.txaMoTa.getText().isEmpty()) {
 //            }
 
-//      Gàn và lấy dữ liệu
+//      Gán dữ liệu
         this.txtMa.setText("ACT-001");
         this.txtTen.setText("Áo CropTop");
         this.cmbLoaiQA.setSelectedIndex(1);
@@ -842,7 +842,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 3).toString());
         this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 4).toString());
         this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 5).toString());
-
     }//GEN-LAST:event_tblQuanAoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -890,5 +889,4 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimQA;
     // End of variables declaration//GEN-END:variables
-    private Image selectImg = null;
 }
