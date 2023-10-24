@@ -4,7 +4,10 @@
  */
 package org.group06.utils;
 
-import javax.swing.*;
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
@@ -12,8 +15,7 @@ import javax.swing.*;
  */
 public class ComponentStatus {
 
-//
-
+//  
     public static void setFieldStatus(java.util.List<JTextField> list, boolean status) {
         for (JTextField item : list) {
             item.setEnabled(status);
@@ -49,9 +51,24 @@ public class ComponentStatus {
         }
     }
 
-//    public static void clearSelectRowTable(java.util.List<javax.swing.JTable> list) {
-//        for (javax.swing.JTable tbl : list) {
-//            tbl.clearSelection();
-//       }
-//    } 
+    public static void checkEmptyField(JTextField txt) {
+        if (txt.getText().isEmpty()) {
+            txt.setBackground(ColorConstant.BACKGROUND_ERROR);
+            txt.setForeground(ColorConstant.TEXT_ERROR);
+            txt.requestFocus();
+        } else {
+            txt.setBackground(Color.WHITE);
+            txt.setForeground(ColorConstant.BLACK);
+        }
+    }
+
+    public static void CheckSelectOption(JComboBox cmb) {
+        if (cmb.getSelectedIndex() == 0) {
+            cmb.setBackground(ColorConstant.BACKGROUND_ERROR);
+            cmb.setForeground(ColorConstant.TEXT_ERROR);
+        } else {
+            cmb.setBackground(Color.WHITE);
+            cmb.setForeground(ColorConstant.BLACK);
+        }
+    }
 }

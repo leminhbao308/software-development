@@ -12,10 +12,14 @@ import org.group06.view.components.panels.ImagePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,15 +36,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo.getTableHeader().setFont(FontConstant.FONT_TABLE_HEADER);
         tblQuanAo.getTableHeader().setForeground(ColorConstant.WHITE);
         tblQuanAo.getTableHeader().setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
-    }
-
-//    Chuyển đổi kiểu dữ liệu
-    public int parseStringtoInt(String text) {
-        return Integer.parseInt(text);
-    }
-
-    public Double parseStringtoDouble(String text) {
-        return Double.parseDouble(text);
     }
 
     @SuppressWarnings("unchecked")
@@ -114,8 +109,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
+        btnUploadImg.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnUploadImg.setFont(FontConstant.FONT_BUTTON);
-        btnUploadImg.setForeground(ColorConstant.BLACK);
+        btnUploadImg.setForeground(ColorConstant.WHITE);
         btnUploadImg.setText("Tải Lên Hình Ảnh");
         btnUploadImg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUploadImg.setMaximumSize(new java.awt.Dimension(200, 40));
@@ -169,12 +165,17 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         txtTenQA.setFont(FontConstant.FONT_TEXT);
         txtTenQA.setEnabled(false);
+        txtTenQA.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenQAFocusLost(evt);
+            }
+        });
 
         lblLoaiQA.setFont(FontConstant.FONT_LABEL);
         lblLoaiQA.setText("Loại Quần Áo:");
 
         cmbLoaiQA.setFont(FontConstant.FONT_TEXT);
-        cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop" }));
+        cmbLoaiQA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Loại Quần Áo", "Jean Jacket", "Váy", "Áo Croptop","Quần" }));
         cmbLoaiQA.setEnabled(false);
         cmbLoaiQA.setLightWeightPopupEnabled(false);
         cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
@@ -194,9 +195,19 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn size", "S", "M", "L","XL", "XXL", "XXXL" }));
         cmbSize.setEnabled(false);
         cmbSize.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSizeActionPerformed(evt);
+            }
+        });
 
         txtThuongHieu.setFont(FontConstant.FONT_TEXT);
         txtThuongHieu.setEnabled(false);
+        txtThuongHieu.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtThuongHieuFocusLost(evt);
+            }
+        });
         txtThuongHieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtThuongHieuActionPerformed(evt);
@@ -210,15 +221,20 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Nhà Cung Cấp", "Chợ Đồng Xuân", "Chợ Bến Thành", "Hạnh Thông Tây" }));
         cmbNhaCungCap.setEnabled(false);
         cmbNhaCungCap.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNhaCungCapActionPerformed(evt);
+            }
+        });
 
         lblThuongHieu.setFont(FontConstant.FONT_LABEL);
         lblThuongHieu.setText("Thương Hiệu:");
 
         txtSoLuongQA.setFont(FontConstant.FONT_TEXT);
         txtSoLuongQA.setEnabled(false);
-        txtSoLuongQA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoLuongQAActionPerformed(evt);
+        txtSoLuongQA.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSoLuongQAFocusLost(evt);
             }
         });
 
@@ -313,9 +329,19 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         txtLoiNhuan.setFont(FontConstant.FONT_TEXT);
         txtLoiNhuan.setEnabled(false);
+        txtLoiNhuan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLoiNhuanFocusLost(evt);
+            }
+        });
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
         txtGiaNhap.setEnabled(false);
+        txtGiaNhap.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtGiaNhapFocusLost(evt);
+            }
+        });
 
         jLabel1.setFont(FontConstant.FONT_HEADER);
         jLabel1.setText("%");
@@ -327,6 +353,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Trạng Thái", "Đang Kinh Doanh", "Dừng Kinh Doanh" }));
         cmbTrangThai.setEnabled(false);
         cmbTrangThai.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbTrangThai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTrangThaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnFieldsRightLayout = new javax.swing.GroupLayout(pnFieldsRight);
         pnFieldsRight.setLayout(pnFieldsRightLayout);
@@ -379,8 +410,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         pnControl.setBackground(ColorConstant.WHITE);
 
+        btnXoaTrang.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
-        btnXoaTrang.setForeground(ColorConstant.BLACK);
+        btnXoaTrang.setForeground(ColorConstant.WHITE);
         btnXoaTrang.setText("Xóa Trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.setMaximumSize(new java.awt.Dimension(200, 50));
@@ -392,8 +424,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
         });
 
+        btnThemMoi.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnThemMoi.setFont(FontConstant.FONT_BUTTON);
-        btnThemMoi.setForeground(ColorConstant.BLACK);
+        btnThemMoi.setForeground(ColorConstant.WHITE);
         btnThemMoi.setText("Thêm Mới");
         btnThemMoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemMoi.setMaximumSize(new java.awt.Dimension(200, 50));
@@ -405,8 +438,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
         });
 
+        btnLuu.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnLuu.setFont(FontConstant.FONT_BUTTON);
-        btnLuu.setForeground(ColorConstant.BLACK);
+        btnLuu.setForeground(ColorConstant.WHITE);
         btnLuu.setText("Lưu");
         btnLuu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLuu.setMaximumSize(new java.awt.Dimension(200, 50));
@@ -418,8 +452,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
         });
 
+        btnCapNhat.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnCapNhat.setFont(FontConstant.FONT_BUTTON);
-        btnCapNhat.setForeground(ColorConstant.BLACK);
+        btnCapNhat.setForeground(ColorConstant.WHITE);
         btnCapNhat.setText("Cập Nhật");
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.setMaximumSize(new java.awt.Dimension(200, 50));
@@ -431,8 +466,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
         });
 
+        btnHuy.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         btnHuy.setFont(FontConstant.FONT_BUTTON);
-        btnHuy.setForeground(ColorConstant.BLACK);
+        btnHuy.setForeground(ColorConstant.WHITE);
         btnHuy.setText("Hủy");
         btnHuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHuy.setMaximumSize(new java.awt.Dimension(200, 50));
@@ -504,8 +540,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo.setFont(FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"QH-0001", "Quần Hoa", "Quần", "S", "10", "No Brand", "Hạnh Thông Tây", "120000", "10", "132000", "Đang Kinh Doanh"},
-                {"VN-0001", "Váy Ngắn", "Váy", "M", "10", "No Brand", "Chợ Bến Thành", "250000", "10%", "275000", "Đang Kinh Doanh"}
+                {"QH-0001", "Quần Hoa", "Quần", "S", "10", "No Brand", "Hạnh Thông Tây", "120000 vnđ", "10 %", "132000 vnđ", "Đang Kinh Doanh"},
+                {"VN-0001", "Váy Ngắn", "Váy", "M", "10", "No Brand", "Chợ Bến Thành", "250000 vnđ", "10 %", "275000 vnđ", "Đang Kinh Doanh"}
             },
             new String [] {
                 "Mã QA", "Tên QA", "Loại QA", "Size", "Số Lượng", "Thương Hiệu", "NCC", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Trạng Thái"
@@ -547,32 +583,17 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-//Thay đổi trạng thái của fields
-    public void setStatusBtn(JButton btn, boolean status) {
-        btn.setEnabled(status);
-        if (!status) {
-            btn.setBackground(ColorConstant.DISABLE_FIELD);
-        } else {
-            btn.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
-        }
+    public void setStatusAllBtns() {
+
     }
 
-    public void setStatusAllBtns(boolean status) {
-        setStatusBtn(btnXoaTrang, status);
-        setStatusBtn(btnLuu, status);
-        setStatusBtn(btnCapNhat, status);
-        setStatusBtn(btnHuy, status);
-        setStatusBtn(btnUploadImg, status);
+//    Chuyển đổi kiểu dữ liệu
+    public int parseStringtoInt(String text) {
+        return Integer.parseInt(text);
     }
 
-    public void xoaTrang() {
-        this.txtTenQA.setText("");
-        this.cmbLoaiQA.setSelectedIndex(0);
-        this.txtThuongHieu.setText("");
-        this.txtGiaNhap.setText("");
-        this.txtLoiNhuan.setText("");
-        this.txtGiaBan.setText("");
-        this.cmbNhaCungCap.setSelectedIndex(0);
+    public Double parseStringtoDouble(String text) {
+        return Double.parseDouble(text);
     }
 
     public String tinhGiaBan(String giaNhap, String loiNhuan) {
@@ -583,54 +604,51 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }
 
     public void loadImage(URL path) {
-        //                Xóa bỏ bản vẽ cũ
-                this.pnImgUpLoad.remove(pnImg);
-//                Vẽ mới
-                this.pnImg = new ImagePanel(path, 400, 400);
-                // <editor-fold defaultstate="collapsed" desc="Định Dạng layout hình ảnh">
-                javax.swing.GroupLayout pnImgLayout = new javax.swing.GroupLayout(pnImg);
-                pnImg.setLayout(pnImgLayout);
-                pnImgLayout.setHorizontalGroup(
-                        pnImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGap(0, 400, Short.MAX_VALUE)
-                );
-                pnImgLayout.setVerticalGroup(
-                        pnImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGap(0, 400, Short.MAX_VALUE)
-                );
-                javax.swing.GroupLayout pnImgUpLoadLayout = new javax.swing.GroupLayout(pnImgUpLoad);
-                pnImgUpLoad.setLayout(pnImgUpLoadLayout);
-                pnImgUpLoadLayout.setHorizontalGroup(
-                        pnImgUpLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnImgUpLoadLayout.createSequentialGroup()
-                                        .addContainerGap(14, Short.MAX_VALUE)
-                                        .addComponent(pnImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(14, 14, 14))
-                                .addGroup(pnImgUpLoadLayout.createSequentialGroup()
-                                        .addGap(117, 117, 117)
-                                        .addComponent(btnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
-                pnImgUpLoadLayout.setVerticalGroup(
-                        pnImgUpLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnImgUpLoadLayout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(pnImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(14, 14, 14)
-                                        .addComponent(btnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19))
-                );
-                // </editor-fold>
-                this.revalidate();
-                this.repaint();
+//      Xóa bỏ bản vẽ cũ
+        this.pnImgUpLoad.remove(pnImg);
+//      Vẽ mới
+        this.pnImg = new ImagePanel(path, 400, 400);
+        // <editor-fold defaultstate="collapsed" desc="Định Dạng layout hình ảnh">
+        javax.swing.GroupLayout pnImgLayout = new javax.swing.GroupLayout(pnImg);
+        pnImg.setLayout(pnImgLayout);
+        pnImgLayout.setHorizontalGroup(
+                pnImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
+        );
+        pnImgLayout.setVerticalGroup(
+                pnImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
+        );
+        javax.swing.GroupLayout pnImgUpLoadLayout = new javax.swing.GroupLayout(pnImgUpLoad);
+        pnImgUpLoad.setLayout(pnImgUpLoadLayout);
+        pnImgUpLoadLayout.setHorizontalGroup(
+                pnImgUpLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnImgUpLoadLayout.createSequentialGroup()
+                                .addContainerGap(14, Short.MAX_VALUE)
+                                .addComponent(pnImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14))
+                        .addGroup(pnImgUpLoadLayout.createSequentialGroup()
+                                .addGap(117, 117, 117)
+                                .addComponent(btnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnImgUpLoadLayout.setVerticalGroup(
+                pnImgUpLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnImgUpLoadLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(pnImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addComponent(btnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))
+        );
+        // </editor-fold>
+        this.revalidate();
+        this.repaint();
     }
     
     private void btnUploadImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImgActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Chọn hình ảnh quần áo");
-//        JFrame newJF = new JFrame("Chọn Hình Ảnh Quần Áo");
-//        newJF.setSize(500, 300);
-//        newJF.setLocationRelativeTo(null);
 
 //        Xử lý định dạng các file hình ảnh hợp lệ
         chooser.setFileFilter(new FileFilter() {
@@ -661,55 +679,116 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUploadImgActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-//        xoaTrang();
-//        setStatusBtn(btnXoaTrang, false);
-//        setStatusBtn(btnLuu, false);
-//        if (txtMaQA.getText().isEmpty()) {
-//
-//        }
+        java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtMaQA, this.txtTenQA, this.txtSoLuongQA, this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
+        java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbSize, this.cmbNhaCungCap, this.cmbTrangThai);
+        ComponentStatus.emptyField(listTxt);
+        ComponentStatus.setDefaultCmb(listCmb);
+        this.tblQuanAo.clearSelection();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+        this.txtTenQA.requestFocus();
+//      Bắt đầu xử lý trạng thái của các fields và combobox
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA, this.txtGiaNhap, this.txtLoiNhuan, this.txtThuongHieu);
         java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbNhaCungCap, this.cmbSize, this.cmbTrangThai);
         ComponentStatus.setFieldStatus(listTxt, true);
         ComponentStatus.setComboBoxStatus(listCmb, true);
-//        xoaTrang();
-//        setStatusBtn(this.btnThemMoi, false);
-//        setStatusBtn(this.btnLuu, true);
-//        setStatusBtn(this.btnHuy, true);
-//        setStatusBtn(this.btnUploadImg, true);
-//        setStatusBtn(this.btnXoaTrang, true);
-//        if (this.txtTen.getText().isEmpty() || this.txtSoLuong.getText().isEmpty() || this.txtGiaBan.getText().isEmpty() || this.txtDinhMucTonKho.getText().isEmpty() || this.txaMoTa.getText().isEmpty()) {
-//            }
+//      Kết thúc xử lý trạng thái
 
-//      Gán dữ liệu
-        this.txtMaQA.setText("ACT-001");
-        this.txtTenQA.setText("Áo CropTop");
-        this.cmbLoaiQA.setSelectedIndex(1);
-        this.txtThuongHieu.setText("10");
-        this.txtGiaNhap.setText("120000");
-        this.txtLoiNhuan.setText("10");
-        this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
-        this.cmbNhaCungCap.setSelectedIndex(3);
+//        this.txtMaQA.setText("ACT-001");
+//        this.txtTenQA.setText("Áo CropTop");
+//        this.cmbLoaiQA.setSelectedIndex(1);
+//        this.txtThuongHieu.setText("10");
+//        this.txtGiaNhap.setText("120000");
+//        this.txtLoiNhuan.setText("10");
+//        this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+//        this.cmbNhaCungCap.setSelectedIndex(3);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
+    public String formatCapitilize(String text) {
+        String resultFormat = "";
+        String trimText = text.trim();
+        String lowerText = trimText.toLowerCase();
+        ArrayList<String> splitResult = new ArrayList<>();
+        String[] splitText = lowerText.split(" ");
+        for (int i = 0; i < splitText.length; i++) {
+            if (!splitText[i].isEmpty()) {
+                splitResult.add(splitText[i]);
+            }
+        }
+
+        for (String item : splitResult) {
+            resultFormat += item.substring(0, 1).toUpperCase() + item.substring(1) + " ";
+
+        }
+        return resultFormat.trim();
+    }
+
+    public static String removeDiacritics(String input) {
+        String regex = "\\p{InCombiningDiacriticalMarks}+";
+        String textWithoutDiacritics = java.text.Normalizer.normalize(input, java.text.Normalizer.Form.NFD)
+                .replaceAll(regex, "");
+        return textWithoutDiacritics;
+    }
+
+    public String taoMaQuanAo(String text) {
+        String resultFormat = "";
+        String trimText = text.trim();
+        String lowerText = trimText.toLowerCase();
+        ArrayList<String> splitResult = new ArrayList<>();
+        String[] splitText = lowerText.split(" ");
+        for (int i = 0; i < splitText.length; i++) {
+            if (!splitText[i].isEmpty()) {
+                splitResult.add(splitText[i]);
+            }
+        }
+        for (String item : splitResult) {
+            resultFormat += item.substring(0, 1).toUpperCase();
+        }
+//        Loại bỏ dấu tiếng việt
+        String resultName = removeDiacritics(resultFormat.trim());
+//        Định dạng lượng số
+        NumberFormat nf = new DecimalFormat("0000");
+        int number = 1;
+        String formattedNumber = nf.format(number);
+
+        String code = "";
+
+        code = resultName + "-" + formattedNumber + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
+
+//        String[] arrayCode = {"VHN-0001-M", "VHN-0002-M"};
+        ArrayList<String> arrayCode = new ArrayList<>();
+        for (int i = 0; i < this.tblQuanAo.getModel().getRowCount(); i++) {
+            arrayCode.add(this.tblQuanAo.getValueAt(i, 0).toString());
+        }
+
+        for (String item : arrayCode) {
+            if (code.contains(item)) {
+                number++;
+                code = resultName + "-" + nf.format(number) + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
+            } else {
+                number = 1;
+            }
+        }
+
+        return code;
+    }
+
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-//        //        Lấy dữ liệu
-//        int loaiQA = this.cmbLoaiQA.getSelectedIndex();
-//        int nhaCungCap = this.cmbNhaCungCap.getSelectedIndex();
-////      Tổng hợp dữ liệu
-//        Object[] data = {this.txtMaQA.getText(), this.txtTenQA.getText(), this.txtThuongHieu.getText(),
-//            this.txtGiaNhap.getText(), this.txtLoiNhuan.getText(), this.txtGiaBan.getText(),
-//            this.cmbLoaiQA.getItemAt(loaiQA), "NoBrand", this.cmbNhaCungCap.getItemAt(nhaCungCap)};
-////      Thêm dữ liệu vào table
-//        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
-//        modelQuanAo.addRow(data);
-////        Xử lý control và các fields
-//        xoaTrang();
-//        setStatusAllFields(false);
-//        setStatusAllBtns(false);
-//        setStatusBtn(this.btnThemMoi, true);
+//        Lấy dữ liệu
+        int loaiQA = this.cmbLoaiQA.getSelectedIndex();
+        int size = this.cmbSize.getSelectedIndex();
+        int nhaCungCap = this.cmbNhaCungCap.getSelectedIndex();
+        int trangThai = this.cmbTrangThai.getSelectedIndex();
+        String maQuanAo = taoMaQuanAo(this.txtTenQA.getText());
+//      Tổng hợp dữ liệu
+        Object[] data = {maQuanAo, formatCapitilize(this.txtTenQA.getText()), this.cmbLoaiQA.getItemAt(loaiQA), this.cmbSize.getItemAt(size),
+            this.txtSoLuongQA.getText(), this.txtThuongHieu.getText(), this.cmbNhaCungCap.getItemAt(nhaCungCap),
+            this.txtGiaNhap.getText(), this.txtLoiNhuan.getText(), this.txtGiaBan.getText(), this.cmbTrangThai.getItemAt(trangThai)};
+//      Thêm dữ liệu vào table
+        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+        modelQuanAo.addRow(data);
+        xoaTrang();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -728,7 +807,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void cmbLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiQAActionPerformed
-        // TODO add your handling code here:
+        ComponentStatus.CheckSelectOption(this.cmbLoaiQA);
     }//GEN-LAST:event_cmbLoaiQAActionPerformed
 
     private void txtThuongHieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThuongHieuActionPerformed
@@ -739,32 +818,80 @@ public class PanelQuanAo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaBanActionPerformed
 
+//    Load dữ liệu lên fields
     private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
-//        setStatusAllFields(false);
-//        Xử lý các button control
-//        setStatusAllBtns(false);
-//        setStatusBtn(btnCapNhat, true);
-//        setStatusBtn(btnHuy, true);
-//        setStatusBtn(btnThemMoi, false);
-//        if (this.txtTenQA.isEnabled()) {
-//            setStatusBtn(btnLuu, true);
-//        } else {
-//            setStatusBtn(btnXoaTrang, false);
-//        }
-
-//      Đổ dữ liệu từ table lên fields
+//      Xử lý đổ dữ liệu từ table lên fields
         int vitri = this.tblQuanAo.getSelectedRow();
         this.txtMaQA.setText(tblQuanAo.getValueAt(vitri, 0).toString());
         this.txtTenQA.setText(tblQuanAo.getValueAt(vitri, 1).toString());
-        this.txtThuongHieu.setText(tblQuanAo.getValueAt(vitri, 2).toString());
-        this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 3).toString());
-        this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 4).toString());
-        this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 5).toString());
+//        Xử lý lấy loại quần áo
+        for (int i = 0; i < this.cmbLoaiQA.getItemCount(); i++) {
+            if (tblQuanAo.getValueAt(vitri, 2).toString().equalsIgnoreCase(this.cmbLoaiQA.getItemAt(i))) {
+                this.cmbLoaiQA.setSelectedIndex(i);
+            }
+
+        }
+//        Xử lý lấy size
+        for (int i = 0; i < this.cmbSize.getItemCount(); i++) {
+            if (tblQuanAo.getValueAt(vitri, 3).toString().equalsIgnoreCase(this.cmbSize.getItemAt(i))) {
+                this.cmbSize.setSelectedIndex(i);
+            }
+
+        }
+        this.txtSoLuongQA.setText(tblQuanAo.getValueAt(vitri, 4).toString());
+        this.txtThuongHieu.setText(tblQuanAo.getValueAt(vitri, 5).toString());
+//        Xử lý lấy nhà cung cấp
+        for (int i = 0; i < this.cmbNhaCungCap.getItemCount(); i++) {
+            if (tblQuanAo.getValueAt(vitri, 6).toString().equalsIgnoreCase(this.cmbNhaCungCap.getItemAt(i))) {
+                this.cmbNhaCungCap.setSelectedIndex(i);
+            }
+
+        }
+        this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 7).toString());
+        this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 8).toString());
+        this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 9).toString());
+        //        Xử lý lấy trạng thái của quần áo
+        for (int i = 0; i < this.cmbTrangThai.getItemCount(); i++) {
+            if (tblQuanAo.getValueAt(vitri, 10).toString().equalsIgnoreCase(this.cmbTrangThai.getItemAt(i))) {
+                this.cmbTrangThai.setSelectedIndex(i);
+            }
+
+        }
     }//GEN-LAST:event_tblQuanAoMouseClicked
 
-    private void txtSoLuongQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongQAActionPerformed
+    private void txtTenQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenQAFocusLost
+        String tenQuanAo = this.txtTenQA.getText();
+//        ComponentStatus.checkEmptyField(this.txtTenQA);
+        this.txtTenQA.setText(formatCapitilize(tenQuanAo));
+    }//GEN-LAST:event_txtTenQAFocusLost
+
+    private void txtLoiNhuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoiNhuanFocusLost
+        this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+    }//GEN-LAST:event_txtLoiNhuanFocusLost
+
+    private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
+//        ComponentStatus.CheckSelectOption(this.cmbSize);
+    }//GEN-LAST:event_cmbSizeActionPerformed
+
+    private void cmbNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNhaCungCapActionPerformed
+//        ComponentStatus.CheckSelectOption(this.cmbNhaCungCap);
+    }//GEN-LAST:event_cmbNhaCungCapActionPerformed
+
+    private void cmbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTrangThaiActionPerformed
+//        ComponentStatus.CheckSelectOption(this.cmbTrangThai);
+    }//GEN-LAST:event_cmbTrangThaiActionPerformed
+
+    private void txtSoLuongQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongQAFocusLost
+//        ComponentStatus.checkEmptyField(this.txtSoLuongQA);
+    }//GEN-LAST:event_txtSoLuongQAFocusLost
+
+    private void txtThuongHieuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtThuongHieuFocusLost
+//        ComponentStatus.checkEmptyField(this.txtThuongHieu);
+    }//GEN-LAST:event_txtThuongHieuFocusLost
+
+    private void txtGiaNhapFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaNhapFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoLuongQAActionPerformed
+    }//GEN-LAST:event_txtGiaNhapFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -807,4 +934,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenQA;
     private javax.swing.JTextField txtThuongHieu;
     // End of variables declaration//GEN-END:variables
+
+    private void xoaTrang() {
+        java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtMaQA, this.txtTenQA, this.txtSoLuongQA, this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
+        java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbSize, this.cmbNhaCungCap, this.cmbTrangThai);
+        ComponentStatus.emptyField(listTxt);
+        ComponentStatus.setDefaultCmb(listCmb);
+    }
 }

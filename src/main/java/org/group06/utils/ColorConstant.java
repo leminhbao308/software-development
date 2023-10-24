@@ -15,6 +15,7 @@ public class ColorConstant {
     public static final Color BACKGROUND_SIDEBAR = new Color(17, 57, 70);
     public static final Color BACKGROUND_CONTAINER = new Color(188, 163, 127);
     public static final Color BACKGROUND_TABLEHEADER = new Color(0, 123, 253);
+    public static final Color BACKGROUND_ERROR = new Color(255, 105, 105);
 
     // Màu nút
     public static final Color BUTTON_ACTIVE = new Color(0, 123, 253);
@@ -35,6 +36,9 @@ public class ColorConstant {
     public static final Color TITLE_BACKGROUND = new Color(234, 215, 187);
     public static final Color DETAIL_PRODUCT_BACKGROUND = new Color(234, 215, 187);
 
+//    Text
+    public static final Color TEXT_ERROR = new Color(255, 245, 224);
+    
     private ColorConstant() {
         // Để ngăn việc tạo đối tượng instance của lớp này
     }
