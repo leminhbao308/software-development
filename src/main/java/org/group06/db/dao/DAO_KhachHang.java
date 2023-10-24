@@ -58,12 +58,34 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
 
     @Override
     public boolean add(KhachHang khachHang) {
-        return false;
+        try {
+            String sql = "INSERT INTO KhachHang (MAKH, TENKH, SDT) VALUES (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, khachHang.getMaKhachHang());
+            statement.setString(2, khachHang.getTenKH());
+            statement.setString(3, khachHang.getSoDienThoai());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean update(KhachHang khachHang) {
-        return false;
+                try {
+            String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ? WHERE MAKH = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, khachHang.getTenKH());
+            statement.setString(2, khachHang.getSoDienThoai());
+            statement.setString(3, khachHang.getMaKhachHang());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
