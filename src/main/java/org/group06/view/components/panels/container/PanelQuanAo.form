@@ -176,11 +176,14 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnUploadImg">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="T&#x1ea3;i L&#xea;n H&#xec;nh &#x1ea2;nh"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -345,6 +348,9 @@
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTenQAFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblLoaiQA">
                   <Properties>
@@ -360,7 +366,7 @@
                       <Connection code="FontConstant.FONT_TEXT" type="code"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ch&#x1ecd;n Lo&#x1ea1;i Qu&#x1ea7;n &#xc1;o&quot;, &quot;Jean Jacket&quot;, &quot;V&#xe1;y&quot;, &quot;&#xc1;o Croptop&quot; })" type="code"/>
+                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ch&#x1ecd;n Lo&#x1ea1;i Qu&#x1ea7;n &#xc1;o&quot;, &quot;Jean Jacket&quot;, &quot;V&#xe1;y&quot;, &quot;&#xc1;o Croptop&quot;,&quot;Qu&#x1ea7;n&quot; })" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
@@ -404,6 +410,9 @@
                       <Dimension value="[72, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbSizeActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -416,6 +425,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtThuongHieuFocusLost"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtThuongHieuActionPerformed"/>
                   </Events>
                 </Component>
@@ -440,6 +450,9 @@
                       <Dimension value="[72, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbNhaCungCapActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -460,7 +473,7 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongQAActionPerformed"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSoLuongQAFocusLost"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -579,6 +592,9 @@
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtLoiNhuanFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtGiaNhap">
                   <Properties>
@@ -587,6 +603,9 @@
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtGiaNhapFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
@@ -617,6 +636,9 @@
                       <Dimension value="[72, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTrangThaiActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -669,11 +691,14 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnXoaTrang">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a Tr&#x1eaf;ng"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -695,11 +720,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnThemMoi">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m M&#x1edb;i"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -721,11 +749,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnLuu">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -747,11 +778,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnCapNhat">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p Nh&#x1ead;t"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -773,11 +807,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnHuy">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ColorConstant.BACKGROUND_TABLEHEADER" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_BUTTON" type="code"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ColorConstant.BLACK" type="code"/>
+                  <Connection code="ColorConstant.WHITE" type="code"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -847,16 +884,16 @@
                   <Data value="Ch&#x1ee3; B&#x1ebf;n Th&#xe0;nh"/>
                 </Column>
                 <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object">
-                  <Data value="120000"/>
-                  <Data value="250000"/>
+                  <Data value="120000 vn&#x111;"/>
+                  <Data value="250000 vn&#x111;"/>
                 </Column>
                 <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object">
-                  <Data value="10"/>
-                  <Data value="10%"/>
+                  <Data value="10 %"/>
+                  <Data value="10 %"/>
                 </Column>
                 <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object">
-                  <Data value="132000"/>
-                  <Data value="275000"/>
+                  <Data value="132000 vn&#x111;"/>
+                  <Data value="275000 vn&#x111;"/>
                 </Column>
                 <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object">
                   <Data value="&#x110;ang Kinh Doanh"/>
