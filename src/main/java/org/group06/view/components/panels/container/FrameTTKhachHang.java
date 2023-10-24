@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package org.group06.view.components.panels.container;
 
@@ -9,21 +9,18 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
-
 /**
  *
  * @author Dell
  */
-public class PanelTTKhachHang extends javax.swing.JPanel {
+public class FrameTTKhachHang extends javax.swing.JFrame {
     private KhachHang kh;
     /**
-     * Creates new form PanelTTKhachHang
+     * Creates new form FrameTTKhachHang
      */
-    public PanelTTKhachHang(KhachHang kh) {
+    public FrameTTKhachHang(KhachHang kh) {
         this.kh = kh;
         initComponents();
-        
-        
     }
 
     /**
@@ -45,11 +42,11 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         txtTenKH = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
 
-        setBackground(ColorConstant.BACKGROUND_CONTAINER);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblTitleCNKH.setFont(FontConstant.FONT_HEADER);
-        lblTitleCNKH.setForeground(ColorConstant.WHITE);
+        lblTitleCNKH.setBackground(new java.awt.Color(0, 0, 0));
+        lblTitleCNKH.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        lblTitleCNKH.setForeground(ColorConstant.BLACK);
         lblTitleCNKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleCNKH.setText("Cập Nhật Thông Tin Khách Hàng");
 
@@ -101,8 +98,8 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -160,6 +157,8 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
                     .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -174,10 +173,12 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
             if(txtTenKH.getText().equals("") || txtSDT.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin");
             } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 btnCapNhat.setText("Cập nhật");
                 btnXoaTrang.setEnabled(false);
                 txtTenKH.setEnabled(false);
                 txtSDT.setEnabled(false);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
@@ -191,7 +192,7 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
         txtTenKH.setText("");
         txtSDT.setText("");
         txtTenKH.requestFocus();
-    }
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;

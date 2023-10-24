@@ -1,22 +1,25 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package org.group06.view.components.panels.container;
+
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
+
+import javax.swing.*;
 
 /**
  *
  * @author Dell
  */
-public class PanelTTNV extends javax.swing.JPanel {
+public class FrameTTNV extends javax.swing.JFrame {
     private NhanVien nv;
     /**
-     * Creates new form PanelTTNV
+     * Creates new form FrameTTNV
      */
-    public PanelTTNV(NhanVien nv) {
+    public FrameTTNV(NhanVien nv) {
         this.nv = nv;
         initComponents();
     }
@@ -55,17 +58,15 @@ public class PanelTTNV extends javax.swing.JPanel {
         cmbChucVu = new javax.swing.JComboBox<>();
         pnlChucNang = new javax.swing.JPanel();
         btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        btnHuy = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
         btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
 
-        setBackground(ColorConstant.BACKGROUND_CONTAINER);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitleTTNV.setFont(FontConstant.FONT_HEADER);
-        lblTitleTTNV.setForeground(ColorConstant.WHITE);
         lblTitleTTNV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleTTNV.setText("Thông Tin Nhân Viên");
 
-        pnlTTNV.setBackground(new java.awt.Color(204, 255, 204));
+        pnlTTNV.setBackground(new java.awt.Color(255, 255, 255));
 
         lblMaNV.setFont(FontConstant.FONT_LABEL);
         lblMaNV.setText("Mã nhân viên:");
@@ -132,9 +133,9 @@ public class PanelTTNV extends javax.swing.JPanel {
 
         grpGioiTinh.add(rdoNam);
         rdoNam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        if(nv.isGioiTinh()){
-            rdoNu.setSelected(false);
+        if(nv.isGioiTinh()) {
             rdoNam.setSelected(true);
+            rdoNu.setSelected(false);
         }
         rdoNam.setText("Nam");
         rdoNam.setEnabled(false);
@@ -142,7 +143,7 @@ public class PanelTTNV extends javax.swing.JPanel {
 
         grpGioiTinh.add(rdoNu);
         rdoNu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        if(!nv.isGioiTinh()){
+        if(!nv.isGioiTinh()) {
             rdoNu.setSelected(true);
             rdoNam.setSelected(false);
         }
@@ -266,17 +267,6 @@ public class PanelTTNV extends javax.swing.JPanel {
             }
         });
 
-        btnHuy.setFont(FontConstant.FONT_BUTTON);
-        btnHuy.setForeground(ColorConstant.WHITE);
-        btnHuy.setText("Hủy");
-        btnHuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnHuy.setEnabled(false);
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
-
         btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
         btnXoaTrang.setForeground(ColorConstant.WHITE);
         btnXoaTrang.setText("Xóa trắng");
@@ -293,37 +283,32 @@ public class PanelTTNV extends javax.swing.JPanel {
         pnlChucNangLayout.setHorizontalGroup(
             pnlChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlChucNangLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(107, 107, 107))
         );
         pnlChucNangLayout.setVerticalGroup(
             pnlChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChucNangLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(pnlChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTTNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleTTNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(50, 50, 50))
-                    .addComponent(pnlChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitleTTNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -336,28 +321,81 @@ public class PanelTTNV extends javax.swing.JPanel {
                 .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCapNhatActionPerformed
-
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHuyActionPerformed
-
-    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoNuActionPerformed
 
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        // TODO add your handling code here:
+        if (btnCapNhat.getText().equals("Cập nhật")) {
+            btnCapNhat.setText("Lưu");
+            btnXoaTrang.setEnabled(true);
+            hideOn();
+        } else if (btnCapNhat.getText().equals("Lưu")) {
+            if (txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("")
+                    || txtCCCD.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                btnCapNhat.setText("Cập nhật");
+                btnXoaTrang.setEnabled(false);
+                hideOff();
+                this.dispose();
+            }
+        }
+
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
+        // TODO add your handling code here:
+        xoaTrang();
+    }//GEN-LAST:event_btnXoaTrangActionPerformed
+
+    private void xoaTrang() {
+        txtTenNV.setText("");
+        txtCCCD.setText("");
+        txtDiaChi.setText("");
+        pwdMK.setText("");
+        rdoNam.setSelected(true);
+        rdoNu.setSelected(false);
+        txtSDT.setText("");
+        cmbChucVu.setSelectedIndex(0);
+        txtTenNV.requestFocus();
+    }
+    
+    private void hideOn() {
+        txtTenNV.setEnabled(true);
+        txtSDT.setEnabled(true);
+        txtDiaChi.setEnabled(true);
+        txtCCCD.setEnabled(true);
+        pwdMK.setEnabled(true);
+        rdoNam.setEnabled(true);
+        rdoNu.setEnabled(true);
+        cmbChucVu.setEnabled(true);
+        cmbTrangThai.setEnabled(true);
+        tglShowMK.setEnabled(true);
+        txtTenNV.requestFocus();
+    }
+    
+     private void hideOff() {
+        txtTenNV.setEnabled(false);
+        txtSDT.setEnabled(false);
+        txtDiaChi.setEnabled(false);
+        txtCCCD.setEnabled(false);
+        pwdMK.setEnabled(false);
+        rdoNam.setEnabled(false);
+        rdoNu.setEnabled(false);
+        cmbChucVu.setEnabled(false);
+        cmbTrangThai.setEnabled(false);
+        tglShowMK.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnXoaTrang;
     private javax.swing.JComboBox<String> cmbChucVu;
     private javax.swing.JComboBox<String> cmbTrangThai;
