@@ -21,6 +21,7 @@ public class ImagePath {
     public static final String ICON_SEARCH = "search.png";
     public static final String ICON_SALE = "sale.png";
     public static final String ICON_SUPPLIER = "supplier.png";
+    public static final String ICON_CALENDAR = "calendar.png";
 
     // Thumbnail path
     public static final URL THUMBNAIL_LOGIN = ImagePath.class.getResource("/images/thumbnail/login.jpg");
