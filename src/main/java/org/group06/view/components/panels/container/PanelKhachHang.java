@@ -3,12 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package org.group06.view.components.panels.container;
-
-import org.group06.utils.ColorConstant;
-import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
-
-import javax.swing.*;
+import java.awt.Color;
+import javax.swing.JFrame;
+import org.group06.utils.*;
 //import org.group06.view.components.*;
 /**
  *
@@ -66,7 +63,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH001", "Lê Minh Bảo", "0399405711"}
+                {"QA01", "Đầm dạ hội", "Trắng"}
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
@@ -144,16 +141,19 @@ public class PanelKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
+    private void callPanelTTKhachHang() {
+        JFrame jf = new JFrame();
+        jf.add(new PanelTTKhachHang());
+        jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        jf.setLocationRelativeTo(null);
+        jf.setResizable(false);
+        jf.pack();
+        jf.setVisible(true);
+    }
+    
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         if(evt.getClickCount() == 2) {
-            JFrame jf = new JFrame();
-            jf.add(new PanelTTKhachHang());
-            jf.getContentPane().add(new PanelTTKhachHang());
-            jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            jf.setLocationRelativeTo(null);
-            jf.setResizable(false);
-            jf.pack();
-            jf.setVisible(true);
+            callPanelTTKhachHang();
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 

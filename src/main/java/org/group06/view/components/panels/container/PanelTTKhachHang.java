@@ -18,9 +18,8 @@ public class PanelTTKhachHang extends javax.swing.JPanel {
      */
     public PanelTTKhachHang() {
         initComponents();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((int) (screenSize.getWidth() - getWidth()) / 2, 
-                  (int) (screenSize.getHeight() - getHeight()) / 2, getWidth(), getHeight());
+        
+        
     }
 
     /**
