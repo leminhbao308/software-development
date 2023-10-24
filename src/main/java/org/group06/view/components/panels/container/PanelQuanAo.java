@@ -22,6 +22,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_QuanAo;
+import org.group06.model.entity.QuanAo;
 
 /**
  * @author lemin
@@ -853,6 +856,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaBanActionPerformed
 
+    private void loadDataTable() {
+        ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConnect.getConnection()).getAll();
+        
+    }
+    
 //    Load dữ liệu lên fields
     private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
 //      Xử lý đổ dữ liệu từ table lên fields

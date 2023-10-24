@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author lehoa
@@ -21,8 +20,8 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     }
 
     @Override
-    public List<QuanAo> getAll() {
-        List<QuanAo> dsQuanAo = new ArrayList<>();
+    public ArrayList<QuanAo> getAll() {
+        ArrayList<QuanAo> dsQuanAo = new ArrayList<>();
         try {
             String sql = "SELECT * FROM QuanAo";
             PreparedStatement statement = connection.prepareStatement(sql);
