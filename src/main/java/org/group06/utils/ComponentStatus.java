@@ -30,13 +30,18 @@ public class ComponentStatus {
 
     public static void setStatusBtn(java.util.List<JButton> list, boolean status) {
         for (JButton btn : list) {
+            setStatusBtn(btn, status);
+        }
+    }
+
+    public static void setStatusBtn(JButton btn, boolean status) {
             btn.setEnabled(status);
             if (!status) {
                 btn.setBackground(ColorConstant.DISABLE_FIELD);
             } else {
-                btn.setBackground(ColorConstant.BACKGROUND_SIDEBAR);
+                btn.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
+                btn.setForeground(ColorConstant.WHITE);
             }
-        }
     }
 
     public static void emptyField(java.util.List<JTextField> list) {
@@ -47,7 +52,7 @@ public class ComponentStatus {
 
     public static void setDefaultCmb(java.util.List<JComboBox> list) {
         for (JComboBox cmb : list) {
-            cmb.setSelectedIndex(-1);
+            cmb.setSelectedIndex(0);
         }
     }
 
