@@ -84,52 +84,16 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="3">
-                <Column editable="false" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.String">
-                  <Data value="NV01"/>
-                  <Data value="NV02"/>
-                  <Data value="NV03"/>
-                </Column>
-                <Column editable="false" title="T&#xea;n nh&#xe2;n vi&#xea;n" type="java.lang.String">
-                  <Data value="Tr&#x1b0;&#x1a1;ng Qu&#x1ed1;c B&#x1ea3;o"/>
-                  <Data value="L&#xea; Minh B&#x1ea3;o"/>
-                  <Data value="L&#xea; Ho&#xe0;ng Nam"/>
-                </Column>
-                <Column editable="false" title="M&#x1ead;t kh&#x1ea9;u" type="java.lang.String">
-                  <Data value="123456789"/>
-                  <Data value="123456789"/>
-                  <Data value="999999999"/>
-                </Column>
-                <Column editable="false" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.String">
-                  <Data value="Nam"/>
-                  <Data value="Nam"/>
-                  <Data value="N&#x1eef;"/>
-                </Column>
-                <Column editable="false" title="C&#x103;n c&#x1b0;&#x1edb;c c&#xf4;ng d&#xe2;n" type="java.lang.String">
-                  <Data value="123456789012"/>
-                  <Data value="123456789999"/>
-                  <Data value="000000111222"/>
-                </Column>
-                <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String">
-                  <Data value="47/48 &#x111;&#x1b0;&#x1edd;ng s&#x1ed1; 19 ph&#x1b0;&#x1edd;ng 8 G&#xf2; V&#x1ea5;p"/>
-                  <Data value="XXX/XX ACB XYZ"/>
-                  <Data value="XX/XXX XYZ ABC"/>
-                </Column>
-                <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String">
-                  <Data value="0762818855"/>
-                  <Data value="0123456789"/>
-                  <Data value="7774445552"/>
-                </Column>
-                <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String">
-                  <Data value="L&#xe0;m vi&#x1ec7;c"/>
-                  <Data value="&#x110;&#xe3; ngh&#x1ec9;"/>
-                  <Data value="L&#xe0;m vi&#x1ec7;c"/>
-                </Column>
-                <Column editable="false" title="Ch&#x1ee9;c v&#x1ee5;" type="java.lang.String">
-                  <Data value="Nh&#xe2;n vi&#xea;n thu ng&#xe2;n"/>
-                  <Data value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n l&#xed;"/>
-                  <Data value="Nh&#xe2;n vi&#xea;n qu&#x1ea3;n l&#xed;"/>
-                </Column>
+              <Table columnCount="9" rowCount="0">
+                <Column editable="false" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.String"/>
+                <Column editable="false" title="T&#xea;n nh&#xe2;n vi&#xea;n" type="java.lang.String"/>
+                <Column editable="false" title="M&#x1ead;t kh&#x1ea9;u" type="java.lang.String"/>
+                <Column editable="false" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.String"/>
+                <Column editable="false" title="C&#x103;n c&#x1b0;&#x1edb;c c&#xf4;ng d&#xe2;n" type="java.lang.String"/>
+                <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String"/>
+                <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String"/>
+                <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String"/>
+                <Column editable="false" title="Ch&#x1ee9;c v&#x1ee5;" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>

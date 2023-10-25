@@ -9,17 +9,21 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import org.group06.db.dao.DAO_KhachHang;
 /**
  *
  * @author Dell
  */
 public class FrameTTKhachHang extends javax.swing.JFrame {
+    private PanelKhachHang pnlKhachHang;
+    private DAO_KhachHang dao_KhachHang;
     private KhachHang kh;
     /**
      * Creates new form FrameTTKhachHang
      */
-    public FrameTTKhachHang(KhachHang kh) {
+    public FrameTTKhachHang(KhachHang kh, PanelKhachHang pnlKhachHang) {
         this.kh = kh;
+        this.pnlKhachHang = pnlKhachHang;
         initComponents();
     }
 
@@ -162,6 +166,7 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -176,7 +181,7 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
             if(txtTenKH.getText().equals("") || txtSDT.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin");
             } else {
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                updateKH();
                 btnCapNhat.setText("Cập nhật");
                 btnXoaTrang.setEnabled(false);
                 txtTenKH.setEnabled(false);
@@ -185,7 +190,17 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
-
+ 
+    private void updateKH() {
+        String maKH = txtMaKH.getText();
+        String tenKH = txtTenKH.getText();
+        String sdt = txtSDT.getText();
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt);
+        dao_KhachHang.update(kh);
+        pnlKhachHang.loadDataTable();
+        JOptionPane.showMessageDialog(this, "Cập nhật thông tin khách hàng thành công");
+    }
+    
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
         xoaTrang();
@@ -208,4 +223,6 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
+
+    
 }

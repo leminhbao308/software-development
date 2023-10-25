@@ -8,7 +8,7 @@ public class NhanVien {
     private String cccd;
     private String diaChi;
     private String soDienThoai;
-    private String trangThai;
+    private boolean trangThai;
     private String chucVu;
 
     public String getMaNV() {
@@ -67,11 +67,11 @@ public class NhanVien {
         this.soDienThoai = soDienThoai;
     }
 
-    public String isTrangThai() {
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -87,7 +87,7 @@ public class NhanVien {
         this.setTenNV("Tài Khoản");
     }
 
-    public NhanVien(String maNV, String matKhau, String tenNV, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, String trangThai, String chucVu) {
+    public NhanVien(String maNV, String matKhau, String tenNV, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String chucVu) {
         this.maNV = maNV;
         this.matKhau = matKhau;
         this.tenNV = tenNV;

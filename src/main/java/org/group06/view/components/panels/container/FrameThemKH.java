@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package org.group06.view.components.panels.container;
+import java.util.ArrayList;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
@@ -15,12 +17,14 @@ import org.group06.model.entity.KhachHang;
  * @author Dell
  */
 public class FrameThemKH extends javax.swing.JFrame {
-    
+    private DAO_KhachHang dao_KhachHang;
+    private PanelKhachHang pnlKhachHang;
     /**
      * Creates new form FrameThemKH
      */
-    public FrameThemKH() {
-        
+    public FrameThemKH(PanelKhachHang pnlKhachHang) {
+        dao_KhachHang = new DAO_KhachHang(DatabaseConnect.getConnection());
+        this.pnlKhachHang = pnlKhachHang;
         initComponents();
     }
 
@@ -180,6 +184,7 @@ public class FrameThemKH extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -188,19 +193,20 @@ public class FrameThemKH extends javax.swing.JFrame {
             if(txtSDT.getText().equals("") || txtTenKH.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
             } else {
-                
-                JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+                themKH();
                 this.dispose();
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
-
+    
     private void themKH() {
         String maKH = txtMaKH.getText();
         String tenKH = txtTenKH.getText();
         String sdt = txtSDT.getText();
-        
-        
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt);
+        dao_KhachHang.add(kh);
+        pnlKhachHang.loadDataTable();
+        JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
     }
     
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -212,41 +218,6 @@ public class FrameThemKH extends javax.swing.JFrame {
         txtSDT.setText("");
         txtTenKH.setText("");
         txtTenKH.requestFocus();
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameThemKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameThemKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameThemKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameThemKH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameThemKH().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,12 +4,14 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.util.ArrayList;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
 //import org.group06.view.components.*;
@@ -18,11 +20,14 @@ import org.group06.db.dao.DAO_KhachHang;
  * @author Dell
  */
 public class PanelKhachHang extends javax.swing.JPanel {
+    private DAO_KhachHang dao_KhachHang;
     /**
      * Creates new form PanelKhachHang
      */
     public PanelKhachHang() {
+        
         initComponents();
+        loadDataTable();
     }
 
     /**
@@ -59,7 +64,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH001", "Lê Minh Bảo", "0399405711"}
+
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
@@ -197,10 +202,10 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
-        FrameTTKhachHang frThemNV = new FrameTTKhachHang(this.getSelectedKH());
-        frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frThemNV.setResizable(false);
-        frThemNV.setVisible(true);
+        FrameTTKhachHang frTTKH = new FrameTTKhachHang(this.getSelectedKH(),this);
+        frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTTKH.setResizable(false);
+        frTTKH.setVisible(true);
     }
     
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
@@ -223,7 +228,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void callFrameThemKH() {
-        FrameThemKH frThemNV = new FrameThemKH();
+        FrameThemKH frThemNV = new FrameThemKH(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
         frThemNV.setVisible(true);
@@ -247,4 +252,14 @@ public class PanelKhachHang extends javax.swing.JPanel {
             return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
         }
     }
+    
+    public void loadDataTable() {
+        ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getAll();
+        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+        for(KhachHang kh : dsKH) {
+            Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
+            modelKH.addRow(data);
+        }
+    }
+    
 }

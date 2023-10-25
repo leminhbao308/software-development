@@ -39,7 +39,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(result.getString("CCCD").trim());
                 nhanVien.setDiaChi(result.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(result.getString("SDT").trim());
-                nhanVien.setTrangThai(result.getString("TRANGTHAI"));
+                nhanVien.setTrangThai(result.getBoolean("TRANGTHAI"));
                 nhanVien.setChucVu(result.getString("VITRI").trim());
                 nhanViens.add(nhanVien);
             }
@@ -66,7 +66,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(result.getString("CCCD").trim());
                 nhanVien.setDiaChi(result.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(result.getString("SDT").trim());
-                nhanVien.setTrangThai(result.getString("TRANGTHAI"));
+                nhanVien.setTrangThai(result.getBoolean("TRANGTHAI"));
                 nhanVien.setChucVu(result.getString("VITRI").trim());
             }
         } catch (SQLException e) {
@@ -90,8 +90,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public List<NhanVien> getLocTheoPhai(String gioiTinh) {
-        List<NhanVien> dsNhanVien = new ArrayList<>();
+    public ArrayList<NhanVien> getLocTheoPhai(String gioiTinh) {
+        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE GIOITINH = ?";
 
         try {
@@ -107,7 +107,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(resultSet.getString("CCCD").trim());
                 nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
-                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setTrangThai(resultSet.getBoolean("TRANGTHAI"));
                 nhanVien.setChucVu(resultSet.getString("VITRI").trim());
                 dsNhanVien.add(nhanVien);
             }
@@ -117,8 +117,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         return dsNhanVien;
     }
     
-    public List<NhanVien> getLocTheoTrangThai(String trangThai) {
-        List<NhanVien> dsNhanVien = new ArrayList<>();
+    public ArrayList<NhanVien> getLocTheoTrangThai(String trangThai) {
+        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ?";
 
         try {
@@ -134,7 +134,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(resultSet.getString("CCCD").trim());
                 nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
-                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setTrangThai(resultSet.getBoolean("TRANGTHAI"));
                 nhanVien.setChucVu(resultSet.getString("VITRI").trim());
                 dsNhanVien.add(nhanVien);
             }
@@ -144,8 +144,8 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         return dsNhanVien;
     }
     
-    public List<NhanVien> getByName(String name) {
-        List<NhanVien> dsNhanVien = new ArrayList<>();
+    public ArrayList<NhanVien> getByName(String name) {
+        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM KhachHang WHERE TENKH LIKE '?'";
 
         try {
@@ -161,7 +161,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 nhanVien.setCccd(resultSet.getString("CCCD").trim());
                 nhanVien.setDiaChi(resultSet.getString("DIACHI").trim());
                 nhanVien.setSoDienThoai(resultSet.getString("SDT").trim());
-                nhanVien.setTrangThai(resultSet.getString("TRANGTHAI"));
+                nhanVien.setTrangThai(resultSet.getBoolean("TRANGTHAI"));
                 nhanVien.setChucVu(resultSet.getString("VITRI").trim());
                 dsNhanVien.add(nhanVien);
             }

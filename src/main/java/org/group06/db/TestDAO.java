@@ -10,6 +10,8 @@ import org.group06.model.entity.QuanAo;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import org.group06.db.dao.DAO_KhachHang;
+import org.group06.model.entity.KhachHang;
 
 public class TestDAO {
     public static void main(String[] args) {
@@ -19,7 +21,8 @@ public class TestDAO {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
 //                testDAO_NhanVien(connection);
-                test_DAO_QuanAo(connection);
+//                test_DAO_QuanAo(connection);
+                    test_DAO_KhachHang(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -106,6 +109,22 @@ public class TestDAO {
         String id = "ADD-0001-M";
         QuanAo quanAo = quanAoDAO.getByID(id);
         System.out.println("Quần Áo có mã " + id + ":" + quanAo);
+    }
+    
+    private static void test_DAO_KhachHang(Connection connection) {
+        // Tạo đối tượng QuanAoDAO
+        DAO_KhachHang khachHangDAO = new DAO_KhachHang(connection);
+
+        // Lấy danh sách tất cả nhân viên
+        List<KhachHang> dsKhachHang = khachHangDAO.getAll();
+        System.out.println("Danh sách QuanAo:");
+        for (KhachHang khachHang : dsKhachHang) {
+            System.out.println(khachHang);
+        }
+
+        String id = "0762818855";
+        KhachHang khachHang = khachHangDAO.getByID(id);
+        System.out.println("Khách hàng có mã " + id + ":" + khachHang);
     }
 }
 
