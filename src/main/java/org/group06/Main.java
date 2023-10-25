@@ -22,7 +22,7 @@ public class Main {
             UIManager.put("Table.foreground", ColorConstant.BLACK);
             UIManager.put("Table.selectionForeground", ColorConstant.BLACK);
             UIManager.put("fillsViewportHeight", true);
-            UIManager.put("Table.font", org.group06.utils.FontConstant.FONT_TABLE);
+            UIManager.put("Table.font", new Font("Segoe UI", 0, 18));
             UIManager.put("TableHeader.opaque", true);
             UIManager.put("TableHeader.background", ColorConstant.BUTTON_ACTIVE);
             UIManager.put("TableHeader.foreground", ColorConstant.WHITE);
