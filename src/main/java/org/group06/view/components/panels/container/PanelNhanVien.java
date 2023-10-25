@@ -4,24 +4,29 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.util.ArrayList;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhanVien;
 
 /**
  *
  * @author Dell
  */
 public class PanelNhanVien extends javax.swing.JPanel {
-
+    private DAO_NhanVien dao_NhanVien;
     /**
      * Creates new form PanelNhanVien
      */
     public PanelNhanVien() {
         initComponents();
         tblNhanVien.getTableHeader().setFont(FontConstant.FONT_TABLE);
+        loadDataTable();
     }
 
     /**
@@ -57,9 +62,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         tblNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NV01", "Trương Quốc Bảo", "123456789", "Nam", "123456789012", "47/48 đường số 19 phường 8 Gò Vấp", "0762818855", "Làm việc", "Nhân viên thu ngân"},
-                {"NV02", "Lê Minh Bảo", "123456789", "Nam", "123456789999", "XXX/XX ACB XYZ", "0123456789", "Đã nghỉ", "Nhân viên quản lí"},
-                {"NV03", "Lê Hoàng Nam", "999999999", "Nữ", "000000111222", "XX/XXX XYZ ABC", "7774445552", "Làm việc", "Nhân viên quản lí"}
+
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Mật khẩu", "Giới tính", "Căn cước công dân", "Địa chỉ", "Số điện thoại", "Trạng thái", "Chức vụ"
@@ -136,6 +139,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblLoc.setText("Lọc");
 
         txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
@@ -143,6 +147,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         });
 
         txtTimTheoTen2.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTen2ActionPerformed(evt);
@@ -226,6 +231,10 @@ public class PanelNhanVien extends javax.swing.JPanel {
         boolean gioiTinh = false;
         if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam"))
             gioiTinh = true;
+        
+        boolean trangThai = false;
+        if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Làm việc"))
+            trangThai = true;
 
         if(tblNhanVien.getSelectedRow() == -1)
             return null;
@@ -238,7 +247,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 4).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 5).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 6).toString(),
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString(),
+                    trangThai,
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 8).toString());
         }
     }
@@ -290,4 +299,22 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimTheoTen;
     private javax.swing.JTextField txtTimTheoTen2;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataTable() {
+        String gioiTinh = "", trangThai = "";
+        
+        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getAll();
+        DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+        for(NhanVien nv : dsNV) {
+            if(nv.isGioiTinh()) gioiTinh = "Nam";
+            else gioiTinh = "Nữ";
+            
+            if(nv.isTrangThai()) trangThai = "Làm việc";
+            else trangThai = "Đã nghỉ";
+            
+            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gioiTinh,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            modelKH.addRow(data);
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     private final Connection connection;
@@ -41,7 +42,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         String sql = "SELECT * FROM KhachHang WHERE SDT = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(3, sdt);
+            statement.setString(1, sdt);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 khachHang = new KhachHang();

@@ -79,12 +79,14 @@ public class FrameTTNV extends javax.swing.JFrame {
 
         txtTenNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTenNV.setText(nv.getTenNV());
+        txtTenNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTenNV.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenNV.setEnabled(false);
         txtTenNV.setPreferredSize(new java.awt.Dimension(71, 30));
 
         txtMaNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMaNV.setText(nv.getMaNV());
+        txtMaNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtMaNV.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaNV.setEnabled(false);
         txtMaNV.setPreferredSize(new java.awt.Dimension(71, 30));
@@ -100,12 +102,14 @@ public class FrameTTNV extends javax.swing.JFrame {
 
         txtDiaChi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtDiaChi.setText(nv.getDiaChi());
+        txtDiaChi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtDiaChi.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtDiaChi.setEnabled(false);
         txtDiaChi.setPreferredSize(new java.awt.Dimension(71, 30));
 
         txtCCCD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtCCCD.setText(nv.getCccd());
+        txtCCCD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCCCD.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCCCD.setEnabled(false);
         txtCCCD.setPreferredSize(new java.awt.Dimension(71, 30));
@@ -121,12 +125,14 @@ public class FrameTTNV extends javax.swing.JFrame {
 
         txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSDT.setText(nv.getSoDienThoai());
+        txtSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
 
         pwdMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pwdMK.setText(nv.getMatKhau());
+        pwdMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pwdMK.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         pwdMK.setEnabled(false);
         pwdMK.setPreferredSize(new java.awt.Dimension(71, 30));
@@ -323,6 +329,7 @@ public class FrameTTNV extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed

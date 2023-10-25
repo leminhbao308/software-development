@@ -542,6 +542,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 .addGap(3, 3, 3))
         );
 
+        tblQuanAo.setAutoCreateRowSorter(true);
         tblQuanAo.setBackground(ColorConstant.WHITE);
         tblQuanAo.setFont(FontConstant.FONT_TEXT);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
@@ -552,9 +553,13 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 "Mã QA", "Tên QA", "Loại QA", "Size", "Số Lượng", "Thương Hiệu", "NCC", "Giá Nhập", "Lợi Nhuận", "Giá Bán", "Trạng Thái"
             }
         ));
+        tblQuanAo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblQuanAo.setFillsViewportHeight(true);
         tblQuanAo.setRowHeight(30);
         tblQuanAo.setSelectionBackground(new java.awt.Color(102, 153, 255));
         tblQuanAo.setSelectionForeground(new java.awt.Color(204, 204, 204));
+        tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblQuanAo.setShowGrid(true);
         tblQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
