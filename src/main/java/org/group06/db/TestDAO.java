@@ -106,6 +106,17 @@ public class TestDAO {
         String id = "ADD-0001-M";
         QuanAo quanAo = quanAoDAO.getByID(id);
         System.out.println("Quần Áo có mã " + id + ":" + quanAo);
+
+        // Thêm quần áo mới
+        QuanAo newQuanAo = new QuanAo("VHN-0001-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "Hinh Anh Moi");
+        quanAoDAO.add(newQuanAo);
+        System.out.println("Quần Áo mới đã được thêm.");
+
+        List<QuanAo> dsQuanAoMoi = quanAoDAO.getAll();
+        System.out.println("Danh sách QuanAo:");
+        for (QuanAo quanAoM : dsQuanAoMoi) {
+            System.out.println(quanAoM);
+        }
     }
 }
 
