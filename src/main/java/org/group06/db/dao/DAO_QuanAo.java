@@ -1,13 +1,13 @@
 package org.group06.db.dao;
 
 import org.group06.model.entity.QuanAo;
-import org.group06.model.entity.QuanAo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author lehoa
@@ -133,6 +133,37 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    public HashMap<String, String> getAllLoaiQuanAo() {
+        HashMap<String, String> dsLoaiQuanAo = new HashMap<>();
+        try {
+            String sql = "SELECT * FROM LoaiQuanAo";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                dsLoaiQuanAo.put(result.getString("MALOAIQA"), result.getString("TENLOAIQA"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsLoaiQuanAo;
+    }
+    
+    public String getTenLoaiQuanAo(String maLoaiQuanAO) {
+        try {
+            String sql = "SELECT FROM LoaiQuanAo WHERE MALOAIQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maLoaiQuanAO);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                return result.getString("TENLOAIQA");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            return "Không xác định";
         }
     }
 }

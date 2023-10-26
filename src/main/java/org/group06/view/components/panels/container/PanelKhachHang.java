@@ -4,23 +4,28 @@
  */
 package org.group06.view.components.panels.container;
 
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
-import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 //import org.group06.view.components.*;
 /**
  *
  * @author Dell
  */
 public class PanelKhachHang extends javax.swing.JPanel {
+    private DAO_KhachHang dao_KhachHang;
     /**
      * Creates new form PanelKhachHang
      */
     public PanelKhachHang() {
+        
         initComponents();
+        loadDataTable();
     }
 
     /**
@@ -35,19 +40,21 @@ public class PanelKhachHang extends javax.swing.JPanel {
         lblTitleTTKH = new javax.swing.JLabel();
         scrKhachHang = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
-        pnlCN = new javax.swing.JPanel();
+        pnlTimKH = new javax.swing.JPanel();
         lblTimTheoTen = new javax.swing.JLabel();
+        txtTimTheoTen = new javax.swing.JTextField();
         lblTimTheoSDT = new javax.swing.JLabel();
-        txtTimTheoTen = new org.group06.view.components.textFields.TextField();
-        txtTimTheoTen1 = new org.group06.view.components.textFields.TextField();
-        btnThem = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        txtTimTheoTen1 = new javax.swing.JTextField();
+        pnlThemKH = new javax.swing.JPanel();
+        btnThem = new javax.swing.JButton();
 
         setToolTipText("");
 
         lblTitleTTKH.setBackground(new java.awt.Color(0, 0, 0));
-        lblTitleTTKH.setFont(FontConstant.FONT_HEADER);
+        lblTitleTTKH.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitleTTKH.setForeground(ColorConstant.BLACK);
-        lblTitleTTKH.setText("Danh sách khách hàng");
+        lblTitleTTKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitleTTKH.setText("Quản Lý Khách Hàng");
 
         scrKhachHang.setBorder(null);
         scrKhachHang.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -57,7 +64,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFont(org.group06.utils.FontConstant.FONT_TEXT);
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH001", "Lê Minh Bảo", "0399405711"}
+
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
@@ -101,28 +108,60 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pnlTimKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTimTheoTen.setText("Tìm theo tên");
 
-        lblTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblTimTheoSDT.setText("Tìm theo số điện thoại");
-
-        txtTimTheoTen.setFont(FontConstant.FONT_TEXT);
+        txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
             }
         });
 
-        txtTimTheoTen1.setFont(FontConstant.FONT_TEXT);
+        lblTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTimTheoSDT.setText("Tìm theo số điện thoại");
+
+        txtTimTheoTen1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTen1ActionPerformed(evt);
             }
         });
 
-        btnThem.setFont(FontConstant.FONT_BUTTON);
-        btnThem.setForeground(ColorConstant.WHITE);
+        javax.swing.GroupLayout pnlTimKHLayout = new javax.swing.GroupLayout(pnlTimKH);
+        pnlTimKH.setLayout(pnlTimKHLayout);
+        pnlTimKHLayout.setHorizontalGroup(
+            pnlTimKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTimKHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTimTheoTen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTimTheoSDT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlTimKHLayout.setVerticalGroup(
+            pnlTimKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTimKHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTimKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
+        );
+
+        pnlTimKHLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtTimTheoTen, txtTimTheoTen1});
+
+        pnlThemKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Thêm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -131,33 +170,20 @@ public class PanelKhachHang extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout pnlCNLayout = new javax.swing.GroupLayout(pnlCN);
-        pnlCN.setLayout(pnlCNLayout);
-        pnlCNLayout.setHorizontalGroup(
-            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCNLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlThemKHLayout = new javax.swing.GroupLayout(pnlThemKH);
+        pnlThemKH.setLayout(pnlThemKHLayout);
+        pnlThemKHLayout.setHorizontalGroup(
+            pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlThemKHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblTimTheoTen)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lblTimTheoSDT)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
+                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        pnlCNLayout.setVerticalGroup(
-            pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCNLayout.createSequentialGroup()
+        pnlThemKHLayout.setVerticalGroup(
+            pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlThemKHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlCNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimTheoTen)
-                    .addComponent(txtTimTheoTen1)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -168,22 +194,25 @@ public class PanelKhachHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(scrKhachHang)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                        .addComponent(pnlTimKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnlThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(pnlCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblTitleTTKH, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -193,10 +222,10 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
-        FrameTTKhachHang frThemNV = new FrameTTKhachHang(this.getSelectedKH());
-        frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frThemNV.setResizable(false);
-        frThemNV.setVisible(true);
+        FrameTTKhachHang frTTKH = new FrameTTKhachHang(this.getSelectedKH(),this);
+        frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTTKH.setResizable(false);
+        frTTKH.setVisible(true);
     }
     
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
@@ -219,7 +248,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void callFrameThemKH() {
-        FrameThemKH frThemNV = new FrameThemKH();
+        FrameThemKH frThemNV = new FrameThemKH(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
         frThemNV.setVisible(true);
@@ -230,7 +259,8 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblTimTheoSDT;
     private javax.swing.JLabel lblTimTheoTen;
     private javax.swing.JLabel lblTitleTTKH;
-    private javax.swing.JPanel pnlCN;
+    private javax.swing.JPanel pnlThemKH;
+    private javax.swing.JPanel pnlTimKH;
     private javax.swing.JScrollPane scrKhachHang;
     private javax.swing.JTable tblKhachHang;
     private javax.swing.JTextField txtTimTheoTen;
@@ -243,4 +273,14 @@ public class PanelKhachHang extends javax.swing.JPanel {
             return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
         }
     }
+    
+    public void loadDataTable() {
+        ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getAll();
+        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+        for(KhachHang kh : dsKH) {
+            Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
+            modelKH.addRow(data);
+        }
+    }
+    
 }

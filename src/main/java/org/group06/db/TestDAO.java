@@ -1,8 +1,10 @@
 package org.group06.db;
 
+import org.group06.db.dao.DAO_KhachHang;
 import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.db.dao.DAO_QuanAo;
+import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.NhaCungCap;
 import org.group06.model.entity.NhanVien;
 import org.group06.model.entity.QuanAo;
@@ -12,6 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TestDAO {
+
     public static void main(String[] args) {
         // Kết nối đến cơ sở dữ liệu
         try (Connection connection = DatabaseConnect.getConnection()) {
@@ -19,7 +22,8 @@ public class TestDAO {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
 //                testDAO_NhanVien(connection);
-                test_DAO_QuanAo(connection);
+//                test_DAO_QuanAo(connection);
+                    test_DAO_KhachHang(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -77,7 +81,6 @@ public class TestDAO {
 //        NhanVien newEmployee = new NhanVien("NV002", "Nguyễn Văn B", "123456", true, "123456789", "123 Đường A, Quận 1, TP.HCM", "0123456789", true, "Nhân viên bán hàng", 1);
 //        employeeDAO.add(newEmployee);
 //        System.out.println("Nhân viên mới đã được thêm.");
-
         // Cập nhật thông tin một nhân viên
 //        NhanVien updatedEmployee = employeeDAO.getByID("NV001");
 //        if (updatedEmployee != null) {
@@ -85,7 +88,6 @@ public class TestDAO {
 //            employeeDAO.update(updatedEmployee);
 //            System.out.println("Thông tin nhân viên đã được cập nhật.");
 //        }
-
         // Xóa một nhân viên
 //        String employeeIdToDelete = "NV016";
 //        employeeDAO.delete(employeeIdToDelete);
@@ -101,6 +103,7 @@ public class TestDAO {
         System.out.println("Danh sách QuanAo:");
         for (QuanAo quanAo : dsQuanAo) {
             System.out.println(quanAo);
+            System.out.println(quanAoDAO.getTenLoaiQuanAo(quanAo.getLoaiQuanAo()));
         }
 
         String id = "ADD-0001-M";
@@ -118,5 +121,20 @@ public class TestDAO {
             System.out.println(quanAoM);
         }
     }
-}
+    
+    private static void test_DAO_KhachHang(Connection connection) {
+        // Tạo đối tượng QuanAoDAO
+        DAO_KhachHang khachHangDAO = new DAO_KhachHang(connection);
 
+        // Lấy danh sách tất cả nhân viên
+        List<KhachHang> dsKhachHang = khachHangDAO.getAll();
+        System.out.println("Danh sách QuanAo:");
+        for (KhachHang khachHang : dsKhachHang) {
+            System.out.println(khachHang);
+        }
+
+        String id = "0762818855";
+        KhachHang khachHang = khachHangDAO.getByID(id);
+        System.out.println("Khách hàng có mã " + id + ":" + khachHang);
+    }
+}
