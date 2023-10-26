@@ -49,7 +49,7 @@ public class Frame extends JFrame {
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
     private final JMenuItem mniDangXuat = new JMenuItem("Đăng Xuất");
 
-    private JPanel pnlContainer = new PanelBanHang();
+    private JPanel pnlContainer = new PanelQuanAo();
     private NhanVien nv;
     // </editor-fold>
 
