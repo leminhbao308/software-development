@@ -62,18 +62,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblMaNV" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblTenNV" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblCCCD" alignment="0" pref="165" max="32767" attributes="0"/>
+                      <Component id="lblCCCD" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblGioiTinh" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblMK" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblDiaChi" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblSDT" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblChucVu" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblTrangThai1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="lblTrangThai1" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -91,13 +91,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="pwdMK" min="-2" pref="280" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tglShowMK" pref="74" max="32767" attributes="0"/>
+                              <Component id="tglShowMK" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="cmbChucVu" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblLamViec" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblLamViec" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
