@@ -198,8 +198,10 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin");
             } else if (!checkRegexTenKH()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
+                txtTenKH.requestFocus();
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+                txtSDT.requestFocus();
             } else {
                 updateKH();
                 this.dispose();

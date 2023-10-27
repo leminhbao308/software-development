@@ -358,14 +358,19 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
             } else if (!checkRegexTenNV()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên");
+                txtTenNV.requestFocus();
             } else if (!checkRegexMatKhau()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu");
+                pwdMK.requestFocus();
             } else if (!checkRegexCCCD()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại mã căn cước");
+                txtCCCD.requestFocus();
             } else if (!checkRegexDiaChi()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại địa chỉ");
+                txtDiaChi.requestFocus();
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+                txtSDT.requestFocus();
             } else {
                 themNV();
                 this.dispose();

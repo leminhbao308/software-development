@@ -217,8 +217,10 @@ public class FrameThemKH extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
             } else if (!checkRegexTenKH()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
+                txtTenKH.requestFocus();
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+                txtSDT.requestFocus();
             } else {
                 themKH();
                 this.dispose();

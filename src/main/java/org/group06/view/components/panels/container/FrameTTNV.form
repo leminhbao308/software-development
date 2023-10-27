@@ -212,6 +212,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTenNVFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaNV">
           <Properties>
@@ -280,6 +283,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDiaChiFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCCCD">
           <Properties>
@@ -302,6 +308,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCCCDFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblChucVu">
           <Properties>
@@ -348,6 +357,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSDTFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pwdMK">
           <Properties>
