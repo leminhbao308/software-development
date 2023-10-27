@@ -2,8 +2,8 @@ package org.group06.model.entity;
 
 public class NhanVien {
     private String maNV;
-    private String matKhau;
     private String tenNV;
+    private String matKhau;
     private boolean gioiTinh;
     private String cccd;
     private String diaChi;
@@ -87,10 +87,10 @@ public class NhanVien {
         this.setTenNV("Tài Khoản");
     }
 
-    public NhanVien(String maNV, String matKhau, String tenNV, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String chucVu) {
+    public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String chucVu) {
         this.maNV = maNV;
-        this.matKhau = matKhau;
         this.tenNV = tenNV;
+        this.matKhau = matKhau;
         this.gioiTinh = gioiTinh;
         this.cccd = cccd;
         this.diaChi = diaChi;
@@ -103,8 +103,8 @@ public class NhanVien {
     public String toString() {
         return "NhanVien{" +
                 "maNV='" + maNV + '\'' +
-                ", matKhau='" + matKhau + '\'' +
                 ", tenNV='" + tenNV + '\'' +
+                ", matKhau='" + matKhau + '\'' +
                 ", gioiTinh=" + gioiTinh +
                 ", cccd='" + cccd + '\'' +
                 ", diaChi='" + diaChi + '\'' +

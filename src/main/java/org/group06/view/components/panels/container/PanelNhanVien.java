@@ -4,10 +4,12 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.event.KeyEvent;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
-
+import org.group06.model.entity.PasswordRenderer;
+        
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
  */
 public class PanelNhanVien extends javax.swing.JPanel {
     private DAO_NhanVien dao_NhanVien;
+    public int soMaNV = 4;
     /**
      * Creates new form PanelNhanVien
      */
@@ -120,9 +123,15 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.setToolTipText(null);
+        txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
+            }
+        });
+        txtTimTheoTen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimTheoTenKeyReleased(evt);
             }
         });
 
@@ -130,9 +139,15 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblTimTheoMa.setText("Tìm theo mã");
 
         txtTimTheoMa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimTheoMa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoMaActionPerformed(evt);
+            }
+        });
+        txtTimTheoMa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimTheoMaKeyReleased(evt);
             }
         });
 
@@ -141,12 +156,29 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
         cmbLocGioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbLocGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Nam", "Nữ" }));
+        cmbLocGioiTinh.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbLocGioiTinhItemStateChanged(evt);
+            }
+        });
+        cmbLocGioiTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbLocGioiTinhMouseClicked(evt);
+            }
+        });
 
         lblLocTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLocTrangThai.setText("Trạng Thái Công Việc");
 
         cmbLocTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Đang Làm Việc", "Đã Nghỉ" }));
+        cmbLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Làm việc", "Đã nghỉ" }));
+        cmbLocTrangThai.setMinimumSize(new java.awt.Dimension(92, 31));
+        cmbLocTrangThai.setPreferredSize(new java.awt.Dimension(92, 31));
+        cmbLocTrangThai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbLocTrangThaiItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTimNVLayout = new javax.swing.GroupLayout(pnlTimNV);
         pnlTimNV.setLayout(pnlTimNVLayout);
@@ -159,18 +191,16 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     .addComponent(lblTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTimNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                    .addComponent(txtTimTheoMa))
-                .addGap(50, 50, 50)
-                .addGroup(pnlTimNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimNVLayout.createSequentialGroup()
-                        .addComponent(lblLocGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbLocGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimNVLayout.createSequentialGroup()
-                        .addComponent(lblLocTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbLocTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtTimTheoMa, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                    .addComponent(txtTimTheoTen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTimNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLocGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLocTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTimNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbLocTrangThai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbLocGioiTinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlTimNVLayout.setVerticalGroup(
@@ -187,11 +217,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     .addComponent(lblTimTheoMa)
                     .addComponent(txtTimTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLocTrangThai)
-                    .addComponent(cmbLocTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbLocTrangThai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        pnlTimNVLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbLocGioiTinh, cmbLocTrangThai, lblLocGioiTinh, lblLocTrangThai, lblTimTheoMa, lblTimTheoTen, txtTimTheoMa, txtTimTheoTen});
+        pnlTimNVLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbLocGioiTinh, lblLocGioiTinh, lblLocTrangThai, lblTimTheoMa, lblTimTheoTen, txtTimTheoMa, txtTimTheoTen});
 
         pnlThemNV.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Thêm Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -262,7 +292,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         boolean trangThai = false;
         if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Làm việc"))
             trangThai = true;
-
+        
         if(tblNhanVien.getSelectedRow() == -1)
             return null;
         else {
@@ -280,14 +310,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void callFrameTTNV() {
-        FrameTTNV frTTNV = new FrameTTNV(getSelectedNV());
+        FrameTTNV frTTNV = new FrameTTNV(this.getSelectedNV(),this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
     }
 
     private void callFrameThemNV() {
-        FrameThemNhanVien frThemNV = new FrameThemNhanVien();
+        FrameThemNhanVien frThemNV = new FrameThemNhanVien(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
         frThemNV.setVisible(true);
@@ -304,14 +334,181 @@ public class PanelNhanVien extends javax.swing.JPanel {
         callFrameThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
+     public String getMaNV() {
+         int count = new DAO_NhanVien((DatabaseConnect.getConnection())).loadMaNVCount(soMaNV);
+        count++;
+        // Tạo mã nhân viên theo quy tắc và có thứ tự
+        String customerID = "NV" + String.format("%03d", count); // Ví dụ: NV001, NV002,...
+        soMaNV++; // Tăng biến đếm cho lần thêm nhân viên tiếp theo
+        return customerID;
+    }
+    
     private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimTheoTenActionPerformed
 
     private void txtTimTheoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoMaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtTimTheoMaActionPerformed
 
+    private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
+        String tenNV = txtTimTheoTen.getText();
+        String gt = "Nữ",trangThai = "Đã nghỉ";
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(!tenNV.equals("")) {
+                ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getByName(tenNV);
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+                modelKH.setRowCount(0);
+                for (NhanVien nv : dsNV) {
+                    if(nv.isGioiTinh())
+                        gt = "Nam";
+                    if(nv.isTrangThai())
+                        trangThai = "Làm việc";
+                    
+                    Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+                    modelKH.addRow(data);
+                }
+            } else {
+                loadDataTable();
+            }
+        }
+    }//GEN-LAST:event_txtTimTheoTenKeyReleased
+
+    private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
+        String maNV = txtTimTheoMa.getText();
+        String gt = "Nữ",trangThai = "Đã nghỉ";
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(!maNV.equals("")) {
+                NhanVien nhanVien = new DAO_NhanVien((DatabaseConnect.getConnection())).getByID(maNV);
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+                modelKH.setRowCount(0);
+                
+                if(nhanVien.isGioiTinh())
+                    gt = "Nam";
+                if(nhanVien.isTrangThai())
+                    trangThai = "Làm việc";
+
+                Object[] data = {nhanVien.getMaNV(),nhanVien.getTenNV(),nhanVien.getMatKhau(),gt,
+                                    nhanVien.getCccd(),nhanVien.getDiaChi(),nhanVien.getSoDienThoai(),trangThai,nhanVien.getChucVu()};
+                modelKH.addRow(data);
+                
+            } else {
+                loadDataTable();
+            }
+        }
+    }//GEN-LAST:event_txtTimTheoMaKeyReleased
+
+    private void cmbLocGioiTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLocGioiTinhMouseClicked
+
+    private void cmbLocGioiTinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhItemStateChanged
+        locTheoGioiTinh();
+        locTheoTrangThaiVaGioiTinh();
+    }//GEN-LAST:event_cmbLocGioiTinhItemStateChanged
+
+    private void cmbLocTrangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocTrangThaiItemStateChanged
+        locTheoTrangThai();
+        locTheoTrangThaiVaGioiTinh();
+    }//GEN-LAST:event_cmbLocTrangThaiItemStateChanged
+
+    private void locTheoGioiTinh() {
+        String selectedOption = cmbLocGioiTinh.getSelectedItem().toString();
+        int phai;
+        if(selectedOption.equals("Nam")) {
+            phai = 1;
+            getDataLocTheoPhai(selectedOption, phai);
+        } else if(selectedOption.equals("Nữ")) {
+            phai = 0;
+            getDataLocTheoPhai(selectedOption, phai);
+        } else 
+            loadDataTable();
+    }
+    
+    private void getDataLocTheoPhai(String gt,int phai) {
+        String trangThai;
+        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoPhai(phai);
+        DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+        modelNV.setRowCount(0);
+        for (NhanVien nv : dsNV) {
+            if(nv.isTrangThai())
+                trangThai = "Làm việc";
+            else
+                trangThai = "Đã nghỉ";
+            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            modelNV.addRow(data);
+        }
+    }
+    
+    private void locTheoTrangThai() {
+        String selectedOption = cmbLocTrangThai.getSelectedItem().toString();
+        int trangThai;
+        if(selectedOption.equals("Làm việc")) {
+            trangThai = 1;
+            getDataLocTheoTrangThai(selectedOption, trangThai);
+        } else if(selectedOption.equals("Đã nghỉ")) {
+            trangThai = 0;
+            getDataLocTheoTrangThai(selectedOption, trangThai);
+        } else 
+            loadDataTable();
+    }
+    
+    private void getDataLocTheoTrangThai(String trangThai,int tt) {
+        String gt;
+        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoTrangThai(tt);
+        DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+        modelNV.setRowCount(0);
+        for (NhanVien nv : dsNV) {
+            if(nv.isGioiTinh())
+                gt = "Nam";
+            else 
+                gt = "Nữ";
+            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            modelNV.addRow(data);
+        }
+    }
+    
+    private void locTheoTrangThaiVaGioiTinh() {
+        String selectTrangThai = cmbLocTrangThai.getSelectedItem().toString();
+        String selectGioiTinh = cmbLocGioiTinh.getSelectedItem().toString();
+        int trangThai,gioiTinh;
+        if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nam")) {
+            trangThai = 1;
+            gioiTinh = 1;
+            getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
+        } else if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nữ")) {
+            trangThai = 1;
+            gioiTinh = 0;
+            getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
+        } else if(selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nam")) {
+            trangThai = 0;
+            gioiTinh = 1;
+            getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
+        } else if(selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nữ")) {
+            trangThai = 0;
+            gioiTinh = 0;
+            getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
+        } else if(selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nam")) {
+            getDataLocTheoPhai("Nam", 1);
+        } else if(selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nữ")) {
+            getDataLocTheoPhai("Nữ", 0);
+        } else if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Tất Cả")) {
+            getDataLocTheoTrangThai("Làm việc", 1);
+        } else if(selectTrangThai.equals("Nghỉ việc") && selectGioiTinh.equals("Tất Cả")) {
+            getDataLocTheoTrangThai("Nghỉ việc", 0);
+        }
+    }
+    
+    private void getDatalocTheoTrangThaiVaGioiTinh(String trangThai, int tt, String gioiTinh, int gt) {
+        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoTrangThaiVaGioiTinh(tt,gt);
+        DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+        modelNV.setRowCount(0);
+        for (NhanVien nv : dsNV) {
+            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gioiTinh,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            modelNV.addRow(data);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cmbLocGioiTinh;
@@ -330,20 +527,25 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimTheoTen;
     // End of variables declaration//GEN-END:variables
 
-    private void loadDataTable() {
+    public void loadDataTable() {
         String gioiTinh = "", trangThai = "";
-        
+        tblNhanVien.getColumnModel().getColumn(2).setCellRenderer(new PasswordRenderer());
         ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getAll();
-        DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+        DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+        modelNV.setRowCount(0);
         for(NhanVien nv : dsNV) {
-            if(nv.isGioiTinh()) gioiTinh = "Nam";
-            else gioiTinh = "Nữ";
+            if(nv.isGioiTinh()) 
+                gioiTinh = "Nam";
+            else 
+                gioiTinh = "Nữ";
             
-            if(nv.isTrangThai()) trangThai = "Làm việc";
-            else trangThai = "Đã nghỉ";
+            if(nv.isTrangThai()) 
+                trangThai = "Làm việc";
+            else 
+                trangThai = "Đã nghỉ";
             
             Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gioiTinh,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
-            modelKH.addRow(data);
+            modelNV.addRow(data);
         }
     }
 

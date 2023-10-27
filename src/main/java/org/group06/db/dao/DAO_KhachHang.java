@@ -74,7 +74,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
 
     @Override
     public boolean update(KhachHang khachHang) {
-                try {
+            try {
             String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ? WHERE MAKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khachHang.getTenKH());
@@ -87,14 +87,13 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             return false;
         }
     }
-
+    
     public ArrayList<KhachHang> getByName(String name) {
         ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
         String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
-
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,name);
+            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 KhachHang khachHang = new KhachHang();
@@ -104,9 +103,29 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 dsKhachHang.add(khachHang);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+           e.printStackTrace();
         }
         return dsKhachHang;
+    }
+    
+    public int loadMaKHCount(int countMaKH) {
+        String query = "SELECT MAX(MAKH) FROM KhachHang";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String maxMaKH = resultSet.getString(1);
+                if (maxMaKH != null) {
+                    countMaKH = Integer.parseInt(maxMaKH.substring(2)); // Bỏ đi 2 ký tự đầu (VD: KH) để lấy số
+                }
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi tải giá trị countMaKH từ cơ sở dữ liệu.");
+            e.printStackTrace();
+        }
+        return countMaKH;
     }
 
     @Override
