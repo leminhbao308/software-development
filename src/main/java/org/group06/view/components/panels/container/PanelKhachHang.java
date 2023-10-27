@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.event.KeyEvent;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
@@ -19,11 +20,11 @@ import java.util.ArrayList;
  */
 public class PanelKhachHang extends javax.swing.JPanel {
     private DAO_KhachHang dao_KhachHang;
+    public int soMaKH = 31;
     /**
      * Creates new form PanelKhachHang
      */
     public PanelKhachHang() {
-        
         initComponents();
         loadDataTable();
     }
@@ -44,7 +45,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         lblTimTheoTen = new javax.swing.JLabel();
         txtTimTheoTen = new javax.swing.JTextField();
         lblTimTheoSDT = new javax.swing.JLabel();
-        txtTimTheoTen1 = new javax.swing.JTextField();
+        txtTimTheoSDT = new javax.swing.JTextField();
         pnlThemKH = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
 
@@ -111,22 +112,34 @@ public class PanelKhachHang extends javax.swing.JPanel {
         pnlTimKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         lblTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTimTheoTen.setText("Tìm theo tên");
+        lblTimTheoTen.setText("Tìm theo họ tên");
 
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
+            }
+        });
+        txtTimTheoTen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimTheoTenKeyReleased(evt);
             }
         });
 
         lblTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTimTheoSDT.setText("Tìm theo số điện thoại");
 
-        txtTimTheoTen1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTimTheoTen1.addActionListener(new java.awt.event.ActionListener() {
+        txtTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimTheoSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTimTheoSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoTen1ActionPerformed(evt);
+                txtTimTheoSDTActionPerformed(evt);
+            }
+        });
+        txtTimTheoSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimTheoSDTKeyReleased(evt);
             }
         });
 
@@ -138,11 +151,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTimTheoTen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTimTheoSDT)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addComponent(txtTimTheoSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlTimKHLayout.setVerticalGroup(
@@ -153,11 +166,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     .addComponent(lblTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimTheoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimTheoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTimTheoSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6))
         );
 
-        pnlTimKHLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtTimTheoTen, txtTimTheoTen1});
+        pnlTimKHLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtTimTheoSDT, txtTimTheoTen});
 
         pnlThemKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Thêm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -236,22 +249,65 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
     private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimTheoTenActionPerformed
 
-    private void txtTimTheoTen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTen1ActionPerformed
+    private void txtTimTheoSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoSDTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimTheoTen1ActionPerformed
+    }//GEN-LAST:event_txtTimTheoSDTActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         callFrameThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
+        
+    public String getMaKH() {
+        int count = new DAO_KhachHang((DatabaseConnect.getConnection())).loadMaKHCount(soMaKH);
+        count++;
+        // Tạo mã khách hàng theo quy tắc và có thứ tự
+        String customerID = "KH" + String.format("%03d", count); // Ví dụ: KH001, KH002,...
+        soMaKH++; // Tăng biến đếm cho lần thêm khách hàng tiếp theo
+        return customerID;
+    }
+    
+    private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
+        String tenKH = txtTimTheoTen.getText();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(!tenKH.equals("")) {
+                ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getByName(tenKH);
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+                modelKH.setRowCount(0);
+                for (KhachHang kh : dsKH) {
+                Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
+                modelKH.addRow(data);
+                }
+            } else {
+                loadDataTable();
+            }
+        }
+    }//GEN-LAST:event_txtTimTheoTenKeyReleased
+
+    private void txtTimTheoSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoSDTKeyReleased
+        String sdt = txtTimTheoSDT.getText();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           if(!sdt.equals("")) {
+                KhachHang kh = new DAO_KhachHang((DatabaseConnect.getConnection())).getByID(sdt);
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+                modelKH.setRowCount(0);
+                Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
+                modelKH.addRow(data);
+           }else {
+                loadDataTable();
+            }
+        }
+    }//GEN-LAST:event_txtTimTheoSDTKeyReleased
 
     private void callFrameThemKH() {
-        FrameThemKH frThemNV = new FrameThemKH(this);
-        frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frThemNV.setResizable(false);
-        frThemNV.setVisible(true);
+        FrameThemKH frThemKH = new FrameThemKH(this);
+        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemKH.setResizable(false);
+        frThemKH.setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -263,9 +319,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTimKH;
     private javax.swing.JScrollPane scrKhachHang;
     private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTextField txtTimTheoSDT;
     private javax.swing.JTextField txtTimTheoTen;
-    private javax.swing.JTextField txtTimTheoTen1;
     // End of variables declaration//GEN-END:variables
+    
+    
     private KhachHang getSelectedKH() {
         if(tblKhachHang.getSelectedRow() == -1)
             return null;
@@ -277,6 +335,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     public void loadDataTable() {
         ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+        modelKH.setRowCount(0);
         for(KhachHang kh : dsKH) {
             Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
             modelKH.addRow(data);

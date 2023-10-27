@@ -9,18 +9,26 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhanVien;
 
 /**
  *
  * @author Dell
  */
 public class FrameTTNV extends javax.swing.JFrame {
+
     private NhanVien nv;
+    private DAO_NhanVien dao_NhanVien;
+    private PanelNhanVien pnlNhanVien;
+
     /**
      * Creates new form FrameTTNV
      */
-    public FrameTTNV(NhanVien nv) {
+    public FrameTTNV(NhanVien nv, PanelNhanVien pnlNhanVien) {
         this.nv = nv;
+        this.pnlNhanVien = pnlNhanVien;
+        dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
         initComponents();
     }
 
@@ -163,9 +171,14 @@ public class FrameTTNV extends javax.swing.JFrame {
         });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tglShowMK.setText("Reset");
-        tglShowMK.setEnabled(false);
+        tglShowMK.setText("Show");
+        tglShowMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tglShowMK.setPreferredSize(new java.awt.Dimension(111, 30));
+        tglShowMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tglShowMKMouseClicked(evt);
+            }
+        });
 
         cmbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Làm việc", "Đã nghỉ" }));
@@ -174,7 +187,7 @@ public class FrameTTNV extends javax.swing.JFrame {
         cmbTrangThai.setPreferredSize(new java.awt.Dimension(72, 30));
 
         cmbChucVu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên thu ngân", "Nhân viên quản lí" }));
+        cmbChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên Bán Hàng", "Nhân Viên Quản Lý" }));
         cmbChucVu.setSelectedItem(nv.getChucVu());
         cmbChucVu.setEnabled(false);
         cmbChucVu.setMinimumSize(new java.awt.Dimension(72, 30));
@@ -347,48 +360,97 @@ public class FrameTTNV extends javax.swing.JFrame {
                     || txtCCCD.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
             } else {
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                btnCapNhat.setText("Cập nhật");
-                btnXoaTrang.setEnabled(false);
-                hideOff();
+                updateNV();
                 this.dispose();
             }
         }
-
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void updateNV() {
+        boolean gt = true, trangThai = true;
+        String maNV = txtMaNV.getText();
+        String tenNV = checkKiTu(txtTenNV.getText());
+        String password = pwdMK.getName();
+        String cccd = txtCCCD.getText();
+        String diaChi = checkKiTu(txtDiaChi.getText());
+        String sdt = txtSDT.getText();
+        String chucVu = cmbChucVu.getSelectedItem().toString();
+
+        if (rdoNu.isSelected()) {
+            gt = false;
+        }
+
+        if (cmbTrangThai.getSelectedItem().equals("Đã nghỉ")) {
+            trangThai = false;
+        }
+
+        NhanVien nv = new NhanVien(maNV, tenNV, password, gt, cccd, diaChi, sdt, trangThai, chucVu);
+        if (dao_NhanVien.update(nv)) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thông tin nhân viên thành công");
+            pnlNhanVien.loadDataTable();
+            btnCapNhat.setText("Cập nhật");
+            btnXoaTrang.setEnabled(false);
+            hideOff();
+        }
+    }
+
+    private String checkKiTu(String text) {
+        text = text.replaceAll("\\s+", " ").trim();
+        text = text.toLowerCase();
+        String[] a = text.split(" ");
+        StringBuilder temp = new StringBuilder();
+        for (String word : a) {
+            if (!word.isEmpty()) {
+                temp.append(Character.toUpperCase(word.charAt(0)));
+                temp.append(word.substring(1));
+                temp.append(" ");
+            }
+        }
+        return temp.toString().trim();
+    }
+
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
+    private void tglShowMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tglShowMKMouseClicked
+        if (tglShowMK.getText().equals("Show")) {
+            pwdMK.setEchoChar('\u0000');
+            tglShowMK.setText("Hide");
+        } else {
+            pwdMK.setEchoChar('•');
+            tglShowMK.setText("Show");
+        }
+    }//GEN-LAST:event_tglShowMKMouseClicked
+
     private void xoaTrang() {
         txtTenNV.setText("");
         txtCCCD.setText("");
         txtDiaChi.setText("");
-        pwdMK.setText("");
+//        pwdMK.setText("");
         rdoNam.setSelected(true);
         rdoNu.setSelected(false);
         txtSDT.setText("");
         cmbChucVu.setSelectedIndex(0);
         txtTenNV.requestFocus();
     }
-    
+
     private void hideOn() {
         txtTenNV.setEnabled(true);
         txtSDT.setEnabled(true);
         txtDiaChi.setEnabled(true);
         txtCCCD.setEnabled(true);
-        pwdMK.setEnabled(true);
+        pwdMK.setEnabled(false);
         rdoNam.setEnabled(true);
         rdoNu.setEnabled(true);
         cmbChucVu.setEnabled(true);
         cmbTrangThai.setEnabled(true);
-        tglShowMK.setEnabled(true);
         txtTenNV.requestFocus();
     }
-    
-     private void hideOff() {
+
+    private void hideOff() {
         txtTenNV.setEnabled(false);
         txtSDT.setEnabled(false);
         txtDiaChi.setEnabled(false);
@@ -398,7 +460,6 @@ public class FrameTTNV extends javax.swing.JFrame {
         rdoNu.setEnabled(false);
         cmbChucVu.setEnabled(false);
         cmbTrangThai.setEnabled(false);
-        tglShowMK.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,26 +4,32 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.Color;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
+
 /**
  *
  * @author Dell
  */
 public class FrameTTKhachHang extends javax.swing.JFrame {
+
     private PanelKhachHang pnlKhachHang;
     private DAO_KhachHang dao_KhachHang;
     private KhachHang kh;
+
     /**
      * Creates new form FrameTTKhachHang
      */
     public FrameTTKhachHang(KhachHang kh, PanelKhachHang pnlKhachHang) {
         this.kh = kh;
         this.pnlKhachHang = pnlKhachHang;
+        dao_KhachHang = new DAO_KhachHang(DatabaseConnect.getConnection());
         initComponents();
     }
 
@@ -97,6 +103,11 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
         txtTenKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenKH.setEnabled(false);
         txtTenKH.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtTenKH.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenKHFocusLost(evt);
+            }
+        });
 
         txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSDT.setText(kh.getSoDienThoai());
@@ -104,6 +115,11 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
         txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtSDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSDTFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,46 +187,101 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
-        if(btnCapNhat.getText().equals("Cập nhật")){
+        if (btnCapNhat.getText().equals("Cập nhật")) {
             btnCapNhat.setText("Lưu");
             txtTenKH.requestFocus();
             btnXoaTrang.setEnabled(true);
             txtTenKH.setEnabled(true);
             txtSDT.setEnabled(true);
         } else {
-            if(txtTenKH.getText().equals("") || txtSDT.getText().equals("")) {
+            if (txtTenKH.getText().equals("") || txtSDT.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin");
+            } else if (!checkRegexTenKH()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
+            } else if (!checkRegexSDT()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
             } else {
                 updateKH();
-                btnCapNhat.setText("Cập nhật");
-                btnXoaTrang.setEnabled(false);
-                txtTenKH.setEnabled(false);
-                txtSDT.setEnabled(false);
                 this.dispose();
             }
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
- 
+
     private void updateKH() {
         String maKH = txtMaKH.getText();
-        String tenKH = txtTenKH.getText();
-        String sdt = txtSDT.getText();
+        String tenKH = checkKiTu(txtTenKH.getText());
+        String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
         KhachHang kh = new KhachHang(maKH, tenKH, sdt);
-        dao_KhachHang.update(kh);
-        pnlKhachHang.loadDataTable();
-        JOptionPane.showMessageDialog(this, "Cập nhật thông tin khách hàng thành công");
+        if (dao_KhachHang.update(kh)) {
+            if (checkRegexSDT() && checkRegexTenKH()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin khách hàng thành công");
+                pnlKhachHang.loadDataTable();
+                btnCapNhat.setText("Cập nhật");
+                btnXoaTrang.setEnabled(false);
+                txtTenKH.setEnabled(false);
+                txtSDT.setEnabled(false);
+            }
+        }
     }
     
+    private String checkKiTu(String text) {
+        text = text.replaceAll("\\s+", " ").trim();
+        text = text.toLowerCase();
+        String[] a = text.split(" ");
+        StringBuilder temp = new StringBuilder();
+        for(String word : a) {
+            if(!word.isEmpty()) {
+                temp.append(Character.toUpperCase(word.charAt(0)));
+                temp.append(word.substring(1));
+                temp.append(" ");
+            }
+        }
+        return temp.toString().trim();
+    }
+
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
+    private void txtTenKHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenKHFocusLost
+        if (!checkRegexTenKH()) {
+            txtTenKH.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtTenKH.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtTenKHFocusLost
+
+    private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
+        if (!checkRegexSDT()) {
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtSDTFocusLost
+
+    private boolean checkRegexTenKH() {
+        String tenKH = txtTenKH.getText().trim();
+        if (tenKH.equals("") || !tenKH.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexSDT() {
+        String sdt = txtSDT.getText().trim();
+//        if(sdt.equals("") ||  !sdt.matches("0[9|3|8|7][0-9]{8}")) {
+        if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void xoaTrang() {
         txtTenKH.setText("");
         txtSDT.setText("");
         txtTenKH.requestFocus();
-    } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -224,5 +295,4 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
 
-    
 }

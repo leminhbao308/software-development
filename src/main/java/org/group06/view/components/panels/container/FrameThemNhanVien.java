@@ -9,6 +9,9 @@ import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhanVien;
+import org.group06.model.entity.NhanVien;
 
 /**
  *
@@ -16,10 +19,15 @@ import javax.swing.*;
  */
 public class FrameThemNhanVien extends javax.swing.JFrame {
 
+    private DAO_NhanVien dao_NhanVien;
+    private PanelNhanVien pnlNhanVien;
+
     /**
      * Creates new form FrameThemNhanVien
      */
-    public FrameThemNhanVien() {
+    public FrameThemNhanVien(PanelNhanVien pnlNhanVien) {
+        dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
+        this.pnlNhanVien = pnlNhanVien;
         initComponents();
     }
 
@@ -88,6 +96,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
         txtMaNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMaNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtMaNV.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaNV.setEnabled(false);
         txtMaNV.setPreferredSize(new java.awt.Dimension(71, 30));
 
@@ -103,10 +112,20 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         txtDiaChi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtDiaChi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtDiaChi.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtDiaChi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDiaChiFocusLost(evt);
+            }
+        });
 
         txtCCCD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtCCCD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCCCD.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtCCCD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCCCDFocusLost(evt);
+            }
+        });
 
         lblChucVu.setFont(FontConstant.FONT_LABEL);
         lblChucVu.setText("Chức vụ:");
@@ -120,10 +139,21 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         txtSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtSDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSDTFocusLost(evt);
+            }
+        });
 
         pwdMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pwdMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pwdMK.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         pwdMK.setPreferredSize(new java.awt.Dimension(71, 30));
+        pwdMK.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pwdMKFocusLost(evt);
+            }
+        });
 
         grpGioiTinh.add(rdoNam);
         rdoNam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -143,10 +173,16 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tglShowMK.setText("Show");
+        tglShowMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tglShowMK.setPreferredSize(new java.awt.Dimension(111, 30));
+        tglShowMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tglShowMKMouseClicked(evt);
+            }
+        });
 
         cmbChucVu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên thu ngân", "Nhân viên quản lí" }));
+        cmbChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên Bán Hàng", "Nhân Viên Quản Lý" }));
         cmbChucVu.setMinimumSize(new java.awt.Dimension(72, 30));
         cmbChucVu.setPreferredSize(new java.awt.Dimension(72, 30));
 
@@ -236,6 +272,8 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtMaNV.setText(pnlNhanVien.getMaNV());
+
         btnLuu.setFont(FontConstant.FONT_BUTTON);
         btnLuu.setForeground(ColorConstant.WHITE);
         btnLuu.setText("Lưu");
@@ -305,6 +343,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
@@ -313,16 +352,62 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
-        if(btnLuu.getText().equals("Lưu")){
-            if(txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("") ||
-                txtCCCD.getText().equals("")) {
+        if (btnLuu.getText().equals("Lưu")) {
+            if (txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("")
+                    || txtCCCD.getText().equals("") || pwdMK.getPassword().equals("")) {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
+            } else if (!checkRegexTenNV()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên");
+            } else if (!checkRegexMatKhau()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu");
+            } else if (!checkRegexCCCD()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại mã căn cước");
+            } else if (!checkRegexDiaChi()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại địa chỉ");
+            } else if (!checkRegexSDT()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+                themNV();
                 this.dispose();
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void themNV() {
+        boolean gt = true, trangThai = true;
+
+        String maNV = txtMaNV.getText();
+        String tenNV = checkKiTu(txtTenNV.getText());
+        String password = new String(pwdMK.getPassword()).trim();
+        String cccd = txtCCCD.getText().replaceAll("\\s+", "").trim();
+        String diaChi = checkKiTu(txtDiaChi.getText());
+        String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
+        String chucVu = new String(cmbChucVu.getSelectedItem().toString());
+
+        if (rdoNu.isSelected()) {
+            gt = false;
+        }
+
+        NhanVien nv = new NhanVien(maNV, tenNV, password, gt, cccd, diaChi, sdt, trangThai, chucVu);
+        dao_NhanVien.add(nv);
+        pnlNhanVien.loadDataTable();
+        JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+    }
+
+    private String checkKiTu(String text) {
+        text = text.replaceAll("\\s+", " ").trim();
+        text = text.toLowerCase();
+        String[] a = text.split(" ");
+        StringBuilder temp = new StringBuilder();
+        for (String word : a) {
+            if (!word.isEmpty()) {
+                temp.append(Character.toUpperCase(word.charAt(0)));
+                temp.append(word.substring(1));
+                temp.append(" ");
+            }
+        }
+        return temp.toString().trim();
+    }
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         // TODO add your handling code here:
@@ -334,52 +419,95 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void txtTenNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusLost
-        // TODO add your handling code here:
-        if(txtTenNV.getText().equals("123")) {
+        if (!checkRegexTenNV()) {
             txtTenNV.setBorder(BorderFactory.createLineBorder(Color.RED));
-            txtTenNV.setOpaque(true);
-        } 
-        else {
+        } else
             txtTenNV.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-//            txtTenNV.setOpaque(false);
-        }
-        
     }//GEN-LAST:event_txtTenNVFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameThemNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
+        if (!checkRegexSDT()) {
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtSDTFocusLost
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameThemNhanVien().setVisible(true);
-            }
-        });
+    private void txtDiaChiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaChiFocusLost
+        if (!checkRegexDiaChi()) {
+            txtDiaChi.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtDiaChi.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtDiaChiFocusLost
+
+    private void txtCCCDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCCCDFocusLost
+        if (!checkRegexCCCD()) {
+            txtCCCD.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtCCCD.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtCCCDFocusLost
+
+    private void pwdMKFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdMKFocusLost
+        if (!checkRegexMatKhau()) {
+            pwdMK.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            pwdMK.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_pwdMKFocusLost
+
+    private void tglShowMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tglShowMKMouseClicked
+        if (tglShowMK.getText().equals("Show")) {
+            pwdMK.setEchoChar('\u0000');
+            tglShowMK.setText("Hide");
+        } else {
+            pwdMK.setEchoChar('•');
+            tglShowMK.setText("Show");
+        }
+    }//GEN-LAST:event_tglShowMKMouseClicked
+
+    private boolean checkRegexTenNV() {
+        String tenNV = txtTenNV.getText().trim();
+        if (tenNV.equals("") || !tenNV.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
+        }
     }
+
+    private boolean checkRegexMatKhau() {
+        String mK = new String(pwdMK.getPassword()).trim();
+        if (mK.equals("") || !mK.matches("^[a-zA-Z@0-9]{4,}$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexDiaChi() {
+        String diaChi = txtDiaChi.getText().trim();
+        if (diaChi.equals("") || !diaChi.matches("^[\\p{L}\\s\\d\\,}]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexCCCD() {
+        String cccd = txtCCCD.getText().trim();
+        if (cccd.equals("") || !cccd.matches("[0-9]{12}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexSDT() {
+        String sdt = txtSDT.getText().trim();
+        if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
