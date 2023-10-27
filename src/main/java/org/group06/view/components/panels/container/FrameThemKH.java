@@ -172,13 +172,11 @@ public class FrameThemKH extends javax.swing.JFrame {
                         .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlThemKHLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         txtMaKH.setText(pnlKhachHang.getMaKH());
@@ -217,8 +215,10 @@ public class FrameThemKH extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
             } else if (!checkRegexTenKH()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
+                txtTenKH.requestFocus();
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+                txtSDT.requestFocus();
             } else {
                 themKH();
                 this.dispose();

@@ -72,17 +72,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblMaNV" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblTenNV" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblTrangThai" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblCCCD" alignment="0" pref="165" max="32767" attributes="0"/>
+                      <Component id="lblCCCD" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblGioiTinh" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblMK" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblDiaChi" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblSDT" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblChucVu" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblChucVu" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -100,10 +100,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="pwdMK" min="-2" pref="280" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tglShowMK" pref="74" max="32767" attributes="0"/>
+                              <Component id="tglShowMK" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="cmbTrangThai" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cmbChucVu" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmbChucVu" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -112,10 +112,10 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblMaNV" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lblTenNV" min="-2" pref="50" max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Component id="txtMaNV" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="txtTenNV" min="-2" max="-2" attributes="0"/>
@@ -161,7 +161,6 @@
                           <Component id="txtSDT" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -212,6 +211,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTenNVFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaNV">
           <Properties>
@@ -280,6 +282,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDiaChiFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCCCD">
           <Properties>
@@ -302,6 +307,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCCCDFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblChucVu">
           <Properties>
@@ -348,6 +356,9 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSDTFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pwdMK">
           <Properties>

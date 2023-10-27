@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.Color;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
@@ -91,6 +92,11 @@ public class FrameTTNV extends javax.swing.JFrame {
         txtTenNV.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenNV.setEnabled(false);
         txtTenNV.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtTenNV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenNVFocusLost(evt);
+            }
+        });
 
         txtMaNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMaNV.setText(nv.getMaNV());
@@ -114,6 +120,11 @@ public class FrameTTNV extends javax.swing.JFrame {
         txtDiaChi.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtDiaChi.setEnabled(false);
         txtDiaChi.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtDiaChi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDiaChiFocusLost(evt);
+            }
+        });
 
         txtCCCD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtCCCD.setText(nv.getCccd());
@@ -121,6 +132,11 @@ public class FrameTTNV extends javax.swing.JFrame {
         txtCCCD.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCCCD.setEnabled(false);
         txtCCCD.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtCCCD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCCCDFocusLost(evt);
+            }
+        });
 
         lblChucVu.setFont(FontConstant.FONT_LABEL);
         lblChucVu.setText("Chức vụ:");
@@ -137,6 +153,11 @@ public class FrameTTNV extends javax.swing.JFrame {
         txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSDT.setEnabled(false);
         txtSDT.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtSDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSDTFocusLost(evt);
+            }
+        });
 
         pwdMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pwdMK.setText(nv.getMatKhau());
@@ -198,17 +219,17 @@ public class FrameTTNV extends javax.swing.JFrame {
         pnlTTNVLayout.setHorizontalGroup(
             pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTTNVLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(17, 17, 17)
                 .addGroup(pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCCCD, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(lblCCCD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTTNVLayout.createSequentialGroup()
@@ -224,17 +245,17 @@ public class FrameTTNV extends javax.swing.JFrame {
                         .addGroup(pnlTTNVLayout.createSequentialGroup()
                             .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tglShowMK, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                            .addComponent(tglShowMK, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                         .addComponent(cmbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbChucVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cmbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTTNVLayout.setVerticalGroup(
             pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTTNVLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTTNVLayout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
                 .addGroup(pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTTNVLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lblTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +284,7 @@ public class FrameTTNV extends javax.swing.JFrame {
                             .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlTTNVLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(9, 9, 9)
                         .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,8 +293,7 @@ public class FrameTTNV extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         btnCapNhat.setFont(FontConstant.FONT_BUTTON);
@@ -359,6 +379,18 @@ public class FrameTTNV extends javax.swing.JFrame {
             if (txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("")
                     || txtCCCD.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
+            } else if (!checkRegexTenNV()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên");
+                txtTenNV.requestFocus();
+            } else if (!checkRegexCCCD()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại mã căn cước");
+                txtCCCD.requestFocus();
+            } else if (!checkRegexDiaChi()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại địa chỉ");
+                txtDiaChi.requestFocus();
+            } else if (!checkRegexSDT()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+                txtSDT.requestFocus();
             } else {
                 updateNV();
                 this.dispose();
@@ -424,6 +456,70 @@ public class FrameTTNV extends javax.swing.JFrame {
             tglShowMK.setText("Show");
         }
     }//GEN-LAST:event_tglShowMKMouseClicked
+
+    private void txtTenNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusLost
+        if (!checkRegexTenNV()) {
+            txtTenNV.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtTenNV.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtTenNVFocusLost
+
+    private void txtCCCDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCCCDFocusLost
+        if (!checkRegexCCCD()) {
+            txtCCCD.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtCCCD.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtCCCDFocusLost
+
+    private void txtDiaChiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaChiFocusLost
+        if (!checkRegexDiaChi()) {
+            txtDiaChi.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtDiaChi.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtDiaChiFocusLost
+
+    private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
+        if (!checkRegexSDT()) {
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtSDT.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtSDTFocusLost
+
+    private boolean checkRegexTenNV() {
+        String tenNV = txtTenNV.getText().trim();
+        if (tenNV.equals("") || !tenNV.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexDiaChi() {
+        String diaChi = txtDiaChi.getText().trim();
+        if (diaChi.equals("") || !diaChi.matches("^[\\p{L}\\s\\d\\,}]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexCCCD() {
+        String cccd = txtCCCD.getText().trim();
+        if (cccd.equals("") || !cccd.matches("[0-9]{12}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexSDT() {
+        String sdt = txtSDT.getText().trim();
+        if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private void xoaTrang() {
         txtTenNV.setText("");
