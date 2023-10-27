@@ -1,24 +1,42 @@
 package org.group06.view.components.panels.container;
 
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_KhachHang;
+import org.group06.db.dao.DAO_NhaCungCap;
+import org.group06.db.dao.DAO_QuanAo;
+import org.group06.model.entity.KhachHang;
+import org.group06.model.entity.NhaCungCap;
 import org.group06.model.entity.QuanAo;
 import org.group06.view.components.textFields.PlaceholderTextField;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Le Minh Bao
  */
 public class PanelBanHang extends javax.swing.JPanel {
 
+    private final DAO_QuanAo daoQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+    private final ArrayList<QuanAo> dsQuanAo = daoQuanAo.getAll();
+    private final ArrayList<NhaCungCap> dsNhaCungCap = new DAO_NhaCungCap(DatabaseConnect.getConnection()).getAll();
+    private final ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(DatabaseConnect.getConnection()).getAll();
+    private final HashMap<String, String> dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
+
     /**
      * Creates new form pnBanHang
      */
     public PanelBanHang() {
         initComponents();
+        loadAllTableQuanAo(dsQuanAo, dsLoaiQuanAo);
     }
 
     /**
@@ -36,8 +54,8 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlLeft = new javax.swing.JPanel();
         pnlTimKiem = new javax.swing.JPanel();
         txtTimQA = new PlaceholderTextField("Tìm tên sản phẩm");
-        lblDanhMuc = new javax.swing.JLabel();
-        cmbDanhMuc = new javax.swing.JComboBox<>();
+        lblLoaiQuanAo = new javax.swing.JLabel();
+        cmbLoaiQuanAo = new javax.swing.JComboBox<>();
         lblNhaCungCap = new javax.swing.JLabel();
         cmbNhaCungCap = new javax.swing.JComboBox<>();
         lblKichCo = new javax.swing.JLabel();
@@ -47,7 +65,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblQuanAo = new javax.swing.JTable();
         pnlAction = new javax.swing.JPanel();
         lblSoLuongQuanAo = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spnSoLuongQuanAo = new javax.swing.JSpinner();
         btnThemQuanAo = new javax.swing.JButton();
         scrDonHang = new javax.swing.JScrollPane();
         tblDonHang = new javax.swing.JTable();
@@ -55,9 +73,9 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlInfoKhachHang = new javax.swing.JPanel();
         lblTim_SDT_KhachHang = new javax.swing.JLabel();
         txtTim_SDT_KhachHang = new PlaceholderTextField("Tìm số điện thoại");
-        btnTim_KhachHang = new javax.swing.JButton();
         lblKhachHang = new javax.swing.JLabel();
         txtKhachHang = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         tabBanHang_DatHang = new javax.swing.JTabbedPane();
         pnlBanHang = new javax.swing.JPanel();
         lbl_KM_BanHang = new javax.swing.JLabel();
@@ -126,21 +144,32 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Quần Áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txtTimQA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTimQA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimQAActionPerformed(evt);
+        txtTimQA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimQAKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimQAKeyReleased(evt);
             }
         });
 
-        lblDanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblDanhMuc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDanhMuc.setText("Danh Mục");
-        lblDanhMuc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblLoaiQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLoaiQuanAo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblLoaiQuanAo.setText("Loại Quần Áo");
+        lblLoaiQuanAo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        cmbDanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbDanhMuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbDanhMuc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbDanhMuc.setLightWeightPopupEnabled(false);
+        cmbLoaiQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbLoaiQuanAo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        for (String value : dsLoaiQuanAo.values()) {
+            cmbLoaiQuanAo.addItem(value);
+        }
+        cmbLoaiQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmbLoaiQuanAo.setLightWeightPopupEnabled(false);
+        cmbLoaiQuanAo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLoaiQuanAoActionPerformed(evt);
+            }
+        });
 
         lblNhaCungCap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblNhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -148,23 +177,41 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblNhaCungCap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         cmbNhaCungCap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbNhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        for (NhaCungCap nhaCungCap : dsNhaCungCap) {
+            cmbNhaCungCap.addItem(nhaCungCap.getTenNCC());
+        }
         cmbNhaCungCap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbNhaCungCap.setLightWeightPopupEnabled(false);
+        cmbNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNhaCungCapActionPerformed(evt);
+            }
+        });
 
         lblKichCo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblKichCo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblKichCo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblKichCo.setText("Kích Cỡ");
         lblKichCo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         cmbKichCo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbKichCo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbKichCo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "S", "M", "L", "XL", "XXL", "XXXL" }));
         cmbKichCo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbKichCo.setLightWeightPopupEnabled(false);
+        cmbKichCo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbKichCoActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLamMoi.setText("Làm Mới");
         btnLamMoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTimKiemLayout = new javax.swing.GroupLayout(pnlTimKiem);
         pnlTimKiem.setLayout(pnlTimKiemLayout);
@@ -172,72 +219,69 @@ public class PanelBanHang extends javax.swing.JPanel {
             pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimKiemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTimKiemLayout.createSequentialGroup()
-                        .addComponent(txtTimQA, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(lblNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(lblKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtTimQA, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTimKiemLayout.createSequentialGroup()
+                        .addComponent(lblNhaCungCap)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbNhaCungCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlTimKiemLayout.createSequentialGroup()
+                        .addComponent(lblKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
         );
-
-        pnlTimKiemLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbDanhMuc, cmbKichCo, cmbNhaCungCap, txtTimQA});
-
         pnlTimKiemLayout.setVerticalGroup(
             pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTimKiemLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimKiemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlTimKiemLayout.createSequentialGroup()
                         .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbKichCo)
                             .addComponent(lblKichCo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbNhaCungCap)
-                            .addComponent(lblNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbLoaiQuanAo)
+                            .addComponent(lblLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLamMoi)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnLamMoi))
                     .addGroup(pnlTimKiemLayout.createSequentialGroup()
+                        .addComponent(txtTimQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTimQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbDanhMuc)
-                            .addComponent(lblDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cmbNhaCungCap)
+                            .addComponent(lblNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
-        pnlTimKiemLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLamMoi, cmbDanhMuc, txtTimQA});
+        pnlTimKiemLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLamMoi, cmbLoaiQuanAo, txtTimQA});
 
         pnlLeft.add(pnlTimKiem);
 
         scrQuanAo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Danh Sách Quần Áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        scrQuanAo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         tblQuanAo.setAutoCreateRowSorter(true);
         tblQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Mã Quần Áo", "Tên Quần Áo", "Size", "Số Lượng Còn", "Giá Bán"
+                "Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Size", "Nhà Cung Cấp", "Số Lượng Còn", "Giá Bán"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -248,19 +292,37 @@ public class PanelBanHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblQuanAo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    int selectedRow = tblQuanAo.getSelectedRow();
+                    if (selectedRow != -1) {
+                        String maQA = tblQuanAo.getValueAt(selectedRow, 0).toString();
+                        setSoLuongQuanAoToiDa(get_SLQA_TrongKho(maQA));
+                    }
+                }
+            }
+        });
         tblQuanAo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblQuanAo.setFillsViewportHeight(true);
         tblQuanAo.setGridColor(new java.awt.Color(0, 0, 0));
-        tblQuanAo.setPreferredSize(new java.awt.Dimension(300, 800));
         tblQuanAo.setRowHeight(50);
         tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblQuanAo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblQuanAo.setShowGrid(true);
-        tblQuanAo.setVerifyInputWhenFocusTarget(false);
+        tblQuanAo.getTableHeader().setResizingAllowed(false);
+        tblQuanAo.getTableHeader().setReorderingAllowed(false);
+        tblQuanAo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tblQuanAoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tblQuanAoFocusLost(evt);
+            }
+        });
         scrQuanAo.setViewportView(tblQuanAo);
-        if (tblQuanAo.getColumnModel().getColumnCount() > 0) {
-            tblQuanAo.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         pnlLeft.add(scrQuanAo);
 
@@ -269,12 +331,42 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblSoLuongQuanAo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblSoLuongQuanAo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblSoLuongQuanAo.setText("Nhập số lượng quần áo mua");
+        lblSoLuongQuanAo.setName(""); // NOI18N
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnSoLuongQuanAo.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        JSpinner.NumberEditor ne = new JSpinner.NumberEditor(spnSoLuongQuanAo);
+        spnSoLuongQuanAo.setEditor(ne);
+
+        FocusAdapter focusAdapter = new FocusAdapter()
+        {
+            public void focusGained(final FocusEvent e)
+            {
+                String name = e.getComponent().getClass().getName();
+                System.out.println("Focus gained : " + name);
+            }
+
+            public void focusLost(final FocusEvent e) {
+                String name = e.getComponent().getClass().getName();
+                System.out.println("Focus lost : " + name);
+                spnSoLuongQuanAoFocusLost(e);
+            };
+        };
+
+        ((JSpinner.DefaultEditor)spnSoLuongQuanAo.getEditor()).getTextField().addFocusListener(focusAdapter);
+        spnSoLuongQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        spnSoLuongQuanAo.setEnabled(false);
+        spnSoLuongQuanAo.setName("spnSoLuongQuanAo"); // NOI18N
 
         btnThemQuanAo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnThemQuanAo.setText("Thêm Quần Áo");
         btnThemQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThemQuanAo.setEnabled(false);
+        btnThemQuanAo.setName("btnThemQuanAo"); // NOI18N
+        btnThemQuanAo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemQuanAoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlActionLayout = new javax.swing.GroupLayout(pnlAction);
         pnlAction.setLayout(pnlActionLayout);
@@ -284,7 +376,7 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spnSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThemQuanAo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -292,15 +384,15 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlActionLayout.setVerticalGroup(
             pnlActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlActionLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(pnlActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnThemQuanAo)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSoLuongQuanAo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlActionLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jSpinner1, lblSoLuongQuanAo});
+        pnlActionLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblSoLuongQuanAo, spnSoLuongQuanAo});
 
         pnlLeft.add(pnlAction);
 
@@ -309,10 +401,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblDonHang.setAutoCreateRowSorter(true);
         tblDonHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Quần Áo", "Tên Quần Áo", "Size", "Đơn Giá", "Số Lượng", "Thành Tiền"
@@ -334,7 +423,8 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblDonHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDonHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDonHang.setShowGrid(true);
-        tblDonHang.setVerifyInputWhenFocusTarget(false);
+        tblDonHang.getTableHeader().setResizingAllowed(false);
+        tblDonHang.getTableHeader().setReorderingAllowed(false);
         scrDonHang.setViewportView(tblDonHang);
 
         pnlLeft.add(scrDonHang);
@@ -350,11 +440,6 @@ public class PanelBanHang extends javax.swing.JPanel {
 
         txtTim_SDT_KhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        btnTim_KhachHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnTim_KhachHang.setText("Tìm");
-        btnTim_KhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTim_KhachHang.setEnabled(false);
-
         lblKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblKhachHang.setText("Khách hàng hiện tại");
 
@@ -362,6 +447,8 @@ public class PanelBanHang extends javax.swing.JPanel {
         txtKhachHang.setText("Khách vãng lai");
         txtKhachHang.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtKhachHang.setEnabled(false);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon/black/clear.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlInfoKhachHangLayout = new javax.swing.GroupLayout(pnlInfoKhachHang);
         pnlInfoKhachHang.setLayout(pnlInfoKhachHangLayout);
@@ -372,11 +459,11 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addGroup(pnlInfoKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTim_SDT_KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtKhachHang)
                     .addComponent(txtTim_SDT_KhachHang)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoKhachHangLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnTim_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlInfoKhachHangLayout.createSequentialGroup()
+                        .addComponent(txtKhachHang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlInfoKhachHangLayout.setVerticalGroup(
@@ -385,13 +472,13 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTim_SDT_KhachHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTim_SDT_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTim_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTim_SDT_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblKhachHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlInfoKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -482,7 +569,7 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addComponent(txt_KM_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_KM_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 987, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1005, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_BanHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,15 +626,16 @@ public class PanelBanHang extends javax.swing.JPanel {
         lbl_TongTien_DatHang.setOpaque(true);
 
         chk_KH_TraTruoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        chk_KH_TraTruoc.setSelected(true);
         chk_KH_TraTruoc.setText("Khách trả tiền trước");
 
         txt_TienKhachTra_DatHang.setBackground(java.awt.Color.lightGray);
         txt_TienKhachTra_DatHang.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         txt_TienKhachTra_DatHang.setForeground(java.awt.Color.red);
         txt_TienKhachTra_DatHang.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        txt_TienKhachTra_DatHang.setText("38,939,235,000 VND");
+        txt_TienKhachTra_DatHang.setText("0 VND");
         txt_TienKhachTra_DatHang.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Tiền Khách Đưa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        txt_TienKhachTra_DatHang.setDisabledTextColor(java.awt.Color.red);
+        txt_TienKhachTra_DatHang.setEnabled(false);
 
         spr_TienThua_DatHang.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -607,7 +695,7 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addComponent(txt_LM_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_KM_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 905, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 923, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_DatHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -670,30 +758,112 @@ public class PanelBanHang extends javax.swing.JPanel {
         add(pnlMain);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTimQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimQAActionPerformed
-        String keyword = txtTimQA.getText();
-        System.out.println(keyword);
-    }//GEN-LAST:event_txtTimQAActionPerformed
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        txtTimQA.setText("Tìm tên sản phẩm");
+        txtTimQA.setForeground(Color.GRAY);
+        cmbLoaiQuanAo.setSelectedIndex(0);
+        cmbKichCo.setSelectedIndex(0);
+        cmbNhaCungCap.setSelectedIndex(0);
+        loadAllTableQuanAo(dsQuanAo, dsLoaiQuanAo);
+        pnlBanHang.requestFocus();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
+    private void cmbLoaiQuanAoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiQuanAoActionPerformed
+        xuLyTimKiem();
+    }//GEN-LAST:event_cmbLoaiQuanAoActionPerformed
+
+    private void cmbNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNhaCungCapActionPerformed
+        xuLyTimKiem();
+    }//GEN-LAST:event_cmbNhaCungCapActionPerformed
+
+    private void cmbKichCoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKichCoActionPerformed
+        xuLyTimKiem();
+    }//GEN-LAST:event_cmbKichCoActionPerformed
+
+    private void txtTimQAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimQAKeyPressed
+        xuLyTimKiem();
+    }//GEN-LAST:event_txtTimQAKeyPressed
+
+    private void txtTimQAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimQAKeyReleased
+        xuLyTimKiem();
+    }//GEN-LAST:event_txtTimQAKeyReleased
+
+    private void tblQuanAoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblQuanAoFocusGained
+        spnSoLuongQuanAo.setEnabled(true);
+        btnThemQuanAo.setEnabled(true);
+    }//GEN-LAST:event_tblQuanAoFocusGained
+
+    private void tblQuanAoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblQuanAoFocusLost
+        Component focusedComponent = evt.getOppositeComponent(); // Lấy component đang được focus
+        // Kiểm tra xem component đang được focus có phải là spnSoLuongQuanAo hoặc btnThemQuanAo hay không
+        if (focusedComponent != null) {
+            // Kiểm tra xem component đang được focus có phải là Spinner.formattedTextField của spnSoLuongQuanAo
+            if (focusedComponent.equals(spnSoLuongQuanAo.getEditor().getComponent(0))) {
+                // Nếu là Spinner.formattedTextField của spnSoLuongQuanAo, không làm gì cả
+                return;
+            }
+
+            // Kiểm tra xem component đang được focus có phải là btnThemQuanAo hay không
+            if (focusedComponent.equals(btnThemQuanAo)) {
+                // Nếu là btnThemQuanAo, không làm gì cả
+                spnSoLuongQuanAo.setValue(1);
+                return;
+            }
+        }
+
+        // Nếu không phải, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+        disableBanHang();
+    }//GEN-LAST:event_tblQuanAoFocusLost
+
+    private void spnSoLuongQuanAoFocusLost(java.awt.event.FocusEvent evt) {
+        Component focusedComponent = evt.getOppositeComponent();
+        System.out.println(focusedComponent);
+        if (focusedComponent != null) {
+            if (focusedComponent.equals(tblQuanAo)) {
+                // Nếu là tblQuanAo, set số lượng về 1
+                spnSoLuongQuanAo.setValue(1);
+            } else {
+                // Nếu không phải cả hai trường hợp trên, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+                disableBanHang();
+            }
+        } else {
+            // Nếu focusedComponent là null, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+            disableBanHang();
+        }
+    }
+
+    private void btnThemQuanAoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemQuanAoActionPerformed
+        QuanAo quanAoDuocChon = new QuanAo();
+        for (QuanAo quanAo : dsQuanAo) {
+            if (quanAo.getMaQA().equals(tblQuanAo.getValueAt(tblQuanAo.getSelectedRow(), 0))) {
+                quanAoDuocChon = quanAo;
+                break;
+            }
+        }
+        int soLuongMua = Integer.parseInt(((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().getText());
+        themQuanAoVaoDonHang(quanAoDuocChon, soLuongMua,dsLoaiQuanAo);
+        disableBanHang();
+    }//GEN-LAST:event_btnThemQuanAoActionPerformed
+
+    // <editor-fold defaultstate="collapsed" desc="Initiate Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatHang;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemQuanAo;
-    private javax.swing.JButton btnTim_KhachHang;
     private javax.swing.JButton btn_KM_BanHang;
     private javax.swing.JButton btn_KM_DatHang;
     private javax.swing.JCheckBox chk_KH_TraTruoc;
     private javax.swing.JCheckBox chk_XuatDH_DatHang;
     private javax.swing.JCheckBox chk_XuatHD_BanHang;
-    private javax.swing.JComboBox<String> cmbDanhMuc;
     private javax.swing.JComboBox<String> cmbKichCo;
+    private javax.swing.JComboBox<String> cmbLoaiQuanAo;
     private javax.swing.JComboBox<String> cmbNhaCungCap;
     private com.toedter.calendar.JDateChooser dchNgayNhanHang;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JLabel lblDanhMuc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblKhachHang;
     private javax.swing.JLabel lblKichCo;
+    private javax.swing.JLabel lblLoaiQuanAo;
     private javax.swing.JLabel lblNgayNhanHang;
     private javax.swing.JLabel lblNhaCungCap;
     private javax.swing.JLabel lblSoLuongQuanAo;
@@ -718,6 +888,7 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTitle;
     private javax.swing.JScrollPane scrDonHang;
     private javax.swing.JScrollPane scrQuanAo;
+    private javax.swing.JSpinner spnSoLuongQuanAo;
     private javax.swing.JSeparator spr_TienThua_BanHang;
     private javax.swing.JSeparator spr_TienThua_DatHang;
     private javax.swing.JSeparator spr_VAT_BanHang;
@@ -733,22 +904,101 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TienKhachTra_BanHang;
     private javax.swing.JTextField txt_TienKhachTra_DatHang;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 
-    private void loadTableQuanAo(ArrayList<QuanAo> dsQuanAo) {
-        
-//        for (QuanAo quanAo = dsQuanAo) {
-//            Object[] data = {quanAo.getMaQA(), quanAo.getTenQA(), quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())};
-//            // Thêm dữ liệu vào table
-//            DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
-//            modelQuanAo.addRow(data);
-//            
-//        }
-//        
-        DefaultTableModel tblModel = new DefaultTableModel();
+    /**
+     * Cập nhật bảng hiển thị quần áo dựa trên danh sách quần áo và loại quần
+     * áo.
+     *
+     * @param dsQuanAo Danh sách sản phẩm quần áo.
+     * @param dsLoaiQuanAo Danh sách loại quần áo.
+     */
+    private void loadAllTableQuanAo(ArrayList<QuanAo> dsQuanAo, HashMap<String, String> dsLoaiQuanAo) {
+        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+        modelQuanAo.setRowCount(0);
+        for (QuanAo quanAo : dsQuanAo) {
+            Object[] data = {
+                quanAo.getMaQA(), quanAo.getTenQA(),
+                dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()),
+                quanAo.getKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
+                quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())
+            };
+            // Thêm dữ liệu vào table
+            modelQuanAo.addRow(data);
+        }
     }
-    
+
+    private void themQuanAoVaoDonHang(QuanAo quanAo, int soLuongMua, HashMap<String, String> dsLoaiQuanAo) {
+        DefaultTableModel modelDonHang = (DefaultTableModel) this.tblDonHang.getModel();
+        double giaBan = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan());
+        double thanhTien = tinhThanhTien(tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), soLuongMua);
+        Object[] data = {
+            quanAo.getMaQA(), quanAo.getTenQA(),
+            quanAo.getKichThuoc(), giaBan,
+            soLuongMua, thanhTien
+        };
+        // Thêm dữ liệu vào table
+        modelDonHang.addRow(data);
+    }
+
+    /**
+     * Tính giá bán dựa trên giá nhập quần áo và lợi nhuận.
+     *
+     * @param giaNhap Giá nhập của sản phẩm.
+     * @param loiNhuan Lợi nhuận được áp dụng cho sản phẩm (dưới dạng phần
+     * trăm).
+     * @return Giá bán của sản phẩm.
+     */
     private double tinhGiaBan(double giaNhap, double loiNhuan) {
         return giaNhap + (giaNhap * loiNhuan / 100);
     }
 
+    private double tinhThanhTien(double giaBan, int soLuong) {
+        return giaBan * soLuong;
+    }
+
+    /**
+     * Phương thức này xử lý tìm kiếm quần áo dựa trên các thông tin được chọn
+     * từ giao diện người dùng.
+     */
+    private void xuLyTimKiem() {
+        String tenQuanAoTim = txtTimQA.getText().equals("Tìm tên sản phẩm") ? "" : txtTimQA.getText().toLowerCase().trim();
+        String loaiQuanAo = cmbLoaiQuanAo.getSelectedItem().toString();
+        String kichCo = cmbKichCo.getSelectedItem().toString();
+        String nhaCungCap = cmbNhaCungCap.getSelectedItem().toString();
+        ArrayList<QuanAo> dsQuanAoTimDuoc = new ArrayList<>();
+
+        for (QuanAo quanAo : this.dsQuanAo) {
+            boolean matchTen = tenQuanAoTim.isEmpty() || quanAo.getTenQA().toLowerCase().contains(tenQuanAoTim);
+            boolean matchLoai = loaiQuanAo.equals("Tất Cả") || dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()).equalsIgnoreCase(loaiQuanAo);
+            boolean matchKichThuoc = kichCo.equals("Tất Cả") || quanAo.getKichThuoc().equalsIgnoreCase(kichCo);
+            boolean matchNhaCungCap = nhaCungCap.equals("Tất Cả") || quanAo.getNhaCungCap().getTenNCC().toLowerCase().contains(nhaCungCap.toLowerCase());
+
+            if (matchTen && matchLoai && matchKichThuoc && matchNhaCungCap) {
+                dsQuanAoTimDuoc.add(quanAo);
+            }
+        }
+        // Cập nhật kết quả tìm kiếm lên bảng
+        loadAllTableQuanAo(dsQuanAoTimDuoc, dsLoaiQuanAo);
+    }
+
+    private int get_SLQA_TrongKho(String maQA) {
+        for (QuanAo quanAo : dsQuanAo) {
+            if (quanAo.getMaQA().equals(maQA)) {
+                return quanAo.getSoLuong();
+            }
+        }
+        return 0;
+    }
+
+    private void setSoLuongQuanAoToiDa(int soLuong) {
+        this.spnSoLuongQuanAo.setModel(new SpinnerNumberModel(1, 1, soLuong, 1));
+    }
+
+    private void disableBanHang() {
+        ((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().setText("1");
+        spnSoLuongQuanAo.setEnabled(false);
+        btnThemQuanAo.setEnabled(false);
+        tblQuanAo.clearSelection();
+    }
 }

@@ -4,13 +4,15 @@
  */
 package org.group06.view.components.panels.container;
 
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_QuanAo;
+import org.group06.model.entity.QuanAo;
 import org.group06.utils.*;
 import org.group06.view.components.panels.ImagePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,10 +21,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.group06.db.DatabaseConnect;
-import org.group06.db.dao.DAO_QuanAo;
-import org.group06.model.entity.QuanAo;
 
 /**
  * @author lemin
@@ -826,7 +824,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         int trangThai = this.cmbTrangThai.getSelectedIndex();
         String maQuanAo = taoMaQuanAo(this.txtTenQA.getText());
 //      Tổng hợp dữ liệu
-        Object[] data = {maQuanAo, NameStandard.formatCapitilize(this.txtTenQA.getText()), this.cmbLoaiQA.getItemAt(loaiQA), this.cmbSize.getItemAt(size),
+        Object[] data = {maQuanAo, NameStandard.formatCapitalize(this.txtTenQA.getText()), this.cmbLoaiQA.getItemAt(loaiQA), this.cmbSize.getItemAt(size),
                 this.txtSoLuongQA.getText(), this.txtThuongHieu.getText(), this.cmbNhaCungCap.getItemAt(nhaCungCap),
                 this.txtGiaNhap.getText(), this.txtLoiNhuan.getText(), this.txtGiaBan.getText(), this.cmbTrangThai.getItemAt(trangThai)};
 //      Thêm dữ liệu vào table
@@ -918,7 +916,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private void txtTenQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenQAFocusLost
         String tenQuanAo = this.txtTenQA.getText();
 //        ComponentStatus.checkEmptyField(this.txtTenQA);
-        this.txtTenQA.setText(NameStandard.formatCapitilize(tenQuanAo));
+        this.txtTenQA.setText(NameStandard.formatCapitalize(tenQuanAo));
     }//GEN-LAST:event_txtTenQAFocusLost
 
     private void txtLoiNhuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoiNhuanFocusLost

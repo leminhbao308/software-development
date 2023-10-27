@@ -286,7 +286,9 @@ public class Frame extends JFrame {
         mnTaiKhoan.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_USER));
 
         mnuMain.add(mnNhanVien);
+        mnuMain.add(Box.createHorizontalStrut(10));
         mnuMain.add(mnKhachHang);
+        mnuMain.add(Box.createHorizontalStrut(10));
         mnuMain.add(mnQuanAo);
         mnuMain.add(Box.createHorizontalGlue());
         mnuMain.add(mnTaiKhoan);
