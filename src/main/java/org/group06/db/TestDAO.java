@@ -20,10 +20,10 @@ public class TestDAO {
         try (Connection connection = DatabaseConnect.getConnection()) {
             if (connection != null) {
                 System.out.println("Kết nối thành công!");
-//                testDAO_NhaCungCap(connection);
-//                testDAO_NhanVien(connection);
-//                test_DAO_QuanAo(connection);
-                    test_DAO_KhachHang(connection);
+                testDAO_NhaCungCap(connection);
+                testDAO_NhanVien(connection);
+                test_DAO_QuanAo(connection);
+                test_DAO_KhachHang(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -44,22 +44,22 @@ public class TestDAO {
         }
 
         // Thêm một nhà cung cấp mới
-        NhaCungCap newSupplier = new NhaCungCap("NCC002", "Cửa Hàng Quần Áo Nam Nam", "456 Ðường B, Quận 2, TP.HCM", "0900125199");
-        supplierDAO.add(newSupplier);
-        System.out.println("Nhà cung cấp mới đã được thêm.");
-
-        // Cập nhật thông tin một nhà cung cấp
-        NhaCungCap updatedSupplier = supplierDAO.getByID("NCC001");
-        if (updatedSupplier != null) {
-            updatedSupplier.setTenNCC("Công ty Áo Sơ Mi Việt");
-            supplierDAO.update(updatedSupplier);
-            System.out.println("Thông tin nhà cung cấp đã được cập nhật.");
-        }
-
-        // Xóa một nhà cung cấp
-        String supplierIdToDelete = "NCC016";
-        supplierDAO.delete(supplierIdToDelete);
-        System.out.println("Nhà cung cấp có mã " + supplierIdToDelete + " đã bị xóa.");
+//        NhaCungCap newSupplier = new NhaCungCap("NCC002", "Cửa Hàng Quần Áo Nam Nam", "456 Ðường B, Quận 2, TP.HCM", "0900125199");
+//        supplierDAO.add(newSupplier);
+//        System.out.println("Nhà cung cấp mới đã được thêm.");
+//
+//        // Cập nhật thông tin một nhà cung cấp
+//        NhaCungCap updatedSupplier = supplierDAO.getByID("NCC001");
+//        if (updatedSupplier != null) {
+//            updatedSupplier.setTenNCC("Công ty Áo Sơ Mi Việt");
+//            supplierDAO.update(updatedSupplier);
+//            System.out.println("Thông tin nhà cung cấp đã được cập nhật.");
+//        }
+//
+//        // Xóa một nhà cung cấp
+//        String supplierIdToDelete = "NCC016";
+//        supplierDAO.delete(supplierIdToDelete);
+//        System.out.println("Nhà cung cấp có mã " + supplierIdToDelete + " đã bị xóa.");
     }
 
     private static void testDAO_NhanVien(Connection connection) {
@@ -121,7 +121,7 @@ public class TestDAO {
             System.out.println(quanAoM);
         }
     }
-    
+
     private static void test_DAO_KhachHang(Connection connection) {
         // Tạo đối tượng QuanAoDAO
         DAO_KhachHang khachHangDAO = new DAO_KhachHang(connection);

@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class NameStandard {
 
     /**
-     * @param formatCapitilize Định dạng lại In Hoa chữ cái đầu
+     * Định dạng lại In Hoa chữ cái đầu tiên của mỗi từ trong chuỗi
+     *
+     * @param text Chuỗi cần chuẩn hóa
+     * @return Chuỗi đã được chuẩn hóa
      */
-
-    public static String formatCapitilize(String text) {
+    public static String formatCapitalize(String text) {
         String resultFormat = "";
         String trimText = text.trim();
         String lowerText = trimText.toLowerCase();
@@ -28,7 +30,10 @@ public class NameStandard {
     }
 
     /**
-     * @param removeDiacritics Loại bỏ dấu tiếng Việt
+     * Loại bỏ dấu tiếng Việt trong chuỗi
+     *
+     * @param input Chuỗi cần loại bỏ dấu
+     * @return Chuỗi đã được loại bỏ dấu
      */
     public static String removeDiacritics(String input) {
         String regex = "\\p{InCombiningDiacriticalMarks}+";
