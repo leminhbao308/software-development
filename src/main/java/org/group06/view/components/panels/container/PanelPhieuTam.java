@@ -31,8 +31,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitlePhieuDat = new javax.swing.JLabel();
-        btnTimMaPhieuDat = new org.group06.view.components.buttons.StaticRoundButton("", ImagePath.ICON_SEARCH, ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        txtTimMaPhieuDat = new org.group06.view.components.textFields.TextField("Mã phiếu tạm cần tìm", ColorConstant.BLACK);
         scrPhieuDat = new javax.swing.JScrollPane();
         tblPhieuDat = new javax.swing.JTable();
 
@@ -41,18 +39,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         lblTitlePhieuDat.setFont(org.group06.utils.FontConstant.FONT_HEADER);
         lblTitlePhieuDat.setForeground(org.group06.utils.ColorConstant.WHITE);
         lblTitlePhieuDat.setText("Thông Tin Phiếu Tạm");
-
-        btnTimMaPhieuDat.setToolTipText("Click để tìm kiếm khách hàng");
-        btnTimMaPhieuDat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTimMaPhieuDat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtTimMaPhieuDat.setFont(FontConstant.FONT_TEXT);
-        txtTimMaPhieuDat.setToolTipText("Nhập mã phiếu tạm cần tìm");
-        txtTimMaPhieuDat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimMaPhieuDatActionPerformed(evt);
-            }
-        });
 
         tblPhieuDat.setAutoCreateRowSorter(true);
         tblPhieuDat.setBackground(org.group06.utils.ColorConstant.BACKGROUND_NORMAL);
@@ -99,10 +85,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitlePhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimMaPhieuDat, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTimMaPhieuDat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(589, 589, 589))
                     .addComponent(scrPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -110,26 +93,17 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTimMaPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTimMaPhieuDat)
-                    .addComponent(lblTitlePhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addComponent(lblTitlePhieuDat, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addComponent(scrPhieuDat, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTimMaPhieuDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimMaPhieuDatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimMaPhieuDatActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTimMaPhieuDat;
     private javax.swing.JLabel lblTitlePhieuDat;
     private javax.swing.JScrollPane scrPhieuDat;
     private javax.swing.JTable tblPhieuDat;
-    private javax.swing.JTextField txtTimMaPhieuDat;
     // End of variables declaration//GEN-END:variables
 }
