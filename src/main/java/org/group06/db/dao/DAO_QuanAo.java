@@ -1,5 +1,6 @@
 package org.group06.db.dao;
 
+import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.QuanAo;
 
 import java.sql.Connection;
@@ -99,6 +100,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         }
     }
 
+
     @Override
     public boolean update(QuanAo quanAo) {
         try {
@@ -114,6 +116,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             statement.setString(8, quanAo.getNhaCungCap().getMaNCC());
             statement.setBoolean(9, quanAo.isTrangThai());
             statement.setString(10, quanAo.getHinhAnh());
+            statement.setString(11, quanAo.getMaQA());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

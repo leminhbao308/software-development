@@ -1,15 +1,10 @@
 package org.group06.db;
 
-import org.group06.db.dao.DAO_KhachHang;
-import org.group06.db.dao.DAO_NhaCungCap;
-import org.group06.db.dao.DAO_NhanVien;
-import org.group06.db.dao.DAO_QuanAo;
-import org.group06.model.entity.KhachHang;
-import org.group06.model.entity.NhaCungCap;
-import org.group06.model.entity.NhanVien;
-import org.group06.model.entity.QuanAo;
+import org.group06.db.dao.*;
+import org.group06.model.entity.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,10 +15,11 @@ public class TestDAO {
         try (Connection connection = DatabaseConnect.getConnection()) {
             if (connection != null) {
                 System.out.println("Kết nối thành công!");
-                testDAO_NhaCungCap(connection);
-                testDAO_NhanVien(connection);
-                test_DAO_QuanAo(connection);
-                test_DAO_KhachHang(connection);
+//                testDAO_NhaCungCap(connection);
+//                testDAO_NhanVien(connection);
+//                test_DAO_QuanAo(connection);
+//                test_DAO_KhachHang(connection);
+                test_DAO_KhuyenMai(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -111,7 +107,7 @@ public class TestDAO {
         System.out.println("Quần Áo có mã " + id + ":" + quanAo);
 
         // Thêm quần áo mới
-        QuanAo newQuanAo = new QuanAo("VHN-0001-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "Hinh Anh Moi");
+        QuanAo newQuanAo = new QuanAo("VHN-0002-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "C:\\Users\\lehoa\\Desktop\\example.jpg");
         quanAoDAO.add(newQuanAo);
         System.out.println("Quần Áo mới đã được thêm.");
 
@@ -136,5 +132,46 @@ public class TestDAO {
         String id = "0762818855";
         KhachHang khachHang = khachHangDAO.getByID(id);
         System.out.println("Khách hàng có mã " + id + ":" + khachHang);
+    }
+
+    private static void test_DAO_KhuyenMai(Connection connection) {
+        // Tạo đối tượng QuanAoDAO
+        DAO_KhuyenMai khuyenMaiDAO = new DAO_KhuyenMai(connection);
+
+        // Lấy danh sách tất cả chương trình khuyến mãi
+        List<KhuyenMai> dsKhuyenMai = khuyenMaiDAO.getAll();
+        System.out.println("Danh sách QuanAo:");
+        for (KhuyenMai khuyenMai : dsKhuyenMai) {
+            System.out.println(khuyenMai);
+        }
+
+        String id = "KM020";
+        KhuyenMai khuyenMai = khuyenMaiDAO.getByID(id);
+        System.out.println("Khách hàng có mã " + id + ":" + khuyenMai);
+
+//        KhuyenMai khuyenMaiNew = new KhuyenMai("KM021", "BlackFriday", 1, new Date(2022, 8, 1), new Date(2022, 8, 2), 200);
+//        if (khuyenMaiDAO.add(khuyenMaiNew)) {
+//            System.out.println("Thêm thành công");
+//        }
+//// Lấy danh sách tất cả chương trình khuyến mãi
+//        List<KhuyenMai> dsKhuyenMai1 = khuyenMaiDAO.getAll();
+//        System.out.println("Danh sách QuanAo:");
+//        for (KhuyenMai khuyenMai1 : dsKhuyenMai1) {
+//            System.out.println(khuyenMai1);
+//        }
+
+        // Cập nhật thông tin một nhân viên
+        KhuyenMai updatedKhuyenMai = khuyenMaiDAO.getByID("KM020");
+        if (updatedKhuyenMai != null) {
+            updatedKhuyenMai.setTenCTKM("Kỷ Niệm 5 năm khai trương cửa hàng");
+            khuyenMaiDAO.update(updatedKhuyenMai);
+            System.out.println("Thông tin khuyến mãi đã được cập nhật.");
+        }
+        // Lấy danh sách tất cả chương trình khuyến mãi
+        List<KhuyenMai> dsKhuyenMai2 = khuyenMaiDAO.getAll();
+        System.out.println("Danh sách Khuyến mãi:");
+        for (KhuyenMai khuyenMai2 : dsKhuyenMai2) {
+            System.out.println(khuyenMai2);
+        }
     }
 }
