@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.io.ByteArrayOutputStream;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.QuanAo;
@@ -14,6 +15,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -21,6 +25,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.group06.db.dao.DAO_NhaCungCap;
+import org.group06.model.entity.NhaCungCap;
 
 /**
  * @author lemin
@@ -688,9 +694,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }
 
     /**
-     * @pagram setAllField
-     * Xóa trắng field + combobox xử lý trạng thái
-     * Xóa trắng tất cả các fields và combobox + status các field và combobox
+     * @pagram setAllField Xóa trắng field + combobox xử lý trạng thái Xóa trắng
+     * tất cả các fields và combobox + status các field và combobox
      */
     public void setAllField(Boolean status) {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtMaQA, this.txtTenQA, this.txtSoLuongQA,
@@ -706,7 +711,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }
 
     /**
-     * @pagram setFieldUpdate Xóa trắng các fields(Ngoại trừ mã) và combobox + enable các field(ngoại trừ mã và giá bán) và combobox
+     * @pagram setFieldUpdate Xóa trắng các fields(Ngoại trừ mã) và combobox +
+     * enable các field(ngoại trừ mã và giá bán) và combobox
      */
     public void setFieldUpdate() {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA,
@@ -719,8 +725,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setDefaultCmb(listCmb);
         ComponentStatus.setComboBoxStatus(listCmb, true);
     }
-
-
+    File file = null;
     private void btnUploadImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImgActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Chọn hình ảnh quần áo");
@@ -744,14 +749,18 @@ public class PanelQuanAo extends javax.swing.JPanel {
         });
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             try {
-                File file = chooser.getSelectedFile();
+                file = chooser.getSelectedFile();
 //                Load hình ảnh
                 loadImage(file.toURI().toURL());
                 System.out.println(file.getPath());
+
             } catch (MalformedURLException ex) {
+                Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
     }//GEN-LAST:event_btnUploadImgActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
@@ -819,18 +828,62 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
 //        Lấy dữ liệu
+        QuanAo qa = new QuanAo();
         int loaiQA = this.cmbLoaiQA.getSelectedIndex();
         int size = this.cmbSize.getSelectedIndex();
         int nhaCungCap = this.cmbNhaCungCap.getSelectedIndex();
         int trangThai = this.cmbTrangThai.getSelectedIndex();
-        String maQuanAo = taoMaQuanAo(this.txtTenQA.getText());
-//      Tổng hợp dữ liệu
-        Object[] data = {maQuanAo, NameStandard.formatCapitalize(this.txtTenQA.getText()), this.cmbLoaiQA.getItemAt(loaiQA), this.cmbSize.getItemAt(size),
-                this.txtSoLuongQA.getText(), this.txtThuongHieu.getText(), this.cmbNhaCungCap.getItemAt(nhaCungCap),
-                this.txtGiaNhap.getText(), this.txtLoiNhuan.getText(), this.txtGiaBan.getText(), this.cmbTrangThai.getItemAt(trangThai)};
-//      Thêm dữ liệu vào table
-        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
-        modelQuanAo.addRow(data);
+//        String maQuanAo = taoMaQuanAo(this.txtTenQA.getText());
+////      Tổng hợp dữ liệu
+//        Object[] data = {maQuanAo, NameStandard.formatCapitalize(this.txtTenQA.getText()), this.cmbLoaiQA.getItemAt(loaiQA), this.cmbSize.getItemAt(size),
+//                this.txtSoLuongQA.getText(), this.txtThuongHieu.getText(), this.cmbNhaCungCap.getItemAt(nhaCungCap),
+//                this.txtGiaNhap.getText(), this.txtLoiNhuan.getText(), this.txtGiaBan.getText(), this.cmbTrangThai.getItemAt(trangThai)};
+////      Thêm dữ liệu vào table
+//        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+//        modelQuanAo.addRow(data);
+        String tenQuanAo =  NameStandard.formatCapitalize(this.txtTenQA.getText());
+        String loaiQuanAo = this.cmbLoaiQA.getItemAt(loaiQA);
+        String sizeQuanAo = this.cmbSize.getItemAt(size);
+        int soLuongQuanAo = parseStringtoInt(this.txtSoLuongQA.getText());
+        String tenThuongHieu = this.txtThuongHieu.getText();
+        String maNhaCungCap = "NCC008";
+        double giaNhap = parseStringtoDouble(this.txtGiaNhap.getText());
+        double loiNhuan = parseStringtoDouble(this.txtLoiNhuan.getText());
+        boolean trangThaiQuanAo = true;
+        String maQA = taoMaQuanAo(this.txtTenQA.getText());
+        
+        try {
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+            }
+            qa.setHinhAnh(bos.toByteArray());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        qa.setMaQA(maQA);
+        qa.setTenQA(tenQuanAo);
+        qa.setLoaiQuanAo("LQA006");
+        qa.setKichThuoc(sizeQuanAo);
+        qa.setSoLuong(soLuongQuanAo);
+        qa.setThuongHieu(tenThuongHieu);
+        qa.setGiaNhap(giaNhap);
+        qa.setLoiNhuan(loiNhuan);
+        qa.setNhaCungCap(new NhaCungCap(maNhaCungCap));
+        qa.setTrangThai(trangThaiQuanAo);
+        
+        DAO_QuanAo addQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+        if (addQuanAo.add(qa)) {
+            System.out.println("Thêm mới thành công");
+        }
         xoaTrang();
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -863,7 +916,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
         for (QuanAo qa : this.dsQA) {
             Object[] data = {qa.getMaQA(), qa.getTenQA(), qa.getLoaiQuanAo(), qa.getKichThuoc(),
-                    qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), qa.getGiaNhap(), qa.getLoiNhuan(), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
+                qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), qa.getGiaNhap(), qa.getLoiNhuan(), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
 //      Thêm dữ liệu vào table
             modelQuanAo.addRow(data);
         }
@@ -882,13 +935,13 @@ public class PanelQuanAo extends javax.swing.JPanel {
         }
     }
 
-    //    Load dữ liệu lên fields
+//    Load dữ liệu lên fields
     private void tblQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanAoMouseClicked
         java.util.List<JButton> listBtnEnable = java.util.Arrays.asList(this.btnHuy, this.btnCapNhat);
         ComponentStatus.setStatusBtn(listBtnEnable, true);
         ComponentStatus.setStatusBtn(this.btnThemMoi, false);
         int vitri = this.tblQuanAo.getSelectedRow();
-        //      Xử lý đổ dữ liệu từ table lên fields
+//      Xử lý đổ dữ liệu từ table lên fields
         this.txtMaQA.setText(tblQuanAo.getValueAt(vitri, 0).toString());
         this.txtTenQA.setText(tblQuanAo.getValueAt(vitri, 1).toString());
 //        Xử lý lấy loại quần áo
@@ -896,14 +949,12 @@ public class PanelQuanAo extends javax.swing.JPanel {
             if (tblQuanAo.getValueAt(vitri, 2).toString().equalsIgnoreCase(this.cmbLoaiQA.getItemAt(i))) {
                 this.cmbLoaiQA.setSelectedIndex(i);
             }
-
         }
 //        Xử lý lấy size
         for (int i = 0; i < this.cmbSize.getItemCount(); i++) {
             if (tblQuanAo.getValueAt(vitri, 3).toString().equalsIgnoreCase(this.cmbSize.getItemAt(i))) {
                 this.cmbSize.setSelectedIndex(i);
             }
-
         }
         this.txtSoLuongQA.setText(tblQuanAo.getValueAt(vitri, 4).toString());
         this.txtThuongHieu.setText(tblQuanAo.getValueAt(vitri, 5).toString());
@@ -917,7 +968,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.txtGiaNhap.setText(tblQuanAo.getValueAt(vitri, 7).toString());
         this.txtLoiNhuan.setText(tblQuanAo.getValueAt(vitri, 8).toString());
         this.txtGiaBan.setText(tblQuanAo.getValueAt(vitri, 9).toString());
-        //        Xử lý lấy trạng thái của quần áo
+//        Xử lý lấy trạng thái của quần áo
         for (int i = 0; i < this.cmbTrangThai.getItemCount(); i++) {
             if (tblQuanAo.getValueAt(vitri, 10).toString().equalsIgnoreCase(this.cmbTrangThai.getItemAt(i))) {
                 this.cmbTrangThai.setSelectedIndex(i);
@@ -1010,6 +1061,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
     private ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConnect.getConnection()).getAll();
+
     private void xoaTrang() {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtMaQA, this.txtTenQA, this.txtSoLuongQA, this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
         java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbSize, this.cmbNhaCungCap, this.cmbTrangThai);

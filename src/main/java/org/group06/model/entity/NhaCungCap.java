@@ -29,6 +29,10 @@ public class NhaCungCap {
         this.setDiaChi(diaChi);
         this.setSoDienThoai(soDienThoai);
     }
+    
+    public NhaCungCap(String maNCC) {
+        this.setMaNCC(maNCC);
+    }
 
     public String getMaNCC() {
         return maNCC;
