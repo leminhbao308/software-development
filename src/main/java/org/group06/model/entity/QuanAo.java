@@ -14,7 +14,7 @@ public class QuanAo {
     private double loiNhuan;
     private NhaCungCap nhaCungCap;
     private boolean trangThai;
-    private String hinhAnh;
+    private byte[] hinhAnh;
 
 
     public QuanAo() {
@@ -28,7 +28,7 @@ public class QuanAo {
         this.loiNhuan = 0;
         this.nhaCungCap = new NhaCungCap();
         this.trangThai = false;
-        this.hinhAnh = "Chưa xác định";
+        this.hinhAnh = new byte[1024];
     }
 
     /**
@@ -42,9 +42,9 @@ public class QuanAo {
      * @param loiNhuan   tiền lời
      * @param nhaCungCap nhà cung cấp quần áo
      * @param trangThai  trạng thái của quần áo là còn kinh doanh hay không
-     * @param hinhAnh    đường dẫn của hình ảnh
+     * @param hinhAnh    hinh anh
      */
-    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String kichThuoc, int soLuong, String thuongHieu, double giaNhap, double loiNhuan, NhaCungCap nhaCungCap, boolean trangThai, String hinhAnh) {
+    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String kichThuoc, int soLuong, String thuongHieu, double giaNhap, double loiNhuan, NhaCungCap nhaCungCap, boolean trangThai, byte[] hinhAnh) {
         this.setMaQA(maQA);
         this.setTenQA(tenQA);
         this.setLoaiQuanAo(loaiQuanAo);
@@ -130,11 +130,11 @@ public class QuanAo {
         this.trangThai = trangThai;
     }
 
-    public String getHinhAnh() {
+    public byte[] getHinhAnh() {
         return hinhAnh;
     }
 
-    public void setHinhAnh(String hinhAnh) {
+    public void setHinhAnh(byte[] hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
 

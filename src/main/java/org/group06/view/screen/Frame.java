@@ -62,7 +62,6 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
@@ -253,7 +252,6 @@ public class Frame extends JFrame {
         mniBanHang_DatHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniNhapHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhanVien.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-
 
         //Menu Khach Hang
         mniQuanLyKhachHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
