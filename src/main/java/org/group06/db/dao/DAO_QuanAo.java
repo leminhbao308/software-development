@@ -116,6 +116,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             statement.setString(8, quanAo.getNhaCungCap().getMaNCC());
             statement.setBoolean(9, quanAo.isTrangThai());
             statement.setString(10, quanAo.getHinhAnh());
+            statement.setString(11, quanAo.getMaQA());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

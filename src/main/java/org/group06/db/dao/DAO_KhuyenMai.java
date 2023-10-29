@@ -65,7 +65,7 @@ public class DAO_KhuyenMai implements DAO_Interface<KhuyenMai> {
     @Override
     public boolean add(KhuyenMai khuyenMai) {
         try {
-            String sql = "INSERT INTO QuanAo (MAKM, TENCTKM, MUCGIAGIAM, NGAYBATDAU, NGAYKETTHUC, SOLUOTSD) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO KhuyenMai (MAKM, TENCTKM, MUCGIAGIAM, NGAYBATDAU, NGAYKETTHUC, SOLUOTSD) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khuyenMai.getMaKhuyenMai());
             statement.setString(2, khuyenMai.getTenCTKM());
@@ -84,13 +84,14 @@ public class DAO_KhuyenMai implements DAO_Interface<KhuyenMai> {
     @Override
     public boolean update(KhuyenMai khuyenMai) {
         try {
-            String sql = "UPDATE QuanAo SET TENCTKM = ?, MUCGIAGIAM = ?, NGAYBATDAU = ?, NGAYKETTHUC = ?, SOLUOTSD = ? WHERE MAKM = ?";
+            String sql = "UPDATE KhuyenMai SET TENCTKM = ?, MUCGIAGIAM = ?, NGAYBATDAU = ?, NGAYKETTHUC = ?, SOLUOTSD = ? WHERE MAKM = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khuyenMai.getTenCTKM());
             statement.setDouble(2, khuyenMai.getMucGiamGia());
             statement.setDate(3, khuyenMai.getNgayBatDau());
             statement.setDate(4, khuyenMai.getNgayKetThuc());
             statement.setInt(5, khuyenMai.getSoLuotSuDung());
+            statement.setString(6, khuyenMai.getMaKhuyenMai());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
