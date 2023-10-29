@@ -433,6 +433,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbSizeItemStateChanged"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbSizeActionPerformed"/>
                   </Events>
                   <AuxValues>
@@ -878,17 +879,17 @@
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="11" rowCount="0">
-                <Column editable="true" title="M&#xe3; QA" type="java.lang.Object"/>
-                <Column editable="true" title="T&#xea;n QA" type="java.lang.Object"/>
-                <Column editable="true" title="Lo&#x1ea1;i QA" type="java.lang.Object"/>
-                <Column editable="true" title="Size" type="java.lang.Object"/>
-                <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
-                <Column editable="true" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object"/>
-                <Column editable="true" title="NCC" type="java.lang.Object"/>
-                <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object"/>
-                <Column editable="true" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object"/>
-                <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
-                <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
+                <Column editable="false" title="M&#xe3; QA" type="java.lang.Object"/>
+                <Column editable="false" title="T&#xea;n QA" type="java.lang.Object"/>
+                <Column editable="false" title="Lo&#x1ea1;i QA" type="java.lang.Object"/>
+                <Column editable="false" title="Size" type="java.lang.Object"/>
+                <Column editable="false" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                <Column editable="false" title="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u" type="java.lang.Object"/>
+                <Column editable="false" title="NCC" type="java.lang.Object"/>
+                <Column editable="false" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Object"/>
+                <Column editable="false" title="L&#x1ee3;i Nhu&#x1ead;n" type="java.lang.Object"/>
+                <Column editable="false" title="Gi&#xe1; B&#xe1;n" type="java.lang.Object"/>
+                <Column editable="false" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>

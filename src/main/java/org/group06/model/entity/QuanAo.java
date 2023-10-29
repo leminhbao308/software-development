@@ -54,8 +54,8 @@ public class QuanAo {
         this.setLoiNhuan(loiNhuan);
         this.setNhaCungCap(nhaCungCap);
         this.setTrangThai(trangThai);
-        this.setHinhAnh(hinhAnh);
         this.setThuongHieu(thuongHieu);
+        this.setHinhAnh(hinhAnh);
     }
 
     public String getMaQA() {

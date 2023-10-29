@@ -125,7 +125,7 @@ public class Frame extends JFrame {
 
         mniQuanLyLoaiQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelQuanAo();
+            pnlContainer = new PanelLoaiQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
