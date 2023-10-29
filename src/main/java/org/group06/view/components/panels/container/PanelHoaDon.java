@@ -4,10 +4,6 @@
  */
 package org.group06.view.components.panels.container;
 
-import org.group06.utils.ColorConstant;
-import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
-
 /**
  *
  * @author Le Minh Bao
@@ -53,11 +49,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
         txtTimTheoTenKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTenKH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoTenKH.setPreferredSize(new java.awt.Dimension(64, 29));
 
         txtTimTheoNgay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoNgay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoNgay.setPreferredSize(new java.awt.Dimension(64, 29));
 
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
@@ -101,17 +95,26 @@ public class PanelHoaDon extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblHoaDon.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblHoaDon.setFillsViewportHeight(true);
         tblHoaDon.setGridColor(new java.awt.Color(0, 0, 0));
+        tblHoaDon.setRowHeight(50);
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setShowGrid(true);
+        tblHoaDon.getTableHeader().setReorderingAllowed(false);
         srcHoaDon.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
