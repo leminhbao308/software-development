@@ -50,7 +50,7 @@ public class Frame extends JFrame {
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
     private final JMenuItem mniDangXuat = new JMenuItem("Đăng Xuất");
 
-    private JPanel pnlContainer = new PanelBanHang();
+    private JPanel pnlContainer;
     private NhanVien nv;
     // </editor-fold>
 
@@ -63,6 +63,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
+        pnlContainer = new PanelBanHang(nv);
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
@@ -81,7 +82,7 @@ public class Frame extends JFrame {
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang();
+            pnlContainer = new PanelBanHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -89,7 +90,7 @@ public class Frame extends JFrame {
 
         mniNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang();
+            pnlContainer = new PanelBanHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
