@@ -56,19 +56,4 @@ public class Manager_KhachHang implements Manager_Interface<KhachHang> {
         }
         return null;
     }
-
-    @Override
-    public boolean save() {
-        // TODO: Save with thread to avoid overloading
-//        for (KhachHang kh : dsKhachHang) {
-//            Thread thread = new Thread(() -> {
-//                if (kh.isNew()) {
-//                    daoKhachHang.add(kh);
-//                } else {
-//                    daoKhachHang.update(kh);
-//                }
-//            });
-//        }
-        return true;
-    }
 }

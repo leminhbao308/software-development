@@ -1114,7 +1114,6 @@ public class PanelBanHang extends javax.swing.JPanel {
      * áo.
      *
      * @param dsQuanAo Danh sách sản phẩm quần áo.
-     * @param dsLoaiQuanAo Danh sách loại quần áo.
      */
     private void loadAllTableQuanAo(ArrayList<QuanAo> dsQuanAo) {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
