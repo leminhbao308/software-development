@@ -1,6 +1,5 @@
 package org.group06.db.dao;
 
-import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.QuanAo;
 
 import java.sql.Connection;
@@ -163,7 +162,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 return result.getString("TENLOAIQA");
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         } finally {
             return "Không xác định";
         }

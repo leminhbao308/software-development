@@ -37,7 +37,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnlTimHD" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="srcHoaDon" pref="422" max="32767" attributes="0"/>
+              <Component id="srcHoaDon" pref="421" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -77,11 +77,13 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="lblTimTheoTenKH" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTimTheoTenKH" pref="205" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimTheoTenKH" pref="152" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="lblTimTheoNgay" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="dchTimTheoNgay" pref="205" max="32767" attributes="0"/>
+                  <Component id="dchTimTheoNgay" pref="159" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLamMoi" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -96,7 +98,11 @@
                       <Component id="txtTimTheoTenKH" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="dchTimTheoNgay" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="btnLamMoi" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -129,6 +135,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimTheoTenKHKeyReleased"/>
+          </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dchTimTheoNgay">
           <Properties>
@@ -139,9 +148,24 @@
               <Dimension value="[64, 29]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dchTimTheoNgayMouseClicked"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTimTheoNgayPropertyChange"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgay.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnLamMoi">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLamMoiMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -231,7 +255,7 @@
             </Property>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
         </Component>

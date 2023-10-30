@@ -7,6 +7,9 @@ public class KhachHang {
     private String soDienThoai;
 
     public KhachHang() {
+        this.tenKH = "Khách vãng lai";
+        this.soDienThoai = "0000000000";
+        this.maKhachHang = "KH000";
     }
 
     public KhachHang(String maKhachHang, String tenKH, String soDienThoai) {
