@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_HoaDon;
@@ -209,16 +208,27 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimTheoTenKHKeyReleased
 
     private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
-        dchTimTheoNgay = new JDateChooser();
-        java.util.Date date = dchTimTheoNgay.getDate();
-        System.out.println("1111111111111");
-        System.out.println(date);
-        if(date != null)
-            System.out.println("1111111111111");
+        
+        if(evt.getPropertyName().equals("date")){
+            
+            java.util.Date date = dchTimTheoNgay.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formatDay = sdf.format(date.getTime());
+            if(date != null){
+                ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByDate(formatDay);
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+                modelKH.setRowCount(0);
+                for (HoaDon hd : dsHD) {
+                    Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
+                    modelKH.addRow(data);
+                }
+            } else
+                loadDataTable();
+        }
     }//GEN-LAST:event_dchTimTheoNgayPropertyChange
 
     private void dchTimTheoNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchTimTheoNgayMouseClicked
-        
+        // TODO add your handling code here:
     }//GEN-LAST:event_dchTimTheoNgayMouseClicked
 
 
