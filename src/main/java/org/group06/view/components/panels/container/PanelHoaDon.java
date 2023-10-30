@@ -4,17 +4,28 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_HoaDon;
+import org.group06.model.entity.HoaDon;
+import org.group06.utils.ColorConstant;
+import org.group06.utils.FontConstant;
+import org.group06.utils.ImagePath;
+
 /**
  *
  * @author Le Minh Bao
  */
 public class PanelHoaDon extends javax.swing.JPanel {
-
+    private DAO_HoaDon dao_HoaDon;
     /**
      * Creates new form PanelHoaDon
      */
     public PanelHoaDon() {
         initComponents();
+        loadDataTable();
     }
 
     /**
@@ -31,7 +42,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         lblTimTheoTenKH = new javax.swing.JLabel();
         lblTimTheoNgay = new javax.swing.JLabel();
         txtTimTheoTenKH = new javax.swing.JTextField();
-        txtTimTheoNgay = new javax.swing.JTextField();
+        dchTimTheoNgay = new com.toedter.calendar.JDateChooser();
         srcHoaDon = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
 
@@ -50,8 +61,8 @@ public class PanelHoaDon extends javax.swing.JPanel {
         txtTimTheoTenKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTenKH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtTimTheoNgay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTimTheoNgay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dchTimTheoNgay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchTimTheoNgay.setPreferredSize(new java.awt.Dimension(64, 29));
 
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
@@ -60,13 +71,13 @@ public class PanelHoaDon extends javax.swing.JPanel {
             .addGroup(pnlTimHDLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTimTheoTenKH)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTimTheoNgay)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dchTimTheoNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlTimHDLayout.setVerticalGroup(
             pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,27 +87,35 @@ public class PanelHoaDon extends javax.swing.JPanel {
                     .addComponent(lblTimTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTimTheoTenKH)
                     .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dchTimTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        pnlTimHDLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dchTimTheoNgay, lblTimTheoNgay, lblTimTheoTenKH, txtTimTheoTenKH});
+
+        dchTimTheoNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+
+        dchTimTheoNgay.getDateEditor().setEnabled(false);
+
+        ((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
         srcHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tblHoaDon.setAutoCreateRowSorter(true);
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD001", "11/12/2021", "Trần văn cường", "Bùi thị hoa", "120000"},
-                {"HD002", "28/2/2023", "Nguyễn Thị Ly", "Trương Văn Toàn", "96000"}
+                {"HD001", "11/12/2021", "Trần văn cường", "Bùi thị hoa", "120000", "KM001"},
+                {"HD002", "28/2/2023", "Nguyễn Thị Ly", "Trương Văn Toàn", "96000", "KM002"}
             },
             new String [] {
-                "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền"
+                "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền", "Mã khuyến mãi"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,8 +133,14 @@ public class PanelHoaDon extends javax.swing.JPanel {
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setShowGrid(true);
-        tblHoaDon.getTableHeader().setReorderingAllowed(false);
         srcHoaDon.setViewportView(tblHoaDon);
+        if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
+            tblHoaDon.getColumnModel().getColumn(0).setResizable(false);
+            tblHoaDon.getColumnModel().getColumn(1).setResizable(false);
+            tblHoaDon.getColumnModel().getColumn(2).setResizable(false);
+            tblHoaDon.getColumnModel().getColumn(3).setResizable(false);
+            tblHoaDon.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -147,13 +172,28 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser dchTimTheoNgay;
     private javax.swing.JLabel lblTimTheoNgay;
     private javax.swing.JLabel lblTimTheoTenKH;
     private javax.swing.JLabel lblTitleDSHoaDon;
     private javax.swing.JPanel pnlTimHD;
     private javax.swing.JScrollPane srcHoaDon;
     private javax.swing.JTable tblHoaDon;
-    private javax.swing.JTextField txtTimTheoNgay;
     private javax.swing.JTextField txtTimTheoTenKH;
     // End of variables declaration//GEN-END:variables
+
+    public void loadDataTable() {
+        ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getAll();
+        DefaultTableModel modelHD = (DefaultTableModel) this.tblHoaDon.getModel();
+        modelHD.setRowCount(0);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        for(HoaDon hd : dsHD) {
+            String date = formatter.format(hd.getNgayTao());
+            String tenKH = hd.getKhachHang().getTenKH();
+            String tenNV = hd.getNhanVien().getTenNV();
+            String khuyenMai = hd.getKhuyenMai().getTenCTKM();
+            Object[] data = {hd.getMaHoaDon(),date,tenKH,tenNV,1,khuyenMai};
+            modelHD.addRow(data);
+        }
+    }
 }
