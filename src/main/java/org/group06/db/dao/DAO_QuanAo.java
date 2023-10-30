@@ -136,7 +136,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             return false;
         }
     }
-    
+
     public HashMap<String, String> getAllLoaiQuanAo() {
         HashMap<String, String> dsLoaiQuanAo = new HashMap<>();
         try {
@@ -151,7 +151,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         }
         return dsLoaiQuanAo;
     }
-    
+
     public String getTenLoaiQuanAo(String maLoaiQuanAO) {
         try {
             String sql = "SELECT FROM LoaiQuanAo WHERE MALOAIQA = ?";
@@ -165,6 +165,33 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             e.printStackTrace();
         } finally {
             return "Không xác định";
+        }
+    }
+    public boolean addLoaiQuanAo(String maLoaiQuanAo, String tenLoaiQuanAo) {
+        try {
+            String sql = "INSERT INTO LoaiQuanAo (MALOAIQA, TENLOAIQA) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maLoaiQuanAo);
+            statement.setString(2, tenLoaiQuanAo);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateLoaiQuanAo(String maLoaiQA, String tenLoaiQA) {
+        try {
+            String sql = "UPDATE LoaiQuanAo SET TENLOAIQA = ? WHERE MALOAIQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, tenLoaiQA);
+            statement.setString(2, maLoaiQA);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
