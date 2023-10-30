@@ -1,18 +1,13 @@
 package org.group06.db.dao;
 
-import org.group06.model.entity.HoaDon;
-
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import org.group06.db.DatabaseConnect;
+import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.NhanVien;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
@@ -84,7 +79,7 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, hoaDon.getMaHoaDon());
             statement.setDate(2, hoaDon.getNgayTao());
-            statement.setString(3, hoaDon.getKhuyenMai().getMaKhuyenMai());
+//            statement.setString(3, hoaDon.getKhuyenMai().getMaKhuyenMai());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
