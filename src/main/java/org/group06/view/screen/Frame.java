@@ -168,7 +168,7 @@ public class Frame extends JFrame {
 
         mniQuanLyHoaDonNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelHoaDon();
+            pnlContainer = new PanelPhieuTam();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
