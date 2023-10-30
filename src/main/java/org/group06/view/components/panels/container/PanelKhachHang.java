@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class PanelKhachHang extends javax.swing.JPanel {
     private DAO_KhachHang dao_KhachHang;
-    public int soMaKH = 31;
+    public int soMaKH = 0;
     /**
      * Creates new form PanelKhachHang
      */
