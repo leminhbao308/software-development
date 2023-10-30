@@ -6,7 +6,7 @@ public class HoaDon {
     private String maHoaDon;
     private Date ngayTao;
     private KhachHang khachHang;
-    private NhanVien nhanVien;
+    private NhanVien nhanVien;  
     private KhuyenMai khuyenMai;
 
     public HoaDon() {

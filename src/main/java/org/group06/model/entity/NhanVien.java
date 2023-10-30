@@ -98,6 +98,10 @@ public class NhanVien {
         this.trangThai = trangThai;
         this.chucVu = chucVu;
     }
+    
+    public NhanVien(String maNV) {
+        this.maNV = maNV;
+    }
 
     @Override
     public String toString() {

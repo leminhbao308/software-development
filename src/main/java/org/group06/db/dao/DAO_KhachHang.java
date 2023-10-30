@@ -108,6 +108,25 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         return dsKhachHang;
     }
     
+    public KhachHang getByMAKH(String maKH) {
+        KhachHang khachHang = null;
+        String sql = "SELECT * FROM KhachHang WHERE MAKH = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maKH);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                khachHang = new KhachHang();
+                khachHang.setMaKhachHang(resultSet.getString("MAKH"));
+                khachHang.setTenKH(resultSet.getString("TENKH"));
+                khachHang.setSoDienThoai(resultSet.getString("SDT"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return khachHang;
+    }
+    
     public int loadMaKHCount(int countMaKH) {
         String query = "SELECT MAX(MAKH) FROM KhachHang";
         try {

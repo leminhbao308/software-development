@@ -3,13 +3,22 @@ package org.group06.db.dao;
 import org.group06.model.entity.HoaDon;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import org.group06.db.DatabaseConnect;
+import org.group06.model.entity.KhachHang;
+import org.group06.model.entity.KhuyenMai;
+import org.group06.model.entity.NhanVien;
 
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
+    private DAO_NhanVien dao_NhanVien;
+    private DAO_KhuyenMai dao_KhuyenMai;
+    private DAO_KhachHang dao_KhachHang;
     private Connection connection;
 
     public DAO_HoaDon(Connection connection) {
@@ -18,22 +27,31 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
     @Override
     public ArrayList<HoaDon> getAll() {
-        ArrayList<HoaDon> hoaDons = new ArrayList<>();
-        String sql = "SELECT * FROM HoaDon";
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
+        dao_KhachHang = new DAO_KhachHang(connection);
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+            DatabaseConnect.getConnection();
+            Connection con = DatabaseConnect.getConnection();
+            String sql = "SELECT * FROM HoaDon";
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 HoaDon hoaDon = new HoaDon();
-                hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
-                hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
-//                hoaDon.set
-                hoaDons.add(hoaDon);
+                String maHD = resultSet.getString(1);
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
+                Date ngayLap = resultSet.getDate(3);
+                KhachHang khachHang = dao_KhachHang.getByMAKH(resultSet.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
+                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
+                dsHD.add(hoaDon);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return hoaDons;
+        return dsHD;
     }
 
     @Override
@@ -80,5 +98,36 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     @Override
     public boolean delete(String id) {
         return false;
+    }
+
+    public ArrayList<HoaDon> getByName(String name) {
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
+        dao_KhachHang = new DAO_KhachHang(connection);
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        try {
+            DatabaseConnect.getConnection();
+            Connection con = DatabaseConnect.getConnection();
+            String sql = "SELECT HoaDon.MAHD,NGAYTAO,MAKM,HoaDon.MAKH,MANV FROM HoaDon, KhachHang WHERE HoaDon.MAKH = KhachHang.MAKH and TENKH = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+            //Duyệt trên kết quả trả về 
+            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+                HoaDon hoaDon = new HoaDon();
+                String maHD = rs.getString("MAHD");
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                Date ngayLap = rs.getDate("NGAYTAO");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
+                dsHD.add(hoaDon);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHD;
     }
 }

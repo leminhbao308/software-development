@@ -14,6 +14,10 @@ public class KhachHang {
         this.tenKH = tenKH;
         this.soDienThoai = soDienThoai;
     }
+    
+    public KhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
+    }
 
     public String getMaKhachHang() {
         return maKhachHang;
