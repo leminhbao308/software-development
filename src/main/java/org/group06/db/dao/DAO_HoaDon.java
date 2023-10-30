@@ -130,4 +130,35 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         }
         return dsHD;
     }
+    
+    public ArrayList<HoaDon> getByDate(Date date) {
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
+        dao_KhachHang = new DAO_KhachHang(connection);
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        try {
+            DatabaseConnect.getConnection();
+            Connection con = DatabaseConnect.getConnection();
+            String sql = "SELECT *from HoaDon where NGAYTAO = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDate(1, date);
+            ResultSet rs = statement.executeQuery();
+            //Duyệt trên kết quả trả về 
+            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+                HoaDon hoaDon = new HoaDon();
+                String maHD = rs.getString("MAHD");
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                Date ngayLap = rs.getDate("NGAYTAO");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
+                dsHD.add(hoaDon);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHD;
+    }
 }
