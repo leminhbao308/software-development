@@ -74,12 +74,14 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     @Override
     public boolean add(HoaDon hoaDon) {
         boolean success = false;
-        String sql = "INSERT INTO HoaDon (MAHD, NGAYTAO) VALUES (?, ?)";
+        String sql = "INSERT INTO HoaDon (MAHD, NGAYTAO, MAKM, MAKH, MANV) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, hoaDon.getMaHoaDon());
             statement.setDate(2, hoaDon.getNgayTao());
-//            statement.setString(3, hoaDon.getKhuyenMai().getMaKhuyenMai());
+            statement.setString(3, hoaDon.getKhuyenMai().getMaKhuyenMai());
+            statement.setString(4, hoaDon.getKhachHang().getMaKhachHang());
+            statement.setString(5, hoaDon.getNhanVien().getMaNV());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,11 +89,13 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return success;
     }
 
+    @Deprecated
     @Override
     public boolean update(HoaDon hoaDon) {
         return false;
     }
 
+    @Deprecated
     @Override
     public boolean delete(String id) {
         return false;

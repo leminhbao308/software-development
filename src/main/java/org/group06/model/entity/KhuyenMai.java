@@ -14,8 +14,8 @@ public class KhuyenMai {
     private int soLuotSuDung;
 
     public KhuyenMai() {
-        this.maKhuyenMai = "Không";
-        this.tenCTKM = "Không";
+        this.maKhuyenMai = "KH000";
+        this.tenCTKM = "Mặc Định";
         this.mucGiamGia = 0;
         this.ngayBatDau = new Date(System.currentTimeMillis());
         this.ngayKetThuc = this.ngayBatDau;
