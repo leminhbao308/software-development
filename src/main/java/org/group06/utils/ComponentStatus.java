@@ -10,12 +10,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 /**
- *
  * @author lehoa
  */
 public class ComponentStatus {
 
-//  
+    //  
     public static void setFieldStatus(java.util.List<JTextField> list, boolean status) {
         for (JTextField item : list) {
             item.setEnabled(status);
@@ -35,19 +34,23 @@ public class ComponentStatus {
     }
 
     public static void setStatusBtn(JButton btn, boolean status) {
-            btn.setEnabled(status);
-            if (!status) {
-                btn.setBackground(ColorConstant.DISABLE_FIELD);
-            } else {
-                btn.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
-                btn.setForeground(ColorConstant.WHITE);
-            }
+        btn.setEnabled(status);
+        if (!status) {
+            btn.setBackground(ColorConstant.DISABLE_FIELD);
+        } else {
+            btn.setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
+            btn.setForeground(ColorConstant.WHITE);
+        }
     }
 
     public static void emptyField(java.util.List<JTextField> list) {
         for (JTextField txt : list) {
             txt.setText("");
         }
+    }
+
+    public static void emptyField(JTextField txt) {
+        txt.setText("");
     }
 
     public static void setDefaultCmb(java.util.List<JComboBox> list) {
