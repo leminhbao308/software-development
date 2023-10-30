@@ -48,6 +48,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         lblTimTheoNgay = new javax.swing.JLabel();
         txtTimTheoTenKH = new javax.swing.JTextField();
         dchTimTheoNgay = new com.toedter.calendar.JDateChooser();
+        btnLamMoi = new javax.swing.JButton();
         srcHoaDon = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
 
@@ -84,6 +85,14 @@ public class PanelHoaDon extends javax.swing.JPanel {
             }
         });
 
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLamMoiMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
         pnlTimHDLayout.setHorizontalGroup(
@@ -92,11 +101,13 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTimTheoTenKH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTimTheoNgay)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dchTimTheoNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addComponent(dchTimTheoNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLamMoi)
                 .addContainerGap())
         );
         pnlTimHDLayout.setVerticalGroup(
@@ -108,7 +119,10 @@ public class PanelHoaDon extends javax.swing.JPanel {
                     .addComponent(lblTimTheoTenKH)
                     .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dchTimTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimHDLayout.createSequentialGroup()
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pnlTimHDLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dchTimTheoNgay, lblTimTheoNgay, lblTimTheoTenKH, txtTimTheoTenKH});
@@ -183,7 +197,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(srcHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(srcHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -231,8 +245,15 @@ public class PanelHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dchTimTheoNgayMouseClicked
 
+    private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
+        loadDataTable();
+        txtTimTheoTenKH.setText("");
+        dchTimTheoNgay.setDate(null);
+    }//GEN-LAST:event_btnLamMoiMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLamMoi;
     private com.toedter.calendar.JDateChooser dchTimTheoNgay;
     private javax.swing.JLabel lblTimTheoNgay;
     private javax.swing.JLabel lblTimTheoTenKH;
