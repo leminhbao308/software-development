@@ -38,6 +38,10 @@ public class KhuyenMai {
         this.setNgayKetThuc(ngayKetThuc);
         this.setSoLuotSuDung(soLuotSuDung);
     }
+    
+    public KhuyenMai(String maKhuyenMai) {
+        this.setMaKhuyenMai(maKhuyenMai);
+    }
 
     public String getMaKhuyenMai() {
         return maKhuyenMai;

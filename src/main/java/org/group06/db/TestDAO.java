@@ -19,7 +19,8 @@ public class TestDAO {
 //                testDAO_NhanVien(connection);
 //                test_DAO_QuanAo(connection);
 //                test_DAO_KhachHang(connection);
-                test_DAO_KhuyenMai(connection);
+//                test_DAO_KhuyenMai(connection);
+                testDAO_HoaDon(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -172,6 +173,19 @@ public class TestDAO {
         System.out.println("Danh sách Khuyến mãi:");
         for (KhuyenMai khuyenMai2 : dsKhuyenMai2) {
             System.out.println(khuyenMai2);
+        }
+    }
+    
+    
+    private static void testDAO_HoaDon(Connection connection) {
+        // Tạo đối tượng HoaDonDAO
+        DAO_HoaDon employeeDAO = new DAO_HoaDon(connection);
+
+        // Lấy danh sách tất cả nhân viên
+        List<HoaDon> employees = employeeDAO.getByName("Trương Quốc Bảo");
+        System.out.println("Danh sách hóa đơn:");
+        for (HoaDon employee : employees) {
+            System.out.println(employee);
         }
     }
 }

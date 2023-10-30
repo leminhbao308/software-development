@@ -341,5 +341,4 @@ public class PanelKhachHang extends javax.swing.JPanel {
             modelKH.addRow(data);
         }
     }
-    
 }
