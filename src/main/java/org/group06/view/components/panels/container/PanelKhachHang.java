@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
@@ -14,13 +15,16 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 //import org.group06.view.components.*;
+
 /**
  *
  * @author Dell
  */
 public class PanelKhachHang extends javax.swing.JPanel {
+
     private DAO_KhachHang dao_KhachHang;
     public int soMaKH = 0;
+
     /**
      * Creates new form PanelKhachHang
      */
@@ -116,6 +120,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTimTheoTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTimTheoTenFocusLost(evt);
+            }
+        });
         txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoTenActionPerformed(evt);
@@ -132,6 +141,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         txtTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTimTheoSDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTimTheoSDTFocusLost(evt);
+            }
+        });
         txtTimTheoSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimTheoSDTActionPerformed(evt);
@@ -235,14 +249,14 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
-        FrameTTKhachHang frTTKH = new FrameTTKhachHang(this.getSelectedKH(),this);
+        FrameTTKhachHang frTTKH = new FrameTTKhachHang(this.getSelectedKH(), this);
         frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTKH.setResizable(false);
         frTTKH.setVisible(true);
     }
-    
+
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-        if(evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             callFrameTTKhachHang();
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
@@ -260,7 +274,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         callFrameThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
-        
+
     public String getMaKH() {
         int count = new DAO_KhachHang((DatabaseConnect.getConnection())).loadMaKHCount(soMaKH);
         count++;
@@ -269,18 +283,25 @@ public class PanelKhachHang extends javax.swing.JPanel {
         soMaKH++; // Tăng biến đếm cho lần thêm khách hàng tiếp theo
         return customerID;
     }
-    
+
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenKH = txtTimTheoTen.getText();
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(!tenKH.equals("")) {
-                ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getByName(tenKH);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
-                modelKH.setRowCount(0);
-                for (KhachHang kh : dsKH) {
-                Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
-                modelKH.addRow(data);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!tenKH.equals("")) {
+                if (checkRegexTenKH()) {
+                    ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getByName(tenKH);
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+                    modelKH.setRowCount(0);
+                    for (KhachHang kh : dsKH) {
+                        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
+                        modelKH.addRow(data);
+                    }
+                    txtTimTheoSDT.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
+                    loadDataTable();
                 }
+
             } else {
                 loadDataTable();
             }
@@ -290,24 +311,58 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private void txtTimTheoSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoSDTKeyReleased
         String sdt = txtTimTheoSDT.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           if(!sdt.equals("")) {
-                KhachHang kh = new DAO_KhachHang((DatabaseConnect.getConnection())).getByID(sdt);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
-                modelKH.setRowCount(0);
-                Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
-                modelKH.addRow(data);
-           }else {
+            if (!sdt.equals("")) {
+                if (checkRegexSDT()) {
+                    KhachHang kh = new DAO_KhachHang((DatabaseConnect.getConnection())).getByID(sdt);
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+                    modelKH.setRowCount(0);
+                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
+                    modelKH.addRow(data);
+                    txtTimTheoTen.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại cần tìm");
+                    loadDataTable();
+                    txtTimTheoSDT.setText("");
+                    txtTimTheoSDT.requestFocus();
+                }
+            } else {
                 loadDataTable();
             }
         }
     }//GEN-LAST:event_txtTimTheoSDTKeyReleased
+
+    private void txtTimTheoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimTheoTenFocusLost
+
+    }//GEN-LAST:event_txtTimTheoTenFocusLost
+
+    private void txtTimTheoSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimTheoSDTFocusLost
+
+    }//GEN-LAST:event_txtTimTheoSDTFocusLost
+
+    private boolean checkRegexTenKH() {
+        String tenKH = txtTimTheoTen.getText().trim();
+        if (tenKH.equals("") || !tenKH.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexSDT() {
+        String sdt = txtTimTheoSDT.getText().trim();
+        if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private void callFrameThemKH() {
         FrameThemKH frThemKH = new FrameThemKH(this);
         frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemKH.setResizable(false);
         frThemKH.setVisible(true);
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -322,22 +377,21 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimTheoSDT;
     private javax.swing.JTextField txtTimTheoTen;
     // End of variables declaration//GEN-END:variables
-    
-    
+
     private KhachHang getSelectedKH() {
-        if(tblKhachHang.getSelectedRow() == -1)
+        if (tblKhachHang.getSelectedRow() == -1) {
             return null;
-        else {
+        } else {
             return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
         }
     }
-    
+
     public void loadDataTable() {
         ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
         modelKH.setRowCount(0);
-        for(KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(),kh.getTenKH(),kh.getSoDienThoai()};
+        for (KhachHang kh : dsKH) {
+            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
             modelKH.addRow(data);
         }
     }
