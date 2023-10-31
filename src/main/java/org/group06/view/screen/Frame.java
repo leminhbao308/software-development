@@ -160,7 +160,7 @@ public class Frame extends JFrame {
 
         mniQuanLyHoaDonDatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelHoaDon();
+            pnlContainer = new PanelPhieuTam();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -168,7 +168,7 @@ public class Frame extends JFrame {
 
         mniQuanLyHoaDonNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelPhieuTam();
+            pnlContainer = new PanelHoaDon();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();

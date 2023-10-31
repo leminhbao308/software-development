@@ -6,9 +6,10 @@ package org.group06.view.components.panels.container;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_HoaDon;
@@ -30,6 +31,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
      */
     public PanelHoaDon() {
         initComponents();
+        checkNgay();
         loadDataTable();
     }
 
@@ -138,8 +140,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         tblHoaDon.setAutoCreateRowSorter(true);
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD001", "11/12/2021", "Trần văn cường", "Bùi thị hoa", "120000", "KM001"},
-                {"HD002", "28/2/2023", "Nguyễn Thị Ly", "Trương Văn Toàn", "96000", "KM002"}
+
             },
             new String [] {
                 "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền", "Mã khuyến mãi"
@@ -208,12 +209,17 @@ public class PanelHoaDon extends javax.swing.JPanel {
         String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
-                ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByName(tenKH);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
-                modelKH.setRowCount(0);
-                for (HoaDon hd : dsHD) {
-                    Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
-                    modelKH.addRow(data);
+                if (checkRegexTenKH()) {
+                    ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByName(tenKH);
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+                    modelKH.setRowCount(0);
+                    for (HoaDon hd : dsHD) {
+                        Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
+                        modelKH.addRow(data);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
+                    loadDataTable();
                 }
             } else {
                 loadDataTable();
@@ -221,24 +227,17 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTimTheoTenKHKeyReleased
 
-    private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
-        
-        if(evt.getPropertyName().equals("date")){
-            
-            java.util.Date date = dchTimTheoNgay.getDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String formatDay = sdf.format(date.getTime());
-            if(date != null){
-                ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByDate(formatDay);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
-                modelKH.setRowCount(0);
-                for (HoaDon hd : dsHD) {
-                    Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
-                    modelKH.addRow(data);
-                }
-            } else
-                loadDataTable();
+    private boolean checkRegexTenKH() {
+        String tenKH = txtTimTheoTenKH.getText().trim();
+        if (tenKH.equals("") || !tenKH.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
         }
+    }
+
+    private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
+
     }//GEN-LAST:event_dchTimTheoNgayPropertyChange
 
     private void dchTimTheoNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchTimTheoNgayMouseClicked
@@ -246,10 +245,43 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_dchTimTheoNgayMouseClicked
 
     private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
-        loadDataTable();
         txtTimTheoTenKH.setText("");
         dchTimTheoNgay.setDate(null);
+        loadDataTable();
     }//GEN-LAST:event_btnLamMoiMouseClicked
+
+    private void checkNgay() {
+        dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    Date date = (Date) evt.getNewValue();
+                    java.util.Date dateNow = new java.util.Date();
+                    if (date.after(dateNow)) {
+                        JOptionPane.showMessageDialog(null, "Ngày tạo hóa đơn phải trước ngày hiện tại");
+                        dchTimTheoNgay.setDate(null);
+                        loadDataTable();
+                    } else {
+                        loadDataNgay(date);
+                    }
+                }
+            }
+        }
+        );
+    }
+
+    private void loadDataNgay(Date ngay) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
+        String formatNgay = sdf.format(ngay);
+        ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByDate(formatNgay);
+        DefaultTableModel modelHD = (DefaultTableModel) this.tblHoaDon.getModel();
+        modelHD.setRowCount(0);
+        for (HoaDon hd : dsHD) {
+            String newFormatNgayTao = newSDF.format(hd.getNgayTao());
+            Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
+            modelHD.addRow(data);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
