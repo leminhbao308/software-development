@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package org.group06.view.components.panels.container;
 
 import java.text.DecimalFormat;
@@ -32,6 +28,8 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
         initComponents();
         loadDataTable();
         setStatusAllBtnsStart();
+        
+
     }
 
     public void setStatusAllBtnsStart() {
