@@ -8,7 +8,6 @@ public class PhieuDat {
     private Date ngayNhan;
     private KhachHang khachHang;
     private NhanVien nhanVien;
-
     private KhuyenMai khuyenMai;
 
     public PhieuDat() {

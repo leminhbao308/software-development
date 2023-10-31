@@ -9,7 +9,7 @@ import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 import org.group06.model.entity.PasswordRenderer;
-        
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -19,8 +19,10 @@ import java.util.ArrayList;
  * @author Dell
  */
 public class PanelNhanVien extends javax.swing.JPanel {
+
     private DAO_NhanVien dao_NhanVien;
     public int soMaNV = 4;
+
     /**
      * Creates new form PanelNhanVien
      */
@@ -286,16 +288,18 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private NhanVien getSelectedNV() {
         boolean gioiTinh = false;
-        if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam"))
+        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam")) {
             gioiTinh = true;
-        
+        }
+
         boolean trangThai = false;
-        if(tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Làm việc"))
+        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Làm việc")) {
             trangThai = true;
-        
-        if(tblNhanVien.getSelectedRow() == -1)
+        }
+
+        if (tblNhanVien.getSelectedRow() == -1) {
             return null;
-        else {
+        } else {
             return new NhanVien(
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0).toString(),
                     tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 1).toString(),
@@ -310,7 +314,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void callFrameTTNV() {
-        FrameTTNV frTTNV = new FrameTTNV(this.getSelectedNV(),this);
+        FrameTTNV frTTNV = new FrameTTNV(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
@@ -322,9 +326,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
         frThemNV.setResizable(false);
         frThemNV.setVisible(true);
     }
-    
+
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-        if(evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             callFrameTTNV();
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
@@ -334,39 +338,46 @@ public class PanelNhanVien extends javax.swing.JPanel {
         callFrameThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
-     public String getMaNV() {
-         int count = new DAO_NhanVien((DatabaseConnect.getConnection())).loadMaNVCount(soMaNV);
+    public String getMaNV() {
+        int count = new DAO_NhanVien((DatabaseConnect.getConnection())).loadMaNVCount(soMaNV);
         count++;
         // Tạo mã nhân viên theo quy tắc và có thứ tự
         String customerID = "NV" + String.format("%03d", count); // Ví dụ: NV001, NV002,...
         soMaNV++; // Tăng biến đếm cho lần thêm nhân viên tiếp theo
         return customerID;
     }
-    
+
     private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimTheoTenActionPerformed
 
     private void txtTimTheoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoMaActionPerformed
-        
+
     }//GEN-LAST:event_txtTimTheoMaActionPerformed
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
-        String gt = "Nữ",trangThai = "Đã nghỉ";
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(!tenNV.equals("")) {
-                ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getByName(tenNV);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
-                modelKH.setRowCount(0);
-                for (NhanVien nv : dsNV) {
-                    if(nv.isGioiTinh())
-                        gt = "Nam";
-                    if(nv.isTrangThai())
-                        trangThai = "Làm việc";
-                    
-                    Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
-                    modelKH.addRow(data);
+        String gt = "Nữ", trangThai = "Đã nghỉ";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!tenNV.equals("")) {
+                if (checkRegexTenNV()) {
+                    ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getByName(tenNV);
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+                    modelKH.setRowCount(0);
+                    for (NhanVien nv : dsNV) {
+                        if (nv.isGioiTinh()) {
+                            gt = "Nam";
+                        }
+                        if (nv.isTrangThai()) {
+                            trangThai = "Làm việc";
+                        }
+
+                        Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
+                        modelKH.addRow(data);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên cần tìm");
+                    loadDataTable();
                 }
             } else {
                 loadDataTable();
@@ -374,24 +385,48 @@ public class PanelNhanVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTimTheoTenKeyReleased
 
+    private boolean checkRegexTenNV() {
+        String tenKH = txtTimTheoTen.getText().trim();
+        if (tenKH.equals("") || !tenKH.matches("^[\\p{L}\\s]+$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkRegexMaNV() {
+        String maNV = txtTimTheoMa.getText().trim();
+        if (maNV.equals("") || !maNV.matches("^NV[0-9]{3}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
         String maNV = txtTimTheoMa.getText();
-        String gt = "Nữ",trangThai = "Đã nghỉ";
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(!maNV.equals("")) {
-                NhanVien nhanVien = new DAO_NhanVien((DatabaseConnect.getConnection())).getByID(maNV);
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
-                modelKH.setRowCount(0);
-                
-                if(nhanVien.isGioiTinh())
-                    gt = "Nam";
-                if(nhanVien.isTrangThai())
-                    trangThai = "Làm việc";
-
-                Object[] data = {nhanVien.getMaNV(),nhanVien.getTenNV(),nhanVien.getMatKhau(),gt,
-                                    nhanVien.getCccd(),nhanVien.getDiaChi(),nhanVien.getSoDienThoai(),trangThai,nhanVien.getChucVu()};
-                modelKH.addRow(data);
-                
+        String gt = "Nữ", trangThai = "Đã nghỉ";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!maNV.equals("")) {
+                if (checkRegexMaNV()) {
+                    NhanVien nhanVien = new DAO_NhanVien((DatabaseConnect.getConnection())).getByID(maNV);
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
+                    modelKH.setRowCount(0);
+                    if (nhanVien.isGioiTinh()) {
+                        gt = "Nam";
+                    }
+                    if (nhanVien.isTrangThai()) {
+                        trangThai = "Làm việc";
+                    }
+                    Object[] data = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getMatKhau(), gt,
+                        nhanVien.getCccd(), nhanVien.getDiaChi(), nhanVien.getSoDienThoai(), trangThai, nhanVien.getChucVu()};
+                    modelKH.addRow(data);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại mã nhân viên cần tìm");
+                    loadDataTable();
+                    txtTimTheoMa.setText("");
+                    txtTimTheoMa.requestFocus();
+                }
             } else {
                 loadDataTable();
             }
@@ -415,100 +450,104 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private void locTheoGioiTinh() {
         String selectedOption = cmbLocGioiTinh.getSelectedItem().toString();
         int phai;
-        if(selectedOption.equals("Nam")) {
+        if (selectedOption.equals("Nam")) {
             phai = 1;
             getDataLocTheoPhai(selectedOption, phai);
-        } else if(selectedOption.equals("Nữ")) {
+        } else if (selectedOption.equals("Nữ")) {
             phai = 0;
             getDataLocTheoPhai(selectedOption, phai);
-        } else 
+        } else {
             loadDataTable();
+        }
     }
-    
-    private void getDataLocTheoPhai(String gt,int phai) {
+
+    private void getDataLocTheoPhai(String gt, int phai) {
         String trangThai;
         ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoPhai(phai);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
-            if(nv.isTrangThai())
+            if (nv.isTrangThai()) {
                 trangThai = "Làm việc";
-            else
+            } else {
                 trangThai = "Đã nghỉ";
-            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            }
+            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
             modelNV.addRow(data);
         }
     }
-    
+
     private void locTheoTrangThai() {
         String selectedOption = cmbLocTrangThai.getSelectedItem().toString();
         int trangThai;
-        if(selectedOption.equals("Làm việc")) {
+        if (selectedOption.equals("Làm việc")) {
             trangThai = 1;
             getDataLocTheoTrangThai(selectedOption, trangThai);
-        } else if(selectedOption.equals("Đã nghỉ")) {
+        } else if (selectedOption.equals("Đã nghỉ")) {
             trangThai = 0;
             getDataLocTheoTrangThai(selectedOption, trangThai);
-        } else 
+        } else {
             loadDataTable();
+        }
     }
-    
-    private void getDataLocTheoTrangThai(String trangThai,int tt) {
+
+    private void getDataLocTheoTrangThai(String trangThai, int tt) {
         String gt;
         ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoTrangThai(tt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
-            if(nv.isGioiTinh())
+            if (nv.isGioiTinh()) {
                 gt = "Nam";
-            else 
+            } else {
                 gt = "Nữ";
-            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gt,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            }
+            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
             modelNV.addRow(data);
         }
     }
-    
+
     private void locTheoTrangThaiVaGioiTinh() {
         String selectTrangThai = cmbLocTrangThai.getSelectedItem().toString();
         String selectGioiTinh = cmbLocGioiTinh.getSelectedItem().toString();
-        int trangThai,gioiTinh;
-        if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nam")) {
+        int trangThai, gioiTinh;
+        if (selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nam")) {
             trangThai = 1;
             gioiTinh = 1;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nữ")) {
+        } else if (selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Nữ")) {
             trangThai = 1;
             gioiTinh = 0;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if(selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nam")) {
+        } else if (selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nam")) {
             trangThai = 0;
             gioiTinh = 1;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if(selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nữ")) {
+        } else if (selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nữ")) {
             trangThai = 0;
             gioiTinh = 0;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if(selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nam")) {
+        } else if (selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nam")) {
             getDataLocTheoPhai("Nam", 1);
-        } else if(selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nữ")) {
+        } else if (selectTrangThai.equals("Tất Cả") && selectGioiTinh.equals("Nữ")) {
             getDataLocTheoPhai("Nữ", 0);
-        } else if(selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Tất Cả")) {
+        } else if (selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Tất Cả")) {
             getDataLocTheoTrangThai("Làm việc", 1);
-        } else if(selectTrangThai.equals("Nghỉ việc") && selectGioiTinh.equals("Tất Cả")) {
+        } else if (selectTrangThai.equals("Nghỉ việc") && selectGioiTinh.equals("Tất Cả")) {
             getDataLocTheoTrangThai("Nghỉ việc", 0);
         }
     }
-    
+
     private void getDatalocTheoTrangThaiVaGioiTinh(String trangThai, int tt, String gioiTinh, int gt) {
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoTrangThaiVaGioiTinh(tt,gt);
+        ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getLocTheoTrangThaiVaGioiTinh(tt, gt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
-            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gioiTinh,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gioiTinh, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
             modelNV.addRow(data);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cmbLocGioiTinh;
@@ -533,18 +572,20 @@ public class PanelNhanVien extends javax.swing.JPanel {
         ArrayList<NhanVien> dsNV = new DAO_NhanVien((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
-        for(NhanVien nv : dsNV) {
-            if(nv.isGioiTinh()) 
+        for (NhanVien nv : dsNV) {
+            if (nv.isGioiTinh()) {
                 gioiTinh = "Nam";
-            else 
+            } else {
                 gioiTinh = "Nữ";
-            
-            if(nv.isTrangThai()) 
+            }
+
+            if (nv.isTrangThai()) {
                 trangThai = "Làm việc";
-            else 
+            } else {
                 trangThai = "Đã nghỉ";
-            
-            Object[] data = {nv.getMaNV(),nv.getTenNV(),nv.getMatKhau(),gioiTinh,nv.getCccd(),nv.getDiaChi(),nv.getSoDienThoai(),trangThai,nv.getChucVu()};
+            }
+
+            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gioiTinh, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
             modelNV.addRow(data);
         }
     }
