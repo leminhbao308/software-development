@@ -4,6 +4,7 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
@@ -11,7 +12,6 @@ import org.group06.db.dao.DAO_KhuyenMai;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
 
 /**
  *
@@ -52,9 +52,9 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         lblSoLuotSuDung = new javax.swing.JLabel();
         txtSoLuotSuDung = new javax.swing.JTextField();
         lblNgayBatDau = new javax.swing.JLabel();
-        txtNgayBatDau = new javax.swing.JTextField();
         lblNgayKetThuc = new javax.swing.JLabel();
-        txtNgayKetThuc = new javax.swing.JTextField();
+        dchNgayBatDau = new com.toedter.calendar.JDateChooser();
+        dchNgayKetThuc = new com.toedter.calendar.JDateChooser();
         pnControl = new javax.swing.JPanel();
         btnXoaTrang = new javax.swing.JButton();
         btnThemMoi = new javax.swing.JButton();
@@ -139,19 +139,17 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     .addGroup(pnLeftLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24)
-                .addGroup(pnLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnLeftLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(lblTenCTKM))
+                .addGap(32, 32, 32)
+                .addGroup(pnLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTenCTKM)
                     .addComponent(txtTenCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addGroup(pnLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnLeftLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(lblMucGiamGia))
                     .addComponent(txtMucGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addGap(16, 16, 16))
         );
 
         pnFields.add(pnLeft);
@@ -170,12 +168,34 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         lblNgayBatDau.setFont(FontConstant.FONT_LABEL);
         lblNgayBatDau.setText("Ngày Bắt Đầu:");
 
-        txtNgayBatDau.setFont(FontConstant.FONT_TEXT);
-
         lblNgayKetThuc.setFont(FontConstant.FONT_LABEL);
         lblNgayKetThuc.setText("Ngày Kết Thúc:");
 
-        txtNgayKetThuc.setFont(FontConstant.FONT_TEXT);
+        dchNgayBatDau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayBatDau.setPreferredSize(new java.awt.Dimension(64, 29));
+        dchNgayBatDau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dchNgayBatDauMouseClicked(evt);
+            }
+        });
+        dchNgayBatDau.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dchNgayBatDauPropertyChange(evt);
+            }
+        });
+
+        dchNgayKetThuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayKetThuc.setPreferredSize(new java.awt.Dimension(64, 29));
+        dchNgayKetThuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dchNgayKetThucMouseClicked(evt);
+            }
+        });
+        dchNgayKetThuc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dchNgayKetThucPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRightLayout = new javax.swing.GroupLayout(pnRight);
         pnRight.setLayout(pnRightLayout);
@@ -189,34 +209,46 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     .addComponent(lblNgayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNgayKetThuc)
                     .addComponent(txtSoLuotSuDung)
-                    .addComponent(txtNgayBatDau, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
+                    .addComponent(dchNgayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                    .addComponent(dchNgayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         pnRightLayout.setVerticalGroup(
             pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnRightLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSoLuotSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSoLuotSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRightLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(52, 52, 52)
                         .addComponent(lblNgayBatDau))
                     .addGroup(pnRightLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(33, 33, 33)
+                        .addComponent(dchNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(pnRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnRightLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(lblNgayKetThuc))
-                    .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                        .addGap(53, 53, 53)
+                        .addComponent(lblNgayKetThuc)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRightLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dchNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
+
+        dchNgayBatDau.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+
+        dchNgayBatDau.getDateEditor().setEnabled(false);
+
+        ((com.toedter.calendar.JTextFieldDateEditor) dchNgayBatDau.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
+        dchNgayBatDau.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+
+        dchNgayBatDau.getDateEditor().setEnabled(false);
+
+        ((com.toedter.calendar.JTextFieldDateEditor) dchNgayBatDau.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
         pnFields.add(pnRight);
 
@@ -383,7 +415,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(pnControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(scrKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(scrKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -414,7 +446,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
 //    Xử lý đưa dữ liệu từ row table lên fields
     private void tblKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhuyenMaiMouseClicked
-
 //        Lấy vị trí dòng click
         int vitri = this.tblKhuyenMai.getSelectedRow();
 //      Lấy và set giá trị cho fields
@@ -422,11 +453,54 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         this.txtTenCTKM.setText(tblKhuyenMai.getValueAt(vitri, 1).toString());
         this.txtMucGiamGia.setText(tblKhuyenMai.getValueAt(vitri, 2).toString());
         this.txtSoLuotSuDung.setText(tblKhuyenMai.getValueAt(vitri, 3).toString());
-        this.txtNgayBatDau.setText(tblKhuyenMai.getValueAt(vitri, 4).toString());
-        this.txtNgayKetThuc.setText(tblKhuyenMai.getValueAt(vitri, 5).toString());
+//        this.txtNgayBatDau.setText(tblKhuyenMai.getValueAt(vitri, 4).toString());
+//        this.txtNgayKetThuc.setText(tblKhuyenMai.getValueAt(vitri, 5).toString());
 
     }//GEN-LAST:event_tblKhuyenMaiMouseClicked
 
+    private void dchNgayBatDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayBatDauMouseClicked
+
+    }//GEN-LAST:event_dchNgayBatDauMouseClicked
+
+    private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
+        if (evt.getPropertyName().equals("date")) {
+            java.util.Date date = dchNgayBatDau.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formatDay = sdf.format(date.getTime());
+//            if(date != null){
+//                ArrayList<KhuyenMai> dsKM = new DAO_KhuyenMai((DatabaseConnect.getConnection())).getByDate(formatDay);
+//                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+//                modelKH.setRowCount(0);
+//                for (HoaDon hd : dsHD) {
+//                    Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
+//                    modelKH.addRow(data);
+//                }
+//            } else
+            loadDataTable();
+        }
+    }//GEN-LAST:event_dchNgayBatDauPropertyChange
+
+    private void dchNgayKetThucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayKetThucMouseClicked
+
+    }//GEN-LAST:event_dchNgayKetThucMouseClicked
+
+    private void dchNgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayKetThucPropertyChange
+        if (evt.getPropertyName().equals("date")) {
+            java.util.Date date = dchNgayKetThuc.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formatDay = sdf.format(date.getTime());
+//            if(date != null){
+//                ArrayList<KhuyenMai> dsKM = new DAO_KhuyenMai((DatabaseConnect.getConnection())).getByDate(formatDay);
+//                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+//                modelKH.setRowCount(0);
+//                for (HoaDon hd : dsHD) {
+//                    Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
+//                    modelKH.addRow(data);
+//                }
+//            } else
+            loadDataTable();
+        }
+    }//GEN-LAST:event_dchNgayKetThucPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -434,6 +508,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoaTrang;
+    private com.toedter.calendar.JDateChooser dchNgayBatDau;
+    private com.toedter.calendar.JDateChooser dchNgayKetThuc;
     private javax.swing.JLabel lblMa;
     private javax.swing.JLabel lblMucGiamGia;
     private javax.swing.JLabel lblNgayBatDau;
@@ -450,11 +526,9 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTable tblKhuyenMai;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMucGiamGia;
-    private javax.swing.JTextField txtNgayBatDau;
-    private javax.swing.JTextField txtNgayKetThuc;
     private javax.swing.JTextField txtSoLuotSuDung;
     private javax.swing.JTextField txtTenCTKM;
     private javax.swing.JTextField txtTimCTKM;
     // End of variables declaration//GEN-END:variables
- private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
+    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
 }

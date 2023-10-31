@@ -371,6 +371,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
         ComponentStatus.setStatusBtn(this.btnHuy, true);
         this.txtMaLoaiQuanAo.setText(taoMa());
         this.txtTenLoaiQuanAo.setEnabled(true);
+        this.txtTenLoaiQuanAo.requestFocus();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -482,5 +483,5 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
     private boolean statusBtnThemMoi = false;
     private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
     private DAO_QuanAo loaQuanAoCapNhat = null;
-    int viTri = 0;
+    private int viTri = 0;
 }
