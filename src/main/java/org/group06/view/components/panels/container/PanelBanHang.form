@@ -354,7 +354,7 @@
                 <Component class="javax.swing.JTable" name="tblQuanAo">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tblQuanAo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent event) {&#xa;        if (!event.getValueIsAdjusting()) {&#xa;            int selectedRow = tblQuanAo.getSelectedRow();&#xa;            if (selectedRow != -1) {&#xa;                String maQA = tblQuanAo.getValueAt(selectedRow, 0).toString();&#xa;                setSoLuongQuanAoToiDa(get_SLQA_TrongKho(maQA));&#xa;            }&#xa;        }&#xa;    }&#xa;});">
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="7" rowCount="0">
                         <Column editable="false" title="M&#xe3; Qu&#x1ea7;n &#xc1;o" type="java.lang.String"/>
                         <Column editable="false" title="T&#xea;n Qu&#x1ea7;n &#xc1;o" type="java.lang.String"/>
@@ -422,10 +422,6 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tblQuanAoFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tblQuanAoFocusLost"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -477,7 +473,7 @@
                 </Component>
                 <Component class="javax.swing.JSpinner" name="spnSoLuongQuanAo">
                   <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor" postCode="JSpinner.NumberEditor ne = new JSpinner.NumberEditor(spnSoLuongQuanAo);&#xa;        spnSoLuongQuanAo.setEditor(ne);        &#xa;        &#xa;        FocusAdapter focusAdapter = new FocusAdapter()&#xa;        {&#xa;            public void focusGained(final FocusEvent e)&#xa;            {&#xa;            }&#xa;            &#xa;            public void focusLost(final FocusEvent e) {&#xa;                spnSoLuongQuanAoFocusLost(e);&#xa;            };            &#xa;        };        &#xa;        &#xa;((JSpinner.DefaultEditor)spnSoLuongQuanAo.getEditor()).getTextField().addFocusListener(focusAdapter);">
+                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                       <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -499,9 +495,6 @@
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="btnThemQuanAo" noResource="true"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemQuanAoActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -589,13 +582,6 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tblDonHangFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tblDonHangFocusLost"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="tblDonHang.getModel().addTableModelListener(new TableModelListener() {&#xa;    @Override&#xa;public void tableChanged(TableModelEvent e) {&#xa;        int rowCount = tblDonHang.getRowCount();&#xa;        if (rowCount != 0) {&#xa;            btnThanhToan.setEnabled(true);&#xa;        }&#xa;    }&#xa;});&#xa;tblDonHang.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;            @Override&#xa;            public void valueChanged(ListSelectionEvent e) {&#xa;                int selectedRow = tblDonHang.getSelectedRow();&#xa;                if (selectedRow &gt;= 0) {&#xa;                    // Khi c&#xf3; d&#xf2;ng &#x111;&#x1b0;&#x1ee3;c ch&#x1ecd;n, cho ph&#xe9;p x&#xf3;a&#xa;                    tblDonHang.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), &quot;delete&quot;);&#xa;                    tblDonHang.getActionMap().put(&quot;delete&quot;, new AbstractAction() {&#xa;                        @Override&#xa;                        public void actionPerformed(ActionEvent e) {&#xa;                            ((DefaultTableModel) tblDonHang.getModel()).removeRow(selectedRow);&#xa;                            capNhatSoTienMuaHang();&#xa;                            disableBanHang();&#xa;                            if (tblDonHang.getRowCount() == 0) btnThanhToan.setEnabled(false);&#xa;                        }&#xa;                    });&#xa;                }&#xa;            }&#xa;        });"/>
-                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -791,7 +777,6 @@
                                   <Component id="lbl_VAT_BanHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txt_KM_BanHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="chk_XuatHD_BanHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KhuyenMai_BanHang" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -804,9 +789,7 @@
                               <Component id="lbl_KM_BanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_KM_BanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_KhuyenMai_BanHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="1020" max="32767" attributes="0"/>
+                              <EmptySpace pref="1051" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_BanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_BanHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -845,15 +828,6 @@
                       <Events>
                         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_KM_BanHangKeyReleased"/>
                       </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_KhuyenMai_BanHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="0%"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbl_VAT_BanHang">
                       <Properties>
@@ -927,9 +901,6 @@
                           </Border>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TienKhachTra_BanHangActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JSeparator" name="spr_TienThua_BanHang">
                       <Properties>
@@ -990,9 +961,6 @@
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1039,7 +1007,6 @@
                                   <Component id="chk_KH_TraTruoc" max="32767" attributes="0"/>
                                   <Component id="chk_XuatDH_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txt_LM_DatHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KhuyenMai_DatHang" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1056,9 +1023,7 @@
                               <Component id="lbl_KM_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_LM_DatHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_KhuyenMai_DatHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="938" max="32767" attributes="0"/>
+                              <EmptySpace pref="969" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_DatHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -1103,15 +1068,6 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayNhanHang.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                       </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_KhuyenMai_DatHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="0%"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbl_KM_DatHang">
                       <Properties>
