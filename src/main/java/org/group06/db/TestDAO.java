@@ -17,10 +17,10 @@ public class TestDAO {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
 //                testDAO_NhanVien(connection);
-//                test_DAO_QuanAo(connection);
+                test_DAO_QuanAo(connection);
 //                test_DAO_KhachHang(connection);
 //                test_DAO_KhuyenMai(connection);
-                testDAO_HoaDon(connection);
+//                testDAO_HoaDon(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -95,17 +95,17 @@ public class TestDAO {
         // Tạo đối tượng QuanAoDAO
         DAO_QuanAo quanAoDAO = new DAO_QuanAo(connection);
 
-        // Lấy danh sách tất cả nhân viên
-        List<QuanAo> dsQuanAo = quanAoDAO.getAll();
-        System.out.println("Danh sách QuanAo:");
-        for (QuanAo quanAo : dsQuanAo) {
-            System.out.println(quanAo);
-            System.out.println(quanAoDAO.getTenLoaiQuanAo(quanAo.getLoaiQuanAo()));
-        }
-
-        String id = "ADD-0001-M";
-        QuanAo quanAo = quanAoDAO.getByID(id);
-        System.out.println("Quần Áo có mã " + id + ":" + quanAo);
+//        // Lấy danh sách tất cả nhân viên
+//        List<QuanAo> dsQuanAo = quanAoDAO.getAll();
+//        System.out.println("Danh sách QuanAo:");
+//        for (QuanAo quanAo : dsQuanAo) {
+//            System.out.println(quanAo);
+//            System.out.println(quanAoDAO.getTenLoaiQuanAo(quanAo.getLoaiQuanAo()));
+//        }
+//
+//        String id = "ADD-0001-M";
+//        QuanAo quanAo = quanAoDAO.getByID(id);
+//        System.out.println("Quần Áo có mã " + id + ":" + quanAo);
 
 //        // Thêm quần áo mới
 //        QuanAo newQuanAo = new QuanAo("VHN-0002-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "C:\\Users\\lehoa\\Desktop\\example.jpg");
@@ -116,6 +116,12 @@ public class TestDAO {
 //        System.out.println("Danh sách QuanAo:");
 //        for (QuanAo quanAoM : dsQuanAoMoi) {
 //            System.out.println(quanAoM);
+//        }
+
+//        if (quanAoDAO.delete("ĐX-0001-L")) {
+//            System.out.println("Xóa thành công");
+//        } else {
+//            System.out.println("Lỗi gòi");
 //        }
     }
 

@@ -63,7 +63,8 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-        pnlContainer = new PanelBanHang(nv);
+//        pnlContainer = new PanelBanHang(nv);
+        pnlContainer = new PanelLoaiQuanAo();
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
