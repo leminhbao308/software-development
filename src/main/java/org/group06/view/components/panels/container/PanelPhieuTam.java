@@ -7,6 +7,7 @@ package org.group06.view.components.panels.container;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -339,7 +340,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     java.util.Date dateNow = new java.util.Date();
                     if (ngayDat != null) {
                         if (ngayDat.after(dateNow)) {
-                            JOptionPane.showMessageDialog(null, "Ngày tạo không hợp lệ");
+                            JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
                             resetDay();
                         } else {
                             if (ngayNhan == null) {

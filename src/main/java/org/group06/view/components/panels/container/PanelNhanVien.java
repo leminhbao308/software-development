@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PanelNhanVien extends javax.swing.JPanel {
 
     private DAO_NhanVien dao_NhanVien;
-    public int soMaNV = 4;
+    public int soMaNV;
 
     /**
      * Creates new form PanelNhanVien
@@ -314,7 +314,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void callFrameTTNV() {
-        FrameTTNV frTTNV = new FrameTTNV(this.getSelectedNV(), this);
+        FrameTTNhanVien frTTNV = new FrameTTNhanVien(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
