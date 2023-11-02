@@ -28,7 +28,6 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
         initComponents();
         loadDataTable();
         setStatusAllBtnsStart();
-        
 
     }
 
@@ -566,10 +565,11 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
             modelNCC.addRow(data);
         }
     }
-    private void xuLyTimKiemCTKM() {
+
+    private void xuLyTimKiemNCC() {
         String duLieuTimKiem = this.txtTimNhaCungCap.getText().trim();
         int tieuChiTimKiem = this.cmbTieuChiTimKiemNCC.getSelectedIndex();
-        
+
         if (duLieuTimKiem.isEmpty() || tieuChiTimKiem == 0) {
             loadDataTable();
         } else {
@@ -586,7 +586,7 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
                         dsNCCTimDuoc.add(ncc);
                     }
                 }
-            }else if (tieuChiTimKiem == 3) {
+            } else if (tieuChiTimKiem == 3) {
                 for (NhaCungCap ncc : this.dsNCC) {
                     if (ncc.getSoDienThoai().contains(duLieuTimKiem)) {
                         dsNCCTimDuoc.add(ncc);
@@ -600,11 +600,11 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
     }
 //    Xử lý tìm kiếm nhà cung cấp
     private void txtTimNhaCungCapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimNhaCungCapKeyPressed
-        xuLyTimKiemCTKM();
+        xuLyTimKiemNCC();
     }//GEN-LAST:event_txtTimNhaCungCapKeyPressed
 
     private void txtTimNhaCungCapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimNhaCungCapKeyReleased
-        xuLyTimKiemCTKM();
+        xuLyTimKiemNCC();
     }//GEN-LAST:event_txtTimNhaCungCapKeyReleased
 
 
