@@ -57,7 +57,6 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         lblTitleCTPD = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(790, 820));
 
         pnlDSQA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách quần áo đã đặt", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16))); // NOI18N
 

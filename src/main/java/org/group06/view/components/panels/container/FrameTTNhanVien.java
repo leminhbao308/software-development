@@ -203,7 +203,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
 
         cmbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Làm việc", "Đã nghỉ" }));
-        cmbTrangThai.setSelectedItem(nv.isTrangThai());
         cmbTrangThai.setEnabled(false);
         cmbTrangThai.setPreferredSize(new java.awt.Dimension(72, 30));
 
@@ -295,6 +294,11 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
+
+        if(nv.isTrangThai()){
+            cmbTrangThai.setSelectedItem("Làm việc");
+        } else
+        cmbTrangThai.setSelectedItem("Đã nghỉ");
 
         btnCapNhat.setFont(FontConstant.FONT_BUTTON);
         btnCapNhat.setForeground(ColorConstant.WHITE);

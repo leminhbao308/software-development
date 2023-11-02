@@ -222,6 +222,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                         Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
                         modelKH.addRow(data);
                     }
+                    dchTimTheoNgay.setDate(null);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
                     loadDataTable();
@@ -279,8 +280,10 @@ public class PanelHoaDon extends javax.swing.JPanel {
                             JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
                             dchTimTheoNgay.setDate(null);
                             loadDataTable();
+                            txtTimTheoTenKH.setText("");
                         } else {
                             loadDataNgay(date);
+                            txtTimTheoTenKH.setText("");
                         }
                     }
                 }
