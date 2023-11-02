@@ -23,7 +23,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
     @Override
     public ArrayList<ChiTietHoaDon> getAll() {
         ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
-        String sql = "SELECT * FROM KhachHang";
+        String sql = "SELECT * FROM ChiTietHoaDon";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -36,7 +36,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
                 dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return dsChiTietHoaDon;
     }

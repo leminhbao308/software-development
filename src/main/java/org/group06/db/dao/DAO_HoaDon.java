@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
-    private DAO_NhanVien dao_NhanVien;
-    private DAO_KhuyenMai dao_KhuyenMai;
-    private DAO_KhachHang dao_KhachHang;
     private Connection connection;
 
     public DAO_HoaDon(Connection connection) {
@@ -22,27 +19,20 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
     @Override
     public ArrayList<HoaDon> getAll() {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        ArrayList<HoaDon> dsHD = new ArrayList<>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
             String sql = "SELECT * FROM HoaDon";
-            Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 HoaDon hoaDon = new HoaDon();
-                String maHD = resultSet.getString(1);
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
+                hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
                 Date ngayLap = resultSet.getDate(3);
-                KhachHang khachHang = dao_KhachHang.getByMAKH(resultSet.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
-                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
+                hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
                 dsHD.add(hoaDon);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,8 +42,8 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     @Override
     public HoaDon getByID(String id) {
         HoaDon hoaDon = null;
-        String sql = "SELECT * FROM HoaDon WHERE MAHD = ?";
         try {
+            String sql = "SELECT * FROM HoaDon WHERE MAHD = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -61,9 +51,9 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
                 hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
                 hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
-                hoaDon.setKhuyenMai(dao_KhuyenMai.getByID(resultSet.getString("MAKM")));
-                hoaDon.setKhachHang(dao_KhachHang.getByMAKH(resultSet.getString("MAKH")));
-                hoaDon.setNhanVien(dao_NhanVien.getByID(resultSet.getString("MANV")));
+                hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,9 +92,6 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     }
 
     public ArrayList<HoaDon> getByName(String name) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
             DatabaseConnect.getConnection();
@@ -118,10 +105,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
                 HoaDon hoaDon = new HoaDon();
                 String maHD = rs.getString("MAHD");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                KhuyenMai khuyenMai = new DAO_KhuyenMai(connection).getByID(rs.getString("MAKM"));
                 Date ngayLap = rs.getDate("NGAYTAO");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                KhachHang khachHang = new DAO_KhachHang(connection).getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = new DAO_NhanVien(connection).getByID(rs.getString("MANV"));
                 hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
                 dsHD.add(hoaDon);
             }
@@ -133,9 +120,6 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     }
 
     public ArrayList<HoaDon> getByDate(String date) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
             DatabaseConnect.getConnection();
@@ -149,10 +133,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
                 HoaDon hoaDon = new HoaDon();
                 String maHD = rs.getString("MAHD");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                KhuyenMai khuyenMai = new DAO_KhuyenMai(connection).getByID(rs.getString("MAKM"));
                 Date ngayLap = rs.getDate("NGAYTAO");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                KhachHang khachHang = new DAO_KhachHang(connection).getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = new DAO_NhanVien(connection).getByID(rs.getString("MANV"));
                 hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
                 dsHD.add(hoaDon);
             }
