@@ -4,7 +4,13 @@
  */
 package org.group06.view.components.panels.container;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
@@ -19,12 +25,13 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
+    private PanelQuanAo pnlQuanAo;
 
-    
     public FrameChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
         this.pnlHoaDon = pnlHoaDon;
         initComponents();
+        loadDataTable();
     }
 
     /**
@@ -51,8 +58,8 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
         txtTenCTKM = new javax.swing.JTextField();
         txtTongTT = new javax.swing.JTextField();
         pnlDSQA = new javax.swing.JPanel();
-        srcQuanAo = new javax.swing.JScrollPane();
-        tblDSQuanAo = new javax.swing.JTable();
+        srcChiTietHD = new javax.swing.JScrollPane();
+        tblChiTietHD = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -144,10 +151,9 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
         });
 
         txtTongTT.setBackground(new java.awt.Color(242, 242, 242));
-        txtTongTT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTongTT.setText("1");
+        txtTongTT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtTongTT.setBorder(null);
-        txtTongTT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtTongTT.setDisabledTextColor(new java.awt.Color(255, 0, 51));
         txtTongTT.setEnabled(false);
         txtTongTT.setPreferredSize(new java.awt.Dimension(71, 30));
         txtTongTT.addActionListener(new java.awt.event.ActionListener() {
@@ -220,10 +226,10 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
         pnlDSQA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách quần áo đã mua", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16))); // NOI18N
 
-        tblDSQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        tblDSQuanAo.setModel(new javax.swing.table.DefaultTableModel(
+        tblChiTietHD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tblChiTietHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"A001", "120000", "1", "120000"}
+
             },
             new String [] {
                 "Tên quần áo", "Giá tiền", "Số lượng", "Thành tiền"
@@ -237,24 +243,24 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblDSQuanAo.setRowHeight(30);
-        srcQuanAo.setViewportView(tblDSQuanAo);
-        if (tblDSQuanAo.getColumnModel().getColumnCount() > 0) {
-            tblDSQuanAo.getColumnModel().getColumn(0).setResizable(false);
-            tblDSQuanAo.getColumnModel().getColumn(1).setResizable(false);
-            tblDSQuanAo.getColumnModel().getColumn(2).setResizable(false);
-            tblDSQuanAo.getColumnModel().getColumn(3).setResizable(false);
+        tblChiTietHD.setRowHeight(30);
+        srcChiTietHD.setViewportView(tblChiTietHD);
+        if (tblChiTietHD.getColumnModel().getColumnCount() > 0) {
+            tblChiTietHD.getColumnModel().getColumn(0).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(1).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(2).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(3).setResizable(false);
         }
 
         javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
         pnlDSQA.setLayout(pnlDSQALayout);
         pnlDSQALayout.setHorizontalGroup(
             pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(srcChiTietHD, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnlDSQALayout.setVerticalGroup(
             pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+            .addComponent(srcChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -320,8 +326,8 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel lblTongTT;
     private javax.swing.JPanel pnlDSQA;
     private javax.swing.JPanel pnlTTHD;
-    private javax.swing.JScrollPane srcQuanAo;
-    private javax.swing.JTable tblDSQuanAo;
+    private javax.swing.JScrollPane srcChiTietHD;
+    private javax.swing.JTable tblChiTietHD;
     private javax.swing.JTextField txtKH;
     private javax.swing.JTextField txtMaCTHD;
     private javax.swing.JTextField txtNV;
@@ -329,4 +335,27 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenCTKM;
     private javax.swing.JTextField txtTongTT;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataTable() {
+        double tinhTongThanhTien = 0;
+        String hd = hoaDon.getMaHoaDon().toString();
+        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
+        DefaultTableModel modelCTHD = (DefaultTableModel) this.tblChiTietHD.getModel();
+        modelCTHD.setRowCount(0);
+        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
+        for (ChiTietHoaDon cthd : dsCTHD) {
+            String tenQA = cthd.getQuanAo().getTenQA();
+            String giaBan = dfMoney.format(cthd.getGiaBan());
+            int soLuong = cthd.getSoLuong();
+            double tinhThanhTien = soLuong * cthd.getGiaBan();
+            String thanhTien = dfMoney.format(tinhThanhTien);
+
+            tinhTongThanhTien += tinhThanhTien;
+
+            Object[] data = {tenQA, giaBan, soLuong, thanhTien};
+            modelCTHD.addRow(data);
+        }
+        String tongThanhTien = dfMoney.format(tinhTongThanhTien);
+        txtTongTT.setText(tongThanhTien);
+    }
 }
