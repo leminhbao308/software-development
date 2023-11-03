@@ -4,24 +4,21 @@
  */
 package org.group06.db.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.NhanVien;
 import org.group06.model.entity.PhieuDat;
 
+import java.sql.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author Dell
  */
-public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
+public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
+
     private DAO_NhanVien dao_NhanVien;
     private DAO_KhuyenMai dao_KhuyenMai;
     private DAO_KhachHang dao_KhachHang;
@@ -30,7 +27,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
     public DAO_PhieuDat(Connection connection) {
         this.connection = connection;
     }
-    
+
     @Override
     public ArrayList<PhieuDat> getAll() {
         dao_NhanVien = new DAO_NhanVien(connection);
@@ -90,7 +87,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
         }
         return dsPD;
     }
-    
+
     public ArrayList<PhieuDat> getByNameNV(String name) {
         dao_NhanVien = new DAO_NhanVien(connection);
         dao_KhuyenMai = new DAO_KhuyenMai(connection);
@@ -120,7 +117,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
         }
         return dsPD;
     }
-    
+
     public ArrayList<PhieuDat> getByDateDat(String date) {
         dao_NhanVien = new DAO_NhanVien(connection);
         dao_KhuyenMai = new DAO_KhuyenMai(connection);
@@ -151,7 +148,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
         }
         return dsPD;
     }
-    
+
     public ArrayList<PhieuDat> getByDateNhan(String date) {
         dao_NhanVien = new DAO_NhanVien(connection);
         dao_KhuyenMai = new DAO_KhuyenMai(connection);
@@ -182,8 +179,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
         }
         return dsPD;
     }
-    
-    public ArrayList<PhieuDat> getByDateDatAndDateNhan(String dateDat,String dateNhan) {
+
+    public ArrayList<PhieuDat> getByDateDatAndDateNhan(String dateDat, String dateNhan) {
         dao_NhanVien = new DAO_NhanVien(connection);
         dao_KhuyenMai = new DAO_KhuyenMai(connection);
         dao_KhachHang = new DAO_KhachHang(connection);
@@ -213,7 +210,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
         }
         return dsPD;
     }
-    
+
     @Override
     public PhieuDat getByID(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -230,7 +227,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
             statement.setDate(3, phieuDat.getNgayNhan());
             statement.setString(4, phieuDat.getKhachHang().getMaKhachHang());
             statement.setString(5, phieuDat.getNhanVien().getMaNV());
-            statement.setString(6, phieuDat.getKhuyenMai().getMaKhuyenMai());
+            statement.setString(6, phieuDat.getKhuyenMai() == null ? null : phieuDat.getKhuyenMai().getMaKhuyenMai());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -247,5 +244,26 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat>{
     public boolean delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    public int loadMaPDCount() {
+        int countMaPD = 0;
+        String query = "SELECT MAX(MAPHIEUDAT) FROM PhieuDat";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String maxMaPD = resultSet.getString(1);
+                if (maxMaPD != null) {
+                    countMaPD = Integer.parseInt(maxMaPD.substring(2)); // Bỏ đi 2 ký tự đầu (VD: PD) để lấy số
+                }
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi tải giá trị countMaPD từ cơ sở dữ liệu.");
+            e.printStackTrace();
+        }
+        return countMaPD;
+    }
+
 }

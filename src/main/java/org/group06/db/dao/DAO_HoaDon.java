@@ -69,8 +69,8 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, hoaDon.getMaHoaDon());
             statement.setDate(2, hoaDon.getNgayTao());
-            statement.setString(3, hoaDon.getKhuyenMai().getMaKhuyenMai());
-            statement.setString(4, hoaDon.getKhachHang().getMaKhachHang());
+            statement.setString(3, hoaDon.getKhuyenMai() == null ? null : hoaDon.getKhuyenMai().getMaKhuyenMai());
+            statement.setString(4, hoaDon.getKhachHang() == null ? null : hoaDon.getKhachHang().getMaKhachHang());
             statement.setString(5, hoaDon.getNhanVien().getMaNV());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
