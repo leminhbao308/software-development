@@ -1,5 +1,6 @@
 package org.group06.view.components.panels.container;
 
+import com.toedter.calendar.JDateChooser;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -28,7 +29,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     public PanelKhuyenMai() {
         initComponents();
         loadDataTable();
-
 //        setDefaultCalender();
         this.dchNgayBatDau.setEnabled(false);
         this.dchNgayKetThuc.setEnabled(false);
@@ -538,25 +538,24 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
         if (evt.getPropertyName().equals("date")) {
-            java.util.Date selectedDate = new java.util.Date(this.dchNgayBatDau.getDate().getTime());
+            Date date = (Date) evt.getNewValue();
+            java.util.Date dateNow = new java.util.Date();
 
-            java.util.Date currentDate = new java.util.Date();
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String formattedSelectedDate = sdf.format(selectedDate);
-
-            if (selectedDate.before(currentDate)) {
-                System.out.println("Bạn chọn ngày trước ngày hiện tại");
-            } else if (selectedDate.after(currentDate)) {
-                System.out.println("Bạn chọn ngày sau ngày hiện tại");
-            } else {
-                System.out.println("Bạn chọn ngày hiện tại");
+            SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
+            String formatDate = newSDF.format(date);
+            String formatDateNow = newSDF.format(dateNow);
+            if (date != null) {
+                if (formatDate.compareTo(formatDateNow) > 0) {
+                    System.out.println("Bạn chọn ngày sau ngày hiện tại");
+                } else if (formatDate.compareTo(formatDateNow) == 0) {
+                    System.out.println("Bạn chọn ngày hiện tại");
+                } else {
+                    System.out.println("Bạn chọn ngày trước ngày hiện tại");
+                }
             }
-
         }
-
-
     }//GEN-LAST:event_dchNgayBatDauPropertyChange
+
 
     private void dchNgayKetThucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayKetThucMouseClicked
 

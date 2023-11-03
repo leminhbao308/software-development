@@ -35,6 +35,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private DAO_HoaDon dao_HoaDon;
     private ChiTietHoaDon chiTietHoaDon;
+
     /**
      * Creates new form PanelHoaDon
      */
@@ -326,7 +327,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     private HoaDon getSelectedHoaDon() {
         String hd = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
         String date = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 1).toString();
-        
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.sql.Date sqlDate = null;
         try {
@@ -362,7 +363,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
             modelHD.addRow(data);
         }
     }
-    
+
     private String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
