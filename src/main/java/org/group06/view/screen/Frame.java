@@ -64,7 +64,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-//        pnlContainer = new PanelBanHang(nv);
+//        pnlContainer = new PanelBanHang_DatHang(nv);
         pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
 //        pnlContainer = new PanelLoaiQuanAo();
         this.add(pnlContainer, BorderLayout.CENTER);
@@ -85,7 +85,7 @@ public class Frame extends JFrame {
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang(nv);
+            pnlContainer = new PanelBanHang_DatHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -93,7 +93,7 @@ public class Frame extends JFrame {
 
         mniNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang(nv);
+            pnlContainer = new PanelBanHang_DatHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -196,13 +196,13 @@ public class Frame extends JFrame {
 //            this.repaint();
 //        });
 //
-//        mniThongKeKhachHang.addActionListener(e -> {
-//            getContentPane().remove(pnlContainer);
-//            pnlContainer = new PanelThongKe();
-//            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-//            this.revalidate();
-//            this.repaint();
-//        });
+        mniThongKeKhachHang.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelThongKeKhachHang();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
 //
 //        mniTongKetCuoiNgay.addActionListener(e -> {
 //            getContentPane().remove(pnlContainer);
