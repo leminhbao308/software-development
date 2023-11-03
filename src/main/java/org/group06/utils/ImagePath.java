@@ -26,6 +26,7 @@ public class ImagePath {
 
     // Thumbnail path
     public static final URL THUMBNAIL_LOGIN = ImagePath.class.getResource("/images/thumbnail/login.jpg");
+    public static final URL THUMBNAIL_MAIN = ImagePath.class.getResource("/images/thumbnail/gdChinh.jpg");
     public static final URL THUMBNAIL_LOGO = ImagePath.class.getResource("/images/thumbnail/logo.png");
     public static final URL THUMBNAIL_ICON = ImagePath.class.getResource("/images/thumbnail/icon.png");
 

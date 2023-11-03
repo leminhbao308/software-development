@@ -36,8 +36,10 @@
                       <Component id="lblTitleKhuyenMai" min="-2" pref="785" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="lblTimKiemCTKM" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtTimCTKM" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbTieuChiTimKiem" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
                   <Component id="scrKhuyenMai" max="32767" attributes="0"/>
               </Group>
@@ -55,7 +57,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtTimCTKM" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTimCTKM" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="cmbTieuChiTimKiem" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -97,7 +102,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="FontConstant.FONT_LABEL" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m Ch&#x1b0;&#x1a1;ng Tr&#xec;nh Khuy&#x1ebf;n M&#xe3;i"/>
+        <Property name="text" type="java.lang.String" value="Ti&#x1ebf;m Ch&#x1b0;&#x1a1;ng Tr&#xec;nh Khuy&#x1ebf;n M&#xe3;i"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTimCTKM">
@@ -106,7 +111,7 @@
           <Connection code="FontConstant.FONT_TEXT" type="code"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="ColorConstant.WHITE" type="code"/>
+          <Connection code="ColorConstant.BLACK" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="&quot;Nh&#x1ead;p m&#xe3; khuy&#x1ebf;n m&#xe3;i c&#x1ea7;n t&#xec;m&quot;" type="code"/>
@@ -123,6 +128,8 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimCTKMActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimCTKMKeyPressed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimCTKMKeyReleased"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pnFields">
@@ -184,9 +191,12 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTenCTKM" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTenCTKM" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtTenCTKM" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblTenCTKM" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -204,9 +214,16 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtMa">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMa">
@@ -230,6 +247,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMucGiamGia">
@@ -245,6 +263,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -334,6 +353,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontConstant.FONT_TEXT" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNgayBatDau">
@@ -383,7 +403,7 @@
                 <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchNgayKetThucPropertyChange"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayBatDau.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchNgayBatDau.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayBatDau.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayKetThuc.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchNgayKetThuc.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayKetThuc.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -643,5 +663,21 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JComboBox" name="cmbTieuChiTimKiem">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="FontConstant.FONT_TEXT" type="code"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ch&#x1ecd;n ti&#xea;u ch&#xed; t&#xec;m ki&#x1ebf;m&quot;, &quot;T&#xec;m theo m&#xe3;&quot;, &quot;T&#xec;m theo t&#xea;n&quot;})" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTieuChiTimKiemActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
   </SubComponents>
 </Form>

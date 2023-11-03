@@ -184,6 +184,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Quần Áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txtTimQA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimQA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimQAActionPerformed(evt);
+            }
+        });
         txtTimQA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTimQAKeyPressed(evt);
@@ -1099,6 +1104,10 @@ public class PanelBanHang extends javax.swing.JPanel {
         
         reloadAll();
     }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void txtTimQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimQAActionPerformed
 
     private void reloadAll() {
         loadAllTableQuanAo(dsQuanAo);
