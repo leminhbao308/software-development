@@ -17,10 +17,11 @@ public class TestDAO {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
 //                testDAO_NhanVien(connection);
-                test_DAO_QuanAo(connection);
+//                test_DAO_QuanAo(connection);
 //                test_DAO_KhachHang(connection);
 //                test_DAO_KhuyenMai(connection);
 //                testDAO_HoaDon(connection);
+                    testDAO_ChiTietHoaDon(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -191,6 +192,18 @@ public class TestDAO {
         List<HoaDon> employees = employeeDAO.getByName("Trương Quốc Bảo");
         System.out.println("Danh sách hóa đơn:");
         for (HoaDon employee : employees) {
+            System.out.println(employee);
+        }
+    }
+    
+    private static void testDAO_ChiTietHoaDon(Connection connection) {
+        // Tạo đối tượng HoaDonDAO
+        DAO_ChiTietHoaDon employeeDAO = new DAO_ChiTietHoaDon(connection);
+
+        // Lấy danh sách tất cả nhân viên
+        List<ChiTietHoaDon> employees = employeeDAO.getAll();
+        System.out.println("Danh sách chi tiết hóa đơn:");
+        for (ChiTietHoaDon employee : employees) {
             System.out.println(employee);
         }
     }
