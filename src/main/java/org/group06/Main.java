@@ -30,9 +30,9 @@ public class Main {
             UIManager.put("Component.arc", 10);
             UIManager.put("ProgressBar.arc", 10);
             UIManager.put("TextComponent.arc", 10);
-            UIManager.put("JRootPane.titleBarShowIconify", false);
-            UIManager.put("JRootPane.titleBarShowMaximize", false);
             System.setProperty( "flatlaf.menuBarEmbedded", "true");
+            System.setProperty("JRootPane.titleBarShowIconify", "false");
+            UIManager.put("JRootPane.titleBarShowMaximize", true);
             UIManager.put( "TabbedPane.selectedBackground", Color.WHITE);
             UIManager.put( "JTabbedPane.hasFullBorder", true );
             //</editor-fold>
