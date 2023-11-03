@@ -17,11 +17,11 @@ public class TestDAO {
                 System.out.println("Kết nối thành công!");
 //                testDAO_NhaCungCap(connection);
 //                testDAO_NhanVien(connection);
-//                test_DAO_QuanAo(connection);
+                test_DAO_QuanAo(connection);
 //                test_DAO_KhachHang(connection);
 //                test_DAO_KhuyenMai(connection);
 //                testDAO_HoaDon(connection);
-                    testDAO_ChiTietHoaDon(connection);
+//                    testDAO_ChiTietHoaDon(connection);
             } else {
                 System.out.println("Kết nối thất bại.");
             }
@@ -108,10 +108,10 @@ public class TestDAO {
 //        QuanAo quanAo = quanAoDAO.getByID(id);
 //        System.out.println("Quần Áo có mã " + id + ":" + quanAo);
 
-//        // Thêm quần áo mới
-//        QuanAo newQuanAo = new QuanAo("VHN-0002-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "C:\\Users\\lehoa\\Desktop\\example.jpg");
-//        quanAoDAO.add(newQuanAo);
-//        System.out.println("Quần Áo mới đã được thêm.");
+        // Thêm quần áo mới
+        QuanAo newQuanAo = new QuanAo("VHN-0003-M", "Váy Hoa Nhí", "LQA006", "M", 120, "Yame", 120000, 10, new DAO_NhaCungCap(connection).getByID("NCC008"), true, "C:\\Users\\lehoa\\Desktop\\example.jpg");
+        quanAoDAO.add(newQuanAo);
+        System.out.println("Quần Áo mới đã được thêm.");
 //
 //        List<QuanAo> dsQuanAoMoi = quanAoDAO.getAll();
 //        System.out.println("Danh sách QuanAo:");
