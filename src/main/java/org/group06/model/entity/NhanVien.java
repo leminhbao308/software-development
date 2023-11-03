@@ -85,6 +85,7 @@ public class NhanVien {
 
     public NhanVien() {
         this.setTenNV("Tài Khoản");
+        this.setMaNV("NV000");
     }
 
     public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String chucVu) {
