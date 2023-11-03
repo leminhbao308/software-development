@@ -1,6 +1,7 @@
 package org.group06.view.components.panels.container;
 
-import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_QuanAo;
@@ -8,13 +9,10 @@ import org.group06.model.entity.QuanAo;
 import org.group06.utils.*;
 import org.group06.view.components.panels.ImagePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
@@ -168,11 +166,13 @@ public class PanelQuanAo extends javax.swing.JPanel {
         for (QuanAo qa : this.dsQA) {
             if (qa.getMaQA().equalsIgnoreCase(maQuanAo)) {
                 try {
-                    byte[] image = qa.getHinhAnh();
-                    System.out.println(qa.getHinhAnh());
-//                    loadImage(urlImg);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    ByteArrayInputStream bais = new ByteArrayInputStream(qa.getHinhAnh());
+                    BufferedImage originalImage = ImageIO.read(new File("path/to/image/imag.jpg"));
+
+//                    File hinhAnhHienThi = new File();
+                    //save imageInByte as blob in database
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }
@@ -190,7 +190,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 }
             }
             Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getKichThuoc(),
-                    qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), dfMoney.format(qa.getGiaNhap()), dfPercent.format(qa.getLoiNhuan()), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
+                qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), dfMoney.format(qa.getGiaNhap()), dfPercent.format(qa.getLoiNhuan()), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
 //      Thêm dữ liệu vào table
             modelQuanAo.addRow(data);
         }
@@ -240,6 +240,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo = new javax.swing.JTable();
         lblTitleQA1 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
+        cmbTimKiemQATheoTieuChi = new javax.swing.JComboBox<>();
 
         setBackground(ColorConstant.WHITE);
 
@@ -748,13 +749,23 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblTitleQA1.setPreferredSize(new java.awt.Dimension(103, 60));
 
         txtTimKiem.setFont(FontConstant.FONT_TEXT);
-        txtTimKiem.setText("Nhập Vào Mã Quần áo");
         txtTimKiem.setEnabled(true);
         txtTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtTimKiemFocusLost(evt);
             }
         });
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
+        cmbTimKiemQATheoTieuChi.setFont(FontConstant.FONT_TEXT);
+        cmbTimKiemQATheoTieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn Tiêu Chí Tìm Kiếm", "Tìm Theo Mã", "Tìm Theo Tên","Tìm Theo Thương Hiệu" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -763,13 +774,15 @@ public class PanelQuanAo extends javax.swing.JPanel {
             .addComponent(pnInformationFields, javax.swing.GroupLayout.DEFAULT_SIZE, 1480, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrQuanAo)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(835, 835, 835)
                         .addComponent(lblTimKiemQA, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimKiem)))
+                        .addComponent(txtTimKiem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbTimKiemQATheoTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -783,7 +796,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTimKiemQA, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTimKiemQA, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTimKiemQATheoTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnInformationFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1130,16 +1144,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
                         tenTrangThai = "Dừng Kinh Doanh";
                     }
                     Object[] row = {maQuanAo, tenQuanAo, tenLoaiQA, sizeQuanAo, soLuongQuanAo, tenThuongHieu,
-                            tenNhaCungCap, giaNhapFormat, loiNhuanFormat, giaBan, tenTrangThai};
+                        tenNhaCungCap, giaNhapFormat, loiNhuanFormat, giaBan, tenTrangThai};
                     DefaultTableModel model = (DefaultTableModel) this.tblQuanAo.getModel();
                     model.addRow(row);
-
-
                     try {
                         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
                         byte[] buf = new byte[1024];
-                        for (int readNum; (readNum = fis.read(buf)) != -1; ) {
+                        for (int readNum; (readNum = fis.read(buf)) != -1;) {
                             bos.write(buf, 0, readNum);
                         }
                         qaThemMoi.setHinhAnh(bos.toByteArray());
@@ -1157,7 +1169,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
                         System.out.println("Thêm mới thành công");
                     }
                 }
-
 
                 this.statusBtnThemMoi = false;
                 this.statusBtnCapNhat = false;
@@ -1261,6 +1272,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
         }
 //        Xử lý lấy hình ảnh theo dòng dữ liệu
         loadImgWithRowData(tblQuanAo.getValueAt(viTri, 0).toString());
+
+
     }//GEN-LAST:event_tblQuanAoMouseClicked
 
     private void txtTenQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenQAFocusLost
@@ -1310,6 +1323,69 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.CheckSelectOption(this.cmbSize);
     }//GEN-LAST:event_cmbSizeItemStateChanged
 
+    private void loadAllTableQA(ArrayList<QuanAo> dsQATimDuoc) {
+        DefaultTableModel modelQA = (DefaultTableModel) this.tblQuanAo.getModel();
+        modelQA.setRowCount(0);
+        String tenLoaiQuanAo = "";
+        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
+        DecimalFormat dfPercent = new DecimalFormat("##,## %");
+        for (QuanAo qa : dsQATimDuoc) {
+            for (HashMap.Entry<String, String> item : loaiQuanAo.entrySet()) {
+                if (qa.getLoaiQuanAo().equalsIgnoreCase(item.getKey())) {
+                    tenLoaiQuanAo = item.getValue();
+                }
+            }
+            Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getKichThuoc(),
+                qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(),
+                dfMoney.format(qa.getGiaNhap()), dfPercent.format(qa.getLoiNhuan()),
+                tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())),
+                qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
+//      Thêm dữ liệu vào table
+            modelQA.addRow(data);
+        }
+    }
+
+    private void xuLyTimKiemQA() {
+        String duLieuTimKiem = this.txtTimKiem.getText().trim();
+        int tieuChiTimKiem = this.cmbTimKiemQATheoTieuChi.getSelectedIndex();
+
+        if (duLieuTimKiem.isEmpty() || tieuChiTimKiem == 0) {
+            loadDataTable();
+        } else {
+            ArrayList<QuanAo> dsQATimDuoc = new ArrayList<>();
+            if (tieuChiTimKiem == 1) {
+                for (QuanAo qa : this.dsQA) {
+                    if (qa.getMaQA().contains(duLieuTimKiem)) {
+                        dsQATimDuoc.add(qa);
+                    }
+                }
+            } else if (tieuChiTimKiem == 2) {
+                for (QuanAo qa : this.dsQA) {
+                    if (qa.getTenQA().contains(duLieuTimKiem)) {
+                        dsQATimDuoc.add(qa);
+                    }
+                }
+            } else if (tieuChiTimKiem == 3) {
+                for (QuanAo qa : this.dsQA) {
+                    if (qa.getThuongHieu().contains(duLieuTimKiem)) {
+                        dsQATimDuoc.add(qa);
+                    }
+                }
+            }
+
+//        Cập nhật kết quả tìm kiếm lên bảng
+            loadAllTableQA(dsQATimDuoc);
+        }
+    }
+//    Xử lý tìm kiếm quần áo
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+        xuLyTimKiemQA();
+    }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        xuLyTimKiemQA();
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnHuy;
@@ -1320,6 +1396,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbLoaiQA;
     private javax.swing.JComboBox<String> cmbNhaCungCap;
     private javax.swing.JComboBox<String> cmbSize;
+    private javax.swing.JComboBox<String> cmbTimKiemQATheoTieuChi;
     private javax.swing.JComboBox<String> cmbTrangThai;
     private javax.swing.JLabel lbTenQA;
     private javax.swing.JLabel lblGiaBan;

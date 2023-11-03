@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PanelNhanVien extends javax.swing.JPanel {
 
     private DAO_NhanVien dao_NhanVien;
-    public int soMaNV = 4;
+    public int soMaNV;
 
     /**
      * Creates new form PanelNhanVien
@@ -286,35 +286,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private NhanVien getSelectedNV() {
-        boolean gioiTinh = false;
-        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam")) {
-            gioiTinh = true;
-        }
-
-        boolean trangThai = false;
-        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Làm việc")) {
-            trangThai = true;
-        }
-
-        if (tblNhanVien.getSelectedRow() == -1) {
-            return null;
-        } else {
-            return new NhanVien(
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0).toString(),
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 1).toString(),
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 2).toString(),
-                    gioiTinh,
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 4).toString(),
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 5).toString(),
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 6).toString(),
-                    trangThai,
-                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 8).toString());
-        }
-    }
-
     private void callFrameTTNV() {
-        FrameTTNV frTTNV = new FrameTTNV(this.getSelectedNV(), this);
+        FrameTTNhanVien frTTNV = new FrameTTNhanVien(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
@@ -374,6 +347,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
                         Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
                         modelKH.addRow(data);
+                        txtTimTheoMa.setText("");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên cần tìm");
@@ -421,8 +395,9 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     Object[] data = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getMatKhau(), gt,
                         nhanVien.getCccd(), nhanVien.getDiaChi(), nhanVien.getSoDienThoai(), trangThai, nhanVien.getChucVu()};
                     modelKH.addRow(data);
+                    txtTimTheoTen.setText("");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Nhập lại mã nhân viên cần tìm");
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy, vui lòng nhập lại");
                     loadDataTable();
                     txtTimTheoMa.setText("");
                     txtTimTheoMa.requestFocus();
@@ -565,6 +540,33 @@ public class PanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimTheoMa;
     private javax.swing.JTextField txtTimTheoTen;
     // End of variables declaration//GEN-END:variables
+
+    private NhanVien getSelectedNV() {
+        boolean gioiTinh = false;
+        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 3).toString().equals("Nam")) {
+            gioiTinh = true;
+        }
+
+        boolean trangThai = true;
+        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Đã nghỉ")) {
+            trangThai = false;
+        }
+
+        if (tblNhanVien.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return new NhanVien(
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 1).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 2).toString(),
+                    gioiTinh,
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 4).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 5).toString(),
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 6).toString(),
+                    trangThai,
+                    tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 8).toString());
+        }
+    }
 
     public void loadDataTable() {
         String gioiTinh = "", trangThai = "";

@@ -22,6 +22,7 @@ public class KhachHang {
         this.maKhachHang = maKhachHang;
     }
 
+
     public String getMaKhachHang() {
         return maKhachHang;
     }

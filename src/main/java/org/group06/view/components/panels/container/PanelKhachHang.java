@@ -382,7 +382,9 @@ public class PanelKhachHang extends javax.swing.JPanel {
         if (tblKhachHang.getSelectedRow() == -1) {
             return null;
         } else {
-            return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(), tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
+            return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
+                                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
+                                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
         }
     }
 

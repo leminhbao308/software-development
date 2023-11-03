@@ -2,6 +2,7 @@ package org.group06.view.screen;
 
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
+import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.components.panels.container.*;
 
 import javax.swing.*;
@@ -64,7 +65,8 @@ public class Frame extends JFrame {
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
 //        pnlContainer = new PanelBanHang(nv);
-        pnlContainer = new PanelLoaiQuanAo();
+        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
+//        pnlContainer = new PanelLoaiQuanAo();
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();

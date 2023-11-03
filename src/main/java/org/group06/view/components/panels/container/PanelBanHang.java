@@ -1,18 +1,26 @@
 package org.group06.view.components.panels.container;
 
 import org.group06.db.DatabaseConnect;
-import org.group06.db.dao.DAO_KhachHang;
-import org.group06.db.dao.DAO_KhuyenMai;
-import org.group06.db.dao.DAO_NhaCungCap;
-import org.group06.db.dao.DAO_QuanAo;
+import org.group06.db.dao.*;
 import org.group06.model.entity.*;
+import org.group06.utils.NumberStandard;
 import org.group06.view.components.search.Data;
 import org.group06.view.components.search.SearchClickEvent;
 import org.group06.view.components.textFields.PlaceholderTextField;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.sql.Date;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,11 +32,11 @@ public class PanelBanHang extends javax.swing.JPanel {
 
     private Connection connection = DatabaseConnect.getConnection();
     private final DAO_QuanAo daoQuanAo = new DAO_QuanAo(connection);
-    private ArrayList<QuanAo> dsQuanAo = daoQuanAo.getAll();
-    private ArrayList<NhaCungCap> dsNhaCungCap = new DAO_NhaCungCap(connection).getAll();
-    private ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(connection).getAll();
-    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
-    private HashMap<String, String> dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
+    private final ArrayList<QuanAo> dsQuanAo = daoQuanAo.getAll();
+    private final ArrayList<NhaCungCap> dsNhaCungCap = new DAO_NhaCungCap(connection).getAll();
+    private final ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(connection).getAll();
+    private final ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
+    private final HashMap<String, String> dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
 
     private final NhanVien nhanVien;
 
@@ -38,6 +46,7 @@ public class PanelBanHang extends javax.swing.JPanel {
     public PanelBanHang(NhanVien nhanVien) {
         this.nhanVien = nhanVien;
         initComponents();
+        loadAllTableQuanAo(dsQuanAo);
     }
 
     /**
@@ -85,6 +94,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlBanHang = new javax.swing.JPanel();
         lbl_KM_BanHang = new javax.swing.JLabel();
         txt_KM_BanHang = new javax.swing.JTextField();
+        lbl_KhuyenMai_BanHang = new javax.swing.JLabel();
         lbl_VAT_BanHang = new javax.swing.JLabel();
         spr_VAT_BanHang = new javax.swing.JSeparator();
         lbl_TongTien_BanHang = new javax.swing.JLabel();
@@ -96,6 +106,7 @@ public class PanelBanHang extends javax.swing.JPanel {
         pnlDatHang = new javax.swing.JPanel();
         lblNgayNhanHang = new javax.swing.JLabel();
         dchNgayNhanHang = new com.toedter.calendar.JDateChooser();
+        lbl_KhuyenMai_DatHang = new javax.swing.JLabel();
         lbl_KM_DatHang = new javax.swing.JLabel();
         txt_LM_DatHang = new PlaceholderTextField("Nhập mã khuyến mãi");
         lbl_VAT_DatHang = new javax.swing.JLabel();
@@ -128,7 +139,7 @@ public class PanelBanHang extends javax.swing.JPanel {
             @Override
             public void itemClick(Data data) {
                 txt_KM_BanHang.setText(data.getSubTitle());
-//                capNhatSoTienMuaHang();
+                capNhatSoTienMuaHang();
                 pmnTimKiemKhuyenMai.setVisible(false);
                 pnlMain.requestFocus();
             }
@@ -321,6 +332,18 @@ public class PanelBanHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblQuanAo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    int selectedRow = tblQuanAo.getSelectedRow();
+                    if (selectedRow != -1) {
+                        String maQA = tblQuanAo.getValueAt(selectedRow, 0).toString();
+                        setSoLuongQuanAoToiDa(get_SLQA_TrongKho(maQA));
+                    }
+                }
+            }
+        });
         tblQuanAo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblQuanAo.setFillsViewportHeight(true);
@@ -331,6 +354,14 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblQuanAo.setShowGrid(true);
         tblQuanAo.getTableHeader().setResizingAllowed(false);
         tblQuanAo.getTableHeader().setReorderingAllowed(false);
+        tblQuanAo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tblQuanAoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tblQuanAoFocusLost(evt);
+            }
+        });
         scrQuanAo.setViewportView(tblQuanAo);
 
         pnlLeft.add(scrQuanAo);
@@ -343,6 +374,21 @@ public class PanelBanHang extends javax.swing.JPanel {
         lblSoLuongQuanAo.setName(""); // NOI18N
 
         spnSoLuongQuanAo.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        JSpinner.NumberEditor ne = new JSpinner.NumberEditor(spnSoLuongQuanAo);
+        spnSoLuongQuanAo.setEditor(ne);
+
+        FocusAdapter focusAdapter = new FocusAdapter()
+        {
+            public void focusGained(final FocusEvent e)
+            {
+            }
+
+            public void focusLost(final FocusEvent e) {
+                spnSoLuongQuanAoFocusLost(e);
+            };
+        };
+
+        ((JSpinner.DefaultEditor)spnSoLuongQuanAo.getEditor()).getTextField().addFocusListener(focusAdapter);
         spnSoLuongQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spnSoLuongQuanAo.setEnabled(false);
         spnSoLuongQuanAo.setName("spnSoLuongQuanAo"); // NOI18N
@@ -352,6 +398,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnThemQuanAo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThemQuanAo.setEnabled(false);
         btnThemQuanAo.setName("btnThemQuanAo"); // NOI18N
+        btnThemQuanAo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemQuanAoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlActionLayout = new javax.swing.GroupLayout(pnlAction);
         pnlAction.setLayout(pnlActionLayout);
@@ -417,6 +468,42 @@ public class PanelBanHang extends javax.swing.JPanel {
         tblDonHang.setShowGrid(true);
         tblDonHang.getTableHeader().setResizingAllowed(false);
         tblDonHang.getTableHeader().setReorderingAllowed(false);
+        tblDonHang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tblDonHangFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tblDonHangFocusLost(evt);
+            }
+        });
+        tblDonHang.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int rowCount = tblDonHang.getRowCount();
+                if (rowCount != 0) {
+                    btnThanhToan.setEnabled(true);
+                }
+            }
+        });
+        tblDonHang.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = tblDonHang.getSelectedRow();
+                if (selectedRow >= 0) {
+                    // Khi có dòng được chọn, cho phép xóa
+                    tblDonHang.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete");
+                    tblDonHang.getActionMap().put("delete", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            ((DefaultTableModel) tblDonHang.getModel()).removeRow(selectedRow);
+                            capNhatSoTienMuaHang();
+                            disableBanHang();
+                            if (tblDonHang.getRowCount() == 0) btnThanhToan.setEnabled(false);
+                        }
+                    });
+                }
+            }
+        });
         scrDonHang.setViewportView(tblDonHang);
 
         pnlLeft.add(scrDonHang);
@@ -500,6 +587,10 @@ public class PanelBanHang extends javax.swing.JPanel {
             }
         });
 
+        lbl_KhuyenMai_BanHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_KhuyenMai_BanHang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_KhuyenMai_BanHang.setText("0%");
+
         lbl_VAT_BanHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_VAT_BanHang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_VAT_BanHang.setText("Thuế VAT: 8%");
@@ -520,6 +611,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         txt_TienKhachTra_BanHang.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txt_TienKhachTra_BanHang.setText("0 VNĐ");
         txt_TienKhachTra_BanHang.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Tiền Khách Đưa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        txt_TienKhachTra_BanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TienKhachTra_BanHangActionPerformed(evt);
+            }
+        });
 
         spr_TienThua_BanHang.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -540,6 +636,11 @@ public class PanelBanHang extends javax.swing.JPanel {
         btnThanhToan.setText("Thanh Toán");
         btnThanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThanhToan.setEnabled(false);
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBanHangLayout = new javax.swing.GroupLayout(pnlBanHang);
         pnlBanHang.setLayout(pnlBanHangLayout);
@@ -557,7 +658,8 @@ public class PanelBanHang extends javax.swing.JPanel {
                     .addComponent(lbl_KM_BanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                     .addComponent(lbl_VAT_BanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_KM_BanHang)
-                    .addComponent(chk_XuatHD_BanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chk_XuatHD_BanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_KhuyenMai_BanHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlBanHangLayout.setVerticalGroup(
@@ -567,7 +669,9 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addComponent(lbl_KM_BanHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_KM_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1051, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_KhuyenMai_BanHang)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1020, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_BanHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -598,6 +702,10 @@ public class PanelBanHang extends javax.swing.JPanel {
         dchNgayNhanHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchNgayNhanHang.setMinSelectableDate(java.util.Date.from(Instant.now())
         );
+
+        lbl_KhuyenMai_DatHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_KhuyenMai_DatHang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_KhuyenMai_DatHang.setText("0%");
 
         lbl_KM_DatHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_KM_DatHang.setText("Mã khuyến mãi (nếu có)");
@@ -669,7 +777,8 @@ public class PanelBanHang extends javax.swing.JPanel {
                     .addComponent(lbl_KM_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chk_KH_TraTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chk_XuatDH_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_LM_DatHang))
+                    .addComponent(txt_LM_DatHang)
+                    .addComponent(lbl_KhuyenMai_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlDatHangLayout.setVerticalGroup(
@@ -683,7 +792,9 @@ public class PanelBanHang extends javax.swing.JPanel {
                 .addComponent(lbl_KM_DatHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_LM_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 969, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_KhuyenMai_DatHang)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 938, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_DatHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,7 +865,8 @@ public class PanelBanHang extends javax.swing.JPanel {
         cmbKichCo.setSelectedIndex(0);
         cmbNhaCungCap.setSelectedIndex(0);
 
-        // loadAllTableQuanAo(dsQuanAo);
+        loadAllTableQuanAo(dsQuanAo);
+
         pnlBanHang.requestFocus();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
@@ -777,6 +889,141 @@ public class PanelBanHang extends javax.swing.JPanel {
     private void txtTimQAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimQAKeyReleased
         xuLyTimKiemQuanAo();
     }//GEN-LAST:event_txtTimQAKeyReleased
+
+    private void tblQuanAoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblQuanAoFocusGained
+        if (tblQuanAo.getRowCount() > 0) {
+            spnSoLuongQuanAo.setEnabled(true);
+            btnThemQuanAo.setText("Thêm Quần Áo");
+            btnThemQuanAo.setEnabled(true);
+        }
+    }//GEN-LAST:event_tblQuanAoFocusGained
+
+    private void tblQuanAoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblQuanAoFocusLost
+        Component focusedComponent = evt.getOppositeComponent(); // Lấy component đang được focus
+        // Kiểm tra xem component đang được focus có phải là spnSoLuongQuanAo hoặc btnThemQuanAo hay không
+        if (focusedComponent != null) {
+            // Kiểm tra xem component đang được focus có phải là Spinner.formattedTextField của spnSoLuongQuanAo
+            if (focusedComponent.equals(spnSoLuongQuanAo.getEditor().getComponent(0))) {
+                // Nếu là Spinner.formattedTextField của spnSoLuongQuanAo, không làm gì cả
+                return;
+            }
+
+            // Kiểm tra xem component đang được focus có phải là btnThemQuanAo hay không
+            if (focusedComponent.equals(btnThemQuanAo)) {
+                // Nếu là btnThemQuanAo, không làm gì cả
+                return;
+            }
+        }
+
+        // Nếu không phải, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+        disableBanHang();
+    }//GEN-LAST:event_tblQuanAoFocusLost
+
+    private void spnSoLuongQuanAoFocusLost(java.awt.event.FocusEvent evt) {
+        Component focusedComponent = evt.getOppositeComponent();
+        if (focusedComponent != null) {
+            if (focusedComponent.equals(tblQuanAo)) {
+                // Nếu là tblQuanAo, set số lượng về 1
+                spnSoLuongQuanAo.setValue(1);
+            } else if (focusedComponent.equals(btnThemQuanAo)) {
+            } else {
+                // Nếu không phải cả hai trường hợp trên, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+                disableBanHang();
+            }
+        } else {
+            // Nếu focusedComponent là null, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+            disableBanHang();
+        }
+    }
+
+    private void btnThemQuanAoActionPerformed(java.awt.event.ActionEvent evt) {
+        String label = btnThemQuanAo.getText();
+
+        if (label.equals("Thêm Quần Áo")) {
+            for (QuanAo quanAo : dsQuanAo) {
+                if (quanAo.getMaQA().equals(tblQuanAo.getValueAt(tblQuanAo.getSelectedRow(), 0))) {
+                    int soLuongMua = NumberStandard.parseInt(((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().getText());
+                    int soLuongTonKho = quanAo.getSoLuong();
+                    int soLuongDuocMua = soLuongMua <= soLuongTonKho ? soLuongMua : soLuongTonKho;
+
+                    themQuanAoVaoDonHang(quanAo, soLuongDuocMua);
+                    quanAo.setSoLuong(quanAo.getSoLuong() - soLuongDuocMua);
+                    break;
+                }
+            }
+        } else {
+            String maQADuocChon = tblDonHang.getValueAt(tblDonHang.getSelectedRow(), 0).toString();
+            DefaultTableModel modelDonHang = (DefaultTableModel) tblDonHang.getModel();
+
+            for (QuanAo quanAo : dsQuanAo) {
+                if (quanAo.getMaQA().equals(maQADuocChon)) {
+                    int soLuongMua = NumberStandard.parseInt(tblDonHang.getValueAt(tblDonHang.getSelectedRow(), 4).toString());
+                    int soLuongCapNhat = NumberStandard.parseInt(((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().getText());
+                    int soLuongTonKho = quanAo.getSoLuong();
+
+                    if (soLuongMua == soLuongCapNhat) {
+                        break;
+                    }
+
+                    if (soLuongMua > soLuongCapNhat) {
+                        int soLuongChenhLech = soLuongMua - soLuongCapNhat;
+                        capNhatSoLuongMua(soLuongCapNhat, tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()));
+                        quanAo.setSoLuong(quanAo.getSoLuong() + soLuongChenhLech);
+                    } else {
+                        int soLuongChenhLech = soLuongCapNhat - soLuongMua;
+                        if (soLuongTonKho == 0) {
+                            JOptionPane.showMessageDialog(this, "Sản phẩm này đã hết hàng!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                            break;
+                        }
+                        if (soLuongChenhLech <= soLuongTonKho) {
+                            capNhatSoLuongMua(soLuongCapNhat, tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()));
+                            quanAo.setSoLuong(quanAo.getSoLuong() - soLuongChenhLech);
+                        } else {
+                            capNhatSoLuongMua(soLuongMua + soLuongTonKho, tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()));
+                            quanAo.setSoLuong(0);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        capNhatSoTienMuaHang();
+        xuLyTimKiemQuanAo();
+        disableBanHang();
+    }
+
+    private void tblDonHangFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblDonHangFocusGained
+        if (tblDonHang.getRowCount() != 0) {
+            setSoLuongQuanAoDangChon(tblDonHang.getValueAt(tblDonHang.getSelectedRow(), 4).toString());
+            spnSoLuongQuanAo.setEnabled(true);
+            btnThemQuanAo.setText("Cập Nhật");
+            btnThemQuanAo.setEnabled(true);
+        }
+    }//GEN-LAST:event_tblDonHangFocusGained
+
+    private void tblDonHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblDonHangFocusLost
+        Component focusedComponent = evt.getOppositeComponent(); // Lấy component đang được focus
+        // Kiểm tra xem component đang được focus có phải là spnSoLuongQuanAo hoặc btnThemQuanAo hay không
+        if (focusedComponent != null) {
+            // Kiểm tra xem component đang được focus có phải là Spinner.formattedTextField của spnSoLuongQuanAo
+            if (focusedComponent.equals(spnSoLuongQuanAo.getEditor().getComponent(0))) {
+                return;
+            }
+
+            // Kiểm tra xem component đang được focus có phải là btnThemQuanAo hay không
+            if (focusedComponent.equals(btnThemQuanAo)) {
+                return;
+            }
+        }
+
+        // Nếu không phải, vô hiệu hóa spnSoLuongQuanAo và btnThemQuanAo
+        disableBanHang();
+    }//GEN-LAST:event_tblDonHangFocusLost
+
+    private void txt_TienKhachTra_BanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TienKhachTra_BanHangActionPerformed
+        capNhatSoTienMuaHang();
+    }//GEN-LAST:event_txt_TienKhachTra_BanHangActionPerformed
 
     private void txtTim_SDT_KhachHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTim_SDT_KhachHangKeyReleased
         String sdt = txtTim_SDT_KhachHang.getText().trim();
@@ -805,38 +1052,169 @@ public class PanelBanHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_KM_BanHangKeyReleased
 
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        ArrayList<QuanAo> dsQuanAoMua = new ArrayList<>();
+        int soLuongQuanAo = 0;
+        for (QuanAo quanAo : dsQuanAo) {
+            if (soLuongQuanAo == tblDonHang.getRowCount()) {
+                break;
+            }
+
+            if (tblDonHang.getValueAt(soLuongQuanAo, 0).toString().equals(quanAo.getMaQA())) {
+                QuanAo quanAoDuocMua = quanAo;
+                quanAoDuocMua.setSoLuong(NumberStandard.parseInt(tblDonHang.getValueAt(soLuongQuanAo, 4).toString()));
+                dsQuanAoMua.add(quanAoDuocMua);
+                soLuongQuanAo++;
+            }
+        }
+
+        KhachHang khachHang = new KhachHang();
+        for (KhachHang kh : dsKhachHang) {
+            if (kh.getTenKH().equals(txtKhachHang.getText())) {
+                khachHang = kh;
+                break;
+            }
+        }
+
+        KhuyenMai khuyenMai = new KhuyenMai();
+        for (KhuyenMai km : dsKhuyenMai) {
+            if (km.getMaKhuyenMai().equals(txt_KM_BanHang.getText())) {
+                khuyenMai = km;
+            }
+        }
+
+        // TODO: Hoàn thành xử lý bán hàng
+        String maHoaDon = taoMaHD();
+        double tongTienThanhToan = NumberStandard.parseMoney(lbl_TongTien_BanHang.getText());
+        Date ngayHienTai = new Date(System.currentTimeMillis());
+
+        HoaDon hoaDonBanHang = new HoaDon( maHoaDon, ngayHienTai, khachHang, nhanVien, khuyenMai);
+        DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+        DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+        dao_HoaDon.add(hoaDonBanHang);
+        for (QuanAo quanAo : dsQuanAoMua) {
+            ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()) * quanAo.getSoLuong());
+            dao_ChiTietHoaDon.add(cthd);
+        }
+        
+        reloadAll();
+    }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void txtTimQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimQAActionPerformed
+
+    private void reloadAll() {
+        loadAllTableQuanAo(dsQuanAo);
+        ((DefaultTableModel) tblDonHang.getModel()).setRowCount(0);
+        txt_TienKhachTra_BanHang.setText(NumberStandard.formatMoney(0));
+        capNhatSoTienMuaHang();
+        txtKhachHang.setText("Khách vãng lai");
+        txt_KM_BanHang.setText("");
+    }
+    
+    /**
+     * Cập nhật bảng hiển thị quần áo dựa trên danh sách quần áo và loại quần
+     * áo.
+     *
+     * @param dsQuanAo Danh sách sản phẩm quần áo.
+     */
+    private void loadAllTableQuanAo(ArrayList<QuanAo> dsQuanAo) {
+        DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+        modelQuanAo.setRowCount(0);
+        for (QuanAo quanAo : dsQuanAo) {
+            if (quanAo.getSoLuong() > 0) {
+                Object[] data = {
+                    quanAo.getMaQA(), quanAo.getTenQA(),
+                    dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()),
+                    quanAo.getKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
+                    quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())
+                };
+                // Thêm dữ liệu vào table
+                modelQuanAo.addRow(data);
+            }
+        }
+    }
+
+    /**
+     * Thêm quần áo vào đơn hàng hoặc cập nhật thông tin nếu đã tồn tại.
+     *
+     * @param quanAo Quần áo cần thêm vào đơn hàng hoặc cập nhật.
+     * @param soLuongMua Số lượng quần áo muốn thêm vào đơn hàng.
+     */
+    private void themQuanAoVaoDonHang(QuanAo quanAo, int soLuongMua) {
+        DefaultTableModel modelDonHang = (DefaultTableModel) this.tblDonHang.getModel();
+        int rowExist = -1;
+
+        // Kiểm tra xem đã tồn tại hàng trong đơn hàng chưa
+        if (modelDonHang.getRowCount() > 0) {
+            for (int i = 0; i < modelDonHang.getRowCount(); i++) {
+                String maQA = modelDonHang.getValueAt(i, 0).toString();
+                if (maQA.equals(quanAo.getMaQA())) {
+                    rowExist = i;
+                    break;
+                }
+            }
+        }
+
+        if (rowExist != -1) {
+            // Nếu hàng đã tồn tại, cập nhật thông tin
+            int soLuongCu = Integer.parseInt(modelDonHang.getValueAt(rowExist, 4).toString());
+            int soLuongMoi = soLuongCu + soLuongMua;
+            tblDonHang.setValueAt(soLuongMoi, rowExist, 4);
+            tblDonHang.setValueAt(soLuongMoi * tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), rowExist, 5);
+            return;
+        }
+
+        // Nếu hàng chưa tồn tại, thêm thông tin mới
+        double giaBan = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan());
+        double thanhTien = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()) * soLuongMua;
+        Object[] data = {
+            quanAo.getMaQA(), quanAo.getTenQA(),
+            quanAo.getKichThuoc(), giaBan,
+            soLuongMua, thanhTien
+        };
+
+        // Thêm dữ liệu vào table
+        modelDonHang.addRow(data);
+    }
+
+    /**
+     * Tính giá bán dựa trên giá nhập quần áo và lợi nhuận.
+     *
+     * @param giaNhap Giá nhập của sản phẩm.
+     * @param loiNhuan Lợi nhuận được áp dụng cho sản phẩm (dưới dạng phần
+     * trăm).
+     * @return Giá bán của sản phẩm.
+     */
+    private double tinhGiaBan(double giaNhap, double loiNhuan) {
+        return giaNhap + (giaNhap * loiNhuan / 100);
+    }
+
     /**
      * Xử lý tìm kiếm quần áo dựa trên các tiêu chí được chọn từ giao diện người
      * dùng.
      */
     private void xuLyTimKiemQuanAo() {
-        String tenQuanAoTim = txtTimQA.getText();
+        String tenQuanAoTim = txtTimQA.getText().equals("Tìm tên sản phẩm") ? "" : txtTimQA.getText().toLowerCase().trim();
         String loaiQuanAo = cmbLoaiQuanAo.getSelectedItem().toString();
         String kichCo = cmbKichCo.getSelectedItem().toString();
-        String nhaCungCap = cmbNhaCungCap.getSelectedItem().toString().toLowerCase();
-
-        if (tenQuanAoTim.equals("Tìm tên sản phẩm")) {
-            tenQuanAoTim = "";
-        } else {
-            tenQuanAoTim = tenQuanAoTim.toLowerCase().trim();
-        }
-
+        String nhaCungCap = cmbNhaCungCap.getSelectedItem().toString();
         ArrayList<QuanAo> dsQuanAoTimDuoc = new ArrayList<>();
 
         for (QuanAo quanAo : this.dsQuanAo) {
             boolean matchTen = tenQuanAoTim.isEmpty() || quanAo.getTenQA().toLowerCase().contains(tenQuanAoTim);
             boolean matchLoai = loaiQuanAo.equals("Tất Cả") || dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()).equalsIgnoreCase(loaiQuanAo);
             boolean matchKichThuoc = kichCo.equals("Tất Cả") || quanAo.getKichThuoc().equalsIgnoreCase(kichCo);
-            boolean matchNhaCungCap = nhaCungCap.equals("tất cả") || quanAo.getNhaCungCap().getTenNCC().toLowerCase().contains(nhaCungCap);
+            boolean matchNhaCungCap = nhaCungCap.equals("Tất Cả") || quanAo.getNhaCungCap().getTenNCC().toLowerCase().contains(nhaCungCap.toLowerCase());
 
             if (matchTen && matchLoai && matchKichThuoc && matchNhaCungCap) {
                 dsQuanAoTimDuoc.add(quanAo);
             }
         }
         // Cập nhật kết quả tìm kiếm lên bảng
-        // loadAllTableQuanAo(dsQuanAoTimDuoc);
+        loadAllTableQuanAo(dsQuanAoTimDuoc);
     }
-
 
     private ArrayList<Data> xuLyTimKiemKhachHang(String sdt) {
         ArrayList<Data> result = new ArrayList<>();
@@ -871,6 +1249,82 @@ public class PanelBanHang extends javax.swing.JPanel {
         return result;
     }
 
+    private int get_SLQA_TrongKho(String maQA) {
+        for (QuanAo quanAo : dsQuanAo) {
+            if (quanAo.getMaQA().equals(maQA)) {
+                return quanAo.getSoLuong();
+            }
+        }
+        return 0;
+    }
+
+    private void setSoLuongQuanAoToiDa(int soLuong) {
+        this.spnSoLuongQuanAo.setModel(new SpinnerNumberModel(1, 1, soLuong, 1));
+    }
+
+    public String taoMaHD() {
+        int count = new DAO_HoaDon((DatabaseConnect.getConnection())).loadMaHDCount();
+        count++;
+        // Tạo mã hoá đơn theo quy tắc và có thứ tự
+        return "HD" + String.format("%03d", count); // Ví dụ: HD001, HD002,...
+    }
+
+    private void setSoLuongQuanAoDangChon(String soLuong) {
+        ((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().setText(soLuong);
+    }
+
+    private void capNhatSoLuongMua(int soLuongMoi, double giaBan) {
+        tblDonHang.setValueAt(soLuongMoi, tblDonHang.getSelectedRow(), 4);
+        tblDonHang.setValueAt(soLuongMoi * giaBan, tblDonHang.getSelectedRow(), 5);
+    }
+
+    private void capNhatSoTienMuaHang() {
+        double tongTienPhaiTra = 0;
+        double thueVAT = 0.08f;
+        double khuyenMai = 0.0f;
+
+        for (KhuyenMai km : dsKhuyenMai) {
+            if (!txt_KM_BanHang.getText().isEmpty() && km.getMaKhuyenMai().equals(txt_KM_BanHang.getText())) {
+                if (km.getSoLuotSuDung() > 0) {
+                    khuyenMai = km.getMucGiamGia();
+                }
+                break;
+            }
+        }
+
+        double tienKhachTra = NumberStandard.roundAndNormalizeMoney(NumberStandard.parseMoney(txt_TienKhachTra_BanHang.getText()));
+        if (tblDonHang.getRowCount() > 0) {
+            for (int i = 0; i < tblDonHang.getRowCount(); i++) {
+                tongTienPhaiTra += NumberStandard.parseDouble(tblDonHang.getValueAt(i, 5).toString());
+            }
+            tongTienPhaiTra += NumberStandard.roundAndNormalizeMoney(tongTienPhaiTra * thueVAT);
+            tongTienPhaiTra -= NumberStandard.roundAndNormalizeMoney(tongTienPhaiTra * khuyenMai);
+            lbl_TongTien_BanHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
+            if (tienKhachTra < tongTienPhaiTra) {
+                txt_TienKhachTra_BanHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
+                lbl_TienThua_BanHang.setText(NumberStandard.formatMoney(0));
+            } else {
+                double tienTraKhach = tienKhachTra - tongTienPhaiTra;
+                txt_TienKhachTra_BanHang.setText(NumberStandard.formatMoney(tienKhachTra));
+                lbl_TienThua_BanHang.setText(NumberStandard.formatMoney(tienTraKhach));
+            }
+        } else {
+            lbl_TongTien_BanHang.setText(NumberStandard.formatMoney(0));
+            txt_TienKhachTra_BanHang.setText(NumberStandard.formatMoney(0));
+            lbl_TienThua_BanHang.setText(NumberStandard.formatMoney(0));
+        }
+    }
+
+    private void disableBanHang() {
+        pnlMain.requestFocus();
+        ((JSpinner.DefaultEditor) spnSoLuongQuanAo.getEditor()).getTextField().setText("1");
+        spnSoLuongQuanAo.setEnabled(false);
+        btnThemQuanAo.setText("Thêm Quần Áo");
+        btnThemQuanAo.setEnabled(false);
+        tblQuanAo.clearSelection();
+        tblDonHang.clearSelection();
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Initiate Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatHang;
@@ -895,6 +1349,8 @@ public class PanelBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lbl_KM_BanHang;
     private javax.swing.JLabel lbl_KM_DatHang;
+    private javax.swing.JLabel lbl_KhuyenMai_BanHang;
+    private javax.swing.JLabel lbl_KhuyenMai_DatHang;
     private javax.swing.JLabel lbl_TienThua_BanHang;
     private javax.swing.JLabel lbl_TienThua_DatHang;
     private javax.swing.JLabel lbl_TongTien_BanHang;

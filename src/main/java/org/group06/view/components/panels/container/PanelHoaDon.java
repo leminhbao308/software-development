@@ -6,14 +6,20 @@ package org.group06.view.components.panels.container;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.HoaDon;
+import org.group06.model.entity.KhachHang;
+import org.group06.model.entity.KhuyenMai;
+import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.ImagePath;
@@ -146,16 +152,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền", "Mã khuyến mãi"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -168,12 +167,18 @@ public class PanelHoaDon extends javax.swing.JPanel {
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblHoaDon.setShowGrid(true);
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         srcHoaDon.setViewportView(tblHoaDon);
         if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
             tblHoaDon.getColumnModel().getColumn(0).setResizable(false);
             tblHoaDon.getColumnModel().getColumn(1).setResizable(false);
             tblHoaDon.getColumnModel().getColumn(2).setResizable(false);
             tblHoaDon.getColumnModel().getColumn(3).setResizable(false);
+            tblHoaDon.getColumnModel().getColumn(4).setResizable(false);
             tblHoaDon.getColumnModel().getColumn(5).setResizable(false);
         }
 
@@ -217,6 +222,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                         Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), 1, hd.getKhuyenMai().getTenCTKM()};
                         modelKH.addRow(data);
                     }
+                    dchTimTheoNgay.setDate(null);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
                     loadDataTable();
@@ -250,18 +256,35 @@ public class PanelHoaDon extends javax.swing.JPanel {
         loadDataTable();
     }//GEN-LAST:event_btnLamMoiMouseClicked
 
+    private void callFrameChiTietHoaDon() {
+        FrameChiTietHoaDon frCTHD = new FrameChiTietHoaDon(this.getSelectedHoaDon(), this);
+        frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frCTHD.setResizable(false);
+        frCTHD.setVisible(true);
+    }
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        if (evt.getClickCount() == 2) {
+            callFrameChiTietHoaDon();
+        }
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
     private void checkNgay() {
         dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 if ("date".equals(evt.getPropertyName())) {
                     Date date = (Date) evt.getNewValue();
                     java.util.Date dateNow = new java.util.Date();
-                    if (date.after(dateNow)) {
-                        JOptionPane.showMessageDialog(null, "Ngày tạo hóa đơn phải trước ngày hiện tại");
-                        dchTimTheoNgay.setDate(null);
-                        loadDataTable();
-                    } else {
-                        loadDataNgay(date);
+                    if (date != null) {
+                        if (date.after(dateNow)) {
+                            JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
+                            dchTimTheoNgay.setDate(null);
+                            loadDataTable();
+                            txtTimTheoTenKH.setText("");
+                        } else {
+                            loadDataNgay(date);
+                            txtTimTheoTenKH.setText("");
+                        }
                     }
                 }
             }
@@ -295,6 +318,31 @@ public class PanelHoaDon extends javax.swing.JPanel {
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtTimTheoTenKH;
     // End of variables declaration//GEN-END:variables
+
+    private HoaDon getSelectedHoaDon() {
+        String hd = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
+
+        String date = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 1).toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.sql.Date sqlDate = null;
+        try {
+            java.util.Date utilDate = dateFormat.parse(date);
+            sqlDate = new java.sql.Date(utilDate.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        
+        KhachHang kh = new KhachHang(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 2).toString(), null);
+        NhanVien nv = new NhanVien(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 3).toString(), null, true, null, null, null, true, null);
+        KhuyenMai km = new KhuyenMai(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 5).toString(), 0, null, null, 0);
+
+        if (tblHoaDon.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return new HoaDon(hd, sqlDate, kh, nv, km);
+        }
+    }
 
     public void loadDataTable() {
         ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getAll();
