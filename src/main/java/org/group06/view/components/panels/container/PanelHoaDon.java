@@ -273,51 +273,23 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
-//    private void checkNgay() {
-//        dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-//            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-//                if ("date".equals(evt.getPropertyName())) {
-//                    Date date = (Date) evt.getNewValue();
-//                    java.util.Date dateNow = new java.util.Date();
-//                    
-//                    if (date != null) {
-//                        if (date.after(dateNow)){
-//                            JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
-//                            dchTimTheoNgay.setDate(null);
-//                            loadDataTable();
-//                            txtTimTheoTenKH.setText("");
-//                        } else {
-//                            loadDataNgay(date);
-//                            txtTimTheoTenKH.setText("");
-//                        } 
-//                    }
-//                }
-//            }
-//        }
-//        );
-//    }
     private void checkNgay() {
         dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 if ("date".equals(evt.getPropertyName())) {
                     Date date = (Date) evt.getNewValue();
                     java.util.Date dateNow = new java.util.Date();
-
-                    SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
-                    String formatDate = newSDF.format(date);
-                    String formatDateNow = newSDF.format(dateNow);
+                    
                     if (date != null) {
-                        if (formatDate.compareTo(formatDateNow) > 0) {
+                        if (date.after(dateNow)){
                             JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
                             dchTimTheoNgay.setDate(null);
                             loadDataTable();
                             txtTimTheoTenKH.setText("");
-                        } else if (formatDate.compareTo(formatDateNow) == 0) {
-                            JOptionPane.showMessageDialog(null, "Chọn ngày là ngày hiện tại");
                         } else {
                             loadDataNgay(date);
                             txtTimTheoTenKH.setText("");
-                        }
+                        } 
                     }
                 }
             }
