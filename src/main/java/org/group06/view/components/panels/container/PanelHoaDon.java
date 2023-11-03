@@ -35,6 +35,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private DAO_HoaDon dao_HoaDon;
     private ChiTietHoaDon chiTietHoaDon;
+
     /**
      * Creates new form PanelHoaDon
      */
@@ -272,23 +273,51 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
+//    private void checkNgay() {
+//        dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+//            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+//                if ("date".equals(evt.getPropertyName())) {
+//                    Date date = (Date) evt.getNewValue();
+//                    java.util.Date dateNow = new java.util.Date();
+//                    
+//                    if (date != null) {
+//                        if (date.after(dateNow)){
+//                            JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
+//                            dchTimTheoNgay.setDate(null);
+//                            loadDataTable();
+//                            txtTimTheoTenKH.setText("");
+//                        } else {
+//                            loadDataNgay(date);
+//                            txtTimTheoTenKH.setText("");
+//                        } 
+//                    }
+//                }
+//            }
+//        }
+//        );
+//    }
     private void checkNgay() {
         dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 if ("date".equals(evt.getPropertyName())) {
                     Date date = (Date) evt.getNewValue();
                     java.util.Date dateNow = new java.util.Date();
-                    
+
+                    SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
+                    String formatDate = newSDF.format(date);
+                    String formatDateNow = newSDF.format(dateNow);
                     if (date != null) {
-                        if (date.after(dateNow)){
+                        if (formatDate.compareTo(formatDateNow) > 0) {
                             JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
                             dchTimTheoNgay.setDate(null);
                             loadDataTable();
                             txtTimTheoTenKH.setText("");
+                        } else if (formatDate.compareTo(formatDateNow) == 0) {
+                            JOptionPane.showMessageDialog(null, "Chọn ngày là ngày hiện tại");
                         } else {
                             loadDataNgay(date);
                             txtTimTheoTenKH.setText("");
-                        } 
+                        }
                     }
                 }
             }
@@ -326,7 +355,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     private HoaDon getSelectedHoaDon() {
         String hd = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
         String date = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 1).toString();
-        
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.sql.Date sqlDate = null;
         try {
@@ -362,7 +391,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
             modelHD.addRow(data);
         }
     }
-    
+
     private String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
