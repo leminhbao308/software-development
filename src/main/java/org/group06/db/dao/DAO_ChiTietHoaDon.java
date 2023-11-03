@@ -23,7 +23,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
     @Override
     public ArrayList<ChiTietHoaDon> getAll() {
         ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
-        String sql = "SELECT * FROM KhachHang";
+        String sql = "SELECT * FROM ChiTietHoaDon";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -36,30 +36,30 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
                 dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return dsChiTietHoaDon;
     }
 
-    public ChiTietHoaDon getByID(String maHD, String maQA) {
-        ChiTietHoaDon chiTietHoaDon = null;
-        String sql = "SELECT * FROM ChiTietHoaDon WHERE MAHD = ? AND MAQA = ?";
+    public ArrayList<ChiTietHoaDon> getAllCTQA(String maHD) {
+        ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
+        String sql = "SELECT * FROM ChiTietHoaDon WHERE MAHD = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, maHD);
-            statement.setString(2, maQA);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                chiTietHoaDon = new ChiTietHoaDon();
+            while (resultSet.next()) {
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
                 chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
+                dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return chiTietHoaDon;
+        return dsChiTietHoaDon;
     }
 
     @Override
@@ -93,8 +93,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
 
     @Deprecated
     @Override
-    public ChiTietHoaDon getByID(String id) {
+    public ChiTietHoaDon getByID(String maHD) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 }

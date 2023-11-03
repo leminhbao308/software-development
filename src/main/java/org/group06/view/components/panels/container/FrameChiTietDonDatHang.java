@@ -63,7 +63,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         tblDSQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tblDSQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"A001", "120000", "1", "120000"}
+
             },
             new String [] {
                 "Tên quần áo", "Giá tiền", "Số lượng", "Thành tiền"
@@ -79,6 +79,12 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         });
         tblDSQuanAo.setRowHeight(30);
         srcQuanAo.setViewportView(tblDSQuanAo);
+        if (tblDSQuanAo.getColumnModel().getColumnCount() > 0) {
+            tblDSQuanAo.getColumnModel().getColumn(0).setResizable(false);
+            tblDSQuanAo.getColumnModel().getColumn(1).setResizable(false);
+            tblDSQuanAo.getColumnModel().getColumn(2).setResizable(false);
+            tblDSQuanAo.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
         pnlDSQA.setLayout(pnlDSQALayout);
@@ -175,9 +181,8 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
         txtTongTT.setBackground(new java.awt.Color(242, 242, 242));
         txtTongTT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTongTT.setText("1");
         txtTongTT.setBorder(null);
-        txtTongTT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtTongTT.setDisabledTextColor(new java.awt.Color(255, 0, 0));
         txtTongTT.setEnabled(false);
         txtTongTT.setPreferredSize(new java.awt.Dimension(71, 30));
         txtTongTT.addActionListener(new java.awt.event.ActionListener() {

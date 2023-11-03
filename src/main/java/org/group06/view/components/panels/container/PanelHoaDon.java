@@ -6,6 +6,7 @@ package org.group06.view.components.panels.container;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -15,7 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
+import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
@@ -31,6 +34,7 @@ import org.group06.utils.ImagePath;
 public class PanelHoaDon extends javax.swing.JPanel {
 
     private DAO_HoaDon dao_HoaDon;
+    private ChiTietHoaDon chiTietHoaDon;
 
     /**
      * Creates new form PanelHoaDon
@@ -149,7 +153,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền", "Mã khuyến mãi"
+                "Mã hóa đơn", "Ngày lập hóa đơn", "Tên khách hàng", "Tên nhân viên lập hóa đơn", "Tổng thành tiền", "Tên CT khuyến mãi"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -275,8 +279,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 if ("date".equals(evt.getPropertyName())) {
                     Date date = (Date) evt.getNewValue();
                     java.util.Date dateNow = new java.util.Date();
+                    
                     if (date != null) {
-                        if (date.after(dateNow)) {
+                        if (date.after(dateNow)){
                             JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
                             dchTimTheoNgay.setDate(null);
                             loadDataTable();
@@ -284,7 +289,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                         } else {
                             loadDataNgay(date);
                             txtTimTheoTenKH.setText("");
-                        }
+                        } 
                     }
                 }
             }
@@ -321,8 +326,8 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private HoaDon getSelectedHoaDon() {
         String hd = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
-
         String date = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 1).toString();
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.sql.Date sqlDate = null;
         try {
@@ -332,7 +337,6 @@ public class PanelHoaDon extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-        
         KhachHang kh = new KhachHang(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 2).toString(), null);
         NhanVien nv = new NhanVien(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 3).toString(), null, true, null, null, null, true, null);
         KhuyenMai km = new KhuyenMai(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 5).toString(), 0, null, null, 0);
@@ -354,8 +358,23 @@ public class PanelHoaDon extends javax.swing.JPanel {
             String tenKH = hd.getKhachHang().getTenKH();
             String tenNV = hd.getNhanVien().getTenNV();
             String khuyenMai = hd.getKhuyenMai().getTenCTKM();
-            Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, 1, khuyenMai};
+            String ttt = loadTongThanhTien(hd.getMaHoaDon());
+            Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, ttt, khuyenMai};
             modelHD.addRow(data);
         }
+    }
+
+    private String loadTongThanhTien(String hd) {
+        double tinhTongThanhTien = 0;
+        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
+        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
+        for (ChiTietHoaDon cthd : dsCTHD) {
+            int soLuong = cthd.getSoLuong();
+            double tinhThanhTien = soLuong * cthd.getGiaBan();
+            tinhTongThanhTien += tinhThanhTien;
+        }
+        double ttt = (tinhTongThanhTien - (tinhTongThanhTien * 0.08) - (tinhTongThanhTien * new KhuyenMai().getMucGiamGia()));
+        String tongThanhTien = dfMoney.format(ttt);
+        return tongThanhTien;
     }
 }

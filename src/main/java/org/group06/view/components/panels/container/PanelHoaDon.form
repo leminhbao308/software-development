@@ -188,7 +188,7 @@
                 <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xea;n nh&#xe2;n vi&#xea;n l&#x1ead;p h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                 <Column editable="false" title="T&#x1ed5;ng th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
-                <Column editable="false" title="M&#xe3; khuy&#x1ebf;n m&#xe3;i" type="java.lang.Object"/>
+                <Column editable="false" title="T&#xea;n CT khuy&#x1ebf;n m&#xe3;i" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>
