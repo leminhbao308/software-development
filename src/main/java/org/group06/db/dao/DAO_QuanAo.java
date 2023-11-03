@@ -38,7 +38,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setLoiNhuan(result.getDouble("LOINHUAN"));
                 quanAo.setNhaCungCap(new DAO_NhaCungCap(connection).getByID(result.getString("MANCC")));
                 quanAo.setTrangThai(result.getBoolean("TRANGTHAI"));
-                quanAo.setHinhAnh(result.getBytes("HINHANH"));
+                quanAo.setHinhAnh(result.getString("HINHANH"));
                 dsQuanAo.add(quanAo);
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setLoiNhuan(result.getDouble("LOINHUAN"));
                 quanAo.setNhaCungCap(new DAO_NhaCungCap(connection).getByID(result.getString("MANCC")));
                 quanAo.setTrangThai(result.getBoolean("TRANGTHAI"));
-                quanAo.setHinhAnh(result.getBytes("HINHANH"));
+                quanAo.setHinhAnh(result.getString("HINHANH"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +90,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             statement.setDouble(8, quanAo.getLoiNhuan());
             statement.setString(9, quanAo.getNhaCungCap().getMaNCC());
             statement.setBoolean(10, quanAo.isTrangThai());
-            statement.setBytes(11, quanAo.getHinhAnh());
+            statement.setString(11, quanAo.getHinhAnh());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -113,7 +113,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             statement.setDouble(7, quanAo.getLoiNhuan());
             statement.setString(8, quanAo.getNhaCungCap().getMaNCC());
             statement.setBoolean(9, quanAo.isTrangThai());
-            statement.setBytes(10, quanAo.getHinhAnh());
+            statement.setString(10, quanAo.getHinhAnh());
             statement.setString(11, quanAo.getMaQA());
             statement.executeUpdate();
             return true;
