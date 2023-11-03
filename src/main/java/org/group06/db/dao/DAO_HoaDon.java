@@ -27,8 +27,8 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             while (resultSet.next()) {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
-                Date ngayLap = resultSet.getDate(3);
                 hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
+                hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
                 hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
                 hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
                 dsHD.add(hoaDon);

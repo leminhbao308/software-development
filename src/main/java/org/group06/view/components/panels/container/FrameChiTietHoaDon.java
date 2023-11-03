@@ -25,7 +25,6 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
-    private PanelQuanAo pnlQuanAo;
 
     public FrameChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
@@ -355,7 +354,8 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
             Object[] data = {tenQA, giaBan, soLuong, thanhTien};
             modelCTHD.addRow(data);
         }
-        String tongThanhTien = dfMoney.format(tinhTongThanhTien);
+        double ttt = (tinhTongThanhTien - (tinhTongThanhTien * 0.08) - (tinhTongThanhTien * hoaDon.getKhuyenMai().getMucGiamGia()));
+        String tongThanhTien = dfMoney.format(ttt);
         txtTongTT.setText(tongThanhTien);
     }
 }
