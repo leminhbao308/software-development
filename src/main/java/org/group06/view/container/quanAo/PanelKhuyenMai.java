@@ -13,6 +13,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -28,7 +31,10 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         loadDataTable();
 //        setDefaultCalender();
         this.dchNgayBatDau.setEnabled(false);
+        this.dchNgayBatDau.setDateFormatString("dd-MM-yyyy");
         this.dchNgayKetThuc.setEnabled(false);
+        this.dchNgayKetThuc.setDateFormatString("dd-MM-yyyy");
+        setDefaultCalender();
         setStatusAllBtnsStart();
     }
 
@@ -42,8 +48,17 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     public void setDefaultCalender() {
         Date currentDate = new Date();
         this.dchNgayBatDau.setDate(currentDate);
+
+        // Lấy ngày hiện tại
+        LocalDate dateNow = LocalDate.now();
+        // Tính toán ngày hôm sau
+        LocalDate nextDay = dateNow.plusDays(1);
         this.dchNgayBatDau.setDateFormatString("dd-MM-yyyy");
-        this.dchNgayKetThuc.setDate(currentDate);
+        Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+        // Chuyển đổi sang java.util.Date
+        java.util.Date utilDate = Date.from(instant);
+        this.dchNgayKetThuc.setDate(utilDate);
         this.dchNgayKetThuc.setDateFormatString("dd-MM-yyyy");
     }
 
@@ -372,6 +387,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
+        LocalDate ngayKT = new java.sql.Date(dchNgayKetThuc.getDate().getTime()).toLocalDate();
         if (txtMa.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Mã chương trình khuyến mãi đang trống không thể lưu");
         } else if (txtTenCTKM.getText().trim().isEmpty()) {
@@ -383,6 +400,13 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         } else if (txtSoLuotSuDung.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Số lượt sử dụng của chương trình khuyến mãi đang trống không thể lưu");
             this.txtSoLuotSuDung.requestFocus();
+        } else if (!ngayKT.isAfter(ngayBD)) {
+            JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
+            LocalDate nextDay = ngayBD.plusDays(1);
+            Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
+            // Chuyển đổi sang java.util.Date
+            java.util.Date utilDate = Date.from(instant);
+            this.dchNgayKetThuc.setDate(utilDate);
         } else {
             if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn lưu?", "Xác nhận hành động", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
                 if (this.statusBtnCapNhat == true && this.statusBtnThemMoi == false) {
@@ -535,20 +559,13 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
         if (evt.getPropertyName().equals("date")) {
-            Date date = (Date) evt.getNewValue();
-            java.util.Date dateNow = new java.util.Date();
+            LocalDate ngayHienTai = LocalDate.now();
+            LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
 
-            SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
-            String formatDate = newSDF.format(date);
-            String formatDateNow = newSDF.format(dateNow);
-            if (date != null) {
-                if (formatDate.compareTo(formatDateNow) > 0) {
-                    System.out.println("Bạn chọn ngày sau ngày hiện tại");
-                } else if (formatDate.compareTo(formatDateNow) == 0) {
-                    System.out.println("Bạn chọn ngày hiện tại");
-                } else {
-                    System.out.println("Bạn chọn ngày trước ngày hiện tại");
-                }
+            if (ngayBD.isBefore(ngayHienTai)) {
+                JOptionPane.showMessageDialog(null, "Ngày bắt đầu không được trước ngày hiện tại!");
+                dchNgayBatDau.setDate(new Date());
+                System.out.println("Bạn chọn ngày trước ngày hiện tại.");
             }
         }
     }//GEN-LAST:event_dchNgayBatDauPropertyChange
@@ -560,17 +577,17 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     private void dchNgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayKetThucPropertyChange
         if (evt.getPropertyName().equals("date")) {
-            java.util.Date ngayKetThucCTKM = (Date) evt.getNewValue();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String formatDay = sdf.format(ngayKetThucCTKM.getTime());
-            java.util.Date ngayBatDauCTKM = dchNgayBatDau.getDate();
-//            if (ngayKetThucCTKM.before(ngayBatDauCTKM)) {
-//                System.out.println("Bạn chọn ngayKetThucCTKM trước ngayBatDauCTKM");
-//            } else if (ngayKetThucCTKM.after(ngayBatDauCTKM)) {
-//                System.out.println("Bạn chọn ngayKetThucCTKM sau ngayBatDauCTKM");
-//            } else {
-//                System.out.println("Bạn chọn ngày hiện tại");
-//            }
+            LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
+            LocalDate ngayKT = new java.sql.Date(dchNgayKetThuc.getDate().getTime()).toLocalDate();
+            if (!ngayKT.isAfter(ngayBD)) {
+                JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
+//                dchNgayBatDau.setDate(new Date());
+                LocalDate nextDay = ngayBD.plusDays(1);
+                Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                // Chuyển đổi sang java.util.Date
+                java.util.Date utilDate = Date.from(instant);
+                this.dchNgayKetThuc.setDate(utilDate);
+            }
         }
     }//GEN-LAST:event_dchNgayKetThucPropertyChange
 
