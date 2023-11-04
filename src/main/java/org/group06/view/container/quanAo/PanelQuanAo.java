@@ -1,21 +1,21 @@
-package org.group06.view.components.panels.container;
-
-import java.awt.image.BufferedImage;
-import java.io.*;
+package org.group06.view.container.quanAo;
 
 import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.db.dao.DAO_QuanAo;
+import org.group06.model.entity.NhaCungCap;
 import org.group06.model.entity.QuanAo;
 import org.group06.utils.*;
 import org.group06.view.components.panels.ImagePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -26,11 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.text.html.Option;
-
-import org.group06.db.dao.DAO_NhaCungCap;
-import org.group06.model.entity.NhaCungCap;
 
 /**
  * @author lemin

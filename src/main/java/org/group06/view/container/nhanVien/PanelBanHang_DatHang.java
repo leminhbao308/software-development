@@ -1,4 +1,4 @@
-package org.group06.view.components.panels.container;
+package org.group06.view.container.nhanVien;
 
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.*;

@@ -1,18 +1,4 @@
-package org.group06.view.components.panels.container;
-
-import com.toedter.calendar.JDateChooser;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+package org.group06.view.container.quanAo;
 
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhuyenMai;
@@ -20,6 +6,17 @@ import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.ComponentStatus;
 import org.group06.utils.FontConstant;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author lehoangnam

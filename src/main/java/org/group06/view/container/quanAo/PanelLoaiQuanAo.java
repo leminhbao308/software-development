@@ -2,24 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package org.group06.view.components.panels.container;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+package org.group06.view.container.quanAo;
 
 import org.group06.db.DatabaseConnect;
-import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.db.dao.DAO_QuanAo;
-import org.group06.model.entity.NhaCungCap;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.ComponentStatus;
 import org.group06.utils.FontConstant;
-import org.group06.utils.ImagePath;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
 
 /**
  * @author lehoa

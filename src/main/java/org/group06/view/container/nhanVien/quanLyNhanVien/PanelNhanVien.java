@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package org.group06.view.components.panels.container;
+package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import java.awt.event.KeyEvent;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
@@ -12,6 +11,7 @@ import org.group06.model.entity.PasswordRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
