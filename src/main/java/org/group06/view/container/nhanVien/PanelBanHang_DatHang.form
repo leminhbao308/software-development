@@ -37,7 +37,7 @@
     </Container>
     <Container class="org.group06.view.components.search.PanelSearch" name="pnlTimKiemKhuyenMai">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pnlTimKiemKhuyenMai.addEventClick(new SearchClickEvent(){&#xa;    @Override&#xa;    public void itemClick(Data data) {&#xa;        txt_KM_BanHang.setText(data.getSubTitle());&#xa;        capNhatSoTienMuaHang();&#xa;        pmnTimKiemKhuyenMai.setVisible(false);&#xa;        pnlMain.requestFocus();&#xa;    }&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pnlTimKiemKhuyenMai.addEventClick(new SearchClickEvent(){&#xa;    @Override&#xa;    public void itemClick(Data data) {&#xa;        txtKhuyenMai.setText(data.getSubTitle());&#xa;        capNhatSoTienMuaHang();&#xa;        pmnTimKiemKhuyenMai.setVisible(false);&#xa;        pnlMain.requestFocus();&#xa;    }&#xa;});"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -206,7 +206,6 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimQAActionPerformed"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimQAKeyPressed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimQAKeyReleased"/>
                   </Events>
@@ -595,7 +594,7 @@
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tblDonHangFocusLost"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="tblDonHang.getModel().addTableModelListener(new TableModelListener() {&#xa;    @Override&#xa;public void tableChanged(TableModelEvent e) {&#xa;        int rowCount = tblDonHang.getRowCount();&#xa;        if (rowCount != 0) {&#xa;            btnThanhToan.setEnabled(true);&#xa;        }&#xa;    }&#xa;});&#xa;tblDonHang.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;            @Override&#xa;            public void valueChanged(ListSelectionEvent e) {&#xa;                int selectedRow = tblDonHang.getSelectedRow();&#xa;                if (selectedRow &gt;= 0) {&#xa;                    // Khi c&#xf3; d&#xf2;ng &#x111;&#x1b0;&#x1ee3;c ch&#x1ecd;n, cho ph&#xe9;p x&#xf3;a&#xa;                    tblDonHang.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), &quot;delete&quot;);&#xa;                    tblDonHang.getActionMap().put(&quot;delete&quot;, new AbstractAction() {&#xa;                        @Override&#xa;                        public void actionPerformed(ActionEvent e) {&#xa;                            ((DefaultTableModel) tblDonHang.getModel()).removeRow(selectedRow);&#xa;                            capNhatSoTienMuaHang();&#xa;                            disableBanHang();&#xa;                            if (tblDonHang.getRowCount() == 0) btnThanhToan.setEnabled(false);&#xa;                        }&#xa;                    });&#xa;                }&#xa;            }&#xa;        });"/>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="tblDonHang.getModel().addTableModelListener(new TableModelListener() {&#xa;    @Override&#xa;public void tableChanged(TableModelEvent e) {&#xa;        int rowCount = tblDonHang.getRowCount();&#xa;        if (rowCount != 0) {&#xa;            btnThanhToan.setEnabled(true);&#xa;            btnDatHang.setEnabled(true);&#xa;        }&#xa;    }&#xa;});&#xa;tblDonHang.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;            @Override&#xa;            public void valueChanged(ListSelectionEvent e) {&#xa;                int selectedRow = tblDonHang.getSelectedRow();&#xa;                if (selectedRow &gt;= 0) {&#xa;                    // Khi c&#xf3; d&#xf2;ng &#x111;&#x1b0;&#x1ee3;c ch&#x1ecd;n, cho ph&#xe9;p x&#xf3;a&#xa;                    tblDonHang.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), &quot;delete&quot;);&#xa;                    tblDonHang.getActionMap().put(&quot;delete&quot;, new AbstractAction() {&#xa;                        @Override&#xa;                        public void actionPerformed(ActionEvent e) {&#xa;                            int soLuong = Integer.parseInt(tblDonHang.getValueAt(selectedRow, 4).toString());&#xa;                            String maQA = tblDonHang.getValueAt(selectedRow, 0).toString();&#xa;                            ((DefaultTableModel) tblDonHang.getModel()).removeRow(selectedRow);&#xa;                            capNhatSoTienMuaHang();&#xa;                            qlQuanAoMua.delete(qlQuanAoMua.getByID(maQA));&#xa;                            qlQuanAo.updateSoLuong(maQA, soLuong + qlQuanAo.getByID(maQA).getSoLuong());&#xa;                            xuLyTimKiemQuanAo();&#xa;                            disableBanHang();&#xa;                            if (tblDonHang.getRowCount() == 0) {&#xa;                                btnThanhToan.setEnabled(false);&#xa;                                btnDatHang.setEnabled(false);&#xa;                            }&#xa;                        }&#xa;                    });&#xa;                }&#xa;            }&#xa;        });"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -626,7 +625,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="pnlInfoKhachHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="tabBanHang_DatHang" max="32767" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
@@ -662,6 +661,13 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnXoaKhachHang" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="lblKhuyenMai" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbl_KhuyenMai_ApDung" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtKhuyenMai" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnXoaKhuyenMai" min="-2" pref="45" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -678,10 +684,19 @@
                           <Component id="lblKhachHang" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtKhachHang" pref="45" max="32767" attributes="0"/>
-                              <Component id="btnXoaKhachHang" max="32767" attributes="0"/>
+                              <Component id="txtKhachHang" max="32767" attributes="0"/>
+                              <Component id="btnXoaKhachHang" pref="45" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lblKhuyenMai" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnXoaKhuyenMai" pref="45" max="32767" attributes="0"/>
+                              <Component id="txtKhuyenMai" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lbl_KhuyenMai_ApDung" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -738,6 +753,46 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaKhachHangActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="lblKhuyenMai">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; khuy&#x1ebf;n m&#xe3;i (n&#x1ebf;u c&#xf3;)"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtKhuyenMai">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKhuyenMaiKeyReleased"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnXoaKhuyenMai">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/icon/black/clear.png"/>
+                    </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaKhuyenMaiActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbl_KhuyenMai_ApDung">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="0.00%"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JTabbedPane" name="tabBanHang_DatHang">
@@ -788,11 +843,8 @@
                                   <Component id="txt_TienKhachTra_BanHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_TongTien_BanHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnThanhToan" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KM_BanHang" alignment="0" pref="403" max="32767" attributes="0"/>
                                   <Component id="lbl_VAT_BanHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_KM_BanHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="chk_XuatHD_BanHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KhuyenMai_BanHang" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="chk_XuatHD_BanHang" alignment="0" pref="403" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -801,13 +853,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="lbl_KM_BanHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txt_KM_BanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_KhuyenMai_BanHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="1020" max="32767" attributes="0"/>
+                              <EmptySpace pref="1015" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_BanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_BanHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -829,33 +875,6 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="lbl_KM_BanHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="M&#xe3; khuy&#x1ebf;n m&#xe3;i (n&#x1ebf;u c&#xf3;)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txt_KM_BanHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="0"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_KM_BanHangKeyReleased"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_KhuyenMai_BanHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="0%"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lbl_VAT_BanHang">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1031,16 +1050,13 @@
                                   <Component id="spr_VAT_DatHang" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lbl_TienThua_DatHang" alignment="1" max="32767" attributes="0"/>
                                   <Component id="spr_TienThua_DatHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_TienKhachTra_DatHang" alignment="0" pref="403" max="32767" attributes="0"/>
+                                  <Component id="txt_TienKhachTra_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_TongTien_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnDatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_VAT_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblNgayNhanHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KM_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="chk_KH_TraTruoc" max="32767" attributes="0"/>
                                   <Component id="chk_XuatDH_DatHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_LM_DatHang" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_KhuyenMai_DatHang" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1053,13 +1069,7 @@
                               <Component id="lblNgayNhanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="dchNgayNhanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_KM_DatHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txt_LM_DatHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_KhuyenMai_DatHang" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="938" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="lbl_VAT_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_DatHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -1093,6 +1103,9 @@
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="dchNgayNhanHang">
                       <Properties>
+                        <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new java.util.Date()" type="code"/>
+                        </Property>
                         <Property name="dateFormatString" type="java.lang.String" value="dd MMM, y"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
@@ -1102,34 +1115,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayNhanHang.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_KhuyenMai_DatHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="0%"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_KM_DatHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="M&#xe3; khuy&#x1ebf;n m&#xe3;i (n&#x1ebf;u c&#xf3;)"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txt_LM_DatHang">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="0"/>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new PlaceholderTextField(&quot;Nh&#x1ead;p m&#xe3; khuy&#x1ebf;n m&#xe3;i&quot;)"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayNhanHang.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayNhanHang.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbl_VAT_DatHang">
@@ -1160,7 +1146,7 @@
                           <Color blue="0" green="0" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="11"/>
-                        <Property name="text" type="java.lang.String" value="38,939,235,000 VND"/>
+                        <Property name="text" type="java.lang.String" value="0 VN&#x110;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="T&#x1ed5;ng Ti&#x1ec1;n Ph&#x1ea3;i Tr&#x1ea3;">
@@ -1184,6 +1170,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Kh&#xe1;ch tr&#x1ea3; ti&#x1ec1;n tr&#x1b0;&#x1edb;c"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chk_KH_TraTruocItemStateChanged"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_TienKhachTra_DatHang">
                       <Properties>
@@ -1197,7 +1186,7 @@
                           <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="11"/>
-                        <Property name="text" type="java.lang.String" value="0 VND"/>
+                        <Property name="text" type="java.lang.String" value="0 VN&#x110;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Ti&#x1ec1;n Kh&#xe1;ch &#x110;&#x1b0;a">
@@ -1216,6 +1205,9 @@
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TienKhachTra_DatHangActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JSeparator" name="spr_TienThua_DatHang">
                       <Properties>
@@ -1236,7 +1228,7 @@
                           <Color blue="0" green="0" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="11"/>
-                        <Property name="text" type="java.lang.String" value="0 VND"/>
+                        <Property name="text" type="java.lang.String" value="0 VN&#x110;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Ti&#x1ec1;n Th&#x1eeb;a Tr&#x1ea3; Kh&#xe1;ch">
@@ -1276,6 +1268,9 @@
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDatHangActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

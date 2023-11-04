@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package org.group06.view.components.panels.container;
+package org.group06.view.container.khachHang;
 
-import java.awt.Color;
-import java.awt.event.KeyEvent;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
@@ -13,6 +11,7 @@ import org.group06.utils.ColorConstant;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 //import org.group06.view.components.*;
 

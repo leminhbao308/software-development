@@ -4,10 +4,8 @@
  */
 package org.group06.utils;
 
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author lehoa

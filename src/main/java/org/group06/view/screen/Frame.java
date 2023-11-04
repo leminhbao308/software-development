@@ -3,7 +3,17 @@ package org.group06.view.screen;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
-import org.group06.view.components.panels.container.*;
+import org.group06.view.container.khachHang.PanelKhachHang;
+import org.group06.view.container.khachHang.PanelThongKeKhachHang;
+import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
+import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
+import org.group06.view.container.nhanVien.quanLyHoaDon.PanelPhieuTam;
+import org.group06.view.container.nhanVien.quanLyNhanVien.PanelNhanVien;
+import org.group06.view.container.quanAo.PanelKhuyenMai;
+import org.group06.view.container.quanAo.PanelLoaiQuanAo;
+import org.group06.view.container.quanAo.PanelNhaCungCap;
+import org.group06.view.container.quanAo.PanelQuanAo;
+import org.group06.view.container.taiKhoan.FrameDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +74,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-//        pnlContainer = new PanelBanHang(nv);
+//        pnlContainer = new PanelBanHang_DatHang(nv);
         pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
 //        pnlContainer = new PanelLoaiQuanAo();
         this.add(pnlContainer, BorderLayout.CENTER);
@@ -85,7 +95,7 @@ public class Frame extends JFrame {
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang(nv);
+            pnlContainer = new PanelBanHang_DatHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -93,7 +103,7 @@ public class Frame extends JFrame {
 
         mniNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang(nv);
+            pnlContainer = new PanelBanHang_DatHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -196,13 +206,13 @@ public class Frame extends JFrame {
 //            this.repaint();
 //        });
 //
-//        mniThongKeKhachHang.addActionListener(e -> {
-//            getContentPane().remove(pnlContainer);
-//            pnlContainer = new PanelThongKe();
-//            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-//            this.revalidate();
-//            this.repaint();
-//        });
+        mniThongKeKhachHang.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelThongKeKhachHang();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
 //
 //        mniTongKetCuoiNgay.addActionListener(e -> {
 //            getContentPane().remove(pnlContainer);

@@ -1,5 +1,6 @@
 package org.group06.model.manager;
 
+import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.QuanAo;
 
@@ -11,6 +12,12 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo>{
 
     private HashMap<String, String> dsLoaiQuanAo;
     private ArrayList<QuanAo> dsQuanAo;
+
+    public Manager_QuanAo() {
+        DAO_QuanAo dao_QuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+        dsQuanAo = new ArrayList<>();
+        dsLoaiQuanAo = dao_QuanAo.getAllLoaiQuanAo();
+    }
 
     public Manager_QuanAo(Connection connection) {
         DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
@@ -38,6 +45,16 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo>{
         for (QuanAo qa : dsQuanAo) {
             if (qa.getMaQA().equals(quanAo.getMaQA())) {
                 qa = quanAo;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateSoLuong(String maQA, int soLuong) {
+        for (QuanAo qa : dsQuanAo) {
+            if (qa.getMaQA().equals(maQA)) {
+                qa.setSoLuong(soLuong);
                 return true;
             }
         }
@@ -74,5 +91,9 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo>{
             }
         }
         return null;
+    }
+
+    public void deleteAll() {
+        dsQuanAo.clear();
     }
 }

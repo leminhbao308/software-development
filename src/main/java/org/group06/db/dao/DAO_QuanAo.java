@@ -167,6 +167,24 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             return "Không xác định";
         }
     }
+
+    public boolean updateSoLuongQuanAo(QuanAo quanAo) {
+        String updateQuery = "UPDATE QuanAo SET SOLUONG = ? WHERE MAQA = ?";
+        boolean success = false;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+
+            preparedStatement.setInt(1, quanAo.getSoLuong());
+            preparedStatement.setString(2, quanAo.getMaQA());
+            success = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+
     public boolean addLoaiQuanAo(String maLoaiQuanAo, String tenLoaiQuanAo) {
         try {
             String sql = "INSERT INTO LoaiQuanAo (MALOAIQA, TENLOAIQA) VALUES (?, ?)";
