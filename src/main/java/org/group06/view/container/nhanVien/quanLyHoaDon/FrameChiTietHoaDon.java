@@ -334,7 +334,7 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadDataTable() {
-        double tinhTongThanhTien = 0;
+        double tinhTongThanhTien = 0, mucGiamGia = 0;
         String hd = hoaDon.getMaHoaDon().toString();
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
         DefaultTableModel modelCTHD = (DefaultTableModel) this.tblChiTietHD.getModel();
@@ -351,8 +351,14 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
             Object[] data = {tenQA, giaBan, soLuong, thanhTien};
             modelCTHD.addRow(data);
+            
+            
+            if (cthd.getHoaDon().getKhuyenMai() != null) {
+                mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia())/100;
+            }
         }
-        double ttt = (tinhTongThanhTien - (tinhTongThanhTien * 0.08) - (tinhTongThanhTien * hoaDon.getKhuyenMai().getMucGiamGia()));
+        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
+        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
         String tongThanhTien = dfMoney.format(ttt);
         txtTongTT.setText(tongThanhTien);
     }
