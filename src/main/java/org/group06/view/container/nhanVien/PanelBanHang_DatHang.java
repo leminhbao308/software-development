@@ -8,6 +8,8 @@ import org.group06.utils.NumberStandard;
 import org.group06.view.components.search.Data;
 import org.group06.view.components.search.SearchClickEvent;
 import org.group06.view.components.textFields.PlaceholderTextField;
+import org.group06.view.container.khachHang.FrameThemKH;
+import org.group06.view.container.khachHang.PanelKhachHang;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -99,6 +101,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         txtKhuyenMai = new javax.swing.JTextField();
         btnXoaKhuyenMai = new javax.swing.JButton();
         lbl_KhuyenMai_ApDung = new javax.swing.JLabel();
+        btnThem = new javax.swing.JButton();
         tabBanHang_DatHang = new javax.swing.JTabbedPane();
         pnlBanHang = new javax.swing.JPanel();
         lbl_VAT_BanHang = new javax.swing.JLabel();
@@ -574,6 +577,15 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         lbl_KhuyenMai_ApDung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_KhuyenMai_ApDung.setText("0.00%");
 
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnThem.setText("Thêm Mới");
+        btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlInfoKhachHangLayout = new javax.swing.GroupLayout(pnlInfoKhachHang);
         pnlInfoKhachHang.setLayout(pnlInfoKhachHangLayout);
         pnlInfoKhachHangLayout.setHorizontalGroup(
@@ -583,7 +595,6 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 .addGroup(pnlInfoKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTim_SDT_KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTim_SDT_KhachHang)
                     .addGroup(pnlInfoKhachHangLayout.createSequentialGroup()
                         .addComponent(txtKhachHang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -593,7 +604,11 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                     .addGroup(pnlInfoKhachHangLayout.createSequentialGroup()
                         .addComponent(txtKhuyenMai)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnXoaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlInfoKhachHangLayout.createSequentialGroup()
+                        .addComponent(txtTim_SDT_KhachHang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnThem)))
                 .addContainerGap())
         );
         pnlInfoKhachHangLayout.setVerticalGroup(
@@ -602,7 +617,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTim_SDT_KhachHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTim_SDT_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlInfoKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTim_SDT_KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblKhachHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -696,7 +713,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         pnlBanHangLayout.setVerticalGroup(
             pnlBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBanHangLayout.createSequentialGroup()
-                .addContainerGap(1015, Short.MAX_VALUE)
+                .addContainerGap(1010, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_BanHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -724,7 +741,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         lblNgayNhanHang.setText("Ngày nhận hàng");
 
         dchNgayNhanHang.setDate(new java.util.Date());
-        dchNgayNhanHang.setDateFormatString("dd MMM, y");
+        dchNgayNhanHang.setDateFormatString("dd-MM-yyyy");
         dchNgayNhanHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchNgayNhanHang.setMinSelectableDate(java.util.Date.from(Instant.now())
         );
@@ -1134,6 +1151,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     private void btnXoaKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhuyenMaiActionPerformed
         txtKhuyenMai.setText("");
         lbl_KhuyenMai_ApDung.setText(NumberStandard.formatPercent(0.0f));
+        capNhatSoTienMuaHang();
         pnlMain.requestFocus();
     }//GEN-LAST:event_btnXoaKhuyenMaiActionPerformed
 
@@ -1198,6 +1216,19 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDatHangActionPerformed
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        callFrameThemKH();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void callFrameThemKH() {
+        FrameThemKH frThemKH = new FrameThemKH(new PanelKhachHang());
+        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemKH.setResizable(false);
+        frThemKH.setVisible(true);
+        dsKhachHang = new DAO_KhachHang(connection).getAll();
+    }
+
     /**
      * reset lại các giá trị của bảng đơn hàng, tiền khách trả, tiền thừa, ...
      */
@@ -1222,12 +1253,12 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQuanAo.setRowCount(0);
         for (QuanAo quanAo : dsQuanAo) {
-            if (quanAo.getSoLuong() > 0) {
+            if (quanAo.getSoLuong() > 0 && quanAo.isTrangThai()) {
                 Object[] data = {
-                        quanAo.getMaQA(), quanAo.getTenQA(),
-                        dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()),
-                        quanAo.getKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
-                        quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())
+                    quanAo.getMaQA(), quanAo.getTenQA(),
+                    dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()),
+                    quanAo.getKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
+                    quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())
                 };
                 // Thêm dữ liệu vào table
                 modelQuanAo.addRow(data);
@@ -1238,7 +1269,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     /**
      * Thêm quần áo vào đơn hàng hoặc cập nhật thông tin nếu đã tồn tại.
      *
-     * @param quanAo     Quần áo cần thêm vào đơn hàng hoặc cập nhật.
+     * @param quanAo Quần áo cần thêm vào đơn hàng hoặc cập nhật.
      * @param soLuongMua Số lượng quần áo muốn thêm vào đơn hàng.
      */
     private void themQuanAoVaoDonHang(QuanAo quanAo, int soLuongMua) {
@@ -1269,9 +1300,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         double giaBan = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan());
         double thanhTien = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()) * soLuongMua;
         Object[] data = {
-                quanAo.getMaQA(), quanAo.getTenQA(),
-                quanAo.getKichThuoc(), giaBan,
-                soLuongMua, thanhTien
+            quanAo.getMaQA(), quanAo.getTenQA(),
+            quanAo.getKichThuoc(), giaBan,
+            soLuongMua, thanhTien
         };
 
         // Thêm dữ liệu vào table
@@ -1281,9 +1312,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     /**
      * Tính giá bán dựa trên giá nhập quần áo và lợi nhuận.
      *
-     * @param giaNhap  Giá nhập của sản phẩm.
+     * @param giaNhap Giá nhập của sản phẩm.
      * @param loiNhuan Lợi nhuận được áp dụng cho sản phẩm (dưới dạng phần
-     *                 trăm).
+     * trăm).
      * @return Giá bán của sản phẩm.
      */
     private double tinhGiaBan(double giaNhap, double loiNhuan) {
@@ -1423,7 +1454,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         for (KhuyenMai km : dsKhuyenMai) {
             if (!txtKhuyenMai.getText().isEmpty() && km.getMaKhuyenMai().equals(txtKhuyenMai.getText())) {
                 if (km.getSoLuotSuDung() > 0) {
-                    khuyenMai = km.getMucGiamGia();
+                    khuyenMai = km.getMucGiamGia() / 100;
                     lbl_KhuyenMai_ApDung.setText(NumberStandard.formatPercent(khuyenMai));
                 } else {
                     JOptionPane.showMessageDialog(this, "Mã khuyến mãi đã hết lượt sử dụng!", "Thông báo", JOptionPane.WARNING_MESSAGE);
@@ -1438,8 +1469,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             for (int i = 0; i < tblDonHang.getRowCount(); i++) {
                 tongTienPhaiTra += NumberStandard.parseDouble(tblDonHang.getValueAt(i, 5).toString());
             }
-            tongTienPhaiTra += NumberStandard.roundAndNormalizeMoney(tongTienPhaiTra * thueVAT);
-            tongTienPhaiTra -= NumberStandard.roundAndNormalizeMoney(tongTienPhaiTra * khuyenMai);
+            tongTienPhaiTra += tongTienPhaiTra * thueVAT;
+            tongTienPhaiTra -= tongTienPhaiTra * khuyenMai;
+            tongTienPhaiTra = NumberStandard.roundAndNormalizeMoney(tongTienPhaiTra);
 
             lbl_TongTien_BanHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
             lbl_TongTien_DatHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
@@ -1492,6 +1524,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     private javax.swing.JButton btnDatHang;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
+    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemQuanAo;
     private javax.swing.JButton btnXoaKhachHang;
     private javax.swing.JButton btnXoaKhuyenMai;
