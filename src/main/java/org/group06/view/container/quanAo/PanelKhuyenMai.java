@@ -5,6 +5,7 @@ import org.group06.db.dao.DAO_KhuyenMai;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.ComponentStatus;
+import org.group06.utils.DateStandard;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
@@ -29,11 +30,11 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     public PanelKhuyenMai() {
         initComponents();
         loadDataTable();
-//        setDefaultCalender();
+        setDefaultCalender();
         this.dchNgayBatDau.setEnabled(false);
-        this.dchNgayBatDau.setDateFormatString("dd/MM/yyyy");
+        DateStandard.formatDate(this.dchNgayBatDau.getDate());
         this.dchNgayKetThuc.setEnabled(false);
-        this.dchNgayKetThuc.setDateFormatString("dd/MM/yyyy");
+        DateStandard.formatDate(this.dchNgayKetThuc.getDate());
         setDefaultCalender();
         setStatusAllBtnsStart();
     }
@@ -53,13 +54,13 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         LocalDate dateNow = LocalDate.now();
         // Tính toán ngày hôm sau
         LocalDate nextDay = dateNow.plusDays(1);
-        this.dchNgayBatDau.setDateFormatString("dd/MM/yyyy");
+        DateStandard.formatDate(this.dchNgayBatDau.getDate());
         Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         // Chuyển đổi sang java.util.Date
         java.util.Date utilDate = Date.from(instant);
         this.dchNgayKetThuc.setDate(utilDate);
-        this.dchNgayKetThuc.setDateFormatString("dd/MM/yyyy");
+        DateStandard.formatDate(this.dchNgayKetThuc.getDate());
     }
 
     public String taoMa() {
@@ -72,7 +73,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         for (KhuyenMai ctkm : dsKhuyenMai) {
             dsMaKM.add(ctkm.getMaKhuyenMai());
         }
-// Kiểm tra mã đã tồn tại trong danh sách hay chưa
+//        Kiểm tra mã đã tồn tại trong danh sách hay chưa
         while (dsMaKM.contains(maKM)) {
             number++;
             maKM = "KM" + nf.format(number);
@@ -83,9 +84,9 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private void loadDataTable() {
         DefaultTableModel modelKhuyenMai = (DefaultTableModel) this.tblKhuyenMai.getModel();
         for (KhuyenMai km : this.dsKhuyenMai) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Object[] data = {km.getMaKhuyenMai(), km.getTenCTKM(), km.getMucGiamGia(), km.getSoLuotSuDung(), sdf.format(km.getNgayBatDau()), sdf.format(km.getNgayKetThuc())};
-//      Thêm dữ liệu vào table
+            Object[] data = {km.getMaKhuyenMai(), km.getTenCTKM(), km.getMucGiamGia(), km.getSoLuotSuDung(),
+                    DateStandard.formatDate(km.getNgayBatDau()), DateStandard.formatDate(km.getNgayKetThuc())};
+//            Thêm dữ liệu vào table
             modelKhuyenMai.addRow(data);
         }
     }
@@ -431,12 +432,11 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
                     }
 //                    Đổ dữ liệu vừa cập nhật xuống table
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     this.tblKhuyenMai.getModel().setValueAt(tenCTKM, viTri, 1);
                     this.tblKhuyenMai.getModel().setValueAt(mucGiamGiaCTKM, viTri, 2);
                     this.tblKhuyenMai.getModel().setValueAt(soLuotSDCTKM, viTri, 3);
-                    this.tblKhuyenMai.getModel().setValueAt(sdf.format(ngayBatDauCTKM), viTri, 4);
-                    this.tblKhuyenMai.getModel().setValueAt(sdf.format(ngayKetThucCTKM), viTri, 5);
+                    this.tblKhuyenMai.getModel().setValueAt(DateStandard.formatDate(ngayBatDauCTKM), viTri, 4);
+                    this.tblKhuyenMai.getModel().setValueAt(DateStandard.formatDate(ngayKetThucCTKM), viTri, 5);
                 } else if (this.statusBtnThemMoi == true && this.statusBtnCapNhat == false) {
 //                    Lấy giá trị của fields
                     String maCTKM = this.txtMa.getText().trim();
@@ -454,8 +454,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     ctkm.setNgayBatDau(ngayBatDauCTKM);
                     ctkm.setNgayKetThuc(ngayKetThucCTKM);
 //                    Load xuống table
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Object[] data = {maCTKM, tenCTKM, mucGiamGiaCTKM, soLuotSDCTKM, sdf.format(ngayBatDauCTKM), sdf.format(ngayKetThucCTKM)};
+                    Object[] data = {maCTKM, tenCTKM, mucGiamGiaCTKM, soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblKhuyenMai.getModel();
                     modelTable.addRow(data);
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
@@ -522,20 +521,16 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         this.txtTenCTKM.setText(tblKhuyenMai.getValueAt(vitri, 1).toString());
         this.txtMucGiamGia.setText(tblKhuyenMai.getValueAt(vitri, 2).toString());
         this.txtSoLuotSuDung.setText(tblKhuyenMai.getValueAt(vitri, 3).toString());
-//        Xử lý định dạng ngày tháng năm
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
+
 //            Ngày bắt đầu khuyến mãi
-            java.util.Date ngayBatDau = sdf.parse(tblKhuyenMai.getValueAt(vitri, 4).toString());
-            this.dchNgayBatDau.setDate(ngayBatDau);
-            this.dchNgayBatDau.setDateFormatString("dd/MM/yyyy");
+        java.util.Date ngayBatDau = DateStandard.parseToDate(tblKhuyenMai.getValueAt(vitri, 4).toString());
+        this.dchNgayBatDau.setDate(ngayBatDau);
+        DateStandard.formatDate(this.dchNgayBatDau.getDate());
 //            Ngày kết thúc khuyến mãi
-            java.util.Date ngayKetThuc = sdf.parse(tblKhuyenMai.getValueAt(vitri, 5).toString());
-            this.dchNgayKetThuc.setDate(ngayKetThuc);
-            this.dchNgayKetThuc.setDateFormatString("dd/MM/yyyy");
-        } catch (ParseException ex) {
-            Logger.getLogger(PanelKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        java.util.Date ngayKetThuc = DateStandard.parseToDate(tblKhuyenMai.getValueAt(vitri, 5).toString());
+        this.dchNgayKetThuc.setDate(ngayKetThuc);
+        DateStandard.formatDate(this.dchNgayKetThuc.getDate());
+
 
         this.txtTenCTKM.setEnabled(false);
         this.txtMucGiamGia.setEnabled(false);
