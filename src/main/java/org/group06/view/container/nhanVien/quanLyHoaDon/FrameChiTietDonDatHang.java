@@ -4,24 +4,30 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
+import java.text.DecimalFormat;
 import org.group06.model.entity.PhieuDat;
 import org.group06.utils.FontConstant;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_ChiTietPhieuDat;
+import org.group06.model.entity.ChiTietPhieuDat;
 /**
  *
  * @author Dell
  */
 public class FrameChiTietDonDatHang extends javax.swing.JFrame {
+    
     private PhieuDat phieuDat;
     private PanelPhieuTam pnlPhieuTam;
-    /**
-     * Creates new form FrameChiTietDonDatHang
-     */
+  
     public FrameChiTietDonDatHang(PhieuDat phieuDat, PanelPhieuTam pnlPhieuTam) {
         this.phieuDat = phieuDat;
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
+        loadDataTable();
     }
 
     /**
@@ -354,4 +360,34 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenCTKM;
     private javax.swing.JTextField txtTongTT;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataTable() {
+        double tinhTongThanhTien = 0, mucGiamGia = 0;
+        String pd = phieuDat.getMaPhieuDat().toString();
+        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat((DatabaseConnect.getConnection())).getAllByID(pd);
+        DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
+        modelCTPD.setRowCount(0);
+        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
+        for (ChiTietPhieuDat ctpd : dsCTPD) {
+            String tenQA = ctpd.getQuanAo().getTenQA();
+            String giaBan = dfMoney.format(ctpd.getGiaBan());
+            int soLuong = ctpd.getSoLuong();
+            double tinhThanhTien = soLuong * ctpd.getGiaBan();
+            String thanhTien = dfMoney.format(tinhThanhTien);
+
+            tinhTongThanhTien += tinhThanhTien;
+
+            Object[] data = {tenQA, giaBan, soLuong, thanhTien};
+            modelCTPD.addRow(data);
+            
+            
+            if (ctpd.getPhieuDat().getKhuyenMai() != null) {
+                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia())/100;
+            }
+        }
+        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
+        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
+        String tongThanhTien = dfMoney.format(ttt);
+        txtTongTT.setText(tongThanhTien);
+    }
 }

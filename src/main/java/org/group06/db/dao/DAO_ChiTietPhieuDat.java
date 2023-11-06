@@ -39,10 +39,10 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
     public ArrayList<ChiTietPhieuDat> getAllByID(String id) {
         ArrayList<ChiTietPhieuDat> dsChiTietPhieuDat = new ArrayList<>();
-
         String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAPHIEUDAT = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();

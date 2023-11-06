@@ -885,7 +885,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 Logger.getLogger(PanelQuanAo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }//GEN-LAST:event_btnUploadImgActionPerformed
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
