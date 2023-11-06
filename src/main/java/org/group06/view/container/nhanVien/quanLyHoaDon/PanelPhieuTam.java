@@ -17,6 +17,10 @@ import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
@@ -198,11 +202,11 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi"
+                "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -224,6 +228,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             tblPhieuDat.getColumnModel().getColumn(4).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(5).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(6).setResizable(false);
+            tblPhieuDat.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -264,7 +269,15 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                         String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                         String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : ""};
+                        String ghiChu;
+                        if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                            ghiChu = "Chưa đến hạn nhận hàng";
+                        } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                            ghiChu = "Có thể nhận hàng";
+                        } else {
+                            ghiChu = "Quá hạn nhận hàng";
+                        }
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenNV.setText("");
@@ -326,7 +339,15 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                         String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                         String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-                        Object[] data = {pd.getMaPhieuDat(),ngayTao ,ngayNhan , pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM()};
+                        String ghiChu;
+                        if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                            ghiChu = "Chưa đến hạn nhận hàng";
+                        } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                            ghiChu = "Có thể nhận hàng";
+                        } else {
+                            ghiChu = "Quá hạn nhận hàng";
+                        }
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenKH.setText("");
@@ -432,7 +453,15 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM()};
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -447,7 +476,15 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM()};
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -463,7 +500,17 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM()};
+
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -513,6 +560,24 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
+    private int checkGhiChu(java.sql.Date ngayNhan) {
+        LocalDate ngayNhanHang = ngayNhan.toLocalDate();
+        if (ngayNhanHang.isBefore(LocalDate.now()) || ngayNhanHang.isEqual(LocalDate.now())) {
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Số ngày giữa hai ngày
+            long daysBetween = ChronoUnit.DAYS.between(ngayNhanHang, currentDate);
+            System.out.println("run Day    " + daysBetween);
+            if (daysBetween > 7) {
+                return -1;
+            } else if (daysBetween >= 0) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     public void loadDataTable() {
         ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
@@ -525,12 +590,21 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String tenNV = pd.getNhanVien().getTenNV();
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String khuyenMai = (pd.getKhuyenMai() == null) ? "" : pd.getKhuyenMai().getTenCTKM();
-            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai};
+
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+
+            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, ghiChu};
             modelPD.addRow(data);
         }
     }
-    
-    
+
     private String loadTongThanhTien(String pd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat((DatabaseConnect.getConnection())).getAllByID(pd);
@@ -541,7 +615,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             tinhTongThanhTien += tinhThanhTien;
 
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {
-                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia())/100;
+                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
 
