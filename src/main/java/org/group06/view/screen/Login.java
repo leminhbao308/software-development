@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 
 public class Login extends JFrame implements ActionListener {
 
-    private RippleRoundButton btnLogin;
+    private JButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
     private javax.swing.JLabel lblTitle;
     private ImagePanel pnImage;
@@ -37,7 +37,8 @@ public class Login extends JFrame implements ActionListener {
         lblSubTitle = new javax.swing.JLabel();
         txtUsername = new TextField();
         pwdPassword = new PasswordField();
-        btnLogin = new RippleRoundButton("LOGIN", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnLogin = new JButton("Đăng Nhập");
+        btnLogin.setBackground(ColorConstant.BUTTON_ACTIVE);
         pnImage = new ImagePanel(ImagePath.THUMBNAIL_LOGIN, 820, 600);
 //        setUndecorated(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
