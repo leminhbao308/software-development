@@ -34,7 +34,6 @@ public class Frame extends JFrame {
 
     //Menu Nhan Vien
     private final JMenuItem mniBanHang_DatHang = new JMenuItem("Bán Hàng / Đặt Hàng");
-    private final JMenuItem mniNhapHang = new JMenuItem("Nhập Hàng");
     private final JMenuItem mniQuanLyNhanVien = new JMenuItem("Quản Lý Nhân Viên");
 
     //Menu Khach Hang
@@ -49,7 +48,6 @@ public class Frame extends JFrame {
     //Menu Hoa Don
     private final JMenuItem mniQuanLyHoaDonBanHang = new JMenuItem("Quản Lý Hóa Đơn Bán Hàng");
     private final JMenuItem mniQuanLyHoaDonDatHang = new JMenuItem("Quản Lý Hóa Đơn Đặt Hàng");
-    private final JMenuItem mniQuanLyHoaDonNhapHang = new JMenuItem("Quản Lý Hóa Đơn Nhập Hàng");
 
     //Menu Thong Ke
     private final JMenuItem mniThongKeDoanhThu = new JMenuItem("Thống Kê Doanh Thu");
@@ -94,14 +92,6 @@ public class Frame extends JFrame {
 
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
-            getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang_DatHang(nv);
-            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-            this.revalidate();
-            this.repaint();
-        });
-
-        mniNhapHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
             pnlContainer = new PanelBanHang_DatHang(nv);
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
@@ -178,14 +168,6 @@ public class Frame extends JFrame {
             this.revalidate();
             this.repaint();
         });
-
-        mniQuanLyHoaDonNhapHang.addActionListener(e -> {
-            getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelHoaDon();
-            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-            this.revalidate();
-            this.repaint();
-        });
     }
 
     private void addActionMenuThongKe() {
@@ -255,7 +237,6 @@ public class Frame extends JFrame {
         mnThongKe.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mnTaiKhoan.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniBanHang_DatHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        mniNhapHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyNhanVien.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -264,7 +245,6 @@ public class Frame extends JFrame {
         mniQuanLyKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonDatHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        mniQuanLyHoaDonNhapHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeDoanhThu.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -274,7 +254,6 @@ public class Frame extends JFrame {
 
         //Menu Nhan Vien
         mniBanHang_DatHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        mniNhapHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhanVien.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Khach Hang
@@ -289,7 +268,6 @@ public class Frame extends JFrame {
         //Menu Hoa Don
         mniQuanLyHoaDonBanHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyHoaDonDatHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        mniQuanLyHoaDonNhapHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Thong Ke
         mniThongKeDoanhThu.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -318,7 +296,6 @@ public class Frame extends JFrame {
 
         //Menu Nhan Vien
         mnNhanVien.add(mniBanHang_DatHang);
-        mnNhanVien.add(mniNhapHang);
         mnNhanVien.add(new JSeparator());
         mnNhanVien.add(mniQuanLyNhanVien);
         mnNhanVien.add(new JSeparator());
@@ -338,7 +315,6 @@ public class Frame extends JFrame {
         //Menu Hoa Don
         mnHoaDon.add(mniQuanLyHoaDonBanHang);
         mnHoaDon.add(mniQuanLyHoaDonDatHang);
-        mnHoaDon.add(mniQuanLyHoaDonNhapHang);
 
         //Menu Thong Ke
         mnThongKe.add(mniThongKeDoanhThu);
