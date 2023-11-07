@@ -1,10 +1,12 @@
 package org.group06.view.container.nhanVien;
 
+import com.itextpdf.text.DocumentException;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.*;
 import org.group06.model.entity.*;
 import org.group06.model.manager.Manager_QuanAo;
 import org.group06.utils.NumberStandard;
+import org.group06.utils.PDF_Creator;
 import org.group06.view.components.search.Data;
 import org.group06.view.components.search.SearchClickEvent;
 import org.group06.view.components.textFields.PlaceholderTextField;
@@ -16,12 +18,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.time.Instant;
@@ -1137,7 +1142,59 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             }
             // TODO: Xuất hoá đơn
             if (chk_XuatHD_BanHang.isSelected()) {
-                System.out.println("Đã xuất hoá đơn");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Chọn Vị Trí Lưu Hoá Đơn");
+                // Chỉ cho phép lưu file với định dạng .pdf
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
+                fileChooser.setSelectedFile(new File(hoaDonBanHang.getMaHoaDon() + ".pdf"));
+                // Hiển thị hộp thoại để chọn vị trí lưu file
+                int result = fileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    // Lấy đường dẫn đã chọn
+                    String filePath = fileChooser.getSelectedFile().getPath();
+                    // Kiểm tra xem có đuôi mở rộng của file không
+                    if (!filePath.endsWith(".pdf")) {
+                        filePath += ".pdf";
+                    }
+                    // Kiểm tra nếu file đã tồn tại
+                    File file = fileChooser.getSelectedFile();
+                    if (file.exists()) {
+                        int response = JOptionPane.showConfirmDialog(null,
+                                "File đã tồn tại, bạn có muốn ghi đè lên file này?", "Cảnh báo",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if (response == JOptionPane.YES_OPTION) {
+                            // Lưu file
+                            try {
+                                PDF_Creator.createInvoice(hoaDonBanHang, filePath);
+                            } catch (DocumentException | IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            // Mở file vừa lưu
+                            if (Desktop.isDesktopSupported()) {
+                                try {
+                                    Desktop.getDesktop().open(file);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }
+                    } else {
+                        // Lưu file
+                        try {
+                            PDF_Creator.createInvoice(hoaDonBanHang, filePath);
+                        } catch (DocumentException | IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        // Mở file vừa lưu
+                        if (Desktop.isDesktopSupported()) {
+                            try {
+                                Desktop.getDesktop().open(file);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -1195,9 +1252,63 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 }
                 reloadAll();
             }
-            // TODO: Xuất hoá đơn
+            // TODO: Xuất phiếu đặt hàng
             if (chk_XuatHD_BanHang.isSelected()) {
-                System.out.println("Đã xuất hoá đơn");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Chọn Vị Trí Lưu Phiếu Đặt Hàng");
+                // Chỉ cho phép lưu file với định dạng .pdf
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
+                fileChooser.setSelectedFile(new File(phieuDatHang.getMaPhieuDat() + ".pdf"));
+                // Hiển thị hộp thoại để chọn vị trí lưu file
+                int result = fileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    // Lấy đường dẫn đã chọn
+                    String filePath = fileChooser.getSelectedFile().getPath();
+                    // Kiểm tra xem có đuôi mở rộng của file không
+                    if (!filePath.endsWith(".pdf")) {
+                        filePath += ".pdf";
+                    }
+                    // Kiểm tra nếu file đã tồn tại
+                    File file = fileChooser.getSelectedFile();
+                    if (file.exists()) {
+                        int response = JOptionPane.showConfirmDialog(null,
+                                "File đã tồn tại, bạn có muốn ghi đè lên file này?", "Cảnh báo",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if (response == JOptionPane.YES_OPTION) {
+                            // Lưu file
+                            try {
+                                PDF_Creator.createOrder(phieuDatHang, filePath);
+                            } catch (DocumentException | IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            }
+                            // Mở file vừa lưu
+                            if (Desktop.isDesktopSupported()) {
+                                try {
+                                    Desktop.getDesktop().open(file);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }
+                    } else {
+                        // Lưu file
+                        try {
+                            PDF_Creator.createOrder(phieuDatHang, filePath);
+                        } catch (DocumentException | IOException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                        // Mở file vừa lưu
+                        if (Desktop.isDesktopSupported()) {
+                            try {
+                                Desktop.getDesktop().open(file);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnDatHangActionPerformed

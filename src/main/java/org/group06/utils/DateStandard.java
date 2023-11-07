@@ -19,4 +19,8 @@ public class DateStandard {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(date);
     }
+
+    public static Date getNgayHienTai() {
+        return new Date();
+    }
 }

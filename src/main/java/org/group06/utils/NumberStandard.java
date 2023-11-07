@@ -88,6 +88,20 @@ public class NumberStandard {
     }
 
     /**
+     * Định dạng số tiền với đơn vị VNĐ hoặc không
+     * @param money Số tiền cần định dạng
+     * @param hasVND Có thêm đơn vị VNĐ hay không
+     * @return Chuỗi đã được định dạng
+     */
+    public static String formatMoney (double money, boolean hasVND) {
+        if (hasVND) {
+            return String.format("%,.0f", money) + " VNĐ";
+        } else {
+            return String.format("%,.0f", money);
+        }
+    }
+
+    /**
      * Chuẩn hóa số tiền theo các mệnh giá và làm tròn số tiền lên.
      * Ví dụ: 1,234,567 sẽ được chuẩn hóa thành 1,235,000
      *
