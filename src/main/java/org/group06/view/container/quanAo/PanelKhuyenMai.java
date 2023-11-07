@@ -32,10 +32,9 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         loadDataTable();
         setDefaultCalender();
         this.dchNgayBatDau.setEnabled(false);
-        DateStandard.formatDate(this.dchNgayBatDau.getDate());
+        this.dchNgayBatDau.setDateFormatString("dd/MM/yyyy");
         this.dchNgayKetThuc.setEnabled(false);
-        DateStandard.formatDate(this.dchNgayKetThuc.getDate());
-        setDefaultCalender();
+        this.dchNgayKetThuc.setDateFormatString("dd/MM/yyyy");
         setStatusAllBtnsStart();
     }
 
@@ -374,6 +373,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.statusBtnThemMoi = true;
         this.statusBtnCapNhat = false;
+        this.statusClickCheckDate = true;
         ComponentStatus.setStatusBtn(this.btnThemMoi, false);
         ComponentStatus.setStatusBtn(this.btnCapNhat, false);
         ComponentStatus.setStatusBtn(this.btnXoaTrang, true);
@@ -430,6 +430,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     this.ctkm_DAO = new DAO_KhuyenMai(DatabaseConnect.getConnection());
                     if (this.ctkm_DAO.update(ctkmCapNhat)) {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
+                        JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã cập nhật thành công chương trình khuyến mãi " + this.ctkmCapNhat.getTenCTKM());
                     }
 //                    Đổ dữ liệu vừa cập nhật xuống table
                     this.tblKhuyenMai.getModel().setValueAt(tenCTKM, viTri, 1);
@@ -438,6 +439,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     this.tblKhuyenMai.getModel().setValueAt(DateStandard.formatDate(ngayBatDauCTKM), viTri, 4);
                     this.tblKhuyenMai.getModel().setValueAt(DateStandard.formatDate(ngayKetThucCTKM), viTri, 5);
                 } else if (this.statusBtnThemMoi == true && this.statusBtnCapNhat == false) {
+                    this.statusClickCheckDate = false;
 //                    Lấy giá trị của fields
                     String maCTKM = this.txtMa.getText().trim();
                     String tenCTKM = this.txtTenCTKM.getText().trim();
@@ -460,8 +462,10 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
                     this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConnect.getConnection());
                     if (this.themMoiCTKM.add(ctkm)) {
+                        JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
                         System.out.println("Thêm mới thành công loại chương trình khuyến mãi!");
                     }
+
                 }
                 setStatusAllBtnsStart();
                 ComponentStatus.emptyField(this.txtMa);
@@ -475,6 +479,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 this.dchNgayBatDau.setEnabled(true);
                 this.dchNgayKetThuc.setEnabled(true);
                 this.tblKhuyenMai.clearSelection();
+
                 this.statusBtnCapNhat = false;
                 this.statusBtnThemMoi = false;
             }
@@ -492,6 +497,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
             this.txtSoLuotSuDung.setEnabled(true);
             this.dchNgayBatDau.setEnabled(true);
             this.dchNgayKetThuc.setEnabled(true);
+            this.statusClickCheckDate = true;
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -510,11 +516,13 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
             this.dchNgayKetThuc.setEnabled(false);
             this.statusBtnCapNhat = false;
             this.statusBtnThemMoi = false;
+            this.statusClickCheckDate = false;
         }
     }//GEN-LAST:event_btnHuyActionPerformed
 
     //    Xử lý đưa dữ liệu từ row table lên fields
     private void tblKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhuyenMaiMouseClicked
+        this.statusClickCheckDate = true;
         int vitri = this.tblKhuyenMai.getSelectedRow();//        Lấy vị trí dòng click
 //        Lấy và set giá trị cho fields
         this.txtMa.setText(tblKhuyenMai.getValueAt(vitri, 0).toString());
@@ -554,13 +562,15 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
         if (evt.getPropertyName().equals("date")) {
-            LocalDate ngayHienTai = LocalDate.now();
-            LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
+            if (this.statusClickCheckDate == false) {
+                LocalDate ngayHienTai = LocalDate.now();
+                LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
 
-            if (ngayBD.isBefore(ngayHienTai)) {
-                JOptionPane.showMessageDialog(null, "Ngày bắt đầu không được trước ngày hiện tại!");
-                dchNgayBatDau.setDate(new Date());
-                System.out.println("Bạn chọn ngày trước ngày hiện tại.");
+                if (ngayBD.isBefore(ngayHienTai)) {
+                    JOptionPane.showMessageDialog(null, "Ngày bắt đầu không được trước ngày hiện tại!");
+                    dchNgayBatDau.setDate(new Date());
+                    System.out.println("Bạn chọn ngày trước ngày hiện tại.");
+                }
             }
         }
     }//GEN-LAST:event_dchNgayBatDauPropertyChange
@@ -572,16 +582,18 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     private void dchNgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayKetThucPropertyChange
         if (evt.getPropertyName().equals("date")) {
-            LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
-            LocalDate ngayKT = new java.sql.Date(dchNgayKetThuc.getDate().getTime()).toLocalDate();
-            if (!ngayKT.isAfter(ngayBD)) {
-                JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
+            if (this.statusClickCheckDate == false) {
+                LocalDate ngayBD = new java.sql.Date(dchNgayBatDau.getDate().getTime()).toLocalDate();
+                LocalDate ngayKT = new java.sql.Date(dchNgayKetThuc.getDate().getTime()).toLocalDate();
+                if (!ngayKT.isAfter(ngayBD)) {
+                    JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
 //                dchNgayBatDau.setDate(new Date());
-                LocalDate nextDay = ngayBD.plusDays(1);
-                Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
-                // Chuyển đổi sang java.util.Date
-                java.util.Date utilDate = Date.from(instant);
-                this.dchNgayKetThuc.setDate(utilDate);
+                    LocalDate nextDay = ngayBD.plusDays(1);
+                    Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                    // Chuyển đổi sang java.util.Date
+                    java.util.Date utilDate = Date.from(instant);
+                    this.dchNgayKetThuc.setDate(utilDate);
+                }
             }
         }
     }//GEN-LAST:event_dchNgayKetThucPropertyChange
@@ -668,6 +680,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
     private boolean statusBtnThemMoi = true;
     private boolean statusBtnCapNhat = true;
+    private boolean statusClickCheckDate = false;
     private int viTri = 0;
     private KhuyenMai ctkmCapNhat = null;
     private DAO_KhuyenMai ctkm_DAO = null;
