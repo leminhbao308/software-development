@@ -1279,12 +1279,18 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     private void txtTenQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenQAFocusLost
         String tenQuanAo = this.txtTenQA.getText();
-//        ComponentStatus.checkEmptyField(this.txtTenQA);
         this.txtTenQA.setText(NameStandard.formatCapitalize(tenQuanAo));
     }//GEN-LAST:event_txtTenQAFocusLost
 
     private void txtLoiNhuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoiNhuanFocusLost
-        this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+        if (Pattern.compile("^\\d+\\.{0,1}\\d+$").matcher(txtLoiNhuan.getText().trim()).find() == false) {
+            JOptionPane.showMessageDialog(null,
+                    "Vui lòng nhập số(sử dụng dấu . với số thực)!");
+            this.txtLoiNhuan.selectAll();
+            this.txtLoiNhuan.requestFocus();
+        } else {
+            this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+        }
     }//GEN-LAST:event_txtLoiNhuanFocusLost
 
     private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
@@ -1300,7 +1306,12 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTrangThaiActionPerformed
 
     private void txtSoLuongQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongQAFocusLost
-//        ComponentStatus.checkEmptyField(this.txtSoLuongQA);
+        if (Pattern.compile("^\\d+$").matcher(txtSoLuongQA.getText().trim()).find() == false) {
+            JOptionPane.showMessageDialog(null,
+                    "Vui lòng nhập số nguyên dương!");
+            this.txtSoLuongQA.selectAll();
+            this.txtSoLuongQA.requestFocus();
+        }
     }//GEN-LAST:event_txtSoLuongQAFocusLost
 
     private void txtThuongHieuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtThuongHieuFocusLost
@@ -1308,7 +1319,12 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_txtThuongHieuFocusLost
 
     private void txtGiaNhapFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaNhapFocusLost
-        // TODO add your handling code here:
+        if (Pattern.compile("^\\d+$").matcher(txtGiaNhap.getText().trim()).find() == false) {
+            JOptionPane.showMessageDialog(null,
+                    "Vui lòng nhập số!");
+            this.txtGiaNhap.selectAll();
+            this.txtGiaNhap.requestFocus();
+        }
     }//GEN-LAST:event_txtGiaNhapFocusLost
 
     private void txtTimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusLost
