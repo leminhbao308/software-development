@@ -94,8 +94,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
         tblKhachHang.setFillsViewportHeight(true);
         tblKhachHang.setGridColor(org.group06.utils.ColorConstant.BLACK);
         tblKhachHang.setRowHeight(50);
-        tblKhachHang.setSelectionBackground(org.group06.utils.ColorConstant.BACKGROUND_SIDEBAR);
-        tblKhachHang.setSelectionForeground(org.group06.utils.ColorConstant.WHITE);
         tblKhachHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblKhachHang.setShowGrid(true);
         tblKhachHang.getTableHeader().setResizingAllowed(false);

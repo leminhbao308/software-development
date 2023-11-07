@@ -192,8 +192,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tglShowMK.setText("Show");
-        tglShowMK.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tglShowMK.setText("Hiện");
         tglShowMK.setPreferredSize(new java.awt.Dimension(111, 30));
         tglShowMK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,12 +241,12 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
                         .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlTTNVLayout.createSequentialGroup()
-                            .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pwdMK, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tglShowMK, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                         .addComponent(cmbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmbChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlTTNVLayout.setVerticalGroup(
             pnlTTNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,12 +451,12 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void tglShowMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tglShowMKMouseClicked
-        if (tglShowMK.getText().equals("Show")) {
+        if (tglShowMK.getText().equals("Hiện")) {
             pwdMK.setEchoChar('\u0000');
-            tglShowMK.setText("Hide");
+            tglShowMK.setText("Ẩn");
         } else {
             pwdMK.setEchoChar('•');
-            tglShowMK.setText("Show");
+            tglShowMK.setText("Hiện");
         }
     }//GEN-LAST:event_tglShowMKMouseClicked
 

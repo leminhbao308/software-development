@@ -14,10 +14,18 @@ import org.group06.model.entity.PhieuDat;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import org.group06.db.dao.DAO_ChiTietPhieuDat;
+import org.group06.model.entity.ChiTietPhieuDat;
+import org.group06.utils.DateStandard;
 
 /**
  *
@@ -191,15 +199,14 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
         tblPhieuDat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"PD001", "1/1/2022", "10/1/2022", "Trương Quốc Bảo", "Lê Minh Bảo", "120000", "KM001"},
-                {"PD002", "1/1/2022", "5/1/2022", "Lê Hoàng Nam", "Lê Minh Bảo", "500000", null}
+
             },
             new String [] {
-                "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi"
+                "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -221,6 +228,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             tblPhieuDat.getColumnModel().getColumn(4).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(5).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(6).setResizable(false);
+            tblPhieuDat.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -258,7 +266,18 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        Object[] data = {pd.getMaPhieuDat(), pd.getNgayTao(), pd.getNgayNhan(), pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), 1, pd.getKhuyenMai().getTenCTKM()};
+                        String ngayTao = DateStandard.formatDate(pd.getNgayTao());
+                        String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
+                        String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                        String ghiChu;
+                        if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                            ghiChu = "Chưa đến hạn nhận hàng";
+                        } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                            ghiChu = "Có thể nhận hàng";
+                        } else {
+                            ghiChu = "Quá hạn nhận hàng";
+                        }
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenNV.setText("");
@@ -317,7 +336,18 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        Object[] data = {pd.getMaPhieuDat(), pd.getNgayTao(), pd.getNgayNhan(), pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), 1, pd.getKhuyenMai().getTenCTKM()};
+                        String ngayTao = DateStandard.formatDate(pd.getNgayTao());
+                        String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
+                        String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                        String ghiChu;
+                        if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                            ghiChu = "Chưa đến hạn nhận hàng";
+                        } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                            ghiChu = "Có thể nhận hàng";
+                        } else {
+                            ghiChu = "Quá hạn nhận hàng";
+                        }
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenKH.setText("");
@@ -415,46 +445,72 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void loadDataNgayDat(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
         String formatDayDat = sdf.format(formatDay);
         ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateDat(formatDayDat);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
-            String newFormatNgayTao = newSDF.format(pd.getNgayTao());
-            String newFormatNgayNhan = newSDF.format(pd.getNgayNhan());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), 1, pd.getKhuyenMai().getTenCTKM()};
+            String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
+            String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
+            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
 
     private void loadDataNgayNhan(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
         String formatDayNhan = sdf.format(formatDay);
         ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateNhan(formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
-            String newFormatNgayTao = newSDF.format(pd.getNgayTao());
-            String newFormatNgayNhan = newSDF.format(pd.getNgayNhan());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), 1, pd.getKhuyenMai().getTenCTKM()};
+            String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
+            String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
+            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
 
     private void loadDataTheo2Ngay(Date day1, Date day2) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat newSDF = new SimpleDateFormat("dd/MM/yyyy");
         String formatDayDat = sdf.format(day1);
         String formatDayNhan = sdf.format(day2);
         ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateDatAndDateNhan(formatDayDat, formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
-            String newFormatNgayTao = newSDF.format(pd.getNgayTao());
-            String newFormatNgayNhan = newSDF.format(pd.getNgayNhan());
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), 1, pd.getKhuyenMai().getTenCTKM()};
+            String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
+            String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
+            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -487,17 +543,11 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         String dateDat = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 1).toString();
         String dateNhan = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 2).toString();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.sql.Date sqlDateDat = null, sqlDateNhan = null;
-        try {
-            java.util.Date utilDateDat = dateFormat.parse(dateDat);
-            java.util.Date utilDateNhan = dateFormat.parse(dateNhan);
-
-            sqlDateDat = new java.sql.Date(utilDateDat.getTime());
-            sqlDateNhan = new java.sql.Date(utilDateNhan.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        java.util.Date utilDateDat = DateStandard.parseToDate(dateDat);
+        java.util.Date utilDateNhan = DateStandard.parseToDate(dateNhan);
+        sqlDateDat = new java.sql.Date(utilDateDat.getTime());
+        sqlDateNhan = new java.sql.Date(utilDateNhan.getTime());
 
         KhachHang kh = new KhachHang(null, tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 3).toString(), null);
         NhanVien nv = new NhanVien(null, tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 4).toString(), null, true, null, null, null, true, null);
@@ -510,20 +560,68 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
+    private int checkGhiChu(java.sql.Date ngayNhan) {
+        LocalDate ngayNhanHang = ngayNhan.toLocalDate();
+        if (ngayNhanHang.isBefore(LocalDate.now()) || ngayNhanHang.isEqual(LocalDate.now())) {
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Số ngày giữa hai ngày
+            long daysBetween = ChronoUnit.DAYS.between(ngayNhanHang, currentDate);
+            System.out.println("run Day    " + daysBetween);
+            if (daysBetween > 7) {
+                return -1;
+            } else if (daysBetween >= 0) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     public void loadDataTable() {
         ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         for (PhieuDat pd : dsPD) {
             String maPD = pd.getMaPhieuDat();
-            String dateNhan = formatter.format(pd.getNgayNhan());
-            String dateDat = formatter.format(pd.getNgayTao());
-            String tenKH = pd.getKhachHang().getTenKH();
+            String dateNhan = DateStandard.formatDate(pd.getNgayNhan());
+            String dateDat = DateStandard.formatDate(pd.getNgayTao());
+            String tenKH = (pd.getKhachHang() == null) ? "Khách vãng lai" : pd.getKhachHang().getTenKH();
             String tenNV = pd.getNhanVien().getTenNV();
-            String khuyenMai = pd.getKhuyenMai().getTenCTKM();
-            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, 1, khuyenMai};
+            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            String khuyenMai = (pd.getKhuyenMai() == null) ? "" : pd.getKhuyenMai().getTenCTKM();
+
+            String ghiChu;
+            if (checkGhiChu(pd.getNgayNhan()) == 0) {
+                ghiChu = "Chưa đến hạn nhận hàng";
+            } else if (checkGhiChu(pd.getNgayNhan()) == 1) {
+                ghiChu = "Có thể nhận hàng";
+            } else {
+                ghiChu = "Quá hạn nhận hàng";
+            }
+
+            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, ghiChu};
             modelPD.addRow(data);
         }
+    }
+
+    private String loadTongThanhTien(String pd) {
+        double tinhTongThanhTien = 0, mucGiamGia = 0;
+        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat((DatabaseConnect.getConnection())).getAllByID(pd);
+        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
+        for (ChiTietPhieuDat ctpd : dsCTPD) {
+            int soLuong = ctpd.getSoLuong();
+            double tinhThanhTien = soLuong * ctpd.getGiaBan();
+            tinhTongThanhTien += tinhThanhTien;
+
+            if (ctpd.getPhieuDat().getKhuyenMai() != null) {
+                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
+            }
+        }
+
+        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
+        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
+        String tongThanhTien = dfMoney.format(ttt);
+        return tongThanhTien;
     }
 }

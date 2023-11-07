@@ -213,7 +213,25 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     @Override
     public PhieuDat getByID(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PhieuDat phieuDat = null;
+        try {
+            String sql = "SELECT * FROM PhieuDat WHERE MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                phieuDat = new PhieuDat();
+                phieuDat.setMaPhieuDat(resultSet.getString("MAPHIEUDAT"));
+                phieuDat.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
+                phieuDat.setNgayTao(resultSet.getDate("NGAYTAO"));
+                phieuDat.setNgayNhan(resultSet.getDate("NGAYNHAN"));
+                phieuDat.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
+                phieuDat.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return phieuDat;
     }
 
     @Override
