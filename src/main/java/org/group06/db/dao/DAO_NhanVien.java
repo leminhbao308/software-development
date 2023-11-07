@@ -248,4 +248,18 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         }
         return countMaNV;
     }
+    
+    public boolean updateMatKhau(String maNV, String matKhau) {
+        try {
+            String sql = "UPDATE NhanVien SET MATKHAU = ? WHERE MANV = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, matKhau);
+            statement.setString(2, maNV);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

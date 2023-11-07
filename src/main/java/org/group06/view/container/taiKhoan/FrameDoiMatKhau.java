@@ -4,6 +4,9 @@
  */
 package org.group06.view.container.taiKhoan;
 
+import javax.swing.JOptionPane;
+import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 
 /**
@@ -13,6 +16,7 @@ import org.group06.model.entity.NhanVien;
 public class FrameDoiMatKhau extends javax.swing.JFrame {
 
     private NhanVien nv;
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
 
     /**
      * Creates new form FrameDoiMatKhau
@@ -104,6 +108,11 @@ public class FrameDoiMatKhau extends javax.swing.JFrame {
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCapNhat.setText("Cập Nhật");
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
         pnlChucNang.add(btnCapNhat);
 
         btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -221,6 +230,23 @@ public class FrameDoiMatKhau extends javax.swing.JFrame {
     private void btnMKMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMKMoiMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMKMoiMouseClicked
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        if(nv.getMatKhau().equals(new String(pwdMKCu.getPassword()))) {
+            if(new String(pwdMKMoi.getPassword()).equals(new String(pwdNhapMKMoi.getPassword()))) {
+                
+                if(dao_NhanVien.updateMatKhau(nv.getMaNV(), new String(pwdMKMoi.getPassword()))) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                    this.dispose();
+                } else
+                    JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp, vui lòng nhập lại");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp, vui lòng nhập lại");
+        }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
