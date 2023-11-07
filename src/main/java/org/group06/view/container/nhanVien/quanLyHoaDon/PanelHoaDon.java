@@ -217,7 +217,6 @@ public class PanelHoaDon extends javax.swing.JPanel {
                     ArrayList<HoaDon> dsHD = new DAO_HoaDon(connection).getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
                     modelKH.setRowCount(0);
-                    System.out.println();
                     for (HoaDon hd : dsHD) {
                         String ttt = loadTongThanhTien(hd.getMaHoaDon());
                         String date = DateStandard.formatDate(hd.getNgayTao());
@@ -226,7 +225,13 @@ public class PanelHoaDon extends javax.swing.JPanel {
                                 Object[] data = {hd.getMaHoaDon(), date, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
                                 modelKH.addRow(data);
                             }
+                        } else {
+                            if (tenKH.contains("Khách vãng lai")) {
+                                Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
+                                modelKH.addRow(data);
+                            }
                         }
+
                     }
                     dchTimTheoNgay.setDate(null);
                 } else {
@@ -369,7 +374,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
             tinhTongThanhTien += tinhThanhTien;
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
-                mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia())/100;
+                mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
 
