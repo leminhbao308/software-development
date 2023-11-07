@@ -260,7 +260,17 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     @Override
     public boolean delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        new DAO_ChiTietPhieuDat(connection).delete(id);
+        try {
+            String sql = "DELETE FROM PhieuDat WHERE MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public int loadMaPDCount() {

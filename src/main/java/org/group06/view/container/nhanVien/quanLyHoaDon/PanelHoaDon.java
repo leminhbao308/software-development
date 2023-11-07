@@ -12,6 +12,7 @@ import org.group06.model.entity.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import org.group06.utils.DateStandard;
  */
 public class PanelHoaDon extends javax.swing.JPanel {
 
+    private Connection connection = DatabaseConnect.getConnection();
     private DAO_HoaDon dao_HoaDon;
     private ChiTietHoaDon chiTietHoaDon;
 
@@ -212,7 +214,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
-                    ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getAll();
+                    ArrayList<HoaDon> dsHD = new DAO_HoaDon(connection).getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
                     modelKH.setRowCount(0);
                     System.out.println();
@@ -300,7 +302,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     private void loadDataNgay(Date ngay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatNgay = sdf.format(ngay);
-        ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getByDate(formatNgay);
+        ArrayList<HoaDon> dsHD = new DAO_HoaDon(connection).getByDate(formatNgay);
         DefaultTableModel modelHD = (DefaultTableModel) this.tblHoaDon.getModel();
         modelHD.setRowCount(0);
         for (HoaDon hd : dsHD) {
@@ -343,7 +345,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }
 
     public void loadDataTable() {
-        ArrayList<HoaDon> dsHD = new DAO_HoaDon((DatabaseConnect.getConnection())).getAll();
+        ArrayList<HoaDon> dsHD = new DAO_HoaDon(connection).getAll();
         DefaultTableModel modelHD = (DefaultTableModel) this.tblHoaDon.getModel();
         modelHD.setRowCount(0);
         for (HoaDon hd : dsHD) {
@@ -359,7 +361,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
-        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
+        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             int soLuong = cthd.getSoLuong();

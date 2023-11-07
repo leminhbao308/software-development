@@ -4,29 +4,56 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
+import java.sql.Connection;
+import java.sql.Date;
 import java.text.DecimalFormat;
 import org.group06.model.entity.PhieuDat;
 import org.group06.utils.FontConstant;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
+import org.group06.db.dao.DAO_HoaDon;
+import org.group06.db.dao.DAO_PhieuDat;
+import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.ChiTietPhieuDat;
+import org.group06.model.entity.HoaDon;
+import org.group06.model.entity.KhachHang;
+import org.group06.model.entity.KhuyenMai;
+import org.group06.model.entity.NhanVien;
+import org.group06.model.entity.QuanAo;
+import org.group06.utils.NumberStandard;
+
 /**
  *
  * @author Dell
  */
 public class FrameChiTietDonDatHang extends javax.swing.JFrame {
-    
+
+    private Connection connection = DatabaseConnect.getConnection();
     private PhieuDat phieuDat;
     private PanelPhieuTam pnlPhieuTam;
-  
+    private KhachHang khachHang;
+    private NhanVien nhanVien;
+    private KhuyenMai khuyenMai;
+
     public FrameChiTietDonDatHang(PhieuDat phieuDat, PanelPhieuTam pnlPhieuTam) {
         this.phieuDat = phieuDat;
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
+
+        if (pnlPhieuTam.checkGhiChu(phieuDat.getNgayNhan()) != 1) {
+            btnNhanHang.setEnabled(false);
+        } else {
+            btnNhanHang.setEnabled(true);
+        }
+
         loadDataTable();
     }
 
@@ -172,7 +199,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
         txtTenCTKM.setBackground(new java.awt.Color(242, 242, 242));
         txtTenCTKM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTenCTKM.setText(phieuDat.getKhuyenMai().getTenCTKM());
+        txtTenCTKM.setText(phieuDat.getKhuyenMai() != null ? phieuDat.getKhuyenMai().getTenCTKM() : "");
         txtTenCTKM.setBorder(null);
         txtTenCTKM.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenCTKM.setEnabled(false);
@@ -289,6 +316,11 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
                 btnNhanHangMouseClicked(evt);
             }
         });
+        btnNhanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhanHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -352,9 +384,43 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNgayNhanActionPerformed
 
     private void btnNhanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanHangMouseClicked
-        
+
     }//GEN-LAST:event_btnNhanHangMouseClicked
 
+    private void btnNhanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanHangActionPerformed
+        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(phieuDat.getMaPhieuDat());
+        String maHoaDon = taoMaHD();
+        Date ngayHienTai = new Date(System.currentTimeMillis());
+
+        khachHang = phieuDat.getKhachHang();
+        nhanVien = phieuDat.getNhanVien();
+        khuyenMai = phieuDat.getKhuyenMai();
+
+        btnNhanHang.setEnabled(true);
+        HoaDon hoaDonBanHang = new HoaDon(maHoaDon, ngayHienTai, khachHang, nhanVien, khuyenMai);
+        DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+        int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn xác nhận nhận hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (selection == JOptionPane.YES_OPTION) {
+            if (dao_HoaDon.add(hoaDonBanHang)) {
+                DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+                for (ChiTietPhieuDat phieuDat : dsCTPD) {
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, phieuDat.getQuanAo(), phieuDat.getSoLuong(), phieuDat.getGiaBan());
+                    dao_ChiTietHoaDon.add(cthd);
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Đã lưu hóa đơn");
+            new DAO_PhieuDat(connection).delete(phieuDat.getMaPhieuDat());
+            pnlPhieuTam.loadDataTable();
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnNhanHangActionPerformed
+
+    public String taoMaHD() {
+        int count = new DAO_HoaDon(connection).loadMaHDCount();
+        count++;
+        // Tạo mã hoá đơn theo quy tắc và có thứ tự
+        return "HD" + String.format("%03d", count); // Ví dụ: HD001, HD002,...
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhanHang;
@@ -382,7 +448,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     private void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String pd = phieuDat.getMaPhieuDat().toString();
-        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat((DatabaseConnect.getConnection())).getAllByID(pd);
+        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
         DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
         modelCTPD.setRowCount(0);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
@@ -397,9 +463,9 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
             Object[] data = {tenQA, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
-            
+
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {
-                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia())/100;
+                mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
         double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);

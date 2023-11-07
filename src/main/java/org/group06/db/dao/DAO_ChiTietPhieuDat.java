@@ -87,6 +87,15 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
     @Override
     public boolean delete(String id) {
-        return false;
+        try {
+            String sql = "DELETE FROM ChiTietPhieuDat WHERE MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

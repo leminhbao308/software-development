@@ -14,6 +14,7 @@ import org.group06.model.entity.PhieuDat;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
+import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.ChiTietPhieuDat;
 import org.group06.utils.DateStandard;
 
@@ -33,13 +35,16 @@ import org.group06.utils.DateStandard;
  */
 public class PanelPhieuTam extends javax.swing.JPanel {
 
-    private DAO_PhieuDat dao_PhieuDat;
+    private Connection connection = DatabaseConnect.getConnection();
+    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
+    private ArrayList<PhieuDat> dsPD;
 
     /**
      * Creates new form PanelHoaDon
      */
     public PanelPhieuTam() {
         initComponents();
+        dsPD = dao_PhieuDat.getAll();
         checkNgayDat();
         checkNgayNhan();
         loadDataTable();
@@ -262,7 +267,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
-                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByNameKH(tenKH);
+                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByNameKH(tenKH);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
@@ -332,7 +337,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByNameNV(tenNV);
+                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByNameNV(tenNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
@@ -446,7 +451,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private void loadDataNgayDat(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayDat = sdf.format(formatDay);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateDat(formatDayDat);
+        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateDat(formatDayDat);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -469,7 +474,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private void loadDataNgayNhan(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayNhan = sdf.format(formatDay);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateNhan(formatDayNhan);
+        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateNhan(formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -493,7 +498,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayDat = sdf.format(day1);
         String formatDayNhan = sdf.format(day2);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getByDateDatAndDateNhan(formatDayDat, formatDayNhan);
+        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateDatAndDateNhan(formatDayDat, formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -549,10 +554,18 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         sqlDateDat = new java.sql.Date(utilDateDat.getTime());
         sqlDateNhan = new java.sql.Date(utilDateNhan.getTime());
 
-        KhachHang kh = new KhachHang(null, tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 3).toString(), null);
-        NhanVien nv = new NhanVien(null, tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 4).toString(), null, true, null, null, null, true, null);
-        KhuyenMai km = new KhuyenMai(null, tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 6).toString(), 0, null, null, 0);
+        KhachHang kh = null;
+        NhanVien nv = null;
+        KhuyenMai km = null;
 
+        for(PhieuDat pd : dsPD) {
+            if(pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
+                kh = pd.getKhachHang();
+                nv = pd.getNhanVien();
+                km = pd.getKhuyenMai();
+            }
+        }
+        
         if (tblPhieuDat.getSelectedRow() == -1) {
             return null;
         } else {
@@ -560,15 +573,13 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
-    private int checkGhiChu(java.sql.Date ngayNhan) {
+    public int checkGhiChu(java.sql.Date ngayNhan) {
         LocalDate ngayNhanHang = ngayNhan.toLocalDate();
         if (ngayNhanHang.isBefore(LocalDate.now()) || ngayNhanHang.isEqual(LocalDate.now())) {
             // Lấy ngày hiện tại
             LocalDate currentDate = LocalDate.now();
-
             // Số ngày giữa hai ngày
             long daysBetween = ChronoUnit.DAYS.between(ngayNhanHang, currentDate);
-            System.out.println("run Day    " + daysBetween);
             if (daysBetween > 7) {
                 return -1;
             } else if (daysBetween >= 0) {
@@ -579,7 +590,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }
 
     public void loadDataTable() {
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat((DatabaseConnect.getConnection())).getAll();
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -607,7 +617,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private String loadTongThanhTien(String pd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
-        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat((DatabaseConnect.getConnection())).getAllByID(pd);
+        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             int soLuong = ctpd.getSoLuong();
