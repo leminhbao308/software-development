@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -33,8 +34,10 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         loadDataTable();
         setDefaultCalender();
         this.dchNgayBatDau.setEnabled(false);
+        this.dchNgayBatDau.setLocale(new Locale("vi", "VN"));
         this.dchNgayBatDau.setDateFormatString("dd/MM/yyyy");
         this.dchNgayKetThuc.setEnabled(false);
+        this.dchNgayKetThuc.setLocale(new Locale("vi", "VN"));
         this.dchNgayKetThuc.setDateFormatString("dd/MM/yyyy");
         setStatusAllBtnsStart();
     }
