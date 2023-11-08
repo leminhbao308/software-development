@@ -352,7 +352,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         } else {
                             ghiChu = "Quá hạn nhận hàng";
                         }
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenKH.setText("");
@@ -466,7 +466,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             } else {
                 ghiChu = "Quá hạn nhận hàng";
             }
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -489,7 +489,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             } else {
                 ghiChu = "Quá hạn nhận hàng";
             }
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -515,7 +515,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                 ghiChu = "Quá hạn nhận hàng";
             }
 
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai().getTenCTKM(), ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
             modelPD.addRow(data);
         }
     }

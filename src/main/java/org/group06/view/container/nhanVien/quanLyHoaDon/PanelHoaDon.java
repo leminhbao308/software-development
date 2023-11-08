@@ -226,7 +226,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                                 modelKH.addRow(data);
                             }
                         } else {
-                            if (tenKH.contains("Khách vãng lai")) {
+                            if (tenKH.contains("Khách vãng lai") || tenKH.contains("KVL") || tenKH.contains("kvl") || tenKH.contains("khách vãng lai")) {
                                 Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
                                 modelKH.addRow(data);
                             }
@@ -313,7 +313,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         for (HoaDon hd : dsHD) {
             String ttt = loadTongThanhTien(hd.getMaHoaDon());
             String newFormatNgayTao = DateStandard.formatDate(hd.getNgayTao());
-            Object[] data = {hd.getMaHoaDon(), hd.getNgayTao(), hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai().getTenCTKM()};
+            Object[] data = {hd.getMaHoaDon(), newFormatNgayTao, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai().getTenCTKM()};
             modelHD.addRow(data);
         }
     }
