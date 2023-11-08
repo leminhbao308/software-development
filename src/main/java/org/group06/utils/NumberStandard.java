@@ -18,6 +18,15 @@ public class NumberStandard {
         return result;
     }
 
+    /**
+     * Định dạng số nguyên
+     * @param tongSoHoaDon Số nguyên cần định dạng
+     * @return Chuỗi đã được định dạng
+     */
+    public static String formatInteger(int tongSoHoaDon) {
+        return String.format("%,d", tongSoHoaDon);
+    }
+
 
     /**
      * Chuyển đổi chuỗi sang kiểu double
@@ -89,11 +98,12 @@ public class NumberStandard {
 
     /**
      * Định dạng số tiền với đơn vị VNĐ hoặc không
-     * @param money Số tiền cần định dạng
+     *
+     * @param money  Số tiền cần định dạng
      * @param hasVND Có thêm đơn vị VNĐ hay không
      * @return Chuỗi đã được định dạng
      */
-    public static String formatMoney (double money, boolean hasVND) {
+    public static String formatMoney(double money, boolean hasVND) {
         if (hasVND) {
             return String.format("%,.0f", money) + " VNĐ";
         } else {

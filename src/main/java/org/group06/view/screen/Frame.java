@@ -4,11 +4,12 @@ import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.container.khachHang.PanelKhachHang;
-import org.group06.view.container.khachHang.PanelThongKeKhachHang;
 import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelPhieuTam;
 import org.group06.view.container.nhanVien.quanLyNhanVien.PanelNhanVien;
+import org.group06.view.container.nhanVien.thongKe.PanelThongKeDoanhThu;
+import org.group06.view.container.nhanVien.thongKe.PanelThongKeKhachHang;
 import org.group06.view.container.quanAo.PanelKhuyenMai;
 import org.group06.view.container.quanAo.PanelLoaiQuanAo;
 import org.group06.view.container.quanAo.PanelNhaCungCap;
@@ -53,7 +54,6 @@ public class Frame extends JFrame {
     private final JMenuItem mniThongKeDoanhThu = new JMenuItem("Thống Kê Doanh Thu");
     private final JMenuItem mniThongKeQuanAo = new JMenuItem("Thống Kê Quần Áo");
     private final JMenuItem mniThongKeKhachHang = new JMenuItem("Thống Kê Khách Hàng");
-    private final JMenuItem mniTongKetCuoiNgay = new JMenuItem("Tổng Kết Cuối Ngày");
 
     //Menu Tai Khoan
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
@@ -172,13 +172,13 @@ public class Frame extends JFrame {
 
     private void addActionMenuThongKe() {
 //        TODO: Add Các Panel Thống Kê trước khi thêm action
-//        mniThongKeDoanhThu.addActionListener(e -> {
-//            getContentPane().remove(pnlContainer);
-//            pnlContainer = new PanelThongKe();
-//            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-//            this.revalidate();
-//            this.repaint();
-//        });
+        mniThongKeDoanhThu.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelThongKeDoanhThu();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
 //
 //        mniThongKeQuanAo.addActionListener(e -> {
 //            getContentPane().remove(pnlContainer);
@@ -195,14 +195,6 @@ public class Frame extends JFrame {
             this.revalidate();
             this.repaint();
         });
-//
-//        mniTongKetCuoiNgay.addActionListener(e -> {
-//            getContentPane().remove(pnlContainer);
-//            pnlContainer = new PanelThongKe();
-//            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-//            this.revalidate();
-//            this.repaint();
-//        });
     }
 
     private void addActionMenuTaiKhoan() {
@@ -248,7 +240,6 @@ public class Frame extends JFrame {
         mniThongKeDoanhThu.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        mniTongKetCuoiNgay.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniDoiMatKhau.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniDangXuat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -273,7 +264,6 @@ public class Frame extends JFrame {
         mniThongKeDoanhThu.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniThongKeQuanAo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniThongKeKhachHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        mniTongKetCuoiNgay.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Tai Khoan
         mniDoiMatKhau.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -320,7 +310,6 @@ public class Frame extends JFrame {
         mnThongKe.add(mniThongKeDoanhThu);
         mnThongKe.add(mniThongKeQuanAo);
         mnThongKe.add(mniThongKeKhachHang);
-        mnThongKe.add(mniTongKetCuoiNgay);
 
         //Menu Tai Khoan
         mnTaiKhoan.add(mniDoiMatKhau);
