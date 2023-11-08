@@ -24,6 +24,7 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.ChiTietPhieuDat;
@@ -44,6 +45,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
      */
     public PanelPhieuTam() {
         initComponents();
+        dchTimTheoNgayDat.setLocale(new Locale("vi", "VN"));
+        dchTimTheoNgayNhan.setLocale(new Locale("vi", "VN"));
         dsPD = dao_PhieuDat.getAll();
         checkNgayDat();
         checkNgayNhan();
@@ -186,7 +189,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                             .addComponent(lblTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         dchTimTheoNgayDat.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
@@ -253,8 +256,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitleDSHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTitleDSHoaDon)
+                .addGap(2, 2, 2)
                 .addComponent(pnlTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(srcPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)

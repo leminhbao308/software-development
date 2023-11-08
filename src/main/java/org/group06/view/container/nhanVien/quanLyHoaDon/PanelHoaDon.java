@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import org.group06.utils.DateStandard;
 
 /**
@@ -35,6 +36,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
      */
     public PanelHoaDon() {
         initComponents();
+        dchTimTheoNgay.setLocale(new Locale("vi", "VN"));
         checkNgay();
         loadDataTable();
     }
