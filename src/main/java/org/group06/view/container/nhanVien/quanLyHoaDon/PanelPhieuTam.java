@@ -5,30 +5,22 @@
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
 import org.group06.db.DatabaseConnect;
+import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_PhieuDat;
-import org.group06.model.entity.KhachHang;
-import org.group06.model.entity.KhuyenMai;
-import org.group06.model.entity.NhanVien;
-import org.group06.model.entity.PhieuDat;
+import org.group06.model.entity.*;
+import org.group06.utils.DateStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import org.group06.db.dao.DAO_ChiTietPhieuDat;
-import org.group06.db.dao.DAO_KhachHang;
-import org.group06.model.entity.ChiTietPhieuDat;
-import org.group06.utils.DateStandard;
 
 /**
  *
@@ -623,8 +615,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
-            int soLuong = ctpd.getSoLuong();
-            double tinhThanhTien = soLuong * ctpd.getGiaBan();
+            double tinhThanhTien = ctpd.getGiaBan();
             tinhTongThanhTien += tinhThanhTien;
 
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {

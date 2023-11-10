@@ -342,9 +342,9 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             String tenQA = cthd.getQuanAo().getTenQA();
-            String giaBan = dfMoney.format(cthd.getGiaBan());
+            String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
-            double tinhThanhTien = soLuong * cthd.getGiaBan();
+            double tinhThanhTien = cthd.getGiaBan();
             String thanhTien = dfMoney.format(tinhThanhTien);
 
             tinhTongThanhTien += tinhThanhTien;

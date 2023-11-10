@@ -8,18 +8,17 @@ import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.*;
+import org.group06.utils.DateStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import org.group06.utils.DateStandard;
 
 /**
  *
@@ -371,8 +370,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
-            int soLuong = cthd.getSoLuong();
-            double tinhThanhTien = soLuong * cthd.getGiaBan();
+            double tinhThanhTien = cthd.getGiaBan();
             tinhTongThanhTien += tinhThanhTien;
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
