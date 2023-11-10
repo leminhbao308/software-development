@@ -39,6 +39,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
 
     private void loadDataTable() {
         DefaultTableModel modelLoaiQuanAo = (DefaultTableModel) this.tblLoaiQuanAo.getModel();
+        modelLoaiQuanAo.setRowCount(0);
         for (HashMap.Entry<String, String> item : dsLoaiQuanAo.entrySet()) {
             Object[] data = {item.getKey(), item.getValue()};
             modelLoaiQuanAo.addRow(data);
@@ -448,8 +449,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
 
     //    Xử lý đưa dữ liệu từ row table lên fields
     private void tblLoaiQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiQuanAoMouseClicked
-//        Lấy vị trí dòng click
-        viTri = this.tblLoaiQuanAo.getSelectedRow();
+        viTri = this.tblLoaiQuanAo.getSelectedRow();//        Lấy vị trí dòng click
 //      Lấy và set giá trị cho fields
         this.txtMaLoaiQuanAo.setText(tblLoaiQuanAo.getValueAt(viTri, 0).toString());
         this.txtTenLoaiQuanAo.setText(tblLoaiQuanAo.getValueAt(viTri, 1).toString());

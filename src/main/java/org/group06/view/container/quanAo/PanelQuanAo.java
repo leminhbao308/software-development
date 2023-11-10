@@ -44,12 +44,12 @@ public class PanelQuanAo extends javax.swing.JPanel {
         loadDataForComboboxLoaiQuanAo();
         loadDataForComboboxNCC();
         setStatusAllBtnsStart();
-        formatCellRendererCenter(this.tblQuanAo, 3);
-        formatCellRendererCenter(this.tblQuanAo, 4);
-        formatCellRendererRight(this.tblQuanAo, 7);
-        formatCellRendererRight(this.tblQuanAo, 8);
-        formatCellRendererRight(this.tblQuanAo, 9);
-        formatCellRendererCenter(this.tblQuanAo, 10);
+        FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 3);
+        FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 4);
+        FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 7);
+        FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 8);
+        FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 9);
+        FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 10);
 
     }
 
@@ -75,24 +75,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
         return value;
-    }
-
-    public void formatCellRendererCenter(JTable tbl, int index) {
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        tbl.getColumnModel().getColumn(index).setCellRenderer(centerRenderer);
-    }
-
-    public void formatCellRendererLeft(JTable tbl, int index) {
-        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
-        leftRenderer.setHorizontalAlignment(DefaultTableCellRenderer.LEFT);
-        tbl.getColumnModel().getColumn(index).setCellRenderer(leftRenderer);
-    }
-
-    public void formatCellRendererRight(JTable tbl, int index) {
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
-        tbl.getColumnModel().getColumn(index).setCellRenderer(rightRenderer);
     }
 
     public void loadDataForComboboxLoaiQuanAo() {
@@ -173,6 +155,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     private void loadDataTable() {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
+        modelQuanAo.setRowCount(0);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         DecimalFormat dfPercent = new DecimalFormat("##,## %");
         String tenLoaiQuanAo = "";
@@ -311,12 +294,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txtMaQA.setEditable(false);
         txtMaQA.setBackground(ColorConstant.DISABLE_FIELD);
         txtMaQA.setFont(FontConstant.FONT_TEXT);
+        txtMaQA.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaQA.setEnabled(false);
 
         lbTenQA.setFont(FontConstant.FONT_LABEL);
         lbTenQA.setText("Tên Quần Áo:");
 
         txtTenQA.setFont(FontConstant.FONT_TEXT);
+        txtTenQA.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenQA.setEnabled(false);
         txtTenQA.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -360,6 +345,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         });
 
         txtThuongHieu.setFont(FontConstant.FONT_TEXT);
+        txtThuongHieu.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtThuongHieu.setEnabled(false);
         txtThuongHieu.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -389,6 +375,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         lblThuongHieu.setText("Thương Hiệu:");
 
         txtSoLuongQA.setFont(FontConstant.FONT_TEXT);
+        txtSoLuongQA.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSoLuongQA.setEnabled(false);
         txtSoLuongQA.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -478,6 +465,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
         txtGiaBan.setBackground(ColorConstant.DISABLE_FIELD);
         txtGiaBan.setFont(FontConstant.FONT_TEXT);
+        txtGiaBan.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtGiaBan.setEnabled(false);
         txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,6 +474,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         });
 
         txtLoiNhuan.setFont(FontConstant.FONT_TEXT);
+        txtLoiNhuan.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtLoiNhuan.setEnabled(false);
         txtLoiNhuan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -494,6 +483,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         });
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
+        txtGiaNhap.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtGiaNhap.setEnabled(false);
         txtGiaNhap.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1389,7 +1379,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     }
                 }
             }
-
 //        Cập nhật kết quả tìm kiếm lên bảng
             loadAllTableQA(dsQATimDuoc);
         }
