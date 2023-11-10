@@ -18,6 +18,7 @@ import org.group06.view.container.taiKhoan.FrameDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
+import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
 
 /**
  * @author Le Minh Bao
@@ -73,7 +74,8 @@ public class Frame extends JFrame {
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
 //        pnlContainer = new PanelBanHang_DatHang(nv);
-        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
+//        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
+        pnlContainer = new PanelThongKeQuanAo();
 //        pnlContainer = new PanelLoaiQuanAo();
         this.add(pnlContainer, BorderLayout.CENTER);
 

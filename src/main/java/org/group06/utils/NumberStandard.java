@@ -83,7 +83,7 @@ public class NumberStandard {
      * @return Chuỗi đã được định dạng
      */
     public static String formatPercent(double percent) {
-        return String.format("%.2f", percent * 100) + "%";
+        return String.format("%.2f", percent) + "%";
     }
 
     /**
