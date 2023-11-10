@@ -840,8 +840,8 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
             double loiNhuan = 0.0f;
             for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
                 if (hoaDon.getMaHoaDon().equals(cthd.getHoaDon().getMaHoaDon())) {
-                    doanhThu += cthd.getSoLuong() * cthd.getGiaBan();
-                    loiNhuan += (cthd.getSoLuong() * cthd.getGiaBan()) - cthd.getQuanAo().getGiaNhap();
+                    doanhThu += cthd.getGiaBan();
+                    loiNhuan += (cthd.getGiaBan()) - (cthd.getSoLuong() * cthd.getQuanAo().getGiaNhap());
                 }
             }
             Object[] rowDoanhThu = {hoaDon.getMaHoaDon(), hoaDon.getNgayTao(), hoaDon.getKhachHang() != null ? hoaDon.getKhachHang().getTenKH() : "Khách vãng lai", doanhThu};
