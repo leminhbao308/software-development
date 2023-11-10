@@ -10,14 +10,9 @@ import java.util.LinkedHashMap;
 
 public class BarChart extends ChartPanel {
 
-    public BarChart(String title, String xLabel, String yLabel, BarChartData data) throws Exception {
-        super(ChartFactory.createBarChart(title, xLabel, yLabel, data.getDataSet()), true, true, true, true, true);
+    public BarChart(String title, String yLabel, BarChartData data) throws Exception {
+        super(ChartFactory.createBarChart(title, data.getxLabel(), yLabel, data.getDataSet()), true, true, true, true, true);
         super.getChart().getCategoryPlot().setRangeGridlinePaint(ColorConstant.BLACK);
-
-        // Đảm bảo xLabel của BarChartData phải trùng với xLabel của BarChart
-        if (!xLabel.equals(data.getxLabel())) {
-            throw new Exception("xLabel is not matched");
-        }
     }
 
     public static void main(String[] args) {
@@ -33,7 +28,7 @@ public class BarChart extends ChartPanel {
 
             BarChart barChartPanel = null;
             try {
-                barChartPanel = new BarChart("Bar Chart Example", "Category", "Value", new BarChartData("Category", data));
+                barChartPanel = new BarChart("Bar Chart Example", "Category", new BarChartData("Category", data));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

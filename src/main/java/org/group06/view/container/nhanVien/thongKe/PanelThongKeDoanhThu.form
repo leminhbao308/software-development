@@ -16,12 +16,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="tabLuaChonXem" max="32767" attributes="0"/>
-                  <Component id="lblTitle" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlGeneral" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tabXemThongTin" max="32767" attributes="0"/>
+                  <Component id="lblTitle" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -32,11 +31,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="tabXemThongTin" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlGeneral" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabLuaChonXem" max="32767" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,311 +45,31 @@
           <Font name="Segoe UI" size="36" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Doanh Thu C&#x1eed;a H&#xe0;ng"/>
+        <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Doanh Thu"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="pnlGeneral">
+    <Container class="javax.swing.JTabbedPane" name="tabXemThongTin">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="T&#x1ed5;ng Quan">
-              <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
-            </TitledBorder>
-          </Border>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
         </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblNgayThongKe" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNgayThongKeCuoi" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbLuaChonThongKe" pref="350" max="32767" attributes="0"/>
-                      <Component id="dchNgayThongKe" alignment="0" max="32767" attributes="0"/>
-                      <Component id="dchNgayThongKeCuoi" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="pnlDoanhSo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmbLuaChonThongKe" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblNgayThongKe" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                  <Component id="dchNgayThongKe" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblNgayThongKeCuoi" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                  <Component id="dchNgayThongKeCuoi" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <Component id="pnlDoanhSo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JPanel" name="pnlDoanhSo">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Doanh S&#x1ed1;">
-                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
-                </TitledBorder>
-              </Border>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTongSoHoaDon" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtTongSoHoaDon" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="lblLoiNhuanThuDuoc" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="txtLoiNhuanThuDuoc" pref="433" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSoQuanAoDaBan" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="txtSoQuanAoDaBan" pref="433" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTongDoanhThu" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="txtTongDoanhThu" pref="433" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTongSoHoaDon" linkSize="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTongSoHoaDon" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSoQuanAoDaBan" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSoQuanAoDaBan" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTongDoanhThu" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTongDoanhThu" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblLoiNhuanThuDuoc" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLoiNhuanThuDuoc" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblTongSoHoaDon">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ho&#xe1; &#x111;&#x1a1;n &#x111;&#xe3; l&#x1ead;p:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblSoQuanAoDaBan">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; qu&#x1ea7;n &#xe1;o &#x111;&#xe3; b&#xe1;n:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblTongDoanhThu">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblLoiNhuanThuDuoc">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="L&#x1ee3;i nhu&#x1ead;n thu &#x111;&#x1b0;&#x1ee3;c:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtTongSoHoaDon">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSoQuanAoDaBan">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtTongDoanhThu">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtLoiNhuanThuDuoc">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JComboBox" name="cmbLuaChonThongKe">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Th&#x1ed1;ng k&#xea; theo ng&#xe0;y"/>
-                <StringItem index="1" value="Th&#x1ed1;ng k&#xea; theo th&#xe1;ng"/>
-                <StringItem index="2" value="Th&#x1ed1;ng k&#xea; theo n&#x103;m"/>
-                <StringItem index="3" value="Th&#x1ed1;ng k&#xea; theo kho&#x1ea3;ng th&#x1edd;i gian"/>
-                <StringItem index="4" value="Th&#x1ed1;ng k&#xea; t&#x1ea5;t c&#x1ea3; th&#x1edd;i gian"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbLuaChonThongKeItemStateChanged"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblNgayThongKe">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ng&#xe0;y th&#x1ed1;ng k&#xea;:"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dchNgayThongKe">
-          <Properties>
-            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new java.util.Date()" type="code"/>
-            </Property>
-            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Date.from(Instant.now())&#xd;&#xa;" type="code"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dchNgayThongKeFocusGained"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchNgayThongKePropertyChange"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayThongKe.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchNgayThongKe.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayThongKe.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayThongKe.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblNgayThongKeCuoi">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="lblNgayThongKeCuoi.setVisible(false);"/>
-          </AuxValues>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dchNgayThongKeCuoi">
-          <Properties>
-            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new java.util.Date()" type="code"/>
-            </Property>
-            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="dchNgayThongKe.getDate()&#xa;    " type="code"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dchNgayThongKeCuoiFocusGained"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchNgayThongKeCuoiPropertyChange"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayThongKeCuoi.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchNgayThongKeCuoi.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayThongKeCuoi.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayThongKeCuoi.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="dchNgayThongKeCuoi.setVisible(false);"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JTabbedPane" name="tabLuaChonXem">
-      <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="javax.swing.JLabel lblBanHang = new javax.swing.JLabel(&quot;B&#x1ea3;ng Chi Ti&#x1ebf;t&quot;);&#xa;javax.swing.JLabel lblDatHang = new javax.swing.JLabel(&quot;Bi&#x1ec3;u &#x110;&#x1ed3; Tr&#x1ef1;c Quan&quot;);&#xa;lblBanHang.setPreferredSize(new Dimension(350, 30));&#xa;lblDatHang.setPreferredSize(new Dimension(350, 30));&#xa;lblBanHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblDatHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblBanHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;lblDatHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;tabXemThongTin.setTabComponentAt(0, lblBanHang);&#xa;tabXemThongTin.setTabComponentAt(1, lblDatHang);"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pnlBangChiTiet">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="B&#x1ea3;ng Chi Ti&#x1ebf;t">
@@ -364,30 +81,595 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scrHdGiaTriCaoNhat" pref="502" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="scrHdLoiNhuanCaoNhat" pref="502" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="scrTopDoanhThu" pref="633" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="scrTopLoiNhuan" pref="556" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="pnlTongQuan" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="scrHdLoiNhuanCaoNhat" pref="541" max="32767" attributes="0"/>
-                          <Component id="scrHdGiaTriCaoNhat" pref="541" max="32767" attributes="0"/>
-                      </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlTongQuan" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="scrTopDoanhThu" pref="380" max="32767" attributes="0"/>
+                          <Component id="scrTopLoiNhuan" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="scrHdGiaTriCaoNhat">
+            <Container class="javax.swing.JPanel" name="pnlTongQuan">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="T&#x1ed5;ng Quan">
+                      <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="tabLuaChonThongKe" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="pnlTongQuanDoanhThu" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tabLuaChonThongKe" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="pnlTongQuanDoanhThu" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JTabbedPane" name="tabLuaChonThongKe">
+                  <Properties>
+                    <Property name="tabPlacement" type="int" value="2"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tabLuaChonThongKeStateChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="javax.swing.JLabel lblTheoNgay = new javax.swing.JLabel(&quot;Th&#x1ed1;ng K&#xea; Theo Ng&#xe0;y&quot;);&#xa;javax.swing.JLabel lblTheoThang = new javax.swing.JLabel(&quot;Th&#x1ed1;ng K&#xea; Theo Th&#xe1;ng&quot;);&#xa;javax.swing.JLabel lblTheoNam = new javax.swing.JLabel(&quot;Th&#x1ed1;ng K&#xea; Theo N&#x103;m&quot;);&#xa;javax.swing.JLabel lblTheoKhoangThoiGian = new javax.swing.JLabel(&quot;Th&#x1ed1;ng K&#xea; Theo Kho&#x1ea3;ng Th&#x1edd;i Gian&quot;);&#xa;javax.swing.JLabel lblToanBo = new javax.swing.JLabel(&quot;Th&#x1ed1;ng K&#xea; To&#xe0;n B&#x1ed9; Th&#x1edd;i Gian&quot;);&#xa;&#xa;lblTheoNgay.setPreferredSize(new Dimension(270, 30));&#xa;lblTheoThang.setPreferredSize(new Dimension(270, 30));&#xa;lblTheoNam.setPreferredSize(new Dimension(270, 30));&#xa;lblTheoKhoangThoiGian.setPreferredSize(new Dimension(270, 30));&#xa;lblToanBo.setPreferredSize(new Dimension(270, 30));&#xa;&#xa;lblTheoNgay.setHorizontalAlignment(SwingConstants.LEFT);&#xa;lblTheoThang.setHorizontalAlignment(SwingConstants.LEFT);&#xa;lblTheoNam.setHorizontalAlignment(SwingConstants.LEFT);&#xa;lblTheoKhoangThoiGian.setHorizontalAlignment(SwingConstants.LEFT);&#xa;lblToanBo.setHorizontalAlignment(SwingConstants.LEFT);&#xa;&#xa;lblTheoNgay.setFont(new Font(&quot;Segoe UI&quot;, 0, 18));&#xa;lblTheoThang.setFont(new Font(&quot;Segoe UI&quot;, 0, 18));&#xa;lblTheoNam.setFont(new Font(&quot;Segoe UI&quot;, 0, 18));&#xa;lblTheoKhoangThoiGian.setFont(new Font(&quot;Segoe UI&quot;, 0, 18));&#xa;lblToanBo.setFont(new Font(&quot;Segoe UI&quot;, 0, 18));&#xa;&#xa;tabLuaChonThongKe.setTabComponentAt(0, lblTheoNgay);&#xa;tabLuaChonThongKe.setTabComponentAt(1, lblTheoThang);&#xa;tabLuaChonThongKe.setTabComponentAt(2, lblTheoNam);&#xa;tabLuaChonThongKe.setTabComponentAt(3, lblTheoKhoangThoiGian);&#xa;tabLuaChonThongKe.setTabComponentAt(4, lblToanBo);"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="pnlTkTheoNgay">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Th&#x1ed1;ng K&#xea; Theo Ng&#xe0;y">
+                            <Property name="tabTitle" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Theo Ng&#xe0;y"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="dchChonNgay" alignment="0" pref="315" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblChonNgay" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblChonNgay" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dchChonNgay" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblChonNgay">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ng&#xe0;y:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dchChonNgay">
+                          <Properties>
+                            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new java.util.Date()" type="code"/>
+                            </Property>
+                            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new java.util.Date()" type="code"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchChonNgayPropertyChange"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchChonNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchChonNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pnlTkTheoThang">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Th&#x1ed1;ng K&#xea; Theo Th&#xe1;ng">
+                            <Property name="tabTitle" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Theo Th&#xe1;ng"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblChonThangVaNam" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="monthTheoThang" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="yearTheoThang" pref="136" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblChonThangVaNam" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="yearTheoThang" pref="40" max="32767" attributes="0"/>
+                                      <Component id="monthTheoThang" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblChonThangVaNam">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n th&#xe1;ng v&#xe0; n&#x103;m:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JMonthChooser" name="monthTheoThang">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="yearChooser" type="com.toedter.calendar.JYearChooser" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="yearTheoThang"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="monthTheoThangPropertyChange"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="monthTheoThang.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="com.toedter.calendar.JYearChooser" name="yearTheoThang">
+                          <Properties>
+                            <Property name="endYear" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="LocalDate.now().getYear()" type="code"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="yearTheoThangPropertyChange"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pnlTkTheoNam">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Th&#x1ed1;ng K&#xea; Theo N&#x103;m">
+                            <Property name="tabTitle" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Theo N&#x103;m"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblChonNam" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="229" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="yearTheoNam" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblChonNam" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="yearTheoNam" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblChonNam">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n n&#x103;m:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JYearChooser" name="yearTheoNam">
+                          <Properties>
+                            <Property name="endYear" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="LocalDate.now().getYear()" type="code"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="yearTheoNamPropertyChange"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pnlTkTheoKhoangThoiGian">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Th&#x1ed1;ng K&#xea; Theo Kho&#x1ea3;ng Th&#x1edd;i Gian">
+                            <Property name="tabTitle" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Theo Kho&#x1ea3;ng Th&#x1edd;i Gian"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="dchTuNgay" pref="315" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblTuNgay" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDenNgay" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="dchDenNgay" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblTuNgay" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dchTuNgay" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblDenNgay" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dchDenNgay" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <EmptySpace pref="110" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblTuNgay">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dchTuNgay">
+                          <Properties>
+                            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new java.util.Date()" type="code"/>
+                            </Property>
+                            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="dchDenNgay.getDate()" type="code"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTuNgayPropertyChange"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTuNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchTuNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblDenNgay">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dchDenNgay">
+                          <Properties>
+                            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new java.util.Date()" type="code"/>
+                            </Property>
+                            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="dchTuNgay.getDate()" type="code"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchDenNgayPropertyChange"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchDenNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchDenNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pnlTkToanBo">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Th&#x1ed1;ng K&#xea; To&#xe0;n B&#x1ed9; Th&#x1edd;i Gian">
+                            <Property name="tabTitle" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; To&#xe0;n B&#x1ed9; Th&#x1edd;i Gian"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblToanBo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblToanBo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="239" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lblToanBo">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="&#x110;ang Hi&#x1ec3;n Th&#x1ecb; Th&#x1ed1;ng K&#xea; To&#xe0;n Th&#x1edd;i Gian"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pnlTongQuanDoanhThu">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="T&#x1ed5;ng Quan Doanh Thu">
+                          <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                        </TitledBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lblDoanhThu" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblTongQA" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblTongHD" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblLoiNhuan" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtTongHD" max="32767" attributes="0"/>
+                                  <Component id="txtTongQA" alignment="1" pref="351" max="32767" attributes="0"/>
+                                  <Component id="txtDoanhThu" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtLoiNhuan" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblTongHD" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="txtTongHD" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblTongQA" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="txtTongQA" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblDoanhThu" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="txtDoanhThu" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblLoiNhuan" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="txtLoiNhuan" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="lblTongHD">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ho&#xe1; &#x111;&#x1a1;n &#x111;&#xe3; l&#x1ead;p:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblTongQA">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="S&#x1ed1; qu&#x1ea7;n &#xe1;o &#x111;&#xe3; b&#xe1;n:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblDoanhThu">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblLoiNhuan">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="L&#x1ee3;i nhu&#x1ead;n thu &#x111;&#x1b0;&#x1ee3;c:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtTongHD">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="11"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="NumberStandard.formatInteger(0)" type="code"/>
+                        </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtTongQA">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="11"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="NumberStandard.formatInteger(0)" type="code"/>
+                        </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtDoanhThu">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="11"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="NumberStandard.formatMoney(0)" type="code"/>
+                        </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtLoiNhuan">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="11"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="NumberStandard.formatMoney(0)" type="code"/>
+                        </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="scrTopDoanhThu">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -403,12 +685,12 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblHdGiaTriCaoNhat">
+                <Component class="javax.swing.JTable" name="tblTopDoanhThu">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tblTopDoanhThu.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {&#xa;            @Override&#xa;            public Component getTableCellRendererComponent(JTable table, Object value,&#xa;                boolean isSelected, boolean hasFocus, int row, int column) {&#xa;                Component c = super.getTableCellRendererComponent(table, value,&#xa;                    isSelected, hasFocus, row, column);&#xa;                if (column == 3) {&#xa;                    setHorizontalAlignment(JLabel.RIGHT);&#xa;                } else {&#xa;                    setHorizontalAlignment(JLabel.LEFT);&#xa;                }&#xa;                return c;&#xa;            }&#xa;        });">
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="M&#xe3; Ho&#xe1; &#x110;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y T&#x1ea1;o" type="java.lang.Object"/>
@@ -423,10 +705,13 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTopDoanhThuMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JScrollPane" name="scrHdLoiNhuanCaoNhat">
+            <Container class="javax.swing.JScrollPane" name="scrTopLoiNhuan">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -442,12 +727,12 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblHdLoiNhuanCaoNhat">
+                <Component class="javax.swing.JTable" name="tblTopLoiNhuan">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tblTopLoiNhuan.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {&#xa;            @Override&#xa;            public Component getTableCellRendererComponent(JTable table, Object value,&#xa;                boolean isSelected, boolean hasFocus, int row, int column) {&#xa;                Component c = super.getTableCellRendererComponent(table, value,&#xa;                    isSelected, hasFocus, row, column);&#xa;                if (column == 3) {&#xa;                    setHorizontalAlignment(JLabel.RIGHT);&#xa;                } else {&#xa;                    setHorizontalAlignment(JLabel.LEFT);&#xa;                }&#xa;                return c;&#xa;            }&#xa;        });">
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="M&#xe3; Ho&#xe1; &#x110;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y T&#x1ea1;o" type="java.lang.Object"/>
@@ -462,12 +747,20 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTopLoiNhuanMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pnlBieuDoTrucQuan">
+        <Container class="javax.swing.JPanel" name="pnlBieuDo">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Bi&#x1ec3;u &#x110;&#x1ed3; Tr&#x1ef1;c Quan">
@@ -479,12 +772,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1066" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1251" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="553" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="719" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

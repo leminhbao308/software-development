@@ -440,13 +440,13 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="615" max="32767" attributes="0"/>
                           <Component id="lblSoLuongQuanAo" min="-2" pref="300" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="spnSoLuongQuanAo" min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="spnSoLuongQuanAo" min="-2" pref="222" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnThemQuanAo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="554" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -455,11 +455,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="btnThemQuanAo" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="spnSoLuongQuanAo" linkSize="7" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="lblSoLuongQuanAo" linkSize="7" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="spnSoLuongQuanAo" linkSize="7" alignment="2" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnThemQuanAo" alignment="2" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="264" max="32767" attributes="0"/>
+                          <EmptySpace pref="249" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -477,6 +477,9 @@
                 </Component>
                 <Component class="javax.swing.JSpinner" name="spnSoLuongQuanAo">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor" postCode="JSpinner.NumberEditor ne = new JSpinner.NumberEditor(spnSoLuongQuanAo);&#xa;        spnSoLuongQuanAo.setEditor(ne);        &#xa;        &#xa;        FocusAdapter focusAdapter = new FocusAdapter()&#xa;        {&#xa;            public void focusGained(final FocusEvent e)&#xa;            {&#xa;            }&#xa;            &#xa;            public void focusLost(final FocusEvent e) {&#xa;                spnSoLuongQuanAoFocusLost(e);&#xa;            };            &#xa;        };        &#xa;        &#xa;((JSpinner.DefaultEditor)spnSoLuongQuanAo.getEditor()).getTextField().addFocusListener(focusAdapter);">
                       <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                     </Property>
@@ -683,11 +686,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblTim_SDT_KhachHang" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtTim_SDT_KhachHang" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="btnThem" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtTim_SDT_KhachHang" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btnThem" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblKhachHang" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -698,7 +701,7 @@
                           <Component id="lblKhuyenMai" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnXoaKhuyenMai" pref="45" max="32767" attributes="0"/>
+                              <Component id="btnXoaKhuyenMai" max="32767" attributes="0"/>
                               <Component id="txtKhuyenMai" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -821,9 +824,12 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="javax.swing.JLabel lblBanHang = new javax.swing.JLabel(&quot;B&#xe1;n H&#xe0;ng&quot;);&#xa;javax.swing.JLabel lblDatHang = new javax.swing.JLabel(&quot;&#x110;&#x1eb7;t H&#xe0;ng&quot;);&#xa;lblBanHang.setPreferredSize(new Dimension(130, 20));&#xa;lblDatHang.setPreferredSize(new Dimension(130, 20));&#xa;lblBanHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblDatHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblBanHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 14));&#xa;lblDatHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 14));&#xa;tabBanHang_DatHang.setTabComponentAt(0, lblBanHang);&#xa;tabBanHang_DatHang.setTabComponentAt(1, lblDatHang);"/>
+                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="javax.swing.JLabel lblBanHang = new javax.swing.JLabel(&quot;B&#xe1;n H&#xe0;ng&quot;);&#xa;javax.swing.JLabel lblDatHang = new javax.swing.JLabel(&quot;&#x110;&#x1eb7;t H&#xe0;ng&quot;);&#xa;lblBanHang.setPreferredSize(new Dimension(130, 30));&#xa;lblDatHang.setPreferredSize(new Dimension(130, 30));&#xa;lblBanHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblDatHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblBanHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;lblDatHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;tabBanHang_DatHang.setTabComponentAt(0, lblBanHang);&#xa;tabBanHang_DatHang.setTabComponentAt(1, lblDatHang);"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -874,7 +880,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="1010" max="32767" attributes="0"/>
+                              <EmptySpace pref="1012" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_BanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_BanHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -1089,7 +1095,7 @@
                               <Component id="lblNgayNhanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="dchNgayNhanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace pref="922" max="32767" attributes="0"/>
+                              <EmptySpace pref="924" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_DatHang" min="-2" pref="10" max="-2" attributes="0"/>
