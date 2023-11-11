@@ -181,15 +181,15 @@ public class Frame extends JFrame {
             this.revalidate();
             this.repaint();
         });
-//
-//        mniThongKeQuanAo.addActionListener(e -> {
-//            getContentPane().remove(pnlContainer);
-//            pnlContainer = new PanelThongKe();
-//            getContentPane().add(pnlContainer, BorderLayout.CENTER);
-//            this.revalidate();
-//            this.repaint();
-//        });
-//
+
+        mniThongKeQuanAo.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelThongKeQuanAo();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
+
         mniThongKeKhachHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
             pnlContainer = new PanelThongKeKhachHang();
