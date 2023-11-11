@@ -107,7 +107,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getInt("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"),resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {
@@ -210,7 +210,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             statement.setString(1, date);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getInt("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {
@@ -318,7 +318,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             statement.setInt(2, year);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getInt("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {
@@ -421,7 +421,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             statement.setInt(1, year);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getInt("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {
@@ -529,7 +529,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             statement.setString(2, date2);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getInt("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {

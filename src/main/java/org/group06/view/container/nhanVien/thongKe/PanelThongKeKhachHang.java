@@ -453,6 +453,20 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblTopSanPham.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus, row, column);
+                if (column == 2) {
+                    setHorizontalAlignment(JLabel.RIGHT);
+                } else {
+                    setHorizontalAlignment(JLabel.LEFT);
+                }
+                return c;
+            }
+        });
         tblTopSanPham.setFillsViewportHeight(true);
         tblTopSanPham.setRowHeight(50);
         tblTopSanPham.setShowGrid(true);
@@ -485,7 +499,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
                 boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-                if (column == 3) {
+                if (column == 2) {
                     setHorizontalAlignment(JLabel.RIGHT);
                 } else {
                     setHorizontalAlignment(JLabel.LEFT);
@@ -707,7 +721,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
             modelSP.addRow(row);
         }
         for (Object[] data : rowChi) {
-            Object[] row = {data[0], data[1], data[2]};
+            Object[] row = {data[0], data[1], NumberStandard.formatMoney((double) data[2])};
             modelChi.addRow(row);
         }
     }
