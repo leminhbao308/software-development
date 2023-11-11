@@ -1039,7 +1039,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     }
 
 //                    Xử lý lấy hình ảnh mới cần cập nhật
-                    System.out.println(file.getPath());
+//                    System.out.println(file.getPath());
                     if (file != null) {
                         String urlHinhAnh = file.getPath();
                         qaCapNhat.setHinhAnh(urlHinhAnh);

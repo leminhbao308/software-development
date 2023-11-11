@@ -267,9 +267,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaCTPDActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTongTT">
           <Properties>
@@ -298,9 +295,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayTaoActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);&#xa;// Chuy&#x1ec3;n &#x111;&#x1ed5;i th&#xe0;nh chu&#x1ed7;i&#xa;String dateString = dateFormat.format(phieuDat.getNgayTao());&#xa;txtNgayTao.setText(dateString);"/>
           </AuxValues>
@@ -327,9 +321,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtKHActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNV">
           <Properties>
@@ -353,9 +344,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNVActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTenCTKM">
           <Properties>
@@ -379,9 +367,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTenCTKMActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTongTT">
           <Properties>
@@ -402,9 +387,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTongTTActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNgayNhan">
           <Properties>
@@ -433,9 +415,6 @@
               <Dimension value="[71, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayNhanActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="SimpleDateFormat dateFormatNhan = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);&#xa;// Chuy&#x1ec3;n &#x111;&#x1ed5;i th&#xe0;nh chu&#x1ed7;i&#xa;String dateStringNhan = dateFormatNhan.format(phieuDat.getNgayNhan());&#xa;txtNgayNhan.setText(dateStringNhan);"/>
           </AuxValues>
@@ -459,7 +438,6 @@
         <Property name="text" type="java.lang.String" value="Nh&#x1ead;n H&#xe0;ng"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNhanHangMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhanHangActionPerformed"/>
       </Events>
     </Component>

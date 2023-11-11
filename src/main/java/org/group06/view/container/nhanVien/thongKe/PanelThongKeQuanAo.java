@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import org.group06.db.dao.DAO_QuanAo;
+import org.group06.utils.FormatCellRenderer;
 
 /**
  * @author Le Hoang Nam
@@ -33,14 +34,18 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private final DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
     private ArrayList<HoaDon> dsHoaDon = new ArrayList<>();
     private ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
+    private ArrayList<QuanAo> dsQA = new ArrayList<>();
 
     /**
-     * Creates new form PanelThongKeDoanhThu
+     * Creates new form PanelThongKeQuanAo
      */
     public PanelThongKeQuanAo() {
         dsHoaDon = dao_HoaDon.getAll();
         dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
+        dsQA = dao_QuanAo.getAll();
         initComponents();
+        FormatCellRenderer.formatCellRendererLeft(tblTopQuanAo, 3);
+        tabLuaChonThongKe.setSelectedIndex(-1);
     }
 
     @SuppressWarnings("unchecked")
@@ -477,7 +482,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Số Lượng Đã Bán", "Lợi Nhuận"
+                "Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -513,6 +518,14 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             }
         });
         scrTopQuanAo.setViewportView(tblTopQuanAo);
+        if (tblTopQuanAo.getColumnModel().getColumnCount() > 0) {
+            tblTopQuanAo.getColumnModel().getColumn(0).setResizable(false);
+            tblTopQuanAo.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblTopQuanAo.getColumnModel().getColumn(1).setResizable(false);
+            tblTopQuanAo.getColumnModel().getColumn(2).setResizable(false);
+            tblTopQuanAo.getColumnModel().getColumn(3).setResizable(false);
+            tblTopQuanAo.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlBangChiTietLayout = new javax.swing.GroupLayout(pnlBangChiTiet);
         pnlBangChiTiet.setLayout(pnlBangChiTietLayout);
@@ -590,20 +603,36 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private void tabLuaChonThongKeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabLuaChonThongKeStateChanged
         switch (tabLuaChonThongKe.getSelectedIndex()) {
             case 0:
-                locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
+                DefaultTableModel modelQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
+                modelQuanAo.setRowCount(0);
+                int kiemTraHet = 0;
+                for (QuanAo qa : dsQA) {
+                    if (qa.getSoLuong() == 0) {
+                        Object[] rowData = {qa.getMaQA(), qa.getTenQA(), qa.getLoaiQuanAo(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC()};
+                        modelQuanAo.addRow(rowData);
+                        System.out.println(rowData);
+                        kiemTraHet++;
+                    }
+                }
+                if (kiemTraHet == 0) {
+                    JOptionPane.showMessageDialog(null, "Không có quần áo hết");
+                }
                 break;
             case 1:
-                locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+                locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
                 break;
-            case 2:
-                locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
-                break;
-            case 3:
-                locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
-                break;
-            case 4:
-                locDuLieu(null, null, dsHoaDon, dsChiTietHoaDon);
-                break;
+//            case 2:
+//                locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
+//                break;
+//            case 3:
+//                locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+//                break;
+//            case 4:
+//                locDuLieu(null, null, dsHoaDon, dsChiTietHoaDon);
+//                break;
+//            case 5:
+//                locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+//                break;
         }
     }//GEN-LAST:event_tabLuaChonThongKeStateChanged
 
@@ -643,8 +672,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Xử lý popup chi tiết hoá đơn">                          
     private void tblTopQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTopQuanAoMouseClicked
         if (evt.getClickCount() == 2) {
-            if (tblTopQuanAo.getSelectedRow() != -1)
+            if (tblTopQuanAo.getSelectedRow() != -1) {
                 callFrameChiTietHoaDon(tblTopQuanAo.getValueAt(tblTopQuanAo.getSelectedRow(), 0).toString());
+            }
         }
     }//GEN-LAST:event_tblTopQuanAoMouseClicked
 
@@ -654,7 +684,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         for (HoaDon hd : dsHoaDon) {
             if (hd.getMaHoaDon().equals(maHD)) {
 
-                KhachHang kh = hd.getKhachHang() != null ? hd.getKhachHang() : new KhachHang(null, "Khách vãng lai", null) ;
+                KhachHang kh = hd.getKhachHang() != null ? hd.getKhachHang() : new KhachHang(null, "Khách vãng lai", null);
                 NhanVien nv = hd.getNhanVien();
                 KhuyenMai km = hd.getKhuyenMai() != null ? hd.getKhuyenMai() : new KhuyenMai(null, "", 0, null, null, 0);
 
@@ -673,7 +703,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
     /**
      * Lọc dữ liệu theo ngày được chọn hoặc theo khoảng thời gian được chọn, dữ
-     * lệu đúng được giữ lại. Nếu cả 2 ngày đều null thì lọc dữ liệu theo toàn
+     * liệu đúng được giữ lại. Nếu cả 2 ngày đều null thì lọc dữ liệu theo toàn
      * bộ thời gian
      *
      * @param date1 Ngày được chọn, hoặc ngày bắt đầu khoảng thời gian được chọn
