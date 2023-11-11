@@ -81,16 +81,6 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
         dchTimTheoNgay.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchTimTheoNgay.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchTimTheoNgay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchTimTheoNgayMouseClicked(evt);
-            }
-        });
-        dchTimTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dchTimTheoNgayPropertyChange(evt);
-            }
-        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLamMoi.setText("Làm mới");
@@ -253,14 +243,6 @@ public class PanelHoaDon extends javax.swing.JPanel {
             return true;
         }
     }
-
-    private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
-
-    }//GEN-LAST:event_dchTimTheoNgayPropertyChange
-
-    private void dchTimTheoNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchTimTheoNgayMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dchTimTheoNgayMouseClicked
 
     private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
         txtTimTheoTenKH.setText("");

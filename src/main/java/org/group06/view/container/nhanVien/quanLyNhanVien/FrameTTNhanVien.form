@@ -417,9 +417,6 @@
               <Dimension value="[98, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNuActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="tglShowMK">
           <Properties>

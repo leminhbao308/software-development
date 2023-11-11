@@ -170,10 +170,6 @@
               <Dimension value="[64, 29]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dchTimTheoNgayDatMouseClicked"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTimTheoNgayDatPropertyChange"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayDat.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayDat.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayDat.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
           </AuxValues>
@@ -229,10 +225,6 @@
               <Dimension value="[64, 29]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dchTimTheoNgayNhanMouseClicked"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTimTheoNgayNhanPropertyChange"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayNhan.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayNhan.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayNhan.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
           </AuxValues>

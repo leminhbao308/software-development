@@ -198,7 +198,6 @@
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTenNVFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTenNVActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaNV">
@@ -374,9 +373,6 @@
               <Dimension value="[98, 30]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNuActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="tglShowMK">
           <Properties>

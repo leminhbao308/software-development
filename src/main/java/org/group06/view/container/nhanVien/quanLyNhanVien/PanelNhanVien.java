@@ -128,11 +128,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.setToolTipText(null);
         txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoTenActionPerformed(evt);
-            }
-        });
         txtTimTheoTen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoTenKeyReleased(evt);
@@ -144,11 +139,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
         txtTimTheoMa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoMa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoMaActionPerformed(evt);
-            }
-        });
         txtTimTheoMa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoMaKeyReleased(evt);
@@ -321,14 +311,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         soMaNV++; // Tăng biến đếm cho lần thêm nhân viên tiếp theo
         return customerID;
     }
-
-    private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimTheoTenActionPerformed
-
-    private void txtTimTheoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoMaActionPerformed
-
-    }//GEN-LAST:event_txtTimTheoMaActionPerformed
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();

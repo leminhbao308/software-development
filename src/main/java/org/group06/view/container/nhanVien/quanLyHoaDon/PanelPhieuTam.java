@@ -92,16 +92,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
         dchTimTheoNgayDat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchTimTheoNgayDat.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchTimTheoNgayDat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchTimTheoNgayDatMouseClicked(evt);
-            }
-        });
-        dchTimTheoNgayDat.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dchTimTheoNgayDatPropertyChange(evt);
-            }
-        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLamMoi.setText("Làm mới");
@@ -127,16 +117,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
         dchTimTheoNgayNhan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchTimTheoNgayNhan.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchTimTheoNgayNhan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchTimTheoNgayNhanMouseClicked(evt);
-            }
-        });
-        dchTimTheoNgayNhan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                dchTimTheoNgayNhanPropertyChange(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
@@ -311,14 +291,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
-    private void dchTimTheoNgayDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchTimTheoNgayDatMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dchTimTheoNgayDatMouseClicked
-
-    private void dchTimTheoNgayDatPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayDatPropertyChange
-
-    }//GEN-LAST:event_dchTimTheoNgayDatPropertyChange
-
     private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
         txtTimTheoTenKH.setText("");
         txtTimTheoTenNV.setText("");
@@ -362,14 +334,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtTimTheoTenNVKeyReleased
-
-    private void dchTimTheoNgayNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchTimTheoNgayNhanMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dchTimTheoNgayNhanMouseClicked
-
-    private void dchTimTheoNgayNhanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayNhanPropertyChange
-
-    }//GEN-LAST:event_dchTimTheoNgayNhanPropertyChange
 
     private void callFrameChiTietHoaDon() {
         FrameChiTietDonDatHang frCTDDH = new FrameChiTietDonDatHang(this.getSelectedPhieuDat(), this);

@@ -185,11 +185,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         rdoNu.setText("Nữ");
         rdoNu.setEnabled(false);
         rdoNu.setPreferredSize(new java.awt.Dimension(98, 30));
-        rdoNu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNuActionPerformed(evt);
-            }
-        });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tglShowMK.setText("Hiện");
@@ -367,10 +362,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNuActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:

@@ -88,11 +88,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
                 txtTenNVFocusLost(evt);
             }
         });
-        txtTenNV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenNVActionPerformed(evt);
-            }
-        });
 
         txtMaNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtMaNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -165,11 +160,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         rdoNu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoNu.setText("Nữ");
         rdoNu.setPreferredSize(new java.awt.Dimension(98, 30));
-        rdoNu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNuActionPerformed(evt);
-            }
-        });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tglShowMK.setText("Hiện");
@@ -345,10 +335,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNuActionPerformed
-
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
         if (btnLuu.getText().equals("Lưu")) {
@@ -417,10 +403,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
-
-    private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void txtTenNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusLost
         if (!checkRegexTenNV()) {
