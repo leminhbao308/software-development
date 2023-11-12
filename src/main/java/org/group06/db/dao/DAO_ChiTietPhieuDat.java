@@ -7,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.group06.db.DatabaseConnect;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
-    private Connection connection;
+    private Connection connection = DatabaseConnect.getConnection();
+    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
+    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
 
     public DAO_ChiTietPhieuDat(Connection connection) {
         this.connection = connection;
@@ -25,8 +28,8 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();
-                chiTietPhieuDat.setPhieuDat(new DAO_PhieuDat(connection).getByID(resultSet.getString("MAPHIEUDAT")));
-                chiTietPhieuDat.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
@@ -46,8 +49,8 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();
-                chiTietPhieuDat.setPhieuDat(new DAO_PhieuDat(connection).getByID(resultSet.getString("MAPHIEUDAT")));
-                chiTietPhieuDat.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);

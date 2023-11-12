@@ -13,16 +13,12 @@ import org.group06.model.entity.PhieuDat;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author Dell
- */
 public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
-    private DAO_NhanVien dao_NhanVien;
-    private DAO_KhuyenMai dao_KhuyenMai;
-    private DAO_KhachHang dao_KhachHang;
-    private Connection connection;
+    private Connection connection = DatabaseConnect.getConnection();
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
+    private DAO_KhuyenMai dao_KhuyenMai = new DAO_KhuyenMai(connection);
+    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
 
     public DAO_PhieuDat(Connection connection) {
         this.connection = connection;
@@ -30,16 +26,11 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     @Override
     public ArrayList<PhieuDat> getAll() {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
         ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
             String sql = "SELECT * FROM PhieuDat";
-            Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 PhieuDat phieuDat = new PhieuDat();
                 String maPD = resultSet.getString("MAPHIEUDAT");
@@ -51,7 +42,6 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
                 dsPD.add(phieuDat);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,19 +49,13 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
     }
 
     public ArrayList<PhieuDat> getByNameKH(String name) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsKH = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH and TENKH = ?";
+            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH AND TENKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về 
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+            while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
                 String maPD = rs.getString("MAPHIEUDAT");
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
@@ -80,28 +64,22 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsPD.add(phieuDat);
+                dsKH.add(phieuDat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsPD;
+        return dsKH;
     }
 
     public ArrayList<PhieuDat> getByNameNV(String name) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsNV = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV and TENNV = ?";
+            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV AND TENNV = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về 
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+            while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
                 String maPD = rs.getString("MAPHIEUDAT");
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
@@ -110,29 +88,22 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsPD.add(phieuDat);
+                dsNV.add(phieuDat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsPD;
+        return dsNV;
     }
 
     public ArrayList<PhieuDat> getByDateDat(String date) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsDateDat = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT *from PhieuDat where NGAYTAO = ?";
-
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+            while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
                 String maHD = rs.getString("MAPHIEUDAT");
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
@@ -141,29 +112,22 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsPD.add(phieuDat);
+                dsDateDat.add(phieuDat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsPD;
+        return dsDateDat;
     }
 
     public ArrayList<PhieuDat> getByDateNhan(String date) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsDateNhan = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT *from PhieuDat where NGAYNHAN = ?";
-
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYNHAN = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+            while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
                 String maHD = rs.getString("MAPHIEUDAT");
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
@@ -172,24 +136,24 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsPD.add(phieuDat);
+                dsDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsPD;
+        return dsDateNhan;
     }
 
+    /**
+     * Tìm theo ngày đặt hàng hoặc ngày nhận hàng.
+     * @param dateDat
+     * @param dateNhan
+     * @return danh sách ngày đặt hàng hoặc ngày nhận hàng
+     */
     public ArrayList<PhieuDat> getByDateDatAndDateNhan(String dateDat, String dateNhan) {
-        dao_NhanVien = new DAO_NhanVien(connection);
-        dao_KhuyenMai = new DAO_KhuyenMai(connection);
-        dao_KhachHang = new DAO_KhachHang(connection);
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsDateDatAndDateNhan = new ArrayList<PhieuDat>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "select *from PhieuDat where NGAYTAO = ? or NgayNhan = ?";
-
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ? OR NgayNhan = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, dateDat);
             statement.setString(2, dateNhan);
@@ -203,12 +167,12 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsPD.add(phieuDat);
+                dsDateDatAndDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsPD;
+        return dsDateDatAndDateNhan;
     }
 
     @Override
@@ -275,9 +239,9 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     public int loadMaPDCount() {
         int countMaPD = 0;
-        String query = "SELECT MAX(MAPHIEUDAT) FROM PhieuDat";
+        String sql = "SELECT MAX(MAPHIEUDAT) FROM PhieuDat";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String maxMaPD = resultSet.getString(1);
@@ -293,5 +257,4 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         }
         return countMaPD;
     }
-
 }

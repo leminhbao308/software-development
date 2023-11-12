@@ -183,17 +183,6 @@ public class TestDAO {
     }
     
     
-    private static void testDAO_HoaDon(Connection connection) {
-        // Tạo đối tượng HoaDonDAO
-        DAO_HoaDon employeeDAO = new DAO_HoaDon(connection);
-
-        // Lấy danh sách tất cả nhân viên
-        List<HoaDon> employees = employeeDAO.getByName("Trương Quốc Bảo");
-        System.out.println("Danh sách hóa đơn:");
-        for (HoaDon employee : employees) {
-            System.out.println(employee);
-        }
-    }
     
     private static void testDAO_ChiTietHoaDon(Connection connection) {
         // Tạo đối tượng HoaDonDAO

@@ -435,9 +435,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         return temp.toString().trim();
     }
 
-
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
@@ -519,7 +517,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         txtTenNV.setText("");
         txtCCCD.setText("");
         txtDiaChi.setText("");
-//        pwdMK.setText("");
         rdoNam.setSelected(true);
         rdoNu.setSelected(false);
         txtSDT.setText("");

@@ -100,8 +100,8 @@ public class NhanVien {
         this.chucVu = chucVu;
     }
     
-    public NhanVien(String maNV) {
-        this.maNV = maNV;
+    public NhanVien(String tenNV) {
+        this.tenNV = tenNV;
     }
     
     @Override

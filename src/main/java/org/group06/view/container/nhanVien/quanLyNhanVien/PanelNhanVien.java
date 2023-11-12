@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PanelNhanVien extends javax.swing.JPanel {
 
     private Connection connection = DatabaseConnect.getConnection();
-    private DAO_NhanVien dao_NhanVien;
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
     public int soMaNV;
 
     /**
@@ -153,11 +153,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cmbLocGioiTinh.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbLocGioiTinhItemStateChanged(evt);
-            }
-        });
-        cmbLocGioiTinh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbLocGioiTinhMouseClicked(evt);
             }
         });
 
@@ -299,7 +294,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
         callFrameThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -318,7 +312,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getByName(tenNV);
+                    ArrayList<NhanVien> dsNV = dao_NhanVien.getByName(tenNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     for (NhanVien nv : dsNV) {
@@ -367,7 +361,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
-                    NhanVien nhanVien = new DAO_NhanVien(connection).getByID(maNV);
+                    NhanVien nhanVien = dao_NhanVien.getByID(maNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     if (nhanVien.isGioiTinh()) {
@@ -391,10 +385,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtTimTheoMaKeyReleased
-
-    private void cmbLocGioiTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbLocGioiTinhMouseClicked
 
     private void cmbLocGioiTinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhItemStateChanged
         locTheoGioiTinh();
@@ -422,7 +412,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void getDataLocTheoPhai(String gt, int phai) {
         String trangThai;
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoPhai(phai);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoPhai(phai);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -452,7 +442,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void getDataLocTheoTrangThai(String trangThai, int tt) {
         String gt;
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoTrangThai(tt);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoTrangThai(tt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -498,7 +488,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void getDatalocTheoTrangThaiVaGioiTinh(String trangThai, int tt, String gioiTinh, int gt) {
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoTrangThaiVaGioiTinh(tt, gt);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoTrangThaiVaGioiTinh(tt, gt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -555,7 +545,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     public void loadDataTable() {
         String gioiTinh = "", trangThai = "";
         tblNhanVien.getColumnModel().getColumn(2).setCellRenderer(new PasswordRenderer());
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getAll();
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -575,5 +565,4 @@ public class PanelNhanVien extends javax.swing.JPanel {
             modelNV.addRow(data);
         }
     }
-
 }

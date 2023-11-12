@@ -336,7 +336,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
         if (btnLuu.getText().equals("Lưu")) {
             if (txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("")
                     || txtCCCD.getText().equals("") || pwdMK.getPassword().equals("")) {
@@ -365,7 +364,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
     private void themNV() {
         boolean gt = true, trangThai = true;
-
         String maNV = txtMaNV.getText();
         String tenNV = checkKiTu(txtTenNV.getText());
         String password = new String(pwdMK.getPassword()).trim();
@@ -400,7 +398,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     }
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
@@ -494,6 +491,17 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         }
     }
 
+    private void xoaTrang() {
+        txtTenNV.setText("");
+        txtCCCD.setText("");
+        txtDiaChi.setText("");
+        pwdMK.setText("");
+        rdoNam.setSelected(true);
+        rdoNu.setSelected(false);
+        txtSDT.setText("");
+        cmbChucVu.setSelectedIndex(0);
+        txtTenNV.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
@@ -523,16 +531,4 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
-
-    private void xoaTrang() {
-        txtTenNV.setText("");
-        txtCCCD.setText("");
-        txtDiaChi.setText("");
-        pwdMK.setText("");
-        rdoNam.setSelected(true);
-        rdoNu.setSelected(false);
-        txtSDT.setText("");
-        cmbChucVu.setSelectedIndex(0);
-        txtTenNV.requestFocus();
-    }
 }

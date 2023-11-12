@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DAO_KhachHang implements DAO_Interface<KhachHang> {
+
     private final Connection connection;
 
     public DAO_KhachHang(Connection connection) {
@@ -73,7 +74,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
 
     @Override
     public boolean update(KhachHang khachHang) {
-            try {
+        try {
             String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ? WHERE MAKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khachHang.getTenKH());
@@ -86,7 +87,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             return false;
         }
     }
-    
+
     public ArrayList<KhachHang> getByName(String name) {
         ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
         String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
@@ -102,11 +103,11 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 dsKhachHang.add(khachHang);
             }
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return dsKhachHang;
     }
-    
+
     public KhachHang getByMAKH(String maKH) {
         KhachHang khachHang = null;
         String sql = "SELECT * FROM KhachHang WHERE MAKH = ?";
@@ -125,11 +126,11 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         }
         return khachHang;
     }
-    
+
     public int loadMaKHCount(int countMaKH) {
-        String query = "SELECT MAX(MAKH) FROM KhachHang";
+        String sql = "SELECT MAX(MAKH) FROM KhachHang";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String maxMaKH = resultSet.getString(1);

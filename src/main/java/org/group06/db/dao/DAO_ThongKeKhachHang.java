@@ -9,19 +9,17 @@ import java.util.ArrayList;
 public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
 
     private Connection connection = DatabaseConnect.getConnection();
-//    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
 
     public DAO_ThongKeKhachHang(Connection connection) {
         this.connection = connection;
     }
 
-    @Override
-    public ArrayList<HoaDon> getAll() {
-        return null;
-    }
-
-// Tính theo tất cả các khoảng thời gian
-    //Tổng khách hàng theo tất cả thời gian
+    /**
+     * Tìm theo tất cả các khoảng thời gian bằng cách sử dụng câu lệnh SQL
+     *
+     * @return Danh sách khách hàng theo tất cả khoảng thời gian
+     */
+    // Tổng tất cả khách hàng
     public ArrayList<HoaDon> getTongKH() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -38,7 +36,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết theo tất cả thời gian
+    // Tổng khách hàng thân thiết, nếu trùng sẽ không tính
     public ArrayList<HoaDon> getTongKHTT() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -55,7 +53,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai theo tất cả thời gian
+    //Tổng khách vãng lai
     public ArrayList<HoaDon> getTongKVL() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -72,7 +70,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng mua nhiều sản phẩm nhất
+    // Danh sách khách hàng mua sản phẩm, sort theo tổng sản phẩm đã mua
     public ArrayList<Object[]> getAllKhachHangTheoTongSP() {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -94,7 +92,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-    // Danh sách khách hàng chi tiêu nhất
+    // Danh sách khách hàng chi tiêu, sort theo tổng chi tiêu của khách hàng
     public ArrayList<Object[]> getAllKhachHangTheoTongChi() {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -107,7 +105,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"),resultSet.getDouble("TongChiTieu")};
+                Object[] data = {resultSet.getString("TENKH"), resultSet.getString("SDT"), resultSet.getDouble("TongChiTieu")};
                 rows.add(data);
             }
         } catch (SQLException e) {
@@ -116,8 +114,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-// Tính theo khoảng thời gian (Ngày, tháng, năm)    
-    //Tổng khách hàng theo khoảng thời gian (Ngày, tháng, năm)    
+    /**
+     * Tìm theo ngày tháng năm được chọn bằng cách sử dụng câu lệnh SQL
+     *
+     * @return Danh sách khách hàng theo ngày tháng năm được chọn (chỉ trong 1
+     * ngày)
+     */
+    //Tổng khách hàng trong ngày
     public ArrayList<HoaDon> getTongKH_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -135,7 +138,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết theo khoảng thời gian (Ngày, tháng, năm)    
+    //Tổng khách hàng thân thiết trong ngày
     public ArrayList<HoaDon> getTongKHTT_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -153,7 +156,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai theo khoảng thời gian (Ngày, tháng, năm)    
+    //Tổng khách vãng lai trong ngày  
     public ArrayList<HoaDon> getTongKVL_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -171,7 +174,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng mua nhiều sản phẩm nhất theo khoảng thời gian (Ngày, tháng, năm)    
+    // Danh sách khách hàng mua sản phẩm trong ngày   
     public ArrayList<Object[]> getAllKhachHangTheoTongSP_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -195,7 +198,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-    // Danh sách khách hàng chi tiêu nhất theo khoảng thời gian (Ngày, tháng, năm)    
+    // Danh sách khách hàng chi tiêu trong ngày
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -219,8 +222,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-// Tính theo khoảng thời gian (Tháng)    
-    //Tổng khách hàng theo khoảng thời gian (Tháng)    
+    /**
+     * Tìm theo tháng đã chọn bằng cách sử dụng câu lệnh SQL
+     *
+     * @return Danh sách khách hàng trong tháng
+     */
+    //Tổng khách hàng trong tháng
     public ArrayList<HoaDon> getTongKH_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -239,7 +246,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết theo khoảng thời gian (Tháng)    
+    //Tổng khách hàng thân thiết trong tháng
     public ArrayList<HoaDon> getTongKHTT_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -258,7 +265,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai theo khoảng thời gian (Tháng)    
+    //Tổng khách vãng lai trong tháng
     public ArrayList<HoaDon> getTongKVL_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -277,7 +284,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng mua nhiều sản phẩm nhất theo khoảng thời gian (Tháng)    
+    // Danh sách khách hàng mua sản phẩm trong tháng
     public ArrayList<Object[]> getAllKhachHangTheoTongSP_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -302,7 +309,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-    // Danh sách khách hàng chi tiêu nhất theo khoảng thời gian (Tháng)    
+    // Danh sách khách hàng chi tiêu trong tháng  
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -327,8 +334,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-// Tính theo khoảng thời gian (Năm)    
-    //Tổng khách hàng theo khoảng thời gian (Năm)    
+    /**
+     * Tìm theo năm đã chọn bằng cách sử dụng câu lệnh SQL
+     *
+     * @return Danh sách khách hàng trong năm
+     */
+    //Tổng khách hàng trong năm
     public ArrayList<HoaDon> getTongKH_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -346,7 +357,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết theo khoảng thời gian (Năm)    
+    //Tổng khách hàng thân thiết trong năm
     public ArrayList<HoaDon> getTongKHTT_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -364,7 +375,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai theo khoảng thời gian (Năm)    
+    //Tổng khách vãng lai trong năm
     public ArrayList<HoaDon> getTongKVL_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -382,7 +393,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng mua nhiều sản phẩm nhất theo khoảng thời gian (Năm)    
+    // Danh sách khách hàng mua sản phẩm trong năm
     public ArrayList<Object[]> getAllKhachHangTheoTongSP_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -406,7 +417,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-    // Danh sách khách hàng chi tiêu nhất theo khoảng thời gian (Năm)    
+    // Danh sách khách hàng chi tiêu trong năm
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -430,8 +441,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-// Tính theo giữa 2 ngày
-    //Tổng khách hàng theo khoảng thời gian
+    /**
+     * Tìm theo khoảng thời gian đã chọn bằng cách sử dụng câu lệnh SQL
+     *
+     * @return Danh sách khách hàng trong khoảng thời gian
+     */
+    //Tổng khách hàng
     public ArrayList<HoaDon> getTongKH_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -450,7 +465,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết theo khoảng thời gian
+    //Tổng khách hàng thân thiết
     public ArrayList<HoaDon> getTongKHTT_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -469,7 +484,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai theo khoảng thời gian
+    //Tổng khách vãng lai
     public ArrayList<HoaDon> getTongKVL_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -488,7 +503,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng mua nhiều sản phẩm nhất theo khoảng thời gian
+    // Danh sách khách hàng mua sản phẩm 
     public ArrayList<Object[]> getAllKhachHangTheoTongSP_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -513,7 +528,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return rows;
     }
 
-    // Danh sách khách hàng chi tiêu nhất theo khoảng thời gian
+    // Danh sách khách hàng chi tiêu
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -539,25 +554,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     @Override
+    public ArrayList<HoaDon> getAll() {
+        return null;
+    }
+
+    @Override
     public HoaDon getByID(String id) {
-        HoaDon hoaDon = null;
-        try {
-            String sql = "SELECT * FROM HoaDon WHERE MAHD = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                hoaDon = new HoaDon();
-                hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
-                hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
-                hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
-                hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
-                hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return hoaDon;
+        return null;
     }
 
     @Override

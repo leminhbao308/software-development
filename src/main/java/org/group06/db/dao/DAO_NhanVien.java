@@ -12,13 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Le Minh Bao
- */
-public class DAO_NhanVien implements DAO_Interface<NhanVien>{
+public class DAO_NhanVien implements DAO_Interface<NhanVien> {
+
     private final Connection connection;
-    
+
     public DAO_NhanVien(Connection connection) {
         this.connection = connection;
     }
@@ -59,15 +56,15 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 nhanVien = new NhanVien();
-                nhanVien.setMaNV(result.getString("MANV").trim());
+                nhanVien.setMaNV(result.getString("MANV"));
                 nhanVien.setTenNV(result.getString("TENNV"));
-                nhanVien.setMatKhau(result.getString("MATKHAU").trim());
+                nhanVien.setMatKhau(result.getString("MATKHAU"));
                 nhanVien.setGioiTinh(result.getBoolean("GIOITINH"));
-                nhanVien.setCccd(result.getString("CCCD").trim());
-                nhanVien.setDiaChi(result.getString("DIACHI").trim());
-                nhanVien.setSoDienThoai(result.getString("SDT").trim());
+                nhanVien.setCccd(result.getString("CCCD"));
+                nhanVien.setDiaChi(result.getString("DIACHI"));
+                nhanVien.setSoDienThoai(result.getString("SDT"));
                 nhanVien.setTrangThai(result.getBoolean("TRANGTHAI"));
-                nhanVien.setChucVu(result.getString("VITRI").trim());
+                nhanVien.setChucVu(result.getString("VITRI"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +96,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
 
     @Override
     public boolean update(NhanVien nhanVien) {
-         try {
+        try {
             String sql = "UPDATE NhanVien SET TENNV = ?, GIOITINH = ?, CCCD = ?, DIACHI = ?, SDT = ?, TRANGTHAI = ?, VITRI = ? WHERE MANV = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, nhanVien.getTenNV());
@@ -122,13 +119,13 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
     public boolean delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public ArrayList<NhanVien> getLocTheoPhai(int gioiTinh) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE GIOITINH = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,gioiTinh);
+            statement.setInt(1, gioiTinh);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanVien nhanVien = new NhanVien();
@@ -144,17 +141,17 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 dsNhanVien.add(nhanVien);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return dsNhanVien;
     }
-    
+
     public ArrayList<NhanVien> getLocTheoTrangThai(int trangThai) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,trangThai);
+            statement.setInt(1, trangThai);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanVien nhanVien = new NhanVien();
@@ -170,18 +167,18 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 dsNhanVien.add(nhanVien);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return dsNhanVien;
     }
-    
+
     public ArrayList<NhanVien> getLocTheoTrangThaiVaGioiTinh(int trangThai, int gioiTinh) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ? AND GIOITINH = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,trangThai);
-            statement.setInt(2,gioiTinh);
+            statement.setInt(1, trangThai);
+            statement.setInt(2, gioiTinh);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanVien nhanVien = new NhanVien();
@@ -197,18 +194,18 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 dsNhanVien.add(nhanVien);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return dsNhanVien;
     }
-    
+
     public ArrayList<NhanVien> getByName(String name) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TENNV = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,name);
+            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanVien nhanVien = new NhanVien();
@@ -224,15 +221,15 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
                 dsNhanVien.add(nhanVien);
             }
         } catch (SQLException e) {
-             e.printStackTrace();
+            e.printStackTrace();
         }
         return dsNhanVien;
     }
-    
+
     public int loadMaNVCount(int countMaNV) {
-        String query = "SELECT MAX(MANV) FROM NhanVien";
+        String sql = "SELECT MAX(MANV) FROM NhanVien";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String maxMaNV = resultSet.getString(1);
@@ -248,7 +245,7 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien>{
         }
         return countMaNV;
     }
-    
+
     public boolean updateMatKhau(String maNV, String matKhau) {
         try {
             String sql = "UPDATE NhanVien SET MATKHAU = ? WHERE MANV = ?";

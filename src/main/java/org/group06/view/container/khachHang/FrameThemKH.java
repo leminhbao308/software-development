@@ -121,11 +121,6 @@ public class FrameThemKH extends javax.swing.JFrame {
         txtMaKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaKH.setEnabled(false);
         txtMaKH.setPreferredSize(new java.awt.Dimension(71, 30));
-        txtMaKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaKHActionPerformed(evt);
-            }
-        });
 
         lblSDT.setFont(FontConstant.FONT_LABEL);
         lblSDT.setText("Số điện thoại:");
@@ -253,10 +248,6 @@ public class FrameThemKH extends javax.swing.JFrame {
         // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
-
-    private void txtMaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaKHActionPerformed
 
     private void txtTenKHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenKHFocusLost
         if (!checkRegexTenKH()) {

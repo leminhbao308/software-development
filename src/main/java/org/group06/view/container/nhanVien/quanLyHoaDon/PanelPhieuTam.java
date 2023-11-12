@@ -40,8 +40,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         dchTimTheoNgayDat.setLocale(new Locale("vi", "VN"));
         dchTimTheoNgayNhan.setLocale(new Locale("vi", "VN"));
         dsPD = dao_PhieuDat.getAll();
-        checkNgayDat();
-        checkNgayNhan();
         loadDataTable();
     }
 
@@ -92,12 +90,17 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
         dchTimTheoNgayDat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchTimTheoNgayDat.setPreferredSize(new java.awt.Dimension(64, 29));
+        dchTimTheoNgayDat.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dchTimTheoNgayDatPropertyChange(evt);
+            }
+        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLamMoi.setText("Làm mới");
-        btnLamMoi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLamMoiMouseClicked(evt);
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
             }
         });
 
@@ -117,6 +120,11 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
         dchTimTheoNgayNhan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         dchTimTheoNgayNhan.setPreferredSize(new java.awt.Dimension(64, 29));
+        dchTimTheoNgayNhan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dchTimTheoNgayNhanPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
@@ -291,20 +299,12 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
-    private void btnLamMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLamMoiMouseClicked
-        txtTimTheoTenKH.setText("");
-        txtTimTheoTenNV.setText("");
-        dchTimTheoNgayDat.setDate(null);
-        dchTimTheoNgayNhan.setDate(null);
-        loadDataTable();
-    }//GEN-LAST:event_btnLamMoiMouseClicked
-
     private void txtTimTheoTenNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenNVKeyReleased
         String tenNV = txtTimTheoTenNV.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByNameNV(tenNV);
+                    ArrayList<PhieuDat> dsPD = dao_PhieuDat.getByNameNV(tenNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
@@ -348,69 +348,70 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblPhieuDatMouseClicked
 
-    private void checkNgayDat() {
-        dchTimTheoNgayDat.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                if ("date".equals(evt.getPropertyName())) {
-                    Date ngayDat = (Date) evt.getNewValue();
-                    Date ngayNhan = dchTimTheoNgayNhan.getDate();
-                    java.util.Date dateNow = new java.util.Date();
-                    if (ngayDat != null) {
-                        if (ngayDat.after(dateNow)) {
-                            JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
+    private void dchTimTheoNgayDatPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayDatPropertyChange
+        if (evt.getPropertyName().equals("date")) {
+            Date ngayDat = (Date) evt.getNewValue();
+            Date ngayNhan = dchTimTheoNgayNhan.getDate();
+            java.util.Date dateNow = new java.util.Date();
+            if (ngayDat != null) {
+                if (ngayDat.after(dateNow)) {
+                    JOptionPane.showMessageDialog(null, "Chọn ngày không hợp lệ");
+                    resetDay();
+                } else {
+                    if (ngayNhan == null) {
+                        loadDataNgayDat(ngayDat);
+                        txtTimTheoTenKH.setText("");
+                        txtTimTheoTenNV.setText("");
+                    } else if (ngayNhan.before(ngayDat)) {
+                        JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
+                        resetDay();
+                    } else {
+                        loadDataTheo2Ngay(ngayDat, ngayNhan);
+                        txtTimTheoTenKH.setText("");
+                        txtTimTheoTenNV.setText("");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_dchTimTheoNgayDatPropertyChange
+
+    private void dchTimTheoNgayNhanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayNhanPropertyChange
+        if (evt.getPropertyName().equals("date")) {
+            if ("date".equals(evt.getPropertyName())) {
+                Date ngayNhan = (Date) evt.getNewValue();
+                Date ngayDat = dchTimTheoNgayDat.getDate();
+                if (ngayNhan != null) {
+                    if (ngayDat == null) {
+                        loadDataNgayNhan(ngayNhan);
+                        txtTimTheoTenKH.setText("");
+                        txtTimTheoTenNV.setText("");
+                    } else {
+                        if (ngayDat.after(ngayNhan)) {
+                            JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
                             resetDay();
                         } else {
-                            if (ngayNhan == null) {
-                                loadDataNgayDat(ngayDat);
-                                txtTimTheoTenKH.setText("");
-                                txtTimTheoTenNV.setText("");
-                            } else if (ngayNhan.before(ngayDat)) {
-                                JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
-                                resetDay();
-                            } else {
-                                loadDataTheo2Ngay(ngayDat, ngayNhan);
-                                txtTimTheoTenKH.setText("");
-                                txtTimTheoTenNV.setText("");
-                            }
+                            loadDataTheo2Ngay(ngayDat, ngayNhan);
+                            txtTimTheoTenKH.setText("");
+                            txtTimTheoTenNV.setText("");
                         }
                     }
                 }
             }
         }
-        );
-    }
+    }//GEN-LAST:event_dchTimTheoNgayNhanPropertyChange
 
-    private void checkNgayNhan() {
-        dchTimTheoNgayNhan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                if ("date".equals(evt.getPropertyName())) {
-                    Date ngayNhan = (Date) evt.getNewValue();
-                    Date ngayDat = dchTimTheoNgayDat.getDate();
-                    if (ngayNhan != null) {
-                        if (ngayDat == null) {
-                            loadDataNgayNhan(ngayNhan);
-                            txtTimTheoTenKH.setText("");
-                            txtTimTheoTenNV.setText("");
-                        } else {
-                            if (ngayDat.after(ngayNhan)) {
-                                JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
-                                resetDay();
-                            } else {
-                                loadDataTheo2Ngay(ngayDat, ngayNhan);
-                                txtTimTheoTenKH.setText("");
-                                txtTimTheoTenNV.setText("");
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        txtTimTheoTenKH.setText("");
+        txtTimTheoTenNV.setText("");
+        dchTimTheoNgayDat.setDate(null);
+        dchTimTheoNgayNhan.setDate(null);
+        loadDataTable();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void loadDataNgayDat(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayDat = sdf.format(formatDay);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateDat(formatDayDat);
+        ArrayList<PhieuDat> dsPD = dao_PhieuDat.getByDateDat(formatDayDat);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -433,7 +434,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private void loadDataNgayNhan(Date formatDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayNhan = sdf.format(formatDay);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateNhan(formatDayNhan);
+        ArrayList<PhieuDat> dsPD = dao_PhieuDat.getByDateNhan(formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -457,7 +458,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDayDat = sdf.format(day1);
         String formatDayNhan = sdf.format(day2);
-        ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByDateDatAndDateNhan(formatDayDat, formatDayNhan);
+        ArrayList<PhieuDat> dsPD = dao_PhieuDat.getByDateDatAndDateNhan(formatDayDat, formatDayNhan);
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
         modelPD.setRowCount(0);
         for (PhieuDat pd : dsPD) {
@@ -517,14 +518,14 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         NhanVien nv = null;
         KhuyenMai km = null;
 
-        for(PhieuDat pd : dsPD) {
-            if(pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
+        for (PhieuDat pd : dsPD) {
+            if (pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
                 kh = pd.getKhachHang();
                 nv = pd.getNhanVien();
                 km = pd.getKhuyenMai();
             }
         }
-        
+
         if (tblPhieuDat.getSelectedRow() == -1) {
             return null;
         } else {

@@ -94,34 +94,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return false;
     }
 
-    public ArrayList<HoaDon> getByName(String name) {
-        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
-        try {
-            String sql = "SELECT HoaDon.MAHD,NGAYTAO,MAKM,HoaDon.MAKH,MANV FROM HoaDon, KhachHang WHERE HoaDon.MAKH = KhachHang.MAKH and TENKH = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                HoaDon hoaDon = new HoaDon();
-                String maHD = rs.getString("MAHD");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
-                dsHD.add(hoaDon);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsHD;
-    }
-
     public ArrayList<HoaDon> getByDate(String date) {
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
-            String sql = "SELECT *from HoaDon where NGAYTAO = ?";
+            String sql = "SELECT *FROM HoaDon WHERE NGAYTAO = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet rs = statement.executeQuery();
@@ -135,7 +111,6 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
                 hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
                 dsHD.add(hoaDon);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,9 +119,9 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
     public int loadMaHDCount() {
         int countMaHD = 1;
-        String query = "SELECT MAX(MAHD) FROM HoaDon";
+        String sql = "SELECT MAX(MAHD) FROM HoaDon";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String maxMaHD = resultSet.getString(1);

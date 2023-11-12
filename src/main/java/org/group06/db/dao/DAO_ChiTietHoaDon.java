@@ -7,14 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.group06.db.DatabaseConnect;
 
-/**
- *
- * @author Le Minh Bao
- */
 public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
 
-    private final Connection connection;
+    private Connection connection = DatabaseConnect.getConnection();
+    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
 
     public DAO_ChiTietHoaDon(Connection connection) {
         this.connection = connection;
@@ -29,8 +28,8 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
-                chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
-                chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietHoaDon.setHoaDon(dao_HoaDon.getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietHoaDon.add(chiTietHoaDon);
@@ -50,8 +49,8 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
-                chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
-                chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietHoaDon.setHoaDon(dao_HoaDon.getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietHoaDon.add(chiTietHoaDon);
@@ -63,14 +62,14 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
     }
 
     @Override
-    public boolean add(ChiTietHoaDon t) {
+    public boolean add(ChiTietHoaDon cthd) {
         try {
             String sql = "INSERT INTO ChiTietHoaDon (MAHD, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, t.getHoaDon().getMaHoaDon());
-            statement.setString(2, t.getQuanAo().getMaQA());
-            statement.setInt(3, t.getSoLuong());
-            statement.setDouble(4, t.getGiaBan());
+            statement.setString(1, cthd.getHoaDon().getMaHoaDon());
+            statement.setString(2, cthd.getQuanAo().getMaQA());
+            statement.setInt(3, cthd.getSoLuong());
+            statement.setDouble(4, cthd.getGiaBan());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
