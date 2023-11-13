@@ -6,6 +6,8 @@ import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.*;
 import org.group06.utils.DateStandard;
 import org.group06.utils.NumberStandard;
+import org.group06.view.components.charts.LineChart;
+import org.group06.view.components.charts.data.LineChartData;
 import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +21,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 
 /**
@@ -39,7 +42,6 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         dsHoaDon = dao_HoaDon.getAll();
         dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
         initComponents();
-        loadChart();
     }
 
     @SuppressWarnings("unchecked")
@@ -81,7 +83,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         tblTopDoanhThu = new javax.swing.JTable();
         scrTopLoiNhuan = new javax.swing.JScrollPane();
         tblTopLoiNhuan = new javax.swing.JTable();
-        pnlBieuDo = new javax.swing.JPanel();
+        pnlBieuDo = loadChart();
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -569,7 +571,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
         tabXemThongTin.addTab("Bảng Chi Tiết", pnlBangChiTiet);
 
-        pnlBieuDo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlBieuDo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlBieuDoLayout = new javax.swing.GroupLayout(pnlBieuDo);
         pnlBieuDo.setLayout(pnlBieuDoLayout);
@@ -882,8 +884,8 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
         for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
             tongQA += cthd.getSoLuong();
-            doanhThu += cthd.getSoLuong() * cthd.getGiaBan();
-            loiNhuan += (cthd.getSoLuong() * cthd.getGiaBan()) - cthd.getQuanAo().getGiaNhap();
+            doanhThu += cthd.getGiaBan();
+            loiNhuan += cthd.getGiaBan() - (cthd.getSoLuong() * cthd.getQuanAo().getGiaNhap());
         }
         loadTongQuanDoanhThu(tongHD, tongQA, doanhThu, loiNhuan);
     }
@@ -928,8 +930,31 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
     }
 
-    private void loadChart() {
-        
+    private LineChart loadChart() {
+        LinkedHashMap<String, Double> data = new LinkedHashMap<>();
+        for (HoaDon hoaDon : dao_HoaDon.getAll()) {
+            LocalDate localDate = hoaDon.getNgayTao().toLocalDate();
+            String key = localDate.getMonthValue() + "/" + localDate.getYear();
+            double value = 0.0f;
+            for (ChiTietHoaDon cthd : dao_ChiTietHoaDon.getAll()) {
+                if (hoaDon.getMaHoaDon().equals(cthd.getHoaDon().getMaHoaDon())) {
+                    value += cthd.getGiaBan();
+                }
+            }
+            if (data.containsKey(key)) {
+                data.replace(key, data.get(key) + value);
+            } else {
+                data.put(key, value);
+            }
+        }
+        LineChartData lineChartData = new LineChartData("", data);
+        LineChart lineChart = null;
+        try {
+            lineChart = new LineChart("Thống Kê Doanh Thu Theo Tháng", "Doanh Thu (VND)", lineChartData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return lineChart;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">

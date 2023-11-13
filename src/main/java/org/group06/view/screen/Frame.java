@@ -2,7 +2,6 @@ package org.group06.view.screen;
 
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
-import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.container.khachHang.PanelKhachHang;
 import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -10,6 +9,7 @@ import org.group06.view.container.nhanVien.quanLyHoaDon.PanelPhieuTam;
 import org.group06.view.container.nhanVien.quanLyNhanVien.PanelNhanVien;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeDoanhThu;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeKhachHang;
+import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
 import org.group06.view.container.quanAo.PanelKhuyenMai;
 import org.group06.view.container.quanAo.PanelLoaiQuanAo;
 import org.group06.view.container.quanAo.PanelNhaCungCap;
@@ -18,7 +18,6 @@ import org.group06.view.container.taiKhoan.FrameDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
-import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
 
 /**
  * @author Le Minh Bao
