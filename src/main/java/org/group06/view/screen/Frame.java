@@ -78,6 +78,11 @@ public class Frame extends JFrame {
 
         initMenu();
         addActionMenu();
+
+        if (nv.getChucVu().equals(NhanVien.NVBH)) {
+            mniQuanLyNhanVien.setVisible(false);
+            mnQuanAo.setVisible(false);
+        }
     }
 
     private void addActionMenu() {
