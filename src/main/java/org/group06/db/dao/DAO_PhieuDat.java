@@ -26,7 +26,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     @Override
     public ArrayList<PhieuDat> getAll() {
-        ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsPD = new ArrayList<>();
         try {
             String sql = "SELECT * FROM PhieuDat";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -39,17 +39,18 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(resultSet.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
+                int trangThai = resultSet.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
                 dsPD.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt");
         }
         return dsPD;
     }
 
     public ArrayList<PhieuDat> getByNameKH(String name) {
-        ArrayList<PhieuDat> dsKH = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsKH = new ArrayList<>();
         try {
             String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH AND TENKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -63,17 +64,18 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 Date ngayNhan = rs.getDate("NGAYNHAN");
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
+                int trangThai = rs.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
                 dsKH.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo tên khách hàng");
         }
         return dsKH;
     }
 
     public ArrayList<PhieuDat> getByNameNV(String name) {
-        ArrayList<PhieuDat> dsNV = new ArrayList<PhieuDat>();
+        ArrayList<PhieuDat> dsPD = new ArrayList<>();
         try {
             String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV AND TENNV = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -87,13 +89,14 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 Date ngayNhan = rs.getDate("NGAYNHAN");
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
-                dsNV.add(phieuDat);
+                int trangThai = rs.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                dsPD.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo tên nhân viên");
         }
-        return dsNV;
+        return dsPD;
     }
 
     public ArrayList<PhieuDat> getByDateDat(String date) {
@@ -111,11 +114,12 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 Date ngayNhan = rs.getDate("NGAYNHAN");
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
+                int trangThai = rs.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
                 dsDateDat.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng");
         }
         return dsDateDat;
     }
@@ -135,11 +139,12 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 Date ngayNhan = rs.getDate("NGAYNHAN");
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
+                int trangThai = rs.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
                 dsDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày nhận hàng");
         }
         return dsDateNhan;
     }
@@ -166,11 +171,12 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 Date ngayNhan = rs.getDate("NGAYNHAN");
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai);
+                int trangThai = rs.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
                 dsDateDatAndDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng hoặc ngày nhận hàng");
         }
         return dsDateDatAndDateNhan;
     }
@@ -191,9 +197,10 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 phieuDat.setNgayNhan(resultSet.getDate("NGAYNHAN"));
                 phieuDat.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
                 phieuDat.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
+                phieuDat.setTrangThai(resultSet.getInt("TRANGTHAI"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy phiếu đặt theo mã phiếu đặt");
         }
         return phieuDat;
     }
@@ -201,7 +208,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
     @Override
     public boolean add(PhieuDat phieuDat) {
         boolean success = false;
-        String sql = "INSERT INTO PhieuDat (MAPHIEUDAT, NGAYTAO, NGAYNHAN, MAKH, MANV, MAKM) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PhieuDat (MAPHIEUDAT, NGAYTAO, NGAYNHAN, MAKH, MANV, MAKM, TRANGTHAI) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, phieuDat.getMaPhieuDat());
@@ -210,9 +217,10 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
             statement.setString(4, phieuDat.getKhachHang().getMaKhachHang());
             statement.setString(5, phieuDat.getNhanVien().getMaNV());
             statement.setString(6, phieuDat.getKhuyenMai() == null ? null : phieuDat.getKhuyenMai().getMaKhuyenMai());
+            statement.setInt(7, phieuDat.getTrangThai());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi thêm phiếu đặt");
         }
         return success;
     }
@@ -232,7 +240,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi xóa phiếu đặt");
             return false;
         }
     }
@@ -253,7 +261,6 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
             statement.close();
         } catch (SQLException e) {
             System.out.println("Lỗi khi tải giá trị countMaPD từ cơ sở dữ liệu.");
-            e.printStackTrace();
         }
         return countMaPD;
     }
