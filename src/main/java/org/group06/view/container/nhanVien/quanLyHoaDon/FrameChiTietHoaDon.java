@@ -5,26 +5,25 @@
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
 import com.itextpdf.text.DocumentException;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.FontConstant;
+import org.group06.utils.NumberStandard;
+import org.group06.utils.PDF_Creator;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import org.group06.utils.PDF_Creator;
 
 /**
- *
  * @author Dell
  */
 public class FrameChiTietHoaDon extends javax.swing.JFrame {
@@ -109,7 +108,7 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
         txtKH.setBackground(new java.awt.Color(242, 242, 242));
         txtKH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtKH.setText(hoaDon.getKhachHang().getTenKH().toString());
+        txtKH.setText(hoaDon.getKhachHang() != null ? hoaDon.getKhachHang().getTenKH().toString() : "Khách vãng lai");
         txtKH.setBorder(null);
         txtKH.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtKH.setEnabled(false);
@@ -125,7 +124,7 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
 
         txtTenCTKM.setBackground(new java.awt.Color(242, 242, 242));
         txtTenCTKM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTenCTKM.setText(hoaDon.getKhuyenMai().getTenCTKM().toString());
+        txtTenCTKM.setText(hoaDon.getKhuyenMai() != null ? (hoaDon.getKhuyenMai().getTenCTKM() + " (" + NumberStandard.formatPercent(hoaDon.getKhuyenMai().getMucGiamGia()) + ")") : "");
         txtTenCTKM.setBorder(null);
         txtTenCTKM.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenCTKM.setEnabled(false);
@@ -305,14 +304,16 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
                     try {
                         PDF_Creator.createInvoice(hoaDon, filePath);
                     } catch (DocumentException | IOException e1) {
-                        e1.printStackTrace();
+                        System.out.println("Lỗi khi lưu file!");
+                        JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                     }
                     // Mở file vừa lưu
                     if (Desktop.isDesktopSupported()) {
                         try {
                             Desktop.getDesktop().open(file);
                         } catch (IOException e1) {
-                            e1.printStackTrace();
+                            System.out.println("Lỗi khi mở file!");
+                            JOptionPane.showMessageDialog(this, "Lỗi khi mở file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -321,14 +322,16 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
                 try {
                     PDF_Creator.createInvoice(hoaDon, filePath);
                 } catch (DocumentException | IOException e1) {
-                    e1.printStackTrace();
+                    System.out.println("Lỗi khi lưu file!");
+                    JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                 }
                 // Mở file vừa lưu
                 if (Desktop.isDesktopSupported()) {
                     try {
                         Desktop.getDesktop().open(file);
                     } catch (IOException e1) {
-                        e1.printStackTrace();
+                        System.out.println("Lỗi khi mở file!");
+                        JOptionPane.showMessageDialog(this, "Lỗi khi mở file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -368,7 +371,7 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
             String tenQA = cthd.getQuanAo().getTenQA();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
-            double tinhThanhTien = cthd.getGiaBan();
+            double tinhThanhTien = cthd.getGiaBan() * soLuong;
             String thanhTien = dfMoney.format(tinhThanhTien);
 
             tinhTongThanhTien += tinhThanhTien;

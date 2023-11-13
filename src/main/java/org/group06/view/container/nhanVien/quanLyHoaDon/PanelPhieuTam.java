@@ -7,7 +7,8 @@ package org.group06.view.container.nhanVien.quanLyHoaDon;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_PhieuDat;
-import org.group06.model.entity.*;
+import org.group06.model.entity.ChiTietPhieuDat;
+import org.group06.model.entity.PhieuDat;
 import org.group06.utils.DateStandard;
 
 import javax.swing.*;
@@ -503,33 +504,20 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private PhieuDat getSelectedPhieuDat() {
-        String hd = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString();
+        String maPD = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString();
 
-        String dateDat = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 1).toString();
-        String dateNhan = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 2).toString();
-
-        java.sql.Date sqlDateDat = null, sqlDateNhan = null;
-        java.util.Date utilDateDat = DateStandard.parseToDate(dateDat);
-        java.util.Date utilDateNhan = DateStandard.parseToDate(dateNhan);
-        sqlDateDat = new java.sql.Date(utilDateDat.getTime());
-        sqlDateNhan = new java.sql.Date(utilDateNhan.getTime());
-
-        KhachHang kh = null;
-        NhanVien nv = null;
-        KhuyenMai km = null;
-
+        PhieuDat phieuDat = null;
+        
         for (PhieuDat pd : dsPD) {
             if (pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
-                kh = pd.getKhachHang();
-                nv = pd.getNhanVien();
-                km = pd.getKhuyenMai();
+                phieuDat = pd;
             }
         }
 
         if (tblPhieuDat.getSelectedRow() == -1) {
             return null;
         } else {
-            return new PhieuDat(hd, sqlDateDat, sqlDateNhan, kh, nv, km);
+            return phieuDat;
         }
     }
 

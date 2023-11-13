@@ -1,5 +1,6 @@
 package org.group06.db.dao;
 
+import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.ChiTietHoaDon;
 
 import java.sql.Connection;
@@ -7,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.group06.db.DatabaseConnect;
 
 public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
 
@@ -35,7 +35,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
                 dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách chi tiết hóa đơn");
         }
         return dsChiTietHoaDon;
     }
@@ -56,7 +56,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
                 dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi lấy danh sách chi tiết hóa đơn");
         }
         return dsChiTietHoaDon;
     }
@@ -73,7 +73,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Lỗi thêm chi tiết hóa đơn");
             return false;
         }
     }

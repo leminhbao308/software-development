@@ -11,12 +11,12 @@ import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_PhieuDat;
 import org.group06.model.entity.*;
 import org.group06.utils.FontConstant;
+import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.Date;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -172,7 +172,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
         txtTenCTKM.setBackground(new java.awt.Color(242, 242, 242));
         txtTenCTKM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTenCTKM.setText(phieuDat.getKhuyenMai() != null ? phieuDat.getKhuyenMai().getTenCTKM() : "");
+        txtTenCTKM.setText(phieuDat.getKhuyenMai() != null ? phieuDat.getKhuyenMai().getTenCTKM() + " (" + NumberStandard.formatPercent(phieuDat.getKhuyenMai().getMucGiamGia()) + ")" : "");
         txtTenCTKM.setBorder(null);
         txtTenCTKM.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenCTKM.setEnabled(false);
@@ -370,14 +370,13 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(pd);
         DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
         modelCTPD.setRowCount(0);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             String tenQA = ctpd.getQuanAo().getTenQA();
-            String giaBan = dfMoney.format(ctpd.getQuanAo().getGiaNhap() + (ctpd.getQuanAo().getGiaNhap() * ctpd.getQuanAo().getLoiNhuan() / 100));
+            String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
-            String thanhTien = dfMoney.format(ctpd.getGiaBan());
+            String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
 
-            tinhTongThanhTien += ctpd.getGiaBan();
+            tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
 
             Object[] data = {tenQA, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
@@ -388,7 +387,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         }
         double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
         double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         txtTongTT.setText(tongThanhTien);
     }
 }

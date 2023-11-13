@@ -7,7 +7,8 @@ package org.group06.view.container.nhanVien.quanLyHoaDon;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
-import org.group06.model.entity.*;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
 import org.group06.utils.DateStandard;
 
 import javax.swing.*;
@@ -308,20 +309,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private HoaDon getSelectedHoaDon() {
         String mHD = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
-        String date = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 1).toString();
-
-        java.sql.Date sqlDate = null;
-        java.util.Date utilDate = DateStandard.parseToDate(date);
-        sqlDate = new java.sql.Date(utilDate.getTime());
-
-        KhachHang kh = new KhachHang(tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 2).toString());
-        NhanVien nv = new NhanVien(tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 3).toString());
-        KhuyenMai km = new KhuyenMai(null, tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 5).toString(), 0, null, null, 0);
 
         if (tblHoaDon.getSelectedRow() == -1) {
             return null;
         } else {
-            return new HoaDon(mHD, sqlDate, kh, nv, km);
+            return dao_HoaDon.getByID(mHD);
         }
     }
 

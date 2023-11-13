@@ -244,7 +244,7 @@
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="hoaDon.getKhachHang().getTenKH().toString()" type="code"/>
+              <Connection code="hoaDon.getKhachHang() != null ? hoaDon.getKhachHang().getTenKH().toString() : &quot;Kh&#xe1;ch v&#xe3;ng lai&quot;" type="code"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -290,7 +290,7 @@
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="hoaDon.getKhuyenMai().getTenCTKM().toString()" type="code"/>
+              <Connection code="hoaDon.getKhuyenMai() != null ? (hoaDon.getKhuyenMai().getTenCTKM() + &quot; (&quot; + NumberStandard.formatPercent(hoaDon.getKhuyenMai().getMucGiamGia()) + &quot;)&quot;) : &quot;&quot;" type="code"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

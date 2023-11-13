@@ -118,7 +118,7 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     }
 
     public int loadMaHDCount() {
-        int countMaHD = 1;
+        int countMaHD = 0;
         String sql = "SELECT MAX(MAHD) FROM HoaDon";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
