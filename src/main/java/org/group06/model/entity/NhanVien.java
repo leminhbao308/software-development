@@ -1,6 +1,10 @@
 package org.group06.model.entity;
 
 public class NhanVien {
+
+    public static String NVBH = "Nhân Viên Bán Hàng";
+    public static String NVQL = "Nhân Viên Quản Lý";
+
     private String maNV;
     private String tenNV;
     private String matKhau;
@@ -86,6 +90,7 @@ public class NhanVien {
     public NhanVien() {
         this.setTenNV("Tài Khoản");
         this.setMaNV("NV000");
+        this.setChucVu(NVBH);
     }
 
     public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, String cccd, String diaChi, String soDienThoai, boolean trangThai, String chucVu) {
