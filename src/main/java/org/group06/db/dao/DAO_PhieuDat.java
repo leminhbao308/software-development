@@ -255,6 +255,33 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         }
     }
 
+    @Override
+    public ArrayList<PhieuDat> getBatch(int start, int end) {
+        ArrayList<PhieuDat> dsPD = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM PhieuDat ORDER BY MAPHIEUDAT OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                PhieuDat phieuDat = new PhieuDat();
+                String maPD = resultSet.getString("MAPHIEUDAT");
+                Date ngayLap = resultSet.getDate("NGAYTAO");
+                Date ngayNhan = resultSet.getDate("NGAYNHAN");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(resultSet.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
+                int trangThai = resultSet.getInt("TRANGTHAI");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                dsPD.add(phieuDat);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsPD;
+    }
+
     public int loadMaPDCount() {
         int countMaPD = 0;
         String sql = "SELECT MAX(MAPHIEUDAT) FROM PhieuDat";

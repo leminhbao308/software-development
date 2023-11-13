@@ -91,6 +91,29 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public ArrayList<ChiTietHoaDon> getBatch(int start, int end) {
+        ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
+        String sql = "SELECT * FROM ChiTietHoaDon ORDER BY MAHD OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
+                chiTietHoaDon.setHoaDon(dao_HoaDon.getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
+                chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
+                dsChiTietHoaDon.add(chiTietHoaDon);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách chi tiết hóa đơn");
+        }
+        return dsChiTietHoaDon;
+    }
+
     @Deprecated
     @Override
     public ChiTietHoaDon getByID(String maHD) {

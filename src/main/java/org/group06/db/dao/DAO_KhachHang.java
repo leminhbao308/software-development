@@ -151,4 +151,26 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     public boolean delete(String id) {
         return false;
     }
+
+    @Override
+    public ArrayList<KhachHang> getBatch(int start, int end) {
+        ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM KhachHang ORDER BY MAKH OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                KhachHang khachHang = new KhachHang();
+                khachHang.setMaKhachHang(resultSet.getString("MAKH"));
+                khachHang.setTenKH(resultSet.getString("TENKH"));
+                khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                dsKhachHang.add(khachHang);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsKhachHang;
+    }
 }

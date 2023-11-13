@@ -140,6 +140,7 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return countMaHD;
     }
 
+    @Override
     public ArrayList<HoaDon> getBatch(int startIndex, int batchSize) {
         ArrayList<HoaDon> dsHD = new ArrayList<>();
         try {

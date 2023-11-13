@@ -129,4 +129,29 @@ public class DAO_KhuyenMai implements DAO_Interface<KhuyenMai> {
             return false;
         }
     }
+
+    @Override
+    public ArrayList<KhuyenMai> getBatch(int start, int end) {
+        ArrayList<KhuyenMai> dsKhuyenMai = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM KhuyenMai ORDER BY MAKM OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                KhuyenMai khuyenMai = new KhuyenMai();
+                khuyenMai.setMaKhuyenMai(result.getString("MAKM"));
+                khuyenMai.setTenCTKM(result.getString("TENCTKM"));
+                khuyenMai.setMucGiamGia(result.getDouble("MUCGIAGIAM"));
+                khuyenMai.setNgayBatDau(result.getDate("NGAYBATDAU"));
+                khuyenMai.setNgayKetThuc(result.getDate("NGAYKETTHUC"));
+                khuyenMai.setSoLuotSuDung(result.getInt("SOLUOTSD"));
+                dsKhuyenMai.add(khuyenMai);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsKhuyenMai;
+    }
 }

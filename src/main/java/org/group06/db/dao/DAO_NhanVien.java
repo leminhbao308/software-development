@@ -120,6 +120,34 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public ArrayList<NhanVien> getBatch(int start, int end) {
+        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM NhanVien ORDER BY MANV OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.setMaNV(resultSet.getString("MANV"));
+                nhanVien.setTenNV(resultSet.getString("TENNV"));
+                nhanVien.setMatKhau(resultSet.getString("MATKHAU"));
+                nhanVien.setGioiTinh(resultSet.getBoolean("GIOITINH"));
+                nhanVien.setCccd(resultSet.getString("CCCD"));
+                nhanVien.setDiaChi(resultSet.getString("DIACHI"));
+                nhanVien.setSoDienThoai(resultSet.getString("SDT"));
+                nhanVien.setTrangThai(resultSet.getBoolean("TRANGTHAI"));
+                nhanVien.setChucVu(resultSet.getString("VITRI"));
+                dsNhanVien.add(nhanVien);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsNhanVien;
+    }
+
     public ArrayList<NhanVien> getLocTheoPhai(int gioiTinh) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE GIOITINH = ?";

@@ -558,28 +558,33 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
 
     @Override
     public ArrayList<HoaDon> getAll() {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public HoaDon getByID(String id) {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean add(HoaDon hoaDon) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Deprecated
     @Override
     public boolean update(HoaDon hoaDon) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Deprecated
     @Override
     public boolean delete(String id) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ArrayList<HoaDon> getBatch(int start, int end) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
