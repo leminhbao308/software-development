@@ -4,7 +4,7 @@
  */
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.NhanVien;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
     private DAO_KhuyenMai dao_KhuyenMai = new DAO_KhuyenMai(connection);
     private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);

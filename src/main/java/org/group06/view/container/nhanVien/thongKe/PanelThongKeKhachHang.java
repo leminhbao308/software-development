@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.nhanVien.thongKe;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ThongKeKhachHang;
 import org.group06.utils.NumberStandard;
 
@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
-    private final Connection connection = DatabaseConnect.getConnection();
+    private final Connection connection = DatabaseConstant.getConnection();
     private DAO_ThongKeKhachHang dao_ThongKe = new DAO_ThongKeKhachHang(connection);
 
     /**

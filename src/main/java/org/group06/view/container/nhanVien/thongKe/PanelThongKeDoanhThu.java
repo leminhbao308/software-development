@@ -1,6 +1,6 @@
 package org.group06.view.container.nhanVien.thongKe;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.*;
@@ -29,7 +29,7 @@ import java.util.Locale;
  */
 public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
-    private final Connection connection = DatabaseConnect.getConnection();
+    private final Connection connection = DatabaseConstant.getConnection();
     private final DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
     private final DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
     private ArrayList<HoaDon> dsHoaDon;

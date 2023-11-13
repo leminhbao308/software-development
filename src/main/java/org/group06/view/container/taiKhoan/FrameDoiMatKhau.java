@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.taiKhoan;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 
@@ -17,7 +17,7 @@ import javax.swing.*;
 public class FrameDoiMatKhau extends javax.swing.JFrame {
 
     private NhanVien nv;
-    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
 
     /**
      * Creates new form FrameDoiMatKhau

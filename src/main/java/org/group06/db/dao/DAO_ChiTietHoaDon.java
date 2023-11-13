@@ -1,6 +1,5 @@
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.ChiTietHoaDon;
 
 import java.sql.Connection;
@@ -11,12 +10,14 @@ import java.util.ArrayList;
 
 public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
 
-    private Connection connection = DatabaseConnect.getConnection();
-    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
-    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
+    private Connection connection;
+    private DAO_HoaDon dao_HoaDon;
+    private DAO_QuanAo dao_QuanAo;
 
     public DAO_ChiTietHoaDon(Connection connection) {
         this.connection = connection;
+        dao_HoaDon = new DAO_HoaDon(connection);
+        dao_QuanAo = new DAO_QuanAo(connection);
     }
 
     @Override

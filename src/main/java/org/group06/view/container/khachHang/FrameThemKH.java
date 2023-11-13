@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.khachHang;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.FontConstant;
@@ -25,7 +25,7 @@ public class FrameThemKH extends javax.swing.JFrame {
      * Creates new form FrameThemKH
      */
     public FrameThemKH(PanelKhachHang pnlKhachHang) {
-        dao_KhachHang = new DAO_KhachHang(DatabaseConnect.getConnection());
+        dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
         this.pnlKhachHang = pnlKhachHang;
         initComponents();
     }

@@ -1,6 +1,6 @@
 package org.group06.view.screen;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
@@ -145,7 +145,7 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Kiểm tra mật khẩu
-        DAO_NhanVien dao_nv = new DAO_NhanVien(DatabaseConnect.getConnection());
+        DAO_NhanVien dao_nv = new DAO_NhanVien(DatabaseConstant.getConnection());
         NhanVien nv = dao_nv.getByID(txtUsername.getText());
         if (nv == null) {
             JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại", "Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);

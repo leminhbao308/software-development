@@ -1,6 +1,6 @@
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.model.entity.ChiTietPhieuDat;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
     private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
 

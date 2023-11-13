@@ -1,6 +1,6 @@
 package org.group06.view.container.nhanVien.thongKe;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_KhuyenMai;
@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
-    private final Connection connection = DatabaseConnect.getConnection();
+    private final Connection connection = DatabaseConstant.getConnection();
     private final DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
     private final DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
     private final DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
@@ -1136,6 +1136,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private HashMap<String, Double> dsThanhTien;
     private HashMap<String, Double> dsLoiNhuan;
     private HashMap<String, Double> dsTongGiaGoc;
-    private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
-    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
+    private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();
+    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConstant.getConnection()).getAll();
 }

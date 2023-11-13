@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_PhieuDat;
 import org.group06.db.dao.DAO_QuanAo;
@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 public class PanelPhieuTam extends javax.swing.JPanel {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
     private ArrayList<PhieuDat> dsPD;
 

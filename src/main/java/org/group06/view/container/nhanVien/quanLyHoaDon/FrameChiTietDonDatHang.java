@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_HoaDon;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
     private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
     private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);

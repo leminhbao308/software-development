@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.khachHang;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
@@ -29,7 +29,7 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
     public FrameTTKhachHang(KhachHang kh, PanelKhachHang pnlKhachHang) {
         this.kh = kh;
         this.pnlKhachHang = pnlKhachHang;
-        dao_KhachHang = new DAO_KhachHang(DatabaseConnect.getConnection());
+        dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
         initComponents();
     }
 

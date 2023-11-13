@@ -1,6 +1,6 @@
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.model.entity.HoaDon;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
 
     public DAO_ThongKeKhachHang(Connection connection) {
         this.connection = connection;

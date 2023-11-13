@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.khachHang;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class PanelKhachHang extends javax.swing.JPanel {
 
-    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(DatabaseConnect.getConnection());
+    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
     public int soMaKH = 0;
 
     /**
@@ -243,7 +243,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     public String getMaKH() {
-        int count = new DAO_KhachHang((DatabaseConnect.getConnection())).loadMaKHCount(soMaKH);
+        int count = new DAO_KhachHang((DatabaseConstant.getConnection())).loadMaKHCount(soMaKH);
         count++;
         // Tạo mã khách hàng theo quy tắc và có thứ tự
         String customerID = "KH" + String.format("%03d", count); // Ví dụ: KH001, KH002,...

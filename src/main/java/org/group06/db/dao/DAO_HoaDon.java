@@ -1,6 +1,5 @@
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
@@ -11,13 +10,16 @@ import java.util.ArrayList;
 
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
-    private Connection connection = DatabaseConnect.getConnection();
-    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
-    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
-    private DAO_KhuyenMai dao_KhuyenMai = new DAO_KhuyenMai(connection);
+    private Connection connection;
+    private DAO_KhachHang dao_KhachHang;
+    private DAO_NhanVien dao_NhanVien;
+    private DAO_KhuyenMai dao_KhuyenMai;
 
     public DAO_HoaDon(Connection connection) {
         this.connection = connection;
+        dao_KhachHang = new DAO_KhachHang(connection);
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
     }
 
     @Override
@@ -136,5 +138,28 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             e.printStackTrace();
         }
         return countMaHD;
+    }
+
+    public ArrayList<HoaDon> getBatch(int startIndex, int batchSize) {
+        ArrayList<HoaDon> dsHD = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM HoaDon ORDER BY MAHD OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, startIndex);
+            statement.setInt(2, batchSize);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
+                hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
+                hoaDon.setKhuyenMai(dao_KhuyenMai.getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhachHang(dao_KhachHang.getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(dao_NhanVien.getByID(resultSet.getString("MANV")));
+                dsHD.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHD;
     }
 }

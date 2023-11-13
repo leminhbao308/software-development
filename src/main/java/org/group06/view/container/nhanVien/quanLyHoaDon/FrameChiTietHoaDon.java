@@ -5,7 +5,7 @@
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
 import com.itextpdf.text.DocumentException;
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
@@ -363,7 +363,7 @@ public class FrameChiTietHoaDon extends javax.swing.JFrame {
     private void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String hd = hoaDon.getMaHoaDon().toString();
-        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConnect.getConnection())).getAllCTQA(hd);
+        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConstant.getConnection())).getAllCTQA(hd);
         DefaultTableModel modelCTHD = (DefaultTableModel) this.tblChiTietHD.getModel();
         modelCTHD.setRowCount(0);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");

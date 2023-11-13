@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.FontConstant;
@@ -25,7 +25,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
      * Creates new form FrameThemNhanVien
      */
     public FrameThemNhanVien(PanelNhanVien pnlNhanVien) {
-        dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
+        dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         this.pnlNhanVien = pnlNhanVien;
         initComponents();
     }

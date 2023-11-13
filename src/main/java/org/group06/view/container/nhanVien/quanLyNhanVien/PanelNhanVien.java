@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.FormatCellRenderer;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class PanelNhanVien extends javax.swing.JPanel {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
     public int soMaNV;
 

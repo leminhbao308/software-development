@@ -1,7 +1,7 @@
 package org.group06.view.container.nhanVien;
 
 import com.itextpdf.text.DocumentException;
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.*;
 import org.group06.model.entity.*;
 import org.group06.model.manager.Manager_QuanAo;
@@ -40,7 +40,7 @@ import java.util.Locale;
  */
 public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
     private final DAO_QuanAo daoQuanAo;
 
     private Manager_QuanAo qlQuanAo;
