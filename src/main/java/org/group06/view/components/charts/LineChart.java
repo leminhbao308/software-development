@@ -28,6 +28,10 @@ public class LineChart extends ChartPanel {
             super.getChart().getCategoryPlot().setRangeGridlinesVisible(visible);
         }
 
+        public void setToolTipVisible(boolean visible) {
+            super.setDisplayToolTips(visible);
+        }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LinkedHashMap<String, Double> data = new LinkedHashMap<>();
