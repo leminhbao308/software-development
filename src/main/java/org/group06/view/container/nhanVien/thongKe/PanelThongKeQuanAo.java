@@ -3,6 +3,7 @@ package org.group06.view.container.nhanVien.thongKe;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
+import org.group06.db.dao.DAO_KhuyenMai;
 import org.group06.model.entity.*;
 import org.group06.utils.NumberStandard;
 import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
@@ -605,7 +606,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabLuaChonThongKeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabLuaChonThongKeStateChanged
-
         //        Xử lý thay đổi column theo tiêu chí thống kê tương ứng
         DefaultTableModel modelQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelQuanAo.setRowCount(0);
@@ -688,11 +688,11 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Xử lý popup chi tiết hoá đơn">                          
     private void tblTopQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTopQuanAoMouseClicked
-        if (evt.getClickCount() == 2) {
-            if (tblTopQuanAo.getSelectedRow() != -1) {
-                callFrameChiTietHoaDon(tblTopQuanAo.getValueAt(tblTopQuanAo.getSelectedRow(), 0).toString());
-            }
-        }
+//        if (evt.getClickCount() == 2) {
+//            if (tblTopQuanAo.getSelectedRow() != -1) {
+//                callFrameChiTietHoaDon(tblTopQuanAo.getValueAt(tblTopQuanAo.getSelectedRow(), 0).toString());
+//            }
+//        }
     }//GEN-LAST:event_tblTopQuanAoMouseClicked
 
     private void callFrameChiTietHoaDon(String maHD) {
@@ -731,7 +731,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDonInput);
         ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDonInput);
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
-        dsQADaKiemTra = new ArrayList<>();
+        dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
         dsSoLuongQuanAo = new HashMap<>();
         dsThanhTien = new HashMap<>();
         if (date2 == null) {
@@ -763,7 +763,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 Set<String> uniqueMaHoaDon = new HashSet<>(); // Mượn đặc tính của set để kiểm tra trùng giá trị
                 for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
                     if (dsQADaKiemTra.size() == 0) {
-                        dsQADaKiemTra.add(cthd.getQuanAo());
+                        dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                         soLuong += cthd.getSoLuong();
                         dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
                         thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
@@ -772,7 +772,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         soLuong = 0;
                     } else {
                         if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
-                            dsQADaKiemTra.add(cthd.getQuanAo());
+                            dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                             soLuong += cthd.getSoLuong();
                             dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
                             thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
@@ -822,29 +822,49 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         // Sắp xếp giảm dần theo số lượng theo mã quần áo
         sapXepGiamDan(resultSortQuatity);
 //        Load dữ liệu lên table
+        double mucGiamGia = 0;
+        double tongChietKhau = 0;
+        double tongThanhTienCuaMotQuanAo = 0;
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
         if (dsMaHoaDon.size() != 0) {
             for (Map.Entry<String, Integer> resultSort : resultSortQuatity) {
-                String maQuanAoTbl = "", tenQuanAoTbl = "", loaQuanAoTbl = "", thuongHieuTbl = "", soLuongTbl = "", loiNhuanTbl = "";
+                String maQuanAoTbl = "", tenQuanAoTbl = "",
+                        loaQuanAoTbl = "", thuongHieuTbl = "", soLuongTbl = "", loiNhuanTbl = "";
 //            Lấy thông tin quần áo load lên table
-                for (QuanAo qaLoadTbl : dsQADaKiemTra) {
-                    if (resultSort.getKey().contains(qaLoadTbl.getMaQA())) {
-                        maQuanAoTbl = qaLoadTbl.getMaQA();
-                        tenQuanAoTbl = qaLoadTbl.getTenQA();
+                for (Map.Entry<HoaDon, QuanAo> item : dsQADaKiemTra.entrySet()) {
+//                for (QuanAo qaLoadTbl : dsQADaKiemTra) {
+                    if (resultSort.getKey().contains(item.getValue().getMaQA())) {
+                        maQuanAoTbl = item.getValue().getMaQA();
+                        tenQuanAoTbl = item.getValue().getTenQA();
                         for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
-                            if (qaLoadTbl.getLoaiQuanAo().contains(loaiQA.getKey())) {
+                            if (item.getValue().getLoaiQuanAo().contains(loaiQA.getKey())) {
                                 loaQuanAoTbl = loaiQA.getValue();
                             }
                         }
-                        thuongHieuTbl = qaLoadTbl.getThuongHieu();
+                        thuongHieuTbl = item.getValue().getThuongHieu();
+                    }
+//                    Tính tổng chiết khấu
+                    for (KhuyenMai km : dsKhuyenMai) {
+                        if (item.getKey().getKhuyenMai().getMaKhuyenMai().contains(km.getMaKhuyenMai())) {
+                            mucGiamGia = km.getMucGiamGia();
+                        } else {
+                            mucGiamGia = 0;
+                        }
+                    }
+//                    Lập danh sách lợi nhuận
+                    for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
+                        if (cthd.getHoaDon().getMaHoaDon().contains(item.getKey().getMaHoaDon())) {
+                            double giaGoc = cthd.getSoLuong() * item.getValue().getGiaNhap();
+                            tongThanhTienCuaMotQuanAo += cthd.getGiaBan() * cthd.getSoLuong() -
+                                    cthd.getGiaBan() * cthd.getSoLuong() * mucGiamGia / 100;
+                        }
                     }
                 }
 
-                soLuongTbl = resultSort.getValue().toString();
                 for (HashMap.Entry<String, Double> loiNhuanQA : dsThanhTien.entrySet()) {
                     if (loiNhuanQA.getKey().contains(resultSort.getKey())) {
-                        loiNhuanTbl = new DecimalFormat("###,###,###,### VNĐ").format(loiNhuanQA.getValue());
+                        loiNhuanTbl = NumberStandard.formatMoney(loiNhuanQA.getValue());
                     }
                 }
                 Object[] row = {maQuanAoTbl, tenQuanAoTbl, loaQuanAoTbl, thuongHieuTbl, soLuongTbl, loiNhuanTbl};
@@ -990,7 +1010,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 if (soLuongComparison == 0) {
                     Double loiNhuan1 = 0.0;
                     Double loiNhuan2 = 0.0;
-                    for(Map.Entry<String, Double> tienLoi: dsThanhTien.entrySet()) {
+                    for (Map.Entry<String, Double> tienLoi : dsThanhTien.entrySet()) {
                         if (entry1.getKey().contains(tienLoi.getKey())) {
                             loiNhuan1 = tienLoi.getValue();
                         } else if (entry2.getKey().contains(tienLoi.getKey())) {
@@ -1120,8 +1140,11 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private com.toedter.calendar.JYearChooser yearTheoThang;
     // End of variables declaration//GEN-END:variables
     // </editor-fold> 
-    private ArrayList<QuanAo> dsQADaKiemTra;
+    private HashMap<HoaDon, QuanAo> dsQADaKiemTra;
     private HashMap<String, Integer> dsSoLuongQuanAo;
     private HashMap<String, Double> dsThanhTien;
+    private HashMap<String, Double> dsLoiNhuan;
+    private HashMap<String, Double> dsTongGiaGoc;
     private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
+    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
 }
