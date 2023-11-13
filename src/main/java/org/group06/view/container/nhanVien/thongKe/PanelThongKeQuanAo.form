@@ -552,9 +552,9 @@
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTongHD" max="32767" attributes="0"/>
-                                  <Component id="txtTongQA" alignment="1" pref="599" max="32767" attributes="0"/>
-                                  <Component id="txtDoanhThu" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtTongSoLuongQuanAo" max="32767" attributes="0"/>
+                                  <Component id="txtLoaiQuanAo" alignment="1" pref="599" max="32767" attributes="0"/>
+                                  <Component id="txtTenQuanAo" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtLoiNhuan" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -567,17 +567,17 @@
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblTongHD" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="txtTongHD" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="txtTongSoLuongQuanAo" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblTongQA" min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="txtTongQA" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="txtLoaiQuanAo" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblDoanhThu" min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="txtDoanhThu" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="txtTenQuanAo" linkSize="2" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -621,7 +621,7 @@
                         <Property name="text" type="java.lang.String" value="L&#x1ee3;i nhu&#x1ead;n thu &#x111;&#x1b0;&#x1ee3;c:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtTongHD">
+                    <Component class="javax.swing.JTextField" name="txtTongSoLuongQuanAo">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -640,7 +640,7 @@
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtTongQA">
+                    <Component class="javax.swing.JTextField" name="txtLoaiQuanAo">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -659,7 +659,7 @@
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtDoanhThu">
+                    <Component class="javax.swing.JTextField" name="txtTenQuanAo">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -711,9 +711,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Top Qu&#x1ea7;n &#xc1;o B&#xe1;n Ch&#x1ea1;y Nh&#x1ea5;t"/>
-              </AccessibilityProperties>
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
@@ -763,6 +760,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="fillsViewportHeight" type="boolean" value="true"/>
                     <Property name="rowHeight" type="int" value="50"/>
                     <Property name="showGrid" type="boolean" value="true"/>

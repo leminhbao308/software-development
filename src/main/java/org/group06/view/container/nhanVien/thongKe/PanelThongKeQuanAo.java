@@ -4,7 +4,6 @@ import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.*;
-import org.group06.utils.DateStandard;
 import org.group06.utils.NumberStandard;
 import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -48,6 +47,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         initComponents();
         FormatCellRenderer.formatCellRendererLeft(tblTopQuanAo, 3);
         tabLuaChonThongKe.setSelectedIndex(-1);
+        this.txtTongSoLuongQuanAo.setText("Không có thông tin");
+        this.txtLoaiQuanAo.setText("Không có thông tin");
+        this.txtTenQuanAo.setText("Không có thông tin");
+        this.txtLoiNhuan.setText("Không có thông tin");
     }
 
     @SuppressWarnings("unchecked")
@@ -83,9 +86,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         lblTongQA = new javax.swing.JLabel();
         lblDoanhThu = new javax.swing.JLabel();
         lblLoiNhuan = new javax.swing.JLabel();
-        txtTongHD = new javax.swing.JTextField();
-        txtTongQA = new javax.swing.JTextField();
-        txtDoanhThu = new javax.swing.JTextField();
+        txtTongSoLuongQuanAo = new javax.swing.JTextField();
+        txtLoaiQuanAo = new javax.swing.JTextField();
+        txtTenQuanAo = new javax.swing.JTextField();
         txtLoiNhuan = new javax.swing.JTextField();
         scrTopQuanAo = new javax.swing.JScrollPane();
         tblTopQuanAo = new javax.swing.JTable();
@@ -400,29 +403,29 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         lblLoiNhuan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLoiNhuan.setText("Lợi nhuận thu được:");
 
-        txtTongHD.setEditable(false);
-        txtTongHD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTongHD.setForeground(new java.awt.Color(255, 51, 51));
-        txtTongHD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtTongHD.setText(NumberStandard.formatInteger(0));
-        txtTongHD.setDisabledTextColor(new java.awt.Color(255, 51, 51));
-        txtTongHD.setFocusable(false);
+        txtTongSoLuongQuanAo.setEditable(false);
+        txtTongSoLuongQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTongSoLuongQuanAo.setForeground(new java.awt.Color(255, 51, 51));
+        txtTongSoLuongQuanAo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtTongSoLuongQuanAo.setText(NumberStandard.formatInteger(0));
+        txtTongSoLuongQuanAo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
+        txtTongSoLuongQuanAo.setFocusable(false);
 
-        txtTongQA.setEditable(false);
-        txtTongQA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTongQA.setForeground(new java.awt.Color(255, 51, 51));
-        txtTongQA.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtTongQA.setText(NumberStandard.formatInteger(0));
-        txtTongQA.setDisabledTextColor(new java.awt.Color(255, 51, 51));
-        txtTongQA.setFocusable(false);
+        txtLoaiQuanAo.setEditable(false);
+        txtLoaiQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtLoaiQuanAo.setForeground(new java.awt.Color(255, 51, 51));
+        txtLoaiQuanAo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtLoaiQuanAo.setText(NumberStandard.formatInteger(0));
+        txtLoaiQuanAo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
+        txtLoaiQuanAo.setFocusable(false);
 
-        txtDoanhThu.setEditable(false);
-        txtDoanhThu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtDoanhThu.setForeground(new java.awt.Color(255, 51, 51));
-        txtDoanhThu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtDoanhThu.setText(NumberStandard.formatMoney(0));
-        txtDoanhThu.setDisabledTextColor(new java.awt.Color(255, 51, 51));
-        txtDoanhThu.setFocusable(false);
+        txtTenQuanAo.setEditable(false);
+        txtTenQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTenQuanAo.setForeground(new java.awt.Color(255, 51, 51));
+        txtTenQuanAo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtTenQuanAo.setText(NumberStandard.formatMoney(0));
+        txtTenQuanAo.setDisabledTextColor(new java.awt.Color(255, 51, 51));
+        txtTenQuanAo.setFocusable(false);
 
         txtLoiNhuan.setEditable(false);
         txtLoiNhuan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -445,9 +448,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                                         .addComponent(lblLoiNhuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtTongHD)
-                                        .addComponent(txtTongQA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
-                                        .addComponent(txtDoanhThu, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtTongSoLuongQuanAo)
+                                        .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                                        .addComponent(txtTenQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtLoiNhuan))
                                 .addContainerGap())
         );
@@ -457,22 +460,22 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                                 .addGap(0, 0, 0)
                                 .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtTongSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblTongQA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTongQA, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtTenQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pnlTongQuanQuanAoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{lblTongHD, txtDoanhThu, txtLoiNhuan, txtTongHD, txtTongQA});
+        pnlTongQuanQuanAoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{lblTongHD, txtLoaiQuanAo, txtLoiNhuan, txtTenQuanAo, txtTongSoLuongQuanAo});
 
         pnlTongQuan.add(pnlTongQuanQuanAo);
 
@@ -509,6 +512,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 return c;
             }
         });
+        tblTopQuanAo.setEnabled(false);
         tblTopQuanAo.setFillsViewportHeight(true);
         tblTopQuanAo.setRowHeight(50);
         tblTopQuanAo.setShowGrid(true);
@@ -549,8 +553,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                                 .addComponent(scrTopQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                                 .addGap(12, 12, 12))
         );
-
-        scrTopQuanAo.getAccessibleContext().setAccessibleName("Top Quần Áo Bán Chạy Nhất");
 
         tabXemThongTin.addTab("Bảng Chi Tiết", pnlBangChiTiet);
 
@@ -611,6 +613,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             modelQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"});
         } else {
             modelQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Số Lượng", "Lợi Nhuận"});
+            FormatCellRenderer.formatCellRendererCenter(tblTopQuanAo, 4);
+            FormatCellRenderer.formatCellRendererRight(tblTopQuanAo, 5);
         }
 
         switch (tabLuaChonThongKe.getSelectedIndex()) {
@@ -696,11 +700,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
         for (HoaDon hd : dsHoaDon) {
             if (hd.getMaHoaDon().equals(maHD)) {
-
                 KhachHang kh = hd.getKhachHang() != null ? hd.getKhachHang() : new KhachHang(null, "Khách vãng lai", null);
                 NhanVien nv = hd.getNhanVien();
                 KhuyenMai km = hd.getKhuyenMai() != null ? hd.getKhuyenMai() : new KhuyenMai(null, "", 0, null, null, 0);
-
                 hoaDon = new HoaDon(maHD, hd.getNgayTao(), kh, nv, km);
             }
         }
@@ -767,6 +769,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
                         dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
                         uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
+                        soLuong = 0;
                     } else {
                         if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
                             dsQADaKiemTra.add(cthd.getQuanAo());
@@ -774,6 +777,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                             dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
                             thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
                             dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
+                            soLuong = 0;
                         } else {
 //                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
                             for (Map.Entry<String, Integer> item : dsSoLuongQuanAo.entrySet()) {
@@ -788,6 +792,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                                     dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
                                 }
                             }
+                            soLuong = 0;
                         }
                     }
                 }
@@ -813,34 +818,57 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         }
 
         //        Xử lý đưa dữ liệu lên table
-        List<Map.Entry<String, Double>> resultSortMoney = new ArrayList<>(dsThanhTien.entrySet());
-        sortGiamDanHashMap(resultSortMoney); // Sắp xếp giảm dần theo thành tiền của tổng số lượng theo mã quần áo
+        List<Map.Entry<String, Integer>> resultSortQuatity = new ArrayList<>(this.dsSoLuongQuanAo.entrySet());
+        // Sắp xếp giảm dần theo số lượng theo mã quần áo
+        sapXepGiamDan(resultSortQuatity);
 //        Load dữ liệu lên table
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
         if (dsMaHoaDon.size() != 0) {
-            for (Map.Entry<String, Double> resultSort : resultSortMoney) {
+            for (Map.Entry<String, Integer> resultSort : resultSortQuatity) {
                 String maQuanAoTbl = "", tenQuanAoTbl = "", loaQuanAoTbl = "", thuongHieuTbl = "", soLuongTbl = "", loiNhuanTbl = "";
 //            Lấy thông tin quần áo load lên table
                 for (QuanAo qaLoadTbl : dsQADaKiemTra) {
                     if (resultSort.getKey().contains(qaLoadTbl.getMaQA())) {
                         maQuanAoTbl = qaLoadTbl.getMaQA();
                         tenQuanAoTbl = qaLoadTbl.getTenQA();
-                        loaQuanAoTbl = qaLoadTbl.getLoaiQuanAo();
+                        for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
+                            if (qaLoadTbl.getLoaiQuanAo().contains(loaiQA.getKey())) {
+                                loaQuanAoTbl = loaiQA.getValue();
+                            }
+                        }
                         thuongHieuTbl = qaLoadTbl.getThuongHieu();
                     }
                 }
-                for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
-                    if (resultSort.getKey().contains(cthd.getQuanAo().getMaQA())) {
-                        soLuongTbl = cthd.getSoLuong() + "";
+
+                soLuongTbl = resultSort.getValue().toString();
+                for (HashMap.Entry<String, Double> loiNhuanQA : dsThanhTien.entrySet()) {
+                    if (loiNhuanQA.getKey().contains(resultSort.getKey())) {
+                        loiNhuanTbl = new DecimalFormat("###,###,###,### VNĐ").format(loiNhuanQA.getValue());
                     }
                 }
-                loiNhuanTbl = new DecimalFormat("###,###,###,### VNĐ").format(resultSort.getValue());
                 Object[] row = {maQuanAoTbl, tenQuanAoTbl, loaQuanAoTbl, thuongHieuTbl, soLuongTbl, loiNhuanTbl};
                 modelTopQuanAo.addRow(row);
             }
+            this.txtTongSoLuongQuanAo.setText(modelTopQuanAo.getValueAt(0, 4).toString());
+//          Tên quần áo và Loại quần áo
+            for (QuanAo qaLoad : dsQA) {
+                if (qaLoad.getMaQA().contains(modelTopQuanAo.getValueAt(0, 0).toString())) {
+                    this.txtTenQuanAo.setText(qaLoad.getTenQA());
+                    for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
+                        if (qaLoad.getLoaiQuanAo().contains(loaiQA.getKey())) {
+                            this.txtLoaiQuanAo.setText(loaiQA.getValue());
+                        }
+                    }
+                }
+            }
+            this.txtLoiNhuan.setText(modelTopQuanAo.getValueAt(0, 5).toString());
         } else {
             modelTopQuanAo.setRowCount(0);
+            this.txtTongSoLuongQuanAo.setText("Không có thông tin");
+            this.txtLoaiQuanAo.setText("Không có thông tin");
+            this.txtTenQuanAo.setText("Không có thông tin");
+            this.txtLoiNhuan.setText("Không có thông tin");
         }
     }
 
@@ -902,6 +930,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * @param dsHoaDon        Dữ liệu về hoá đơn
      * @param dsChiTietHoaDon Dữ liệu về chi tiết hoá đơn
      */
+
     private void sapXepDuLieu(ArrayList<HoaDon> dsHoaDon, ArrayList<ChiTietHoaDon> dsChiTietHoaDon) {
         ArrayList<Object[]> rowsDoanhThu = new ArrayList<>();
         ArrayList<Object[]> rowsLoiNhuan = new ArrayList<>();
@@ -923,10 +952,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         }
 
         // sắp xếp giảm dần theo doanh thu
-        sortGiamDan(rowsDoanhThu);
+        sapXepGiamDan(rowsDoanhThu);
 
         // sắp xếp giảm dần theo lợi nhuận
-        sortGiamDan(rowsLoiNhuan);
+        sapXepGiamDan(rowsLoiNhuan);
 
         tinhToanDuLieu(dsHoaDon, dsChiTietHoaDon);
         loadDuLieuLenTable(rowsDoanhThu, rowsLoiNhuan);
@@ -935,17 +964,54 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     /**
      * Sắp xếp giảm dần theo doanh thu hoặc lợi nhuận
      *
-     * @param rows Dữ liệu cần sắp xếp
+     * @param list Dữ liệu cần sắp xếp
      */
-    private void sortGiamDan(ArrayList<Object[]> rows) {
-        rows.sort((Object[] o1, Object[] o2) -> {
+    private void sapXepGiamDan(ArrayList<Object[]> list) {
+        list.sort((Object[] o1, Object[] o2) -> {
             double data1 = (double) o1[3];
             double data2 = (double) o2[3];
             return Double.compare(data2, data1);
         });
     }
 
-    private void sortGiamDanHashMap(List<Map.Entry<String, Double>> list) {
+    /**
+     * Sắp xếp giảm dần theo Số lượng nếu số lượng bằng nhau thì sắp xếp giảm dần theo lợi nhuận
+     *
+     * @param list Dữ liệu cần sắp xếp
+     */
+    private void sapXepGiamDan(List<Map.Entry<String, Integer>> list) {
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+
+            @Override
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                // So sánh giảm dần theo số lượng
+                int soLuongComparison = Integer.compare(entry2.getValue(), entry1.getValue());
+                // Nếu số lượng bằng nhau, so sánh giảm dần theo lợi nhuận
+                if (soLuongComparison == 0) {
+                    Double loiNhuan1 = 0.0;
+                    Double loiNhuan2 = 0.0;
+                    for(Map.Entry<String, Double> tienLoi: dsThanhTien.entrySet()) {
+                        if (entry1.getKey().contains(tienLoi.getKey())) {
+                            loiNhuan1 = tienLoi.getValue();
+                        } else if (entry2.getKey().contains(tienLoi.getKey())) {
+                            loiNhuan2 = tienLoi.getValue();
+                        }
+                    }
+                    return Double.compare(loiNhuan2, loiNhuan1);
+                }
+                return soLuongComparison;
+            }
+
+
+//            @Override
+//            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+//                // So sánh giá trị Double, sắp xếp giảm dần
+//                return Integer.compare(entry2.getValue(), entry1.getValue());
+//            }
+        });
+    }
+
+    private void sapXepGiamDanTheoLoiNhuan(List<Map.Entry<String, Double>> list) {
         Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
             @Override
             public int compare(Map.Entry<String, Double> entry1, Map.Entry<String, Double> entry2) {
@@ -1007,9 +1073,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      */
     private void loadTongQuanDoanhThu(int tongHD, int tongQA, double doanhThu, double loiNhuan) {
 
-        this.txtTongHD.setText(NumberStandard.formatInteger(tongHD));
-        this.txtTongQA.setText(NumberStandard.formatInteger(tongQA));
-        this.txtDoanhThu.setText(NumberStandard.formatMoney(doanhThu));
+        this.txtTongSoLuongQuanAo.setText(NumberStandard.formatInteger(tongHD));
+        this.txtLoaiQuanAo.setText(NumberStandard.formatInteger(tongQA));
+        this.txtTenQuanAo.setText(NumberStandard.formatMoney(doanhThu));
         this.txtLoiNhuan.setText(NumberStandard.formatMoney(loiNhuan));
 
     }
@@ -1046,10 +1112,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private javax.swing.JTabbedPane tabLuaChonThongKe;
     private javax.swing.JTabbedPane tabXemThongTin;
     private javax.swing.JTable tblTopQuanAo;
-    private javax.swing.JTextField txtDoanhThu;
+    private javax.swing.JTextField txtLoaiQuanAo;
     private javax.swing.JTextField txtLoiNhuan;
-    private javax.swing.JTextField txtTongHD;
-    private javax.swing.JTextField txtTongQA;
+    private javax.swing.JTextField txtTenQuanAo;
+    private javax.swing.JTextField txtTongSoLuongQuanAo;
     private com.toedter.calendar.JYearChooser yearTheoNam;
     private com.toedter.calendar.JYearChooser yearTheoThang;
     // End of variables declaration//GEN-END:variables
@@ -1057,4 +1123,5 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private ArrayList<QuanAo> dsQADaKiemTra;
     private HashMap<String, Integer> dsSoLuongQuanAo;
     private HashMap<String, Double> dsThanhTien;
+    private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
 }
