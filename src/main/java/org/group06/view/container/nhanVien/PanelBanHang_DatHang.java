@@ -40,15 +40,15 @@ import java.util.Locale;
 public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
     private Connection connection = DatabaseConnect.getConnection();
-    private final DAO_QuanAo daoQuanAo = new DAO_QuanAo(connection);
+    private final DAO_QuanAo daoQuanAo;
 
-    private Manager_QuanAo qlQuanAo = new Manager_QuanAo(connection);
-    private Manager_QuanAo qlQuanAoMua = new Manager_QuanAo();
-    private HashMap<String, String> dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
+    private Manager_QuanAo qlQuanAo;
+    private Manager_QuanAo qlQuanAoMua;
+    private HashMap<String, String> dsLoaiQuanAo;
 
-    private ArrayList<NhaCungCap> dsNhaCungCap = new DAO_NhaCungCap(connection).getAll();
-    private ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(connection).getAll();
-    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
+    private ArrayList<NhaCungCap> dsNhaCungCap;
+    private ArrayList<KhachHang> dsKhachHang;
+    private ArrayList<KhuyenMai> dsKhuyenMai;
 
     private final NhanVien nhanVien;
 
@@ -57,6 +57,13 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
      */
     public PanelBanHang_DatHang(NhanVien nhanVien) {
         this.nhanVien = nhanVien;
+        daoQuanAo = new DAO_QuanAo(connection);
+        dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
+        qlQuanAo = new Manager_QuanAo(connection);
+        qlQuanAoMua = new Manager_QuanAo();
+        dsNhaCungCap = new DAO_NhaCungCap(connection).getAll();
+        dsKhachHang = new DAO_KhachHang(connection).getAll();
+        dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
         initComponents();
         loadAllTableQuanAo(qlQuanAo.getAll());
     }

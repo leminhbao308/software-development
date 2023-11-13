@@ -39,6 +39,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         dsHoaDon = dao_HoaDon.getAll();
         dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
         initComponents();
+        loadChart();
     }
 
     @SuppressWarnings("unchecked")
@@ -925,6 +926,10 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         this.txtDoanhThu.setText(NumberStandard.formatMoney(doanhThu));
         this.txtLoiNhuan.setText(NumberStandard.formatMoney(loiNhuan));
 
+    }
+
+    private void loadChart() {
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
