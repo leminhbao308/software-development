@@ -4,7 +4,9 @@ import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_KhuyenMai;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.*;
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
 import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -16,13 +18,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.*;
 import java.util.List;
-
-import org.group06.db.dao.DAO_QuanAo;
-import org.group06.utils.FormatCellRenderer;
+import java.util.*;
 
 /**
  * @author Le Hoang Nam
@@ -44,7 +42,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         dsHoaDon = dao_HoaDon.getAll();
         dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
         dsQA = dao_QuanAo.getAll();
-
         initComponents();
         FormatCellRenderer.formatCellRendererLeft(tblTopQuanAo, 3);
         tabLuaChonThongKe.setSelectedIndex(-1);
@@ -57,7 +54,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         lblTitle = new javax.swing.JLabel();
         tabXemThongTin = new javax.swing.JTabbedPane();
         pnlBangChiTiet = new javax.swing.JPanel();
@@ -197,7 +193,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         );
 
         dchChonNgay.setLocale(new Locale("vi", "VN"));
-        dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchChonNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
@@ -343,11 +339,11 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         );
 
         dchTuNgay.setLocale(new Locale("vi", "VN"));
-        dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchTuNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
         dchDenNgay.setLocale(new Locale("vi", "VN"));
-        dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchDenNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
@@ -607,25 +603,24 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
     private void tabLuaChonThongKeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabLuaChonThongKeStateChanged
         //        Xử lý thay đổi column theo tiêu chí thống kê tương ứng
-        DefaultTableModel modelQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
-        modelQuanAo.setRowCount(0);
+        DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
+        modelTopQuanAo.setRowCount(0);
         if (tabLuaChonThongKe.getSelectedIndex() == 0 || tabLuaChonThongKe.getSelectedIndex() == -1) {
-            modelQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"});
+            modelTopQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"});
         } else {
-            modelQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Số Lượng", "Lợi Nhuận"});
+            modelTopQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Số Lượng", "Lợi Nhuận"});
             FormatCellRenderer.formatCellRendererCenter(tblTopQuanAo, 4);
             FormatCellRenderer.formatCellRendererRight(tblTopQuanAo, 5);
         }
 
         switch (tabLuaChonThongKe.getSelectedIndex()) {
             case 0:
-                modelQuanAo.setRowCount(0);
+                modelTopQuanAo.setRowCount(0);
                 int kiemTraHet = 0;
                 for (QuanAo qa : dsQA) {
                     if (qa.getSoLuong() == 0) {
                         Object[] rowData = {qa.getMaQA(), qa.getTenQA(), qa.getLoaiQuanAo(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC()};
-                        modelQuanAo.addRow(rowData);
-//                        System.out.println(rowData);
+                        modelTopQuanAo.addRow(rowData);
                         kiemTraHet++;
                     }
                 }
@@ -634,50 +629,44 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 }
                 break;
             case 1:
-                locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
-                break;
-            case 2:
-                locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
-                break;
-            case 3:
-                locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
-                break;
-            case 4:
                 locDuLieu(null, null, dsHoaDon, dsChiTietHoaDon);
                 break;
-            case 5:
-                locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+            case 2:
+                locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
                 break;
+            //TODO: Xử lý thống kê theo tháng và năm
         }
     }//GEN-LAST:event_tabLuaChonThongKeStateChanged
 
     private void dchChonNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchChonNgayPropertyChange
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
-        locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
+        if (tabLuaChonThongKe.getSelectedIndex() == 2) {
+            locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
+        }
     }//GEN-LAST:event_dchChonNgayPropertyChange
 
     private void monthTheoThangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_monthTheoThangPropertyChange
-        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+//        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_monthTheoThangPropertyChange
 
     private void yearTheoThangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearTheoThangPropertyChange
-        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+//        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_yearTheoThangPropertyChange
 
     private void yearTheoNamPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearTheoNamPropertyChange
-        locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
+//        locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_yearTheoNamPropertyChange
 
     // <editor-fold defaultstate="collapsed" desc="Xử lý đồng bộ thống kê theo khoảng thời gian">                          
     private void dchTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTuNgayPropertyChange
         dongBoKhoangThoiGian();
-        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+//        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_dchTuNgayPropertyChange
 
     private void dchDenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchDenNgayPropertyChange
         dongBoKhoangThoiGian();
-        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+//        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_dchDenNgayPropertyChange
 
     private void dongBoKhoangThoiGian() {
@@ -728,17 +717,19 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * @param dsChiTietHoaDonInput Dữ liệu về chi tiết hoá đơn
      */
     private void locDuLieu(@Nullable Date date1, @Nullable Date date2, @NotNull ArrayList<HoaDon> dsHoaDonInput, @NotNull ArrayList<ChiTietHoaDon> dsChiTietHoaDonInput) {
+//        Khởi tạo
         ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDonInput);
         ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDonInput);
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
         dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
         dsSoLuongQuanAo = new HashMap<>();
         dsThanhTien = new HashMap<>();
+//        Xử lý
         if (date2 == null) {
-            if (date1 == null) {
-                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
-                return;
-            }
+//            if (date1 == null) {
+//                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
+//                return;
+//            }
             LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
 //            Lấy mã hóa đơn theo ngày đã chọn và thêm vào dsMaHoaDon, nếu hóa đơn không lập ở ngày đã chọn loại bỏ khỏi dsHoaDonOutPut
             for (int i = 0; i < dsHoaDonOutput.size(); i++) {
@@ -757,12 +748,15 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     i--;
                 }
             }
-            if (dsMaHoaDon.size() != 0) {
+//            Xử lý lấy dữ liệu
+            if (!dsMaHoaDon.isEmpty()) {
                 double thanhTien = 0;
                 int soLuong = 0;
-                Set<String> uniqueMaHoaDon = new HashSet<>(); // Mượn đặc tính của set để kiểm tra trùng giá trị
+                // Mượn đặc tính của set để kiểm tra trùng giá trị
+                Set<String> uniqueMaHoaDon = new HashSet<>();
+
                 for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
-                    if (dsQADaKiemTra.size() == 0) {
+                    if (dsQADaKiemTra.isEmpty()) {
                         dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                         soLuong += cthd.getSoLuong();
                         dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
@@ -797,37 +791,39 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     }
                 }
             }
-        } else {
-            LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
-            LocalDate localDate2 = new java.sql.Date(date2.getTime()).toLocalDate();
-            for (int i = 0; i < dsHoaDonOutput.size(); i++) {
-                LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
-                if (localDate.isBefore(localDate1) || localDate.isAfter(localDate2)) {
-                    dsHoaDonOutput.remove(i);
-                    i--;
-                    continue;
-                }
-                dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
-            }
-            for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
-                if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
-                    dsChiTietHoaDonOutput.remove(i);
-                    i--;
-                }
-            }
         }
+//        else {
+//            LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
+//            LocalDate localDate2 = new java.sql.Date(date2.getTime()).toLocalDate();
+//            for (int i = 0; i < dsHoaDonOutput.size(); i++) {
+//                LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
+//                if (localDate.isBefore(localDate1) || localDate.isAfter(localDate2)) {
+//                    dsHoaDonOutput.remove(i);
+//                    i--;
+//                    continue;
+//                }
+//                dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
+//            }
+//            for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
+//                if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
+//                    dsChiTietHoaDonOutput.remove(i);
+//                    i--;
+//                }
+//            }
+//        }
 
         //        Xử lý đưa dữ liệu lên table
-        List<Map.Entry<String, Integer>> resultSortQuatity = new ArrayList<>(this.dsSoLuongQuanAo.entrySet());
         // Sắp xếp giảm dần theo số lượng theo mã quần áo
+        List<Map.Entry<String, Integer>> resultSortQuatity = new ArrayList<>(this.dsSoLuongQuanAo.entrySet());
         sapXepGiamDan(resultSortQuatity);
+
 //        Load dữ liệu lên table
         double mucGiamGia = 0;
         double tongChietKhau = 0;
         double tongThanhTienCuaMotQuanAo = 0;
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
-        if (dsMaHoaDon.size() != 0) {
+        if (!dsMaHoaDon.isEmpty()) {
             for (Map.Entry<String, Integer> resultSort : resultSortQuatity) {
                 String maQuanAoTbl = "", tenQuanAoTbl = "",
                         loaQuanAoTbl = "", thuongHieuTbl = "", soLuongTbl = "", loiNhuanTbl = "";
@@ -837,29 +833,32 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     if (resultSort.getKey().contains(item.getValue().getMaQA())) {
                         maQuanAoTbl = item.getValue().getMaQA();
                         tenQuanAoTbl = item.getValue().getTenQA();
+
                         for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
                             if (item.getValue().getLoaiQuanAo().contains(loaiQA.getKey())) {
                                 loaQuanAoTbl = loaiQA.getValue();
                             }
                         }
                         thuongHieuTbl = item.getValue().getThuongHieu();
+                        soLuongTbl = NumberStandard.formatInteger(resultSort.getValue());
                     }
-//                    Tính tổng chiết khấu
-                    for (KhuyenMai km : dsKhuyenMai) {
-                        if (item.getKey().getKhuyenMai().getMaKhuyenMai().contains(km.getMaKhuyenMai())) {
-                            mucGiamGia = km.getMucGiamGia();
-                        } else {
-                            mucGiamGia = 0;
-                        }
-                    }
-//                    Lập danh sách lợi nhuận
-                    for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
-                        if (cthd.getHoaDon().getMaHoaDon().contains(item.getKey().getMaHoaDon())) {
-                            double giaGoc = cthd.getSoLuong() * item.getValue().getGiaNhap();
-                            tongThanhTienCuaMotQuanAo += cthd.getGiaBan() * cthd.getSoLuong() -
-                                    cthd.getGiaBan() * cthd.getSoLuong() * mucGiamGia / 100;
-                        }
-                    }
+////                    Tính tổng chiết khấu
+//                    for (KhuyenMai km : dsKhuyenMai) {
+//                        if (item.getKey().getKhuyenMai().getMaKhuyenMai().contains(km.getMaKhuyenMai())) {
+//                            mucGiamGia = km.getMucGiamGia();
+//                        } else {
+//                            mucGiamGia = 0;
+//                        }
+//                    }
+
+////                    Lập danh sách lợi nhuận
+//                    for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
+//                        if (cthd.getHoaDon().getMaHoaDon().contains(item.getKey().getMaHoaDon())) {
+//                            double giaGoc = cthd.getSoLuong() * item.getValue().getGiaNhap();
+//                            tongThanhTienCuaMotQuanAo += cthd.getGiaBan() * cthd.getSoLuong() -
+//                                    cthd.getGiaBan() * cthd.getSoLuong() * mucGiamGia / 100;
+//                        }
+//                    }
                 }
 
                 for (HashMap.Entry<String, Double> loiNhuanQA : dsThanhTien.entrySet()) {
@@ -867,22 +866,32 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         loiNhuanTbl = NumberStandard.formatMoney(loiNhuanQA.getValue());
                     }
                 }
+
                 Object[] row = {maQuanAoTbl, tenQuanAoTbl, loaQuanAoTbl, thuongHieuTbl, soLuongTbl, loiNhuanTbl};
                 modelTopQuanAo.addRow(row);
             }
-            this.txtTongSoLuongQuanAo.setText(modelTopQuanAo.getValueAt(0, 4).toString());
-//          Tên quần áo và Loại quần áo
-            for (QuanAo qaLoad : dsQA) {
-                if (qaLoad.getMaQA().contains(modelTopQuanAo.getValueAt(0, 0).toString())) {
-                    this.txtTenQuanAo.setText(qaLoad.getTenQA());
-                    for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
-                        if (qaLoad.getLoaiQuanAo().contains(loaiQA.getKey())) {
-                            this.txtLoaiQuanAo.setText(loaiQA.getValue());
+//            TODO: Xử lý lấy thông tin quần áo Load lên Fields
+            if (modelTopQuanAo.getColumnCount() == 6) {
+                //            Set Tổng số lượng quần áo
+                this.txtTongSoLuongQuanAo.setText(modelTopQuanAo.getValueAt(0, 4).toString());
+//            Set tên quần áo và Loại quần áo
+                for (QuanAo qaLoad : dsQA) {
+                    if (modelTopQuanAo.getRowCount() > 0) {
+                        if (qaLoad.getMaQA().contains(modelTopQuanAo.getValueAt(0, 0).toString())) {
+//                        Set Tên Quần Áo
+                            this.txtTenQuanAo.setText(qaLoad.getTenQA());
+                            for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
+                                if (qaLoad.getLoaiQuanAo().contains(loaiQA.getKey())) {
+//                        Set Loại Quần Áo
+                                    this.txtLoaiQuanAo.setText(loaiQA.getValue());
+                                }
+                            }
                         }
                     }
                 }
+//            Set Lợi nhuận
+                this.txtLoiNhuan.setText(modelTopQuanAo.getValueAt(0, 5).toString());
             }
-            this.txtLoiNhuan.setText(modelTopQuanAo.getValueAt(0, 5).toString());
         } else {
             modelTopQuanAo.setRowCount(0);
             this.txtTongSoLuongQuanAo.setText("Không có thông tin");
@@ -943,7 +952,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
     }
-
+// TODO: Xử lý đồng bộ thống kê theo khoảng thời gian
     /**
      * Sắp xếp dữ liệu theo doanh thu và lợi nhuận giảm dần
      *
@@ -1001,7 +1010,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      */
     private void sapXepGiamDan(List<Map.Entry<String, Integer>> list) {
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
-
             @Override
             public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
                 // So sánh giảm dần theo số lượng
@@ -1020,23 +1028,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     return Double.compare(loiNhuan2, loiNhuan1);
                 }
                 return soLuongComparison;
-            }
-
-
-//            @Override
-//            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
-//                // So sánh giá trị Double, sắp xếp giảm dần
-//                return Integer.compare(entry2.getValue(), entry1.getValue());
-//            }
-        });
-    }
-
-    private void sapXepGiamDanTheoLoiNhuan(List<Map.Entry<String, Double>> list) {
-        Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
-            @Override
-            public int compare(Map.Entry<String, Double> entry1, Map.Entry<String, Double> entry2) {
-                // So sánh giá trị Double, sắp xếp giảm dần
-                return Double.compare(entry2.getValue(), entry1.getValue());
             }
         });
     }

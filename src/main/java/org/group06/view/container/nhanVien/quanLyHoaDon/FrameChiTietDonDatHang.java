@@ -41,7 +41,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
 
-        if (pnlPhieuTam.checkGhiChu(phieuDat.getNgayNhan()) != 1) {
+        if (this.phieuDat.getTrangThai() != PhieuDat.CHO_NHAN_HANG) {
             btnNhanHang.setEnabled(false);
         } else {
             btnNhanHang.setEnabled(true);
@@ -328,6 +328,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
                 }
             }
             JOptionPane.showMessageDialog(this, "Đã lưu hóa đơn");
+
             dao_PhieuDat.delete(phieuDat.getMaPhieuDat());
             pnlPhieuTam.loadDataTable();
             this.dispose();

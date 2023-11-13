@@ -10,7 +10,6 @@ import org.group06.view.components.panels.ImagePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;

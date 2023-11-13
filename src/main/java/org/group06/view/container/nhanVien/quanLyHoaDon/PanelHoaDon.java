@@ -125,7 +125,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
         pnlTimHDLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dchTimTheoNgay, lblTimTheoNgay, lblTimTheoTenKH, txtTimTheoTenKH});
 
-        dchTimTheoNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchTimTheoNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
 
         dchTimTheoNgay.getDateEditor().setEnabled(false);
 

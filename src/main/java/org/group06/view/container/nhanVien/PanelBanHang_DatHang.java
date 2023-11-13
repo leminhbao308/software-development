@@ -862,7 +862,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         );
 
         dchNgayNhanHang.setLocale(new Locale("vi", "VN"));
-        dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchNgayNhanHang.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
@@ -1256,7 +1256,13 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         Date ngayHienTai = new Date(System.currentTimeMillis());
         Date ngayNhanHang = new Date(dchNgayNhanHang.getDate().getTime());
 
-        PhieuDat phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai);
+        PhieuDat phieuDatHang = null;
+        if (ngayNhanHang.toLocalDate().isEqual(ngayHienTai.toLocalDate())) {
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHO_NHAN_HANG);
+        } else {
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHUA_DEN_HEN);
+        }
+
         DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
         int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn hoàn tất đặt hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {

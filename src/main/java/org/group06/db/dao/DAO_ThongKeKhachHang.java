@@ -3,7 +3,10 @@ package org.group06.db.dao;
 import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.HoaDon;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {

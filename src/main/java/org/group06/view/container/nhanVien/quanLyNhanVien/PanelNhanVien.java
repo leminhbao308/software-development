@@ -7,7 +7,7 @@ package org.group06.view.container.nhanVien.quanLyNhanVien;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
-import org.group06.model.entity.PasswordRenderer;
+import org.group06.utils.FormatCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -544,7 +544,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     public void loadDataTable() {
         String gioiTinh = "", trangThai = "";
-        tblNhanVien.getColumnModel().getColumn(2).setCellRenderer(new PasswordRenderer());
+        FormatCellRenderer.formatPasswordCellRenderer(tblNhanVien, 2);
         ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);

@@ -126,7 +126,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         );
 
         dchChonNgay.setLocale(new Locale("vi", "VN"));
-        dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchChonNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 
@@ -272,11 +272,11 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         );
 
         dchTuNgay.setLocale(new Locale("vi", "VN"));
-        dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchTuNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
         dchDenNgay.setLocale(new Locale("vi", "VN"));
-        dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
         dchDenNgay.getDateEditor().setEnabled(false);
         ((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
 

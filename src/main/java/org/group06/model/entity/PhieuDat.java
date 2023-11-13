@@ -5,8 +5,7 @@ import java.sql.Date;
 public class PhieuDat {
     public static final int CHUA_DEN_HEN = 0;
     public static final int CHO_NHAN_HANG = 1;
-    public static final int DA_NHAN_HANG = 2;
-    public static final int DA_QUA_HAN = 3;
+    public static final int DA_QUA_HAN = -1;
 
     private String maPhieuDat;
     private Date ngayTao;

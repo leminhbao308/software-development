@@ -2,6 +2,7 @@ package org.group06.view.screen;
 
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
+import org.group06.view.components.panels.ImagePanel;
 import org.group06.view.container.khachHang.PanelKhachHang;
 import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -72,10 +73,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-//        pnlContainer = new PanelBanHang_DatHang(nv);
-//        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
-        pnlContainer = new PanelThongKeQuanAo();
-//        pnlContainer = new PanelLoaiQuanAo();
+        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
@@ -270,12 +268,12 @@ public class Frame extends JFrame {
         mniDoiMatKhau.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniDangXuat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-        mnNhanVien.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_EMPLOYEE));
-        mnKhachHang.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CUSTOMER));
-        mnQuanAo.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CLOTHES));
-        mnHoaDon.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_BILL));
-        mnThongKe.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CHART));
-        mnTaiKhoan.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_USER));
+        mnNhanVien.setIcon(ImagePath.loadIcon(ImagePath.ICON_EMPLOYEE));
+        mnKhachHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_CUSTOMER));
+        mnQuanAo.setIcon(ImagePath.loadIcon(ImagePath.ICON_CLOTHES));
+        mnHoaDon.setIcon(ImagePath.loadIcon(ImagePath.ICON_BILL));
+        mnThongKe.setIcon(ImagePath.loadIcon(ImagePath.ICON_CHART));
+        mnTaiKhoan.setIcon(ImagePath.loadIcon(ImagePath.ICON_USER));
 
         mnuMain.add(mnNhanVien);
         mnuMain.add(Box.createHorizontalStrut(10));

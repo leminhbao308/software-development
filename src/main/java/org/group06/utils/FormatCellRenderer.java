@@ -22,4 +22,15 @@ public class FormatCellRenderer {
         tbl.getColumnModel().getColumn(index).setCellRenderer(rightRenderer);
     }
 
+    public static void formatPasswordCellRenderer(JTable tbl, int index) {
+        DefaultTableCellRenderer passwordRenderer = new DefaultTableCellRenderer(){
+            @Override
+            protected void setValue(Object value) {
+                setText("••••••••");
+            }
+        };
+        passwordRenderer.setHorizontalAlignment(DefaultTableCellRenderer.LEFT);
+        tbl.getColumnModel().getColumn(index).setCellRenderer(passwordRenderer);
+    }
+
 }

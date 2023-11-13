@@ -1,5 +1,6 @@
 package org.group06.db.dao;
 
+import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.ChiTietPhieuDat;
 
 import java.sql.Connection;
@@ -7,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.group06.db.DatabaseConnect;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 

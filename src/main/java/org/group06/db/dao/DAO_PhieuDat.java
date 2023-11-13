@@ -227,7 +227,17 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     @Override
     public boolean update(PhieuDat t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean success = false;
+        String sql = "UPDATE PhieuDat SET TRANGTHAI = ? WHERE MAPHIEUDAT = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, t.getTrangThai());
+            statement.setString(2, t.getMaPhieuDat());
+            success = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Lỗi cập nhật trạng thái phiếu đặt");
+        }
+        return success;
     }
 
     @Override

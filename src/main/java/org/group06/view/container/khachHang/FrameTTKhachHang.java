@@ -46,8 +46,8 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
         lblMaKH = new javax.swing.JLabel();
         lblTenKH = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
-        btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnCapNhat = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
         txtMaKH = new javax.swing.JTextField();
         txtTenKH = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
@@ -69,8 +69,7 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
         lblSDT.setFont(FontConstant.FONT_LABEL);
         lblSDT.setText("Số điện thoại:");
 
-        btnCapNhat.setFont(FontConstant.FONT_BUTTON);
-        btnCapNhat.setForeground(ColorConstant.WHITE);
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -79,8 +78,7 @@ public class FrameTTKhachHang extends javax.swing.JFrame {
             }
         });
 
-        btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
-        btnXoaTrang.setForeground(ColorConstant.WHITE);
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.setEnabled(false);

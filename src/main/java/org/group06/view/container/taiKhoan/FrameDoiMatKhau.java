@@ -4,10 +4,11 @@
  */
 package org.group06.view.container.taiKhoan;
 
-import javax.swing.JOptionPane;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
+
+import javax.swing.*;
 
 /**
  *

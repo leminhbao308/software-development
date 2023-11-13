@@ -7,7 +7,6 @@ package org.group06.view.container.khachHang;
 import org.group06.db.DatabaseConnect;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
@@ -42,8 +41,8 @@ public class FrameThemKH extends javax.swing.JFrame {
 
         lblTitleThemKH = new javax.swing.JLabel();
         pnlChucNang = new javax.swing.JPanel();
-        btnLuu = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnLuu = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
         pnlThemKH = new javax.swing.JPanel();
         lblMaKH = new javax.swing.JLabel();
         lblTenKH = new javax.swing.JLabel();
@@ -58,8 +57,7 @@ public class FrameThemKH extends javax.swing.JFrame {
         lblTitleThemKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleThemKH.setText("Thêm Mới Khách Hàng");
 
-        btnLuu.setFont(FontConstant.FONT_BUTTON);
-        btnLuu.setForeground(ColorConstant.WHITE);
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +66,7 @@ public class FrameThemKH extends javax.swing.JFrame {
             }
         });
 
-        btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
-        btnXoaTrang.setForeground(ColorConstant.WHITE);
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
