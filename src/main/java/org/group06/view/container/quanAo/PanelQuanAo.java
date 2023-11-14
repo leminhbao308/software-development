@@ -49,7 +49,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 3);
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 4);
         FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 7);
-        FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 8);
+        FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 8);
         FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 9);
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 10);
     }
@@ -1223,6 +1223,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setStatusBtn(this.btnThemMoi, false);
         ComponentStatus.setStatusBtn(this.btnLuu, false);
         setAllField(false);
+        
+        
 
         this.viTri = this.tblQuanAo.getSelectedRow();
 //      Xử lý đổ dữ liệu từ table lên fields
