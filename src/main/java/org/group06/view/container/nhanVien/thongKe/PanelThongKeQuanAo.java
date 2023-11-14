@@ -5,11 +5,12 @@ import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_KhuyenMai;
 import org.group06.db.dao.DAO_QuanAo;
-import org.group06.model.entity.*;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
+import org.group06.model.entity.KhuyenMai;
+import org.group06.model.entity.QuanAo;
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
-import org.group06.view.container.nhanVien.quanLyHoaDon.WinChiTietHoaDon;
-import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,8 +40,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * Creates new form PanelThongKeQuanAo
      */
     public PanelThongKeQuanAo() {
-        dsHoaDon = dao_HoaDon.getAll();
-        dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
         dsQA = dao_QuanAo.getAll();
         initComponents();
         FormatCellRenderer.formatCellRendererLeft(tblTopQuanAo, 3);
@@ -49,12 +48,70 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         this.txtLoaiQuanAo.setText("Không có thông tin");
         this.txtTenQuanAo.setText("Không có thông tin");
         this.txtLoiNhuan.setText("Không có thông tin");
+        winLoading.setLocationRelativeTo(null);
+        winLoading.setVisible(true);
+        loadingPhase();
+    }
+
+    private void loadingPhase() {
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() {
+                int totalCount = dao_HoaDon.loadMaHDCount();
+                int batchSize = 50;  // Điều chỉnh kích thước lô theo nhu cầu của bạn
+                int start = 0;
+
+                while (start < totalCount) {
+                    int stop = Math.min(start + batchSize, totalCount);
+                    List<HoaDon> batchHoaDon = dao_HoaDon.getBatch(start, stop);
+
+                    for (HoaDon hoaDon : batchHoaDon) {
+                        // Kiểm tra hoá đơn đã tồn tại trong dsHoaDon chưa
+                        if (dsHoaDon.stream().noneMatch(hd -> hd.getMaHoaDon().equals(hoaDon.getMaHoaDon()))) {
+                            // Thêm hoá đơn vào dsHoaDon
+                            dsHoaDon.add(hoaDon);
+                            // Load chi tiết hoá đơn
+                            List<ChiTietHoaDon> listChiTietHoaDon = dao_ChiTietHoaDon.getAllCTQA(hoaDon.getMaHoaDon());
+                            dsChiTietHoaDon.addAll(listChiTietHoaDon);
+                        }
+
+                        // Cập nhật tiến trình
+                        int progress = dsHoaDon.size() * 100 / totalCount;
+                        publish(progress);
+                    }
+                    start += batchSize;
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Integer> chunks) {
+                // Cập nhật thanh tiến trình trong quá trình thực hiện
+                for (int progress : chunks) {
+                    SwingUtilities.invokeLater(() -> prgStatus.setValue(progress));
+                }
+            }
+
+            @Override
+            protected void done() {
+                // Thực hiện các tác vụ cuối cùng sau khi công việc nền hoàn thành
+                winLoading.setVisible(false);
+            }
+        };
+
+        worker.execute();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        winLoading = new javax.swing.JDialog();
+        pnlLoading = new javax.swing.JPanel();
+        prgStatus = new javax.swing.JProgressBar();
+        lblTitleLoading = new javax.swing.JLabel();
+        lblSubTitleLoading = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         tabXemThongTin = new javax.swing.JTabbedPane();
         pnlBangChiTiet = new javax.swing.JPanel();
@@ -91,6 +148,58 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         scrTopQuanAo = new javax.swing.JScrollPane();
         tblTopQuanAo = new javax.swing.JTable();
         pnlBieuDo = new javax.swing.JPanel();
+
+        winLoading.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        winLoading.setAlwaysOnTop(true);
+        winLoading.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        winLoading.setResizable(false);
+        winLoading.setSize(new java.awt.Dimension(450, 180));
+        winLoading.setType(java.awt.Window.Type.UTILITY);
+
+        pnlLoading.setPreferredSize(new java.awt.Dimension(450, 180));
+
+        lblTitleLoading.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTitleLoading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitleLoading.setText("Vui lòng chờ...");
+
+        lblSubTitleLoading.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSubTitleLoading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSubTitleLoading.setText("Đang tải dữ liệu thống kê");
+
+        javax.swing.GroupLayout pnlLoadingLayout = new javax.swing.GroupLayout(pnlLoading);
+        pnlLoading.setLayout(pnlLoadingLayout);
+        pnlLoadingLayout.setHorizontalGroup(
+            pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoadingLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitleLoading, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                    .addComponent(lblSubTitleLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(prgStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlLoadingLayout.setVerticalGroup(
+            pnlLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoadingLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitleLoading)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSubTitleLoading)
+                .addGap(18, 18, 18)
+                .addComponent(prgStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout winLoadingLayout = new javax.swing.GroupLayout(winLoading.getContentPane());
+        winLoading.getContentPane().setLayout(winLoadingLayout);
+        winLoadingLayout.setHorizontalGroup(
+            winLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlLoading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        winLoadingLayout.setVerticalGroup(
+            winLoadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -687,7 +796,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     // </editor-fold>
 
     /**
-     * Sắp xếp giảm dần theo Số lượng nếu số lượng bằng nhau thì sắp xếp giảm dần theo lợi nhuận
+     * Sắp xếp giảm dần theo Số lượng nếu số lượng bằng nhau thì sắp xếp giảm
+     * dần theo lợi nhuận
      *
      * @param list Dữ liệu cần sắp xếp
      */
@@ -775,10 +885,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * liệu đúng được giữ lại. Nếu cả 2 ngày đều null thì lọc dữ liệu theo toàn
      * bộ thời gian
      *
-     * @param date1                Ngày được chọn, hoặc ngày bắt đầu khoảng thời gian được chọn
-     * @param date2                Ngày kết thúc khoảng thời gian được chọn, hoặc null nếu chỉ
-     *                             lọc dữ liệu theo một ngày được chọn
-     * @param dsHoaDonInput        Dữ liệu về hoá đơn
+     * @param date1 Ngày được chọn, hoặc ngày bắt đầu khoảng thời gian được chọn
+     * @param date2 Ngày kết thúc khoảng thời gian được chọn, hoặc null nếu chỉ
+     * lọc dữ liệu theo một ngày được chọn
+     * @param dsHoaDonInput Dữ liệu về hoá đơn
      * @param dsChiTietHoaDonInput Dữ liệu về chi tiết hoá đơn
      */
     private void locDuLieu(@Nullable Date date1, @Nullable Date date2, @NotNull ArrayList<HoaDon> dsHoaDonInput, @NotNull ArrayList<ChiTietHoaDon> dsChiTietHoaDonInput) {
@@ -913,9 +1023,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * Lọc dữ liệu theo tháng, năm được chọn hoặc theo năm được chọn, dữ lệu
      * đúng được giữ lại
      *
-     * @param month                Tháng được chọn, có thể = 0 nếu chỉ cần lọc theo năm
-     * @param year                 Năm được chọn
-     * @param dsHoaDonInput        Dữ liệu về hoá đơn
+     * @param month Tháng được chọn, có thể = 0 nếu chỉ cần lọc theo năm
+     * @param year Năm được chọn
+     * @param dsHoaDonInput Dữ liệu về hoá đơn
      * @param dsChiTietHoaDonInput Dữ liệu về chi tiết hoá đơn
      */
     private void locDuLieu(int month, int year, ArrayList<HoaDon> dsHoaDonInput, ArrayList<ChiTietHoaDon> dsChiTietHoaDonInput) {
@@ -1046,8 +1156,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private javax.swing.JLabel lblDenNgay;
     private javax.swing.JLabel lblDoanhThu;
     private javax.swing.JLabel lblLoiNhuan;
+    private javax.swing.JLabel lblSubTitleLoading;
     private javax.swing.JLabel lblTKQuanAoHet;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblTitleLoading;
     private javax.swing.JLabel lblToanBo;
     private javax.swing.JLabel lblTongHD;
     private javax.swing.JLabel lblTongQA;
@@ -1055,6 +1167,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private com.toedter.calendar.JMonthChooser monthTheoThang;
     private javax.swing.JPanel pnlBangChiTiet;
     private javax.swing.JPanel pnlBieuDo;
+    private javax.swing.JPanel pnlLoading;
     private javax.swing.JPanel pnlTkQuanAoHet;
     private javax.swing.JPanel pnlTkTheoKhoangThoiGian;
     private javax.swing.JPanel pnlTkTheoNam;
@@ -1063,6 +1176,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTkToanBo;
     private javax.swing.JPanel pnlTongQuan;
     private javax.swing.JPanel pnlTongQuanQuanAo;
+    private javax.swing.JProgressBar prgStatus;
     private javax.swing.JScrollPane scrTopQuanAo;
     private javax.swing.JTabbedPane tabLuaChonThongKe;
     private javax.swing.JTabbedPane tabXemThongTin;
@@ -1071,6 +1185,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     private javax.swing.JTextField txtLoiNhuan;
     private javax.swing.JTextField txtTenQuanAo;
     private javax.swing.JTextField txtTongSoLuongQuanAo;
+    private javax.swing.JDialog winLoading;
     private com.toedter.calendar.JYearChooser yearTheoNam;
     private com.toedter.calendar.JYearChooser yearTheoThang;
     // End of variables declaration//GEN-END:variables
