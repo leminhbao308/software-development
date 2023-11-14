@@ -16,7 +16,7 @@ import java.awt.*;
  *
  * @author Dell
  */
-public class FrameThemKH extends javax.swing.JFrame {
+public class WinThemKH extends javax.swing.JFrame {
 
     private DAO_KhachHang dao_KhachHang;
     private PanelKhachHang pnlKhachHang;
@@ -24,7 +24,7 @@ public class FrameThemKH extends javax.swing.JFrame {
     /**
      * Creates new form FrameThemKH
      */
-    public FrameThemKH(PanelKhachHang pnlKhachHang) {
+    public WinThemKH(PanelKhachHang pnlKhachHang) {
         dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
         this.pnlKhachHang = pnlKhachHang;
         initComponents();

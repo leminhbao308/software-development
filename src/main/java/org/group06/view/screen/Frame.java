@@ -15,7 +15,7 @@ import org.group06.view.container.quanAo.PanelKhuyenMai;
 import org.group06.view.container.quanAo.PanelLoaiQuanAo;
 import org.group06.view.container.quanAo.PanelNhaCungCap;
 import org.group06.view.container.quanAo.PanelQuanAo;
-import org.group06.view.container.taiKhoan.FrameDoiMatKhau;
+import org.group06.view.container.taiKhoan.WinDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
@@ -201,7 +201,7 @@ public class Frame extends JFrame {
     private void addActionMenuTaiKhoan() {
 //        TODO: Add Panel Đổi mật khẩu trước khi thêm action
         mniDoiMatKhau.addActionListener(e -> {
-            new FrameDoiMatKhau(nv).setVisible(true);
+            new WinDoiMatKhau(nv).setVisible(true);
         });
 
         mniDangXuat.addActionListener(e -> {

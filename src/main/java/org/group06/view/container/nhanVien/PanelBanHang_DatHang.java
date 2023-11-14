@@ -10,7 +10,7 @@ import org.group06.utils.PDF_Creator;
 import org.group06.view.components.search.Data;
 import org.group06.view.components.search.SearchClickEvent;
 import org.group06.view.components.textFields.PlaceholderTextField;
-import org.group06.view.container.khachHang.FrameThemKH;
+import org.group06.view.container.khachHang.WinThemKH;
 import org.group06.view.container.khachHang.PanelKhachHang;
 
 import javax.swing.*;
@@ -1375,7 +1375,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_tabBanHang_DatHangStateChanged
 
     private void callFrameThemKH() {
-        FrameThemKH frThemKH = new FrameThemKH(new PanelKhachHang());
+        WinThemKH frThemKH = new WinThemKH(new PanelKhachHang());
         frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemKH.setResizable(false);
         frThemKH.setVisible(true);

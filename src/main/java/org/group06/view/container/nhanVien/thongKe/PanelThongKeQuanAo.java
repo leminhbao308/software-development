@@ -8,7 +8,7 @@ import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.*;
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
-import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
+import org.group06.view.container.nhanVien.quanLyHoaDon.WinChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -697,7 +697,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         }
 
         if (hoaDon != null) {
-            FrameChiTietHoaDon frCTHD = new FrameChiTietHoaDon(hoaDon, new PanelHoaDon());
+            WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(hoaDon, new PanelHoaDon());
             frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             frCTHD.setResizable(false);
             frCTHD.setVisible(true);

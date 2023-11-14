@@ -24,6 +24,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NameStandard;
 
 /**
@@ -44,6 +46,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         dchTimTheoNgayNhan.setLocale(new Locale("vi", "VN"));
         dsPD = dao_PhieuDat.getAll();
         loadDataTable();
+        FormatCellRenderer.formatCellRendererCenter(tblPhieuDat,0);
+        FormatCellRenderer.formatCellRendererRight(tblPhieuDat,5);
     }
 
     /**
@@ -328,7 +332,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimTheoTenNVKeyReleased
 
     private void callFrameChiTietHoaDon() {
-        FrameChiTietDonDatHang frCTDDH = new FrameChiTietDonDatHang(this.getSelectedPhieuDat(), this);
+        WinChiTietDonDatHang frCTDDH = new WinChiTietDonDatHang(this.getSelectedPhieuDat(), this);
         frCTDDH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTDDH.setResizable(false);
         frCTDDH.setVisible(true);

@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author Le Minh Bao
  */
-public class FrameDoiMatKhau extends javax.swing.JFrame {
+public class WinDoiMatKhau extends javax.swing.JFrame {
 
     private NhanVien nv;
     private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
@@ -22,7 +22,7 @@ public class FrameDoiMatKhau extends javax.swing.JFrame {
     /**
      * Creates new form FrameDoiMatKhau
      */
-    public FrameDoiMatKhau(NhanVien nv) {
+    public WinDoiMatKhau(NhanVien nv) {
         this.setResizable(false);
         this.nv = nv;
         initComponents();

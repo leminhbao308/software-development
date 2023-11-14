@@ -13,6 +13,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NameStandard;
 //import org.group06.view.components.*;
 
@@ -31,6 +33,9 @@ public class PanelKhachHang extends javax.swing.JPanel {
     public PanelKhachHang() {
         initComponents();
         loadDataTable();
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang,0);
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang,2);
+
     }
 
     /**
@@ -227,7 +232,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
-        FrameTTKhachHang frTTKH = new FrameTTKhachHang(this.getSelectedKH(), this);
+        WinTTKhachHang frTTKH = new WinTTKhachHang(this.getSelectedKH(), this);
         frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTKH.setResizable(false);
         frTTKH.setVisible(true);
@@ -318,7 +323,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }
 
     private void callFrameThemKH() {
-        FrameThemKH frThemKH = new FrameThemKH(this);
+        WinThemKH frThemKH = new WinThemKH(this);
         frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemKH.setResizable(false);
         frThemKH.setVisible(true);
