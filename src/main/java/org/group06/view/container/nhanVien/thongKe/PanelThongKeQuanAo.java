@@ -858,23 +858,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         thuongHieuTbl = item.getValue().getThuongHieu();
                         soLuongTbl = NumberStandard.formatInteger(resultSort.getValue());
                     }
-////                    Tính tổng chiết khấu
-//                    for (KhuyenMai km : dsKhuyenMai) {
-//                        if (item.getKey().getKhuyenMai().getMaKhuyenMai().contains(km.getMaKhuyenMai())) {
-//                            mucGiamGia = km.getMucGiamGia();
-//                        } else {
-//                            mucGiamGia = 0;
-//                        }
-//                    }
-
-////                    Lập danh sách lợi nhuận
-//                    for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
-//                        if (cthd.getHoaDon().getMaHoaDon().contains(item.getKey().getMaHoaDon())) {
-//                            double giaGoc = cthd.getSoLuong() * item.getValue().getGiaNhap();
-//                            tongThanhTienCuaMotQuanAo += cthd.getGiaBan() * cthd.getSoLuong() -
-//                                    cthd.getGiaBan() * cthd.getSoLuong() * mucGiamGia / 100;
-//                        }
-//                    }
                 }
 
                 for (HashMap.Entry<String, Double> loiNhuanQA : dsLoiNhuan.entrySet()) {

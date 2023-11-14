@@ -106,6 +106,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setHoaDon(dao_HoaDon.getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setGiaBan(resultSet.getDouble("LOINHUAN"));
                 chiTietHoaDon.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
