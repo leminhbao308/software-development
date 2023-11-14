@@ -602,8 +602,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabLuaChonThongKeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabLuaChonThongKeStateChanged
-        //        Xử lý thay đổi column theo tiêu chí thống kê tương ứng
-        DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
+
+        DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();//        Xử lý thay đổi column theo tiêu chí thống kê tương ứng
         modelTopQuanAo.setRowCount(0);
         if (tabLuaChonThongKe.getSelectedIndex() == 0 || tabLuaChonThongKe.getSelectedIndex() == -1) {
             modelTopQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"});
@@ -725,10 +725,10 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         dsSoLuongQuanAo = new HashMap<>();
         dsLoiNhuan = new HashMap<>();
         if (date2 == null) {
-//            if (date1 == null) {
-//                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
-//                return;
-//            }
+            if (date1 == null) {
+                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
+                return;
+            }
             LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
 //            Lấy mã hóa đơn theo ngày đã chọn và thêm vào dsMaHoaDon, nếu hóa đơn không lập ở ngày đã chọn loại bỏ khỏi dsHoaDonOutPut
             for (int i = 0; i < dsHoaDonOutput.size(); i++) {
@@ -749,27 +749,31 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             }
             if (dsMaHoaDon.size() != 0) {
                 double loiNhuan = 0;
+                double khuyenMai = 0;
                 int soLuong = 0;
                 // Mượn đặc tính của set để kiểm tra trùng giá trị
                 Set<String> uniqueMaHoaDon = new HashSet<>();
-
                 for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
                     if (dsQADaKiemTra.isEmpty()) {
                         dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                         soLuong += cthd.getSoLuong();
                         dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                        loiNhuan += cthd.getSoLuong() * cthd.getGiaBan();
+                        khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                        loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * cthd.getLoiNhuan() * cthd.getGiaBan() * cthd.getSoLuong();
                         dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                         uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
                         soLuong = 0;
+                        loiNhuan = 0;
                     } else {
                         if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
                             dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                             soLuong += cthd.getSoLuong();
                             dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                            loiNhuan += cthd.getLoiNhuan() * cthd.getGiaBan() * cthd.getSoLuong();
+                            khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                            loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
                             dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                             soLuong = 0;
+                            loiNhuan = 0;
                         } else {
 //                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
                             for (Map.Entry<String, Integer> item : dsSoLuongQuanAo.entrySet()) {
@@ -780,11 +784,13 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                             }
                             for (Map.Entry<String, Double> item : dsLoiNhuan.entrySet()) {
                                 if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
-                                    loiNhuan = item.getValue() + cthd.getSoLuong() * cthd.getGiaBan();
+                                    khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                                    loiNhuan = item.getValue() + ((cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong());
                                     dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                                 }
                             }
                             soLuong = 0;
+                            loiNhuan = 0;
                         }
                     }
                 }
@@ -847,15 +853,19 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 for (Map.Entry<HoaDon, QuanAo> item : dsQADaKiemTra.entrySet()) {
 //                for (QuanAo qaLoadTbl : dsQADaKiemTra) {
                     if (resultSort.getKey().contains(item.getValue().getMaQA())) {
+//                        Mã quần áo
                         maQuanAoTbl = item.getValue().getMaQA();
+//                        Tên quần áo
                         tenQuanAoTbl = item.getValue().getTenQA();
-
+//                        Loại quần áo
                         for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
                             if (item.getValue().getLoaiQuanAo().contains(loaiQA.getKey())) {
                                 loaQuanAoTbl = loaiQA.getValue();
                             }
                         }
+//                        Thương hiệu quần áo
                         thuongHieuTbl = item.getValue().getThuongHieu();
+//                        Số lượng quần áo
                         soLuongTbl = NumberStandard.formatInteger(resultSort.getValue());
                     }
                 }
@@ -952,6 +962,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         modelTopQuanAo.setRowCount(0);
     }
 // TODO: Xử lý đồng bộ thống kê theo khoảng thời gian
+
     /**
      * Sắp xếp dữ liệu theo doanh thu và lợi nhuận giảm dần
      *
