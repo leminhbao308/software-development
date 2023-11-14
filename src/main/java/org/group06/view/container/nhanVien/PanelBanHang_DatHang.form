@@ -1095,7 +1095,7 @@
                               <Component id="lblNgayNhanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="dchNgayNhanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace pref="924" max="32767" attributes="0"/>
+                              <EmptySpace pref="927" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_DatHang" min="-2" pref="10" max="-2" attributes="0"/>
@@ -1139,7 +1139,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayNhanHang.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayNhanHang.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchNgayNhanHang.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchNgayNhanHang.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchNgayNhanHang.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchNgayNhanHang.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbl_VAT_DatHang">
@@ -1189,6 +1189,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_TienKhachTra_DatHang">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
                         </Property>
@@ -1216,7 +1217,7 @@
                         <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
                         </Property>
-                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TienKhachTra_DatHangActionPerformed"/>
