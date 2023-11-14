@@ -8,8 +8,8 @@ import org.group06.utils.DateStandard;
 import org.group06.utils.NumberStandard;
 import org.group06.view.components.charts.BarChart;
 import org.group06.view.components.charts.data.BarChartData;
-import org.group06.view.container.nhanVien.quanLyHoaDon.WinChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
+import org.group06.view.container.nhanVien.quanLyHoaDon.WinChiTietHoaDon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -914,11 +914,11 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
             String maHoaDon = cthd.getHoaDon().getMaHoaDon();
             double giaBan = cthd.getGiaBan();
             double soLuong = cthd.getSoLuong();
-            double giaNhap = cthd.getSoLuong() * cthd.getQuanAo().getGiaNhap();
+            double loiNhuan = cthd.getLoiNhuan() / 100;
             double khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0;
 
             doanhThuMap.merge(maHoaDon, giaBan * soLuong * (1 - khuyenMai), Double::sum);
-            loiNhuanMap.merge(maHoaDon, (giaBan * soLuong * (1 - khuyenMai)) - giaNhap, Double::sum);
+            loiNhuanMap.merge(maHoaDon, (giaBan * soLuong * (1 - khuyenMai)) * loiNhuan, Double::sum);
         });
 
         List<Object[]> rowsDoanhThu = dsHoaDon.parallelStream()
@@ -971,7 +971,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
             tongQA += cthd.getSoLuong();
             double khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0;
             doanhThu += cthd.getGiaBan() * cthd.getSoLuong() * (1 - khuyenMai);
-            loiNhuan += (cthd.getGiaBan() * cthd.getSoLuong() * (1 - khuyenMai));
+            loiNhuan += (cthd.getGiaBan() * cthd.getSoLuong() * (1 - khuyenMai)) * cthd.getLoiNhuan() / 100;
         }
         loadTongQuanDoanhThu(tongHD, tongQA, doanhThu, loiNhuan);
     }
