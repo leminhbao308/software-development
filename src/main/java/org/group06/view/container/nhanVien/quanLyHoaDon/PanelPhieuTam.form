@@ -174,7 +174,7 @@
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTimTheoNgayDatPropertyChange"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayDat.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayDat.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayDat.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayDat.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayDat.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayDat.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnLamMoi">
@@ -232,7 +232,7 @@
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTimTheoNgayNhanPropertyChange"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayNhan.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayNhan.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayNhan.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTimTheoNgayNhan.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;&#xa;dchTimTheoNgayNhan.getDateEditor().setEnabled(false);&#xa;&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTimTheoNgayNhan.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -249,7 +249,7 @@
         <Component class="javax.swing.JTable" name="tblPhieuDat">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
+              <Table columnCount="9" rowCount="0">
                 <Column editable="false" title="M&#xe3; phi&#x1ebf;u &#x111;&#x1eb7;t" type="java.lang.Object"/>
                 <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
                 <Column editable="false" title="Ng&#xe0;y nh&#x1ead;n" type="java.lang.Object"/>
@@ -257,11 +257,17 @@
                 <Column editable="false" title="T&#xea;n nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                 <Column editable="false" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
                 <Column editable="false" title="Khuy&#x1ebf;n m&#xe3;i" type="java.lang.Object"/>
+                <Column editable="false" title="Thanh to&#xe1;n" type="java.lang.Object"/>
                 <Column editable="false" title="Ghi ch&#xfa;" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>

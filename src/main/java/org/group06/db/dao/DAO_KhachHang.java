@@ -93,7 +93,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setObject(1, name, java.sql.Types.NVARCHAR);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 KhachHang khachHang = new KhachHang();

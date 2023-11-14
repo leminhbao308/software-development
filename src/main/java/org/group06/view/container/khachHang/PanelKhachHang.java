@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import org.group06.utils.NameStandard;
 //import org.group06.view.components.*;
 
 /**
@@ -222,7 +223,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimSDTActionPerformed
-        
+
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
@@ -252,7 +253,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
-        String tenKH = txtTimTheoTen.getText();
+        String tenKH = NameStandard.formatCapitalize(txtTimTheoTen.getText());
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -342,8 +343,8 @@ public class PanelKhachHang extends javax.swing.JPanel {
             return null;
         } else {
             return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
-                                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
-                                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
         }
     }
 
