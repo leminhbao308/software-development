@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login extends JFrame implements ActionListener {
+public class WinDangNhap extends JFrame implements ActionListener {
 
     private JButton btnLogin;
     private javax.swing.JLabel lblSubTitle;
@@ -25,7 +25,7 @@ public class Login extends JFrame implements ActionListener {
     private PasswordField pwdPassword;
     private TextField txtUsername;
 
-    public Login() {
+    public WinDangNhap() {
         initComponents();
     }
 
@@ -153,11 +153,11 @@ public class Login extends JFrame implements ActionListener {
         }
 
         if (nv.getMatKhau().equals(new String(pwdPassword.getPassword()))) {
-            // Đóng cửa sổ Login
+            // Đóng cửa sổ WinDangNhap
             this.dispose();
             // Mở JFrame MainFrame
-            Frame mainFrame = new Frame(nv);
-            mainFrame.setVisible(true);
+            WinGiaoDienChinh mainWinGiaoDienChinh = new WinGiaoDienChinh(nv);
+            mainWinGiaoDienChinh.setVisible(true);
         } else {
             // Thông báo lỗi
             JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
