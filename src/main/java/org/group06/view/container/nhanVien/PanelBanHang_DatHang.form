@@ -1083,6 +1083,7 @@
                                   <Component id="lbl_VAT_DatHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblNgayNhanHang" alignment="0" max="32767" attributes="0"/>
                                   <Component id="chk_XuatDH_DatHang" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="chk_ThanhToanTruoc" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1095,11 +1096,13 @@
                               <Component id="lblNgayNhanHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="dchNgayNhanHang" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace pref="927" max="32767" attributes="0"/>
+                              <EmptySpace pref="924" max="32767" attributes="0"/>
                               <Component id="lbl_VAT_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spr_VAT_DatHang" min="-2" pref="10" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="chk_ThanhToanTruoc" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_TongTien_DatHang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_TienKhachTra_DatHang" min="-2" pref="56" max="-2" attributes="0"/>
@@ -1157,6 +1160,18 @@
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="chk_ThanhToanTruoc">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="14" style="0"/>
+                        </Property>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng thanh to&#xe1;n tr&#x1b0;&#x1edb;c"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chk_ThanhToanTruocItemStateChanged"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbl_TongTien_DatHang">
                       <Properties>
@@ -1217,7 +1232,6 @@
                         <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
                         </Property>
-                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TienKhachTra_DatHangActionPerformed"/>
@@ -1265,7 +1279,7 @@
                           <Font name="Segoe UI" size="14" style="0"/>
                         </Property>
                         <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t Ho&#xe1; &#x110;&#x1a1;n B&#xe1;n H&#xe0;ng"/>
+                        <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t Ho&#xe1; &#x110;&#x1a1;n &#x110;&#x1eb7;t H&#xe0;ng"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnDatHang">
