@@ -723,8 +723,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
         dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
         dsSoLuongQuanAo = new HashMap<>();
-        dsThanhTien = new HashMap<>();
-//        Xử lý
+        dsLoiNhuan = new HashMap<>();
         if (date2 == null) {
 //            if (date1 == null) {
 //                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
@@ -748,9 +747,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     i--;
                 }
             }
-//            Xử lý lấy dữ liệu
-            if (!dsMaHoaDon.isEmpty()) {
-                double thanhTien = 0;
+            if (dsMaHoaDon.size() != 0) {
+                double loiNhuan = 0;
                 int soLuong = 0;
                 // Mượn đặc tính của set để kiểm tra trùng giá trị
                 Set<String> uniqueMaHoaDon = new HashSet<>();
@@ -760,8 +758,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                         soLuong += cthd.getSoLuong();
                         dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                        thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
-                        dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
+                        loiNhuan += cthd.getSoLuong() * cthd.getGiaBan();
+                        dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                         uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
                         soLuong = 0;
                     } else {
@@ -769,8 +767,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                             dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                             soLuong += cthd.getSoLuong();
                             dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                            thanhTien += cthd.getSoLuong() * cthd.getGiaBan();
-                            dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
+                            loiNhuan += cthd.getLoiNhuan() * cthd.getGiaBan() * cthd.getSoLuong();
+                            dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                             soLuong = 0;
                         } else {
 //                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
@@ -780,15 +778,33 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                                     dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
                                 }
                             }
-                            for (Map.Entry<String, Double> item : dsThanhTien.entrySet()) {
+                            for (Map.Entry<String, Double> item : dsLoiNhuan.entrySet()) {
                                 if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
-                                    thanhTien = item.getValue() + cthd.getSoLuong() * cthd.getGiaBan();
-                                    dsThanhTien.put(cthd.getQuanAo().getMaQA(), thanhTien);
+                                    loiNhuan = item.getValue() + cthd.getSoLuong() * cthd.getGiaBan();
+                                    dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                                 }
                             }
                             soLuong = 0;
                         }
                     }
+                }
+            }
+        } else {
+            LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
+            LocalDate localDate2 = new java.sql.Date(date2.getTime()).toLocalDate();
+            for (int i = 0; i < dsHoaDonOutput.size(); i++) {
+                LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
+                if (localDate.isBefore(localDate1) || localDate.isAfter(localDate2)) {
+                    dsHoaDonOutput.remove(i);
+                    i--;
+                    continue;
+                }
+                dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
+            }
+            for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
+                if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
+                    dsChiTietHoaDonOutput.remove(i);
+                    i--;
                 }
             }
         }
@@ -861,7 +877,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 //                    }
                 }
 
-                for (HashMap.Entry<String, Double> loiNhuanQA : dsThanhTien.entrySet()) {
+                for (HashMap.Entry<String, Double> loiNhuanQA : dsLoiNhuan.entrySet()) {
                     if (loiNhuanQA.getKey().contains(resultSort.getKey())) {
                         loiNhuanTbl = NumberStandard.formatMoney(loiNhuanQA.getValue());
                     }
@@ -1018,7 +1034,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 if (soLuongComparison == 0) {
                     Double loiNhuan1 = 0.0;
                     Double loiNhuan2 = 0.0;
-                    for (Map.Entry<String, Double> tienLoi : dsThanhTien.entrySet()) {
+                    for (Map.Entry<String, Double> tienLoi : dsLoiNhuan.entrySet()) {
                         if (entry1.getKey().contains(tienLoi.getKey())) {
                             loiNhuan1 = tienLoi.getValue();
                         } else if (entry2.getKey().contains(tienLoi.getKey())) {
@@ -1133,7 +1149,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     // </editor-fold> 
     private HashMap<HoaDon, QuanAo> dsQADaKiemTra;
     private HashMap<String, Integer> dsSoLuongQuanAo;
-    private HashMap<String, Double> dsThanhTien;
     private HashMap<String, Double> dsLoiNhuan;
     private HashMap<String, Double> dsTongGiaGoc;
     private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();

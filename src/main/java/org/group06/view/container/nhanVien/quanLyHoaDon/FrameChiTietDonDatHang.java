@@ -323,7 +323,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         if (selection == JOptionPane.YES_OPTION) {
             if (dao_HoaDon.add(hoaDonBanHang)) {
                 for (ChiTietPhieuDat phieuDat : dsCTPD) {
-                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, phieuDat.getQuanAo(), phieuDat.getSoLuong(), phieuDat.getGiaBan());
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, phieuDat.getQuanAo(), phieuDat.getSoLuong(), phieuDat.getGiaBan(), );
                     dao_ChiTietHoaDon.add(cthd);
                 }
             }

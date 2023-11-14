@@ -67,12 +67,13 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
     @Override
     public boolean add(ChiTietHoaDon cthd) {
         try {
-            String sql = "INSERT INTO ChiTietHoaDon (MAHD, LOINHUAN, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ChiTietHoaDon (MAHD, LOINHUAN, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, cthd.getHoaDon().getMaHoaDon());
-            statement.setString(2, cthd.getQuanAo().getMaQA());
-            statement.setInt(3, cthd.getSoLuong());
-            statement.setDouble(4, cthd.getGiaBan());
+            statement.setDouble(2, cthd.getLoiNhuan());
+            statement.setString(3, cthd.getQuanAo().getMaQA());
+            statement.setInt(4, cthd.getSoLuong());
+            statement.setDouble(5, cthd.getGiaBan());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
