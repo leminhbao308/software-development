@@ -30,6 +30,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
@@ -51,6 +52,7 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
@@ -65,12 +67,13 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
     @Override
     public boolean add(ChiTietHoaDon t) {
         try {
-            String sql = "INSERT INTO ChiTietHoaDon (MAHD, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ChiTietHoaDon (MAHD, LOINHUAN, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, t.getHoaDon().getMaHoaDon());
-            statement.setString(2, t.getQuanAo().getMaQA());
-            statement.setInt(3, t.getSoLuong());
-            statement.setDouble(4, t.getGiaBan());
+            statement.setDouble(2, t.getLoiNhuan());
+            statement.setString(3, t.getQuanAo().getMaQA());
+            statement.setInt(4, t.getSoLuong());
+            statement.setDouble(5, t.getGiaBan());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
