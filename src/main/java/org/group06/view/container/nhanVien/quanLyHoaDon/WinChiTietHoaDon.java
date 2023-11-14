@@ -10,6 +10,7 @@ import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.FontConstant;
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
 import org.group06.utils.PDF_Creator;
 
@@ -26,16 +27,20 @@ import java.util.ArrayList;
 /**
  * @author Dell
  */
-public class FrameChiTietHoaDon extends javax.swing.JFrame {
+public class WinChiTietHoaDon extends javax.swing.JFrame {
 
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
 
-    public FrameChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
+    public WinChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
         this.pnlHoaDon = pnlHoaDon;
         initComponents();
         loadDataTable();
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD,1);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD,3);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD,2);
+
     }
 
     /**

@@ -31,6 +31,10 @@ public class PanelNhanVien extends javax.swing.JPanel {
     public PanelNhanVien() {
         initComponents();
         loadDataTable();
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,0);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,3);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,4);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,6);
     }
 
     /**
@@ -274,14 +278,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void callFrameTTNV() {
-        FrameTTNhanVien frTTNV = new FrameTTNhanVien(this.getSelectedNV(), this);
+        WinTTNhanVien frTTNV = new WinTTNhanVien(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
     }
 
     private void callFrameThemNV() {
-        FrameThemNhanVien frThemNV = new FrameThemNhanVien(this);
+        WinThemNhanVien frThemNV = new WinThemNhanVien(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
         frThemNV.setVisible(true);

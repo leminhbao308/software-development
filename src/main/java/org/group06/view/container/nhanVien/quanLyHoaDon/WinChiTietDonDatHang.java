@@ -11,6 +11,7 @@ import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_PhieuDat;
 import org.group06.model.entity.*;
 import org.group06.utils.FontConstant;
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 /**
  * @author Dell
  */
-public class FrameChiTietDonDatHang extends javax.swing.JFrame {
+public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private Connection connection = DatabaseConstant.getConnection();
     private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
@@ -36,7 +37,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     private NhanVien nhanVien;
     private KhuyenMai khuyenMai;
 
-    public FrameChiTietDonDatHang(PhieuDat phieuDat, PanelPhieuTam pnlPhieuTam) {
+    public WinChiTietDonDatHang(PhieuDat phieuDat, PanelPhieuTam pnlPhieuTam) {
         this.phieuDat = phieuDat;
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
@@ -47,6 +48,9 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
             btnNhanHang.setEnabled(true);
         }
         loadDataTable();
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo,1);
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo,3);
+        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo,2);
     }
 
     /**
