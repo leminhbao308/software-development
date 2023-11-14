@@ -1,10 +1,8 @@
 package org.group06;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
 import org.group06.view.screen.WinDangNhap;
-import org.group06.view.screen.WinGiaoDienChinh;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,11 +38,9 @@ public class Main {
             java.util.logging.Logger.getLogger(WinDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(() -> {
-//            WinDangNhap loginFrame = new WinDangNhap();
-            WinGiaoDienChinh winGiaoDienChinh = new WinGiaoDienChinh(new NhanVien("NV002", "Trương Quốc Bảo", "1111", true, "123456789", "Hà Nội", "0123456789", true, NhanVien.NVQL));
-//            loginFrame.setVisible(true);
-            winGiaoDienChinh.setVisible(true);
-            winGiaoDienChinh.requestFocus();
+            WinDangNhap winDangNhap = new WinDangNhap();
+            winDangNhap.setVisible(true);
+            winDangNhap.requestFocus();
         });
     }
 }
