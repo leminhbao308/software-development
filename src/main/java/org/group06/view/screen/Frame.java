@@ -10,6 +10,7 @@ import org.group06.view.container.nhanVien.quanLyHoaDon.PanelPhieuTam;
 import org.group06.view.container.nhanVien.quanLyNhanVien.PanelNhanVien;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeDoanhThu;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeKhachHang;
+import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
 import org.group06.view.container.quanAo.PanelKhuyenMai;
 import org.group06.view.container.quanAo.PanelLoaiQuanAo;
 import org.group06.view.container.quanAo.PanelNhaCungCap;
@@ -18,7 +19,6 @@ import org.group06.view.container.taiKhoan.FrameDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
-import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
 
 /**
  * @author Le Minh Bao
@@ -73,10 +73,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
 
-//        pnlContainer = new PanelBanHang_DatHang(nv);
-//        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
-        pnlContainer = new PanelThongKeQuanAo();
-//        pnlContainer = new PanelLoaiQuanAo();
+        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
@@ -271,26 +268,30 @@ public class Frame extends JFrame {
         mniDoiMatKhau.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniDangXuat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-        mnNhanVien.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_EMPLOYEE));
-        mnKhachHang.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CUSTOMER));
-        mnQuanAo.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CLOTHES));
-        mnHoaDon.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_BILL));
-        mnThongKe.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_CHART));
-        mnTaiKhoan.setIcon(ImagePath.loadBlackIcon(ImagePath.ICON_USER));
+        mnNhanVien.setIcon(ImagePath.loadIcon(ImagePath.ICON_EMPLOYEE));
+        mnKhachHang.setIcon(ImagePath.loadIcon(ImagePath.ICON_CUSTOMER));
+        mnQuanAo.setIcon(ImagePath.loadIcon(ImagePath.ICON_CLOTHES));
+        mnHoaDon.setIcon(ImagePath.loadIcon(ImagePath.ICON_BILL));
+        mnThongKe.setIcon(ImagePath.loadIcon(ImagePath.ICON_CHART));
+        mnTaiKhoan.setIcon(ImagePath.loadIcon(ImagePath.ICON_USER));
 
         mnuMain.add(mnNhanVien);
         mnuMain.add(Box.createHorizontalStrut(10));
         mnuMain.add(mnKhachHang);
         mnuMain.add(Box.createHorizontalStrut(10));
-        mnuMain.add(mnQuanAo);
+        if (nv.getChucVu().equals(NhanVien.NVQL)) {
+            mnuMain.add(mnQuanAo);
+        }
         mnuMain.add(Box.createHorizontalGlue());
         mnuMain.add(mnTaiKhoan);
 
         //Menu Nhan Vien
         mnNhanVien.add(mniBanHang_DatHang);
         mnNhanVien.add(new JSeparator());
-        mnNhanVien.add(mniQuanLyNhanVien);
-        mnNhanVien.add(new JSeparator());
+        if (nv.getChucVu().equals(NhanVien.NVQL)) {
+            mnNhanVien.add(mniQuanLyNhanVien);
+            mnNhanVien.add(new JSeparator());
+        }
         mnNhanVien.add(mnHoaDon);
         mnNhanVien.add(mnThongKe);
 

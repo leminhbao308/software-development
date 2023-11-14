@@ -1,6 +1,6 @@
 package org.group06.view.container.quanAo;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhuyenMai;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.*;
@@ -10,15 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -334,12 +331,12 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                                                 .addGap(14, 14, 14))))
         );
 
-        dchNgayBatDau.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchNgayBatDau.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
 
         dchNgayBatDau.getDateEditor().setEnabled(false);
 
         ((com.toedter.calendar.JTextFieldDateEditor) dchNgayBatDau.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);
-        dchNgayKetThuc.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
+        dchNgayKetThuc.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
 
         dchNgayKetThuc.getDateEditor().setEnabled(false);
 
@@ -593,14 +590,14 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     java.sql.Date ngayBatDauCTKM = new java.sql.Date(this.dchNgayBatDau.getDate().getTime());
                     java.sql.Date ngayKetThucCTKM = new java.sql.Date(this.dchNgayKetThuc.getDate().getTime());
 //                    Lấy dữ liệu chương trình khuyến mãi cần cập nhật
-                    this.ctkmCapNhat = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getByID(maCTKM);
+                    this.ctkmCapNhat = new DAO_KhuyenMai(DatabaseConstant.getConnection()).getByID(maCTKM);
                     this.ctkmCapNhat.setTenCTKM(tenCTKM);
                     this.ctkmCapNhat.setMucGiamGia(mucGiamGiaCTKM);
                     this.ctkmCapNhat.setSoLuotSuDung(soLuotSDCTKM);
                     this.ctkmCapNhat.setNgayBatDau(ngayBatDauCTKM);
                     this.ctkmCapNhat.setNgayKetThuc(ngayKetThucCTKM);
 //                    Xử lý cập nhật dữ liệu vào cơ sở dữ liệu
-                    this.ctkm_DAO = new DAO_KhuyenMai(DatabaseConnect.getConnection());
+                    this.ctkm_DAO = new DAO_KhuyenMai(DatabaseConstant.getConnection());
                     if (this.ctkm_DAO.update(ctkmCapNhat)) {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã cập nhật thành công chương trình khuyến mãi " + this.ctkmCapNhat.getTenCTKM());
@@ -633,7 +630,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblKhuyenMai.getModel();
                     modelTable.addRow(data);
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
-                    this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConnect.getConnection());
+                    this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConstant.getConnection());
                     if (this.themMoiCTKM.add(ctkm)) {
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
                         System.out.println("Thêm mới thành công loại chương trình khuyến mãi!");
@@ -878,7 +875,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenCTKM;
     private javax.swing.JTextField txtTimCTKM;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConnect.getConnection()).getAll();
+    private ArrayList<KhuyenMai> dsKhuyenMai = new DAO_KhuyenMai(DatabaseConstant.getConnection()).getAll();
     private boolean statusBtnThemMoi = true;
     private boolean statusBtnCapNhat = true;
     private boolean statusClickCheckDate = false;

@@ -137,6 +137,36 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         }
     }
 
+    @Override
+    public ArrayList<QuanAo> getBatch(int start, int end) {
+        ArrayList<QuanAo> dsQuanAo = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM QuanAo ORDER BY MAQA OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                QuanAo quanAo = new QuanAo();
+                quanAo.setMaQA(result.getString("MAQA"));
+                quanAo.setTenQA(result.getString("TENQA"));
+                quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
+                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setSoLuong(result.getInt("SOLUONG"));
+                quanAo.setThuongHieu(result.getString("THUONGHIEU"));
+                quanAo.setGiaNhap(result.getDouble("GIANHAP"));
+                quanAo.setLoiNhuan(result.getDouble("LOINHUAN"));
+                quanAo.setNhaCungCap(new DAO_NhaCungCap(connection).getByID(result.getString("MANCC")));
+                quanAo.setTrangThai(result.getBoolean("TRANGTHAI"));
+                quanAo.setHinhAnh(result.getString("HINHANH"));
+                dsQuanAo.add(quanAo);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsQuanAo;
+    }
+
     public HashMap<String, String> getAllLoaiQuanAo() {
         HashMap<String, String> dsLoaiQuanAo = new HashMap<>();
         try {

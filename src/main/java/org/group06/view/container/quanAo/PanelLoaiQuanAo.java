@@ -4,12 +4,11 @@
  */
 package org.group06.view.container.quanAo;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_QuanAo;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.ComponentStatus;
 import org.group06.utils.FontConstant;
-import org.group06.utils.NameStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -397,7 +396,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
                     viTri = this.tblLoaiQuanAo.getSelectedRow();
                     String maLoaiQA = this.txtMaLoaiQuanAo.getText().trim();
                     String tenLoaiQA = this.txtTenLoaiQuanAo.getText().trim();
-                    this.loaQuanAoCapNhat = new DAO_QuanAo(DatabaseConnect.getConnection());
+                    this.loaQuanAoCapNhat = new DAO_QuanAo(DatabaseConstant.getConnection());
                     if (loaQuanAoCapNhat.updateLoaiQuanAo(maLoaiQA, tenLoaiQA)) {
                         System.out.println("Cập nhật thành công loại quần áo!");
                     }
@@ -409,7 +408,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
                     Object[] data = {maLoaiQA, tenLoaiQA};
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblLoaiQuanAo.getModel();
                     modelTable.addRow(data);
-                    DAO_QuanAo themMoiLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+                    DAO_QuanAo themMoiLoaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
                     if (themMoiLoaiQuanAo.addLoaiQuanAo(maLoaiQA, tenLoaiQA)) {
                         System.out.println("Thêm mới thành công loại quần áo!");
                     }
@@ -536,7 +535,7 @@ public class PanelLoaiQuanAo extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private boolean statusBtnCapNhat = false;
     private boolean statusBtnThemMoi = false;
-    private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
+    private HashMap<String, String> dsLoaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();
     private DAO_QuanAo loaQuanAoCapNhat = null;
     private int viTri = 0;
 }

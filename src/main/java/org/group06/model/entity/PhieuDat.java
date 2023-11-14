@@ -3,12 +3,17 @@ package org.group06.model.entity;
 import java.sql.Date;
 
 public class PhieuDat {
+    public static final int CHUA_DEN_HEN = 0;
+    public static final int CHO_NHAN_HANG = 1;
+    public static final int DA_QUA_HAN = -1;
+
     private String maPhieuDat;
     private Date ngayTao;
     private Date ngayNhan;
     private KhachHang khachHang;
     private NhanVien nhanVien;
     private KhuyenMai khuyenMai;
+    private int trangThai;
 
     public PhieuDat() {
         this.maPhieuDat = "";
@@ -17,15 +22,17 @@ public class PhieuDat {
         this.khachHang = new KhachHang();
         this.nhanVien = new NhanVien();
         this.khuyenMai = new KhuyenMai();
+        this.trangThai = CHUA_DEN_HEN;
     }
 
-    public PhieuDat(String maPhieuDat, Date ngayTao, Date ngayNhan, KhachHang khachHang, NhanVien nhanVien, KhuyenMai khuyenMai) {
+    public PhieuDat(String maPhieuDat, Date ngayTao, Date ngayNhan, KhachHang khachHang, NhanVien nhanVien, KhuyenMai khuyenMai, int trangThai) {
         this.setMaPhieuDat(maPhieuDat);
         this.setNgayTao(ngayTao);
         this.setNgayNhan(ngayNhan);
         this.setKhachHang(khachHang);
         this.setNhanVien(nhanVien);
         this.setKhuyenMai(khuyenMai);
+        this.setTrangThai(trangThai);
     }
 
     public String getMaPhieuDat() {
@@ -76,6 +83,14 @@ public class PhieuDat {
         this.khuyenMai = khuyenMai;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     @Override
     public String toString() {
         return "PhieuDat{" +
@@ -85,6 +100,7 @@ public class PhieuDat {
                 ", khachHang=" + khachHang +
                 ", nhanVien=" + nhanVien +
                 ", khuyenMai=" + khuyenMai +
+                ", trangThai=" + trangThai +
                 '}';
     }
 }

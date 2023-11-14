@@ -4,19 +4,19 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_PhieuDat;
 import org.group06.model.entity.*;
 import org.group06.utils.FontConstant;
+import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.Date;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -25,7 +25,11 @@ import java.util.ArrayList;
  */
 public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
-    private Connection connection = DatabaseConnect.getConnection();
+    private Connection connection = DatabaseConstant.getConnection();
+    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+    private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
+    private DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
     private PhieuDat phieuDat;
     private PanelPhieuTam pnlPhieuTam;
     private KhachHang khachHang;
@@ -37,7 +41,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
 
-        if (pnlPhieuTam.checkGhiChu(phieuDat.getNgayNhan()) != 1) {
+        if (this.phieuDat.getTrangThai() != PhieuDat.CHO_NHAN_HANG) {
             btnNhanHang.setEnabled(false);
         } else {
             btnNhanHang.setEnabled(true);
@@ -168,7 +172,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
         txtTenCTKM.setBackground(new java.awt.Color(242, 242, 242));
         txtTenCTKM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTenCTKM.setText(phieuDat.getKhuyenMai() != null ? phieuDat.getKhuyenMai().getTenCTKM() : "");
+        txtTenCTKM.setText(phieuDat.getKhuyenMai() != null ? phieuDat.getKhuyenMai().getTenCTKM() + " (" + NumberStandard.formatPercent(phieuDat.getKhuyenMai().getMucGiamGia()) + ")" : "");
         txtTenCTKM.setBorder(null);
         txtTenCTKM.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenCTKM.setEnabled(false);
@@ -305,7 +309,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNhanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanHangActionPerformed
-        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(phieuDat.getMaPhieuDat());
+        ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(phieuDat.getMaPhieuDat());
         String maHoaDon = taoMaHD();
         Date ngayHienTai = new Date(System.currentTimeMillis());
 
@@ -315,25 +319,24 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
 
         btnNhanHang.setEnabled(true);
         HoaDon hoaDonBanHang = new HoaDon(maHoaDon, ngayHienTai, khachHang, nhanVien, khuyenMai);
-        DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
         int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn xác nhận nhận hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {
             if (dao_HoaDon.add(hoaDonBanHang)) {
-                DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
                 for (ChiTietPhieuDat phieuDat : dsCTPD) {
                     ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, phieuDat.getQuanAo(), phieuDat.getSoLuong(), phieuDat.getGiaBan());
                     dao_ChiTietHoaDon.add(cthd);
                 }
             }
             JOptionPane.showMessageDialog(this, "Đã lưu hóa đơn");
-            new DAO_PhieuDat(connection).delete(phieuDat.getMaPhieuDat());
+
+            dao_PhieuDat.delete(phieuDat.getMaPhieuDat());
             pnlPhieuTam.loadDataTable();
             this.dispose();
         }
     }//GEN-LAST:event_btnNhanHangActionPerformed
 
     public String taoMaHD() {
-        int count = new DAO_HoaDon(connection).loadMaHDCount();
+        int count = dao_HoaDon.loadMaHDCount();
         count++;
         // Tạo mã hoá đơn theo quy tắc và có thứ tự
         return "HD" + String.format("%03d", count); // Ví dụ: HD001, HD002,...
@@ -365,18 +368,16 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
     private void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String pd = phieuDat.getMaPhieuDat().toString();
-        ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
+        ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(pd);
         DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
         modelCTPD.setRowCount(0);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             String tenQA = ctpd.getQuanAo().getTenQA();
-            String giaBan = dfMoney.format(ctpd.getQuanAo().getGiaNhap() + (ctpd.getQuanAo().getGiaNhap() * ctpd.getQuanAo().getLoiNhuan() / 100));
+            String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
-            double tinhThanhTien = ctpd.getGiaBan();
-            String thanhTien = dfMoney.format(tinhThanhTien);
+            String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
 
-            tinhTongThanhTien += tinhThanhTien;
+            tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
 
             Object[] data = {tenQA, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
@@ -387,7 +388,7 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         }
         double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
         double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         txtTongTT.setText(tongThanhTien);
     }
 }

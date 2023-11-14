@@ -4,10 +4,9 @@
  */
 package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
     public FrameTTNhanVien(NhanVien nv, PanelNhanVien pnlNhanVien) {
         this.nv = nv;
         this.pnlNhanVien = pnlNhanVien;
-        dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
+        dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         initComponents();
     }
 
@@ -66,8 +65,8 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         cmbTrangThai = new javax.swing.JComboBox<>();
         cmbChucVu = new javax.swing.JComboBox<>();
         pnlChucNang = new javax.swing.JPanel();
-        btnCapNhat = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnCapNhat = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,11 +184,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         rdoNu.setText("Nữ");
         rdoNu.setEnabled(false);
         rdoNu.setPreferredSize(new java.awt.Dimension(98, 30));
-        rdoNu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNuActionPerformed(evt);
-            }
-        });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tglShowMK.setText("Hiện");
@@ -299,8 +293,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         } else
         cmbTrangThai.setSelectedItem("Đã nghỉ");
 
-        btnCapNhat.setFont(FontConstant.FONT_BUTTON);
-        btnCapNhat.setForeground(ColorConstant.WHITE);
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -309,8 +302,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
             }
         });
 
-        btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
-        btnXoaTrang.setForeground(ColorConstant.WHITE);
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.setEnabled(false);
@@ -367,10 +359,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNuActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
@@ -444,9 +432,7 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         return temp.toString().trim();
     }
 
-
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
@@ -528,7 +514,6 @@ public class FrameTTNhanVien extends javax.swing.JFrame {
         txtTenNV.setText("");
         txtCCCD.setText("");
         txtDiaChi.setText("");
-//        pwdMK.setText("");
         rdoNam.setSelected(true);
         rdoNu.setSelected(false);
         txtSDT.setText("");

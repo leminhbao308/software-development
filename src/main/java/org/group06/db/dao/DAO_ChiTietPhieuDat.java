@@ -1,5 +1,6 @@
 package org.group06.db.dao;
 
+import org.group06.db.DatabaseConstant;
 import org.group06.model.entity.ChiTietPhieuDat;
 
 import java.sql.Connection;
@@ -10,7 +11,9 @@ import java.util.ArrayList;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
-    private Connection connection;
+    private Connection connection = DatabaseConstant.getConnection();
+    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
+    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
 
     public DAO_ChiTietPhieuDat(Connection connection) {
         this.connection = connection;
@@ -25,8 +28,8 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();
-                chiTietPhieuDat.setPhieuDat(new DAO_PhieuDat(connection).getByID(resultSet.getString("MAPHIEUDAT")));
-                chiTietPhieuDat.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
@@ -46,8 +49,8 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();
-                chiTietPhieuDat.setPhieuDat(new DAO_PhieuDat(connection).getByID(resultSet.getString("MAPHIEUDAT")));
-                chiTietPhieuDat.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
@@ -97,5 +100,28 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public ArrayList<ChiTietPhieuDat> getBatch(int start, int end) {
+        ArrayList<ChiTietPhieuDat> dsChiTietPhieuDat = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM ChiTietPhieuDat ORDER BY MAPHIEUDAT OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat();
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                dsChiTietPhieuDat.add(chiTietPhieuDat);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dsChiTietPhieuDat;
     }
 }

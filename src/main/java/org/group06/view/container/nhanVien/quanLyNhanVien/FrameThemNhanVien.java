@@ -4,10 +4,9 @@
  */
 package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 
 import javax.swing.*;
@@ -26,7 +25,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
      * Creates new form FrameThemNhanVien
      */
     public FrameThemNhanVien(PanelNhanVien pnlNhanVien) {
-        dao_NhanVien = new DAO_NhanVien(DatabaseConnect.getConnection());
+        dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         this.pnlNhanVien = pnlNhanVien;
         initComponents();
     }
@@ -63,8 +62,8 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         cmbChucVu = new javax.swing.JComboBox<>();
         lblTrangThai1 = new javax.swing.JLabel();
         pnlChucNang = new javax.swing.JPanel();
-        btnLuu = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
-        btnXoaTrang = new org.group06.view.components.buttons.StaticRoundButton("", ColorConstant.BUTTON_LOGIN_NORMAL, ColorConstant.BUTTON_LOGIN_HOVER, ColorConstant.BUTTON_LOGIN_CLICK);
+        btnLuu = new javax.swing.JButton();
+        btnXoaTrang = new javax.swing.JButton();
         lblTitleTTNV = new javax.swing.JLabel();
 
         setResizable(false);
@@ -86,11 +85,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         txtTenNV.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtTenNVFocusLost(evt);
-            }
-        });
-        txtTenNV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenNVActionPerformed(evt);
             }
         });
 
@@ -165,11 +159,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         rdoNu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rdoNu.setText("Nữ");
         rdoNu.setPreferredSize(new java.awt.Dimension(98, 30));
-        rdoNu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNuActionPerformed(evt);
-            }
-        });
 
         tglShowMK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tglShowMK.setText("Hiện");
@@ -273,8 +262,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
         txtMaNV.setText(pnlNhanVien.getMaNV());
 
-        btnLuu.setFont(FontConstant.FONT_BUTTON);
-        btnLuu.setForeground(ColorConstant.WHITE);
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -283,8 +271,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
             }
         });
 
-        btnXoaTrang.setFont(FontConstant.FONT_BUTTON);
-        btnXoaTrang.setForeground(ColorConstant.WHITE);
+        btnXoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnXoaTrang.setText("Xóa trắng");
         btnXoaTrang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoaTrang.addActionListener(new java.awt.event.ActionListener() {
@@ -345,12 +332,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNuActionPerformed
-
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
         if (btnLuu.getText().equals("Lưu")) {
             if (txtTenNV.getText().equals("") || txtSDT.getText().equals("") || txtDiaChi.getText().equals("")
                     || txtCCCD.getText().equals("") || pwdMK.getPassword().equals("")) {
@@ -379,7 +361,6 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
 
     private void themNV() {
         boolean gt = true, trangThai = true;
-
         String maNV = txtMaNV.getText();
         String tenNV = checkKiTu(txtTenNV.getText());
         String password = new String(pwdMK.getPassword()).trim();
@@ -414,13 +395,8 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     }
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
-
-    private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void txtTenNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusLost
         if (!checkRegexTenNV()) {
@@ -512,6 +488,17 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
         }
     }
 
+    private void xoaTrang() {
+        txtTenNV.setText("");
+        txtCCCD.setText("");
+        txtDiaChi.setText("");
+        pwdMK.setText("");
+        rdoNam.setSelected(true);
+        rdoNu.setSelected(false);
+        txtSDT.setText("");
+        cmbChucVu.setSelectedIndex(0);
+        txtTenNV.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
@@ -541,16 +528,4 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
-
-    private void xoaTrang() {
-        txtTenNV.setText("");
-        txtCCCD.setText("");
-        txtDiaChi.setText("");
-        pwdMK.setText("");
-        rdoNam.setSelected(true);
-        rdoNu.setSelected(false);
-        txtSDT.setText("");
-        cmbChucVu.setSelectedIndex(0);
-        txtTenNV.requestFocus();
-    }
 }

@@ -4,7 +4,7 @@
  */
 package org.group06.view.container.khachHang;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class PanelKhachHang extends javax.swing.JPanel {
 
-    private DAO_KhachHang dao_KhachHang;
+    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
     public int soMaKH = 0;
 
     /**
@@ -117,16 +117,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoTen.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtTimTheoTenFocusLost(evt);
-            }
-        });
-        txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoTenActionPerformed(evt);
-            }
-        });
         txtTimTheoTen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoTenKeyReleased(evt);
@@ -138,16 +128,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         txtTimTheoSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoSDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoSDT.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtTimTheoSDTFocusLost(evt);
-            }
-        });
-        txtTimTheoSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoSDTActionPerformed(evt);
-            }
-        });
         txtTimTheoSDT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoSDTKeyReleased(evt);
@@ -242,7 +222,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimSDTActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
     private void callFrameTTKhachHang() {
@@ -258,22 +238,12 @@ public class PanelKhachHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
-    private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtTimTheoTenActionPerformed
-
-    private void txtTimTheoSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoSDTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimTheoSDTActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
         callFrameThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
 
     public String getMaKH() {
-        int count = new DAO_KhachHang((DatabaseConnect.getConnection())).loadMaKHCount(soMaKH);
+        int count = new DAO_KhachHang((DatabaseConstant.getConnection())).loadMaKHCount(soMaKH);
         count++;
         // Tạo mã khách hàng theo quy tắc và có thứ tự
         String customerID = "KH" + String.format("%03d", count); // Ví dụ: KH001, KH002,...
@@ -286,7 +256,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
-                    ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getByName(tenKH);
+                    ArrayList<KhachHang> dsKH = dao_KhachHang.getByName(tenKH);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
                     for (KhachHang kh : dsKH) {
@@ -310,7 +280,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!sdt.equals("")) {
                 if (checkRegexSDT()) {
-                    KhachHang kh = new DAO_KhachHang((DatabaseConnect.getConnection())).getByID(sdt);
+                    KhachHang kh = dao_KhachHang.getByID(sdt);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
                     Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
@@ -327,14 +297,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtTimTheoSDTKeyReleased
-
-    private void txtTimTheoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimTheoTenFocusLost
-
-    }//GEN-LAST:event_txtTimTheoTenFocusLost
-
-    private void txtTimTheoSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimTheoSDTFocusLost
-
-    }//GEN-LAST:event_txtTimTheoSDTFocusLost
 
     private boolean checkRegexTenKH() {
         String tenKH = txtTimTheoTen.getText().trim();
@@ -386,7 +348,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }
 
     public void loadDataTable() {
-        ArrayList<KhachHang> dsKH = new DAO_KhachHang((DatabaseConnect.getConnection())).getAll();
+        ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
         modelKH.setRowCount(0);
         for (KhachHang kh : dsKH) {

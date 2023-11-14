@@ -1,6 +1,5 @@
 package org.group06.db.dao;
 
-import org.group06.db.DatabaseConnect;
 import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
@@ -12,9 +11,15 @@ import java.util.ArrayList;
 public class DAO_HoaDon implements DAO_Interface<HoaDon> {
 
     private Connection connection;
+    private DAO_KhachHang dao_KhachHang;
+    private DAO_NhanVien dao_NhanVien;
+    private DAO_KhuyenMai dao_KhuyenMai;
 
     public DAO_HoaDon(Connection connection) {
         this.connection = connection;
+        dao_KhachHang = new DAO_KhachHang(connection);
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
     }
 
     @Override
@@ -27,10 +32,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             while (resultSet.next()) {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
-                hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhuyenMai(dao_KhuyenMai.getByID(resultSet.getString("MAKM")));
                 hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
-                hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
-                hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
+                hoaDon.setKhachHang(dao_KhachHang.getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(dao_NhanVien.getByID(resultSet.getString("MANV")));
                 dsHD.add(hoaDon);
             }
         } catch (SQLException e) {
@@ -51,9 +56,9 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
                 hoaDon = new HoaDon();
                 hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
                 hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
-                hoaDon.setKhuyenMai(new DAO_KhuyenMai(connection).getByID(resultSet.getString("MAKM")));
-                hoaDon.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
-                hoaDon.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
+                hoaDon.setKhuyenMai(dao_KhuyenMai.getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhachHang(dao_KhachHang.getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(dao_NhanVien.getByID(resultSet.getString("MANV")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,56 +96,23 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return false;
     }
 
-    public ArrayList<HoaDon> getByName(String name) {
-        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
-        try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT HoaDon.MAHD,NGAYTAO,MAKM,HoaDon.MAKH,MANV FROM HoaDon, KhachHang WHERE HoaDon.MAKH = KhachHang.MAKH and TENKH = ?";
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về 
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
-                HoaDon hoaDon = new HoaDon();
-                String maHD = rs.getString("MAHD");
-                KhuyenMai khuyenMai = new DAO_KhuyenMai(connection).getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                KhachHang khachHang = new DAO_KhachHang(connection).getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = new DAO_NhanVien(connection).getByID(rs.getString("MANV"));
-                hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
-                dsHD.add(hoaDon);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsHD;
-    }
-
     public ArrayList<HoaDon> getByDate(String date) {
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
-            DatabaseConnect.getConnection();
-            Connection con = DatabaseConnect.getConnection();
-            String sql = "SELECT *from HoaDon where NGAYTAO = ?";
-
+            String sql = "SELECT *FROM HoaDon WHERE NGAYTAO = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet rs = statement.executeQuery();
-            //Duyệt trên kết quả trả về
-            while (rs.next()) {//Di chuyển con trỏ xuống bản ghi kế tiếp
+            while (rs.next()) {
                 HoaDon hoaDon = new HoaDon();
                 String maHD = rs.getString("MAHD");
-                KhuyenMai khuyenMai = new DAO_KhuyenMai(connection).getByID(rs.getString("MAKM"));
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
                 Date ngayLap = rs.getDate("NGAYTAO");
-                KhachHang khachHang = new DAO_KhachHang(connection).getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = new DAO_NhanVien(connection).getByID(rs.getString("MANV"));
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 hoaDon = new HoaDon(maHD, ngayLap, khachHang, nhanVien, khuyenMai);
                 dsHD.add(hoaDon);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -148,10 +120,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
     }
 
     public int loadMaHDCount() {
-        int countMaHD = 1;
-        String query = "SELECT MAX(MAHD) FROM HoaDon";
+        int countMaHD = 0;
+        String sql = "SELECT MAX(MAHD) FROM HoaDon";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String maxMaHD = resultSet.getString(1);
@@ -166,5 +138,29 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
             e.printStackTrace();
         }
         return countMaHD;
+    }
+
+    @Override
+    public ArrayList<HoaDon> getBatch(int startIndex, int batchSize) {
+        ArrayList<HoaDon> dsHD = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM HoaDon ORDER BY MAHD OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, startIndex);
+            statement.setInt(2, batchSize);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.setMaHoaDon(resultSet.getString("MAHD"));
+                hoaDon.setNgayTao(resultSet.getDate("NGAYTAO"));
+                hoaDon.setKhuyenMai(dao_KhuyenMai.getByID(resultSet.getString("MAKM")));
+                hoaDon.setKhachHang(dao_KhachHang.getByMAKH(resultSet.getString("MAKH")));
+                hoaDon.setNhanVien(dao_NhanVien.getByID(resultSet.getString("MANV")));
+                dsHD.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHD;
     }
 }

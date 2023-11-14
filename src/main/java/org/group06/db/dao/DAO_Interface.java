@@ -8,4 +8,6 @@ public interface DAO_Interface<T> {
     boolean add(T t);
     boolean update(T t);
     boolean delete(String id);
+
+    ArrayList<T> getBatch(int start, int end);
 }

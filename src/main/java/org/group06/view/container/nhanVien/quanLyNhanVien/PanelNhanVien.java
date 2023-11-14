@@ -4,10 +4,10 @@
  */
 package org.group06.view.container.nhanVien.quanLyNhanVien;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhanVien;
 import org.group06.model.entity.NhanVien;
-import org.group06.model.entity.PasswordRenderer;
+import org.group06.utils.FormatCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class PanelNhanVien extends javax.swing.JPanel {
 
-    private Connection connection = DatabaseConnect.getConnection();
-    private DAO_NhanVien dao_NhanVien;
+    private Connection connection = DatabaseConstant.getConnection();
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
     public int soMaNV;
 
     /**
@@ -128,11 +128,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         txtTimTheoTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoTen.setToolTipText(null);
         txtTimTheoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoTenActionPerformed(evt);
-            }
-        });
         txtTimTheoTen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoTenKeyReleased(evt);
@@ -144,11 +139,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
         txtTimTheoMa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTimTheoMa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimTheoMaActionPerformed(evt);
-            }
-        });
         txtTimTheoMa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimTheoMaKeyReleased(evt);
@@ -163,11 +153,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
         cmbLocGioiTinh.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbLocGioiTinhItemStateChanged(evt);
-            }
-        });
-        cmbLocGioiTinh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbLocGioiTinhMouseClicked(evt);
             }
         });
 
@@ -309,7 +294,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
         callFrameThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -322,21 +306,13 @@ public class PanelNhanVien extends javax.swing.JPanel {
         return customerID;
     }
 
-    private void txtTimTheoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoTenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimTheoTenActionPerformed
-
-    private void txtTimTheoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimTheoMaActionPerformed
-
-    }//GEN-LAST:event_txtTimTheoMaActionPerformed
-
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
         String gt = "Nữ", trangThai = "Đã nghỉ";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getByName(tenNV);
+                    ArrayList<NhanVien> dsNV = dao_NhanVien.getByName(tenNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     for (NhanVien nv : dsNV) {
@@ -385,7 +361,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
-                    NhanVien nhanVien = new DAO_NhanVien(connection).getByID(maNV);
+                    NhanVien nhanVien = dao_NhanVien.getByID(maNV);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     if (nhanVien.isGioiTinh()) {
@@ -409,10 +385,6 @@ public class PanelNhanVien extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtTimTheoMaKeyReleased
-
-    private void cmbLocGioiTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbLocGioiTinhMouseClicked
 
     private void cmbLocGioiTinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocGioiTinhItemStateChanged
         locTheoGioiTinh();
@@ -440,7 +412,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void getDataLocTheoPhai(String gt, int phai) {
         String trangThai;
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoPhai(phai);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoPhai(phai);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -470,7 +442,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void getDataLocTheoTrangThai(String trangThai, int tt) {
         String gt;
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoTrangThai(tt);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoTrangThai(tt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -516,7 +488,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
     }
 
     private void getDatalocTheoTrangThaiVaGioiTinh(String trangThai, int tt, String gioiTinh, int gt) {
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getLocTheoTrangThaiVaGioiTinh(tt, gt);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getLocTheoTrangThaiVaGioiTinh(tt, gt);
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -572,8 +544,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     public void loadDataTable() {
         String gioiTinh = "", trangThai = "";
-        tblNhanVien.getColumnModel().getColumn(2).setCellRenderer(new PasswordRenderer());
-        ArrayList<NhanVien> dsNV = new DAO_NhanVien(connection).getAll();
+        FormatCellRenderer.formatPasswordCellRenderer(tblNhanVien, 2);
+        ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
         DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
         modelNV.setRowCount(0);
         for (NhanVien nv : dsNV) {
@@ -593,5 +565,4 @@ public class PanelNhanVien extends javax.swing.JPanel {
             modelNV.addRow(data);
         }
     }
-
 }

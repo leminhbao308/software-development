@@ -1,6 +1,6 @@
 package org.group06.view.container.quanAo;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.NhaCungCap;
@@ -10,7 +10,6 @@ import org.group06.view.components.panels.ImagePanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
@@ -982,7 +981,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 if (this.statusBtnThemMoi == false && this.statusBtnCapNhat == true) {
                     viTri = this.tblQuanAo.getSelectedRow();
 //                Lấy quần áo cần cập nhật
-                    qaCapNhat = new DAO_QuanAo(DatabaseConnect.getConnection()).getByID(this.txtMaQA.getText());
+                    qaCapNhat = new DAO_QuanAo(DatabaseConstant.getConnection()).getByID(this.txtMaQA.getText());
 //                Tên quần áo
                     String tenQuanAo = NameStandard.formatCapitalize(this.txtTenQA.getText());
                     this.qaCapNhat.setTenQA(tenQuanAo);
@@ -1050,7 +1049,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                         }
                     }
 //                    Cập nhật quần áo vào cơ sở dữ liệu
-                    DAO_QuanAo updateQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+                    DAO_QuanAo updateQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
                     if (updateQuanAo.update(qaCapNhat)) {
                         System.out.println("Cập nhật thành công");
                     }
@@ -1152,7 +1151,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     }
                     dsQA.add(qaThemMoi);
 //                Lưu quần áo vào cơ sở dữ liệu
-                    DAO_QuanAo addQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+                    DAO_QuanAo addQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
                     if (addQuanAo.add(qaThemMoi)) {
                         System.out.println("Thêm mới thành công");
                     }
@@ -1440,9 +1439,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private File file = null;
     private QuanAo qaThemMoi = new QuanAo();
     private QuanAo qaCapNhat = null;
-    private ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConnect.getConnection()).getAll();
-    private ArrayList<NhaCungCap> dsNCC = new DAO_NhaCungCap(DatabaseConnect.getConnection()).getAll();
-    private HashMap<String, String> loaiQuanAo = new DAO_QuanAo(DatabaseConnect.getConnection()).getAllLoaiQuanAo();
+    private ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConstant.getConnection()).getAll();
+    private ArrayList<NhaCungCap> dsNCC = new DAO_NhaCungCap(DatabaseConstant.getConnection()).getAll();
+    private HashMap<String, String> loaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();
     private boolean statusBtnCapNhat = false;
     private boolean statusBtnThemMoi = false;
 

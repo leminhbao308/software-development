@@ -105,4 +105,27 @@ public class DAO_NhaCungCap implements DAO_Interface<NhaCungCap>{
             return false;
         }
     }
+
+    @Override
+    public ArrayList<NhaCungCap> getBatch(int start, int end) {
+        ArrayList<NhaCungCap> suppliers = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM NhaCungCap ORDER BY MANCC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, start);
+            statement.setInt(2, end);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                NhaCungCap supplier = new NhaCungCap();
+                supplier.setMaNCC(result.getString("MANCC"));
+                supplier.setTenNCC(result.getString("TENNCC"));
+                supplier.setDiaChi(result.getString("DIACHI"));
+                supplier.setSoDienThoai(result.getString("SDT"));
+                suppliers.add(supplier);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return suppliers;
+    }
 }

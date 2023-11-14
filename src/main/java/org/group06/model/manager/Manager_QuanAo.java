@@ -1,6 +1,6 @@
 package org.group06.model.manager;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.QuanAo;
 
@@ -14,7 +14,7 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo>{
     private ArrayList<QuanAo> dsQuanAo;
 
     public Manager_QuanAo() {
-        DAO_QuanAo dao_QuanAo = new DAO_QuanAo(DatabaseConnect.getConnection());
+        DAO_QuanAo dao_QuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
         dsQuanAo = new ArrayList<>();
         dsLoaiQuanAo = dao_QuanAo.getAllLoaiQuanAo();
     }

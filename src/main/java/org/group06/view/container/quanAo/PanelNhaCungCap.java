@@ -1,6 +1,6 @@
 package org.group06.view.container.quanAo;
 
-import org.group06.db.DatabaseConnect;
+import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_NhaCungCap;
 import org.group06.model.entity.NhaCungCap;
 import org.group06.utils.ColorConstant;
@@ -466,11 +466,11 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
                     String sdtNhaCungCap = this.txtSoDienThoai.getText().trim();
                     String diaChiNCC = this.txtDiaChi.getText().trim();
 
-                    this.nccCapNhat = new DAO_NhaCungCap(DatabaseConnect.getConnection()).getByID(maNhaCungCap);
+                    this.nccCapNhat = new DAO_NhaCungCap(DatabaseConstant.getConnection()).getByID(maNhaCungCap);
                     this.nccCapNhat.setTenNCC(tenNhaCungCap);
                     this.nccCapNhat.setSoDienThoai(sdtNhaCungCap);
                     this.nccCapNhat.setDiaChi(diaChiNCC);
-                    this.nhaCungCap_DAO = new DAO_NhaCungCap(DatabaseConnect.getConnection());
+                    this.nhaCungCap_DAO = new DAO_NhaCungCap(DatabaseConstant.getConnection());
                     if (this.nhaCungCap_DAO.update(nccCapNhat)) {
                         System.out.println("Cập nhật thành công nhà cung cấp!");
                     }
@@ -494,7 +494,7 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblNhaCungCap.getModel();
                     modelTable.addRow(data);
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
-                    this.themMoiNCC = new DAO_NhaCungCap(DatabaseConnect.getConnection());
+                    this.themMoiNCC = new DAO_NhaCungCap(DatabaseConstant.getConnection());
                     if (this.themMoiNCC.add(ncc)) {
                         System.out.println("Thêm mới thành công loại quần áo!");
                     }
@@ -652,7 +652,7 @@ public class PanelNhaCungCap extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenNCC;
     private javax.swing.JTextField txtTimNhaCungCap;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<NhaCungCap> dsNCC = new DAO_NhaCungCap(DatabaseConnect.getConnection()).getAll();
+    private ArrayList<NhaCungCap> dsNCC = new DAO_NhaCungCap(DatabaseConstant.getConnection()).getAll();
     private boolean statusBtnThemMoi = true;
     private boolean statusBtnCapNhat = true;
     private int viTri = 0;
