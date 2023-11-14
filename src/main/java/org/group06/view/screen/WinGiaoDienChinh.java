@@ -23,7 +23,7 @@ import java.awt.*;
 /**
  * @author Le Minh Bao
  */
-public class Frame extends JFrame {
+public class WinGiaoDienChinh extends JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Khai báo biến">
     private final JMenuBar mnuMain = new JMenuBar();
@@ -64,7 +64,7 @@ public class Frame extends JFrame {
     private NhanVien nv;
     // </editor-fold>
 
-    public Frame(NhanVien nv) {
+    public WinGiaoDienChinh(NhanVien nv) {
         this.nv = nv;
         this.mnTaiKhoan.setText(nv.getTenNV());
         this.setJMenuBar(mnuMain);
@@ -73,7 +73,6 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
 
         pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
         this.add(pnlContainer, BorderLayout.CENTER);
@@ -207,9 +206,9 @@ public class Frame extends JFrame {
         mniDangXuat.addActionListener(e -> {
             // Đóng cửa sổ chính
             this.dispose();
-            // Mở Login Frame
-            Login loginFrame = new Login();
-            loginFrame.setVisible(true);
+            // Mở WinDangNhap Frame
+            WinDangNhap winDangNhap = new WinDangNhap();
+            winDangNhap.setVisible(true);
         });
     }
 

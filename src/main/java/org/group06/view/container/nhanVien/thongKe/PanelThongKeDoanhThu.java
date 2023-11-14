@@ -57,13 +57,15 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
                     int stop = Math.min(start + batchSize, totalCount);
                     List<HoaDon> batchHoaDon = dao_HoaDon.getBatch(start, stop);
 
+
                     for (HoaDon hoaDon : batchHoaDon) {
                         // Kiểm tra hoá đơn đã tồn tại trong dsHoaDon chưa
                         if (dsHoaDon.stream().noneMatch(hd -> hd.getMaHoaDon().equals(hoaDon.getMaHoaDon()))) {
                             // Thêm hoá đơn vào dsHoaDon
                             dsHoaDon.add(hoaDon);
                             // Load chi tiết hoá đơn
-                            dsChiTietHoaDon.addAll(dao_ChiTietHoaDon.getAllCTQA(hoaDon.getMaHoaDon()));
+                            List<ChiTietHoaDon> listChiTietHoaDon = dao_ChiTietHoaDon.getAllCTQA(hoaDon.getMaHoaDon());
+                            dsChiTietHoaDon.addAll(listChiTietHoaDon);
                         }
 
                         // Cập nhật tiến trình
