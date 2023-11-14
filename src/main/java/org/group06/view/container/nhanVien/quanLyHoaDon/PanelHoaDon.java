@@ -396,18 +396,25 @@ public class PanelHoaDon extends javax.swing.JPanel {
                         try {
                             List<HoaDon> hoaDons = get();
                             if (hoaDons != null && !hoaDons.isEmpty()) {
-                                for (HoaDon hd : hoaDons) {
-                                    dsHD.add(hd);
-                                    String date = DateStandard.formatDate(hd.getNgayTao());
-                                    String tenKH = (hd.getKhachHang() == null) ? "Khách vãng lai" : hd.getKhachHang().getTenKH();
-                                    String tenNV = hd.getNhanVien().getTenNV();
-                                    String khuyenMai = (hd.getKhuyenMai() == null) ? "" : hd.getKhuyenMai().getTenCTKM();
-                                    String ttt = loadTongThanhTien(hd.getMaHoaDon());
-                                    Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, ttt, khuyenMai};
-                                    // Cập nhật bảng
-                                    modelHD.addRow(data);
+                                // Sử dụng synchronized để đảm bảo đồng bộ hóa
+                                synchronized (modelHD) {
+                                    for (HoaDon hd : hoaDons) {
+                                        dsHD.add(hd);
+                                        String date = DateStandard.formatDate(hd.getNgayTao());
+                                        String tenKH = (hd.getKhachHang() == null) ? "Khách vãng lai" : hd.getKhachHang().getTenKH();
+                                        String tenNV = hd.getNhanVien().getTenNV();
+                                        String khuyenMai = (hd.getKhuyenMai() == null) ? "" : hd.getKhuyenMai().getTenCTKM();
+                                        String ttt = loadTongThanhTien(hd.getMaHoaDon());
+                                        Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, ttt, khuyenMai};
+                                        // Cập nhật bảng
+                                        modelHD.addRow(data);
+                                    }
+                                    currentIndex += batchSize;
                                 }
-                                currentIndex += batchSize;
+                                // Kiểm tra xem timer có đang chạy hay không
+                                if (!((Timer) e.getSource()).isRunning()) {
+                                    ((Timer) e.getSource()).stop();
+                                }
                             } else {
                                 // Dừng timer nếu không còn dữ liệu
                                 ((Timer) e.getSource()).stop();

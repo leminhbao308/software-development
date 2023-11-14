@@ -78,11 +78,6 @@ public class Frame extends JFrame {
 
         initMenu();
         addActionMenu();
-
-        if (nv.getChucVu().equals(NhanVien.NVBH)) {
-            mniQuanLyNhanVien.setVisible(false);
-            mnQuanAo.setVisible(false);
-        }
     }
 
     private void addActionMenu() {
@@ -284,15 +279,19 @@ public class Frame extends JFrame {
         mnuMain.add(Box.createHorizontalStrut(10));
         mnuMain.add(mnKhachHang);
         mnuMain.add(Box.createHorizontalStrut(10));
-        mnuMain.add(mnQuanAo);
+        if (nv.getChucVu().equals(NhanVien.NVQL)) {
+            mnuMain.add(mnQuanAo);
+        }
         mnuMain.add(Box.createHorizontalGlue());
         mnuMain.add(mnTaiKhoan);
 
         //Menu Nhan Vien
         mnNhanVien.add(mniBanHang_DatHang);
         mnNhanVien.add(new JSeparator());
-        mnNhanVien.add(mniQuanLyNhanVien);
-        mnNhanVien.add(new JSeparator());
+        if (nv.getChucVu().equals(NhanVien.NVQL)) {
+            mnNhanVien.add(mniQuanLyNhanVien);
+            mnNhanVien.add(new JSeparator());
+        }
         mnNhanVien.add(mnHoaDon);
         mnNhanVien.add(mnThongKe);
 
