@@ -68,10 +68,12 @@ public class Frame extends JFrame {
         this.nv = nv;
         this.mnTaiKhoan.setText(nv.getTenNV());
         this.setJMenuBar(mnuMain);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
+        this.setUndecorated(true);
+        this.setAlwaysOnTop(true);
 
         pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
         this.add(pnlContainer, BorderLayout.CENTER);

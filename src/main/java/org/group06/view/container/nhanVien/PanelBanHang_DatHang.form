@@ -102,7 +102,7 @@
               <Font name="Segoe UI" size="36" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="B&#xe1;n H&#xe0;ng / &#x110;&#x1eb7;t H&#xe0;ng"/>
+            <Property name="text" type="java.lang.String" value="B&#xe1;n H&#xe0;ng"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
@@ -828,6 +828,9 @@
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tabBanHang_DatHangStateChanged"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="javax.swing.JLabel lblBanHang = new javax.swing.JLabel(&quot;B&#xe1;n H&#xe0;ng&quot;);&#xa;javax.swing.JLabel lblDatHang = new javax.swing.JLabel(&quot;&#x110;&#x1eb7;t H&#xe0;ng&quot;);&#xa;lblBanHang.setPreferredSize(new Dimension(130, 30));&#xa;lblDatHang.setPreferredSize(new Dimension(130, 30));&#xa;lblBanHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblDatHang.setHorizontalAlignment(SwingConstants.CENTER);&#xa;lblBanHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;lblDatHang.setFont(new Font(&quot;Segoe UI&quot;, 1, 18));&#xa;tabBanHang_DatHang.setTabComponentAt(0, lblBanHang);&#xa;tabBanHang_DatHang.setTabComponentAt(1, lblDatHang);"/>
               </AuxValues>

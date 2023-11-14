@@ -968,10 +968,10 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         tongHD = dsHoaDon.size();
 
         for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
-            System.out.println(cthd.getHoaDon().getMaHoaDon() + (cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0));
             tongQA += cthd.getSoLuong();
-            doanhThu += cthd.getGiaBan() * cthd.getSoLuong() * (1 - (cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0));
-            loiNhuan += (cthd.getGiaBan() * cthd.getSoLuong() * (1 - (cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0))) - (cthd.getSoLuong() * cthd.getQuanAo().getGiaNhap());
+            double khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100.0 : 0.0;
+            doanhThu += cthd.getGiaBan() * cthd.getSoLuong() * (1 - khuyenMai);
+            loiNhuan += (cthd.getGiaBan() * cthd.getSoLuong() * (1 - khuyenMai));
         }
         loadTongQuanDoanhThu(tongHD, tongQA, doanhThu, loiNhuan);
     }

@@ -10,6 +10,7 @@ import org.group06.db.dao.DAO_HoaDon;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.DateStandard;
+import org.group06.utils.NameStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,13 +19,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-import org.group06.utils.NameStandard;
 
 public class PanelHoaDon extends javax.swing.JPanel {
 
@@ -430,7 +429,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 // Thực hiện công việc tải dữ liệu trong luồng nền
                 worker.execute();
             }
-        }); // set delay 2s
+        }); // set delay 0.3s
 
         timer.start();
     }
