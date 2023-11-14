@@ -40,7 +40,6 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
      */
     public PanelThongKeDoanhThu() {
         initComponents();
-//        tabLuaChonThongKe.setSelectedIndex(-1);
         winLoading.setLocationRelativeTo(null);
         winLoading.setVisible(true);
         loadingPhase();
@@ -150,9 +149,10 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         winLoading.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         winLoading.setAlwaysOnTop(true);
         winLoading.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        winLoading.setModal(false);
         winLoading.setResizable(false);
-        winLoading.setSize(new java.awt.Dimension(450, 150));
-        winLoading.setType(java.awt.Window.Type.POPUP);
+        winLoading.setSize(new java.awt.Dimension(450, 180));
+        winLoading.setType(java.awt.Window.Type.UTILITY);
 
         pnlLoading.setPreferredSize(new java.awt.Dimension(450, 180));
 
@@ -826,8 +826,6 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
         if (hoaDon != null) {
             WinChiTietHoaDon winCTHD = new WinChiTietHoaDon(hoaDon, new PanelHoaDon());
-            winCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            winCTHD.setResizable(false);
             winCTHD.setVisible(true);
         }
     }

@@ -3,8 +3,8 @@ package org.group06;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ColorConstant;
-import org.group06.view.screen.Frame;
-import org.group06.view.screen.Login;
+import org.group06.view.screen.WinDangNhap;
+import org.group06.view.screen.WinGiaoDienChinh;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,14 +37,14 @@ public class Main {
             UIManager.put( "JTabbedPane.hasFullBorder", true );
             //</editor-fold>
         } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(() -> {
-//            Login loginFrame = new Login();
-            Frame frame = new Frame(new NhanVien("NV002", "Trương Quốc Bảo", "1111", true, "123456789", "Hà Nội", "0123456789", true, NhanVien.NVQL));
+//            WinDangNhap loginFrame = new WinDangNhap();
+            WinGiaoDienChinh winGiaoDienChinh = new WinGiaoDienChinh(new NhanVien("NV002", "Trương Quốc Bảo", "1111", true, "123456789", "Hà Nội", "0123456789", true, NhanVien.NVQL));
 //            loginFrame.setVisible(true);
-            frame.setVisible(true);
-            frame.requestFocus();
+            winGiaoDienChinh.setVisible(true);
+            winGiaoDienChinh.requestFocus();
         });
     }
 }
