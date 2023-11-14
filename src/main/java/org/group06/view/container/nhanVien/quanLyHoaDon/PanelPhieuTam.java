@@ -24,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import org.group06.utils.NameStandard;
 
 /**
  * @author Le Minh Bao
@@ -131,47 +132,47 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTimHDLayout = new javax.swing.GroupLayout(pnlTimHD);
         pnlTimHD.setLayout(pnlTimHDLayout);
         pnlTimHDLayout.setHorizontalGroup(
-                pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTimHDLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTimTheoTenKH)
-                                        .addComponent(lblTimTheoTenNV))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtTimTheoTenNV)
-                                        .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTimTheoNgayNhan)
-                                        .addComponent(lblTimTheoNgayDat))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLamMoi)
-                                .addContainerGap())
+            pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTimHDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTimTheoTenKH)
+                    .addComponent(lblTimTheoTenNV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTimTheoTenNV)
+                    .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTimTheoNgayNhan)
+                    .addComponent(lblTimTheoNgayDat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLamMoi)
+                .addContainerGap())
         );
         pnlTimHDLayout.setVerticalGroup(
-                pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTimHDLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlTimHDLayout.createSequentialGroup()
-                                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                                        .addComponent(lblTimTheoNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblTimTheoTenKH)
-                                                        .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                                        .addComponent(lblTimTheoTenNV)
-                                                        .addComponent(txtTimTheoTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(9, Short.MAX_VALUE))
+            pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTimHDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTimHDLayout.createSequentialGroup()
+                        .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblTimTheoNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTimTheoTenKH)
+                            .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblTimTheoTenNV)
+                            .addComponent(txtTimTheoTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         dchTimTheoNgayDat.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));
@@ -188,19 +189,19 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         srcPhieuDat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tblPhieuDat.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi", "Ghi chú"
-                }
+            },
+            new String [] {
+                "Mã phiếu đặt", "Ngày tạo", "Ngày nhận", "Tên khách hàng", "Tên nhân viên", "Tổng tiền", "Khuyến mãi", "Thanh toán", "Ghi chú"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblPhieuDat.setRowHeight(50);
@@ -219,36 +220,37 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             tblPhieuDat.getColumnModel().getColumn(5).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(6).setResizable(false);
             tblPhieuDat.getColumnModel().getColumn(7).setResizable(false);
+            tblPhieuDat.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(srcPhieuDat, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pnlTimHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(lblTitleDSHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(srcPhieuDat, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlTimHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTitleDSHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTitleDSHoaDon)
-                                .addGap(2, 2, 2)
-                                .addComponent(pnlTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(srcPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitleDSHoaDon)
+                .addGap(2, 2, 2)
+                .addComponent(pnlTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(srcPhieuDat, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-        String tenKH = txtTimTheoTenKH.getText();
+        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -259,8 +261,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                         String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                         String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                        String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
                         String ghiChu = loadGhiChu(pd);
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenNV.setText("");
@@ -295,7 +298,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }
 
     private void txtTimTheoTenNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenNVKeyReleased
-        String tenNV = txtTimTheoTenNV.getText();
+        String tenNV = NameStandard.formatCapitalize(txtTimTheoTenNV.getText());
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
@@ -306,8 +309,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                         String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                         String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                        String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
                         String ghiChu = loadGhiChu(pd);
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
+                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
                         modelKH.addRow(data);
                     }
                     txtTimTheoTenKH.setText("");
@@ -406,8 +410,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -422,8 +427,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -439,10 +445,10 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String newFormatNgayTao = DateStandard.formatDate(pd.getNgayTao());
             String newFormatNgayNhan = DateStandard.formatDate(pd.getNgayNhan());
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-
+            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
 
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -473,7 +479,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         String maPD = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString();
 
         PhieuDat phieuDat = null;
-
+        
         for (PhieuDat pd : dsPD) {
             if (pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
                 phieuDat = pd;
@@ -499,6 +505,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String tenNV = pd.getNhanVien().getTenNV();
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String khuyenMai = (pd.getKhuyenMai() == null) ? "" : pd.getKhuyenMai().getTenCTKM();
+            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
 
             if (pd.getTrangThai() == PhieuDat.CHUA_DEN_HEN) {
                 LocalDate ngayNhan = pd.getNgayNhan().toLocalDate();
@@ -520,7 +527,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
             String ghiChu = loadGhiChu(pd);
 
-            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, ghiChu};
+            Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }

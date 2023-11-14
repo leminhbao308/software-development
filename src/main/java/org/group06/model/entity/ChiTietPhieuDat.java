@@ -5,6 +5,7 @@ public class ChiTietPhieuDat {
     private QuanAo quanAo;
     private int soLuong;
     private double giaBan;
+    private double loiNhuan;
 
     public ChiTietPhieuDat() {
         this.phieuDat = new PhieuDat();
@@ -12,12 +13,20 @@ public class ChiTietPhieuDat {
         this.soLuong = 0;
         this.giaBan = 0;
     }
+    
+//    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan) {
+//        this.setPhieuDat(phieuDat);
+//        this.setQuanAo(quanAo);
+//        this.setSoLuong(soLuong);
+//        this.setGiaBan(giaBan);
+//    }
 
-    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan) {
+    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan, double loiNhuan) {
         this.setPhieuDat(phieuDat);
         this.setQuanAo(quanAo);
         this.setSoLuong(soLuong);
         this.setGiaBan(giaBan);
+        this.setLoiNhuan(loiNhuan);
     }
 
     public PhieuDat getPhieuDat() {
@@ -50,6 +59,14 @@ public class ChiTietPhieuDat {
 
     public void setGiaBan(double giaBan) {
         this.giaBan = giaBan;
+    }
+
+    public double getLoiNhuan() {
+        return loiNhuan;
+    }
+
+    public void setLoiNhuan(double loiNhuan) {
+        this.loiNhuan = loiNhuan;
     }
 
     @Override

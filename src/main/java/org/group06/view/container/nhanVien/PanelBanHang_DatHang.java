@@ -1256,9 +1256,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         PhieuDat phieuDatHang = null;
         if (ngayNhanHang.toLocalDate().isEqual(ngayHienTai.toLocalDate())) {
-            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHO_NHAN_HANG);
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai,PhieuDat.CHO_NHAN_HANG, false);
         } else {
-            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHUA_DEN_HEN);
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai,PhieuDat.CHUA_DEN_HEN, false);
         }
 
         DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
@@ -1267,7 +1267,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             if (dao_PhieuDat.add(phieuDatHang)) {
                 DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
                 for (QuanAo quanAo : dsQuanAoDat) {
-                    ChiTietPhieuDat ctpd = new ChiTietPhieuDat(phieuDatHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()));
+                    ChiTietPhieuDat ctpd = new ChiTietPhieuDat(phieuDatHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()),quanAo.getLoiNhuan());
                     dao_ChiTietPhieuDat.add(ctpd);
                     daoQuanAo.updateSoLuongQuanAo(qlQuanAo.getByID(quanAo.getMaQA()));
                 }
