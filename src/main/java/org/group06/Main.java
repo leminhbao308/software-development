@@ -41,7 +41,7 @@ public class Main {
         }
         java.awt.EventQueue.invokeLater(() -> {
 //            Login loginFrame = new Login();
-            Frame frame = new Frame(new NhanVien());
+            Frame frame = new Frame(new NhanVien("NV002", "Trương Quốc Bảo", "1111", true, "123456789", "Hà Nội", "0123456789", true, NhanVien.NVQL));
 //            loginFrame.setVisible(true);
             frame.setVisible(true);
             frame.requestFocus();
