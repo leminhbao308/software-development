@@ -11,6 +11,8 @@ import org.group06.model.entity.KhuyenMai;
 import org.group06.model.entity.QuanAo;
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
+import org.group06.view.components.charts.BarChart;
+import org.group06.view.components.charts.data.BarChartData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -97,6 +99,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             protected void done() {
                 // Thực hiện các tác vụ cuối cùng sau khi công việc nền hoàn thành
                 winLoading.setVisible(false);
+                JPanel pnlBieuDoThongKe = loadChart();
+                pnlBieuDo.add(pnlBieuDoThongKe, BorderLayout.CENTER);
             }
         };
 
@@ -879,7 +883,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             }
         }
     }
-//    Xử lý dữ liệu số lượng quần áo để trục quan hóa bằng biểu đồ
+
+    //    Xử lý dữ liệu số lượng quần áo để trục quan hóa bằng biểu đồ
 //    Thống kê top 30 quần áo có số lượng cao nhất trong tháng
     public HashMap<String, Integer> xuLyDuLieuQuanAoTrucQuanHoa(ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput, ArrayList<String> dsMaHoaDon) {
         dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
@@ -1179,6 +1184,48 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
             this.txtLoaiQuanAo.setText("Không có thông tin");
             this.txtTenQuanAo.setText("Không có thông tin");
             this.txtLoiNhuan.setText("Không có thông tin");
+        }
+    }
+
+    private JPanel loadChart() {
+        ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDon);
+        ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDon);
+        ArrayList<String> dsMaHoaDon = new ArrayList<>();
+        for (int i = 0; i < dsHoaDonOutput.size(); i++) {
+            LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
+//            if (localDate.getYear() != LocalDate.now().getYear() || localDate.getMonthValue() == LocalDate.now().getMonthValue() - 1) {
+            if (localDate.getYear() == 2023 && localDate.getMonthValue() == 10) {
+                dsHoaDonOutput.remove(i);
+                i--;
+                continue;
+            }
+            dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
+        }
+        for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
+            if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
+                dsChiTietHoaDonOutput.remove(i);
+                i--;
+            }
+        }
+        HashMap<String, Integer> dsTenVaSoLuongQuanAo = xuLyDuLieuQuanAoTrucQuanHoa(dsChiTietHoaDon, dsMaHoaDon);
+
+        LinkedHashMap<String, LinkedHashMap<String, Double>> data = new LinkedHashMap<>();
+
+        // Save ten quan ao va tong so luong ban duoc cua quan ao do
+        LinkedHashMap<String, Double> dataQuanAo = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> item : dsTenVaSoLuongQuanAo.entrySet()) {
+            dataQuanAo.put(item.getKey(), Double.valueOf(item.getValue()));
+        }
+
+        data.put("Quần Áo", dataQuanAo);
+
+        BarChartData barChartData = new BarChartData(data);
+
+        try {
+            return new BarChart("Biểu Đồ Thống Kê Quần Áo Bán Được Trong Tháng Trước", "Tên Quần Áo", "Số Lượng", barChartData);
+        } catch (Exception e) {
+            System.out.println("Loi khi tao bieu do");
+            return null;
         }
     }
 

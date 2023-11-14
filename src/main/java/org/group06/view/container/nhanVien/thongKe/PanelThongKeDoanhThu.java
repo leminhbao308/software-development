@@ -1017,9 +1017,9 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
     }
 
     private JPanel loadChart() {
-        // Lấy danh sách 60 ngày gần nhất
+        // Lấy danh sách 90 ngày gần nhất
         List<HoaDon> dsHoaDon120Ngay = dsHoaDon.stream()
-                .sorted(Comparator.comparing(HoaDon::getNgayTao).reversed()) // Sắp xếp ngược theo ngày tạo để lấy 60 ngày gần nhất
+                .sorted(Comparator.comparing(HoaDon::getNgayTao).reversed()) // Sắp xếp ngược theo ngày tạo để lấy 90 ngày gần nhất
                 .limit(90)
                 .sorted(Comparator.comparing(HoaDon::getNgayTao)) // Sắp xếp lại theo ngày tạo để lấy ngày đầu tiên làm ngày bắt đầu
                 .toList();
