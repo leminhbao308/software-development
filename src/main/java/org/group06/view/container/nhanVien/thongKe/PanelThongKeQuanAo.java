@@ -759,7 +759,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                         soLuong += cthd.getSoLuong();
                         dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
                         khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
-                        loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * cthd.getLoiNhuan() * cthd.getGiaBan() * cthd.getSoLuong();
+                        loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
                         dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
                         uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
                         soLuong = 0;
