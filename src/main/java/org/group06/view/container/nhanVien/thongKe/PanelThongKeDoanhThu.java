@@ -8,7 +8,7 @@ import org.group06.utils.DateStandard;
 import org.group06.utils.NumberStandard;
 import org.group06.view.components.charts.BarChart;
 import org.group06.view.components.charts.data.BarChartData;
-import org.group06.view.container.nhanVien.quanLyHoaDon.FrameChiTietHoaDon;
+import org.group06.view.container.nhanVien.quanLyHoaDon.WinChiTietHoaDon;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -825,7 +825,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         hoaDon = new HoaDon(maHD, temp.getNgayTao(), kh, nv, km);
 
         if (hoaDon != null) {
-            FrameChiTietHoaDon winCTHD = new FrameChiTietHoaDon(hoaDon, new PanelHoaDon());
+            WinChiTietHoaDon winCTHD = new WinChiTietHoaDon(hoaDon, new PanelHoaDon());
             winCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             winCTHD.setResizable(false);
             winCTHD.setVisible(true);

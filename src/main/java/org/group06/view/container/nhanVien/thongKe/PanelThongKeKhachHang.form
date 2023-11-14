@@ -153,6 +153,7 @@
               <SubComponents>
                 <Container class="javax.swing.JTabbedPane" name="tabLuaChonThongKe">
                   <Properties>
+                    <Property name="selectedIndex" type="int" value="1"/>
                     <Property name="tabPlacement" type="int" value="2"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -230,7 +231,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchChonNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchChonNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchChonNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchChonNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchChonNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -444,7 +445,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTuNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTuNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchTuNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTuNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchTuNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblDenNgay">
@@ -472,7 +473,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchDenNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchDenNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchDenNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchDenNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchDenNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -579,7 +580,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng s&#x1ed1; kh&#xe1;ch h&#xe0;ng:"/>
+                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng s&#x1ed1; l&#x1b0;&#x1ee3;t mua h&#xe0;ng:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblKHTT">
@@ -763,6 +764,9 @@
               <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="loadBieuDo()"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Bi&#x1ec3;u &#x110;&#x1ed3; Tr&#x1ef1;c Quan">

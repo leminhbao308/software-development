@@ -16,7 +16,7 @@ import java.awt.*;
  *
  * @author Dell
  */
-public class FrameThemNhanVien extends javax.swing.JFrame {
+public class WinThemNhanVien extends javax.swing.JFrame {
 
     private DAO_NhanVien dao_NhanVien;
     private PanelNhanVien pnlNhanVien;
@@ -24,7 +24,7 @@ public class FrameThemNhanVien extends javax.swing.JFrame {
     /**
      * Creates new form FrameThemNhanVien
      */
-    public FrameThemNhanVien(PanelNhanVien pnlNhanVien) {
+    public WinThemNhanVien(PanelNhanVien pnlNhanVien) {
         dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         this.pnlNhanVien = pnlNhanVien;
         initComponents();

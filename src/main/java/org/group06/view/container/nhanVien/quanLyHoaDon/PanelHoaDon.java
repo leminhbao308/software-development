@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NameStandard;
 
 public class PanelHoaDon extends javax.swing.JPanel {
@@ -39,6 +41,8 @@ public class PanelHoaDon extends javax.swing.JPanel {
         initComponents();
         dchTimTheoNgay.setLocale(new Locale("vi", "VN"));
         loadDataTable();
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon,0);
+        FormatCellRenderer.formatCellRendererRight(tblHoaDon,4);
     }
 
     /**
@@ -254,7 +258,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }
 
     private void callFrameChiTietHoaDon() {
-        FrameChiTietHoaDon frCTHD = new FrameChiTietHoaDon(this.getSelectedHoaDon(), this);
+        WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(this.getSelectedHoaDon(), this);
         frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTHD.setResizable(false);
         frCTHD.setVisible(true);
