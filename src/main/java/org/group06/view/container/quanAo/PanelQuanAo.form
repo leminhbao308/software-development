@@ -344,6 +344,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="M&#xe3; Qu&#x1ea7;n &#xc1;o:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMaQA">
@@ -367,6 +368,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="T&#xea;n Qu&#x1ea7;n &#xc1;o:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTenQA">
@@ -390,6 +392,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i Qu&#x1ea7;n &#xc1;o:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cmbLoaiQA">
@@ -420,6 +423,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; L&#x1b0;&#x1ee3;ng:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSize">
@@ -428,6 +432,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Size:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cmbSize">
@@ -472,6 +477,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Nh&#xe0; Cung C&#x1ea5;p:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cmbNhaCungCap">
@@ -500,6 +506,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Th&#x1b0;&#x1a1;ng Hi&#x1ec7;u:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtSoLuongQA">
@@ -586,6 +593,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Gi&#xe1; Nh&#x1ead;p:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblLoiNhuan">
@@ -594,6 +602,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="L&#x1ee3;i Nhu&#x1ead;n:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblGiaBan">
@@ -602,6 +611,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Gi&#xe1; B&#xe1;n:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtGiaBan">
@@ -657,6 +667,7 @@
                       <Connection code="FontConstant.FONT_LABEL" type="code"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i:"/>
+                    <Property name="verticalAlignment" type="int" value="3"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cmbTrangThai">

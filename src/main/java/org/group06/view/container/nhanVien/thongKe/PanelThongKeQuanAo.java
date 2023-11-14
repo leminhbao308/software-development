@@ -119,18 +119,18 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkQuanAoHetLayout = new javax.swing.GroupLayout(pnlTkQuanAoHet);
         pnlTkQuanAoHet.setLayout(pnlTkQuanAoHetLayout);
         pnlTkQuanAoHetLayout.setHorizontalGroup(
-                pnlTkQuanAoHetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkQuanAoHetLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTKQuanAoHet)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pnlTkQuanAoHetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkQuanAoHetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTKQuanAoHet)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTkQuanAoHetLayout.setVerticalGroup(
-                pnlTkQuanAoHetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkQuanAoHetLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTKQuanAoHet)
-                                .addContainerGap(245, Short.MAX_VALUE))
+            pnlTkQuanAoHetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkQuanAoHetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTKQuanAoHet)
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         tabLuaChonThongKe.addTab("Thống Kê Quần Áo Hết", pnlTkQuanAoHet);
@@ -141,18 +141,18 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkToanBoLayout = new javax.swing.GroupLayout(pnlTkToanBo);
         pnlTkToanBo.setLayout(pnlTkToanBoLayout);
         pnlTkToanBoLayout.setHorizontalGroup(
-                pnlTkToanBoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkToanBoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblToanBo)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pnlTkToanBoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkToanBoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblToanBo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTkToanBoLayout.setVerticalGroup(
-                pnlTkToanBoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkToanBoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblToanBo)
-                                .addContainerGap(245, Short.MAX_VALUE))
+            pnlTkToanBoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkToanBoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblToanBo)
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         tabLuaChonThongKe.addTab("Thống Kê Toàn Bộ Thời Gian", pnlTkToanBo);
@@ -173,24 +173,24 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkTheoNgayLayout = new javax.swing.GroupLayout(pnlTkTheoNgay);
         pnlTkTheoNgay.setLayout(pnlTkTheoNgayLayout);
         pnlTkTheoNgayLayout.setHorizontalGroup(
-                pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTkTheoNgayLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(dchChonNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-                                        .addGroup(pnlTkTheoNgayLayout.createSequentialGroup()
-                                                .addComponent(lblChonNgay)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+            pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTkTheoNgayLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dchChonNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                    .addGroup(pnlTkTheoNgayLayout.createSequentialGroup()
+                        .addComponent(lblChonNgay)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlTkTheoNgayLayout.setVerticalGroup(
-                pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoNgayLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblChonNgay)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dchChonNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(199, Short.MAX_VALUE))
+            pnlTkTheoNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoNgayLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblChonNgay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dchChonNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         dchChonNgay.setLocale(new Locale("vi", "VN"));
@@ -222,29 +222,29 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkTheoThangLayout = new javax.swing.GroupLayout(pnlTkTheoThang);
         pnlTkTheoThang.setLayout(pnlTkTheoThangLayout);
         pnlTkTheoThangLayout.setHorizontalGroup(
-                pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
-                                                .addComponent(lblChonThangVaNam)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
-                                                .addComponent(monthTheoThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(yearTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)))
-                                .addContainerGap())
+            pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
+                        .addComponent(lblChonThangVaNam)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
+                        .addComponent(monthTheoThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(yearTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlTkTheoThangLayout.setVerticalGroup(
-                pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblChonThangVaNam)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(yearTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                                        .addComponent(monthTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(199, Short.MAX_VALUE))
+            pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoThangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblChonThangVaNam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTkTheoThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(yearTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(monthTheoThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         tabLuaChonThongKe.addTab("Thống Kê Theo Tháng", pnlTkTheoThang);
@@ -262,24 +262,24 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkTheoNamLayout = new javax.swing.GroupLayout(pnlTkTheoNam);
         pnlTkTheoNam.setLayout(pnlTkTheoNamLayout);
         pnlTkTheoNamLayout.setHorizontalGroup(
-                pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
-                                                .addComponent(lblChonNam)
-                                                .addGap(0, 517, Short.MAX_VALUE))
-                                        .addComponent(yearTheoNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+            pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
+                        .addComponent(lblChonNam)
+                        .addGap(0, 517, Short.MAX_VALUE))
+                    .addComponent(yearTheoNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlTkTheoNamLayout.setVerticalGroup(
-                pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblChonNam)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(yearTheoNam, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(199, Short.MAX_VALUE))
+            pnlTkTheoNamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoNamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblChonNam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yearTheoNam, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         tabLuaChonThongKe.addTab("Thống Kê Theo Năm", pnlTkTheoNam);
@@ -313,30 +313,30 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTkTheoKhoangThoiGianLayout = new javax.swing.GroupLayout(pnlTkTheoKhoangThoiGian);
         pnlTkTheoKhoangThoiGian.setLayout(pnlTkTheoKhoangThoiGianLayout);
         pnlTkTheoKhoangThoiGianLayout.setHorizontalGroup(
-                pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(dchTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-                                        .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
-                                                .addGroup(pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblTuNgay)
-                                                        .addComponent(lblDenNgay))
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(dchDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+            pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dchTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                    .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
+                        .addGroup(pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTuNgay)
+                            .addComponent(lblDenNgay))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(dchDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlTkTheoKhoangThoiGianLayout.setVerticalGroup(
-                pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
-                                .addComponent(lblTuNgay)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dchTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblDenNgay)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dchDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(116, Short.MAX_VALUE))
+            pnlTkTheoKhoangThoiGianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTkTheoKhoangThoiGianLayout.createSequentialGroup()
+                .addComponent(lblTuNgay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dchTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblDenNgay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dchDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         dchTuNgay.setLocale(new Locale("vi", "VN"));
@@ -390,7 +390,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         pnlTongQuanQuanAo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng Quan Quần Áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         lblTongHD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTongHD.setText("Tổng quần áo đã bán:");
+        lblTongHD.setText("Số lượng quần áo bán nhiều nhất:");
 
         lblTongQA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTongQA.setText("Loại quần áo được mua nhiều nhất:");
@@ -436,44 +436,44 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlTongQuanQuanAoLayout = new javax.swing.GroupLayout(pnlTongQuanQuanAo);
         pnlTongQuanQuanAo.setLayout(pnlTongQuanQuanAoLayout);
         pnlTongQuanQuanAoLayout.setHorizontalGroup(
-                pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlTongQuanQuanAoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblDoanhThu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblTongQA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblTongHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblLoiNhuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtTongSoLuongQuanAo)
-                                        .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
-                                        .addComponent(txtTenQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtLoiNhuan))
-                                .addContainerGap())
+            pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTongQuanQuanAoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDoanhThu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTongQA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTongHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLoiNhuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTongSoLuongQuanAo)
+                    .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addComponent(txtTenQuanAo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtLoiNhuan))
+                .addContainerGap())
         );
         pnlTongQuanQuanAoLayout.setVerticalGroup(
-                pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongQuanQuanAoLayout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTongSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(15, 15, 15)
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTongQA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(15, 15, 15)
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTenQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(15, 15, 15)
-                                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongQuanQuanAoLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTongSoLuongQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTongQA, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLoaiQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(pnlTongQuanQuanAoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pnlTongQuanQuanAoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{lblTongHD, txtLoaiQuanAo, txtLoiNhuan, txtTenQuanAo, txtTongSoLuongQuanAo});
+        pnlTongQuanQuanAoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblTongHD, txtLoaiQuanAo, txtLoiNhuan, txtTenQuanAo, txtTongSoLuongQuanAo});
 
         pnlTongQuan.add(pnlTongQuanQuanAo);
 
@@ -481,27 +481,27 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
         tblTopQuanAo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblTopQuanAo.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"
-                }
+            },
+            new String [] {
+                "Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblTopQuanAo.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
-                                                           boolean isSelected, boolean hasFocus, int row, int column) {
+                boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value,
-                        isSelected, hasFocus, row, column);
+                    isSelected, hasFocus, row, column);
                 if (column == 3) {
                     setHorizontalAlignment(JLabel.RIGHT);
                 } else {
@@ -529,22 +529,22 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlBangChiTietLayout = new javax.swing.GroupLayout(pnlBangChiTiet);
         pnlBangChiTiet.setLayout(pnlBangChiTietLayout);
         pnlBangChiTietLayout.setHorizontalGroup(
-                pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlBangChiTietLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(scrTopQuanAo)
-                                        .addComponent(pnlTongQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+            pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBangChiTietLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrTopQuanAo)
+                    .addComponent(pnlTongQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlBangChiTietLayout.setVerticalGroup(
-                pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBangChiTietLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pnlTongQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(scrTopQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                                .addGap(12, 12, 12))
+            pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBangChiTietLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlTongQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrTopQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         tabXemThongTin.addTab("Bảng Chi Tiết", pnlBangChiTiet);
@@ -554,12 +554,12 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlBieuDoLayout = new javax.swing.GroupLayout(pnlBieuDo);
         pnlBieuDo.setLayout(pnlBieuDoLayout);
         pnlBieuDoLayout.setHorizontalGroup(
-                pnlBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1838, Short.MAX_VALUE)
+            pnlBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1838, Short.MAX_VALUE)
         );
         pnlBieuDoLayout.setVerticalGroup(
-                pnlBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 719, Short.MAX_VALUE)
+            pnlBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 719, Short.MAX_VALUE)
         );
 
         tabXemThongTin.addTab("Biểu Đồ Trực Quan", pnlBieuDo);
@@ -567,22 +567,22 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tabXemThongTin))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tabXemThongTin))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tabXemThongTin)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabXemThongTin)
+                .addContainerGap())
         );
 
         javax.swing.JLabel lblBanHang = new javax.swing.JLabel("Bảng Chi Tiết");

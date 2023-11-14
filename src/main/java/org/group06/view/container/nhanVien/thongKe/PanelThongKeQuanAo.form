@@ -594,7 +594,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng qu&#x1ea7;n &#xe1;o &#x111;&#xe3; b&#xe1;n:"/>
+                        <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng qu&#x1ea7;n &#xe1;o b&#xe1;n nhi&#x1ec1;u nh&#x1ea5;t:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblTongQA">
