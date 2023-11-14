@@ -829,6 +829,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
         if (hoaDon != null) {
             WinChiTietHoaDon winCTHD = new WinChiTietHoaDon(hoaDon, new PanelHoaDon());
             winCTHD.setVisible(true);
+            winCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         }
     }
     // </editor-fold>
