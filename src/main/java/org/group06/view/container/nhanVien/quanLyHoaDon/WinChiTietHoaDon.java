@@ -72,6 +72,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         btnInHoaDon = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblTitleCTHD.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
