@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -25,6 +26,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.group06.model.manager.Manager_QuanAo;
 
 /**
  * @author lemin
@@ -49,31 +52,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 8);
         FormatCellRenderer.formatCellRendererRight(this.tblQuanAo, 9);
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 10);
-
-    }
-
-    public double originalMoney(String data) {
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
-        double value = 0;
-        try {
-            Number money = dfMoney.parse(data);
-            value = money.doubleValue();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        return value;
-    }
-
-    public double originalPercent(String data) {
-        DecimalFormat dfPercent = new DecimalFormat("##,## %");
-        double value = 0;
-        try {
-            Number percent = dfPercent.parse(data);
-            value = percent.doubleValue();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        return value;
     }
 
     public void loadDataForComboboxLoaiQuanAo() {
@@ -139,33 +117,28 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     //    Xử lý load hình ảnh quần áo lên panel khi chọn dòng dữ liệu quần áo trên bảng dữ liệu tương ứng
     private void loadImgWithRowData(String maQuanAo) {
-        for (QuanAo qa : this.dsQA) {
-            if (qa.getMaQA().equalsIgnoreCase(maQuanAo)) {
-                try {
-                    URL urlImg = new URL("file:///" + qa.getHinhAnh());
-                    loadImage(urlImg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    loadImage(ImagePath.UPLOAD_IMG);
-                }
-            }
+        System.out.println(maQuanAo);
+        QuanAo qa = this.dsQuanLyQuanAo.getByID(maQuanAo);
+        try {
+//            URL urlImg = new URI( qa.getHinhAnh()).toURL();
+            URL urlImg = qa.getHinhAnh().startsWith("file:")
+                    ? new URL(qa.getHinhAnh())
+                    : new File(qa.getHinhAnh()).toURI().toURL();
+            loadImage(urlImg);
+        } catch (Exception e) {
+//            e.printStackTrace();
+            System.out.println("Hình ảnh không tồn tại!");
+            loadImage(ImagePath.UPLOAD_IMG);
         }
+
     }
 
     private void loadDataTable() {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQuanAo.setRowCount(0);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
-        DecimalFormat dfPercent = new DecimalFormat("##,## %");
-        String tenLoaiQuanAo = "";
-        for (QuanAo qa : this.dsQA) {
-            for (Map.Entry<String, String> item : loaiQuanAo.entrySet()) {
-                if (qa.getLoaiQuanAo().equalsIgnoreCase(item.getKey())) {
-                    tenLoaiQuanAo = item.getValue();
-                }
-            }
-            Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getKichThuoc(),
-                    qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), dfMoney.format(qa.getGiaNhap()), dfPercent.format(qa.getLoiNhuan()), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
+        for (QuanAo qa : this.dsQuanLyQuanAo.getAll()) {
+            Object[] data = {qa.getMaQA(), qa.getTenQA(), this.dsQuanLyQuanAo.getTenLoaiQuanAo(qa.getLoaiQuanAo()), qa.getKichThuoc(),
+                    qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), NumberStandard.formatMoney(qa.getGiaNhap()), NumberStandard.formatPercent(qa.getLoiNhuan()), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
 //      Thêm dữ liệu vào table
             modelQuanAo.addRow(data);
         }
@@ -307,6 +280,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 txtTenQAFocusLost(evt);
             }
         });
+        txtTenQA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTenQAKeyReleased(evt);
+            }
+        });
 
         lblLoaiQA.setFont(FontConstant.FONT_LABEL);
         lblLoaiQA.setText("Loại Quần Áo:");
@@ -316,6 +294,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
         cmbLoaiQA.setEnabled(false);
         cmbLoaiQA.setLightWeightPopupEnabled(false);
         cmbLoaiQA.setPreferredSize(new java.awt.Dimension(72, 40));
+        cmbLoaiQA.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbLoaiQAFocusGained(evt);
+            }
+        });
         cmbLoaiQA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLoaiQAActionPerformed(evt);
@@ -379,6 +362,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txtSoLuongQA.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSoLuongQAFocusLost(evt);
+            }
+        });
+        txtSoLuongQA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSoLuongQAKeyReleased(evt);
             }
         });
 
@@ -480,6 +468,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 txtLoiNhuanFocusLost(evt);
             }
         });
+        txtLoiNhuan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLoiNhuanKeyReleased(evt);
+            }
+        });
 
         txtGiaNhap.setFont(FontConstant.FONT_TEXT);
         txtGiaNhap.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -487,6 +480,11 @@ public class PanelQuanAo extends javax.swing.JPanel {
         txtGiaNhap.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtGiaNhapFocusLost(evt);
+            }
+        });
+        txtGiaNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiaNhapKeyReleased(evt);
             }
         });
 
@@ -800,20 +798,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setStatusBtn(this.btnThemMoi, true);
     }
 
-    //    Chuyển đổi kiểu dữ liệu
-    public int parseStringtoInt(String text) {
-        return Integer.parseInt(text);
-    }
-
-    public Double parseStringtoDouble(String text) {
-        return Double.parseDouble(text);
-    }
-
     public String tinhGiaBan(String giaNhap, String loiNhuan) {
-        Double giaBan = parseStringtoDouble(giaNhap) + parseStringtoDouble(giaNhap) * parseStringtoDouble(loiNhuan) / 100;
-        DecimalFormat df = new DecimalFormat("##,### VNĐ");
-
-        return df.format(giaBan);
+        Double giaBan = NumberStandard.parseDouble(giaNhap) + NumberStandard.parseDouble(giaNhap) * NumberStandard.parsePercent(loiNhuan) / 100;
+        return NumberStandard.formatMoney(giaBan);
     }
 
     public void setAllField(Boolean status) {
@@ -878,17 +865,23 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
         if (this.statusBtnCapNhat == false && this.statusBtnThemMoi == true) {
+//            Trường hợp chọn nút xóa trắng khi đang thêm mới quần áo
             this.tblQuanAo.clearSelection();
 //            loadImage(ImagePath.UPLOAD_IMG);
             setAllField(true);
+            this.txtMaQA.setText("");
+            System.out.println(NumberStandard.parsePercent("100"));
         } else if (this.statusBtnCapNhat == true && this.statusBtnThemMoi == false) {
+//            Trường hợp chọn nút xóa trắng khi đang cập nhật quần áo
             setFieldUpdate();
-            setFieldUpdate();
+
+
         }
+
+        this.txtTenQA.requestFocus();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        this.txtTenQA.requestFocus();
         setAllField(true);
 //        Thiết lập trạng thái của các button
         java.util.List<JButton> listBtnDisable = java.util.Arrays.asList(this.btnThemMoi, this.btnCapNhat);
@@ -897,6 +890,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setStatusBtn(listBtnEnable, true);
         this.statusBtnThemMoi = true;
         this.statusBtnCapNhat = false;
+        this.statusBtnHuy = true;
+        this.txtTenQA.requestFocus();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     public String taoMaQuanAo(String text) {
@@ -974,13 +969,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vui lòng không để trống field này! Hãy kiểm tra giá nhập và lợi nhuận đã nhập chưa!");
             this.txtGiaBan.requestFocus();
         } else if (this.cmbTrangThai.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn size!");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn trạng thái kinh doanh!");
             ComponentStatus.CheckSelectOption(this.cmbTrangThai);
         } else {
             if (JOptionPane.showConfirmDialog(null, "Bạn chắn chắn lưu dữ liệu này?", "Xác nhận hành động", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
-                if (this.statusBtnThemMoi == false && this.statusBtnCapNhat == true) {
+                if (this.statusBtnCapNhat == true) {
                     viTri = this.tblQuanAo.getSelectedRow();
 //                Lấy quần áo cần cập nhật
+                    System.out.println(this.tblQuanAo.getValueAt(viTri, 0));
                     qaCapNhat = new DAO_QuanAo(DatabaseConstant.getConnection()).getByID(this.txtMaQA.getText());
 //                Tên quần áo
                     String tenQuanAo = NameStandard.formatCapitalize(this.txtTenQA.getText());
@@ -1002,9 +998,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     qaCapNhat.setKichThuoc(sizeQuanAo);
                     this.tblQuanAo.getModel().setValueAt(sizeQuanAo, viTri, 3);
 //                Số lượng quần áo
-                    int soLuongQuanAo = parseStringtoInt(this.txtSoLuongQA.getText());
+                    int soLuongQuanAo = NumberStandard.parseInt(this.txtSoLuongQA.getText());
                     qaCapNhat.setSoLuong(soLuongQuanAo);
-                    this.tblQuanAo.getModel().setValueAt(soLuongQuanAo, viTri, 4);
+                    this.tblQuanAo.getModel().setValueAt(this.txtSoLuongQA.getText(), viTri, 4);
 //                Tên thương hiệu
                     String tenThuongHieu = this.txtThuongHieu.getText();
                     qaCapNhat.setThuongHieu(tenThuongHieu);
@@ -1018,15 +1014,15 @@ public class PanelQuanAo extends javax.swing.JPanel {
                         }
                     }
 //                Giá nhập quần áo
-                    double giaNhap = originalMoney(this.txtGiaNhap.getText());
+                    double giaNhap = NumberStandard.parseMoney(this.txtGiaNhap.getText());
                     qaCapNhat.setGiaNhap(giaNhap);
-                    DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
-                    this.tblQuanAo.getModel().setValueAt(dfMoney.format(giaNhap), viTri, 7);
+
+                    this.tblQuanAo.getModel().setValueAt(NumberStandard.formatMoney(giaNhap), viTri, 7);
 //                Lợi nhuận của quần áo
-                    double loiNhuan = originalPercent(this.txtLoiNhuan.getText());
+                    double loiNhuan = NumberStandard.parsePercent(this.txtLoiNhuan.getText());
                     qaCapNhat.setLoiNhuan(loiNhuan);
-                    DecimalFormat dfPercent = new DecimalFormat("##,## %");
-                    this.tblQuanAo.getModel().setValueAt(dfPercent.format(loiNhuan), viTri, 8);
+
+                    this.tblQuanAo.getModel().setValueAt(NumberStandard.formatPercent(loiNhuan), viTri, 8);
 //                Trạng thái sản phẩm 1: true là đang kinh doanh; 2: false là dừng kinh doanh
                     int trangThai = this.cmbTrangThai.getSelectedIndex();
                     if (trangThai == 1) {
@@ -1038,19 +1034,20 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     }
 
 //                    Xử lý lấy hình ảnh mới cần cập nhật
-//                    System.out.println(file.getPath());
                     if (file != null) {
                         String urlHinhAnh = file.getPath();
                         qaCapNhat.setHinhAnh(urlHinhAnh);
-                        for (QuanAo qa : dsQA) {
-                            if (qaCapNhat.getMaQA().contains(qa.getMaQA())) {
-                                qa.setHinhAnh(urlHinhAnh);
-                            }
-                        }
+//                        for (QuanAo qa : dsQA) {
+//                            if (qaCapNhat.getMaQA().contains(qa.getMaQA())) {
+//                                qa.setHinhAnh(urlHinhAnh);
+//                            }
+//                        }
                     }
 //                    Cập nhật quần áo vào cơ sở dữ liệu
+                    System.out.println(qaCapNhat.getHinhAnh());
+
                     DAO_QuanAo updateQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
-                    if (updateQuanAo.update(qaCapNhat)) {
+                    if (updateQuanAo.update(qaCapNhat) && dsQuanLyQuanAo.update(qaCapNhat)) {
                         System.out.println("Cập nhật thành công");
                     }
 
@@ -1079,7 +1076,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     String maQuanAo = this.txtMaQA.getText().trim();
                     qaThemMoi.setMaQA(maQuanAo);
 //                Số lượng quần áo
-                    int soLuongQuanAo = parseStringtoInt(this.txtSoLuongQA.getText());
+                    int soLuongQuanAo = NumberStandard.parseInt(this.txtSoLuongQA.getText());
                     qaThemMoi.setSoLuong(soLuongQuanAo);
 //                Tên thương hiệu
                     String tenThuongHieu = this.txtThuongHieu.getText();
@@ -1098,33 +1095,30 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     Pattern patternGiaNhap = Pattern.compile(regexGiaNhap);
                     Matcher matcherGiaNhap = patternGiaNhap.matcher(this.txtGiaNhap.getText().trim());
                     double giaNhap = 0;
-                    DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
                     String giaNhapFormat = "";
                     if (matcherGiaNhap.find()) {
-                        giaNhap = originalMoney(this.txtGiaNhap.getText().trim());
+                        giaNhap = NumberStandard.parseMoney(this.txtGiaNhap.getText().trim());
                         qaThemMoi.setGiaNhap(giaNhap);
-                        giaNhapFormat = dfMoney.format(giaNhap);
+                        giaNhapFormat = NumberStandard.formatMoney(giaNhap);
                     } else {
-                        giaNhap = parseStringtoDouble(this.txtGiaNhap.getText().trim());
+                        giaNhap = NumberStandard.parseDouble(this.txtGiaNhap.getText().trim());
                         qaThemMoi.setGiaNhap(giaNhap);
-                        giaNhapFormat = dfMoney.format(giaNhap);
+                        giaNhapFormat = NumberStandard.formatMoney(giaNhap);
                     }
 //                Lợi nhuận của quần áo
                     String regexLoiNhuan = "^*%+$";
                     Pattern patternLoiNhuan = Pattern.compile(regexLoiNhuan);
                     Matcher matcherLoiNhuan = patternLoiNhuan.matcher(this.txtLoiNhuan.getText());
                     double loiNhuan = 0;
-                    DecimalFormat dfPercent = new DecimalFormat("##,## %");
                     String loiNhuanFormat = "";
-
                     if (matcherLoiNhuan.find()) {
-                        loiNhuan = originalPercent(this.txtLoiNhuan.getText());
+                        loiNhuan = NumberStandard.parsePercent(this.txtLoiNhuan.getText());
                         qaThemMoi.setLoiNhuan(loiNhuan);
-                        loiNhuanFormat = dfPercent.format(loiNhuan + "");
+                        loiNhuanFormat = NumberStandard.formatPercent(loiNhuan);
                     } else {
-                        loiNhuan = parseStringtoDouble(this.txtLoiNhuan.getText().trim());
+                        loiNhuan = NumberStandard.parsePercent(this.txtLoiNhuan.getText().trim());
                         qaThemMoi.setLoiNhuan(loiNhuan);
-                        loiNhuanFormat = dfPercent.format(loiNhuan);
+                        loiNhuanFormat = NumberStandard.formatPercent(loiNhuan);
                     }
 //                Giá bán của quần áo
                     String giaBan = this.txtGiaBan.getText();
@@ -1148,17 +1142,20 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     if (file != null) {
                         String urlHinhAnh = file.getPath();
                         qaThemMoi.setHinhAnh(urlHinhAnh);
+                    } else if (file == null) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng chọn hình ảnh quần áo");
                     }
                     dsQA.add(qaThemMoi);
 //                Lưu quần áo vào cơ sở dữ liệu
                     DAO_QuanAo addQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection());
-                    if (addQuanAo.add(qaThemMoi)) {
+                    if (addQuanAo.add(qaThemMoi) && dsQuanLyQuanAo.add(qaThemMoi)) {
                         System.out.println("Thêm mới thành công");
                     }
                 }
 
                 this.statusBtnThemMoi = false;
                 this.statusBtnCapNhat = false;
+                this.statusBtnHuy = false;
                 xoaTrang();
                 ComponentStatus.setStatusBtn(this.btnXoaTrang, false);
                 ComponentStatus.setStatusBtn(this.btnLuu, false);
@@ -1185,8 +1182,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
             ComponentStatus.setFieldStatus(listTxt, true);
 //            Set combobox
             ComponentStatus.setComboBoxStatus(listCmb, true);
-            this.statusBtnThemMoi = false;
+            this.statusBtnThemMoi = true;
             this.statusBtnCapNhat = true;
+            this.statusBtnHuy = true;
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -1201,8 +1199,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
             this.statusBtnThemMoi = false;
             this.statusBtnCapNhat = false;
             this.tblQuanAo.clearSelection();
+            this.statusBtnHuy = true;
         }
-
     }//GEN-LAST:event_btnHuyActionPerformed
 
     private void cmbLoaiQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiQAActionPerformed
@@ -1250,8 +1248,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 this.cmbNhaCungCap.setSelectedIndex(i);
             }
         }
-        this.txtGiaNhap.setText(tblQuanAo.getValueAt(viTri, 7).toString());
-        this.txtLoiNhuan.setText(tblQuanAo.getValueAt(viTri, 8).toString());
+        this.txtGiaNhap.setText(NumberStandard.parseMoney(tblQuanAo.getValueAt(viTri, 7).toString()) + "");
+        this.txtLoiNhuan.setText(NumberStandard.parsePercent(tblQuanAo.getValueAt(viTri, 8).toString()) + "");
         this.txtGiaBan.setText(tblQuanAo.getValueAt(viTri, 9).toString());
 //        Xử lý lấy trạng thái của quần áo
         for (int i = 0; i < this.cmbTrangThai.getItemCount(); i++) {
@@ -1262,7 +1260,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         file = null;
 //        Xử lý lấy hình ảnh theo dòng dữ liệu
         loadImgWithRowData(tblQuanAo.getValueAt(viTri, 0).toString());
-
+        this.statusBtnHuy = true;
 
     }//GEN-LAST:event_tblQuanAoMouseClicked
 
@@ -1272,14 +1270,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTenQAFocusLost
 
     private void txtLoiNhuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoiNhuanFocusLost
-        if (Pattern.compile("^\\d+\\.{0,1}\\d+$").matcher(txtLoiNhuan.getText().trim()).find() == false) {
-            JOptionPane.showMessageDialog(null,
-                    "Vui lòng nhập số(sử dụng dấu . với số thực)!");
-            this.txtLoiNhuan.selectAll();
-            this.txtLoiNhuan.requestFocus();
-        } else {
-            this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
-        }
+
     }//GEN-LAST:event_txtLoiNhuanFocusLost
 
     private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
@@ -1295,46 +1286,26 @@ public class PanelQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTrangThaiActionPerformed
 
     private void txtSoLuongQAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongQAFocusLost
-        if (Pattern.compile("^\\d+$").matcher(txtSoLuongQA.getText().trim()).find() == false) {
-            JOptionPane.showMessageDialog(null,
-                    "Vui lòng nhập số nguyên dương!");
-            this.txtSoLuongQA.selectAll();
-            this.txtSoLuongQA.requestFocus();
-        }
+
     }//GEN-LAST:event_txtSoLuongQAFocusLost
 
     private void txtThuongHieuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtThuongHieuFocusLost
-//        ComponentStatus.checkEmptyField(this.txtThuongHieu);
+        String tenThuongHieu = this.txtThuongHieu.getText().trim();
+        this.txtThuongHieu.setText(NameStandard.formatCapitalize(tenThuongHieu));
     }//GEN-LAST:event_txtThuongHieuFocusLost
 
     private void txtGiaNhapFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaNhapFocusLost
-        if (Pattern.compile("^\\d+$").matcher(txtGiaNhap.getText().trim()).find() == false) {
-            JOptionPane.showMessageDialog(null,
-                    "Vui lòng nhập số!");
-            this.txtGiaNhap.selectAll();
-            this.txtGiaNhap.requestFocus();
-        }
+
     }//GEN-LAST:event_txtGiaNhapFocusLost
 
     private void txtTimKiemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemFocusLost
 
-    private void cmbSizeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSizeItemStateChanged
-        if (this.statusBtnThemMoi == true && this.statusBtnCapNhat == false) {
-            String maQA = taoMaQuanAo(this.txtTenQA.getText());
-            this.txtMaQA.setText(maQA);
-            qaThemMoi.setMaQA(maQA);
-        }
-        ComponentStatus.CheckSelectOption(this.cmbSize);
-    }//GEN-LAST:event_cmbSizeItemStateChanged
-
     private void loadAllTableQA(ArrayList<QuanAo> dsQATimDuoc) {
         DefaultTableModel modelQA = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQA.setRowCount(0);
         String tenLoaiQuanAo = "";
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
-        DecimalFormat dfPercent = new DecimalFormat("##,## %");
         for (QuanAo qa : dsQATimDuoc) {
             for (HashMap.Entry<String, String> item : loaiQuanAo.entrySet()) {
                 if (qa.getLoaiQuanAo().equalsIgnoreCase(item.getKey())) {
@@ -1343,7 +1314,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
             Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getKichThuoc(),
                     qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(),
-                    dfMoney.format(qa.getGiaNhap()), dfPercent.format(qa.getLoiNhuan()),
+                    NumberStandard.formatMoney(qa.getGiaNhap()), NumberStandard.formatPercent(qa.getLoiNhuan()),
                     tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())),
                     qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
 //      Thêm dữ liệu vào table
@@ -1391,6 +1362,68 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         xuLyTimKiemQA();
     }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void cmbLoaiQAFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbLoaiQAFocusGained
+
+    }//GEN-LAST:event_cmbLoaiQAFocusGained
+
+    private void cmbSizeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSizeItemStateChanged
+        if (this.statusBtnThemMoi == true && this.statusBtnCapNhat == false) {
+            String maQA = taoMaQuanAo(this.txtTenQA.getText());
+            this.txtMaQA.setText(maQA);
+            qaThemMoi.setMaQA(maQA);
+        }
+        ComponentStatus.CheckSelectOption(this.cmbSize);
+    }//GEN-LAST:event_cmbSizeItemStateChanged
+
+    private void txtGiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaNhapKeyReleased
+        if (!txtGiaNhap.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "Vui lòng nhập số!");
+            this.txtGiaNhap.selectAll();
+            this.txtGiaNhap.requestFocus();
+        } else {
+            if (!this.txtLoiNhuan.getText().isEmpty()) {
+                this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+            } else {
+                this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), 0 + ""));
+            }
+        }
+    }//GEN-LAST:event_txtGiaNhapKeyReleased
+
+    private void txtLoiNhuanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoiNhuanKeyReleased
+        System.out.println(txtLoiNhuan.getText().trim());
+        if (!txtLoiNhuan.getText().isEmpty()) {
+            if (!txtLoiNhuan.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "Vui lòng nhập số(sử dụng dấu . với số thực)!");
+                this.txtLoiNhuan.selectAll();
+                this.txtLoiNhuan.requestFocus();
+            } else {
+                if (this.txtGiaNhap.getText().isEmpty()) {
+                    this.txtGiaBan.setText(tinhGiaBan(0 + "", this.txtLoiNhuan.getText()));
+                } else {
+                    this.txtGiaBan.setText(tinhGiaBan(this.txtGiaNhap.getText(), this.txtLoiNhuan.getText()));
+                }
+            }
+        }
+    }//GEN-LAST:event_txtLoiNhuanKeyReleased
+
+    private void txtSoLuongQAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoLuongQAKeyReleased
+        if (!txtSoLuongQA.getText().trim().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "Vui lòng nhập số nguyên dương!");
+            this.txtSoLuongQA.selectAll();
+            this.txtSoLuongQA.requestFocus();
+        }
+    }//GEN-LAST:event_txtSoLuongQAKeyReleased
+
+    private void txtTenQAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenQAKeyReleased
+        if (this.statusBtnThemMoi == true && this.statusBtnCapNhat == false) {
+            String tenQuanAo = this.txtTenQA.getText();
+            this.txtMaQA.setText(taoMaQuanAo(tenQuanAo));
+        }
+    }//GEN-LAST:event_txtTenQAKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -1444,6 +1477,8 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private HashMap<String, String> loaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();
     private boolean statusBtnCapNhat = false;
     private boolean statusBtnThemMoi = false;
+    private boolean statusBtnHuy = false;
+    private Manager_QuanAo dsQuanLyQuanAo = new Manager_QuanAo(DatabaseConstant.getConnection());
 
     private void xoaTrang() {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtMaQA, this.txtTenQA, this.txtSoLuongQA, this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
@@ -1452,5 +1487,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setDefaultCmb(listCmb);
         ComponentStatus.setFieldStatus(listTxt, false);
         ComponentStatus.setComboBoxStatus(listCmb, false);
+        this.txtTenQA.requestFocus();
     }
 }

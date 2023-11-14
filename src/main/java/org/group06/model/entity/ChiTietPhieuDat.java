@@ -12,8 +12,9 @@ public class ChiTietPhieuDat {
         this.quanAo = new QuanAo();
         this.soLuong = 0;
         this.giaBan = 0;
+        this.loiNhuan = 0;
     }
-    
+
 //    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan) {
 //        this.setPhieuDat(phieuDat);
 //        this.setQuanAo(quanAo);
@@ -76,6 +77,7 @@ public class ChiTietPhieuDat {
                 ", quanAo=" + quanAo +
                 ", soLuong=" + soLuong +
                 ", giaBan=" + giaBan +
+                ", loiNhuan=" + loiNhuan +
                 '}';
     }
 }

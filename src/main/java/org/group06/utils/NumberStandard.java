@@ -53,7 +53,7 @@ public class NumberStandard {
     public static double parsePercent(String text) {
         double result = 0;
         try {
-            result = Double.parseDouble(text.replaceAll("%", "")) / 100;
+            result = Double.parseDouble(text.replaceAll("%", ""));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

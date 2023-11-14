@@ -1160,7 +1160,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             if (dao_HoaDon.add(hoaDonBanHang)) {
                 DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
                 for (QuanAo quanAo : dsQuanAoMua) {
-                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()));
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), quanAo.getLoiNhuan());
                     dao_ChiTietHoaDon.add(cthd);
                     daoQuanAo.updateSoLuongQuanAo(qlQuanAo.getByID(quanAo.getMaQA()));
                 }

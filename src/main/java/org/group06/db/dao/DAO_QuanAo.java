@@ -184,7 +184,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
 
     public String getTenLoaiQuanAo(String maLoaiQuanAO) {
         try {
-            String sql = "SELECT FROM LoaiQuanAo WHERE MALOAIQA = ?";
+            String sql = "SELECT * FROM LoaiQuanAo WHERE MALOAIQA = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, maLoaiQuanAO);
             ResultSet result = statement.executeQuery();
