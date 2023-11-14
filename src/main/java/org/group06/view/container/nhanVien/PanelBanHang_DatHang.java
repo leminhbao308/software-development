@@ -40,7 +40,7 @@ import java.util.Locale;
  */
 public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
-    private Connection connection = DatabaseConstant.getConnection();
+    private final Connection connection = DatabaseConstant.getConnection();
     private final DAO_QuanAo daoQuanAo;
 
     private Manager_QuanAo qlQuanAo;
@@ -130,6 +130,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         dchNgayNhanHang = new com.toedter.calendar.JDateChooser();
         lbl_VAT_DatHang = new javax.swing.JLabel();
         spr_VAT_DatHang = new javax.swing.JSeparator();
+        chk_ThanhToanTruoc = new javax.swing.JCheckBox();
         lbl_TongTien_DatHang = new javax.swing.JLabel();
         txt_TienKhachTra_DatHang = new javax.swing.JTextField();
         spr_TienThua_DatHang = new javax.swing.JSeparator();
@@ -168,7 +169,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Bán Hàng / Đặt Hàng");
+        lblTitle.setText("Bán Hàng");
         lblTitle.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout pnlTitleLayout = new javax.swing.GroupLayout(pnlTitle);
@@ -652,6 +653,11 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         tabBanHang_DatHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tabBanHang_DatHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tabBanHang_DatHang.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabBanHang_DatHangStateChanged(evt);
+            }
+        });
 
         pnlBanHang.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Thông Tin Thanh Toán", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -766,6 +772,15 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         spr_VAT_DatHang.setForeground(new java.awt.Color(0, 0, 0));
 
+        chk_ThanhToanTruoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chk_ThanhToanTruoc.setSelected(true);
+        chk_ThanhToanTruoc.setText("Khách hàng thanh toán trước");
+        chk_ThanhToanTruoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chk_ThanhToanTruocItemStateChanged(evt);
+            }
+        });
+
         lbl_TongTien_DatHang.setBackground(java.awt.Color.lightGray);
         lbl_TongTien_DatHang.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lbl_TongTien_DatHang.setForeground(new java.awt.Color(255, 0, 0));
@@ -782,7 +797,6 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         txt_TienKhachTra_DatHang.setText("0 VNĐ");
         txt_TienKhachTra_DatHang.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Tiền Khách Đưa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         txt_TienKhachTra_DatHang.setDisabledTextColor(java.awt.Color.red);
-        txt_TienKhachTra_DatHang.setFocusable(false);
         txt_TienKhachTra_DatHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TienKhachTra_DatHangActionPerformed(evt);
@@ -801,7 +815,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         chk_XuatDH_DatHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         chk_XuatDH_DatHang.setSelected(true);
-        chk_XuatDH_DatHang.setText("Xuất Hoá Đơn Bán Hàng");
+        chk_XuatDH_DatHang.setText("Xuất Hoá Đơn Đặt Hàng");
 
         btnDatHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDatHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon/black/bill.png"))); // NOI18N
@@ -830,7 +844,8 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                     .addComponent(btnDatHang, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                     .addComponent(lbl_VAT_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblNgayNhanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chk_XuatDH_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chk_XuatDH_DatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chk_ThanhToanTruoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlDatHangLayout.setVerticalGroup(
@@ -840,11 +855,13 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 .addComponent(lblNgayNhanHang)
                 .addGap(11, 11, 11)
                 .addComponent(dchNgayNhanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 927, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 924, Short.MAX_VALUE)
                 .addComponent(lbl_VAT_DatHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spr_VAT_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_ThanhToanTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_TongTien_DatHang)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_TienKhachTra_DatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -927,7 +944,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimQAKeyReleased
 
     private void tblQuanAoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblQuanAoFocusGained
-        if (tblQuanAo.getRowCount() > 0) {
+        if (tblQuanAo.getRowCount() > 0 && tblQuanAo.getSelectedRow() != -1) {
             spnSoLuongQuanAo.setEnabled(true);
             btnThemQuanAo.setText("Thêm Quần Áo");
             btnThemQuanAo.setEnabled(true);
@@ -1054,7 +1071,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     }
 
     private void tblDonHangFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblDonHangFocusGained
-        if (tblDonHang.getRowCount() != 0) {
+        if (tblDonHang.getRowCount() != 0 && tblDonHang.getSelectedRow() != -1) {
             setSoLuongQuanAoDangChon(tblDonHang.getValueAt(tblDonHang.getSelectedRow(), 4).toString());
             spnSoLuongQuanAo.setEnabled(true);
             btnThemQuanAo.setText("Cập Nhật");
@@ -1138,9 +1155,8 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         HoaDon hoaDonBanHang = new HoaDon(maHoaDon, ngayHienTai, khachHang, nhanVien, khuyenMai);
         DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
-        int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn hoàn tất thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn hoàn tất đơn hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {
-            System.out.println("Thanh toán thành công!");
             if (dao_HoaDon.add(hoaDonBanHang)) {
                 DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
                 for (QuanAo quanAo : dsQuanAoMua) {
@@ -1148,6 +1164,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                     dao_ChiTietHoaDon.add(cthd);
                     daoQuanAo.updateSoLuongQuanAo(qlQuanAo.getByID(quanAo.getMaQA()));
                 }
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 reloadAll();
             }
             // TODO: Xuất hoá đơn
@@ -1256,9 +1273,9 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
 
         PhieuDat phieuDatHang = null;
         if (ngayNhanHang.toLocalDate().isEqual(ngayHienTai.toLocalDate())) {
-            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai,PhieuDat.CHO_NHAN_HANG, false);
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHO_NHAN_HANG, chk_ThanhToanTruoc.isSelected());
         } else {
-            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai,PhieuDat.CHUA_DEN_HEN, false);
+            phieuDatHang = new PhieuDat(maPhieuDat, ngayHienTai, ngayNhanHang, khachHang, nhanVien, khuyenMai, PhieuDat.CHUA_DEN_HEN, chk_ThanhToanTruoc.isSelected());
         }
 
         DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
@@ -1267,10 +1284,11 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             if (dao_PhieuDat.add(phieuDatHang)) {
                 DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
                 for (QuanAo quanAo : dsQuanAoDat) {
-                    ChiTietPhieuDat ctpd = new ChiTietPhieuDat(phieuDatHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()),quanAo.getLoiNhuan());
+                    ChiTietPhieuDat ctpd = new ChiTietPhieuDat(phieuDatHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), quanAo.getLoiNhuan());
                     dao_ChiTietPhieuDat.add(ctpd);
                     daoQuanAo.updateSoLuongQuanAo(qlQuanAo.getByID(quanAo.getMaQA()));
                 }
+                JOptionPane.showMessageDialog(this, "Đặt hàng thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 reloadAll();
             }
             // TODO: Xuất phiếu đặt hàng
@@ -1340,6 +1358,22 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         callFrameThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void chk_ThanhToanTruocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_ThanhToanTruocItemStateChanged
+        txt_TienKhachTra_DatHang.setEditable(chk_ThanhToanTruoc.isSelected());
+        capNhatSoTienMuaHang();
+    }//GEN-LAST:event_chk_ThanhToanTruocItemStateChanged
+
+    private void tabBanHang_DatHangStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabBanHang_DatHangStateChanged
+        switch (tabBanHang_DatHang.getSelectedIndex()) {
+            case 0:
+                lblTitle.setText("Bán Hàng");
+                break;
+            case 1:
+                lblTitle.setText("Đặt Hàng");
+                break;
+        }
+    }//GEN-LAST:event_tabBanHang_DatHangStateChanged
+
     private void callFrameThemKH() {
         WinThemKH frThemKH = new WinThemKH(new PanelKhachHang());
         frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -1362,6 +1396,11 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         qlQuanAoMua.deleteAll();
         btnThanhToan.setEnabled(false);
         btnDatHang.setEnabled(false);
+        chk_ThanhToanTruoc.setSelected(true);
+        chk_XuatDH_DatHang.setSelected(true);
+        chk_XuatDH_DatHang.setSelected(true);
+        dchNgayNhanHang.setDate(new Date(System.currentTimeMillis()));
+        tabBanHang_DatHang.setSelectedIndex(0);
     }
 
     /**
@@ -1608,17 +1647,26 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 lbl_TienThua_BanHang.setText(NumberStandard.formatMoney(0));
 
                 // Đặt Hàng
-                txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
-                lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(0));
-
+                if (chk_ThanhToanTruoc.isSelected()) {
+                    txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(tongTienPhaiTra));
+                    lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(0));
+                } else {
+                    txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(0));
+                    lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(0));
+                }
             } else {
                 double tienTraKhach = tienKhachTra - tongTienPhaiTra;
                 txt_TienKhachTra_BanHang.setText(NumberStandard.formatMoney(tienKhachTra));
                 lbl_TienThua_BanHang.setText(NumberStandard.formatMoney(tienTraKhach));
 
                 // Đặt Hàng
-                txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(tienKhachTra));
-                lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(tienTraKhach));
+                if (chk_ThanhToanTruoc.isSelected()) {
+                    txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(tienKhachTra));
+                    lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(tienTraKhach));
+                } else {
+                    txt_TienKhachTra_DatHang.setText(NumberStandard.formatMoney(0));
+                    lbl_TienThua_DatHang.setText(NumberStandard.formatMoney(0));
+                }
             }
         } else {
             String defaultCost = NumberStandard.formatMoney(0);
@@ -1653,6 +1701,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
     private javax.swing.JButton btnThemQuanAo;
     private javax.swing.JButton btnXoaKhachHang;
     private javax.swing.JButton btnXoaKhuyenMai;
+    private javax.swing.JCheckBox chk_ThanhToanTruoc;
     private javax.swing.JCheckBox chk_XuatDH_DatHang;
     private javax.swing.JCheckBox chk_XuatHD_BanHang;
     private javax.swing.JComboBox<String> cmbKichCo;
