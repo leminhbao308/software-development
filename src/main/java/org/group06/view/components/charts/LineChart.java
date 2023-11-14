@@ -14,6 +14,7 @@ public class LineChart extends ChartPanel {
         public LineChart(String title, String yLabel, LineChartData data) throws Exception {
             super(ChartFactory.createLineChart(title, data.getxLabel(), yLabel, data.getDataSet(), PlotOrientation.VERTICAL, true, true, false), true, true, true, true, true);
             super.getChart().getCategoryPlot().setRangeGridlinePaint(ColorConstant.BLACK);
+
         }
 
         public void setOrientation(PlotOrientation orientation) {
