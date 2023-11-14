@@ -41,12 +41,11 @@ public class FrameChiTietDonDatHang extends javax.swing.JFrame {
         this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
 
-        if (this.phieuDat.getTrangThai() != PhieuDat.CHO_NHAN_HANG) {
+        if (this.phieuDat.getTrangThai() == PhieuDat.DA_QUA_HAN) {
             btnNhanHang.setEnabled(false);
         } else {
             btnNhanHang.setEnabled(true);
         }
-
         loadDataTable();
     }
 

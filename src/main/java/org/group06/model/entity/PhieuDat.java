@@ -14,6 +14,7 @@ public class PhieuDat {
     private NhanVien nhanVien;
     private KhuyenMai khuyenMai;
     private int trangThai;
+    private boolean thanhToan;
 
     public PhieuDat() {
         this.maPhieuDat = "";
@@ -25,7 +26,7 @@ public class PhieuDat {
         this.trangThai = CHUA_DEN_HEN;
     }
 
-    public PhieuDat(String maPhieuDat, Date ngayTao, Date ngayNhan, KhachHang khachHang, NhanVien nhanVien, KhuyenMai khuyenMai, int trangThai) {
+    public PhieuDat(String maPhieuDat, Date ngayTao, Date ngayNhan, KhachHang khachHang, NhanVien nhanVien, KhuyenMai khuyenMai, int trangThai, boolean thanhToan) {
         this.setMaPhieuDat(maPhieuDat);
         this.setNgayTao(ngayTao);
         this.setNgayNhan(ngayNhan);
@@ -33,6 +34,7 @@ public class PhieuDat {
         this.setNhanVien(nhanVien);
         this.setKhuyenMai(khuyenMai);
         this.setTrangThai(trangThai);
+        this.setThanhToan(thanhToan);
     }
 
     public String getMaPhieuDat() {
@@ -89,6 +91,14 @@ public class PhieuDat {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public boolean isThanhToan() {
+        return thanhToan;
+    }
+
+    public void setThanhToan(boolean thanhToan) {
+        this.thanhToan = thanhToan;
     }
 
     @Override

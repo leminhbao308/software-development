@@ -32,6 +32,7 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
                 chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
             }
         } catch (SQLException e) {
@@ -53,6 +54,7 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
                 chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
             }
         } catch (SQLException e) {
@@ -69,12 +71,13 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
     @Override
     public boolean add(ChiTietPhieuDat chiTietPhieuDat) {
         try {
-            String sql = "INSERT INTO ChiTietPhieuDat (MAPHIEUDAT, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ChiTietPhieuDat (MAPHIEUDAT, MAQA, SOLUONG, GIABAN, LOINHUAN) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, chiTietPhieuDat.getPhieuDat().getMaPhieuDat());
             statement.setString(2, chiTietPhieuDat.getQuanAo().getMaQA());
             statement.setInt(3, chiTietPhieuDat.getSoLuong());
             statement.setDouble(4, chiTietPhieuDat.getGiaBan());
+            statement.setDouble(5, chiTietPhieuDat.getLoiNhuan());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -117,6 +120,7 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
                 chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
             }
         } catch (SQLException e) {

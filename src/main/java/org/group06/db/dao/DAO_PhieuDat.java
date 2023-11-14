@@ -40,7 +40,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
                 int trangThai = resultSet.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = resultSet.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsPD.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -51,10 +52,10 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     public ArrayList<PhieuDat> getByNameKH(String name) {
         ArrayList<PhieuDat> dsKH = new ArrayList<>();
+        String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM,TRANGTHAI FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH AND TENKH = ?";
         try {
-            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH AND TENKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setObject(1, name, java.sql.Types.NVARCHAR);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
@@ -65,7 +66,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsKH.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -77,9 +79,9 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
     public ArrayList<PhieuDat> getByNameNV(String name) {
         ArrayList<PhieuDat> dsPD = new ArrayList<>();
         try {
-            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV AND TENNV = ?";
+            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM,PhieuDat.TRANGTHAI FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV AND TENNV = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setObject(1, name, java.sql.Types.NVARCHAR);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 PhieuDat phieuDat = new PhieuDat();
@@ -90,7 +92,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsPD.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -115,7 +118,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai,thanhToan);
                 dsDateDat.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -140,7 +144,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -172,7 +177,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsDateDatAndDateNhan.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -198,6 +204,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 phieuDat.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
                 phieuDat.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
                 phieuDat.setTrangThai(resultSet.getInt("TRANGTHAI"));
+                phieuDat.setThanhToan(resultSet.getBoolean("THANHTOAN")); 
             }
         } catch (SQLException e) {
             System.out.println("Lỗi lấy phiếu đặt theo mã phiếu đặt");
@@ -208,7 +215,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
     @Override
     public boolean add(PhieuDat phieuDat) {
         boolean success = false;
-        String sql = "INSERT INTO PhieuDat (MAPHIEUDAT, NGAYTAO, NGAYNHAN, MAKH, MANV, MAKM, TRANGTHAI) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PhieuDat (MAPHIEUDAT, NGAYTAO, NGAYNHAN, MAKH, MANV, MAKM, TRANGTHAI, THANHTOAN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, phieuDat.getMaPhieuDat());
@@ -218,6 +225,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
             statement.setString(5, phieuDat.getNhanVien().getMaNV());
             statement.setString(6, phieuDat.getKhuyenMai() == null ? null : phieuDat.getKhuyenMai().getMaKhuyenMai());
             statement.setInt(7, phieuDat.getTrangThai());
+            statement.setBoolean(8, phieuDat.isThanhToan());
             success = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Lỗi thêm phiếu đặt");
@@ -273,7 +281,8 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 NhanVien nhanVien = dao_NhanVien.getByID(resultSet.getString("MANV"));
                 KhuyenMai khuyenMai = dao_KhuyenMai.getByID(resultSet.getString("MAKM"));
                 int trangThai = resultSet.getInt("TRANGTHAI");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai);
+                boolean thanhToan = resultSet.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsPD.add(phieuDat);
             }
         } catch (SQLException e) {
