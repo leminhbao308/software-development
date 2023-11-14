@@ -54,6 +54,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         lblTitle = new javax.swing.JLabel();
         tabXemThongTin = new javax.swing.JTabbedPane();
         pnlBangChiTiet = new javax.swing.JPanel();
@@ -515,11 +516,6 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         tblTopQuanAo.setShowGrid(true);
         tblTopQuanAo.getTableHeader().setResizingAllowed(false);
         tblTopQuanAo.getTableHeader().setReorderingAllowed(false);
-        tblTopQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTopQuanAoMouseClicked(evt);
-            }
-        });
         scrTopQuanAo.setViewportView(tblTopQuanAo);
         if (tblTopQuanAo.getColumnModel().getColumnCount() > 0) {
             tblTopQuanAo.getColumnModel().getColumn(0).setResizable(false);
@@ -602,19 +598,22 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabLuaChonThongKeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabLuaChonThongKeStateChanged
-
-        DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();//        Xử lý thay đổi column theo tiêu chí thống kê tương ứng
+        DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
+//        Xử lý thay đổi số lượng và tên cột theo từng tiêu chí thống kê
         if (tabLuaChonThongKe.getSelectedIndex() == 0 || tabLuaChonThongKe.getSelectedIndex() == -1) {
+//            Thống kê quần áo hết
             modelTopQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Nhà Cung Cấp"});
         } else {
+//            Các tiêu chí còn lại
             modelTopQuanAo.setColumnIdentifiers(new String[]{"Mã Quần Áo", "Tên Quần Áo", "Loại Quần Áo", "Thương Hiệu", "Số Lượng", "Lợi Nhuận"});
             FormatCellRenderer.formatCellRendererCenter(tblTopQuanAo, 4);
             FormatCellRenderer.formatCellRendererRight(tblTopQuanAo, 5);
         }
-
+//        Lựa chọn các tiêu chí thống kê
         switch (tabLuaChonThongKe.getSelectedIndex()) {
             case 0:
+//                Thống kê quần áo hết
                 modelTopQuanAo.setRowCount(0);
                 int kiemTraHet = 0;
                 for (QuanAo qa : dsQA) {
@@ -629,12 +628,25 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 }
                 break;
             case 1:
+//                Thống kê toàn bộ thời gian
                 locDuLieu(null, null, dsHoaDon, dsChiTietHoaDon);
                 break;
             case 2:
+//                Thống kê theo ngày được chọn
                 locDuLieu(dchChonNgay.getDate(), null, dsHoaDon, dsChiTietHoaDon);
                 break;
-            //TODO: Xử lý thống kê theo tháng và năm
+            case 3:
+//                Thống kê theo tháng và theo năm
+                locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+                break;
+            case 4:
+//                Thống kê theo năm
+                locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
+                break;
+            case 5:
+//                Thống kê theo khoảng thời gian được chọn
+                locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+                break;
         }
     }//GEN-LAST:event_tabLuaChonThongKeStateChanged
 
@@ -647,26 +659,25 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }//GEN-LAST:event_dchChonNgayPropertyChange
 
     private void monthTheoThangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_monthTheoThangPropertyChange
-//        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_monthTheoThangPropertyChange
 
     private void yearTheoThangPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearTheoThangPropertyChange
-//        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
+        locDuLieu(monthTheoThang.getMonth(), yearTheoThang.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_yearTheoThangPropertyChange
 
     private void yearTheoNamPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yearTheoNamPropertyChange
-//        locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
+        locDuLieu(0, yearTheoNam.getYear(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_yearTheoNamPropertyChange
 
-    // <editor-fold defaultstate="collapsed" desc="Xử lý đồng bộ thống kê theo khoảng thời gian">                          
     private void dchTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTuNgayPropertyChange
         dongBoKhoangThoiGian();
-//        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_dchTuNgayPropertyChange
 
     private void dchDenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchDenNgayPropertyChange
         dongBoKhoangThoiGian();
-//        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
+        locDuLieu(dchTuNgay.getDate(), dchDenNgay.getDate(), dsHoaDon, dsChiTietHoaDon);
     }//GEN-LAST:event_dchDenNgayPropertyChange
 
     private void dongBoKhoangThoiGian() {
@@ -675,35 +686,89 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Xử lý popup chi tiết hoá đơn">                          
-    private void tblTopQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTopQuanAoMouseClicked
-//        if (evt.getClickCount() == 2) {
-//            if (tblTopQuanAo.getSelectedRow() != -1) {
-//                callFrameChiTietHoaDon(tblTopQuanAo.getValueAt(tblTopQuanAo.getSelectedRow(), 0).toString());
-//            }
-//        }
-    }//GEN-LAST:event_tblTopQuanAoMouseClicked
+    /**
+     * Sắp xếp giảm dần theo Số lượng nếu số lượng bằng nhau thì sắp xếp giảm dần theo lợi nhuận
+     *
+     * @param list Dữ liệu cần sắp xếp
+     */
+    private void sapXepGiamDan(List<Map.Entry<String, Integer>> list) {
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                // So sánh giảm dần theo số lượng
+                int soLuongComparison = Integer.compare(entry2.getValue(), entry1.getValue());
+                // Nếu số lượng bằng nhau, so sánh giảm dần theo lợi nhuận
+                if (soLuongComparison == 0) {
+                    Double loiNhuan1 = 0.0;
+                    Double loiNhuan2 = 0.0;
+                    for (Map.Entry<String, Double> tienLoi : dsLoiNhuan.entrySet()) {
+                        if (entry1.getKey().contains(tienLoi.getKey())) {
+                            loiNhuan1 = tienLoi.getValue();
+                        } else if (entry2.getKey().contains(tienLoi.getKey())) {
+                            loiNhuan2 = tienLoi.getValue();
+                        }
+                    }
+                    return Double.compare(loiNhuan2, loiNhuan1);
+                }
+                return soLuongComparison;
+            }
+        });
+    }
 
-    private void callFrameChiTietHoaDon(String maHD) {
-        HoaDon hoaDon = null;
-
-        for (HoaDon hd : dsHoaDon) {
-            if (hd.getMaHoaDon().equals(maHD)) {
-                KhachHang kh = hd.getKhachHang() != null ? hd.getKhachHang() : new KhachHang(null, "Khách vãng lai", null);
-                NhanVien nv = hd.getNhanVien();
-                KhuyenMai km = hd.getKhuyenMai() != null ? hd.getKhuyenMai() : new KhuyenMai(null, "", 0, null, null, 0);
-                hoaDon = new HoaDon(maHD, hd.getNgayTao(), kh, nv, km);
+    //    Xử lý tính toán các thông tin lợi nhuận và số lượng quần áo
+    public void xuLyDuLieuQuanAo(ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput, ArrayList<String> dsMaHoaDon) {
+        dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
+        dsSoLuongQuanAo = new HashMap<>();
+        dsLoiNhuan = new HashMap<>();
+        if (dsMaHoaDon.size() != 0) {
+            double loiNhuan = 0;
+            double khuyenMai = 0;
+            int soLuong = 0;
+            // Mượn đặc tính của set để kiểm tra trùng giá trị
+            Set<String> uniqueMaHoaDon = new HashSet<>();
+            for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
+                if (dsQADaKiemTra.isEmpty()) {
+                    dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
+                    soLuong += cthd.getSoLuong();
+                    dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
+                    khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                    loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
+                    dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
+                    uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
+                    soLuong = 0;
+                    loiNhuan = 0;
+                } else {
+                    if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
+                        dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
+                        soLuong += cthd.getSoLuong();
+                        dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
+                        khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                        loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
+                        dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
+                        soLuong = 0;
+                        loiNhuan = 0;
+                    } else {
+//                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
+                        for (Map.Entry<String, Integer> item : dsSoLuongQuanAo.entrySet()) {
+                            if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
+                                soLuong = item.getValue() + cthd.getSoLuong();
+                                dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
+                            }
+                        }
+                        for (Map.Entry<String, Double> item : dsLoiNhuan.entrySet()) {
+                            if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
+                                khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
+                                loiNhuan = item.getValue() + ((cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong());
+                                dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
+                            }
+                        }
+                        soLuong = 0;
+                        loiNhuan = 0;
+                    }
+                }
             }
         }
-
-        if (hoaDon != null) {
-            WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(hoaDon, new PanelHoaDon());
-            frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            frCTHD.setResizable(false);
-            frCTHD.setVisible(true);
-        }
     }
-    // </editor-fold>
 
     /**
      * Lọc dữ liệu theo ngày được chọn hoặc theo khoảng thời gian được chọn, dữ
@@ -721,79 +786,33 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
         ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDonInput);
         ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDonInput);
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
-        dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
-        dsSoLuongQuanAo = new HashMap<>();
-        dsLoiNhuan = new HashMap<>();
+//        Xử lý lấy danh sách các hóa đơn và chi tiết hóa đơn theo thời gian tiêu chí được chọn
         if (date2 == null) {
             if (date1 == null) {
-                sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
-                return;
-            }
-            LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
+                for (HoaDon hd : dsHoaDonOutput) {
+                    dsMaHoaDon.add(hd.getMaHoaDon());
+                }
+                xuLyDuLieuQuanAo(dsChiTietHoaDonOutput, dsMaHoaDon);
+            } else {
+                LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
 //            Lấy mã hóa đơn theo ngày đã chọn và thêm vào dsMaHoaDon, nếu hóa đơn không lập ở ngày đã chọn loại bỏ khỏi dsHoaDonOutPut
-            for (int i = 0; i < dsHoaDonOutput.size(); i++) {
-                LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
-                if (!localDate.isEqual(localDate1)) {
-                    dsHoaDonOutput.remove(i);
-                    i--;
-                    continue;
+                for (int i = 0; i < dsHoaDonOutput.size(); i++) {
+                    LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
+                    if (!localDate.isEqual(localDate1)) {
+                        dsHoaDonOutput.remove(i);
+                        i--;
+                        continue;
+                    }
+                    dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
                 }
-                dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
-            }
 //            Lấy được danh sách chi tiết hóa đơn (Mã Hóa Đơn, Mã Quần Áo, )
-            for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
-                if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
-                    dsChiTietHoaDonOutput.remove(i);
-                    i--;
-                }
-            }
-            if (dsMaHoaDon.size() != 0) {
-                double loiNhuan = 0;
-                double khuyenMai = 0;
-                int soLuong = 0;
-                // Mượn đặc tính của set để kiểm tra trùng giá trị
-                Set<String> uniqueMaHoaDon = new HashSet<>();
-                for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
-                    if (dsQADaKiemTra.isEmpty()) {
-                        dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
-                        soLuong += cthd.getSoLuong();
-                        dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                        khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
-                        loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
-                        dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
-                        uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
-                        soLuong = 0;
-                        loiNhuan = 0;
-                    } else {
-                        if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
-                            dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
-                            soLuong += cthd.getSoLuong();
-                            dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                            khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
-                            loiNhuan += (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong();
-                            dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
-                            soLuong = 0;
-                            loiNhuan = 0;
-                        } else {
-//                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
-                            for (Map.Entry<String, Integer> item : dsSoLuongQuanAo.entrySet()) {
-                                if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
-                                    soLuong = item.getValue() + cthd.getSoLuong();
-                                    dsSoLuongQuanAo.put(cthd.getQuanAo().getMaQA(), soLuong);
-                                }
-                            }
-                            for (Map.Entry<String, Double> item : dsLoiNhuan.entrySet()) {
-                                if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
-                                    khuyenMai = cthd.getHoaDon().getKhuyenMai() != null ? cthd.getHoaDon().getKhuyenMai().getMucGiamGia() / 100 : 0;
-                                    loiNhuan = item.getValue() + ((cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong() - khuyenMai * (cthd.getLoiNhuan() / 100) * cthd.getGiaBan() * cthd.getSoLuong());
-                                    dsLoiNhuan.put(cthd.getQuanAo().getMaQA(), loiNhuan);
-                                }
-                            }
-                            soLuong = 0;
-                            loiNhuan = 0;
-                        }
+                for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
+                    if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
+                        dsChiTietHoaDonOutput.remove(i);
+                        i--;
                     }
                 }
+                xuLyDuLieuQuanAo(dsChiTietHoaDonOutput, dsMaHoaDon);
             }
         } else {
             LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
@@ -813,32 +832,12 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     i--;
                 }
             }
+            xuLyDuLieuQuanAo(dsChiTietHoaDonOutput, dsMaHoaDon);
         }
-//        else {
-//            LocalDate localDate1 = new java.sql.Date(date1.getTime()).toLocalDate();
-//            LocalDate localDate2 = new java.sql.Date(date2.getTime()).toLocalDate();
-//            for (int i = 0; i < dsHoaDonOutput.size(); i++) {
-//                LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
-//                if (localDate.isBefore(localDate1) || localDate.isAfter(localDate2)) {
-//                    dsHoaDonOutput.remove(i);
-//                    i--;
-//                    continue;
-//                }
-//                dsMaHoaDon.add(dsHoaDonOutput.get(i).getMaHoaDon());
-//            }
-//            for (int i = 0; i < dsChiTietHoaDonOutput.size(); i++) {
-//                if (!dsMaHoaDon.contains(dsChiTietHoaDonOutput.get(i).getHoaDon().getMaHoaDon())) {
-//                    dsChiTietHoaDonOutput.remove(i);
-//                    i--;
-//                }
-//            }
-//        }
-
-        //        Xử lý đưa dữ liệu lên table
-        // Sắp xếp giảm dần theo số lượng theo mã quần áo
+//        Xử lý đưa dữ liệu lên table
+//        Sắp xếp giảm dần theo số lượng theo mã quần áo
         List<Map.Entry<String, Integer>> resultSortQuatity = new ArrayList<>(this.dsSoLuongQuanAo.entrySet());
         sapXepGiamDan(resultSortQuatity);
-
 //        Load dữ liệu lên table
         double mucGiamGia = 0;
         double tongChietKhau = 0;
@@ -920,10 +919,12 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      * @param dsChiTietHoaDonInput Dữ liệu về chi tiết hoá đơn
      */
     private void locDuLieu(int month, int year, ArrayList<HoaDon> dsHoaDonInput, ArrayList<ChiTietHoaDon> dsChiTietHoaDonInput) {
+//        Khởi tạo
         ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDonInput);
         ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDonInput);
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
-        if (month == 0) {
+//        Xử lý lấy danh sách các hóa đơn và chi tiết hóa đơn theo thời gian tiêu chí được chọn
+        if (month == 0) { // Lấy hóa đơn theo năm
             for (int i = 0; i < dsHoaDonOutput.size(); i++) {
                 LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
                 if (localDate.getYear() != year) {
@@ -939,7 +940,9 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     i--;
                 }
             }
+            xuLyDuLieuQuanAo(dsChiTietHoaDonOutput, dsMaHoaDon);
         } else {
+//            Lấy hóa đơn theo tháng trong năm
             for (int i = 0; i < dsHoaDonOutput.size(); i++) {
                 LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
                 if (localDate.getYear() != year || localDate.getMonthValue() != month + 1) {
@@ -955,150 +958,81 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                     i--;
                 }
             }
+            xuLyDuLieuQuanAo(dsChiTietHoaDonOutput, dsMaHoaDon);
         }
-
-        sapXepDuLieu(dsHoaDonOutput, dsChiTietHoaDonOutput);
+//        Xử lý đưa dữ liệu lên table
+//        Sắp xếp giảm dần theo số lượng theo mã quần áo
+        List<Map.Entry<String, Integer>> resultSortQuatity = new ArrayList<>(this.dsSoLuongQuanAo.entrySet());
+        sapXepGiamDan(resultSortQuatity);
+//        Load dữ liệu lên table
+        double mucGiamGia = 0;
+        double tongChietKhau = 0;
+        double tongThanhTienCuaMotQuanAo = 0;
         DefaultTableModel modelTopQuanAo = (DefaultTableModel) tblTopQuanAo.getModel();
         modelTopQuanAo.setRowCount(0);
-    }
-// TODO: Xử lý đồng bộ thống kê theo khoảng thời gian
-
-    /**
-     * Sắp xếp dữ liệu theo doanh thu và lợi nhuận giảm dần
-     *
-     * @param dsHoaDon        Dữ liệu về hoá đơn
-     * @param dsChiTietHoaDon Dữ liệu về chi tiết hoá đơn
-     */
-
-    private void sapXepDuLieu(ArrayList<HoaDon> dsHoaDon, ArrayList<ChiTietHoaDon> dsChiTietHoaDon) {
-        ArrayList<Object[]> rowsDoanhThu = new ArrayList<>();
-        ArrayList<Object[]> rowsLoiNhuan = new ArrayList<>();
-
-        for (HoaDon hoaDon : dsHoaDon) {
-            double doanhThu = 0.0f;
-            double loiNhuan = 0.0f;
-            for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
-                if (hoaDon.getMaHoaDon().equals(cthd.getHoaDon().getMaHoaDon())) {
-                    doanhThu += cthd.getSoLuong() * cthd.getGiaBan();
-                    loiNhuan += (cthd.getSoLuong() * cthd.getGiaBan()) - cthd.getQuanAo().getGiaNhap();
+        if (!dsMaHoaDon.isEmpty()) {
+            for (Map.Entry<String, Integer> resultSort : resultSortQuatity) {
+                String maQuanAoTbl = "", tenQuanAoTbl = "",
+                        loaQuanAoTbl = "", thuongHieuTbl = "", soLuongTbl = "", loiNhuanTbl = "";
+//            Lấy thông tin quần áo load lên table
+                for (Map.Entry<HoaDon, QuanAo> item : dsQADaKiemTra.entrySet()) {
+//                for (QuanAo qaLoadTbl : dsQADaKiemTra) {
+                    if (resultSort.getKey().contains(item.getValue().getMaQA())) {
+//                        Mã quần áo
+                        maQuanAoTbl = item.getValue().getMaQA();
+//                        Tên quần áo
+                        tenQuanAoTbl = item.getValue().getTenQA();
+//                        Loại quần áo
+                        for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
+                            if (item.getValue().getLoaiQuanAo().contains(loaiQA.getKey())) {
+                                loaQuanAoTbl = loaiQA.getValue();
+                            }
+                        }
+//                        Thương hiệu quần áo
+                        thuongHieuTbl = item.getValue().getThuongHieu();
+//                        Số lượng quần áo
+                        soLuongTbl = NumberStandard.formatInteger(resultSort.getValue());
+                    }
                 }
+
+                for (HashMap.Entry<String, Double> loiNhuanQA : dsLoiNhuan.entrySet()) {
+                    if (loiNhuanQA.getKey().contains(resultSort.getKey())) {
+                        loiNhuanTbl = NumberStandard.formatMoney(loiNhuanQA.getValue());
+                    }
+                }
+
+                Object[] row = {maQuanAoTbl, tenQuanAoTbl, loaQuanAoTbl, thuongHieuTbl, soLuongTbl, loiNhuanTbl};
+                modelTopQuanAo.addRow(row);
             }
-            Object[] rowDoanhThu = {hoaDon.getMaHoaDon(), hoaDon.getNgayTao(), hoaDon.getKhachHang() != null ? hoaDon.getKhachHang().getTenKH() : "Khách vãng lai", doanhThu};
-            rowsDoanhThu.add(rowDoanhThu);
-
-            Object[] rowLoiNhuan = {hoaDon.getMaHoaDon(), hoaDon.getNgayTao(), hoaDon.getKhachHang() != null ? hoaDon.getKhachHang().getTenKH() : "Khách vãng lai", loiNhuan};
-            rowsLoiNhuan.add(rowLoiNhuan);
-        }
-
-        // sắp xếp giảm dần theo doanh thu
-        sapXepGiamDan(rowsDoanhThu);
-
-        // sắp xếp giảm dần theo lợi nhuận
-        sapXepGiamDan(rowsLoiNhuan);
-
-        tinhToanDuLieu(dsHoaDon, dsChiTietHoaDon);
-        loadDuLieuLenTable(rowsDoanhThu, rowsLoiNhuan);
-    }
-
-    /**
-     * Sắp xếp giảm dần theo doanh thu hoặc lợi nhuận
-     *
-     * @param list Dữ liệu cần sắp xếp
-     */
-    private void sapXepGiamDan(ArrayList<Object[]> list) {
-        list.sort((Object[] o1, Object[] o2) -> {
-            double data1 = (double) o1[3];
-            double data2 = (double) o2[3];
-            return Double.compare(data2, data1);
-        });
-    }
-
-    /**
-     * Sắp xếp giảm dần theo Số lượng nếu số lượng bằng nhau thì sắp xếp giảm dần theo lợi nhuận
-     *
-     * @param list Dữ liệu cần sắp xếp
-     */
-    private void sapXepGiamDan(List<Map.Entry<String, Integer>> list) {
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
-                // So sánh giảm dần theo số lượng
-                int soLuongComparison = Integer.compare(entry2.getValue(), entry1.getValue());
-                // Nếu số lượng bằng nhau, so sánh giảm dần theo lợi nhuận
-                if (soLuongComparison == 0) {
-                    Double loiNhuan1 = 0.0;
-                    Double loiNhuan2 = 0.0;
-                    for (Map.Entry<String, Double> tienLoi : dsLoiNhuan.entrySet()) {
-                        if (entry1.getKey().contains(tienLoi.getKey())) {
-                            loiNhuan1 = tienLoi.getValue();
-                        } else if (entry2.getKey().contains(tienLoi.getKey())) {
-                            loiNhuan2 = tienLoi.getValue();
+//            TODO: Xử lý lấy thông tin quần áo Load lên Fields
+            if (modelTopQuanAo.getColumnCount() == 6) {
+                //            Set Tổng số lượng quần áo
+                this.txtTongSoLuongQuanAo.setText(modelTopQuanAo.getValueAt(0, 4).toString());
+//            Set tên quần áo và Loại quần áo
+                for (QuanAo qaLoad : dsQA) {
+                    if (modelTopQuanAo.getRowCount() > 0) {
+                        if (qaLoad.getMaQA().contains(modelTopQuanAo.getValueAt(0, 0).toString())) {
+//                        Set Tên Quần Áo
+                            this.txtTenQuanAo.setText(qaLoad.getTenQA());
+                            for (HashMap.Entry<String, String> loaiQA : dsLoaiQuanAo.entrySet()) {
+                                if (qaLoad.getLoaiQuanAo().contains(loaiQA.getKey())) {
+//                        Set Loại Quần Áo
+                                    this.txtLoaiQuanAo.setText(loaiQA.getValue());
+                                }
+                            }
                         }
                     }
-                    return Double.compare(loiNhuan2, loiNhuan1);
                 }
-                return soLuongComparison;
+//            Set Lợi nhuận
+                this.txtLoiNhuan.setText(modelTopQuanAo.getValueAt(0, 5).toString());
             }
-        });
-    }
-
-    /**
-     * Tính toán tổng quan dữ liệu
-     *
-     * @param dsHoaDon        Dữ liệu về hoá đơn
-     * @param dsChiTietHoaDon Dữ liệu về chi tiết hoá đơn
-     */
-    private void tinhToanDuLieu(ArrayList<HoaDon> dsHoaDon, ArrayList<ChiTietHoaDon> dsChiTietHoaDon) {
-        int tongHD = 0;
-        int tongQA = 0;
-        double doanhThu = 0.0f;
-        double loiNhuan = 0.0f;
-
-        tongHD = dsHoaDon.size();
-
-        for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
-            tongQA += cthd.getSoLuong();
-            doanhThu += cthd.getSoLuong() * cthd.getGiaBan();
-            loiNhuan += (cthd.getSoLuong() * cthd.getGiaBan()) - cthd.getQuanAo().getGiaNhap();
+        } else {
+            modelTopQuanAo.setRowCount(0);
+            this.txtTongSoLuongQuanAo.setText("Không có thông tin");
+            this.txtLoaiQuanAo.setText("Không có thông tin");
+            this.txtTenQuanAo.setText("Không có thông tin");
+            this.txtLoiNhuan.setText("Không có thông tin");
         }
-        loadTongQuanDoanhThu(tongHD, tongQA, doanhThu, loiNhuan);
-    }
-
-    /**
-     * Load dữ liệu lên bảng chi tiết
-     *
-     * @param rowDoanhThu Dữ liệu về doanh thu
-     * @param rowLoiNhuan Dữ liệu về lợi nhuận
-     */
-    private void loadDuLieuLenTable(ArrayList<Object[]> rowDoanhThu, ArrayList<Object[]> rowLoiNhuan) {
-        DefaultTableModel modelDoanhThu = (DefaultTableModel) tblTopQuanAo.getModel();
-
-        modelDoanhThu.setRowCount(0);
-//
-//        for (Object[] data : rowDoanhThu) {
-//            Object[] row = {data[0], DateStandard.formatDate((Date) data[1]), data[2], NumberStandard.formatMoney((double) data[3])};
-//            modelDoanhThu.addRow(row);
-//        }
-//        for (Object[] data : rowLoiNhuan) {
-//            Object[] row = {data[0], DateStandard.formatDate((Date) data[1]), data[2], NumberStandard.formatMoney((double) data[3])};
-//        }
-    }
-
-    /**
-     * Load tổng quan dữ liệu
-     *
-     * @param tongHD   Tổng số hoá đơn
-     * @param tongQA   Tổng số quần áo
-     * @param doanhThu Tổng doanh thu
-     * @param loiNhuan Tổng lợi nhuận
-     */
-    private void loadTongQuanDoanhThu(int tongHD, int tongQA, double doanhThu, double loiNhuan) {
-
-        this.txtTongSoLuongQuanAo.setText(NumberStandard.formatInteger(tongHD));
-        this.txtLoaiQuanAo.setText(NumberStandard.formatInteger(tongQA));
-        this.txtTenQuanAo.setText(NumberStandard.formatMoney(doanhThu));
-        this.txtLoiNhuan.setText(NumberStandard.formatMoney(loiNhuan));
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">

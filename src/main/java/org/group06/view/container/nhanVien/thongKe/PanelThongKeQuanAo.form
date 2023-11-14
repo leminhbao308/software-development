@@ -279,7 +279,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchChonNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchChonNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchChonNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchChonNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchChonNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchChonNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchChonNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -493,7 +493,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchTuNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTuNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchTuNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchTuNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchTuNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchTuNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchTuNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblDenNgay">
@@ -521,7 +521,7 @@
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dchDenNgayPropertyChange"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchDenNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadBlackIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchDenNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="dchDenNgay.setLocale(new Locale(&quot;vi&quot;, &quot;VN&quot;));&#xa;dchDenNgay.getCalendarButton().setIcon(org.group06.utils.ImagePath.loadIcon(org.group06.utils.ImagePath.ICON_CALENDAR));&#xa;dchDenNgay.getDateEditor().setEnabled(false);&#xa;((com.toedter.calendar.JTextFieldDateEditor) dchDenNgay.getDateEditor()).setDisabledTextColor(java.awt.Color.BLACK);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -768,9 +768,6 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTopQuanAoMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
