@@ -32,6 +32,10 @@ public class ImagePanel extends JPanel {
         this.image = img;
         this.repaint();
     }
+    
+     public String getImagePath() {
+        return this.image.toString();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

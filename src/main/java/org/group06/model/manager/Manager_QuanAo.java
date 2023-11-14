@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Manager_QuanAo implements Manager_Interface<QuanAo>{
+public class Manager_QuanAo implements Manager_Interface<QuanAo> {
 
     private HashMap<String, String> dsLoaiQuanAo;
     private ArrayList<QuanAo> dsQuanAo;
@@ -44,7 +44,16 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo>{
     public boolean update(QuanAo quanAo) {
         for (QuanAo qa : dsQuanAo) {
             if (qa.getMaQA().equals(quanAo.getMaQA())) {
-                qa = quanAo;
+                qa.setTenQA(quanAo.getTenQA());
+                qa.setLoaiQuanAo(quanAo.getLoaiQuanAo());
+                qa.setKichThuoc(quanAo.getKichThuoc());
+                qa.setSoLuong(quanAo.getSoLuong());
+                qa.setThuongHieu(quanAo.getThuongHieu());
+                qa.setNhaCungCap(quanAo.getNhaCungCap());
+                qa.setGiaNhap(quanAo.getGiaNhap());
+                qa.setLoiNhuan(quanAo.getLoiNhuan());
+                qa.setTrangThai(quanAo.isTrangThai());
+                qa.setHinhAnh(quanAo.getHinhAnh());
                 return true;
             }
         }

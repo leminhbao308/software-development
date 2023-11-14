@@ -43,6 +43,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
      */
     public PanelThongKeQuanAo() {
         dsQA = dao_QuanAo.getAll();
+        dsChiTietHoaDon = dao_ChiTietHoaDon.getAll();
         initComponents();
         FormatCellRenderer.formatCellRendererLeft(tblTopQuanAo, 3);
         tabLuaChonThongKe.setSelectedIndex(-1);
@@ -100,7 +101,7 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 // Thực hiện các tác vụ cuối cùng sau khi công việc nền hoàn thành
                 winLoading.setVisible(false);
                 JPanel pnlBieuDoThongKe = loadChart();
-                pnlBieuDo.add(pnlBieuDoThongKe, BorderLayout.CENTER);
+                pnlBieuDo.add(pnlBieuDoThongKe);
             }
         };
 
@@ -886,32 +887,33 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
     //    Xử lý dữ liệu số lượng quần áo để trục quan hóa bằng biểu đồ
 //    Thống kê top 30 quần áo có số lượng cao nhất trong tháng
-    public HashMap<String, Integer> xuLyDuLieuQuanAoTrucQuanHoa(ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput, ArrayList<String> dsMaHoaDon) {
+    public HashMap<String, Double> xuLyDuLieuQuanAoTrucQuanHoa(ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput, ArrayList<String> dsMaHoaDon) {
         dsQADaKiemTra = new HashMap<HoaDon, QuanAo>();
-        HashMap<String, Integer> dsTenVaSoLuongQuanAo = new HashMap<>();
+        HashMap<String, Double> dsTenVaSoLuongQuanAo = new HashMap<>();
+        HashMap<String, Double> dsKiemTraMa = new HashMap<>();
         if (dsMaHoaDon.size() != 0) {
-            int soLuong = 0;
+            double soLuong = 0;
             // Mượn đặc tính của set để kiểm tra trùng giá trị
-            Set<String> uniqueMaHoaDon = new HashSet<>();
+            Set<String> uniqueMaQA = new HashSet<>();
             for (ChiTietHoaDon cthd : dsChiTietHoaDonOutput) {
                 if (dsQADaKiemTra.isEmpty()) {
                     dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                     soLuong += cthd.getSoLuong();
-                    dsTenVaSoLuongQuanAo.put(cthd.getQuanAo().getTenQA(), soLuong);
-                    uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA());
+                    dsKiemTraMa.put(cthd.getQuanAo().getMaQA(), soLuong);
+                    uniqueMaQA.add(cthd.getQuanAo().getMaQA());
                     soLuong = 0;
                 } else {
-                    if (uniqueMaHoaDon.add(cthd.getQuanAo().getMaQA())) {
+                    if (uniqueMaQA.add(cthd.getQuanAo().getMaQA())) {
                         dsQADaKiemTra.put(cthd.getHoaDon(), cthd.getQuanAo());
                         soLuong += cthd.getSoLuong();
-                        dsTenVaSoLuongQuanAo.put(cthd.getQuanAo().getTenQA(), soLuong);
+                        dsKiemTraMa.put(cthd.getQuanAo().getMaQA(), soLuong);
                         soLuong = 0;
                     } else {
 //                        Cập nhật các giá trị số lượng và thành tiền cho các quần áo bị trùng
-                        for (Map.Entry<String, Integer> item : dsSoLuongQuanAo.entrySet()) {
+                        for (Map.Entry<String, Double> item : dsKiemTraMa.entrySet()) {
                             if (cthd.getQuanAo().getMaQA().contains(item.getKey())) {
-                                soLuong = item.getValue() + cthd.getSoLuong();
-                                dsTenVaSoLuongQuanAo.put(cthd.getQuanAo().getTenQA(), soLuong);
+                                soLuong += item.getValue() + cthd.getSoLuong();
+                                dsKiemTraMa.put(cthd.getQuanAo().getMaQA(), soLuong);
                             }
                         }
                         soLuong = 0;
@@ -919,7 +921,8 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 }
             }
         }
-        return dsTenVaSoLuongQuanAo;
+
+        return dsKiemTraMa;
     }
 
     /**
@@ -1188,13 +1191,13 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
     }
 
     private JPanel loadChart() {
-        ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(dsHoaDon);
-        ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(dsChiTietHoaDon);
+        ArrayList<HoaDon> dsHoaDonOutput = new ArrayList<>(this.dsHoaDon);
+        ArrayList<ChiTietHoaDon> dsChiTietHoaDonOutput = new ArrayList<>(this.dsChiTietHoaDon);
         ArrayList<String> dsMaHoaDon = new ArrayList<>();
+//            Lấy hóa đơn theo tháng trong năm
         for (int i = 0; i < dsHoaDonOutput.size(); i++) {
             LocalDate localDate = dsHoaDonOutput.get(i).getNgayTao().toLocalDate();
-//            if (localDate.getYear() != LocalDate.now().getYear() || localDate.getMonthValue() == LocalDate.now().getMonthValue() - 1) {
-            if (localDate.getYear() == 2023 && localDate.getMonthValue() == 10) {
+            if (localDate.getYear() != LocalDate.now().getYear() || localDate.getMonthValue() != LocalDate.now().getMonthValue() - 1) {
                 dsHoaDonOutput.remove(i);
                 i--;
                 continue;
@@ -1207,26 +1210,28 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
                 i--;
             }
         }
-        HashMap<String, Integer> dsTenVaSoLuongQuanAo = xuLyDuLieuQuanAoTrucQuanHoa(dsChiTietHoaDon, dsMaHoaDon);
+
+        HashMap<String, Double> dsTenVaSoLuongQuanAo = xuLyDuLieuQuanAoTrucQuanHoa(dsChiTietHoaDonOutput, dsMaHoaDon);
 
         LinkedHashMap<String, LinkedHashMap<String, Double>> data = new LinkedHashMap<>();
 
         // Save ten quan ao va tong so luong ban duoc cua quan ao do
         LinkedHashMap<String, Double> dataQuanAo = new LinkedHashMap<>();
-        for (Map.Entry<String, Integer> item : dsTenVaSoLuongQuanAo.entrySet()) {
-            dataQuanAo.put(item.getKey(), Double.valueOf(item.getValue()));
+        for (Map.Entry<String, Double> item : dsTenVaSoLuongQuanAo.entrySet()) {
+            dataQuanAo.put(item.getKey(), item.getValue());
         }
 
         data.put("Quần Áo", dataQuanAo);
 
         BarChartData barChartData = new BarChartData(data);
-
+        BarChart barChart = null;
         try {
-            return new BarChart("Biểu Đồ Thống Kê Quần Áo Bán Được Trong Tháng Trước", "Tên Quần Áo", "Số Lượng", barChartData);
+            barChart = new BarChart("Biểu Đồ Thống Kê Quần Áo Bán Được Trong Tháng Trước", "Tên Quần Áo", "Số Lượng", barChartData);
+            barChart.setBackground(this.getBackground());
         } catch (Exception e) {
-            System.out.println("Loi khi tao bieu do");
-            return null;
+            throw new RuntimeException(e);
         }
+        return barChart;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
