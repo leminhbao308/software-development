@@ -48,9 +48,10 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             btnNhanHang.setEnabled(true);
         }
         loadDataTable();
-        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo,1);
-        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo,3);
-        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo,2);
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 2);
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 4);
+        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 1);
+        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 3);
     }
 
     /**
@@ -93,11 +94,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên quần áo", "Giá tiền", "Số lượng", "Thành tiền"
+                "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -111,6 +112,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             tblDSQuanAo.getColumnModel().getColumn(1).setResizable(false);
             tblDSQuanAo.getColumnModel().getColumn(2).setResizable(false);
             tblDSQuanAo.getColumnModel().getColumn(3).setResizable(false);
+            tblDSQuanAo.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
@@ -376,13 +378,14 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         modelCTPD.setRowCount(0);
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             String tenQA = ctpd.getQuanAo().getTenQA();
+            String size = ctpd.getQuanAo().getKichThuoc();
             String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
             String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
 
             tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
 
-            Object[] data = {tenQA, giaBan, soLuong, thanhTien};
+            Object[] data = {tenQA, size, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
 
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {

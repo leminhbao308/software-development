@@ -255,20 +255,23 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
         String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
+//        String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
-                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getByNameKH(tenKH);
+                    ArrayList<PhieuDat> dsPD = new DAO_PhieuDat(connection).getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        String ngayTao = DateStandard.formatDate(pd.getNgayTao());
-                        String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
-                        String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-                        String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
-                        String ghiChu = loadGhiChu(pd);
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
-                        modelKH.addRow(data);
+                        if(pd.getKhachHang().getTenKH().equalsIgnoreCase(tenKH)) {
+                            String ngayTao = DateStandard.formatDate(pd.getNgayTao());
+                            String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
+                            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
+                            String ghiChu = loadGhiChu(pd);
+                            Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
+                            modelKH.addRow(data);
+                        }
                     }
                     txtTimTheoTenNV.setText("");
                     dchTimTheoNgayDat.setDate(null);
@@ -303,20 +306,24 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void txtTimTheoTenNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenNVKeyReleased
         String tenNV = NameStandard.formatCapitalize(txtTimTheoTenNV.getText());
+//        String tenNV = txtTimTheoTenNV.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<PhieuDat> dsPD = dao_PhieuDat.getByNameNV(tenNV);
+                    ArrayList<PhieuDat> dsPD = dao_PhieuDat.getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        String ngayTao = DateStandard.formatDate(pd.getNgayTao());
-                        String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
-                        String ttt = loadTongThanhTien(pd.getMaPhieuDat());
-                        String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
-                        String ghiChu = loadGhiChu(pd);
-                        Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
-                        modelKH.addRow(data);
+                        if(pd.getNhanVien().getTenNV().equalsIgnoreCase(tenNV)) {
+                            String ngayTao = DateStandard.formatDate(pd.getNgayTao());
+                            String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
+                            String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+                            String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
+                            String ghiChu = loadGhiChu(pd);
+                            Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
+                            modelKH.addRow(data);
+                        }
+
                     }
                     txtTimTheoTenKH.setText("");
                     dchTimTheoNgayDat.setDate(null);

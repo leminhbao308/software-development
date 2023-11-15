@@ -208,7 +208,8 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
+//        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
+        String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -366,7 +367,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                                 ((Timer) e.getSource()).stop();
                             }
                         } catch (InterruptedException | ExecutionException ex) {
-                            throw new RuntimeException(ex);
+
                         }
                     }
                 };

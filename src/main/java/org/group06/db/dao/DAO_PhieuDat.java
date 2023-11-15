@@ -50,57 +50,6 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         return dsPD;
     }
 
-    public ArrayList<PhieuDat> getByNameKH(String name) {
-        ArrayList<PhieuDat> dsKH = new ArrayList<>();
-        String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,PhieuDat.MAKH,MANV,MAKM,TRANGTHAI FROM PhieuDat, KhachHang WHERE PhieuDat.MAKH = KhachHang.MAKH AND TENKH = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setObject(1, name, java.sql.Types.NVARCHAR);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                PhieuDat phieuDat = new PhieuDat();
-                String maPD = rs.getString("MAPHIEUDAT");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                Date ngayNhan = rs.getDate("NGAYNHAN");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                int trangThai = rs.getInt("TRANGTHAI");
-                boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
-                dsKH.add(phieuDat);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi lấy danh sách phiếu đặt theo tên khách hàng");
-        }
-        return dsKH;
-    }
-
-    public ArrayList<PhieuDat> getByNameNV(String name) {
-        ArrayList<PhieuDat> dsPD = new ArrayList<>();
-        try {
-            String sql = "SELECT PhieuDat.MAPHIEUDAT,NGAYTAO,NGAYNHAN,MAKH,PhieuDat.MANV,MAKM,PhieuDat.TRANGTHAI FROM PhieuDat, NhanVien WHERE PhieuDat.MANV = NhanVien.MANV AND TENNV = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setObject(1, name, java.sql.Types.NVARCHAR);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                PhieuDat phieuDat = new PhieuDat();
-                String maPD = rs.getString("MAPHIEUDAT");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                Date ngayNhan = rs.getDate("NGAYNHAN");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                int trangThai = rs.getInt("TRANGTHAI");
-                boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maPD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
-                dsPD.add(phieuDat);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi lấy danh sách phiếu đặt theo tên nhân viên");
-        }
-        return dsPD;
-    }
 
     public ArrayList<PhieuDat> getByDateDat(String date) {
         ArrayList<PhieuDat> dsDateDat = new ArrayList<PhieuDat>();

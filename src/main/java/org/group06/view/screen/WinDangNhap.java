@@ -27,6 +27,8 @@ public class WinDangNhap extends JFrame implements ActionListener {
 
     public WinDangNhap() {
         initComponents();
+        this.txtUsername.setText("NV002");
+        this.pwdPassword.setText("1111");
     }
 
     private void initComponents() {

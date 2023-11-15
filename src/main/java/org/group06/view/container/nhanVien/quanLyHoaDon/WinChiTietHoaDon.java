@@ -37,10 +37,10 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         this.pnlHoaDon = pnlHoaDon;
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD,1);
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD,3);
-        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD,2);
-
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 2);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 4);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 1);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 3);
     }
 
     /**
@@ -73,6 +73,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         lblTitleCTHD.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTitleCTHD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,11 +213,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên quần áo", "Giá tiền", "Số lượng", "Thành tiền"
+                "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -230,6 +231,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             tblChiTietHD.getColumnModel().getColumn(1).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(2).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(3).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
@@ -374,6 +376,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             String tenQA = cthd.getQuanAo().getTenQA();
+            String size = cthd.getQuanAo().getKichThuoc();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
             double tinhThanhTien = cthd.getGiaBan() * soLuong;
@@ -381,7 +384,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             tinhTongThanhTien += tinhThanhTien;
 
-            Object[] data = {tenQA, giaBan, soLuong, thanhTien};
+            Object[] data = {tenQA, size, giaBan, soLuong, thanhTien};
             modelCTHD.addRow(data);
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
