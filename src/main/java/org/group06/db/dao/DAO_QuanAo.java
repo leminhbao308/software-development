@@ -204,7 +204,6 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
-
             preparedStatement.setInt(1, quanAo.getSoLuong());
             preparedStatement.setString(2, quanAo.getMaQA());
             success = preparedStatement.executeUpdate() > 0;

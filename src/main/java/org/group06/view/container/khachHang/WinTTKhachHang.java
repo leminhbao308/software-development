@@ -9,6 +9,7 @@ import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
+import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class WinTTKhachHang extends javax.swing.JFrame {
 
     private PanelKhachHang pnlKhachHang;
     private DAO_KhachHang dao_KhachHang;
-    private KhachHang kh;
+    private KhachHang kh = new KhachHang();
 
     /**
      * Creates new form FrameTTKhachHang
@@ -51,6 +52,10 @@ public class WinTTKhachHang extends javax.swing.JFrame {
         txtMaKH = new javax.swing.JTextField();
         txtTenKH = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
+        lblDiemTichLuy = new javax.swing.JLabel();
+        txtHang = new javax.swing.JTextField();
+        lblHang = new javax.swing.JLabel();
+        txtDiemTichLuy = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +124,26 @@ public class WinTTKhachHang extends javax.swing.JFrame {
             }
         });
 
+        lblDiemTichLuy.setFont(FontConstant.FONT_LABEL);
+        lblDiemTichLuy.setText("Điểm tích lũy:");
+
+        txtHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtHang.setText(kh.getHang());
+        txtHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtHang.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtHang.setEnabled(false);
+        txtHang.setPreferredSize(new java.awt.Dimension(71, 30));
+
+        lblHang.setFont(FontConstant.FONT_LABEL);
+        lblHang.setText("Hạng:");
+
+        txtDiemTichLuy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDiemTichLuy.setText(String.valueOf(kh.getDiemTichLuy()));
+        txtDiemTichLuy.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtDiemTichLuy.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtDiemTichLuy.setEnabled(false);
+        txtDiemTichLuy.setPreferredSize(new java.awt.Dimension(71, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,22 +157,30 @@ public class WinTTKhachHang extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDiemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDiemTichLuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblHang, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,11 +205,21 @@ public class WinTTKhachHang extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDiemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHang, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnXoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,7 +227,6 @@ public class WinTTKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        // TODO add your handling code here:
         if (btnCapNhat.getText().equals("Cập nhật")) {
             btnCapNhat.setText("Lưu");
             txtTenKH.requestFocus();
@@ -211,6 +253,7 @@ public class WinTTKhachHang extends javax.swing.JFrame {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
         String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
+        
         KhachHang kh = new KhachHang(maKH, tenKH, sdt);
         if (dao_KhachHang.update(kh)) {
             if (checkRegexSDT() && checkRegexTenKH()) {
@@ -240,7 +283,6 @@ public class WinTTKhachHang extends javax.swing.JFrame {
     }
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
@@ -269,7 +311,6 @@ public class WinTTKhachHang extends javax.swing.JFrame {
 
     private boolean checkRegexSDT() {
         String sdt = txtSDT.getText().trim();
-//        if(sdt.equals("") ||  !sdt.matches("0[9|3|8|7][0-9]{8}")) {
         if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
             return false;
         } else {
@@ -286,10 +327,14 @@ public class WinTTKhachHang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnXoaTrang;
+    private javax.swing.JLabel lblDiemTichLuy;
+    private javax.swing.JLabel lblHang;
     private javax.swing.JLabel lblMaKH;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
     private javax.swing.JLabel lblTitleCNKH;
+    private javax.swing.JTextField txtDiemTichLuy;
+    private javax.swing.JTextField txtHang;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenKH;

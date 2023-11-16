@@ -23,7 +23,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblTitleTTKH" max="32767" attributes="0"/>
-                  <Component id="scrKhachHang" max="32767" attributes="0"/>
+                  <Component id="scrKhachHang" pref="1110" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="pnlTimKH" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -90,15 +90,27 @@
               <Connection code="org.group06.utils.FontConstant.FONT_TEXT" type="code"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
+              <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.String"/>
                 <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.String"/>
                 <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String"/>
+                <Column editable="false" title="&#x110;i&#x1ec3;m t&#xed;ch l&#x169;y" type="java.lang.Double"/>
+                <Column editable="false" title="H&#x1ea1;ng" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
@@ -157,24 +169,30 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="lblTimTheoTen" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTimTheoTen" pref="289" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimTheoTen" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="lblTimTheoSDT" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTimTheoSDT" pref="289" max="32767" attributes="0"/>
+                  <Component id="txtTimTheoSDT" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTimTheoHang" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbTimTheoHang" min="-2" pref="109" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="lblTimTheoTen" alignment="2" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="txtTimTheoTen" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTimTheoSDT" alignment="2" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="txtTimTheoSDT" linkSize="1" alignment="2" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblTimTheoHang" alignment="2" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="cmbTimTheoHang" alignment="2" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               </Group>
@@ -227,6 +245,41 @@
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimTheoSDTKeyReleased"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTimTheoHang">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#xec;m theo h&#x1ea1;ng:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbTimTheoHang">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="7">
+                <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
+                <StringItem index="1" value="Ch&#x1b0;a c&#xf3;"/>
+                <StringItem index="2" value="&#x110;&#x1ed3;ng"/>
+                <StringItem index="3" value="B&#x1ea1;c"/>
+                <StringItem index="4" value="V&#xe0;ng"/>
+                <StringItem index="5" value="B&#x1ea1;ch Kim"/>
+                <StringItem index="6" value="Kim C&#x1b0;&#x1a1;ng"/>
+              </StringArray>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[90, 31]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTimTheoHangItemStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

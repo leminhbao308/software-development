@@ -28,6 +28,8 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setDiemTichLuy(resultSet.getDouble("DIEMTICHLUY"));
+                khachHang.setHang(resultSet.getString("HANG"));
                 dsKhachHang.add(khachHang);
             }
         } catch (SQLException e) {
@@ -49,6 +51,8 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setDiemTichLuy(resultSet.getDouble("DIEMTICHLUY"));
+                khachHang.setHang(resultSet.getString("HANG"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,26 +90,6 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public ArrayList<KhachHang> getByName(String name) {
-        ArrayList<KhachHang> dsKhachHang = new ArrayList<>();
-        String sql = "SELECT * FROM KhachHang WHERE TENKH = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setObject(1, name, java.sql.Types.NVARCHAR);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                KhachHang khachHang = new KhachHang();
-                khachHang.setMaKhachHang(resultSet.getString("MAKH"));
-                khachHang.setTenKH(resultSet.getString("TENKH"));
-                khachHang.setSoDienThoai(resultSet.getString("SDT"));
-                dsKhachHang.add(khachHang);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsKhachHang;
     }
 
     public KhachHang getByMAKH(String maKH) {

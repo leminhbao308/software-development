@@ -220,7 +220,7 @@ public class WinThemKH extends javax.swing.JFrame {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
         String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
-        KhachHang kh = new KhachHang(maKH, tenKH, sdt);
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt, 0, null);
         dao_KhachHang.add(kh);
         pnlKhachHang.loadDataTable();
         JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
