@@ -28,7 +28,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
-                khachHang.setDiemTichLuy(resultSet.getDouble("DIEMTICHLUY"));
+                khachHang.setDiemTichLuy(resultSet.getString("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
                 dsKhachHang.add(khachHang);
             }
@@ -51,7 +51,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
-                khachHang.setDiemTichLuy(resultSet.getDouble("DIEMTICHLUY"));
+                khachHang.setDiemTichLuy(resultSet.getString("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
             }
         } catch (SQLException e) {

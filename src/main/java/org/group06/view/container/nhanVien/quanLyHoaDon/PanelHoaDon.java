@@ -437,7 +437,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }
 
 
-    private String loadTongThanhTien(String hd) {
+    public String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");

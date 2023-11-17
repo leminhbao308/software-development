@@ -195,7 +195,7 @@ public class WinTTNhanVien extends javax.swing.JFrame {
         });
 
         cmbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Làm việc", "Đã nghỉ" }));
+        cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Làm việc", "Đã thôi việc" }));
         cmbTrangThai.setEnabled(false);
         cmbTrangThai.setPreferredSize(new java.awt.Dimension(72, 30));
 
@@ -291,7 +291,7 @@ public class WinTTNhanVien extends javax.swing.JFrame {
         if(nv.isTrangThai()){
             cmbTrangThai.setSelectedItem("Làm việc");
         } else
-        cmbTrangThai.setSelectedItem("Đã nghỉ");
+        cmbTrangThai.setSelectedItem("Đã thôi việc");
 
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCapNhat.setText("Cập nhật");
@@ -361,7 +361,6 @@ public class WinTTNhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        // TODO add your handling code here:
         if (btnCapNhat.getText().equals("Cập nhật")) {
             btnCapNhat.setText("Lưu");
             btnXoaTrang.setEnabled(true);
@@ -403,7 +402,7 @@ public class WinTTNhanVien extends javax.swing.JFrame {
             gt = false;
         }
 
-        if (cmbTrangThai.getSelectedItem().equals("Đã nghỉ")) {
+        if (cmbTrangThai.getSelectedItem().equals("Đã thôi việc")) {
             trangThai = false;
         }
 

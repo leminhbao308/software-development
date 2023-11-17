@@ -820,7 +820,7 @@ public class PanelThongKeDoanhThu extends javax.swing.JPanel {
 
         // Tìm hoá đơn có mã tương ứng, nếu không tìm thấy thì trả về null
         HoaDon temp = dsHoaDon.parallelStream().filter(hd -> hd.getMaHoaDon().equals(maHD)).findFirst().orElse(null);
-        KhachHang kh = temp.getKhachHang() != null ? temp.getKhachHang() : new KhachHang(null, "Khách vãng lai", null, 0,null);
+        KhachHang kh = temp.getKhachHang() != null ? temp.getKhachHang() : new KhachHang(null, "Khách vãng lai", null, null,null);
         NhanVien nv = temp.getNhanVien();
         KhuyenMai km = temp.getKhuyenMai() != null ? temp.getKhuyenMai() : new KhuyenMai(null, "", 0, null, null, 0);
 

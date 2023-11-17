@@ -5,15 +5,15 @@ public class KhachHang {
     private String maKhachHang;
     private String tenKH;
     private String soDienThoai;
-    private double diemTichLuy;
+    private String diemTichLuy;
     private String hang;
 
     public KhachHang() {
         this.tenKH = "Khách vãng lai";
         this.soDienThoai = "0000000000";
         this.maKhachHang = "KH000";
-        this.diemTichLuy = 0;
-        this.hang = "";
+        this.diemTichLuy = "0";
+        this.hang = null;
     }
         
     public KhachHang(String maKhachHang, String tenKH, String soDienThoai) {
@@ -22,7 +22,7 @@ public class KhachHang {
         this.soDienThoai = soDienThoai;
     }
 
-    public KhachHang(String maKhachHang, String tenKH, String soDienThoai, double diemTichLuy, String hang) {
+    public KhachHang(String maKhachHang, String tenKH, String soDienThoai, String diemTichLuy, String hang) {
         this.maKhachHang = maKhachHang;
         this.tenKH = tenKH;
         this.soDienThoai = soDienThoai;
@@ -58,11 +58,11 @@ public class KhachHang {
         this.soDienThoai = soDienThoai;
     }
 
-    public double getDiemTichLuy() {
+    public String getDiemTichLuy() {
         return diemTichLuy;
     }
 
-    public void setDiemTichLuy(double diemTichLuy) {
+    public void setDiemTichLuy(String diemTichLuy) {
         this.diemTichLuy = diemTichLuy;
     }
 

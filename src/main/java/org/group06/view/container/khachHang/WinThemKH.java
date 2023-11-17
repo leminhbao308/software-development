@@ -11,6 +11,7 @@ import org.group06.utils.FontConstant;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -199,7 +200,6 @@ public class WinThemKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
         if (btnLuu.getText().equals("Lưu")) {
             if (txtSDT.getText().equals("") || txtTenKH.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
@@ -210,29 +210,35 @@ public class WinThemKH extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
                 txtSDT.requestFocus();
             } else {
-                themKH();
-                this.dispose();
+                String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
+                KhachHang khachHang = dao_KhachHang.getByID(sdt);
+                if (khachHang != null) {
+                    JOptionPane.showMessageDialog(this, "Số điện thoại đã tồn tại");
+                    txtSDT.requestFocus();
+                } else {
+                    themKH(sdt);
+                    this.dispose();
+                }
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
-    private void themKH() {
+    private void themKH(String sdt) {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
-        String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
-        KhachHang kh = new KhachHang(maKH, tenKH, sdt, 0, null);
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt, null, null);
         dao_KhachHang.add(kh);
-        pnlKhachHang.loadDataTable();
         JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+        pnlKhachHang.loadDataTable();
     }
-    
+
     private String checkKiTu(String text) {
         text = text.replaceAll("\\s+", " ").trim();
         text = text.toLowerCase();
         String[] a = text.split(" ");
         StringBuilder temp = new StringBuilder();
-        for(String word : a) {
-            if(!word.isEmpty()) {
+        for (String word : a) {
+            if (!word.isEmpty()) {
                 temp.append(Character.toUpperCase(word.charAt(0)));
                 temp.append(word.substring(1));
                 temp.append(" ");
