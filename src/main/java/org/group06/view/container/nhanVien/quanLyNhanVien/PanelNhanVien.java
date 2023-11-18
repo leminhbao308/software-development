@@ -31,10 +31,10 @@ public class PanelNhanVien extends javax.swing.JPanel {
     public PanelNhanVien() {
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,0);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,3);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,4);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,6);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 3);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 4);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 6);
     }
 
     /**
@@ -316,20 +316,21 @@ public class PanelNhanVien extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<NhanVien> dsNV = dao_NhanVien.getByName(tenNV);
+                    ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     for (NhanVien nv : dsNV) {
-                        if (nv.isGioiTinh()) {
-                            gt = "Nam";
+                        if (nv.getTenNV().equalsIgnoreCase(tenNV)) {
+                            if (nv.isGioiTinh()) {
+                                gt = "Nam";
+                            }
+                            if (nv.isTrangThai()) {
+                                trangThai = "Làm việc";
+                            }
+                            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
+                            modelKH.addRow(data);
+                            txtTimTheoMa.setText("");
                         }
-                        if (nv.isTrangThai()) {
-                            trangThai = "Làm việc";
-                        }
-
-                        Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
-                        modelKH.addRow(data);
-                        txtTimTheoMa.setText("");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên cần tìm");

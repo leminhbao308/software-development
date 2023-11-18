@@ -358,7 +358,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString(),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3).toString(),
+                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4).toString());
         }
     }
@@ -369,11 +369,15 @@ public class PanelKhachHang extends javax.swing.JPanel {
         modelKH.setRowCount(0);
         for (KhachHang kh : dsKH) {
             Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
+            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
+            kh.setHang(hangKhachHang(kh.getMaKhachHang()));
+            if(dao_KhachHang.update(kh)){
+            }
             modelKH.addRow(data);
         }
     }
 
-    public String getDiem(String maKH) {
+    private int getDiem(String maKH) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
         for (HoaDon hd : dsHD) {
@@ -393,12 +397,13 @@ public class PanelKhachHang extends javax.swing.JPanel {
         double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
         DecimalFormat df = new DecimalFormat("##,###");
         String temp = df.format(ttt);
-        return temp;
+        int x = NumberStandard.parseInt(temp);
+        return x;
     }
 
-    public String hangKhachHang(String maKH) {
+    private String hangKhachHang(String maKH) {
         String result;
-        double temp = NumberStandard.parseInt(getDiem(maKH));
+        int temp = getDiem(maKH);
         if (temp < 1000000) {
             result = "";
         } else if (temp < 5000000) {

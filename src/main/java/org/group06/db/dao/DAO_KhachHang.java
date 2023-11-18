@@ -28,7 +28,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
-                khachHang.setDiemTichLuy(resultSet.getString("DIEMTICHLUY"));
+                khachHang.setDiemTichLuy(resultSet.getInt("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
                 dsKhachHang.add(khachHang);
             }
@@ -51,7 +51,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
-                khachHang.setDiemTichLuy(resultSet.getString("DIEMTICHLUY"));
+                khachHang.setDiemTichLuy(resultSet.getInt("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
             }
         } catch (SQLException e) {
@@ -79,11 +79,13 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     @Override
     public boolean update(KhachHang khachHang) {
         try {
-            String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ? WHERE MAKH = ?";
+            String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ?, DIEMTICHLUY = ?, HANG = ? WHERE MAKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khachHang.getTenKH());
             statement.setString(2, khachHang.getSoDienThoai());
-            statement.setString(3, khachHang.getMaKhachHang());
+            statement.setDouble(3, khachHang.getDiemTichLuy());
+            statement.setString(4, khachHang.getHang());
+            statement.setString(5, khachHang.getMaKhachHang());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -91,7 +93,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             return false;
         }
     }
-
+    
     public KhachHang getByMAKH(String maKH) {
         KhachHang khachHang = null;
         String sql = "SELECT * FROM KhachHang WHERE MAKH = ?";

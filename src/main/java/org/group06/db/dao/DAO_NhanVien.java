@@ -227,33 +227,6 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         return dsNhanVien;
     }
 
-    public ArrayList<NhanVien> getByName(String name) {
-        ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
-        String sql = "SELECT * FROM NhanVien WHERE TENNV = ?";
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setObject(1, name, java.sql.Types.NVARCHAR);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                NhanVien nhanVien = new NhanVien();
-                nhanVien.setMaNV(resultSet.getString("MANV"));
-                nhanVien.setTenNV(resultSet.getString("TENNV"));
-                nhanVien.setMatKhau(resultSet.getString("MATKHAU"));
-                nhanVien.setGioiTinh(resultSet.getBoolean("GIOITINH"));
-                nhanVien.setCccd(resultSet.getString("CCCD"));
-                nhanVien.setDiaChi(resultSet.getString("DIACHI"));
-                nhanVien.setSoDienThoai(resultSet.getString("SDT"));
-                nhanVien.setTrangThai(resultSet.getBoolean("TRANGTHAI"));
-                nhanVien.setChucVu(resultSet.getString("VITRI"));
-                dsNhanVien.add(nhanVien);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsNhanVien;
-    }
-
     public int loadMaNVCount(int countMaNV) {
         String sql = "SELECT MAX(MANV) FROM NhanVien";
         try {

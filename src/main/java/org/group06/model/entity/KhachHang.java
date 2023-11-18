@@ -5,14 +5,14 @@ public class KhachHang {
     private String maKhachHang;
     private String tenKH;
     private String soDienThoai;
-    private String diemTichLuy;
+    private int diemTichLuy;
     private String hang;
 
     public KhachHang() {
         this.tenKH = "Khách vãng lai";
         this.soDienThoai = "0000000000";
         this.maKhachHang = "KH000";
-        this.diemTichLuy = "0";
+        this.diemTichLuy = 0;
         this.hang = null;
     }
         
@@ -22,7 +22,7 @@ public class KhachHang {
         this.soDienThoai = soDienThoai;
     }
 
-    public KhachHang(String maKhachHang, String tenKH, String soDienThoai, String diemTichLuy, String hang) {
+    public KhachHang(String maKhachHang, String tenKH, String soDienThoai, int diemTichLuy, String hang) {
         this.maKhachHang = maKhachHang;
         this.tenKH = tenKH;
         this.soDienThoai = soDienThoai;
@@ -58,11 +58,11 @@ public class KhachHang {
         this.soDienThoai = soDienThoai;
     }
 
-    public String getDiemTichLuy() {
+    public int getDiemTichLuy() {
         return diemTichLuy;
     }
 
-    public void setDiemTichLuy(String diemTichLuy) {
+    public void setDiemTichLuy(int diemTichLuy) {
         this.diemTichLuy = diemTichLuy;
     }
 
@@ -76,12 +76,12 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        return "KhachHang{"
-                + "maKhachHang='" + maKhachHang + '\''
-                + ", tenKH='" + tenKH + '\''
-                + ", soDienThoai='" + soDienThoai + '\''
-                + ", diemTichLuy=" + diemTichLuy
-                + ", hang='" + hang + '\''
-                + '}';
+        return "KhachHang{" +
+                "maKhachHang='" + maKhachHang + '\'' +
+                ", tenKH='" + tenKH + '\'' +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                ", diemTichLuy=" + diemTichLuy +
+                ", hang='" + hang + '\'' +
+                '}';
     }
 }

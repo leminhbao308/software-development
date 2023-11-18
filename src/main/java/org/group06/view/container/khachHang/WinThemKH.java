@@ -226,7 +226,7 @@ public class WinThemKH extends javax.swing.JFrame {
     private void themKH(String sdt) {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
-        KhachHang kh = new KhachHang(maKH, tenKH, sdt, null, null);
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt, 0, null);
         dao_KhachHang.add(kh);
         JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
         pnlKhachHang.loadDataTable();
