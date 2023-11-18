@@ -397,22 +397,22 @@ public class PanelKhachHang extends javax.swing.JPanel {
         double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
         DecimalFormat df = new DecimalFormat("##,###");
         String temp = df.format(ttt);
-        int x = NumberStandard.parseInt(temp);
+        int x = NumberStandard.parseInt(temp) / 100000;
         return x;
     }
 
     private String hangKhachHang(String maKH) {
         String result;
         int temp = getDiem(maKH);
-        if (temp < 1000000) {
+        if (temp < 100) {
             result = "";
-        } else if (temp < 5000000) {
+        } else if (temp < 200) {
             result = "Đồng";
-        } else if (temp < 10000000) {
+        } else if (temp < 300) {
             result = "Bạc";
-        } else if (temp < 15000000) {
+        } else if (temp < 400) {
             result = "Vàng";
-        } else if (temp < 20000000) {
+        } else if (temp < 500) {
             result = "Bạch Kim";
         } else {
             result = "Kim Cương";
