@@ -16,11 +16,11 @@ public class TextField extends JTextField {
     private String hint = "";
     private float animate;
     private boolean show = true;
-    public TextField() {
-        setOpaque(false);
-        setBorder(new EmptyBorder(9, 1, 9, 1));
-        setForeground(ColorConstant.TEXT_NORMAL);
-        setSelectionColor(new Color(200, 200, 200, 100));
+    private Color placeholder_Color = ColorConstant.TEXT_PLACEHOLDER;
+
+    public TextField(String hint, Color placeholder_Color) {
+        this.hint = hint;
+        this.placeholder_Color = placeholder_Color;
         animator = new Animator(350, new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -39,6 +39,60 @@ public class TextField extends JTextField {
             }
 
         });
+        initiate();
+    }
+
+    public TextField() {
+        animator = new Animator(350, new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                if (show) {
+                    animate = fraction;
+                } else {
+                    animate = 1f - fraction;
+                }
+                repaint();
+            }
+
+            @Override
+            public void end() {
+                show = !show;
+                repaint();
+            }
+
+        });
+        initiate();
+    }
+
+    public TextField(String hint) {
+        animator = new Animator(350, new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                if (show) {
+                    animate = fraction;
+                } else {
+                    animate = 1f - fraction;
+                }
+                repaint();
+            }
+
+            @Override
+            public void end() {
+                show = !show;
+                repaint();
+            }
+
+        });
+        initiate();
+        setHint(hint);
+    }
+
+    private void initiate() {
+        setOpaque(false);
+        setBorder(new EmptyBorder(9, 1, 9, 1));
+        setForeground(ColorConstant.BLACK);
+        setSelectionColor(new Color(200, 200, 200, 100));
+
         animator.setResolution(0);
         animator.setAcceleration(.5f);
         animator.setDeceleration(.5f);
@@ -71,7 +125,6 @@ public class TextField extends JTextField {
 
             }
         });
-
     }
 
     public String getHint() {
@@ -81,6 +134,10 @@ public class TextField extends JTextField {
     public void setHint(String hint) {
         this.hint = hint;
         repaint();
+    }
+
+    public void setPlaceholder_Color(Color placeholder_Color) {
+        this.placeholder_Color = placeholder_Color;
     }
 
     private void stop() {
@@ -97,15 +154,29 @@ public class TextField extends JTextField {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setColor(ColorConstant.TEXT_PLACEHOLDER);
-        g2.drawLine(0, getHeight() - 3, getWidth(), getHeight() - 3);
-        if (!hint.equals("")) {
-            int h = getHeight();
-            Insets ins = getInsets();
-            FontMetrics fm = g.getFontMetrics();
-            g2.setColor(ColorConstant.TEXT_PLACEHOLDER);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f - animate));
-            g2.drawString(hint, ins.left + (animate * 30), h / 2 + fm.getAscent() / 2 - 1);
+        if (this.isEnabled()) {
+            g2.setColor(placeholder_Color);
+            g2.drawLine(0, getHeight() - 3, getWidth(), getHeight() - 3);
+            if (!hint.isEmpty()) {
+                int h = getHeight();
+                Insets ins = getInsets();
+                FontMetrics fm = g.getFontMetrics();
+                g2.setColor(placeholder_Color);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f - animate));
+                g2.drawString(hint, ins.left + (animate * 30), h / 2 + fm.getAscent() / 2 - 1);
+            }
+        } else {
+            g2.clearRect(0, 0, getWidth(), getHeight());
+            g2.setColor(ColorConstant.BLACK);
+            if (!hint.isEmpty()) {
+                int h = getHeight();
+                Insets ins = getInsets();
+                FontMetrics fm = g.getFontMetrics();
+                g2.setColor(placeholder_Color);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f - animate));
+                g2.drawString(hint, ins.left + (animate * 30), h / 2 + fm.getAscent() / 2 - 1);
+            }
+            g2.setBackground(ColorConstant.DISABLE_FIELD);
         }
         g2.dispose();
         super.paint(g);

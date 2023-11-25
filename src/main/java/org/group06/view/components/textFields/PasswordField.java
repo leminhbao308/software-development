@@ -19,7 +19,7 @@ public class PasswordField extends JPasswordField {
     public PasswordField() {
         setOpaque(false);
         setBorder(new EmptyBorder(9, 1, 9, 1));
-        setForeground(ColorConstant.TEXT_NORMAL);
+        setForeground(ColorConstant.BLACK);
         setSelectionColor(new Color(200, 200, 200, 100));
         animator = new Animator(350, new TimingTargetAdapter() {
             @Override
