@@ -31,7 +31,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
@@ -60,7 +60,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
@@ -78,7 +78,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean add(QuanAo quanAo) {
         try {
-            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, KICHTHUOC, SOLUONG, THUONGHIEU, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, MAKICHTHUOC, SOLUONG, THUONGHIEU, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getMaQA());
             statement.setString(2, quanAo.getTenQA());
@@ -102,7 +102,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean update(QuanAo quanAo) {
         try {
-            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, KICHTHUOC = ?, SOLUONG = ?, THUONGHIEU = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
+            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, MAKICHTHUOC = ?, SOLUONG = ?, THUONGHIEU = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getTenQA());
             statement.setString(2, quanAo.getLoaiQuanAo());
@@ -151,7 +151,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));

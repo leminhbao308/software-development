@@ -7,6 +7,7 @@ public class KhachHang {
     private String soDienThoai;
     private int diemTichLuy;
     private String hang;
+    // private String email;
 
     public KhachHang() {
         this.tenKH = "Khách vãng lai";
