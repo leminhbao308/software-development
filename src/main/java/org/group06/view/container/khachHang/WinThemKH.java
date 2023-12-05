@@ -51,6 +51,8 @@ public class WinThemKH extends javax.swing.JFrame {
         txtMaKH = new javax.swing.JTextField();
         lblSDT = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +134,18 @@ public class WinThemKH extends javax.swing.JFrame {
             }
         });
 
+        lblEmail.setFont(FontConstant.FONT_LABEL);
+        lblEmail.setText("Email:");
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtEmail.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlThemKHLayout = new javax.swing.GroupLayout(pnlThemKH);
         pnlThemKH.setLayout(pnlThemKHLayout);
         pnlThemKHLayout.setHorizontalGroup(
@@ -141,12 +155,14 @@ public class WinThemKH extends javax.swing.JFrame {
                 .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(lblSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlThemKHLayout.setVerticalGroup(
@@ -167,7 +183,11 @@ public class WinThemKH extends javax.swing.JFrame {
                 .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlThemKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         txtMaKH.setText(pnlKhachHang.getMaKH());
@@ -189,10 +209,10 @@ public class WinThemKH extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblTitleThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlThemKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlThemKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -209,6 +229,9 @@ public class WinThemKH extends javax.swing.JFrame {
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
                 txtSDT.requestFocus();
+            } else if (!checkRegexEmail()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại Email");
+                txtEmail.requestFocus();
             } else {
                 String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
                 KhachHang khachHang = dao_KhachHang.getByID(sdt);
@@ -226,7 +249,8 @@ public class WinThemKH extends javax.swing.JFrame {
     private void themKH(String sdt) {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
-        KhachHang kh = new KhachHang(maKH, tenKH, sdt, 0, null);
+        String email = txtEmail.getText();
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt, email, 0, null);
         dao_KhachHang.add(kh);
         JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
         pnlKhachHang.loadDataTable();
@@ -248,7 +272,6 @@ public class WinThemKH extends javax.swing.JFrame {
     }
 
     private void btnXoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTrangActionPerformed
-        // TODO add your handling code here:
         xoaTrang();
     }//GEN-LAST:event_btnXoaTrangActionPerformed
 
@@ -265,6 +288,13 @@ public class WinThemKH extends javax.swing.JFrame {
         } else
             txtSDT.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
     }//GEN-LAST:event_txtSDTFocusLost
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        if (!checkRegexEmail()) {
+            txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else
+            txtEmail.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    }//GEN-LAST:event_txtEmailFocusLost
 
     private boolean checkRegexTenKH() {
         String tenKH = txtTenKH.getText().trim();
@@ -283,22 +313,34 @@ public class WinThemKH extends javax.swing.JFrame {
             return true;
         }
     }
+    
+    private boolean checkRegexEmail() {
+        String email = txtEmail.getText().trim();
+        if (email.equals("") || !email.matches("^[A-Za-z0-9+_.-]+@gmail.com$")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private void xoaTrang() {
         txtSDT.setText("");
         txtTenKH.setText("");
+        txtEmail.setText("");
         txtTenKH.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnXoaTrang;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblMaKH;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
     private javax.swing.JLabel lblTitleThemKH;
     private javax.swing.JPanel pnlChucNang;
     private javax.swing.JPanel pnlThemKH;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenKH;

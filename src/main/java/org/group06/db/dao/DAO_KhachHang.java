@@ -28,6 +28,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setEmail(resultSet.getString("EMAIL"));
                 khachHang.setDiemTichLuy(resultSet.getInt("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
                 dsKhachHang.add(khachHang);
@@ -51,6 +52,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setEmail(resultSet.getString("EMAIL"));
                 khachHang.setDiemTichLuy(resultSet.getInt("DIEMTICHLUY"));
                 khachHang.setHang(resultSet.getString("HANG"));
             }
@@ -63,11 +65,12 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     @Override
     public boolean add(KhachHang khachHang) {
         try {
-            String sql = "INSERT INTO KhachHang (MAKH, TENKH, SDT) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO KhachHang (MAKH, TENKH, SDT, EMAIL) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khachHang.getMaKhachHang());
             statement.setString(2, khachHang.getTenKH());
             statement.setString(3, khachHang.getSoDienThoai());
+            statement.setString(4, khachHang.getEmail());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -79,13 +82,14 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
     @Override
     public boolean update(KhachHang khachHang) {
         try {
-            String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ?, DIEMTICHLUY = ?, HANG = ? WHERE MAKH = ?";
+            String sql = "UPDATE KhachHang SET TENKH = ?, SDT = ?, EMAIL = ?, DIEMTICHLUY = ?, HANG = ? WHERE MAKH = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khachHang.getTenKH());
             statement.setString(2, khachHang.getSoDienThoai());
-            statement.setDouble(3, khachHang.getDiemTichLuy());
-            statement.setString(4, khachHang.getHang());
-            statement.setString(5, khachHang.getMaKhachHang());
+            statement.setString(3, khachHang.getEmail());
+            statement.setDouble(4, khachHang.getDiemTichLuy());
+            statement.setString(5, khachHang.getHang());
+            statement.setString(6, khachHang.getMaKhachHang());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -106,6 +110,7 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setEmail(resultSet.getString("EMAIL"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,6 +157,9 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
                 khachHang.setMaKhachHang(resultSet.getString("MAKH"));
                 khachHang.setTenKH(resultSet.getString("TENKH"));
                 khachHang.setSoDienThoai(resultSet.getString("SDT"));
+                khachHang.setEmail(resultSet.getString("EMAIL"));
+                khachHang.setDiemTichLuy(resultSet.getInt("DIEMTICHLUY"));
+                khachHang.setHang(resultSet.getString("HANG"));
                 dsKhachHang.add(khachHang);
             }
         } catch (SQLException e) {
