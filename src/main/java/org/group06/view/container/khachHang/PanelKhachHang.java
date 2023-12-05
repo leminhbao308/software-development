@@ -12,10 +12,17 @@ import org.group06.utils.ColorConstant;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_HoaDon;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
 
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NameStandard;
+import org.group06.utils.NumberStandard;
 //import org.group06.view.components.*;
 
 /**
@@ -24,7 +31,10 @@ import org.group06.utils.NameStandard;
  */
 public class PanelKhachHang extends javax.swing.JPanel {
 
-    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
+    private Connection connection = DatabaseConstant.getConnection();
+    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
+    private DAO_ChiTietHoaDon dao_CTHD = new DAO_ChiTietHoaDon(connection);
+    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
     public int soMaKH = 0;
 
     /**
@@ -33,8 +43,10 @@ public class PanelKhachHang extends javax.swing.JPanel {
     public PanelKhachHang() {
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblKhachHang,0);
-        FormatCellRenderer.formatCellRendererCenter(tblKhachHang,2);
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang, 3);
+        FormatCellRenderer.formatCellRendererCenter(tblKhachHang, 4);
 
     }
 
@@ -77,19 +89,12 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Điểm tích lũy", "Hạng"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -114,6 +119,8 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(0).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(1).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(4).setResizable(false);
         }
 
         pnlTimKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -148,11 +155,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTimTheoTen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimTheoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lblTimTheoSDT)
+                .addComponent(txtTimTheoTen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimTheoSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addComponent(lblTimTheoSDT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimTheoSDT)
                 .addContainerGap())
         );
         pnlTimKHLayout.setVerticalGroup(
@@ -205,7 +212,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitleTTKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrKhachHang)
+                    .addComponent(scrKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlTimKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,19 +269,20 @@ public class PanelKhachHang extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
-                    ArrayList<KhachHang> dsKH = dao_KhachHang.getByName(tenKH);
+                    ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
                     for (KhachHang kh : dsKH) {
-                        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
-                        modelKH.addRow(data);
+                        if (kh.getTenKH().equalsIgnoreCase(tenKH)) {
+                            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
+                            modelKH.addRow(data);
+                        }
                     }
                     txtTimTheoSDT.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
                     loadDataTable();
                 }
-
             } else {
                 loadDataTable();
             }
@@ -289,7 +297,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     KhachHang kh = dao_KhachHang.getByID(sdt);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
-                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
+                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
                     modelKH.addRow(data);
                     txtTimTheoTen.setText("");
                 } else {
@@ -327,7 +335,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
         frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemKH.setResizable(false);
         frThemKH.setVisible(true);
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -347,9 +354,12 @@ public class PanelKhachHang extends javax.swing.JPanel {
         if (tblKhachHang.getSelectedRow() == -1) {
             return null;
         } else {
-            return new KhachHang(tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
+            return new KhachHang(
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString());
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString(),
+                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3),
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4).toString());
         }
     }
 
@@ -358,8 +368,55 @@ public class PanelKhachHang extends javax.swing.JPanel {
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
         modelKH.setRowCount(0);
         for (KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai()};
+            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
+            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
+            kh.setHang(hangKhachHang(kh.getMaKhachHang()));
+            if(dao_KhachHang.update(kh)){
+            }
             modelKH.addRow(data);
         }
+    }
+
+    private int getDiem(String maKH) {
+        double tinhTongThanhTien = 0, mucGiamGia = 0;
+        ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
+        for (HoaDon hd : dsHD) {
+            if (hd.getKhachHang() != null) {
+                if (hd.getKhachHang().getMaKhachHang().equals(maKH)) {
+                    ArrayList<ChiTietHoaDon> dsCTHD = dao_CTHD.getAllCTQA(hd.getMaHoaDon());
+                    for (ChiTietHoaDon cthd : dsCTHD) {
+                        tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
+                        if (cthd.getHoaDon().getKhuyenMai() != null) {
+                            mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
+                        }
+                    }
+                }
+            }
+        }
+        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+        DecimalFormat df = new DecimalFormat("##,###");
+        String temp = df.format(ttt);
+        int x = NumberStandard.parseInt(temp) / 100000;
+        return x;
+    }
+
+    private String hangKhachHang(String maKH) {
+        String result;
+        int temp = getDiem(maKH);
+        if (temp < 100) {
+            result = "";
+        } else if (temp < 200) {
+            result = "Đồng";
+        } else if (temp < 300) {
+            result = "Bạc";
+        } else if (temp < 400) {
+            result = "Vàng";
+        } else if (temp < 500) {
+            result = "Bạch Kim";
+        } else {
+            result = "Kim Cương";
+        }
+        return result;
     }
 }

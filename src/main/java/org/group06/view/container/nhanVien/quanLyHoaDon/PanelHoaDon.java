@@ -256,19 +256,19 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
     }
 
-    private void callFrameChiTietHoaDon() {
-        WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(this.getSelectedHoaDon(), this);
-        frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frCTHD.setResizable(false);
-        frCTHD.setVisible(true);
-    }
-
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         if (evt.getClickCount() == 2) {
             callFrameChiTietHoaDon();
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
+    private void callFrameChiTietHoaDon() {
+        WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(this.getSelectedHoaDon(), this);
+        frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frCTHD.setResizable(false);
+        frCTHD.setVisible(true);
+    }
+    
     private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
         if (evt.getPropertyName().equals("date")) {
             Date date = (Date) evt.getNewValue();
@@ -437,7 +437,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }
 
 
-    private String loadTongThanhTien(String hd) {
+    public String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");

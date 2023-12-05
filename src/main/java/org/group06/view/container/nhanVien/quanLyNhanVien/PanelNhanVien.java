@@ -31,10 +31,10 @@ public class PanelNhanVien extends javax.swing.JPanel {
     public PanelNhanVien() {
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,0);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,3);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,4);
-        FormatCellRenderer.formatCellRendererCenter(tblNhanVien,6);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 3);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 4);
+        FormatCellRenderer.formatCellRendererCenter(tblNhanVien, 6);
     }
 
     /**
@@ -164,7 +164,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         lblLocTrangThai.setText("Trạng Thái Công Việc");
 
         cmbLocTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Làm việc", "Đã nghỉ" }));
+        cmbLocTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Làm việc", "Đã thôi việc" }));
         cmbLocTrangThai.setMinimumSize(new java.awt.Dimension(92, 31));
         cmbLocTrangThai.setPreferredSize(new java.awt.Dimension(92, 31));
         cmbLocTrangThai.addItemListener(new java.awt.event.ItemListener() {
@@ -312,24 +312,25 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
-        String gt = "Nữ", trangThai = "Đã nghỉ";
+        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
-                    ArrayList<NhanVien> dsNV = dao_NhanVien.getByName(tenNV);
+                    ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
                     modelKH.setRowCount(0);
                     for (NhanVien nv : dsNV) {
-                        if (nv.isGioiTinh()) {
-                            gt = "Nam";
+                        if (nv.getTenNV().equalsIgnoreCase(tenNV)) {
+                            if (nv.isGioiTinh()) {
+                                gt = "Nam";
+                            }
+                            if (nv.isTrangThai()) {
+                                trangThai = "Làm việc";
+                            }
+                            Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
+                            modelKH.addRow(data);
+                            txtTimTheoMa.setText("");
                         }
-                        if (nv.isTrangThai()) {
-                            trangThai = "Làm việc";
-                        }
-
-                        Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
-                        modelKH.addRow(data);
-                        txtTimTheoMa.setText("");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên cần tìm");
@@ -361,7 +362,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
         String maNV = txtTimTheoMa.getText();
-        String gt = "Nữ", trangThai = "Đã nghỉ";
+        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
@@ -423,7 +424,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
             if (nv.isTrangThai()) {
                 trangThai = "Làm việc";
             } else {
-                trangThai = "Đã nghỉ";
+                trangThai = "Đã thôi việc";
             }
             Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gt, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};
             modelNV.addRow(data);
@@ -436,7 +437,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         if (selectedOption.equals("Làm việc")) {
             trangThai = 1;
             getDataLocTheoTrangThai(selectedOption, trangThai);
-        } else if (selectedOption.equals("Đã nghỉ")) {
+        } else if (selectedOption.equals("Đã thôi việc")) {
             trangThai = 0;
             getDataLocTheoTrangThai(selectedOption, trangThai);
         } else {
@@ -472,11 +473,11 @@ public class PanelNhanVien extends javax.swing.JPanel {
             trangThai = 1;
             gioiTinh = 0;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if (selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nam")) {
+        } else if (selectTrangThai.equals("Đã thôi việc") && selectGioiTinh.equals("Nam")) {
             trangThai = 0;
             gioiTinh = 1;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
-        } else if (selectTrangThai.equals("Đã nghỉ") && selectGioiTinh.equals("Nữ")) {
+        } else if (selectTrangThai.equals("Đã thôi việc") && selectGioiTinh.equals("Nữ")) {
             trangThai = 0;
             gioiTinh = 0;
             getDatalocTheoTrangThaiVaGioiTinh(selectTrangThai, trangThai, selectGioiTinh, gioiTinh);
@@ -486,8 +487,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
             getDataLocTheoPhai("Nữ", 0);
         } else if (selectTrangThai.equals("Làm việc") && selectGioiTinh.equals("Tất Cả")) {
             getDataLocTheoTrangThai("Làm việc", 1);
-        } else if (selectTrangThai.equals("Nghỉ việc") && selectGioiTinh.equals("Tất Cả")) {
-            getDataLocTheoTrangThai("Nghỉ việc", 0);
+        } else if (selectTrangThai.equals("Đã thôi việc") && selectGioiTinh.equals("Tất Cả")) {
+            getDataLocTheoTrangThai("Đã thôi việc", 0);
         }
     }
 
@@ -526,7 +527,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
         }
 
         boolean trangThai = true;
-        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Đã nghỉ")) {
+        if (tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 7).toString().equals("Đã thôi việc")) {
             trangThai = false;
         }
 
@@ -562,7 +563,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
             if (nv.isTrangThai()) {
                 trangThai = "Làm việc";
             } else {
-                trangThai = "Đã nghỉ";
+                trangThai = "Đã thôi việc";
             }
 
             Object[] data = {nv.getMaNV(), nv.getTenNV(), nv.getMatKhau(), gioiTinh, nv.getCccd(), nv.getDiaChi(), nv.getSoDienThoai(), trangThai, nv.getChucVu()};

@@ -320,7 +320,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
                 <StringItem index="1" value="L&#xe0;m vi&#x1ec7;c"/>
-                <StringItem index="2" value="&#x110;&#xe3; ngh&#x1ec9;"/>
+                <StringItem index="2" value="&#x110;&#xe3; th&#xf4;i vi&#x1ec7;c"/>
               </StringArray>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
