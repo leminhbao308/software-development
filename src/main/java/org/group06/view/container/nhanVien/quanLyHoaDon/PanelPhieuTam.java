@@ -209,6 +209,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             }
         });
         tblPhieuDat.setRowHeight(50);
+        tblPhieuDat.setShowGrid(true);
         tblPhieuDat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPhieuDatMouseClicked(evt);
