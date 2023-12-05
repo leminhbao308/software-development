@@ -646,7 +646,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConstant.getConnection());
                     if (this.themMoiCTKM.add(ctkm)) {
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
-                        System.out.println("Thêm mới thành công loại chương trình khuyến mãi!");
+                        System.out.println("Thêm mới thành công chương trình khuyến mãi!");
+                        EmailCreator.sendEmail("leminhbao.iuh@gmail.com", "Test Send Email With JavaEMail Package", "Xin Chào Bạn Tôi Là Am Fashion Store!");
                     }
 
                 }
