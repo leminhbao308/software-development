@@ -1,4 +1,4 @@
-package org.group06.view.screen;
+ package org.group06.view.screen;
 
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
@@ -49,7 +49,7 @@ public class WinGiaoDienChinh extends JFrame {
 
     //Menu Hoa Don
     private final JMenuItem mniQuanLyHoaDonBanHang = new JMenuItem("Quản Lý Hóa Đơn Bán Hàng");
-    private final JMenuItem mniQuanLyHoaDonDatHang = new JMenuItem("Quản Lý Hóa Đơn Đặt Hàng");
+    private final JMenuItem mniQuanLyHoaDonDatHang = new JMenuItem("Quản Lý Phiếu Đặt Hàng");
 
     //Menu Thong Ke
     private final JMenuItem mniThongKeDoanhThu = new JMenuItem("Thống Kê Doanh Thu");

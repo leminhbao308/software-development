@@ -89,7 +89,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         modelKhuyenMai.setRowCount(0);
         for (KhuyenMai km : this.dsKhuyenMai) {
             Object[] data = {km.getMaKhuyenMai(), km.getTenCTKM(), NumberStandard.formatPercent(km.getMucGiamGia()), km.getSoLuotSuDung(),
-                    DateStandard.formatDate(km.getNgayBatDau()), DateStandard.formatDate(km.getNgayKetThuc())};
+                DateStandard.formatDate(km.getNgayBatDau()), DateStandard.formatDate(km.getNgayKetThuc())};
 //            Thêm dữ liệu vào table
             modelKhuyenMai.addRow(data);
         }
@@ -586,7 +586,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
             // Chuyển đổi sang java.util.Date
             java.util.Date utilDate = Date.from(instant);
             this.dchNgayKetThuc.setDate(utilDate);
-        } else if (Pattern.compile("^\\d+\\.{0,1}\\d+$").matcher(txtMucGiamGia.getText().trim()).find() == false) {
+        } else if (!txtMucGiamGia.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "Vui lòng nhập số(sử dụng dấu . với số thực)!");
             this.txtMucGiamGia.selectAll();
@@ -831,14 +831,15 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTieuChiTimKiemActionPerformed
 
     private void txtMucGiamGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMucGiamGiaFocusLost
-        
+
     }//GEN-LAST:event_txtMucGiamGiaFocusLost
 
     private void txtSoLuotSuDungFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuotSuDungFocusLost
-        
+
     }//GEN-LAST:event_txtSoLuotSuDungFocusLost
 
     private void txtMucGiamGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMucGiamGiaKeyReleased
+
         if (!txtMucGiamGia.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "Vui lòng nhập số(sử dụng dấu . với số thực)!");
