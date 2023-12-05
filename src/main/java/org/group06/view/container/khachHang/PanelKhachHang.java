@@ -89,11 +89,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Điểm tích lũy", "Hạng"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Điểm tích lũy", "Hạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +121,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(4).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(5).setResizable(false);
         }
 
         pnlTimKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -274,7 +275,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     modelKH.setRowCount(0);
                     for (KhachHang kh : dsKH) {
                         if (kh.getTenKH().equalsIgnoreCase(tenKH)) {
-                            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
+                            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
                             modelKH.addRow(data);
                         }
                     }
@@ -297,7 +298,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     KhachHang kh = dao_KhachHang.getByID(sdt);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
-                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
+                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
                     modelKH.addRow(data);
                     txtTimTheoTen.setText("");
                 } else {
@@ -358,8 +359,9 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString(),
-                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4).toString());
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3).toString(),
+                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4),
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5).toString());
         }
     }
 
@@ -368,7 +370,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
         modelKH.setRowCount(0);
         for (KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
+            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
             kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
             kh.setHang(hangKhachHang(kh.getMaKhachHang()));
             if(dao_KhachHang.update(kh)){
