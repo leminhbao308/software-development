@@ -229,9 +229,11 @@ public class WinThemKH extends javax.swing.JFrame {
             } else if (!checkRegexSDT()) {
                 JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
                 txtSDT.requestFocus();
-            } else if (!checkRegexEmail()) {
-                JOptionPane.showMessageDialog(this, "Nhập lại Email");
-                txtEmail.requestFocus();
+            } else if (!txtEmail.getText().equals("")) {
+                if (!checkRegexEmail()) {
+                    JOptionPane.showMessageDialog(this, "Nhập lại Email");
+                    txtEmail.requestFocus();
+                }
             } else {
                 String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
                 KhachHang khachHang = dao_KhachHang.getByID(sdt);
@@ -290,10 +292,13 @@ public class WinThemKH extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSDTFocusLost
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        if (!checkRegexEmail()) {
-            txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
-        } else
-            txtEmail.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        if (txtEmail.getText().equals("")) {
+            if (!checkRegexEmail()) {
+                txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+            } else {
+                txtEmail.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+            }
+        }
     }//GEN-LAST:event_txtEmailFocusLost
 
     private boolean checkRegexTenKH() {
@@ -313,10 +318,10 @@ public class WinThemKH extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     private boolean checkRegexEmail() {
         String email = txtEmail.getText().trim();
-        if (email.equals("") || !email.matches("^[A-Za-z0-9+_.-]+@gmail.com$")) {
+        if (email.equals("") || !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
             return false;
         } else {
             return true;

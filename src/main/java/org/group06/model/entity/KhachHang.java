@@ -14,7 +14,7 @@ public class KhachHang {
         this.maKhachHang = "KH000";
         this.tenKH = "Khách vãng lai";
         this.soDienThoai = "0000000000";
-        this.email = "kvl@gmail.com";
+        this.email = null;
         this.diemTichLuy = 0;
         this.hang = null;
     }
