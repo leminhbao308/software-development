@@ -41,6 +41,7 @@ public class Main {
             WinDangNhap winDangNhap = new WinDangNhap();
             winDangNhap.setVisible(true);
             winDangNhap.requestFocus();
+            System.out.println("Hello World");
         });
     }
 }
