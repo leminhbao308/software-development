@@ -44,6 +44,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         tblQuanAo.getTableHeader().setBackground(ColorConstant.BACKGROUND_TABLEHEADER);
         loadDataTable();
         loadDataForComboboxLoaiQuanAo();
+        loadDataForComboboxSize();
         loadDataForComboboxNCC();
         setStatusAllBtnsStart();
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 3);
@@ -61,6 +62,15 @@ public class PanelQuanAo extends javax.swing.JPanel {
             cmbModel.addElement(item.getValue());
         }
         this.cmbLoaiQA.setModel(cmbModel);
+    }
+
+    public void loadDataForComboboxSize() {
+        DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
+        cmbModel.addElement("Chọn Kích Thước Quần Áo");
+        for (HashMap.Entry<String, String> item : dsKichThuocQA.entrySet()) {
+            cmbModel.addElement(item.getValue());
+        }
+        this.cmbSize.setModel(cmbModel);
     }
 
     public void loadDataForComboboxNCC() {
@@ -136,7 +146,13 @@ public class PanelQuanAo extends javax.swing.JPanel {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQuanAo.setRowCount(0);
         for (QuanAo qa : this.dsQuanLyQuanAo.getAll()) {
-            Object[] data = {qa.getMaQA(), qa.getTenQA(), this.dsQuanLyQuanAo.getTenLoaiQuanAo(qa.getLoaiQuanAo()), qa.getKichThuoc(),
+            String tenKichThuocQA = "";
+            for(Map.Entry<String, String> maKichThuoc: dsKichThuocQA.entrySet()) {
+                if(qa.getMaKichThuoc().equals(maKichThuoc.getKey())){
+                    tenKichThuocQA = maKichThuoc.getValue();
+                }
+            }
+            Object[] data = {qa.getMaQA(), qa.getTenQA(), this.dsQuanLyQuanAo.getTenLoaiQuanAo(qa.getLoaiQuanAo()), tenKichThuocQA,
                 qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(), NumberStandard.formatMoney(qa.getGiaNhap()), NumberStandard.formatPercent(qa.getLoiNhuan()), tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())), qa.isTrangThai() ? "Còn Kinh Doanh" : "Dừng Kinh Doanh"};
 //      Thêm dữ liệu vào table
             modelQuanAo.addRow(data);
@@ -1001,7 +1017,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 //                Size quần áo
                     int size = this.cmbSize.getSelectedIndex();
                     String sizeQuanAo = this.cmbSize.getItemAt(size);
-                    qaCapNhat.setKichThuoc(sizeQuanAo);
+                    qaCapNhat.setMaKichThuoc(sizeQuanAo);
                     this.tblQuanAo.getModel().setValueAt(sizeQuanAo, viTri, 3);
 //                Số lượng quần áo
                     int soLuongQuanAo = NumberStandard.parseInt(this.txtSoLuongQA.getText());
@@ -1070,7 +1086,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 //                Size quần áo
                     int size = this.cmbSize.getSelectedIndex();
                     String sizeQuanAo = this.cmbSize.getItemAt(size);
-                    qaThemMoi.setKichThuoc(sizeQuanAo);
+                    qaThemMoi.setMaKichThuoc(sizeQuanAo);
 //                Mã quần áo
                     String maQuanAo = this.txtMaQA.getText().trim();
                     qaThemMoi.setMaQA(maQuanAo);
@@ -1314,7 +1330,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                     tenLoaiQuanAo = item.getValue();
                 }
             }
-            Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getKichThuoc(),
+            Object[] data = {qa.getMaQA(), qa.getTenQA(), tenLoaiQuanAo, qa.getMaKichThuoc(),
                 qa.getSoLuong(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC(),
                 NumberStandard.formatMoney(qa.getGiaNhap()), NumberStandard.formatPercent(qa.getLoiNhuan()),
                 tinhGiaBan(String.valueOf(qa.getGiaNhap()), String.valueOf(qa.getLoiNhuan())),
@@ -1480,6 +1496,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
     private ArrayList<QuanAo> dsQA = new DAO_QuanAo(DatabaseConstant.getConnection()).getAll();
     private ArrayList<NhaCungCap> dsNCC = new DAO_NhaCungCap(DatabaseConstant.getConnection()).getAll();
     private HashMap<String, String> loaiQuanAo = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllLoaiQuanAo();
+    private HashMap<String, String> dsKichThuocQA = new DAO_QuanAo(DatabaseConstant.getConnection()).getAllKichThuocQA();
     private boolean statusBtnCapNhat = false;
     private boolean statusBtnThemMoi = false;
     private boolean statusBtnHuy = false;

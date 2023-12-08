@@ -46,7 +46,7 @@ public class Manager_QuanAo implements Manager_Interface<QuanAo> {
             if (qa.getMaQA().equals(quanAo.getMaQA())) {
                 qa.setTenQA(quanAo.getTenQA());
                 qa.setLoaiQuanAo(quanAo.getLoaiQuanAo());
-                qa.setKichThuoc(quanAo.getKichThuoc());
+                qa.setMaKichThuoc(quanAo.getMaKichThuoc());
                 qa.setSoLuong(quanAo.getSoLuong());
                 qa.setThuongHieu(quanAo.getThuongHieu());
                 qa.setNhaCungCap(quanAo.getNhaCungCap());

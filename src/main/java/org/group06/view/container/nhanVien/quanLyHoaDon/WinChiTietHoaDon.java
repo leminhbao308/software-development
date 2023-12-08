@@ -376,7 +376,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             String tenQA = cthd.getQuanAo().getTenQA();
-            String size = cthd.getQuanAo().getKichThuoc();
+            String size = cthd.getQuanAo().getMaKichThuoc();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
             double tinhThanhTien = cthd.getGiaBan() * soLuong;
