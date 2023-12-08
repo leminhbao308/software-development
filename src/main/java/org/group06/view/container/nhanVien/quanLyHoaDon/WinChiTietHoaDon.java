@@ -421,7 +421,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         for (ChiTietHoaDon cthd : dsCTHD) {
             String maQA = cthd.getQuanAo().getMaQA();
             String tenQA = cthd.getQuanAo().getTenQA();
-            String size = cthd.getQuanAo().getKichThuoc();
+            String size = cthd.getQuanAo().getMaKichThuoc();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
             double tinhThanhTien = cthd.getGiaBan() * soLuong;

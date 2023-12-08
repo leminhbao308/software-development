@@ -19,6 +19,7 @@ import org.group06.view.container.taiKhoan.WinDoiMatKhau;
 
 import javax.swing.*;
 import java.awt.*;
+import org.group06.view.container.quanAo.PanelKichThuocQA;
 
 /**
  * @author Le Minh Bao
@@ -46,6 +47,7 @@ public class WinGiaoDienChinh extends JFrame {
     private final JMenuItem mniQuanLyLoaiQuanAo = new JMenuItem("Quản Lý Loại Quần Áo");
     private final JMenuItem mniQuanLyNhaCungCap = new JMenuItem("Quản Lý Nhà Cung Cấp");
     private final JMenuItem mniQuanLyKhuyenMai = new JMenuItem("Quản Lý Khuyến Mãi");
+    private final JMenuItem mniQuanLyKichThuoc = new JMenuItem("Quản Lý Kích Thước");
 
     //Menu Hoa Don
     private final JMenuItem mniQuanLyHoaDonBanHang = new JMenuItem("Quản Lý Hóa Đơn Bán Hàng");
@@ -150,6 +152,14 @@ public class WinGiaoDienChinh extends JFrame {
             this.revalidate();
             this.repaint();
         });
+        
+        mniQuanLyKichThuoc.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelKichThuocQA();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
     }
 
     private void addActionMenuHoaDon() {
@@ -235,6 +245,7 @@ public class WinGiaoDienChinh extends JFrame {
         mniQuanLyLoaiQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyNhaCungCap.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mniQuanLyKichThuoc.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonDatHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeDoanhThu.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -255,6 +266,7 @@ public class WinGiaoDienChinh extends JFrame {
         mniQuanLyLoaiQuanAo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhaCungCap.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyKhuyenMai.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        mniQuanLyKichThuoc.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Hoa Don
         mniQuanLyHoaDonBanHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -305,6 +317,7 @@ public class WinGiaoDienChinh extends JFrame {
         mnQuanAo.add(mniQuanLyLoaiQuanAo);
         mnQuanAo.add(mniQuanLyNhaCungCap);
         mnQuanAo.add(mniQuanLyKhuyenMai);
+        mnQuanAo.add(mniQuanLyKichThuoc);
 
         //Menu Hoa Don
         mnHoaDon.add(mniQuanLyHoaDonBanHang);
