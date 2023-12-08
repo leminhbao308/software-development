@@ -15,13 +15,16 @@ import java.util.ArrayList;
 
 public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
-    private Connection connection = DatabaseConstant.getConnection();
-    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(connection);
-    private DAO_KhuyenMai dao_KhuyenMai = new DAO_KhuyenMai(connection);
-    private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
+    private Connection connection;
+    private DAO_NhanVien dao_NhanVien;
+    private DAO_KhuyenMai dao_KhuyenMai;
+    private DAO_KhachHang dao_KhachHang;
 
     public DAO_PhieuDat(Connection connection) {
         this.connection = connection;
+        dao_NhanVien = new DAO_NhanVien(connection);
+        dao_KhuyenMai = new DAO_KhuyenMai(connection);
+        dao_KhachHang = new DAO_KhachHang(connection);
     }
 
     @Override
@@ -50,7 +53,6 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         return dsPD;
     }
 
-
     public ArrayList<PhieuDat> getByDateDat(String date) {
         ArrayList<PhieuDat> dsDateDat = new ArrayList<PhieuDat>();
         try {
@@ -68,7 +70,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
                 int trangThai = rs.getInt("TRANGTHAI");
                 boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai,thanhToan);
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
                 dsDateDat.add(phieuDat);
             }
         } catch (SQLException e) {
@@ -105,6 +107,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
 
     /**
      * Tìm theo ngày đặt hàng hoặc ngày nhận hàng.
+     *
      * @param dateDat
      * @param dateNhan
      * @return danh sách ngày đặt hàng hoặc ngày nhận hàng
@@ -153,7 +156,7 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
                 phieuDat.setKhachHang(new DAO_KhachHang(connection).getByMAKH(resultSet.getString("MAKH")));
                 phieuDat.setNhanVien(new DAO_NhanVien(connection).getByID(resultSet.getString("MANV")));
                 phieuDat.setTrangThai(resultSet.getInt("TRANGTHAI"));
-                phieuDat.setThanhToan(resultSet.getBoolean("THANHTOAN")); 
+                phieuDat.setThanhToan(resultSet.getBoolean("THANHTOAN"));
             }
         } catch (SQLException e) {
             System.out.println("Lỗi lấy phiếu đặt theo mã phiếu đặt");

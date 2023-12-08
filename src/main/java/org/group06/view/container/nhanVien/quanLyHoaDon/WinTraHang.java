@@ -97,7 +97,7 @@ public class WinTraHang extends javax.swing.JFrame {
 
         txtSize.setBackground(new java.awt.Color(242, 242, 242));
         txtSize.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtSize.setText(cthd.getQuanAo().getKichThuoc());
+        txtSize.setText(cthd.getQuanAo().getMaKichThuoc());
         txtSize.setBorder(null);
         txtSize.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSize.setEnabled(false);
