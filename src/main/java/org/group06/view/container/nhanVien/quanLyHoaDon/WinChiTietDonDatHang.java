@@ -48,10 +48,10 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             btnNhanHang.setEnabled(true);
         }
         loadDataTable();
-        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 2);
-        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 4);
-        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 1);
-        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 3);
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 3);
+        FormatCellRenderer.formatCellRendererRight(tblDSQuanAo, 5);
+        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblDSQuanAo, 4);
     }
 
     /**
@@ -66,6 +66,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         pnlDSQA = new javax.swing.JPanel();
         srcQuanAo = new javax.swing.JScrollPane();
         tblDSQuanAo = new javax.swing.JTable();
+        btnNhanHang = new javax.swing.JButton();
         pnlTTPD = new javax.swing.JPanel();
         lblMaCTPD = new javax.swing.JLabel();
         lblTenKH = new javax.swing.JLabel();
@@ -82,7 +83,6 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         lblNgayNhan = new javax.swing.JLabel();
         txtNgayNhan = new javax.swing.JTextField();
         lblTitleCTPD = new javax.swing.JLabel();
-        btnNhanHang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,11 +94,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
+                "Mã quần áo", "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -106,6 +106,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             }
         });
         tblDSQuanAo.setRowHeight(30);
+        tblDSQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSQuanAoMouseClicked(evt);
+            }
+        });
         srcQuanAo.setViewportView(tblDSQuanAo);
         if (tblDSQuanAo.getColumnModel().getColumnCount() > 0) {
             tblDSQuanAo.getColumnModel().getColumn(0).setResizable(false);
@@ -113,17 +118,34 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             tblDSQuanAo.getColumnModel().getColumn(2).setResizable(false);
             tblDSQuanAo.getColumnModel().getColumn(3).setResizable(false);
             tblDSQuanAo.getColumnModel().getColumn(4).setResizable(false);
+            tblDSQuanAo.getColumnModel().getColumn(5).setResizable(false);
         }
+
+        btnNhanHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnNhanHang.setText("Nhận Hàng");
+        btnNhanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhanHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
         pnlDSQA.setLayout(pnlDSQALayout);
         pnlDSQALayout.setHorizontalGroup(
             pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+            .addComponent(srcQuanAo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSQALayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNhanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlDSQALayout.setVerticalGroup(
             pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcQuanAo, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addGroup(pnlDSQALayout.createSequentialGroup()
+                .addComponent(srcQuanAo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNhanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
         );
 
         lblMaCTPD.setFont(FontConstant.FONT_LABEL);
@@ -272,14 +294,6 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         lblTitleCTPD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleCTPD.setText("Chi Tiết Phiếu Đặt");
 
-        btnNhanHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnNhanHang.setText("Nhận Hàng");
-        btnNhanHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhanHangActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,21 +302,15 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lblTitleCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNhanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlTTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlTTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitleCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNhanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitleCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addComponent(lblTitleCTPD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTTPD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -340,6 +348,43 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNhanHangActionPerformed
 
+    private void tblDSQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSQuanAoMouseClicked
+        if (evt.getClickCount() == 2) {
+            callFrameWinTraPhieuDatHang();
+        }
+    }//GEN-LAST:event_tblDSQuanAoMouseClicked
+
+    private void callFrameWinTraPhieuDatHang() {
+        WinTraPhieuDatHang frTPDH = new WinTraPhieuDatHang(this.getSelectedWinTraPhieuDatHang(), this);
+        frTPDH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTPDH.setResizable(false);
+        frTPDH.setVisible(true);
+    }
+
+    private ChiTietPhieuDat getSelectedWinTraPhieuDatHang() {
+        String mQA = tblDSQuanAo.getValueAt(tblDSQuanAo.getSelectedRow(), 0).toString();
+
+        if (tblDSQuanAo.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return dao_ChiTietPhieuDat.getQA(mQA);
+        }
+    }
+
+    public int getSoLuongDaDat() {
+        if (tblDSQuanAo.getSelectedRow() == -1) {
+            return -1;
+        } else {
+            int sl = (int) tblDSQuanAo.getValueAt(tblDSQuanAo.getSelectedRow(), 4);
+            return sl;
+        }
+    }
+    
+    public int getTrangThaiThanhToan() {
+        int temp = pnlPhieuTam.getTrangThai();
+        return temp;
+    }
+    
     public String taoMaHD() {
         int count = dao_HoaDon.loadMaHDCount();
         count++;
@@ -370,13 +415,14 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTongTT;
     // End of variables declaration//GEN-END:variables
 
-    private void loadDataTable() {
+    public void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String pd = phieuDat.getMaPhieuDat().toString();
         ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(pd);
         DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
         modelCTPD.setRowCount(0);
         for (ChiTietPhieuDat ctpd : dsCTPD) {
+            String maQA = ctpd.getQuanAo().getMaQA();
             String tenQA = ctpd.getQuanAo().getTenQA();
             String size = ctpd.getQuanAo().getKichThuoc();
             String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
@@ -385,7 +431,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
             tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
 
-            Object[] data = {tenQA, size, giaBan, soLuong, thanhTien};
+            Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
 
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {

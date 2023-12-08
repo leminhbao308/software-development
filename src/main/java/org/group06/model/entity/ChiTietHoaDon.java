@@ -28,6 +28,11 @@ public class ChiTietHoaDon {
         this.setSoLuong(soLuong);
         this.setGiaBan(giaBan);
     }
+    
+    public ChiTietHoaDon(QuanAo quanAo, int soLuong) {
+        this.setQuanAo(quanAo);
+        this.setSoLuong(soLuong);
+    }
 
 
     public HoaDon getHoaDon() {

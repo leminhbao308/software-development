@@ -62,6 +62,55 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         }
         return dsChiTietPhieuDat;
     }
+    
+    public ChiTietPhieuDat getQA(String maQA) {
+        ChiTietPhieuDat chiTietPhieuDat = null;
+        try {
+            String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                chiTietPhieuDat = new ChiTietPhieuDat();
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietPhieuDat;
+    }
+    
+    public boolean updateSoLuong(ChiTietPhieuDat ctpd) {
+        try {
+            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ? WHERE MAQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, ctpd.getSoLuong());
+            statement.setString(2, ctpd.getQuanAo().getMaQA());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deleteSoLuong(String maQA, String maPD) {
+        try {
+            String sql = "DELETE FROM ChiTietPhieuDat WHERE MAQA = ? AND MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            statement.setString(2, maPD);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Override
     public ChiTietPhieuDat getByID(String id) {

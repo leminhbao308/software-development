@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,18 +30,20 @@ import java.util.ArrayList;
  */
 public class WinChiTietHoaDon extends javax.swing.JFrame {
 
+    private Connection connection = DatabaseConstant.getConnection();
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
+    private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
 
     public WinChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
         this.pnlHoaDon = pnlHoaDon;
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 2);
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 4);
-        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 1);
-        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 3);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 3);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 5);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 4);
     }
 
     /**
@@ -156,18 +159,17 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                     .addComponent(lblNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMaCTHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTongTT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(txtMaCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlTTHDLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtMaCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlTTHDLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNV, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtTenCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(59, 59, 59))
         );
         pnlTTHDLayout.setVerticalGroup(
@@ -213,11 +215,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
+                "Mã quần áo", "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -225,6 +227,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             }
         });
         tblChiTietHD.setRowHeight(30);
+        tblChiTietHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietHDMouseClicked(evt);
+            }
+        });
         srcChiTietHD.setViewportView(tblChiTietHD);
         if (tblChiTietHD.getColumnModel().getColumnCount() > 0) {
             tblChiTietHD.getColumnModel().getColumn(0).setResizable(false);
@@ -232,18 +239,8 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             tblChiTietHD.getColumnModel().getColumn(2).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(3).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(4).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(5).setResizable(false);
         }
-
-        javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
-        pnlDSQA.setLayout(pnlDSQALayout);
-        pnlDSQALayout.setHorizontalGroup(
-            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcChiTietHD, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        pnlDSQALayout.setVerticalGroup(
-            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-        );
 
         btnInHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInHoaDon.setText("In Hóa Đơn");
@@ -252,6 +249,25 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 btnInHoaDonActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
+        pnlDSQA.setLayout(pnlDSQALayout);
+        pnlDSQALayout.setHorizontalGroup(
+            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(srcChiTietHD, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSQALayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlDSQALayout.setVerticalGroup(
+            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDSQALayout.createSequentialGroup()
+                .addComponent(srcChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnInHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,17 +280,13 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                     .addComponent(pnlTTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitleCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitleCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addComponent(lblTitleCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -345,6 +357,38 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
+    private void tblChiTietHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietHDMouseClicked
+        if (evt.getClickCount() == 2) {
+            callFrameWinTraHang();
+        }
+    }//GEN-LAST:event_tblChiTietHDMouseClicked
+
+    private void callFrameWinTraHang() {
+        WinTraHang frTH = new WinTraHang(this.getSelectedWinTraHang(), this);
+        frTH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTH.setResizable(false);
+        frTH.setVisible(true);
+    }
+
+    private ChiTietHoaDon getSelectedWinTraHang() {
+        String mQA = tblChiTietHD.getValueAt(tblChiTietHD.getSelectedRow(), 0).toString();
+
+        if (tblChiTietHD.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return dao_ChiTietHoaDon.getQA(mQA);
+        }
+    }
+
+    public int getSoLuongDaMua() {
+        if (tblChiTietHD.getSelectedRow() == -1) {
+            return -1;
+        } else {
+            int sl = (int) tblChiTietHD.getValueAt(tblChiTietHD.getSelectedRow(), 4);
+            return sl;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInHoaDon;
@@ -367,7 +411,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextField txtTongTT;
     // End of variables declaration//GEN-END:variables
 
-    private void loadDataTable() {
+    public void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String hd = hoaDon.getMaHoaDon().toString();
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConstant.getConnection())).getAllCTQA(hd);
@@ -375,6 +419,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         modelCTHD.setRowCount(0);
         DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
+            String maQA = cthd.getQuanAo().getMaQA();
             String tenQA = cthd.getQuanAo().getTenQA();
             String size = cthd.getQuanAo().getKichThuoc();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
@@ -384,7 +429,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             tinhTongThanhTien += tinhThanhTien;
 
-            Object[] data = {tenQA, size, giaBan, soLuong, thanhTien};
+            Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
             modelCTHD.addRow(data);
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
