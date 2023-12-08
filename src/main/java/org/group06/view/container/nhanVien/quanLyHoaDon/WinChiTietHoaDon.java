@@ -24,6 +24,9 @@ import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import org.group06.db.dao.DAO_QuanAo;
 
 /**
  * @author Dell
@@ -34,6 +37,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
     private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+    private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     public WinChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
@@ -421,13 +425,20 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         for (ChiTietHoaDon cthd : dsCTHD) {
             String maQA = cthd.getQuanAo().getMaQA();
             String tenQA = cthd.getQuanAo().getTenQA();
-            String size = cthd.getQuanAo().getMaKichThuoc();
             String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
             int soLuong = cthd.getSoLuong();
             double tinhThanhTien = cthd.getGiaBan() * soLuong;
             String thanhTien = dfMoney.format(tinhThanhTien);
 
             tinhTongThanhTien += tinhThanhTien;
+            
+            String size = "";
+            for (Map.Entry<String, String> item : dsSize.entrySet()) {
+                if(item.getKey().equals(cthd.getQuanAo().getMaKichThuoc())) {
+                    size = item.getValue();
+                    break;
+                }
+            }
 
             Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
             modelCTHD.addRow(data);

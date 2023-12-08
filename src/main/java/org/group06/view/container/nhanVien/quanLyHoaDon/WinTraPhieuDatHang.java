@@ -9,10 +9,13 @@ import java.sql.Connection;
 import org.group06.utils.FontConstant;
 import org.group06.utils.NumberStandard;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.ChiTietPhieuDat;
 
 /**
@@ -25,6 +28,7 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
     private ChiTietPhieuDat ctpd;
     private WinChiTietDonDatHang winCTPD;
     private DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
+    private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     /**
      * Creates new form CapNhatHoaDon
@@ -97,11 +101,18 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
 
         txtSize.setBackground(new java.awt.Color(242, 242, 242));
         txtSize.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtSize.setText(ctpd.getQuanAo().getMaKichThuoc());
         txtSize.setBorder(null);
         txtSize.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSize.setEnabled(false);
         txtSize.setPreferredSize(new java.awt.Dimension(71, 30));
+        String size = "";
+        for (Map.Entry<String, String> item : dsSize.entrySet()) {
+            if(item.getKey().equals(ctpd.getQuanAo().getMaKichThuoc())) {
+                size = item.getValue();
+                break;
+            }
+        }
+        txtSize.setText(size);
 
         lblSLDat.setFont(FontConstant.FONT_LABEL);
         lblSLDat.setText("Số lượng đã đặt:");

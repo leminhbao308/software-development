@@ -20,6 +20,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import org.group06.db.dao.DAO_QuanAo;
 
 /**
  * @author Dell
@@ -36,6 +39,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
     private KhachHang khachHang;
     private NhanVien nhanVien;
     private KhuyenMai khuyenMai;
+    private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     public WinChiTietDonDatHang(PhieuDat phieuDat, PanelPhieuTam pnlPhieuTam) {
         this.phieuDat = phieuDat;
@@ -424,13 +428,20 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             String maQA = ctpd.getQuanAo().getMaQA();
             String tenQA = ctpd.getQuanAo().getTenQA();
-            String size = ctpd.getQuanAo().getMaKichThuoc();
             String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
             String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
 
             tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
-
+            
+            String size = "";
+            for (Map.Entry<String, String> item : dsSize.entrySet()) {
+                if(item.getKey().equals(ctpd.getQuanAo().getMaKichThuoc())) {
+                    size = item.getValue();
+                    break;
+                }
+            }
+            
             Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
 
