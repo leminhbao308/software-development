@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
-    private Connection connection = DatabaseConstant.getConnection();
-    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
-    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
+    private Connection connection;
+    private DAO_PhieuDat dao_PhieuDat;
+    private DAO_QuanAo dao_QuanAo;
 
     public DAO_ChiTietPhieuDat(Connection connection) {
         this.connection = connection;
+        dao_PhieuDat = new DAO_PhieuDat(connection);
+        dao_QuanAo = new DAO_QuanAo(connection);
     }
 
     @Override
