@@ -373,7 +373,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
             Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
             kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
             kh.setHang(hangKhachHang(kh.getMaKhachHang()));
-            if(dao_KhachHang.update(kh)){
+            if (dao_KhachHang.update(kh)) {
             }
             modelKH.addRow(data);
         }

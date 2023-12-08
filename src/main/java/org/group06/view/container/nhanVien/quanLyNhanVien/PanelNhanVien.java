@@ -312,8 +312,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
                     ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
@@ -362,8 +362,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
         String maNV = txtTimTheoMa.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
                     NhanVien nhanVien = dao_NhanVien.getByID(maNV);

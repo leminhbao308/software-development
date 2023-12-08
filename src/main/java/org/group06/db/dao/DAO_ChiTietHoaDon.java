@@ -63,6 +63,27 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         }
         return dsChiTietHoaDon;
     }
+    
+    public ChiTietHoaDon getQA(String maQA) {
+        ChiTietHoaDon chiTietHoaDon = null;
+        try {
+            String sql = "SELECT * FROM ChiTietHoaDon WHERE MAQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                chiTietHoaDon = new ChiTietHoaDon();
+                chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+                chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách chi tiết hóa đơn");
+        }
+        return chiTietHoaDon;
+    }
 
     @Override
     public boolean add(ChiTietHoaDon cthd) {
@@ -78,6 +99,34 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             return true;
         } catch (SQLException e) {
             System.out.println("Lỗi thêm chi tiết hóa đơn");
+            return false;
+        }
+    }
+    
+    public boolean updateSoLuong(ChiTietHoaDon cthd) {
+        try {
+            String sql = "UPDATE ChiTietHoaDon SET SOLUONG = ? WHERE MAQA = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, cthd.getSoLuong());
+            statement.setString(2, cthd.getQuanAo().getMaQA());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deleteSoLuong(String maQA, String maHD) {
+        try {
+            String sql = "DELETE FROM ChiTietHoaDon WHERE MAQA = ? AND MAHD = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            statement.setString(2, maHD);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

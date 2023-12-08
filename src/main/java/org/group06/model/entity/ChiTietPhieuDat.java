@@ -15,12 +15,10 @@ public class ChiTietPhieuDat {
         this.loiNhuan = 0;
     }
 
-//    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan) {
-//        this.setPhieuDat(phieuDat);
-//        this.setQuanAo(quanAo);
-//        this.setSoLuong(soLuong);
-//        this.setGiaBan(giaBan);
-//    }
+    public ChiTietPhieuDat(QuanAo quanAo, int soLuong) {
+        this.setQuanAo(quanAo);
+        this.setSoLuong(soLuong);
+    }
 
     public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan, double loiNhuan) {
         this.setPhieuDat(phieuDat);

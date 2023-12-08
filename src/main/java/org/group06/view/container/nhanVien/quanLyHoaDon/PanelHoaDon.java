@@ -40,6 +40,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         dchTimTheoNgay.setLocale(new Locale("vi", "VN"));
         loadDataTable();
         FormatCellRenderer.formatCellRendererCenter(tblHoaDon,0);
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon,1);
         FormatCellRenderer.formatCellRendererRight(tblHoaDon,4);
     }
 
@@ -208,9 +209,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-//        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
         String tenKH = txtTimTheoTenKH.getText();
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
@@ -244,7 +243,6 @@ public class PanelHoaDon extends javax.swing.JPanel {
             } else {
                 loadDataTable(dsHD);
             }
-        }
     }//GEN-LAST:event_txtTimTheoTenKHKeyReleased
 
     private boolean checkRegexTenKH() {
