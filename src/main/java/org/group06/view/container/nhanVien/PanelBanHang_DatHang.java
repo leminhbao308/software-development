@@ -1001,7 +1001,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
             quanAoDuocMua.setTenQA(quanAo.getTenQA());
             quanAoDuocMua.setLoaiQuanAo(quanAo.getLoaiQuanAo());
             quanAoDuocMua.setNhaCungCap(quanAo.getNhaCungCap());
-            quanAoDuocMua.setKichThuoc(quanAo.getKichThuoc());
+            quanAoDuocMua.setMaKichThuoc(quanAo.getMaKichThuoc());
             quanAoDuocMua.setGiaNhap(quanAo.getGiaNhap());
             quanAoDuocMua.setLoiNhuan(quanAo.getLoiNhuan());
             quanAoDuocMua.setHinhAnh(quanAo.getHinhAnh());
@@ -1417,7 +1417,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
                 Object[] data = {
                         quanAo.getMaQA(), quanAo.getTenQA(),
                         dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()),
-                        quanAo.getKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
+                        quanAo.getMaKichThuoc(), quanAo.getNhaCungCap().getTenNCC(),
                         quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan())
                 };
                 // Thêm dữ liệu vào table
@@ -1461,7 +1461,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         double thanhTien = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()) * soLuongMua;
         Object[] data = {
                 quanAo.getMaQA(), quanAo.getTenQA(),
-                quanAo.getKichThuoc(), giaBan,
+                quanAo.getMaKichThuoc(), giaBan,
                 soLuongMua, thanhTien
         };
 
@@ -1508,7 +1508,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         for (QuanAo quanAo : qlQuanAo.getAll()) {
             boolean matchTen = tenQuanAoTim.isEmpty() || quanAo.getTenQA().toLowerCase().contains(tenQuanAoTim);
             boolean matchLoai = loaiQuanAo.equals("Tất Cả") || dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()).equalsIgnoreCase(loaiQuanAo);
-            boolean matchKichThuoc = kichCo.equals("Tất Cả") || quanAo.getKichThuoc().equalsIgnoreCase(kichCo);
+            boolean matchKichThuoc = kichCo.equals("Tất Cả") || quanAo.getMaKichThuoc().equalsIgnoreCase(kichCo);
             boolean matchNhaCungCap = nhaCungCap.equals("Tất Cả") || quanAo.getNhaCungCap().getTenNCC().toLowerCase().contains(nhaCungCap.toLowerCase());
 
             if (matchTen && matchLoai && matchKichThuoc && matchNhaCungCap) {

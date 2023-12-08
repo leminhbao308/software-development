@@ -424,7 +424,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         for (ChiTietPhieuDat ctpd : dsCTPD) {
             String maQA = ctpd.getQuanAo().getMaQA();
             String tenQA = ctpd.getQuanAo().getTenQA();
-            String size = ctpd.getQuanAo().getKichThuoc();
+            String size = ctpd.getQuanAo().getMaKichThuoc();
             String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
             String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
