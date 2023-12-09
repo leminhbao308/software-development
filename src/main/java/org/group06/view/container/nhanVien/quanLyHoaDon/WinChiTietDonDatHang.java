@@ -86,6 +86,8 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         txtTongTT = new javax.swing.JTextField();
         lblNgayNhan = new javax.swing.JLabel();
         txtNgayNhan = new javax.swing.JTextField();
+        lblGhiChu = new javax.swing.JLabel();
+        txtGhiChu = new javax.swing.JTextField();
         lblTitleCTPD = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -226,29 +228,42 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         txtNgayNhan.setEnabled(false);
         txtNgayNhan.setPreferredSize(new java.awt.Dimension(71, 30));
 
+        lblGhiChu.setFont(FontConstant.FONT_LABEL);
+        lblGhiChu.setText("Ghi chú:");
+
+        txtGhiChu.setBackground(new java.awt.Color(242, 242, 242));
+        txtGhiChu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtGhiChu.setBorder(null);
+        txtGhiChu.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtGhiChu.setEnabled(false);
+        txtGhiChu.setPreferredSize(new java.awt.Dimension(71, 30));
+
         javax.swing.GroupLayout pnlTTPDLayout = new javax.swing.GroupLayout(pnlTTPD);
         pnlTTPD.setLayout(pnlTTPDLayout);
         pnlTTPDLayout.setHorizontalGroup(
             pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTTPDLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTenCTKM, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(lblTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNgayNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMaCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(47, 47, 47)
                 .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblTenCTKM, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .addComponent(lblTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNgayNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMaCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNV, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                     .addComponent(txtTenCTKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaCTPD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNgayNhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGhiChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(58, 58, 58))
         );
         pnlTTPDLayout.setVerticalGroup(
@@ -282,7 +297,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
                 .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlTTPDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -318,7 +337,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTTPD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlDSQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlDSQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -398,6 +417,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhanHang;
+    private javax.swing.JLabel lblGhiChu;
     private javax.swing.JLabel lblMaCTPD;
     private javax.swing.JLabel lblNgayNhan;
     private javax.swing.JLabel lblNgayTao;
@@ -410,6 +430,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTTPD;
     private javax.swing.JScrollPane srcQuanAo;
     private javax.swing.JTable tblDSQuanAo;
+    private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtKH;
     private javax.swing.JTextField txtMaCTPD;
     private javax.swing.JTextField txtNV;
@@ -421,6 +442,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     public void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
+        String gc = null;
         String pd = phieuDat.getMaPhieuDat().toString();
         ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(pd);
         DefaultTableModel modelCTPD = (DefaultTableModel) this.tblDSQuanAo.getModel();
@@ -442,6 +464,8 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
                 }
             }
             
+            gc = ctpd.getGhiChu();
+            
             Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
             modelCTPD.addRow(data);
 
@@ -453,5 +477,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
         String tongThanhTien = NumberStandard.formatMoney(ttt);
         txtTongTT.setText(tongThanhTien);
+        txtGhiChu.setText(gc);
+        System.out.println(gc);
     }
 }
