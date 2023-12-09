@@ -57,6 +57,7 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+                chiTietPhieuDat.setGhiChu(resultSet.getString("GHICHU"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
             }
         } catch (SQLException e) {
@@ -88,10 +89,11 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
     
     public boolean updateSoLuong(ChiTietPhieuDat ctpd) {
         try {
-            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ? WHERE MAQA = ?";
+            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, ctpd.getSoLuong());
-            statement.setString(2, ctpd.getQuanAo().getMaQA());
+            statement.setString(2, ctpd.getGhiChu());
+            statement.setString(3, ctpd.getQuanAo().getMaQA());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

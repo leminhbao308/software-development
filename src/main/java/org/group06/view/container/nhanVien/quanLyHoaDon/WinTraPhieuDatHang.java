@@ -62,11 +62,10 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
         btnLuu = new javax.swing.JButton();
         txtSLDat = new javax.swing.JTextField();
         lblSLTra = new javax.swing.JLabel();
-        lblLiDo = new javax.swing.JLabel();
-        srcLiDo = new javax.swing.JScrollPane();
-        txaLiDo = new javax.swing.JTextArea();
         lblTienTraKhach = new javax.swing.JLabel();
         txtTienTraKhach = new javax.swing.JTextField();
+        lblLiDo = new javax.swing.JLabel();
+        txtLiDo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,14 +159,6 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
         lblSLTra.setFont(FontConstant.FONT_LABEL);
         lblSLTra.setText("Số lượng muốn trả:");
 
-        lblLiDo.setFont(FontConstant.FONT_LABEL);
-        lblLiDo.setText("Lí do trả hàng:");
-
-        txaLiDo.setColumns(20);
-        txaLiDo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        txaLiDo.setRows(5);
-        srcLiDo.setViewportView(txaLiDo);
-
         lblTienTraKhach.setFont(FontConstant.FONT_LABEL);
         lblTienTraKhach.setText("Số tiền cần trả cho khách hàng (nếu có):");
 
@@ -178,6 +169,15 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
         txtTienTraKhach.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         txtTienTraKhach.setEnabled(false);
         txtTienTraKhach.setPreferredSize(new java.awt.Dimension(71, 30));
+
+        lblLiDo.setFont(FontConstant.FONT_LABEL);
+        lblLiDo.setText("Lí do trả hàng:");
+
+        txtLiDo.setBackground(new java.awt.Color(242, 242, 242));
+        txtLiDo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtLiDo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtLiDo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtLiDo.setPreferredSize(new java.awt.Dimension(71, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,41 +191,40 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(lblSLDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(lblMaQA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblTenQA, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtSize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtSLDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblSLTra, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                            .addComponent(lblGiaTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtSLTra, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                            .addComponent(txtGiaTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(txtTenQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtMaQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(srcLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTienTraKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTienTraKhach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(8, 8, 8)))))
+                                .addComponent(txtTienTraKhach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSLDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSize, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(lblMaQA, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(lblTenQA, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(txtSize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtSLDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(lblSLTra, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                                    .addComponent(lblGiaTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtSLTra, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                                    .addComponent(txtGiaTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(txtTenQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtMaQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(305, 305, 305)
+                .addGap(309, 309, 309)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -259,16 +258,16 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSLDat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblLiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(srcLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLiDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTienTraKhach, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTienTraKhach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -309,10 +308,11 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSLTraKeyReleased
 
     private void updateSLTra() {
+        String ghiChu = txtLiDo.getText();
         int soLuongTra = Integer.parseInt(txtSLTra.getText());
         int soLuongDat = winCTPD.getSoLuongDaDat();
         int temp = soLuongDat - soLuongTra;
-        ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat(ctpd.getQuanAo(), temp);
+        ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat(ctpd.getQuanAo(), temp, ghiChu);
         if (dao_ChiTietPhieuDat.updateSoLuong(chiTietPhieuDat)) {
             if (temp == 0) {
                 if (dao_ChiTietPhieuDat.deleteSoLuong(ctpd.getQuanAo().getMaQA(), ctpd.getPhieuDat().getMaPhieuDat())) {
@@ -344,9 +344,8 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenQA;
     private javax.swing.JLabel lblTienTraKhach;
     private javax.swing.JLabel lblTitleTH;
-    private javax.swing.JScrollPane srcLiDo;
-    private javax.swing.JTextArea txaLiDo;
     private javax.swing.JTextField txtGiaTien;
+    private javax.swing.JTextField txtLiDo;
     private javax.swing.JTextField txtMaQA;
     private javax.swing.JTextField txtSLDat;
     private javax.swing.JTextField txtSLTra;
