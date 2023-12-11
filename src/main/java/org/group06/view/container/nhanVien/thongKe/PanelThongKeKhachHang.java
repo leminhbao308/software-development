@@ -18,6 +18,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Locale;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_HoaDon;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
+import org.group06.utils.FormatCellRenderer;
 
 import org.group06.view.components.charts.PieChart;
 import org.group06.view.components.charts.data.PieChartData;
@@ -26,12 +31,18 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
     private final Connection connection = DatabaseConstant.getConnection();
     private DAO_ThongKeKhachHang dao_ThongKe = new DAO_ThongKeKhachHang(connection);
+    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+    private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
 
     /**
      * Creates new form PanelThongKeKhachHang
      */
     public PanelThongKeKhachHang() {
         initComponents();
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 1);
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 3);
+        FormatCellRenderer.formatCellRendererRight(tblTopChi, 4);
     }
 
     @SuppressWarnings("unchecked")
@@ -595,9 +606,8 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi();
-        loadDuLieuLenTable( dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
-
     /**
      * Tính theo ngày tháng năm được chọn
      */
@@ -627,7 +637,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TrongThang(month, year);
-        loadDuLieuLenTable( dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
@@ -642,7 +652,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TrongNam(year);
-        loadDuLieuLenTable( dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
@@ -665,7 +675,6 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
     /**
      * Load dữ liệu từ 2 Arr lên 2 tabble
      *
-     * @param rowSP
      * @param rowChi
      */
     private void loadDuLieuLenTable(ArrayList<Object[]> rowChi) {
@@ -694,23 +703,52 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         this.txtKVL.setText(NumberStandard.formatInteger(tongKVL));
     }
 
+//    private JPanel loadBieuDo() {
+//        LinkedHashMap<String, Double> tiLeKHTT_KVL = new LinkedHashMap<>();
+//
+//        int tongKHTT = dao_ThongKe.getTongKH().size() - dao_ThongKe.getTongKVL().size();
+//        int tongKVL = dao_ThongKe.getTongKVL().size();
+//
+//        double tileTongKHTT = (tongKHTT * 100.0) / dao_ThongKe.getTongKH().size();
+//        double tileTongKVL = 100 - tileTongKHTT;
+//
+//        tiLeKHTT_KVL.put("Khách hàng thân thiết", tileTongKHTT);
+//        tiLeKHTT_KVL.put("Khách vãng lai", tileTongKVL);
+//
+//        PieChartData data = new PieChartData(tiLeKHTT_KVL);
+//
+//        PieChart chart = null;
+//        try {
+//            chart = new PieChart("Tỉ lệ khách hàng thân thiết và khách vãng lai", data);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return chart;
+//    }
+    
+    
     private JPanel loadBieuDo() {
         LinkedHashMap<String, Double> tiLeKHTT_KVL = new LinkedHashMap<>();
 
-        int tongKHTT = dao_ThongKe.getTongKH().size() - dao_ThongKe.getTongKVL().size();
-        int tongKVL = dao_ThongKe.getTongKVL().size();
+        double tongHangNull = dao_ThongKe.getHangNull().size();
+        double tongHangDong = dao_ThongKe.getHangDong().size();
+        double tongHangBac = dao_ThongKe.getHangBac().size();
+        double tongHangVang = dao_ThongKe.getHangVang().size();
+        double tongHangBK = dao_ThongKe.getHangBachKim().size();
+        double tongHangKC = dao_ThongKe.getHangKimCuong().size();
 
-        double tileTongKHTT = (tongKHTT * 100.0) / dao_ThongKe.getTongKH().size();
-        double tileTongKVL = 100 - tileTongKHTT;
-
-        tiLeKHTT_KVL.put("Khách hàng thân thiết", tileTongKHTT);
-        tiLeKHTT_KVL.put("Khách vãng lai", tileTongKVL);
+        tiLeKHTT_KVL.put("Khách vãng lai", tongHangNull);
+        tiLeKHTT_KVL.put("Đồng", tongHangDong);
+        tiLeKHTT_KVL.put("Bạc", tongHangBac);
+        tiLeKHTT_KVL.put("Vàng", tongHangVang);
+        tiLeKHTT_KVL.put("Bạch Kim", tongHangBK);
+        tiLeKHTT_KVL.put("Kim Cương", tongHangKC);
 
         PieChartData data = new PieChartData(tiLeKHTT_KVL);
 
         PieChart chart = null;
         try {
-            chart = new PieChart("Tỉ lệ khách hàng thân thiết và khách vãng lai", data);
+            chart = new PieChart("Tỉ lệ phân hạng", data);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
