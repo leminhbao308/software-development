@@ -913,6 +913,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.statusBtnCapNhat = false;
         this.statusBtnHuy = true;
         this.txtTenQA.requestFocus();
+        this.cmbTrangThai.setSelectedIndex(1);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     public String taoMaQuanAo(String text) {

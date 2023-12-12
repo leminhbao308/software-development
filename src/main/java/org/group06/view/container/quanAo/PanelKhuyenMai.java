@@ -13,10 +13,13 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import org.group06.db.dao.DAO_KhachHang;
+import org.group06.model.entity.KhachHang;
 
 /**
  * @author lehoangnam
@@ -579,8 +582,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         } else if (txtSoLuotSuDung.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Số lượt sử dụng của chương trình khuyến mãi đang trống không thể lưu");
             this.txtSoLuotSuDung.requestFocus();
-        } else if (!ngayKT.isAfter(ngayBD)) {
-            JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
+        } else if (ngayKT.isBefore(ngayBD)) {
+            JOptionPane.showMessageDialog(null, "Ngày kết thúc không được trước ngày bắt đầu!");
             LocalDate nextDay = ngayBD.plusDays(1);
             Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
             // Chuyển đổi sang java.util.Date
@@ -614,6 +617,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     if (this.ctkm_DAO.update(ctkmCapNhat)) {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã cập nhật thành công chương trình khuyến mãi " + this.ctkmCapNhat.getTenCTKM());
+//                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã cập nhật
                     }
 //                    Đổ dữ liệu vừa cập nhật xuống table
                     this.tblKhuyenMai.getModel().setValueAt(tenCTKM, viTri, 1);
@@ -639,15 +643,29 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     ctkm.setNgayBatDau(ngayBatDauCTKM);
                     ctkm.setNgayKetThuc(ngayKetThucCTKM);
 //                    Load xuống table
-                    Object[] data = {maCTKM, tenCTKM, mucGiamGiaCTKM, soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
+                    Object[] data = {maCTKM, tenCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM), soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblKhuyenMai.getModel();
                     modelTable.addRow(data);
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
                     this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConstant.getConnection());
                     if (this.themMoiCTKM.add(ctkm)) {
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
-                        System.out.println("Thêm mới thành công chương trình khuyến mãi!");
+//                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã thêm mới
+
                         EmailCreator.sendEmail("leminhbao.iuh@gmail.com", "Test Send Email With JavaEMail Package", "Xin Chào Bạn Tôi Là Am Fashion Store!");
+                        // Lấy ngày hiện tại
+                        LocalDate currentDate = LocalDate.now();
+                        // Ngày bắt đầu chương trình khuyến mãi
+                        LocalDate startDate = ngayBatDauCTKM.toLocalDate();
+                        // Tính khoảng cách giữa ngày bắt đầu và ngày hiện tại
+                        long daysUntilStart = ChronoUnit.DAYS.between(currentDate, startDate);
+                        if (startDate.isAfter(currentDate)) {
+                            if (daysUntilStart == 1) {
+                                System.out.println("Chương trình khuyến mãi bắt đầu ngày mai!");
+                            } else {
+                                System.out.println("Chưa đến ngày bắt đầu chương trình khuyến mãi.");
+                            }
+                        }
                     }
 
                 }
@@ -819,7 +837,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     //    Xử lý tìm kiếm chương trình khuyến mãi
     private void txtTimCTKMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimCTKMKeyPressed
-
         xuLyTimKiemCTKM();
     }//GEN-LAST:event_txtTimCTKMKeyPressed
 
@@ -840,7 +857,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSoLuotSuDungFocusLost
 
     private void txtMucGiamGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMucGiamGiaKeyReleased
-
         if (!txtMucGiamGia.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "Vui lòng nhập số(sử dụng dấu . với số thực)!");
@@ -899,4 +915,5 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private KhuyenMai ctkmCapNhat = null;
     private DAO_KhuyenMai ctkm_DAO = null;
     private DAO_KhuyenMai themMoiCTKM = null;
+    private ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(DatabaseConstant.getConnection()).getAll();
 }

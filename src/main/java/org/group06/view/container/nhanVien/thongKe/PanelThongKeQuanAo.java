@@ -724,9 +724,16 @@ public class PanelThongKeQuanAo extends javax.swing.JPanel {
 
                 modelTopQuanAo.setRowCount(0);
                 int kiemTraHet = 0;
+                String loaiQA = "";
+                
                 for (QuanAo qa : dsQA) {
                     if (qa.getSoLuong() == 0) {
-                        Object[] rowData = {qa.getMaQA(), qa.getTenQA(), qa.getLoaiQuanAo(), qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC()};
+                        for(HashMap.Entry<String, String> item: dsLoaiQuanAo.entrySet()) {
+                            if (item.getKey().equals(qa.getLoaiQuanAo())) {
+                                loaiQA = item.getValue();
+                            }
+                        }
+                        Object[] rowData = {qa.getMaQA(), qa.getTenQA(), loaiQA, qa.getThuongHieu(), qa.getNhaCungCap().getTenNCC()};
                         modelTopQuanAo.addRow(rowData);
                         kiemTraHet++;
                     }
