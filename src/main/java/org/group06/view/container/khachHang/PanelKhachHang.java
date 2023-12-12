@@ -5,9 +5,16 @@
 package org.group06.view.container.khachHang;
 
 import org.group06.db.DatabaseConstant;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_KhachHang;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
 import org.group06.utils.ColorConstant;
+import org.group06.utils.FormatCellRenderer;
+import org.group06.utils.NameStandard;
+import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,14 +22,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import org.group06.db.dao.DAO_ChiTietHoaDon;
-import org.group06.db.dao.DAO_HoaDon;
-import org.group06.model.entity.ChiTietHoaDon;
-import org.group06.model.entity.HoaDon;
-
-import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
-import org.group06.utils.NumberStandard;
 //import org.group06.view.components.*;
 
 /**
@@ -370,11 +369,10 @@ public class PanelKhachHang extends javax.swing.JPanel {
         DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
         modelKH.setRowCount(0);
         for (KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
+            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), kh.tinhHangKhachHang()};
             kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
-            kh.setHang(hangKhachHang(kh.getMaKhachHang()));
-            if (dao_KhachHang.update(kh)) {
-            }
+            kh.setHang(kh.tinhHangKhachHang());
+            dao_KhachHang.update(kh);
             modelKH.addRow(data);
         }
     }
@@ -401,24 +399,5 @@ public class PanelKhachHang extends javax.swing.JPanel {
         String temp = df.format(ttt);
         int x = NumberStandard.parseInt(temp) / 100000;
         return x;
-    }
-
-    private String hangKhachHang(String maKH) {
-        String result;
-        int temp = getDiem(maKH);
-        if (temp < 100) {
-            result = "";
-        } else if (temp < 200) {
-            result = "Đồng";
-        } else if (temp < 300) {
-            result = "Bạc";
-        } else if (temp < 400) {
-            result = "Vàng";
-        } else if (temp < 500) {
-            result = "Bạch Kim";
-        } else {
-            result = "Kim Cương";
-        }
-        return result;
     }
 }
