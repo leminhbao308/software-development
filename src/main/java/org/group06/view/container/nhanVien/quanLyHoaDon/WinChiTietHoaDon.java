@@ -12,7 +12,7 @@ import org.group06.model.entity.HoaDon;
 import org.group06.utils.FontConstant;
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
-import org.group06.utils.PDF_Creator;
+import org.group06.utils.PdfCreator;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -343,7 +343,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 if (response == JOptionPane.YES_OPTION) {
                     // Lưu file
                     try {
-                        PDF_Creator.createInvoice(hoaDon, filePath);
+                        PdfCreator.createInvoice(hoaDon, filePath);
                     } catch (DocumentException | IOException e1) {
                         System.out.println("Lỗi khi lưu file!");
                         JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -361,7 +361,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             } else {
                 // Lưu file
                 try {
-                    PDF_Creator.createInvoice(hoaDon, filePath);
+                    PdfCreator.createInvoice(hoaDon, filePath);
                 } catch (DocumentException | IOException e1) {
                     System.out.println("Lỗi khi lưu file!");
                     JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
