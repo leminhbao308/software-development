@@ -1326,8 +1326,8 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
         int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn hoàn tất đặt hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {
+            DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
             if (dao_PhieuDat.add(phieuDatHang)) {
-                DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
                 for (QuanAo quanAo : dsQuanAoDat) {
                     ChiTietPhieuDat ctpd = new ChiTietPhieuDat(phieuDatHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), quanAo.getLoiNhuan());
                     dao_ChiTietPhieuDat.add(ctpd);
