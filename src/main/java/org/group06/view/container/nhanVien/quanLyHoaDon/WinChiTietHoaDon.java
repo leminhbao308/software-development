@@ -73,8 +73,6 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         txtNV = new javax.swing.JTextField();
         txtTenCTKM = new javax.swing.JTextField();
         txtTongTT = new javax.swing.JTextField();
-        txtGhiChu = new javax.swing.JTextField();
-        lblGhiChu = new javax.swing.JLabel();
         pnlDSQA = new javax.swing.JPanel();
         srcChiTietHD = new javax.swing.JScrollPane();
         tblChiTietHD = new javax.swing.JTable();
@@ -152,31 +150,19 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         txtTongTT.setEnabled(false);
         txtTongTT.setPreferredSize(new java.awt.Dimension(71, 30));
 
-        txtGhiChu.setBackground(new java.awt.Color(242, 242, 242));
-        txtGhiChu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtGhiChu.setBorder(null);
-        txtGhiChu.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtGhiChu.setEnabled(false);
-        txtGhiChu.setPreferredSize(new java.awt.Dimension(71, 30));
-
-        lblGhiChu.setFont(FontConstant.FONT_LABEL);
-        lblGhiChu.setText("Ghi chú:");
-
         javax.swing.GroupLayout pnlTTHDLayout = new javax.swing.GroupLayout(pnlTTHD);
         pnlTTHD.setLayout(pnlTTHDLayout);
         pnlTTHDLayout.setHorizontalGroup(
             pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTTHDLayout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblTenCTKM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTenNV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTenKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMaCTHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTongTT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblTenCTKM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenNV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMaCTHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTongTT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMaCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
@@ -184,8 +170,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                     .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGhiChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlTTHDLayout.setVerticalGroup(
@@ -215,10 +200,6 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -235,11 +216,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã quần áo", "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
+                "Mã quần áo", "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -260,6 +241,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             tblChiTietHD.getColumnModel().getColumn(3).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(4).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(5).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(6).setResizable(false);
         }
 
         btnInHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -309,8 +291,8 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitleCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlDSQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -386,7 +368,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_tblChiTietHDMouseClicked
 
     private void callFrameWinTraHang() {
-        WinTraHang frTH = new WinTraHang(this.getSelectedWinTraHang(), this);
+        WinTraHang frTH = new WinTraHang(this.getSelectedWinTraHang(), this, this.pnlHoaDon);
         frTH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTH.setResizable(false);
         frTH.setVisible(true);
@@ -414,7 +396,6 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInHoaDon;
-    private javax.swing.JLabel lblGhiChu;
     private javax.swing.JLabel lblMaCTHD;
     private javax.swing.JLabel lblNgayTao;
     private javax.swing.JLabel lblTenCTKM;
@@ -426,7 +407,6 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTTHD;
     private javax.swing.JScrollPane srcChiTietHD;
     private javax.swing.JTable tblChiTietHD;
-    private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtKH;
     private javax.swing.JTextField txtMaCTHD;
     private javax.swing.JTextField txtNV;
@@ -437,21 +417,18 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
     public void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
-        String gc = null;
         String hd = hoaDon.getMaHoaDon().toString();
-        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConstant.getConnection())).getAllCTQA(hd);
+        ArrayList<ChiTietHoaDon> dsCTHD = dao_ChiTietHoaDon.getAllCTQA(hd);
         DefaultTableModel modelCTHD = (DefaultTableModel) this.tblChiTietHD.getModel();
         modelCTHD.setRowCount(0);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             String maQA = cthd.getQuanAo().getMaQA();
             String tenQA = cthd.getQuanAo().getTenQA();
-            String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
+            String giaBan = NumberStandard.formatMoney(cthd.getGiaBan());
             int soLuong = cthd.getSoLuong();
-            double tinhThanhTien = cthd.getGiaBan() * soLuong;
-            String thanhTien = dfMoney.format(tinhThanhTien);
+            String thanhTien = NumberStandard.formatMoney(cthd.getGiaBan() * soLuong);
 
-            tinhTongThanhTien += tinhThanhTien;
+            tinhTongThanhTien += cthd.getGiaBan() * soLuong;
             
             String size = "";
             for (Map.Entry<String, String> item : dsSize.entrySet()) {
@@ -461,19 +438,23 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 }
             }
             
-            gc = cthd.getGhiChu();
+            String gc = cthd.getGhiChu();
             
-            Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien};
+            
+            Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien, gc};
             modelCTHD.addRow(data);
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
                 mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
-        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
-        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         txtTongTT.setText(tongThanhTien);
-        txtGhiChu.setText(gc);
+    }
+    
+    public double getGiaTien() {
+        return NumberStandard.parseMoney(txtTongTT.getText());
     }
 }

@@ -79,7 +79,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         try {
             String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
-                    + "                   LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
@@ -467,8 +467,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<HoaDon> getBatch(int start, int end) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
+
     public ArrayList<HoaDon> getHangNull() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -484,55 +483,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         }
         return dsSLKhachHang;
     }
-    
-    public ArrayList<HoaDon> getHangVang() {
-        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
-        try {
-            String sql = "select * from KhachHang WHERE HANG = N'Vàng'";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                HoaDon hoaDon = new HoaDon();
-                dsSLKhachHang.add(hoaDon);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsSLKhachHang;
-    }
-    
-    public ArrayList<HoaDon> getHangBachKim() {
-        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
-        try {
-            String sql = "select * from KhachHang WHERE HANG = N'Bạch Kim'";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                HoaDon hoaDon = new HoaDon();
-                dsSLKhachHang.add(hoaDon);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsSLKhachHang;
-    }
-    
-    public ArrayList<HoaDon> getHangKimCuong() {
-        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
-        try {
-            String sql = "select * from KhachHang WHERE HANG = N'Kim Cương'";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                HoaDon hoaDon = new HoaDon();
-                dsSLKhachHang.add(hoaDon);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsSLKhachHang;
-    }
-    
+
     public ArrayList<HoaDon> getHangDong() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -548,11 +499,59 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         }
         return dsSLKhachHang;
     }
-    
+
     public ArrayList<HoaDon> getHangBac() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
             String sql = "select * from KhachHang WHERE HANG = N'Bạc'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+
+    public ArrayList<HoaDon> getHangVang() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Vàng'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+
+    public ArrayList<HoaDon> getHangBachKim() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Bạch Kim'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+
+    public ArrayList<HoaDon> getHangKimCuong() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Kim Cương'";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

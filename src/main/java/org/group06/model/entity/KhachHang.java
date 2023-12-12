@@ -35,10 +35,6 @@ public class KhachHang {
         this.hang = hang;
     }
 
-    public KhachHang(String tenKH) {
-        this.tenKH = tenKH;
-    }
-
     public String getMaKhachHang() {
         return maKhachHang;
     }
@@ -85,6 +81,25 @@ public class KhachHang {
 
     public void setHang(String hang) {
         this.hang = hang;
+    }
+
+    public String tinhHangKhachHang() {
+        String result;
+        int temp = getDiemTichLuy();
+        if (temp < 100) {
+            result = "";
+        } else if (temp < 200) {
+            result = "Đồng";
+        } else if (temp < 300) {
+            result = "Bạc";
+        } else if (temp < 400) {
+            result = "Vàng";
+        } else if (temp < 500) {
+            result = "Bạch Kim";
+        } else {
+            result = "Kim Cương";
+        }
+        return result;
     }
 
     @Override

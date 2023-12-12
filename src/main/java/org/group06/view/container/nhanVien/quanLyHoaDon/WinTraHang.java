@@ -27,15 +27,18 @@ public class WinTraHang extends javax.swing.JFrame {
     private Connection connection = DatabaseConstant.getConnection();
     private ChiTietHoaDon cthd;
     private WinChiTietHoaDon winCTHD;
+    private PanelHoaDon pnlHoaDon;
     private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
     private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     /**
      * Creates new form CapNhatHoaDon
      */
-    public WinTraHang(ChiTietHoaDon cthd, WinChiTietHoaDon winCTHD) {
+    public WinTraHang(ChiTietHoaDon cthd, WinChiTietHoaDon winCTHD, PanelHoaDon pnlHoaDon) {
         this.cthd = cthd;
         this.winCTHD = winCTHD;
+        this.pnlHoaDon = pnlHoaDon;
         initComponents();
     }
 
@@ -310,12 +313,11 @@ public class WinTraHang extends javax.swing.JFrame {
         int temp = soLuongMua - soLuongTra;
         ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(cthd.getQuanAo(), temp, ghiChu);
         if (dao_ChiTietHoaDon.updateSoLuong(chiTietHoaDon)) {
-            if (temp == 0) {
-                if (dao_ChiTietHoaDon.deleteSoLuong(cthd.getQuanAo().getMaQA(), cthd.getHoaDon().getMaHoaDon())) {
-                }
-            }
+            dao_QuanAo.hoanTraQuanAo(cthd.getQuanAo().getMaQA(), soLuongTra);
             JOptionPane.showMessageDialog(this, "Trả hàng thành công");
             winCTHD.loadDataTable();
+            pnlHoaDon.updateGiaTien(winCTHD.getGiaTien());
+            
         }
     }
 

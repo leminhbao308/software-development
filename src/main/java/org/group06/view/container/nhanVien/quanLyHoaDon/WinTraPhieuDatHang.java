@@ -27,15 +27,18 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
     private Connection connection = DatabaseConstant.getConnection();
     private ChiTietPhieuDat ctpd;
     private WinChiTietDonDatHang winCTPD;
+    private PanelPhieuTam pnlPhieuTam;
     private DAO_ChiTietPhieuDat dao_ChiTietPhieuDat = new DAO_ChiTietPhieuDat(connection);
+    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
     private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     /**
      * Creates new form CapNhatHoaDon
      */
-    public WinTraPhieuDatHang(ChiTietPhieuDat ctpd, WinChiTietDonDatHang winCTPD) {
+    public WinTraPhieuDatHang(ChiTietPhieuDat ctpd, WinChiTietDonDatHang winCTPD, PanelPhieuTam pnlPhieuTam) {
         this.ctpd = ctpd;
         this.winCTPD = winCTPD;
+        this.pnlPhieuTam = pnlPhieuTam;
         initComponents();
     }
 
@@ -314,12 +317,10 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
         int temp = soLuongDat - soLuongTra;
         ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat(ctpd.getQuanAo(), temp, ghiChu);
         if (dao_ChiTietPhieuDat.updateSoLuong(chiTietPhieuDat)) {
-            if (temp == 0) {
-                if (dao_ChiTietPhieuDat.deleteSoLuong(ctpd.getQuanAo().getMaQA(), ctpd.getPhieuDat().getMaPhieuDat())) {
-                }
-            }
+            dao_QuanAo.hoanTraQuanAo(ctpd.getQuanAo().getMaQA(), soLuongTra);
             JOptionPane.showMessageDialog(this, "Trả hàng thành công");
             winCTPD.loadDataTable();
+            pnlPhieuTam.loadDataTable();
         }
     }
 
