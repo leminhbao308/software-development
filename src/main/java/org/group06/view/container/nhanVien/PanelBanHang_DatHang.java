@@ -72,6 +72,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         dsKhachHang = new DAO_KhachHang(connection).getAll();
         dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
         initComponents();
+        loadKichThuocQuanAo();
         loadAllTableQuanAo(qlQuanAo.getAll());
     }
 
@@ -79,15 +80,16 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         this.nhanVien = nhanVien;
         daoQuanAo = new DAO_QuanAo(connection);
         dsLoaiQuanAo = daoQuanAo.getAllLoaiQuanAo();
+        dsKichThuoc = daoQuanAo.getAllKichThuocQA();
         qlQuanAo = new Manager_QuanAo(connection);
         this.qlQuanAoMua = qlQuanAoMua;
         dsNhaCungCap = new DAO_NhaCungCap(connection).getAll();
         dsKhachHang = new DAO_KhachHang(connection).getAll();
         dsKhuyenMai = new DAO_KhuyenMai(connection).getAll();
         initComponents();
+        loadKichThuocQuanAo();
         loadAllTableQuanAo(qlQuanAo.getAll());
         loadAllTableMuaHang(this.qlQuanAoMua.getAll());
-        loadKichThuocQuanAo();
     }
 
     /**
@@ -1617,7 +1619,7 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         for (QuanAo quanAo : qlQuanAo.getAll()) {
             boolean matchTen = tenQuanAoTim.isEmpty() || quanAo.getTenQA().toLowerCase().contains(tenQuanAoTim);
             boolean matchLoai = loaiQuanAo.equals("Tất Cả") || dsLoaiQuanAo.get(quanAo.getLoaiQuanAo()).equalsIgnoreCase(loaiQuanAo);
-            boolean matchKichThuoc = kichCo.equals("Tất Cả") || quanAo.getMaKichThuoc().equalsIgnoreCase(kichCo);
+            boolean matchKichThuoc = kichCo.equals("") || quanAo.getMaKichThuoc().equalsIgnoreCase(kichCo);
             boolean matchNhaCungCap = nhaCungCap.equals("Tất Cả") || quanAo.getNhaCungCap().getTenNCC().toLowerCase().contains(nhaCungCap.toLowerCase());
 
             if (matchTen && matchLoai && matchKichThuoc && matchNhaCungCap) {
