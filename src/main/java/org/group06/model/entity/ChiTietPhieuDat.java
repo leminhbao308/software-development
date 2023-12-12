@@ -6,6 +6,7 @@ public class ChiTietPhieuDat {
     private int soLuong;
     private double giaBan;
     private double loiNhuan;
+    private String ghiChu;
 
     public ChiTietPhieuDat() {
         this.phieuDat = new PhieuDat();
@@ -13,14 +14,14 @@ public class ChiTietPhieuDat {
         this.soLuong = 0;
         this.giaBan = 0;
         this.loiNhuan = 0;
+        this.ghiChu = null;
     }
 
-//    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan) {
-//        this.setPhieuDat(phieuDat);
-//        this.setQuanAo(quanAo);
-//        this.setSoLuong(soLuong);
-//        this.setGiaBan(giaBan);
-//    }
+    public ChiTietPhieuDat(QuanAo quanAo, int soLuong, String ghiChu) {
+        this.setQuanAo(quanAo);
+        this.setSoLuong(soLuong);
+        this.setGhiChu(ghiChu);
+    }
 
     public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, double giaBan, double loiNhuan) {
         this.setPhieuDat(phieuDat);
@@ -69,6 +70,14 @@ public class ChiTietPhieuDat {
     public void setLoiNhuan(double loiNhuan) {
         this.loiNhuan = loiNhuan;
     }
+    
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
 
     @Override
     public String toString() {
@@ -78,6 +87,7 @@ public class ChiTietPhieuDat {
                 ", soLuong=" + soLuong +
                 ", giaBan=" + giaBan +
                 ", loiNhuan=" + loiNhuan +
+                ", ghiChu=" + ghiChu +
                 '}';
     }
 }

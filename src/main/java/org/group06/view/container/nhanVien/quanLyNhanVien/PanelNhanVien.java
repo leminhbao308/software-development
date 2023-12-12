@@ -312,8 +312,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
                     ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
@@ -362,13 +362,13 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
         String maNV = txtTimTheoMa.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
                     NhanVien nhanVien = dao_NhanVien.getByID(maNV);
-                    DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
-                    modelKH.setRowCount(0);
+                    DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+                    modelNV.setRowCount(0);
                     if (nhanVien.isGioiTinh()) {
                         gt = "Nam";
                     }
@@ -377,7 +377,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     }
                     Object[] data = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getMatKhau(), gt,
                         nhanVien.getCccd(), nhanVien.getDiaChi(), nhanVien.getSoDienThoai(), trangThai, nhanVien.getChucVu()};
-                    modelKH.addRow(data);
+                    modelNV.addRow(data);
                     txtTimTheoTen.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy, vui lòng nhập lại");
