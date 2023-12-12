@@ -40,7 +40,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 3);
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 4);
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 5);
-
     }
 
     public void setStatusAllBtnsStart() {
@@ -608,6 +607,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã cập nhật thành công chương trình khuyến mãi " + this.ctkmCapNhat.getTenCTKM());
 //                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã cập nhật
+                        xuLyGuiEmailKhachHang(tenCTKM,ngayBatDauCTKM, ngayKetThucCTKM, soLuotSDCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM));
                     }
 //                    Đổ dữ liệu vừa cập nhật xuống table
                     this.tblKhuyenMai.getModel().setValueAt(tenCTKM, viTri, 1);
@@ -641,23 +641,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     if (this.themMoiCTKM.add(ctkm)) {
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
 //                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã thêm mới
-
-                        EmailCreator.sendEmail("leminhbao.iuh@gmail.com", "Test Send Email With JavaEMail Package", "Xin Chào Bạn Tôi Là Am Fashion Store!");
-                        // Lấy ngày hiện tại
-                        LocalDate currentDate = LocalDate.now();
-                        // Ngày bắt đầu chương trình khuyến mãi
-                        LocalDate startDate = ngayBatDauCTKM.toLocalDate();
-                        // Tính khoảng cách giữa ngày bắt đầu và ngày hiện tại
-                        long daysUntilStart = ChronoUnit.DAYS.between(currentDate, startDate);
-                        if (startDate.isAfter(currentDate)) {
-                            if (daysUntilStart == 1) {
-                                System.out.println("Chương trình khuyến mãi bắt đầu ngày mai!");
-                            } else {
-                                System.out.println("Chưa đến ngày bắt đầu chương trình khuyến mãi.");
-                            }
-                        }
+                        xuLyGuiEmailKhachHang(tenCTKM,ngayBatDauCTKM, ngayKetThucCTKM, soLuotSDCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM));
                     }
-
                 }
                 setStatusAllBtnsStart();
                 ComponentStatus.emptyField(this.txtMa);
@@ -676,6 +661,28 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void xuLyGuiEmailKhachHang(String tenCTKM, java.sql.Date ngayBatDauCTKM, java.sql.Date ngayKetThucCTKM, int soLuotSDCTKM, String mucGiamGia) {
+//        Lấy ngày hiện tại
+        LocalDate currentDate = LocalDate.now();
+//        Ngày bắt đầu chương trình khuyến mãi
+        LocalDate startDate = ngayBatDauCTKM.toLocalDate();
+        if (startDate.isAfter(currentDate) || startDate.isEqual(currentDate)) {
+            for (KhachHang kh : dsKhachHang) {
+                new Thread(() -> {
+                    if (kh.getEmail() != null) {
+                        EmailCreator.sendEmail(kh.getEmail(), tenCTKM, "Thân gửi quý khách hàng thân mến. \n\nCửa hàng chúng tôi cập nhật chương trình khuyến mãi bắt đầu vào ngày: "
+                                + DateStandard.formatDate(ngayBatDauCTKM) +
+                                " kết thúc chương trình vào ngày: " + 
+                                DateStandard.formatDate(ngayKetThucCTKM) + 
+                                "\nVới tổng số lượt áp dụng lên đến " + soLuotSDCTKM + " lượt sử dụng. \nVà mức giảm giá: " + mucGiamGia +
+                                ". Nhằm đưa đến quý khách hàng các sản phẩm chất lượng nhất cùng với giá thành vô cùng ưu đãi.\n"
+                                + " Xin cảm ơn quý khách đã theo dõi chương trình khuyến mãi của cửa hàng AM chúng tôi. Hẹn gặp lại quý khách tại của hàng.");
+                    }
+                }).start();
+            }
+        }
+    }
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Bạn chắn chắn cập nhật?", "Xác nhận hành động", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
@@ -783,10 +790,10 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_dchNgayKetThucPropertyChange
 
     private void dongBoKhoangThoiGian() {
-            dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
-            dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
+        dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
+        dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
     }
-    
+
     private void loadAllTableKhuyenMai(ArrayList<KhuyenMai> dsCTKM) {
         DefaultTableModel modelKhuyenMai = (DefaultTableModel) this.tblKhuyenMai.getModel();
         modelKhuyenMai.setRowCount(0);
