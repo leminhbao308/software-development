@@ -11,8 +11,8 @@ import org.group06.utils.PdfCreator;
 import org.group06.view.components.search.Data;
 import org.group06.view.components.search.SearchClickEvent;
 import org.group06.view.components.textFields.PlaceholderTextField;
-import org.group06.view.container.khachHang.WinThemKH;
 import org.group06.view.container.khachHang.PanelKhachHang;
+import org.group06.view.container.khachHang.WinThemKH;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -36,8 +36,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Le Minh Bao
@@ -1175,12 +1173,20 @@ public class PanelBanHang_DatHang extends javax.swing.JPanel {
         DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
         int selection = JOptionPane.showConfirmDialog(this, "Bạn có muốn hoàn tất đơn hàng không?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {
+            double tongThanhTien = 0.0f;
+            DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
             if (dao_HoaDon.add(hoaDonBanHang)) {
-                DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
                 for (QuanAo quanAo : dsQuanAoMua) {
-                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, quanAo, quanAo.getSoLuong(), tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan()), quanAo.getLoiNhuan());
+                    double giaBan = tinhGiaBan(quanAo.getGiaNhap(), quanAo.getLoiNhuan());
+                    tongThanhTien += giaBan * quanAo.getSoLuong();
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDonBanHang, quanAo, quanAo.getSoLuong(), giaBan, quanAo.getLoiNhuan());
                     dao_ChiTietHoaDon.add(cthd);
                     daoQuanAo.updateSoLuongQuanAo(qlQuanAo.getByID(quanAo.getMaQA()));
+                }
+                if (khachHang != null) {
+                    khachHang.setDiemTichLuy(khachHang.getDiemTichLuy() + (int) (tongThanhTien / 100000));
+                    khachHang.setHang(khachHang.tinhHangKhachHang());
+                    new DAO_KhachHang(connection).capNhatDiemTichLuyVaHang(khachHang.getMaKhachHang(), khachHang.getHang(), khachHang.getDiemTichLuy());
                 }
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 reloadAll();
