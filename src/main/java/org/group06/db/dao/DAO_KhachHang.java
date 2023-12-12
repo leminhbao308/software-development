@@ -98,6 +98,21 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         }
     }
     
+    public boolean capNhatDiemTichLuyVaHang(String maKH, String hang, double diemTichLuy) {
+        try {
+            String sql = "UPDATE KhachHang SET DIEMTICHLUY = DIEMTICHLUY + ?, HANG = ? WHERE MAKH = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDouble(1, diemTichLuy);
+            statement.setString(2, hang);
+            statement.setString(3, maKH);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public KhachHang getByMAKH(String maKH) {
         KhachHang khachHang = null;
         String sql = "SELECT * FROM KhachHang WHERE MAKH = ?";

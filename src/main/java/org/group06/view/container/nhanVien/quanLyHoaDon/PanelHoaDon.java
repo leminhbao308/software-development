@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import org.group06.utils.NumberStandard;
 
 public class PanelHoaDon extends javax.swing.JPanel {
 
@@ -39,9 +40,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
         initComponents();
         dchTimTheoNgay.setLocale(new Locale("vi", "VN"));
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblHoaDon,0);
-        FormatCellRenderer.formatCellRendererCenter(tblHoaDon,1);
-        FormatCellRenderer.formatCellRendererRight(tblHoaDon,4);
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon, 1);
+        FormatCellRenderer.formatCellRendererRight(tblHoaDon, 4);
     }
 
     /**
@@ -210,39 +211,39 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
         String tenKH = txtTimTheoTenKH.getText();
-            if (!tenKH.equals("")) {
-                if (checkRegexTenKH()) {
-                    DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
-                    modelKH.setRowCount(0);
-                    ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
-                            .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
-                            .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-                    ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
-                            .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        if (!tenKH.equals("")) {
+            if (checkRegexTenKH()) {
+                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+                modelKH.setRowCount(0);
+                ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
+                        .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
+                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
+                        .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
-                    if (tenKH.contains("Khách vãng lai") || tenKH.contains("KVL") || tenKH.contains("kvl") || tenKH.contains("khách vãng lai")) {
-                        for (HoaDon hd : dsHoaDonKhachVangLai) {
-                            String ttt = loadTongThanhTien(hd.getMaHoaDon());
-                            String date = DateStandard.formatDate(hd.getNgayTao());
-                            Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
-                            modelKH.addRow(data);
-                        }
-                    } else {
-                        for (HoaDon hd : dsHoaDonTheoTenKH) {
-                            String ttt = loadTongThanhTien(hd.getMaHoaDon());
-                            String date = DateStandard.formatDate(hd.getNgayTao());
-                            Object[] data = {hd.getMaHoaDon(), date, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
-                            modelKH.addRow(data);
-                        }
+                if (tenKH.contains("Khách vãng lai") || tenKH.contains("KVL") || tenKH.contains("kvl") || tenKH.contains("khách vãng lai")) {
+                    for (HoaDon hd : dsHoaDonKhachVangLai) {
+                        String ttt = loadTongThanhTien(hd.getMaHoaDon());
+                        String date = DateStandard.formatDate(hd.getNgayTao());
+                        Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
+                        modelKH.addRow(data);
                     }
-                    dchTimTheoNgay.setDate(null);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
-                    loadDataTable(dsHD);
+                    for (HoaDon hd : dsHoaDonTheoTenKH) {
+                        String ttt = loadTongThanhTien(hd.getMaHoaDon());
+                        String date = DateStandard.formatDate(hd.getNgayTao());
+                        Object[] data = {hd.getMaHoaDon(), date, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
+                        modelKH.addRow(data);
+                    }
                 }
+                dchTimTheoNgay.setDate(null);
             } else {
+                JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
                 loadDataTable(dsHD);
             }
+        } else {
+            loadDataTable(dsHD);
+        }
     }//GEN-LAST:event_txtTimTheoTenKHKeyReleased
 
     private boolean checkRegexTenKH() {
@@ -266,7 +267,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
         frCTHD.setResizable(false);
         frCTHD.setVisible(true);
     }
-    
+
     private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
         if (evt.getPropertyName().equals("date")) {
             Date date = (Date) evt.getNewValue();
@@ -378,7 +379,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     public void loadDataTable() {
         DefaultTableModel modelHD = (DefaultTableModel) tblHoaDon.getModel();
-
+        modelHD.setRowCount(0);
         Timer timer = new Timer(300, new ActionListener() {
             private int currentIndex = 0;
             private final int batchSize = 10;
@@ -406,6 +407,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                                         String tenNV = hd.getNhanVien().getTenNV();
                                         String khuyenMai = (hd.getKhuyenMai() == null) ? "" : hd.getKhuyenMai().getTenCTKM();
                                         String ttt = loadTongThanhTien(hd.getMaHoaDon());
+
                                         Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, ttt, khuyenMai};
                                         // Cập nhật bảng
                                         modelHD.addRow(data);
@@ -434,11 +436,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
         timer.start();
     }
 
-
     public String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
             if (cthd.getHoaDon().getKhuyenMai() != null) {
@@ -447,7 +447,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
         double tongTienSauVAT = tinhTongThanhTien * 1.08;
         double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         return tongThanhTien;
+    }
+
+    public void updateGiaTien(double giaTien) {
+        tblHoaDon.setValueAt(NumberStandard.formatMoney(giaTien), tblHoaDon.getSelectedRow(), 4);
     }
 }

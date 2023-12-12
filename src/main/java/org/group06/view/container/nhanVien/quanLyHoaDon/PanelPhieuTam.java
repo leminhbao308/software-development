@@ -28,6 +28,7 @@ import org.group06.model.entity.KhachHang;
 
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NameStandard;
+import org.group06.utils.NumberStandard;
 
 /**
  * @author Le Minh Bao
@@ -538,6 +539,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String tenKH = (pd.getKhachHang() == null) ? "Khách vãng lai" : pd.getKhachHang().getTenKH();
             String tenNV = pd.getNhanVien().getTenNV();
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            if(NumberStandard.parseMoney(ttt) == 0) {
+                continue;
+            }
             String khuyenMai = (pd.getKhuyenMai() == null) ? "" : pd.getKhuyenMai().getTenCTKM();
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
 
@@ -569,19 +573,16 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private String loadTongThanhTien(String pd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
-            double tinhThanhTien = ctpd.getGiaBan();
-            tinhTongThanhTien += tinhThanhTien;
-
+            tinhTongThanhTien += ctpd.getGiaBan() * ctpd.getSoLuong();
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {
                 mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
 
-        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
-        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         return tongThanhTien;
     }
 
