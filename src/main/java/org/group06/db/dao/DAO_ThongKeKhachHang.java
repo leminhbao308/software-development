@@ -77,12 +77,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi() {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(CHD.GIABAN, 0)) AS TongChiTieu\n"
-                    + "FROM HoaDon HD\n"
-                    + "LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
-                    + "LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
-                    + "ORDER BY TongChiTieu DESC";
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+                    + "                    FROM HoaDon HD\n"
+                    + "                   LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
+                    + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -159,13 +159,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(CHD.GIABAN, 0)) AS TongChiTieu\n"
-                    + "FROM HoaDon HD\n"
-                    + "LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
-                    + "LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "AND NGAYTAO = ? \n"
-                    + "GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
-                    + "ORDER BY TongChiTieu DESC";
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+                    + "                    FROM HoaDon HD\n"
+                    + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "			   AND NGAYTAO = ?\n"
+                    + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
+                    + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet resultSet = statement.executeQuery();
@@ -245,13 +245,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG, SUM(ISNULL(CHD.GIABAN, 0)) AS TongChiTieu\n"
-                    + "FROM HoaDon HD\n"
-                    + "LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
-                    + "LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ? \n"
-                    + "GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
-                    + "ORDER BY TongChiTieu DESC";
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+                    + "                    FROM HoaDon HD\n"
+                    + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "			   AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
+                    + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
             statement.setInt(2, year);
@@ -329,13 +329,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG, SUM(ISNULL(CHD.GIABAN, 0)) AS TongChiTieu\n"
-                    + "FROM HoaDon HD\n"
-                    + "LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
-                    + "LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "AND DATEPART(YEAR, NGAYTAO) = ? \n"
-                    + "GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
-                    + "ORDER BY TongChiTieu DESC";
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+                    + "                    FROM HoaDon HD\n"
+                    + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "			   AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
+                    + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, year);
             ResultSet resultSet = statement.executeQuery();
@@ -415,13 +415,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG, SUM(ISNULL(CHD.GIABAN, 0)) AS TongChiTieu\n"
-                    + "FROM HoaDon HD\n"
-                    + "LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
-                    + "LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "AND NGAYTAO BETWEEN ? AND ? \n"
-                    + "GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
-                    + "ORDER BY TongChiTieu DESC";
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+                    + "                    FROM HoaDon HD\n"
+                    + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
+                    + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "		           AND NGAYTAO BETWEEN ? AND ?\n"
+                    + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
+                    + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date1);
             statement.setString(2, date2);
@@ -466,5 +466,102 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     @Override
     public ArrayList<HoaDon> getBatch(int start, int end) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
+    public ArrayList<HoaDon> getHangNull() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = ''";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+    
+    public ArrayList<HoaDon> getHangVang() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Vàng'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+    
+    public ArrayList<HoaDon> getHangBachKim() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Bạch Kim'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+    
+    public ArrayList<HoaDon> getHangKimCuong() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Kim Cương'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+    
+    public ArrayList<HoaDon> getHangDong() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Đồng'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
+    }
+    
+    public ArrayList<HoaDon> getHangBac() {
+        ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
+        try {
+            String sql = "select * from KhachHang WHERE HANG = N'Bạc'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                HoaDon hoaDon = new HoaDon();
+                dsSLKhachHang.add(hoaDon);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsSLKhachHang;
     }
 }
