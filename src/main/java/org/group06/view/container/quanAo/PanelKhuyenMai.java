@@ -1,7 +1,9 @@
 package org.group06.view.container.quanAo;
 
 import org.group06.db.DatabaseConstant;
+import org.group06.db.dao.DAO_KhachHang;
 import org.group06.db.dao.DAO_KhuyenMai;
+import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.*;
 
@@ -9,7 +11,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,9 +18,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Pattern;
-import org.group06.db.dao.DAO_KhachHang;
-import org.group06.model.entity.KhachHang;
 
 /**
  * @author lehoangnam
@@ -280,12 +278,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         lblNgayKetThuc.setText("Ngày Kết Thúc:");
 
         dchNgayBatDau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
         dchNgayBatDau.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchNgayBatDau.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchNgayBatDauMouseClicked(evt);
-            }
-        });
         dchNgayBatDau.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dchNgayBatDauPropertyChange(evt);
@@ -293,12 +287,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         });
 
         dchNgayKetThuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
         dchNgayKetThuc.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchNgayKetThuc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchNgayKetThucMouseClicked(evt);
-            }
-        });
         dchNgayKetThuc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dchNgayKetThucPropertyChange(evt);
@@ -757,10 +747,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblKhuyenMaiMouseClicked
 
-    private void dchNgayBatDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayBatDauMouseClicked
-
-    }//GEN-LAST:event_dchNgayBatDauMouseClicked
-
     private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
         if (evt.getPropertyName().equals("date")) {
             if (this.statusClickCheckDate == false) {
@@ -774,12 +760,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 }
             }
         }
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchNgayBatDauPropertyChange
-
-
-    private void dchNgayKetThucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayKetThucMouseClicked
-
-    }//GEN-LAST:event_dchNgayKetThucMouseClicked
 
     private void dchNgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayKetThucPropertyChange
         if (evt.getPropertyName().equals("date")) {
@@ -797,8 +779,14 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 }
             }
         }
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchNgayKetThucPropertyChange
 
+    private void dongBoKhoangThoiGian() {
+            dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
+            dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
+    }
+    
     private void loadAllTableKhuyenMai(ArrayList<KhuyenMai> dsCTKM) {
         DefaultTableModel modelKhuyenMai = (DefaultTableModel) this.tblKhuyenMai.getModel();
         modelKhuyenMai.setRowCount(0);
