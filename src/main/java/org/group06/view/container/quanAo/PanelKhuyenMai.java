@@ -14,7 +14,6 @@ import java.text.NumberFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -590,7 +589,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     viTri = this.tblKhuyenMai.getSelectedRow();
                     String maCTKM = this.txtMa.getText().trim();
                     String tenCTKM = this.txtTenCTKM.getText().trim();
-                    Double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
+                    double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
                     int soLuotSDCTKM = Integer.parseInt(this.txtSoLuotSuDung.getText().trim());
                     java.sql.Date ngayBatDauCTKM = new java.sql.Date(this.dchNgayBatDau.getDate().getTime());
                     java.sql.Date ngayKetThucCTKM = new java.sql.Date(this.dchNgayKetThuc.getDate().getTime());
@@ -620,7 +619,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 //                    Lấy giá trị của fields
                     String maCTKM = this.txtMa.getText().trim();
                     String tenCTKM = this.txtTenCTKM.getText().trim();
-                    Double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
+                    double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
                     int soLuotSDCTKM = Integer.parseInt(this.txtSoLuotSuDung.getText().trim());
                     java.sql.Date ngayBatDauCTKM = new java.sql.Date(this.dchNgayBatDau.getDate().getTime());
                     java.sql.Date ngayKetThucCTKM = new java.sql.Date(this.dchNgayKetThuc.getDate().getTime());
@@ -632,6 +631,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     ctkm.setSoLuotSuDung(soLuotSDCTKM);
                     ctkm.setNgayBatDau(ngayBatDauCTKM);
                     ctkm.setNgayKetThuc(ngayKetThucCTKM);
+                    dsKhuyenMai.add(ctkm);
 //                    Load xuống table
                     Object[] data = {maCTKM, tenCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM), soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblKhuyenMai.getModel();
