@@ -653,8 +653,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 this.txtTenCTKM.setEnabled(false);
                 this.txtMucGiamGia.setEnabled(false);
                 this.txtSoLuotSuDung.setEnabled(false);
-                this.dchNgayBatDau.setEnabled(true);
-                this.dchNgayKetThuc.setEnabled(true);
+                this.dchNgayBatDau.setEnabled(false);
+                this.dchNgayKetThuc.setEnabled(false);
                 this.tblKhuyenMai.clearSelection();
                 this.statusBtnCapNhat = false;
                 this.statusBtnThemMoi = false;
