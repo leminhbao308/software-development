@@ -35,10 +35,6 @@ public class KhachHang {
         this.hang = hang;
     }
 
-    public KhachHang(String tenKH) {
-        this.tenKH = tenKH;
-    }
-
     public String getMaKhachHang() {
         return maKhachHang;
     }

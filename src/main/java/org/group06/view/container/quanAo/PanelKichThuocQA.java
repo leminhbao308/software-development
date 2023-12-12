@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.group06.utils.FormatCellRenderer;
 
 /**
  * @author lehoangnam
@@ -24,6 +25,8 @@ public class PanelKichThuocQA extends javax.swing.JPanel {
     public PanelKichThuocQA() {
         initComponents();
         loadDataTable();
+        FormatCellRenderer.formatCellRendererCenter(tblKichThuocQA, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblKichThuocQA, 1);
         setStatusAllBtnsStart();
     }
 
