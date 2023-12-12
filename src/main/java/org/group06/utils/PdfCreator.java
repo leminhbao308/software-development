@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PDF_Creator {
+public class PdfCreator {
 
     /**
      * Tạo pdf hoá đơn bán hàng
