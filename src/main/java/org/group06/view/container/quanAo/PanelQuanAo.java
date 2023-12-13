@@ -1555,7 +1555,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
             @Override
             public String getDescription() {
-                return "QuanAo";
+                return "FileExcel";
             }
         });
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
