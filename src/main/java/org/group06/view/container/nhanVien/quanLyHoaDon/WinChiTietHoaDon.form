@@ -28,15 +28,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pnlDSQA" alignment="1" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="pnlTTHD" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="lblTitleCTHD" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblTitleCTHD" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +79,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtMaCTHD" pref="553" max="32767" attributes="0"/>
+                      <Component id="txtMaCTHD" max="32767" attributes="0"/>
                       <Component id="txtTenCTKM" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtTongTT" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtNV" alignment="0" max="32767" attributes="0"/>
@@ -330,7 +328,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="srcChiTietHD" alignment="1" max="32767" attributes="0"/>
+              <Component id="srcChiTietHD" alignment="1" pref="1040" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnInHoaDon" min="-2" pref="192" max="-2" attributes="0"/>
