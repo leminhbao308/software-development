@@ -1,5 +1,7 @@
 package org.group06.model.entity;
 
+import org.group06.utils.ImagePath;
+
 /**
  * @author Le Hoang Nam
  */
