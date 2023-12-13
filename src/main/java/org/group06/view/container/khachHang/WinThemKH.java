@@ -220,32 +220,39 @@ public class WinThemKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if (btnLuu.getText().equals("Lưu")) {
-            if (txtSDT.getText().equals("") || txtTenKH.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
-            } else if (!checkRegexTenKH()) {
-                JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
-                txtTenKH.requestFocus();
-            } else if (!checkRegexSDT()) {
-                JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
-                txtSDT.requestFocus();
-            } else if (!txtEmail.getText().equals("")) {
-                if (!checkRegexEmail()) {
-                    JOptionPane.showMessageDialog(this, "Nhập lại Email");
-                    txtEmail.requestFocus();
-                }
-            } else {
-                String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
-                KhachHang khachHang = dao_KhachHang.getByID(sdt);
-                if (khachHang != null) {
-                    JOptionPane.showMessageDialog(this, "Số điện thoại đã tồn tại");
-                    txtSDT.requestFocus();
-                } else {
-                    themKH(sdt);
-                    this.dispose();
-                }
+        if (txtSDT.getText().equals("") || txtTenKH.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Thông tin không được để trống");
+            return;
+        }
+        if (!checkRegexTenKH()) {
+            JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng");
+            txtTenKH.requestFocus();
+            return;
+        }
+        if (!checkRegexSDT()) {
+            JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại");
+            txtSDT.requestFocus();
+            return;
+        }
+        if (!txtEmail.getText().equals("")) {
+            if (!checkRegexEmail()) {
+                JOptionPane.showMessageDialog(this, "Nhập lại Email");
+                txtEmail.requestFocus();
+                return;
             }
         }
+
+        String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
+        KhachHang khachHang = dao_KhachHang.getByID(sdt);
+        if (khachHang != null) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại đã tồn tại");
+            txtSDT.requestFocus();
+        } else {
+            themKH(sdt);
+
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void themKH(String sdt) {
@@ -253,13 +260,14 @@ public class WinThemKH extends javax.swing.JFrame {
         String tenKH = checkKiTu(txtTenKH.getText());
         String email = txtEmail.getText();
         KhachHang kh = new KhachHang(maKH, tenKH, sdt, email, 0, null);
-        dao_KhachHang.add(kh);
-        JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
-        pnlKhachHang.loadDataTable();
+        if (dao_KhachHang.add(kh)) {
+            JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+            pnlKhachHang.addRow(kh);
+        }
     }
 
     /**
-     * 
+     *
      * @param text
      * @return in hoa kí tự đầu tiên của mỗi từ
      */

@@ -214,6 +214,36 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         return success;
     }
 
+    public boolean updateSoLuongQuanAo(String maQA, int soluong, boolean increase) {
+        if (increase) {
+            String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG + ? WHERE MAQA = ?";
+            boolean success = false;
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setInt(1, soluong);
+                preparedStatement.setString(2, maQA);
+                success = preparedStatement.executeUpdate() > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return success;
+        } else {
+            String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG - ? WHERE MAQA = ?";
+            boolean success = false;
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setInt(1, soluong);
+                preparedStatement.setString(2, maQA);
+                success = preparedStatement.executeUpdate() > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return success;
+        }
+    }
+
     public boolean hoanTraQuanAo(String maQA, int soLuong) {
         String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG + ? WHERE MAQA = ?";
         boolean success = false;
