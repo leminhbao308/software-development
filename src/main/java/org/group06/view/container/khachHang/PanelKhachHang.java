@@ -4,6 +4,8 @@
  */
 package org.group06.view.container.khachHang;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_HoaDon;
@@ -22,6 +24,9 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import org.group06.utils.DateStandard;
 //import org.group06.view.components.*;
 
 /**
@@ -35,6 +40,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private DAO_ChiTietHoaDon dao_CTHD = new DAO_ChiTietHoaDon(connection);
     private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
     public int soMaKH = 0;
+    private ArrayList<KhachHang> dsKH = new ArrayList<>();
 
     /**
      * Creates new form PanelKhachHang
@@ -364,40 +370,93 @@ public class PanelKhachHang extends javax.swing.JPanel {
         }
     }
 
-    public void loadDataTable() {
-        ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
-        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
-        modelKH.setRowCount(0);
-        for (KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), kh.tinhHangKhachHang()};
-            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
-            kh.setHang(kh.tinhHangKhachHang());
-            dao_KhachHang.update(kh);
-            modelKH.addRow(data);
-        }
-    }
+//    public void loadDataTable() {
+//        ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
+//        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+//        modelKH.setRowCount(0);
+//        for (KhachHang kh : dsKH) {
+//            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), kh.tinhHangKhachHang()};
+//            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
+//            kh.setHang(kh.tinhHangKhachHang());
+//            dao_KhachHang.update(kh);
+//            modelKH.addRow(data);
+//        }
+//    }
+//    private int getDiem(String maKH) {
+//        double tinhTongThanhTien = 0, mucGiamGia = 0;
+//        ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
+//        for (HoaDon hd : dsHD) {
+//            if (hd.getKhachHang() != null) {
+//                if (hd.getKhachHang().getMaKhachHang().equals(maKH)) {
+//                    ArrayList<ChiTietHoaDon> dsCTHD = dao_CTHD.getAllCTQA(hd.getMaHoaDon());
+//                    for (ChiTietHoaDon cthd : dsCTHD) {
+//                        tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
+//                        if (cthd.getHoaDon().getKhuyenMai() != null) {
+//                            mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+//        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+//        DecimalFormat df = new DecimalFormat("##,###");
+//        String temp = df.format(ttt);
+//        int x = NumberStandard.parseInt(temp) / 100000;
+//        return x;
+//    }
 
-    private int getDiem(String maKH) {
-        double tinhTongThanhTien = 0, mucGiamGia = 0;
-        ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
-        for (HoaDon hd : dsHD) {
-            if (hd.getKhachHang() != null) {
-                if (hd.getKhachHang().getMaKhachHang().equals(maKH)) {
-                    ArrayList<ChiTietHoaDon> dsCTHD = dao_CTHD.getAllCTQA(hd.getMaHoaDon());
-                    for (ChiTietHoaDon cthd : dsCTHD) {
-                        tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
-                        if (cthd.getHoaDon().getKhuyenMai() != null) {
-                            mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
+    public void loadDataTable() {
+        DefaultTableModel modelKH = (DefaultTableModel) tblKhachHang.getModel();
+        modelKH.setRowCount(0);
+        Timer timer = new Timer(300, new ActionListener() {
+            private int currentIndex = 0;
+            private final int batchSize = 10;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingWorker<List<KhachHang>, Void> worker = new SwingWorker<List<KhachHang>, Void>() {
+                    @Override
+                    protected List<KhachHang> doInBackground() {
+                        // Thực hiện tải dữ liệu từ currentIndex với kích thước batchSize
+                        return dao_KhachHang.getBatch(currentIndex, batchSize);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            List<KhachHang> khachHangs = get();
+                            if (khachHangs != null && !khachHangs.isEmpty()) {
+                                // Sử dụng synchronized để đảm bảo đồng bộ hóa
+                                synchronized (modelKH) {
+                                    for (KhachHang kh : khachHangs) {
+                                        dsKH.add(kh);
+                                        kh.setHang(kh.tinhHangKhachHang());
+                                        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
+                                        dao_KhachHang.update(kh);
+                                        modelKH.addRow(data);
+                                    }
+                                    currentIndex += batchSize;
+                                }
+                                // Kiểm tra xem timer có đang chạy hay không
+                                if (!((Timer) e.getSource()).isRunning()) {
+                                    ((Timer) e.getSource()).stop();
+                                }
+                            } else {
+                                // Dừng timer nếu không còn dữ liệu
+                                ((Timer) e.getSource()).stop();
+                            }
+                        } catch (InterruptedException | ExecutionException ex) {
+                            throw new RuntimeException(ex);
                         }
                     }
-                }
+                };
+
+                // Thực hiện công việc tải dữ liệu trong luồng nền
+                worker.execute();
             }
-        }
-        double tongTienSauVAT = tinhTongThanhTien * 1.08;
-        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
-        DecimalFormat df = new DecimalFormat("##,###");
-        String temp = df.format(ttt);
-        int x = NumberStandard.parseInt(temp) / 100000;
-        return x;
+        }); // set delay 0.3s
+
+        timer.start();
     }
 }

@@ -77,10 +77,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi() {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(KM.MUCGIAGIAM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
                     + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
+                    + "                    LEFT JOIN KhuyenMai KM ON HD.MAKM = KM.MAKM\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -159,11 +160,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(KM.MUCGIAGIAM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
                     + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "			   AND NGAYTAO = ?\n"
+                    + "                    LEFT JOIN KhuyenMai KM ON HD.MAKM = KM.MAKM\n"
+                    + "			   WHERE NGAYTAO = ?\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -245,11 +247,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(KM.MUCGIAGIAM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
                     + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "			   AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "                    LEFT JOIN KhuyenMai KM ON HD.MAKM = KM.MAKM\n"
+                    + "			   WHERE DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ?\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -329,11 +332,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(KM.MUCGIAGIAM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
                     + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "			   AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "                    LEFT JOIN KhuyenMai KM ON HD.MAKM = KM.MAKM\n"
+                    + "			   WHERE DATEPART(YEAR, NGAYTAO) = ?\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -415,11 +419,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
-            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(HD.MAKM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
+            String sql = "SELECT ISNULL(KH.TENKH, 'Khách vãng lai') AS TENKH,ISNULL(SDT, ' ') AS SDT, DIEMTICHLUY, HANG,SUM(ISNULL(KM.MUCGIAGIAM/100,1)*(CHD.GIABAN*CHD.SOLUONG*1.08)) AS TongChiTieu\n"
                     + "                    FROM HoaDon HD\n"
                     + "                    LEFT JOIN KhachHang KH ON HD.MAKH = KH.MAKH\n"
                     + "                    LEFT JOIN ChiTietHoaDon CHD ON HD.MAHD = CHD.MAHD\n"
-                    + "		           AND NGAYTAO BETWEEN ? AND ?\n"
+                    + "                    LEFT JOIN KhuyenMai KM ON HD.MAKM = KM.MAKM\n"
+                    + "		           WHERE NGAYTAO BETWEEN ? AND ?\n"
                     + "                    GROUP BY KH.TENKH,SDT,DIEMTICHLUY,HANG\n"
                     + "                    ORDER BY TongChiTieu DESC";
             PreparedStatement statement = connection.prepareStatement(sql);

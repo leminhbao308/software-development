@@ -590,12 +590,21 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
     private void dchTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTuNgayPropertyChange
         tinhTheoKhoangTGian();
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchTuNgayPropertyChange
 
     private void dchDenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchDenNgayPropertyChange
         tinhTheoKhoangTGian();
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchDenNgayPropertyChange
 
+    private void dongBoKhoangThoiGian() {
+        if (tabLuaChonThongKe.getSelectedIndex() == 3) {
+            dchTuNgay.setMaxSelectableDate(dchDenNgay.getDate());
+            dchDenNgay.setMinSelectableDate(dchTuNgay.getDate());
+        }
+    }
+    
     /**
      * Tính theo tất cả khoảng thời gian
      */
