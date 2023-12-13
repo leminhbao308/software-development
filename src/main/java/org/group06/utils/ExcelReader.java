@@ -29,7 +29,6 @@ public class ExcelReader {
     public static final int COLUMN_INDEX_MAQA = 0;
     public static final int COLUMN_INDEX_TENQA = 1;
     public static final int COLUMN_INDEX_SOLUONG = 2;
-    public static final int COLUMN_INDEX_GIANHAP = 3;
 
 
     public static ArrayList<QuanAo> readExcel(File excelFilePath) throws IOException {
@@ -76,9 +75,6 @@ public class ExcelReader {
                         break;
                     case COLUMN_INDEX_SOLUONG:
                         qa.setSoLuong(new BigDecimal((double) cellValue).intValue());
-                        break;
-                    case COLUMN_INDEX_GIANHAP:
-                        qa.setGiaNhap((Double) getCellValue(cell));
                         break;
                     default:
                         break;
