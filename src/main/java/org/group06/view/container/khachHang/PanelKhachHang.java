@@ -13,22 +13,17 @@ import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
 import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import org.group06.utils.DateStandard;
-//import org.group06.view.components.*;
-
 /**
  *
  * @author Dell
@@ -39,8 +34,8 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
     private DAO_ChiTietHoaDon dao_CTHD = new DAO_ChiTietHoaDon(connection);
     private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
-    public int soMaKH = 0;
     private ArrayList<KhachHang> dsKH = new ArrayList<>();
+    public int soMaKH = 0;
 
     /**
      * Creates new form PanelKhachHang
@@ -79,7 +74,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         lblTitleTTKH.setBackground(new java.awt.Color(0, 0, 0));
         lblTitleTTKH.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblTitleTTKH.setForeground(ColorConstant.BLACK);
         lblTitleTTKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleTTKH.setText("Quản Lý Khách Hàng");
 
@@ -262,7 +256,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     public String getMaKH() {
-        int count = new DAO_KhachHang((DatabaseConstant.getConnection())).loadMaKHCount(soMaKH);
+        int count = new DAO_KhachHang(connection).loadMaKHCount(soMaKH);
         count++;
         // Tạo mã khách hàng theo quy tắc và có thứ tự
         String customerID = "KH" + String.format("%03d", count); // Ví dụ: KH001, KH002,...
@@ -271,7 +265,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
-        String tenKH = NameStandard.formatCapitalize(txtTimTheoTen.getText());
+        String tenKH = txtTimTheoTen.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -369,42 +363,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5).toString());
         }
     }
-
-//    public void loadDataTable() {
-//        ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
-//        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
-//        modelKH.setRowCount(0);
-//        for (KhachHang kh : dsKH) {
-//            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), getDiem(kh.getMaKhachHang()), kh.tinhHangKhachHang()};
-//            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
-//            kh.setHang(kh.tinhHangKhachHang());
-//            dao_KhachHang.update(kh);
-//            modelKH.addRow(data);
-//        }
-//    }
-//    private int getDiem(String maKH) {
-//        double tinhTongThanhTien = 0, mucGiamGia = 0;
-//        ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
-//        for (HoaDon hd : dsHD) {
-//            if (hd.getKhachHang() != null) {
-//                if (hd.getKhachHang().getMaKhachHang().equals(maKH)) {
-//                    ArrayList<ChiTietHoaDon> dsCTHD = dao_CTHD.getAllCTQA(hd.getMaHoaDon());
-//                    for (ChiTietHoaDon cthd : dsCTHD) {
-//                        tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
-//                        if (cthd.getHoaDon().getKhuyenMai() != null) {
-//                            mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        double tongTienSauVAT = tinhTongThanhTien * 1.08;
-//        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
-//        DecimalFormat df = new DecimalFormat("##,###");
-//        String temp = df.format(ttt);
-//        int x = NumberStandard.parseInt(temp) / 100000;
-//        return x;
-//    }
 
     public void loadDataTable() {
         DefaultTableModel modelKH = (DefaultTableModel) tblKhachHang.getModel();

@@ -19,8 +19,8 @@ import java.awt.*;
 public class WinTTNhanVien extends javax.swing.JFrame {
 
     private NhanVien nv;
-    private DAO_NhanVien dao_NhanVien;
     private PanelNhanVien pnlNhanVien;
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());;
 
     /**
      * Creates new form FrameTTNV
@@ -28,7 +28,6 @@ public class WinTTNhanVien extends javax.swing.JFrame {
     public WinTTNhanVien(NhanVien nv, PanelNhanVien pnlNhanVien) {
         this.nv = nv;
         this.pnlNhanVien = pnlNhanVien;
-        dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         initComponents();
     }
 

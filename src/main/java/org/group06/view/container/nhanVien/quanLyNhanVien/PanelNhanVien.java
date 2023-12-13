@@ -353,7 +353,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private boolean checkRegexMaNV() {
         String maNV = txtTimTheoMa.getText().trim();
-        if (maNV.equals("") || !maNV.matches("^NV[0-9]{3}")) {
+        if (maNV.equals("") || !maNV.matches("^NV[0-9]{3}") || !maNV.matches("^nv[0-9]{3}")) {
             return false;
         } else {
             return true;

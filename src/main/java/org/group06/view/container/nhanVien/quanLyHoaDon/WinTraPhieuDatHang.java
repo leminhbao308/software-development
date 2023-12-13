@@ -4,14 +4,12 @@
  */
 package org.group06.view.container.nhanVien.quanLyHoaDon;
 
-import java.awt.Color;
 import java.sql.Connection;
 import org.group06.utils.FontConstant;
 import org.group06.utils.NumberStandard;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;

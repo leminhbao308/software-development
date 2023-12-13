@@ -43,6 +43,11 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         return dsChiTietPhieuDat;
     }
 
+    /**
+     * 
+     * @param id
+     * @return danh sách các sản phẩm đã đặt, số lượng, giá bán... trong phiếu đặt đó
+     */
     public ArrayList<ChiTietPhieuDat> getAllByID(String id) {
         ArrayList<ChiTietPhieuDat> dsChiTietPhieuDat = new ArrayList<>();
         String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAPHIEUDAT = ?";
@@ -66,6 +71,11 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         return dsChiTietPhieuDat;
     }
     
+    /**
+     * 
+     * @param maQA
+     * @return thông tin của quần áo đã chọn 
+     */
     public ChiTietPhieuDat getQA(String maQA) {
         ChiTietPhieuDat chiTietPhieuDat = null;
         try {
@@ -87,6 +97,11 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         return chiTietPhieuDat;
     }
     
+    /**
+     * 
+     * @param ctpd
+     * @return cập nhật lại số lượng quần áo và ghi lại lí do trong chi tiết phiếu đặt nếu KH trả lại quần áo 
+     */
     public boolean updateSoLuong(ChiTietPhieuDat ctpd) {
         try {
             String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ?";
@@ -102,20 +117,6 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         }
     }
     
-    public boolean deleteSoLuong(String maQA, String maPD) {
-        try {
-            String sql = "DELETE FROM ChiTietPhieuDat WHERE MAQA = ? AND MAPHIEUDAT = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, maQA);
-            statement.setString(2, maPD);
-            statement.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     @Override
     public ChiTietPhieuDat getByID(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

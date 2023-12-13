@@ -42,6 +42,11 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         return dsChiTietHoaDon;
     }
 
+    /**
+     * 
+     * @param maHD 
+     * @return danh sách các sản phẩm đã mua, số lượng, giá bán... trong hóa đơn đó
+     */
     public ArrayList<ChiTietHoaDon> getAllCTQA(String maHD) {
         ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
         String sql = "SELECT * FROM ChiTietHoaDon WHERE MAHD = ?";
@@ -65,6 +70,11 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         return dsChiTietHoaDon;
     }
 
+    /**
+     * 
+     * @param maQA
+     * @return thông tin của quần áo đã chọn 
+     */
     public ChiTietHoaDon getQA(String maQA) {
         ChiTietHoaDon chiTietHoaDon = null;
         try {
@@ -104,6 +114,11 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         }
     }
 
+    /**
+     * 
+     * @param cthd
+     * @return cập nhật lại số lượng quần áo và ghi lại lí do trong chi tiết hóa đơn nếu KH trả lại quần áo 
+     */
     public boolean updateSoLuong(ChiTietHoaDon cthd) {
         try {
             String sql = "UPDATE ChiTietHoaDon SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ?";
@@ -111,20 +126,6 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             statement.setInt(1, cthd.getSoLuong());
             statement.setString(2, cthd.getGhiChu());
             statement.setString(3, cthd.getQuanAo().getMaQA());
-            statement.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean deleteSoLuong(String maQA, String maHD) {
-        try {
-            String sql = "DELETE FROM ChiTietHoaDon WHERE MAQA = ? AND MAHD = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, maQA);
-            statement.setString(2, maHD);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

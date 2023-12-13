@@ -9,6 +9,7 @@ import org.group06.db.dao.DAO_ChiTietHoaDon;
 import org.group06.db.dao.DAO_ChiTietPhieuDat;
 import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_PhieuDat;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.*;
 import org.group06.utils.FontConstant;
 import org.group06.utils.FormatCellRenderer;
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.group06.db.dao.DAO_QuanAo;
+
 
 /**
  * @author Dell
@@ -328,7 +329,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private void btnNhanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanHangActionPerformed
         ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(phieuDat.getMaPhieuDat());
-        String maHoaDon = taoMaHD();
+        String maHoaDon = taoMaPD();
         Date ngayHienTai = new Date(System.currentTimeMillis());
 
         khachHang = phieuDat.getKhachHang();
@@ -390,11 +391,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         return temp;
     }
     
-    public String taoMaHD() {
-        int count = dao_HoaDon.loadMaHDCount();
+    public String taoMaPD() {
+        int count = dao_PhieuDat.loadMaPDCount();
         count++;
-        // Tạo mã hoá đơn theo quy tắc và có thứ tự
-        return "HD" + String.format("%03d", count); // Ví dụ: HD001, HD002,...
+        // Tạo mã phiếu đặt theo quy tắc và có thứ tự
+        return "PD" + String.format("%03d", count); // Ví dụ: PD001, PD002,...
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -435,6 +436,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
             tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
             
+            // lấy tên kích thước từ mã kích kích thước có sẵn
             String size = "";
             for (Map.Entry<String, String> item : dsSize.entrySet()) {
                 if(item.getKey().equals(ctpd.getQuanAo().getMaKichThuoc())) {

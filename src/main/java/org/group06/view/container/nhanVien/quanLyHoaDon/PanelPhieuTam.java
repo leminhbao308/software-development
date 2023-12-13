@@ -17,17 +17,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import org.group06.model.entity.KhachHang;
-
 import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
 import org.group06.utils.NumberStandard;
 
 /**
@@ -37,7 +33,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private Connection connection = DatabaseConstant.getConnection();
     private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
-    private ArrayList<PhieuDat> dsPD;
+    private ArrayList<PhieuDat> dsPD = dao_PhieuDat.getAll();;
 
     /**
      * Creates new form PanelHoaDon
@@ -46,7 +42,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         initComponents();
         dchTimTheoNgayDat.setLocale(new Locale("vi", "VN"));
         dchTimTheoNgayNhan.setLocale(new Locale("vi", "VN"));
-        dsPD = dao_PhieuDat.getAll();
         loadDataTable();
         FormatCellRenderer.formatCellRendererCenter(tblPhieuDat, 0);
         FormatCellRenderer.formatCellRendererCenter(tblPhieuDat, 1);
@@ -259,7 +254,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
+        String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {

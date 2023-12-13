@@ -53,92 +53,6 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         return dsPD;
     }
 
-    public ArrayList<PhieuDat> getByDateDat(String date) {
-        ArrayList<PhieuDat> dsDateDat = new ArrayList<PhieuDat>();
-        try {
-            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, date);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                PhieuDat phieuDat = new PhieuDat();
-                String maHD = rs.getString("MAPHIEUDAT");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                Date ngayNhan = rs.getDate("NGAYNHAN");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                int trangThai = rs.getInt("TRANGTHAI");
-                boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
-                dsDateDat.add(phieuDat);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng");
-        }
-        return dsDateDat;
-    }
-
-    public ArrayList<PhieuDat> getByDateNhan(String date) {
-        ArrayList<PhieuDat> dsDateNhan = new ArrayList<PhieuDat>();
-        try {
-            String sql = "SELECT *FROM PhieuDat WHERE NGAYNHAN = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, date);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                PhieuDat phieuDat = new PhieuDat();
-                String maHD = rs.getString("MAPHIEUDAT");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                Date ngayNhan = rs.getDate("NGAYNHAN");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                int trangThai = rs.getInt("TRANGTHAI");
-                boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
-                dsDateNhan.add(phieuDat);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày nhận hàng");
-        }
-        return dsDateNhan;
-    }
-
-    /**
-     * Tìm theo ngày đặt hàng hoặc ngày nhận hàng.
-     *
-     * @param dateDat
-     * @param dateNhan
-     * @return danh sách ngày đặt hàng hoặc ngày nhận hàng
-     */
-    public ArrayList<PhieuDat> getByDateDatAndDateNhan(String dateDat, String dateNhan) {
-        ArrayList<PhieuDat> dsDateDatAndDateNhan = new ArrayList<PhieuDat>();
-        try {
-            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ? OR NgayNhan = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, dateDat);
-            statement.setString(2, dateNhan);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                PhieuDat phieuDat = new PhieuDat();
-                String maHD = rs.getString("MAPHIEUDAT");
-                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
-                Date ngayLap = rs.getDate("NGAYTAO");
-                Date ngayNhan = rs.getDate("NGAYNHAN");
-                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
-                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
-                int trangThai = rs.getInt("TRANGTHAI");
-                boolean thanhToan = rs.getBoolean("THANHTOAN");
-                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
-                dsDateDatAndDateNhan.add(phieuDat);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng hoặc ngày nhận hàng");
-        }
-        return dsDateDatAndDateNhan;
-    }
-
     @Override
     public PhieuDat getByID(String id) {
         PhieuDat phieuDat = null;
@@ -243,6 +157,10 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
         return dsPD;
     }
 
+    /**
+     * 
+     * @return số lớn nhất trong CSDL để tạo một mã phiếu đặt mới 
+     */
     public int loadMaPDCount() {
         int countMaPD = 0;
         String sql = "SELECT MAX(MAPHIEUDAT) FROM PhieuDat";
@@ -261,5 +179,99 @@ public class DAO_PhieuDat implements DAO_Interface<PhieuDat> {
             System.out.println("Lỗi khi tải giá trị countMaPD từ cơ sở dữ liệu.");
         }
         return countMaPD;
+    }
+    
+    /**
+     * 
+     * @param date
+     * @return danh sách phiếu đặt hàng theo ngày tạo
+     */
+    public ArrayList<PhieuDat> getByDateDat(String date) {
+        ArrayList<PhieuDat> dsDateDat = new ArrayList<PhieuDat>();
+        try {
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, date);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PhieuDat phieuDat = new PhieuDat();
+                String maHD = rs.getString("MAPHIEUDAT");
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                Date ngayLap = rs.getDate("NGAYTAO");
+                Date ngayNhan = rs.getDate("NGAYNHAN");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                int trangThai = rs.getInt("TRANGTHAI");
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
+                dsDateDat.add(phieuDat);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng");
+        }
+        return dsDateDat;
+    }
+
+    /**
+     * 
+     * @param date
+     * @return danh sách phiếu đặt hàng theo ngày nhận
+     */
+    public ArrayList<PhieuDat> getByDateNhan(String date) {
+        ArrayList<PhieuDat> dsDateNhan = new ArrayList<PhieuDat>();
+        try {
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYNHAN = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, date);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PhieuDat phieuDat = new PhieuDat();
+                String maHD = rs.getString("MAPHIEUDAT");
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                Date ngayLap = rs.getDate("NGAYTAO");
+                Date ngayNhan = rs.getDate("NGAYNHAN");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                int trangThai = rs.getInt("TRANGTHAI");
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
+                dsDateNhan.add(phieuDat);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày nhận hàng");
+        }
+        return dsDateNhan;
+    }
+
+    /**
+     * @param dateDat
+     * @param dateNhan
+     * @return danh sách phiếu đặt theo ngày đặt hàng hoặc ngày nhận hàng
+     */
+    public ArrayList<PhieuDat> getByDateDatAndDateNhan(String dateDat, String dateNhan) {
+        ArrayList<PhieuDat> dsDateDatAndDateNhan = new ArrayList<PhieuDat>();
+        try {
+            String sql = "SELECT *FROM PhieuDat WHERE NGAYTAO = ? OR NgayNhan = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, dateDat);
+            statement.setString(2, dateNhan);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PhieuDat phieuDat = new PhieuDat();
+                String maHD = rs.getString("MAPHIEUDAT");
+                KhuyenMai khuyenMai = dao_KhuyenMai.getByID(rs.getString("MAKM"));
+                Date ngayLap = rs.getDate("NGAYTAO");
+                Date ngayNhan = rs.getDate("NGAYNHAN");
+                KhachHang khachHang = dao_KhachHang.getByMAKH(rs.getString("MAKH"));
+                NhanVien nhanVien = dao_NhanVien.getByID(rs.getString("MANV"));
+                int trangThai = rs.getInt("TRANGTHAI");
+                boolean thanhToan = rs.getBoolean("THANHTOAN");
+                phieuDat = new PhieuDat(maHD, ngayLap, ngayNhan, khachHang, nhanVien, khuyenMai, trangThai, thanhToan);
+                dsDateDatAndDateNhan.add(phieuDat);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách phiếu đặt theo ngày đặt hàng hoặc ngày nhận hàng");
+        }
+        return dsDateDatAndDateNhan;
     }
 }

@@ -7,6 +7,7 @@ package org.group06.view.container.nhanVien.quanLyHoaDon;
 import com.itextpdf.text.DocumentException;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.FontConstant;
@@ -21,12 +22,11 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.group06.db.dao.DAO_QuanAo;
+
 
 /**
  * @author Dell
@@ -430,6 +430,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             tinhTongThanhTien += cthd.getGiaBan() * soLuong;
             
+            // lấy tên kích thước từ mã kích thước có sẵn
             String size = "";
             for (Map.Entry<String, String> item : dsSize.entrySet()) {
                 if(item.getKey().equals(cthd.getQuanAo().getMaKichThuoc())) {

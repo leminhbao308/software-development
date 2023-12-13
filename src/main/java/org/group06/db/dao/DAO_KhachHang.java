@@ -97,7 +97,13 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
             return false;
         }
     }
-    
+    /**
+     * 
+     * @param maKH
+     * @param hang
+     * @param diemTichLuy
+     * @return cập nhật lại điểm tích lũy và hạng của 1 khách hàng khi biết mã khách hàng
+     */
     public boolean capNhatDiemTichLuyVaHang(String maKH, String hang, double diemTichLuy) {
         try {
             String sql = "UPDATE KhachHang SET DIEMTICHLUY = ?, HANG = ? WHERE MAKH = ?";
@@ -113,6 +119,11 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         }
     }
     
+    /**
+     * 
+     * @param maKH
+     * @return thông tin của 1 khách hàng khi biết mã khách hàng 
+     */
     public KhachHang getByMAKH(String maKH) {
         KhachHang khachHang = null;
         String sql = "SELECT * FROM KhachHang WHERE MAKH = ?";
@@ -133,6 +144,10 @@ public class DAO_KhachHang implements DAO_Interface<KhachHang> {
         return khachHang;
     }
 
+    /**
+     * 
+     * @return số lớn nhất trong CSDL để tạo một mã khách hàng mới 
+     */
     public int loadMaKHCount(int countMaKH) {
         String sql = "SELECT MAX(MAKH) FROM KhachHang";
         try {

@@ -11,7 +11,6 @@ import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.DateStandard;
 import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -211,38 +209,40 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
         String tenKH = txtTimTheoTenKH.getText();
-        if (!tenKH.equals("")) {
-            if (checkRegexTenKH()) {
-                DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
-                modelKH.setRowCount(0);
-                ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
-                        .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
-                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-                ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
-                        .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!tenKH.equals("")) {
+                if (checkRegexTenKH()) {
+                    DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
+                    modelKH.setRowCount(0);
+                    ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
+                            .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
+                            .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                    ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
+                            .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
-                if (tenKH.contains("Khách vãng lai") || tenKH.contains("KVL") || tenKH.contains("kvl") || tenKH.contains("khách vãng lai")) {
-                    for (HoaDon hd : dsHoaDonKhachVangLai) {
-                        String ttt = loadTongThanhTien(hd.getMaHoaDon());
-                        String date = DateStandard.formatDate(hd.getNgayTao());
-                        Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
-                        modelKH.addRow(data);
+                    if (tenKH.contains("Khách vãng lai") || tenKH.contains("KVL") || tenKH.contains("kvl") || tenKH.contains("khách vãng lai")) {
+                        for (HoaDon hd : dsHoaDonKhachVangLai) {
+                            String ttt = loadTongThanhTien(hd.getMaHoaDon());
+                            String date = DateStandard.formatDate(hd.getNgayTao());
+                            Object[] data = {hd.getMaHoaDon(), date, "Khách vãng lai", hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
+                            modelKH.addRow(data);
+                        }
+                    } else {
+                        for (HoaDon hd : dsHoaDonTheoTenKH) {
+                            String ttt = loadTongThanhTien(hd.getMaHoaDon());
+                            String date = DateStandard.formatDate(hd.getNgayTao());
+                            Object[] data = {hd.getMaHoaDon(), date, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
+                            modelKH.addRow(data);
+                        }
                     }
+                    dchTimTheoNgay.setDate(null);
                 } else {
-                    for (HoaDon hd : dsHoaDonTheoTenKH) {
-                        String ttt = loadTongThanhTien(hd.getMaHoaDon());
-                        String date = DateStandard.formatDate(hd.getNgayTao());
-                        Object[] data = {hd.getMaHoaDon(), date, hd.getKhachHang().getTenKH(), hd.getNhanVien().getTenNV(), ttt, hd.getKhuyenMai() != null ? hd.getKhuyenMai().getTenCTKM() : ""};
-                        modelKH.addRow(data);
-                    }
+                    JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
+                    loadDataTable(dsHD);
                 }
-                dchTimTheoNgay.setDate(null);
             } else {
-                JOptionPane.showMessageDialog(this, "Nhập lại tên khách hàng cần tìm");
                 loadDataTable(dsHD);
             }
-        } else {
-            loadDataTable(dsHD);
         }
     }//GEN-LAST:event_txtTimTheoTenKHKeyReleased
 

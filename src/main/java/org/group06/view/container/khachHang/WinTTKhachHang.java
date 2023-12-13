@@ -7,7 +7,6 @@ package org.group06.view.container.khachHang;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_KhachHang;
 import org.group06.model.entity.KhachHang;
-import org.group06.utils.ColorConstant;
 import org.group06.utils.FontConstant;
 import org.group06.utils.NumberStandard;
 
@@ -63,7 +62,6 @@ public class WinTTKhachHang extends javax.swing.JFrame {
 
         lblTitleCNKH.setBackground(new java.awt.Color(0, 0, 0));
         lblTitleCNKH.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        lblTitleCNKH.setForeground(ColorConstant.BLACK);
         lblTitleCNKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleCNKH.setText("Cập Nhật Thông Tin Khách Hàng");
 

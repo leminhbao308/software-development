@@ -18,11 +18,8 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * Tìm theo tất cả các khoảng thời gian bằng cách sử dụng câu lệnh SQL
-     *
-     * @return Danh sách khách hàng theo tất cả khoảng thời gian
+     * @return Danh sách tất cả khách hàng
      */
-    // Tổng tất cả khách hàng
     public ArrayList<HoaDon> getTongKH() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -39,11 +36,17 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Tổng khách hàng thân thiết, nếu trùng sẽ không tính
+    /**
+     * @return Tổng khách hàng thân thiết, nếu trùng sẽ không tính và khách hàng thân thiết có điểm tích lũy >= 100
+     */
     public ArrayList<HoaDon> getTongKHTT() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "SELECT MAKH FROM HoaDon WHERE MAKH IS NOT NULL GROUP BY MAKH";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NOT NULL OR KH.DIEMTICHLUY >= 100)\n"
+                    + "GROUP BY HD.MAKH";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -56,11 +59,18 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai
+    /**
+     * 
+     * @return Tổng khách vãng lai và khách hàng có điểm tích lũy < 100
+     */
     public ArrayList<HoaDon> getTongKVL() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "SELECT MAKH FROM HoaDon WHERE MAKH IS NULL";
+            String sql = "SELECT HD.MAKH \n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE HD.MAKH IS NULL \n"
+                    + "OR KH.DIEMTICHLUY < 100";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -73,7 +83,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng chi tiêu, sort theo tổng chi tiêu của khách hàng
+    /**
+     * 
+     * @return tổng chi tiêt của khách hàng, cộng dồn khách vãng lai 
+     * sort theo tổng chi tiêu của khách hàng
+     * 
+     */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi() {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -97,12 +112,10 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * Tìm theo ngày tháng năm được chọn bằng cách sử dụng câu lệnh SQL
-     *
-     * @return Danh sách khách hàng theo ngày tháng năm được chọn (chỉ trong 1
-     * ngày)
+     * 
+     * @param date
+     * @return Danh sách khách hàng theo date
      */
-    //Tổng khách hàng trong ngày
     public ArrayList<HoaDon> getTongKH_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -120,11 +133,20 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết trong ngày
+    /**
+     * 
+     * @param date
+     * @return danh sách khách hàng thân thiết (điểm tích lũy >= 100) theo date
+     */
     public ArrayList<HoaDon> getTongKHTT_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "SELECT MAKH FROM HoaDon WHERE MAKH is not null AND NGAYTAO = ? GROUP BY MAKH";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NOT NULL OR KH.DIEMTICHLUY >= 100)\n"
+                    + "AND NGAYTAO = ?\n"
+                    + "GROUP BY HD.MAKH";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet resultSet = statement.executeQuery();
@@ -138,11 +160,19 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai trong ngày  
+    /**
+     * 
+     * @param date
+     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 theo date
+     */ 
     public ArrayList<HoaDon> getTongKVL_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is null AND NGAYTAO = ?";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NULL OR KH.DIEMTICHLUY < 100)\n"
+                    + "AND NGAYTAO = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date);
             ResultSet resultSet = statement.executeQuery();
@@ -156,7 +186,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng chi tiêu trong ngày
+    /**
+     * @param date
+     * @return tổng chi tiêu của khách hàng theo date, cộng dồn khách vãng lai 
+     * sort theo tổng chi tiêu của khách hàng 
+     * 
+     */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -182,11 +217,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * Tìm theo tháng đã chọn bằng cách sử dụng câu lệnh SQL
-     *
-     * @return Danh sách khách hàng trong tháng
+     * 
+     * @param month
+     * @param year
+     * @return Danh sách khách hàng theo month và year
      */
-    //Tổng khách hàng trong tháng
     public ArrayList<HoaDon> getTongKH_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -205,11 +240,21 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết trong tháng
+    /**
+     * 
+     * @param month
+     * @param year
+     * @return Danh sách khách hàng thân thiết (điểm tích lũy >= 100) theo month và year
+     */
     public ArrayList<HoaDon> getTongKHTT_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is not null and DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ? GROUP BY MAKH";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NOT NULL OR KH.DIEMTICHLUY >= 100)\n"
+                    + "AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "GROUP BY HD.MAKH";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
             statement.setInt(2, year);
@@ -224,11 +269,20 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai trong tháng
+    /**
+     * 
+     * @param month
+     * @param year
+     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 theo month và year
+     */
     public ArrayList<HoaDon> getTongKVL_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is null AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ? ";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NULL OR KH.DIEMTICHLUY < 100)\n"
+                    + "AND DATEPART(MONTH, NGAYTAO) = ? AND DATEPART(YEAR, NGAYTAO) = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, month);
             statement.setInt(2, year);
@@ -243,7 +297,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng chi tiêu trong tháng  
+    /**
+     * 
+     * @param month
+     * @param year
+     * @return tổng chi tiêu của khách hàng theo month và year, cộng dồn khách vãng lai 
+     * sort theo tổng chi tiêu của khách hàng 
+     */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -270,11 +330,10 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * Tìm theo năm đã chọn bằng cách sử dụng câu lệnh SQL
-     *
+     * 
+     * @param year
      * @return Danh sách khách hàng trong năm
      */
-    //Tổng khách hàng trong năm
     public ArrayList<HoaDon> getTongKH_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -292,11 +351,20 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết trong năm
+    /**
+     * 
+     * @param year
+     * @return Danh sách khách hàng thân thiết (điểm tích lũy >= 100) trong năm
+     */
     public ArrayList<HoaDon> getTongKHTT_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is not null and DATEPART(YEAR, NGAYTAO) = ? GROUP BY MAKH;";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NOT NULL OR KH.DIEMTICHLUY >= 100)\n"
+                    + "AND DATEPART(YEAR, NGAYTAO) = ?\n"
+                    + "GROUP BY HD.MAKH";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, year);
             ResultSet resultSet = statement.executeQuery();
@@ -310,11 +378,19 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai trong năm
+    /**
+     * 
+     * @param year
+     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 trong năm
+     */
     public ArrayList<HoaDon> getTongKVL_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is null AND DATEPART(YEAR, NGAYTAO) = ?";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NULL OR KH.DIEMTICHLUY < 100)\n"
+                    + "AND DATEPART(YEAR, NGAYTAO) = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, year);
             ResultSet resultSet = statement.executeQuery();
@@ -329,6 +405,12 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     // Danh sách khách hàng chi tiêu trong năm
+    /**
+     * 
+     * @param year
+     * @return tổng chi tiêu của khách hàng theo year, cộng dồn khách vãng lai 
+     * sort theo tổng chi tiêu của khách hàng 
+     */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
@@ -354,11 +436,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * Tìm theo khoảng thời gian đã chọn bằng cách sử dụng câu lệnh SQL
-     *
-     * @return Danh sách khách hàng trong khoảng thời gian
+     * 
+     * @param date1
+     * @param date2
+     * @return danh sách khách hàng trong khoảng thời gian được chọn
      */
-    //Tổng khách hàng
     public ArrayList<HoaDon> getTongKH_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -377,11 +459,21 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách hàng thân thiết
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return danh sách khách hàng thân thiết có điểm tích lũy >= 100 trong khoảng thời gian được chọn
+     */
     public ArrayList<HoaDon> getTongKHTT_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "SELECT MAKH FROM HoaDon WHERE MAKH is not null AND NGAYTAO BETWEEN ? AND ? GROUP BY MAKH";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NOT NULL OR KH.DIEMTICHLUY >= 100)\n"
+                    + "AND NGAYTAO BETWEEN ? AND ?\n"
+                    + "GROUP BY HD.MAKH";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date1);
             statement.setString(2, date2);
@@ -396,11 +488,20 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    //Tổng khách vãng lai
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 trong khoảng thời gian được chọn
+     */
     public ArrayList<HoaDon> getTongKVL_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select MAKH from HoaDon where MAKH is null AND NGAYTAO BETWEEN ? AND ?";
+            String sql = "SELECT HD.MAKH\n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE (HD.MAKH IS NULL OR KH.DIEMTICHLUY < 100)\n"
+                    + "AND NGAYTAO BETWEEN ? AND ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, date1);
             statement.setString(2, date2);
@@ -415,7 +516,13 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
         return dsSLKhachHang;
     }
 
-    // Danh sách khách hàng chi tiêu
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return tổng chi tiêu của khách hàng theo 2 date, cộng dồn khách vãng lai 
+     * sort theo tổng chi tiêu của khách hàng 
+     */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
         try {
