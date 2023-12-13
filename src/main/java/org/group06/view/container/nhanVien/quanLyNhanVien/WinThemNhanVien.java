@@ -22,7 +22,7 @@ public class WinThemNhanVien extends javax.swing.JFrame {
     private PanelNhanVien pnlNhanVien;
 
     /**
-     * Creates new form FrameThemNhanVien
+     * Creates new form WinThemNhanVien
      */
     public WinThemNhanVien(PanelNhanVien pnlNhanVien) {
         this.pnlNhanVien = pnlNhanVien;

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import org.group06.utils.DateStandard;
+
 /**
  *
  * @author Dell
@@ -238,23 +239,34 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
-    private void callFrameTTKhachHang() {
+    private void callWinTTKhachHang() {
         WinTTKhachHang frTTKH = new WinTTKhachHang(this.getSelectedKH(), this);
         frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTKH.setResizable(false);
         frTTKH.setVisible(true);
     }
 
+    private void callWinThemKH() {
+        WinThemKH frThemKH = new WinThemKH(this);
+        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemKH.setResizable(false);
+        frThemKH.setVisible(true);
+    }
+
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameTTKhachHang();
+            callWinTTKhachHang();
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        callFrameThemKH();
+        callWinThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    /**
+     * 
+     * @return một mã khách hàng mới khi thêm khách hàng
+     */
     public String getMaKH() {
         int count = new DAO_KhachHang(connection).loadMaKHCount(soMaKH);
         count++;
@@ -328,13 +340,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
         } else {
             return true;
         }
-    }
-
-    private void callFrameThemKH() {
-        WinThemKH frThemKH = new WinThemKH(this);
-        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frThemKH.setResizable(false);
-        frThemKH.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
