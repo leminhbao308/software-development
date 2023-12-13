@@ -24,7 +24,7 @@ public class WinTTKhachHang extends javax.swing.JFrame {
     private KhachHang kh = new KhachHang();
 
     /**
-     * Creates new form FrameTTKhachHang
+     * Creates new form WinTTKhachHang
      */
     public WinTTKhachHang(KhachHang kh, PanelKhachHang pnlKhachHang) {
         this.kh = kh;
@@ -283,7 +283,7 @@ public class WinTTKhachHang extends javax.swing.JFrame {
         String maKH = txtMaKH.getText();
         String tenKH = checkKiTu(txtTenKH.getText());
         String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
-        String email = txtEmail.getText();
+        String email = txtEmail.getText().trim();
         KhachHang kh = new KhachHang(maKH, tenKH, sdt, email);
         if (dao_KhachHang.update(kh)) {
             if (checkRegexSDT() && checkRegexTenKH()) {
@@ -298,6 +298,11 @@ public class WinTTKhachHang extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * 
+     * @param text
+     * @return in hoa kí tự đầu tiên
+     */
     private String checkKiTu(String text) {
         text = text.replaceAll("\\s+", " ").trim();
         text = text.toLowerCase();
@@ -392,5 +397,4 @@ public class WinTTKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
-
 }

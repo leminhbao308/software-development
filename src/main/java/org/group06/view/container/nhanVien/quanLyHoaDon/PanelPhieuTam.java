@@ -36,7 +36,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private ArrayList<PhieuDat> dsPD = dao_PhieuDat.getAll();;
 
     /**
-     * Creates new form PanelHoaDon
+     * Creates new form PanelPhieuTam
      */
     public PanelPhieuTam() {
         initComponents();
@@ -321,7 +321,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                             Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
                             modelKH.addRow(data);
                         }
-
                     }
                     txtTimTheoTenKH.setText("");
                     dchTimTheoNgayDat.setDate(null);
@@ -345,7 +344,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
-    private void callFrameChiTietHoaDon() {
+    private void callWinChiTietHoaDon() {
         WinChiTietDonDatHang frCTDDH = new WinChiTietDonDatHang(this.getSelectedPhieuDat(), this);
         frCTDDH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTDDH.setResizable(false);
@@ -354,7 +353,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void tblPhieuDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuDatMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameChiTietHoaDon();
+            callWinChiTietHoaDon();
         }
     }//GEN-LAST:event_tblPhieuDatMouseClicked
 
@@ -430,6 +429,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
+            
             Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
@@ -447,6 +447,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
+            
             Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
@@ -477,6 +478,10 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         loadDataTable();
     }
 
+    /**
+     * 
+     * @return check tiền cần trả ở WinTraPhieuDatHang
+     */
     public int getTrangThai() {
         if (tblPhieuDat.getSelectedRow() == -1) {
             return -1;
@@ -507,16 +512,12 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private PhieuDat getSelectedPhieuDat() {
-        String maPD = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString();
-
         PhieuDat phieuDat = null;
-
         for (PhieuDat pd : dsPD) {
             if (pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
                 phieuDat = pd;
             }
         }
-
         if (tblPhieuDat.getSelectedRow() == -1) {
             return null;
         } else {
@@ -557,7 +558,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     }
                 }
             }
-
             String ghiChu = loadGhiChu(pd);
 
             Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, trangThaiThanhToan, ghiChu};
@@ -574,7 +574,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                 mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
-
         double tongTienSauVAT = tinhTongThanhTien * 1.08;
         double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
         String tongThanhTien = NumberStandard.formatMoney(ttt);
