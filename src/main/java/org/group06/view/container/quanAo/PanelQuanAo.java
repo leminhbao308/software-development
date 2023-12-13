@@ -1023,6 +1023,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         ComponentStatus.setStatusBtn(listBtnDisable, false);
         ComponentStatus.setStatusBtn(listBtnEnable, true);
         this.statusBtnThemMoi = true;
+        this.btnNhapHang.setEnabled(false);
         this.statusBtnCapNhat = false;
         this.statusBtnHuy = true;
         this.txtTenQA.requestFocus();
@@ -1254,6 +1255,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
                 this.statusBtnThemMoi = false;
                 this.statusBtnCapNhat = false;
                 this.statusBtnHuy = false;
+                this.btnNhapHang.setEnabled(true);
                 xoaTrang();
                 ComponentStatus.setStatusBtn(this.btnXoaTrang, false);
                 ComponentStatus.setStatusBtn(this.btnLuu, false);
@@ -1287,6 +1289,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
             String ma = tblQuanAo.getModel().getValueAt(viTri, 0).toString();
             QuanAo qa = this.dsQuanLyQuanAo.getByID(ma);
             this.file = new File(qa.getHinhAnh());
+            this.btnNhapHang.setEnabled(false);
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -1302,6 +1305,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
             this.statusBtnCapNhat = false;
             this.tblQuanAo.clearSelection();
             this.statusBtnHuy = true;
+            this.btnNhapHang.setEnabled(true);
         }
     }//GEN-LAST:event_btnHuyActionPerformed
 
