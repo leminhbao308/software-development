@@ -1559,6 +1559,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
             }
         });
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+
             try {
                 file = chooser.getSelectedFile();
 //                load file excel
