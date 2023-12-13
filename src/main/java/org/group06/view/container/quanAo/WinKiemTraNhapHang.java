@@ -35,7 +35,7 @@ public class WinKiemTraNhapHang extends javax.swing.JDialog {
         for (QuanAo qa : this.dsQuanLyQuanAo.getAll()) {
             for (QuanAo qaExcels : dsQAExcel) {
                 if (qa.getMaQA().equals(qaExcels.getMaQA())) {
-                    Object[] data = {qa.getMaQA(), qa.getTenQA(), qaExcels.getGiaNhap(),
+                    Object[] data = {qa.getMaQA(), qa.getTenQA(),
                         qa.getSoLuong(), qaExcels.getSoLuong(), qaExcels.getSoLuong() + qa.getSoLuong()};
                     modelQA.addRow(data);
                 }
@@ -66,17 +66,17 @@ public class WinKiemTraNhapHang extends javax.swing.JDialog {
 
         tblNhapHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Quần Áo", "Tên Quần Áo", "Giá Nhập Hàng", "SL Trong Kho", "SL Nhập Thêm", "SL Sau Nhập"
+                "Mã Quần Áo", "Tên Quần Áo", "SL Trong Kho", "SL Nhập Thêm", "SL Sau Nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

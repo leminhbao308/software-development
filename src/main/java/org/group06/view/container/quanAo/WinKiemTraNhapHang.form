@@ -89,10 +89,9 @@
         <Component class="javax.swing.JTable" name="tblNhapHang">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="M&#xe3; Qu&#x1ea7;n &#xc1;o" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xea;n Qu&#x1ea7;n &#xc1;o" type="java.lang.Object"/>
-                <Column editable="false" title="Gi&#xe1; Nh&#x1ead;p H&#xe0;ng" type="java.lang.Object"/>
                 <Column editable="false" title="SL Trong Kho" type="java.lang.Object"/>
                 <Column editable="false" title="SL Nh&#x1ead;p Th&#xea;m" type="java.lang.Object"/>
                 <Column editable="false" title="SL Sau Nh&#x1ead;p" type="java.lang.Object"/>
@@ -100,11 +99,6 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
