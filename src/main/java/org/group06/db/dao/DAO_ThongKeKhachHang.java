@@ -37,7 +37,8 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * @return Tổng khách hàng thân thiết, nếu trùng sẽ không tính và khách hàng thân thiết có điểm tích lũy >= 100
+     * @return Tổng khách hàng thân thiết, nếu trùng sẽ không tính và khách hàng
+     * thân thiết có điểm tích lũy >= 100
      */
     public ArrayList<HoaDon> getTongKHTT() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -60,7 +61,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @return Tổng khách vãng lai và khách hàng có điểm tích lũy < 100
      */
     public ArrayList<HoaDon> getTongKVL() {
@@ -84,10 +85,10 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
-     * @return tổng chi tiêt của khách hàng, cộng dồn khách vãng lai 
-     * sort theo tổng chi tiêu của khách hàng
-     * 
+     *
+     * @return tổng chi tiêt của khách hàng, cộng dồn khách vãng lai sort theo
+     * tổng chi tiêu của khách hàng
+     *
      */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi() {
         ArrayList<Object[]> rows = new ArrayList<>();
@@ -112,7 +113,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date
      * @return Danh sách khách hàng theo date
      */
@@ -134,7 +135,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date
      * @return danh sách khách hàng thân thiết (điểm tích lũy >= 100) theo date
      */
@@ -161,10 +162,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date
-     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 theo date
-     */ 
+     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100
+     * theo date
+     */
     public ArrayList<HoaDon> getTongKVL_TrongNgay(String date) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
@@ -188,9 +190,9 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
 
     /**
      * @param date
-     * @return tổng chi tiêu của khách hàng theo date, cộng dồn khách vãng lai 
-     * sort theo tổng chi tiêu của khách hàng 
-     * 
+     * @return tổng chi tiêu của khách hàng theo date, cộng dồn khách vãng lai
+     * sort theo tổng chi tiêu của khách hàng
+     *
      */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNgay(String date) {
         ArrayList<Object[]> rows = new ArrayList<>();
@@ -217,7 +219,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param month
      * @param year
      * @return Danh sách khách hàng theo month và year
@@ -241,10 +243,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param month
      * @param year
-     * @return Danh sách khách hàng thân thiết (điểm tích lũy >= 100) theo month và year
+     * @return Danh sách khách hàng thân thiết (điểm tích lũy >= 100) theo month
+     * và year
      */
     public ArrayList<HoaDon> getTongKHTT_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -270,10 +273,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param month
      * @param year
-     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 theo month và year
+     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100
+     * theo month và year
      */
     public ArrayList<HoaDon> getTongKVL_TrongThang(int month, int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -298,11 +302,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param month
      * @param year
-     * @return tổng chi tiêu của khách hàng theo month và year, cộng dồn khách vãng lai 
-     * sort theo tổng chi tiêu của khách hàng 
+     * @return tổng chi tiêu của khách hàng theo month và year, cộng dồn khách
+     * vãng lai sort theo tổng chi tiêu của khách hàng
      */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongThang(int month, int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
@@ -330,7 +334,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param year
      * @return Danh sách khách hàng trong năm
      */
@@ -352,7 +356,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param year
      * @return Danh sách khách hàng thân thiết (điểm tích lũy >= 100) trong năm
      */
@@ -379,9 +383,10 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param year
-     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 trong năm
+     * @return Danh sách khách vãng lai và khách hàng có điểm tích lũy < 100
+     * trong năm
      */
     public ArrayList<HoaDon> getTongKVL_TrongNam(int year) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -406,10 +411,10 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
 
     // Danh sách khách hàng chi tiêu trong năm
     /**
-     * 
+     *
      * @param year
-     * @return tổng chi tiêu của khách hàng theo year, cộng dồn khách vãng lai 
-     * sort theo tổng chi tiêu của khách hàng 
+     * @return tổng chi tiêu của khách hàng theo year, cộng dồn khách vãng lai
+     * sort theo tổng chi tiêu của khách hàng
      */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TrongNam(int year) {
         ArrayList<Object[]> rows = new ArrayList<>();
@@ -436,7 +441,7 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date1
      * @param date2
      * @return danh sách khách hàng trong khoảng thời gian được chọn
@@ -460,10 +465,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date1
      * @param date2
-     * @return danh sách khách hàng thân thiết có điểm tích lũy >= 100 trong khoảng thời gian được chọn
+     * @return danh sách khách hàng thân thiết có điểm tích lũy >= 100 trong
+     * khoảng thời gian được chọn
      */
     public ArrayList<HoaDon> getTongKHTT_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -489,10 +495,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date1
      * @param date2
-     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100 trong khoảng thời gian được chọn
+     * @return danh sách khách vãng lai và khách hàng có điểm tích lũy < 100
+     * trong khoảng thời gian được chọn
      */
     public ArrayList<HoaDon> getTongKVL_TheoKhoangTGian(String date1, String date2) {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
@@ -517,11 +524,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     }
 
     /**
-     * 
+     *
      * @param date1
      * @param date2
-     * @return tổng chi tiêu của khách hàng theo 2 date, cộng dồn khách vãng lai 
-     * sort theo tổng chi tiêu của khách hàng 
+     * @return tổng chi tiêu của khách hàng theo 2 date, cộng dồn khách vãng lai
+     * sort theo tổng chi tiêu của khách hàng
      */
     public ArrayList<Object[]> getAllKhachHangTheoTongChi_TheoKhoangTGian(String date1, String date2) {
         ArrayList<Object[]> rows = new ArrayList<>();
@@ -583,7 +590,11 @@ public class DAO_ThongKeKhachHang implements DAO_Interface<HoaDon> {
     public ArrayList<HoaDon> getHangNull() {
         ArrayList<HoaDon> dsSLKhachHang = new ArrayList<>();
         try {
-            String sql = "select * from KhachHang WHERE HANG = ''";
+            String sql = "SELECT HD.MAKH \n"
+                    + "FROM HoaDon HD\n"
+                    + "LEFT JOIN KhachHang KH ON KH.MAKH = HD.MAKH\n"
+                    + "WHERE HD.MAKH IS NULL \n"
+                    + "OR KH.DIEMTICHLUY < 100";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
