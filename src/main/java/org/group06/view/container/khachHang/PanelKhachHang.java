@@ -363,9 +363,9 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString(),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3).toString(),
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3) != null ? tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3).toString() : "",
                     (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5).toString());
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5) != null ? tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5).toString() : "");
         }
     }
 
@@ -421,5 +421,14 @@ public class PanelKhachHang extends javax.swing.JPanel {
         }); // set delay 0.3s
 
         timer.start();
+    }
+    
+    public void addRow(KhachHang kh) {
+        DefaultTableModel modelKH = (DefaultTableModel)tblKhachHang.getModel();
+        
+        String email = kh.getEmail() != null ? kh.getEmail() : "";
+        
+        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), email, kh.getDiemTichLuy(), kh.getHang()};
+        modelKH.addRow(data);
     }
 }
