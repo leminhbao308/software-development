@@ -31,7 +31,8 @@ public class ChiTietHoaDon {
         this.setGiaBan(giaBan);
     }
     
-    public ChiTietHoaDon(QuanAo quanAo, int soLuong, String ghiChu) {
+    public ChiTietHoaDon(HoaDon hoaDon, QuanAo quanAo, int soLuong, String ghiChu) {
+        this.setHoaDon(hoaDon);
         this.setQuanAo(quanAo);
         this.setSoLuong(soLuong);
         this.setGhiChu(ghiChu);

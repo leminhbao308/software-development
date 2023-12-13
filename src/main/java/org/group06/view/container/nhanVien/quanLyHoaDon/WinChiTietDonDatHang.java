@@ -369,11 +369,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private ChiTietPhieuDat getSelectedWinTraPhieuDatHang() {
         String mQA = tblDSQuanAo.getValueAt(tblDSQuanAo.getSelectedRow(), 0).toString();
-
+        
         if (tblDSQuanAo.getSelectedRow() == -1) {
             return null;
         } else {
-            return dao_ChiTietPhieuDat.getQA(mQA);
+            return dao_ChiTietPhieuDat.getQA(mQA, this.phieuDat.getMaPhieuDat());
         }
     }
 

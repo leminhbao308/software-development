@@ -309,7 +309,7 @@ public class WinTraHang extends javax.swing.JFrame {
         int soLuongTra = Integer.parseInt(txtSLTra.getText());
         int soLuongMua = winCTHD.getSoLuongDaMua();
         int temp = soLuongMua - soLuongTra;
-        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(cthd.getQuanAo(), temp, ghiChu);
+        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(cthd.getHoaDon(), cthd.getQuanAo(), temp, ghiChu);
         if (dao_ChiTietHoaDon.updateSoLuong(chiTietHoaDon)) {
             dao_QuanAo.hoanTraQuanAo(cthd.getQuanAo().getMaQA(), soLuongTra);
             JOptionPane.showMessageDialog(this, "Trả hàng thành công");

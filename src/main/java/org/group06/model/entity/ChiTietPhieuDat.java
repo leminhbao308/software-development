@@ -17,7 +17,8 @@ public class ChiTietPhieuDat {
         this.ghiChu = null;
     }
 
-    public ChiTietPhieuDat(QuanAo quanAo, int soLuong, String ghiChu) {
+    public ChiTietPhieuDat(PhieuDat phieuDat, QuanAo quanAo, int soLuong, String ghiChu) {
+        this.setPhieuDat(phieuDat);
         this.setQuanAo(quanAo);
         this.setSoLuong(soLuong);
         this.setGhiChu(ghiChu);

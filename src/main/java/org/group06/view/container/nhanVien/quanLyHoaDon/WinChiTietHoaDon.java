@@ -380,7 +380,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         if (tblChiTietHD.getSelectedRow() == -1) {
             return null;
         } else {
-            return dao_ChiTietHoaDon.getQA(mQA);
+            return dao_ChiTietHoaDon.getQA(mQA, this.hoaDon.getMaHoaDon());
         }
     }
 

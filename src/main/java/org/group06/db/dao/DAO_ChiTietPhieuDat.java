@@ -76,12 +76,13 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
      * @param maQA
      * @return thông tin của quần áo đã chọn 
      */
-    public ChiTietPhieuDat getQA(String maQA) {
+    public ChiTietPhieuDat getQA(String maQA, String maPD) {
         ChiTietPhieuDat chiTietPhieuDat = null;
         try {
-            String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAQA = ?";
+            String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAQA = ? AND MAPHIEUDAT = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, maQA);
+            statement.setString(2, maPD);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 chiTietPhieuDat = new ChiTietPhieuDat();
@@ -104,11 +105,12 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
      */
     public boolean updateSoLuong(ChiTietPhieuDat ctpd) {
         try {
-            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ?";
+            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ? AND MAPHIEUDAT = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, ctpd.getSoLuong());
             statement.setString(2, ctpd.getGhiChu());
             statement.setString(3, ctpd.getQuanAo().getMaQA());
+            statement.setString(4, ctpd.getPhieuDat().getMaPhieuDat());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

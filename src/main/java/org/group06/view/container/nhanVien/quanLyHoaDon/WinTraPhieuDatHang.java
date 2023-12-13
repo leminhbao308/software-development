@@ -313,7 +313,7 @@ public class WinTraPhieuDatHang extends javax.swing.JFrame {
         int soLuongTra = Integer.parseInt(txtSLTra.getText());
         int soLuongDat = winCTPD.getSoLuongDaDat();
         int temp = soLuongDat - soLuongTra;
-        ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat(ctpd.getQuanAo(), temp, ghiChu);
+        ChiTietPhieuDat chiTietPhieuDat = new ChiTietPhieuDat(ctpd.getPhieuDat(), ctpd.getQuanAo(), temp, ghiChu);
         if (dao_ChiTietPhieuDat.updateSoLuong(chiTietPhieuDat)) {
             dao_QuanAo.hoanTraQuanAo(ctpd.getQuanAo().getMaQA(), soLuongTra);
             JOptionPane.showMessageDialog(this, "Trả hàng thành công");
