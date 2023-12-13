@@ -23,7 +23,7 @@ public class WinThemKH extends javax.swing.JFrame {
     private PanelKhachHang pnlKhachHang;
 
     /**
-     * Creates new form FrameThemKH
+     * Creates new form WinThemKH
      */
     public WinThemKH(PanelKhachHang pnlKhachHang) {
         dao_KhachHang = new DAO_KhachHang(DatabaseConstant.getConnection());
@@ -258,6 +258,11 @@ public class WinThemKH extends javax.swing.JFrame {
         pnlKhachHang.loadDataTable();
     }
 
+    /**
+     * 
+     * @param text
+     * @return in hoa kí tự đầu tiên của mỗi từ
+     */
     private String checkKiTu(String text) {
         text = text.replaceAll("\\s+", " ").trim();
         text = text.toLowerCase();

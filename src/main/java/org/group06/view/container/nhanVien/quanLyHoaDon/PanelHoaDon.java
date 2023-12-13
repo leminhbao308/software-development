@@ -214,9 +214,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
                 if (checkRegexTenKH()) {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
                     modelKH.setRowCount(0);
+                    // trả về ds hóa đơn có khách hàng != null
                     ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
                             .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
                             .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                    // trả về ds hóa đơn có khách hàng là khách vãng lai
                     ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
                             .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
@@ -257,11 +259,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameChiTietHoaDon();
+            callWinChiTietHoaDon();
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
-    private void callFrameChiTietHoaDon() {
+    private void callWinChiTietHoaDon() {
         WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(this.getSelectedHoaDon(), this);
         frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTHD.setResizable(false);
@@ -320,12 +322,12 @@ public class PanelHoaDon extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private HoaDon getSelectedHoaDon() {
-        String mHD = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
+        String maHD = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
 
         if (tblHoaDon.getSelectedRow() == -1) {
             return null;
         } else {
-            return dao_HoaDon.getByID(mHD);
+            return dao_HoaDon.getByID(maHD);
         }
     }
 

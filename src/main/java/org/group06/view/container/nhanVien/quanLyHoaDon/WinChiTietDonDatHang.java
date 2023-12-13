@@ -329,7 +329,7 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private void btnNhanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanHangActionPerformed
         ArrayList<ChiTietPhieuDat> dsCTPD = dao_ChiTietPhieuDat.getAllByID(phieuDat.getMaPhieuDat());
-        String maHoaDon = taoMaPD();
+        String maHoaDon = taoMaHD();
         Date ngayHienTai = new Date(System.currentTimeMillis());
 
         khachHang = phieuDat.getKhachHang();
@@ -356,11 +356,11 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private void tblDSQuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSQuanAoMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameWinTraPhieuDatHang();
+            callWinTraPhieuDatHang();
         }
     }//GEN-LAST:event_tblDSQuanAoMouseClicked
 
-    private void callFrameWinTraPhieuDatHang() {
+    private void callWinTraPhieuDatHang() {
         WinTraPhieuDatHang frTPDH = new WinTraPhieuDatHang(this.getSelectedWinTraPhieuDatHang(), this, this.pnlPhieuTam);
         frTPDH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTPDH.setResizable(false);
@@ -369,7 +369,6 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
 
     private ChiTietPhieuDat getSelectedWinTraPhieuDatHang() {
         String mQA = tblDSQuanAo.getValueAt(tblDSQuanAo.getSelectedRow(), 0).toString();
-        
         if (tblDSQuanAo.getSelectedRow() == -1) {
             return null;
         } else {
@@ -377,6 +376,10 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * 
+     * @return số lượng quần áo của mỗi quần áo đã đặt hàng ở trong mỗi hóa đơn
+     */
     public int getSoLuongDaDat() {
         if (tblDSQuanAo.getSelectedRow() == -1) {
             return -1;
@@ -386,16 +389,24 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * 
+     * @return trạng thái thanh toán để check số tiền cần trả (nếu có)
+     */
     public int getTrangThaiThanhToan() {
         int temp = pnlPhieuTam.getTrangThai();
         return temp;
     }
     
-    public String taoMaPD() {
-        int count = dao_PhieuDat.loadMaPDCount();
+    /**
+     * 
+     * @return khi bấm nhận hàng sẽ tự động tạo mã hóa đơn 
+     */
+    public String taoMaHD() {
+        int count = dao_HoaDon.loadMaHDCount();
         count++;
-        // Tạo mã phiếu đặt theo quy tắc và có thứ tự
-        return "PD" + String.format("%03d", count); // Ví dụ: PD001, PD002,...
+        // Tạo mã hóa đơn theo quy tắc và có thứ tự
+        return "HD" + String.format("%03d", count); // Ví dụ: HD001, HD002,...
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -432,8 +443,8 @@ public class WinChiTietDonDatHang extends javax.swing.JFrame {
             String tenQA = ctpd.getQuanAo().getTenQA();
             String giaBan = NumberStandard.formatMoney(ctpd.getGiaBan());
             int soLuong = ctpd.getSoLuong();
+            // thành tiền của mỗi quần áo mua
             String thanhTien = NumberStandard.formatMoney(ctpd.getGiaBan() * soLuong);
-
             tinhTongThanhTien += ctpd.getGiaBan() * soLuong;
             
             // lấy tên kích thước từ mã kích kích thước có sẵn

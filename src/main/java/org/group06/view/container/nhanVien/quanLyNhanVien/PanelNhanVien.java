@@ -277,14 +277,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void callFrameTTNV() {
+    private void callWinTTNV() {
         WinTTNhanVien frTTNV = new WinTTNhanVien(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
     }
 
-    private void callFrameThemNV() {
+    private void callWinThemNV() {
         WinThemNhanVien frThemNV = new WinThemNhanVien(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
@@ -293,12 +293,12 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameTTNV();
+            callWinTTNV();
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        callFrameThemNV();
+        callWinThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     public String getMaNV() {

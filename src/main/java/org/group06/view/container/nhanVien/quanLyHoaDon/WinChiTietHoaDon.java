@@ -363,11 +363,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
     private void tblChiTietHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietHDMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameWinTraHang();
+            callWinTraHang();
         }
     }//GEN-LAST:event_tblChiTietHDMouseClicked
 
-    private void callFrameWinTraHang() {
+    private void callWinTraHang() {
         WinTraHang frTH = new WinTraHang(this.getSelectedWinTraHang(), this, this.pnlHoaDon);
         frTH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTH.setResizable(false);
@@ -426,8 +426,8 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             String tenQA = cthd.getQuanAo().getTenQA();
             String giaBan = NumberStandard.formatMoney(cthd.getGiaBan());
             int soLuong = cthd.getSoLuong();
+            // tính thành tiền của quần áo đã mua
             String thanhTien = NumberStandard.formatMoney(cthd.getGiaBan() * soLuong);
-
             tinhTongThanhTien += cthd.getGiaBan() * soLuong;
             
             // lấy tên kích thước từ mã kích thước có sẵn
