@@ -55,6 +55,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         FormatCellRenderer.formatCellRendererCenter(this.tblQuanAo, 10);
     }
 
+    /**
+     * Load dữ liệu cho loại quần áo, danh sách loại quần áo được lấy từ DAO_QuanAo được khai báo với dạng hashmap<String, String>
+     *     Do loại quần áo chỉ có 2 field cho nên rất thích hợp áp dụng hashmap
+     */
     public void loadDataForComboboxLoaiQuanAo() {
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
         cmbModel.addElement("Chọn Loại Quần Áo");
@@ -64,6 +68,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.cmbLoaiQA.setModel(cmbModel);
     }
 
+    /**
+     * Load dữ liệu cho kích thước, danh sách kích thước được lấy từ DAO_QuanAo được khai báo với dạng hashmap<String, String>
+     *     Do kích thước lượng dữ liệu không nhiều, và chỉ có 2 field cho nên rất thích hợp áp dụng hashmap
+     */
     public void loadDataForComboboxSize() {
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
         cmbModel.addElement("Chọn Kích Thước Quần Áo");
@@ -73,6 +81,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.cmbSize.setModel(cmbModel);
     }
 
+    /**
+     * Load dữ liệu cho nhà cung cấp lên combobox
+     */
     public void loadDataForComboboxNCC() {
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
         cmbModel.addElement("Chọn Nhà Cung Cấp");
@@ -82,6 +93,10 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.cmbNhaCungCap.setModel(cmbModel);
     }
 
+    /**
+     *     Vẽ hình ảnh lên giao diện dưới dạng ImagePanel
+     * @param path đường dẫn hình ảnh lấy được từ loaiImgWithRowData
+     */
     public void loadImage(URL path) {
 //      Xóa bỏ bản vẽ cũ
         this.pnImgUpLoad.remove(pnImg);
@@ -125,11 +140,14 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.repaint();
     }
 
-    //    Xử lý load hình ảnh quần áo lên panel khi chọn dòng dữ liệu quần áo trên bảng dữ liệu tương ứng
+    /**
+     * Xử lý load hình ảnh quần áo lên panel khi chọn dòng dữ liệu quần áo trên bảng dữ liệu tương ứng.
+     * Khi chọn dòng ta lấy được mã quần áo mã quần áo là đối số của hàm sau đó lấy
+     * quần áo từ dsQuanLyQuanAo để lấy được hình ảnh của quần áo tương ứng
+     */
     private void loadImgWithRowData(String maQuanAo) {
         QuanAo qa = this.dsQuanLyQuanAo.getByID(maQuanAo);
         try {
-//            URL urlImg = new URI( qa.getHinhAnh()).toURL();
             URL urlImg = qa.getHinhAnh().startsWith("file:")
                     ? new URL(qa.getHinhAnh())
                     : new File(qa.getHinhAnh()).toURI().toURL();
@@ -142,6 +160,9 @@ public class PanelQuanAo extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Load dữ liệu từ danh sách quần áo lên bảng
+     */
     private void loadDataTable() {
         DefaultTableModel modelQuanAo = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQuanAo.setRowCount(0);
@@ -817,39 +838,112 @@ public class PanelQuanAo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Thiết lập trạng thái cho các button khi bắt đầu tất cả điều disable trừ btnThemMoi
+     */
     public void setStatusAllBtnsStart() {
         java.util.List<JButton> listBtn = java.util.Arrays.asList(this.btnHuy, this.btnXoaTrang, this.btnCapNhat, this.btnUploadImg, this.btnLuu);
         ComponentStatus.setStatusBtn(listBtn, false);
         ComponentStatus.setStatusBtn(this.btnThemMoi, true);
     }
 
-    public String tinhGiaBan(String giaNhap, String loiNhuan) {
-        Double giaBan = NumberStandard.parseDouble(giaNhap) + NumberStandard.parseDouble(giaNhap) * NumberStandard.parsePercent(loiNhuan) / 100;
-        return NumberStandard.formatMoney(giaBan);
-    }
-
+    /**
+     *
+     * @param status trạng thái của các fields muốn thiết lập
+     */
     public void setAllField(Boolean status) {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA,
                 this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
         java.util.List<JTextField> listStatusTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA,
                 this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan);
         java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbSize, this.cmbNhaCungCap, this.cmbTrangThai);
+//        Xóa trắng fields
         ComponentStatus.emptyField(listTxt);
+//        Thiết lập trạng thái của fields enable hoặc disable
         ComponentStatus.setFieldStatus(listStatusTxt, status);
+//        Thiết lập combobox mặc định về index 0
         ComponentStatus.setDefaultCmb(listCmb);
+//        Thiết lập trạng thái của combobox enable hoặc disable
         ComponentStatus.setComboBoxStatus(listCmb, status);
     }
 
+    /**
+     * Thiết lập các field khi update
+     */
     public void setFieldUpdate() {
         java.util.List<JTextField> listTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA,
                 this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan, this.txtGiaBan);
         java.util.List<JTextField> listStatusTxt = java.util.Arrays.asList(this.txtTenQA, this.txtSoLuongQA,
                 this.txtThuongHieu, this.txtGiaNhap, this.txtLoiNhuan);
         java.util.List<JComboBox> listCmb = java.util.Arrays.asList(this.cmbLoaiQA, this.cmbSize, this.cmbNhaCungCap, this.cmbTrangThai);
+//        xóa trắng các fields
         ComponentStatus.emptyField(listTxt);
+//        Thiết lập trạng thái của các fields được enable
         ComponentStatus.setFieldStatus(listStatusTxt, true);
+//        Thiết lập mặc định cho các combobox
         ComponentStatus.setDefaultCmb(listCmb);
+//        Thiết lập trạng thái của các combobox được enable
         ComponentStatus.setComboBoxStatus(listCmb, true);
+    }
+    /**
+     * Tính toán giá bán
+     * @param giaNhap là giá gốc quần áo được nhập vào với đơn vị tiền tệ là VNĐ
+     * @param loiNhuan là phần trăm lợi nhuận mà cửa hàng muốn thu về đơn vị %
+     * @return giá bán của quần áo = giá nhập + giá nhập * (lợi nhuận / 100)
+     */
+    public String tinhGiaBan(String giaNhap, String loiNhuan) {
+        Double giaBan = NumberStandard.parseDouble(giaNhap) + NumberStandard.parseDouble(giaNhap) * NumberStandard.parsePercent(loiNhuan) / 100;
+        return NumberStandard.formatMoney(giaBan);
+    }
+
+    /**
+     *
+     * @param text chuỗi được chuyền vào field tên
+     * @return mã quần áo của quần áo cần thêm mới
+     */
+    public String taoMaQuanAo(String text) {
+        String resultFormat = "";
+        String trimText = text.trim();
+        String lowerText = trimText.toLowerCase();
+        ArrayList<String> splitResult = new ArrayList<>();
+//        Tách chuỗi thành mảng các từ của chuỗi
+        String[] splitText = lowerText.split(" ");
+        for (int i = 0; i < splitText.length; i++) {
+//            Kiểm tra nếu phần tử trong mảng là từ khác khoảng trắng thì từ đó được thêm vào mảng splitResult
+            if (!splitText[i].isEmpty()) {
+                splitResult.add(splitText[i]);
+            }
+        }
+        for (String item : splitResult) {
+//            lặp qua các phần tử là từ của chuỗi trong splitResult ta lấy ký tự đầu tiên của từ và In Hoa Ký tự đó lên
+            resultFormat += item.substring(0, 1).toUpperCase();
+        }
+//        Loại bỏ dấu tiếng việt
+        String resultName = NameStandard.removeDiacritics(resultFormat.trim());
+//        Định dạng lượng số
+        NumberFormat nf = new DecimalFormat("0000");
+        int number = 1;
+        String formattedNumber = nf.format(number);
+        String code = ""; // code là mã của quần áo có được qua việc nối các chuỗi của resultName + formattedNumber + kích thước quần áo đã chọn
+        code = resultName + "-" + formattedNumber + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
+
+        if (this.tblQuanAo.getModel().getRowCount() >= 1) {
+//            Lấy toàn bộ các mã quần áo có trong table quần áo đã load dữ liệu lên để kiểm tra trùng
+            ArrayList<String> arrayCode = new ArrayList<>();
+            for (int i = 0; i < this.tblQuanAo.getModel().getRowCount(); i++) {
+                arrayCode.add(this.tblQuanAo.getValueAt(i, 0).toString());
+            }
+//            nếu trùng thì tăng number
+            for (String item : arrayCode) {
+                if (code.contains(item)) {
+                    number++;
+                    code = resultName + "-" + nf.format(number) + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
+                } else {
+                    number = 1;
+                }
+            }
+        }
+        return code;
     }
 
     private void btnUploadImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImgActionPerformed
@@ -896,7 +990,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         } else if (this.statusBtnCapNhat == true && this.statusBtnThemMoi == false) {
 //            Trường hợp chọn nút xóa trắng khi đang cập nhật quần áo
             setFieldUpdate();
-
         }
 
         this.txtTenQA.requestFocus();
@@ -915,49 +1008,6 @@ public class PanelQuanAo extends javax.swing.JPanel {
         this.txtTenQA.requestFocus();
         this.cmbTrangThai.setSelectedIndex(1);
     }//GEN-LAST:event_btnThemMoiActionPerformed
-
-    public String taoMaQuanAo(String text) {
-        String resultFormat = "";
-        String trimText = text.trim();
-        String lowerText = trimText.toLowerCase();
-        ArrayList<String> splitResult = new ArrayList<>();
-        String[] splitText = lowerText.split(" ");
-        for (int i = 0; i < splitText.length; i++) {
-            if (!splitText[i].isEmpty()) {
-                splitResult.add(splitText[i]);
-            }
-        }
-        for (String item : splitResult) {
-            resultFormat += item.substring(0, 1).toUpperCase();
-        }
-//        Loại bỏ dấu tiếng việt
-        String resultName = NameStandard.removeDiacritics(resultFormat.trim());
-//        Định dạng lượng số
-        NumberFormat nf = new DecimalFormat("0000");
-        int number = 1;
-        String formattedNumber = nf.format(number);
-
-        String code = "";
-
-        code = resultName + "-" + formattedNumber + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
-
-//        String[] arrayCode = {"VHN-0001-M", "VHN-0002-M"};
-        ArrayList<String> arrayCode = new ArrayList<>();
-        for (int i = 0; i < this.tblQuanAo.getModel().getRowCount(); i++) {
-            arrayCode.add(this.tblQuanAo.getValueAt(i, 0).toString());
-        }
-
-        for (String item : arrayCode) {
-            if (code.contains(item)) {
-                number++;
-                code = resultName + "-" + nf.format(number) + "-" + this.cmbSize.getItemAt(this.cmbSize.getSelectedIndex());
-            } else {
-                number = 1;
-            }
-        }
-
-        return code;
-    }
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (this.txtTenQA.getText().trim().isEmpty()) {
@@ -1321,6 +1371,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemFocusLost
 
+//    Xử lý load dữ liệu quần áo tìm kiếm được lên bảng
     private void loadAllTableQA(ArrayList<QuanAo> dsQATimDuoc) {
         DefaultTableModel modelQA = (DefaultTableModel) this.tblQuanAo.getModel();
         modelQA.setRowCount(0);
@@ -1341,6 +1392,7 @@ public class PanelQuanAo extends javax.swing.JPanel {
         }
     }
 
+//    Xử lý chọn tiêu chí tìm kiếm
     private void xuLyTimKiemQA() {
         String duLieuTimKiem = this.txtTimKiem.getText().trim();
         int tieuChiTimKiem = this.cmbTimKiemQATheoTieuChi.getSelectedIndex();
