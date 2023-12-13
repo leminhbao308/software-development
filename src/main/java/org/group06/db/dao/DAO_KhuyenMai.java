@@ -100,20 +100,32 @@ public class DAO_KhuyenMai implements DAO_Interface<KhuyenMai> {
         }
     }
     
-    public boolean updateSoLuotSuDung(KhuyenMai khuyenMai) {
-        String updateQuery = "UPDATE KhuyenMai SET SOLUOTSD = ? WHERE MAKM = ?";
-        boolean success = false;
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
-
-            preparedStatement.setInt(1, khuyenMai.getSoLuotSuDung());
-            preparedStatement.setString(2, khuyenMai.getMaKhuyenMai());
-            success = preparedStatement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public boolean updateSoLuotSuDung(String maKM, int soLuotSuDung, boolean increase) {
+        if (increase) {
+            try {
+                String sql = "UPDATE KhuyenMai SET SOLUOTSD = SOLUOTSD + ? WHERE MAKM = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, soLuotSuDung);
+                statement.setString(2, maKM);
+                statement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            try {
+                String sql = "UPDATE KhuyenMai SET SOLUOTSD = SOLUOTSD - ? WHERE MAKM = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, soLuotSuDung);
+                statement.setString(2, maKM);
+                statement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
-        return success;
     }    
 
     @Override

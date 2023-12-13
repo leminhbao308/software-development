@@ -1,9 +1,9 @@
 package org.group06.view.screen;
 
 import org.group06.model.entity.NhanVien;
-import org.group06.model.manager.Manager_QuanAo;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
+import org.group06.view.components.tabbedPane.TabBanHang_DatHang;
 import org.group06.view.container.khachHang.PanelKhachHang;
 import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -22,7 +22,8 @@ import java.awt.*;
  * @author Le Minh Bao
  */
 public class WinGiaoDienChinh extends JFrame {
-    private Manager_QuanAo donHangTam = null;
+
+    private JTabbedPane tabDonHang = null;
     private final NhanVien nv;
 
     // <editor-fold defaultstate="collapsed" desc="Khai báo biến">
@@ -59,6 +60,7 @@ public class WinGiaoDienChinh extends JFrame {
 
     //Menu Tai Khoan
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
+    private final JMenuItem mniCaiDat = new JMenuItem("Cài Đặt");
     private final JMenuItem mniDangXuat = new JMenuItem("Đăng Xuất");
 
     private JPanel pnlContainer;
@@ -93,10 +95,17 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            if (donHangTam == null) {
+            if (tabDonHang == null) {
                 pnlContainer = new PanelBanHang_DatHang(nv);
+                tabDonHang = ((PanelBanHang_DatHang) pnlContainer).getTab();
             } else {
-                pnlContainer = new PanelBanHang_DatHang(nv, donHangTam);
+                // sync data in all tab
+                for (int i = 0; i < tabDonHang.getTabCount(); i++) {
+                    if (tabDonHang.getComponentAt(i) instanceof TabBanHang_DatHang tabBanHangDatHang) {
+                        tabBanHangDatHang.synchronizeData();
+                    }
+                }
+                pnlContainer = new PanelBanHang_DatHang(nv, tabDonHang);
             }
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -105,7 +114,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyNhanVien.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelNhanVien();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -116,7 +125,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuKhachHang() {
         mniQuanLyKhachHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelKhachHang();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -127,7 +136,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuQuanAo() {
         mniQuanLyQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -136,7 +145,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyLoaiQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelLoaiQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -145,7 +154,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyNhaCungCap.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelNhaCungCap();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -154,7 +163,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyKhuyenMai.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelKhuyenMai();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -173,7 +182,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuHoaDon() {
         mniQuanLyHoaDonBanHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelHoaDon();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -182,7 +191,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyHoaDonDatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelPhieuTam();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -193,7 +202,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuThongKe() {
         mniThongKeDoanhThu.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeDoanhThu();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -202,7 +211,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniThongKeQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -211,7 +220,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniThongKeKhachHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            collectDonHangTam();
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeKhachHang();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -233,9 +242,9 @@ public class WinGiaoDienChinh extends JFrame {
         });
     }
 
-    private void collectDonHangTam() {
-        if (pnlContainer instanceof PanelBanHang_DatHang) {
-            this.donHangTam = ((PanelBanHang_DatHang) pnlContainer).getDonHangTam();
+    private void tamLuuDonHang() {
+        if (pnlContainer instanceof PanelBanHang_DatHang panelBanHangDatHang) {
+            this.tabDonHang = panelBanHangDatHang.getTab();
         }
     }
 
