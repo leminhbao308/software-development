@@ -284,7 +284,9 @@ public class WinTTKhachHang extends javax.swing.JFrame {
         String tenKH = checkKiTu(txtTenKH.getText());
         String sdt = txtSDT.getText().replaceAll("\\s+", "").trim();
         String email = txtEmail.getText().trim();
-        KhachHang kh = new KhachHang(maKH, tenKH, sdt, email);
+        int diem = NumberStandard.parseInt(txtDiemTichLuy.getText());
+        String hang = txtHang.getText();
+        KhachHang kh = new KhachHang(maKH, tenKH, sdt, email, diem, hang);
         if (dao_KhachHang.update(kh)) {
             if (checkRegexSDT() && checkRegexTenKH()) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thông tin khách hàng thành công");
