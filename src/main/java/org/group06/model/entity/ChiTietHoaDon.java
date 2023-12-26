@@ -6,6 +6,7 @@ public class ChiTietHoaDon {
     private int soLuong;
     private double giaBan;
     private double loiNhuan;
+    private String ghiChu;
 
     public ChiTietHoaDon() {
         this.hoaDon = new HoaDon();
@@ -13,8 +14,9 @@ public class ChiTietHoaDon {
         this.soLuong = 0;
         this.giaBan = 0;
         this.loiNhuan = 0;
+        this.ghiChu = null;
     }
-
+    
     public ChiTietHoaDon(HoaDon hoaDon, QuanAo quanAo, int soLuong, double giaBan, double loiNhuan) {
         this.setHoaDon(hoaDon);
         this.setQuanAo(quanAo);
@@ -27,6 +29,13 @@ public class ChiTietHoaDon {
         this.setQuanAo(quanAo);
         this.setSoLuong(soLuong);
         this.setGiaBan(giaBan);
+    }
+    
+    public ChiTietHoaDon(HoaDon hoaDon, QuanAo quanAo, int soLuong, String ghiChu) {
+        this.setHoaDon(hoaDon);
+        this.setQuanAo(quanAo);
+        this.setSoLuong(soLuong);
+        this.setGhiChu(ghiChu);
     }
 
 
@@ -69,6 +78,14 @@ public class ChiTietHoaDon {
     public void setLoiNhuan(double loiNhuan) {
         this.loiNhuan = loiNhuan;
     }
+    
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
 
     @Override
     public String toString() {
@@ -78,6 +95,7 @@ public class ChiTietHoaDon {
                 ", soLuong=" + soLuong +
                 ", giaBan=" + giaBan +
                 ", loiNhuan=" + loiNhuan +
+                ", ghiChu=" + ghiChu +
                 '}';
     }
 }

@@ -17,16 +17,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
 import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
+import org.group06.utils.NumberStandard;
 
 /**
  * @author Le Minh Bao
@@ -35,19 +33,20 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private Connection connection = DatabaseConstant.getConnection();
     private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
-    private ArrayList<PhieuDat> dsPD;
+    private ArrayList<PhieuDat> dsPD = dao_PhieuDat.getAll();;
 
     /**
-     * Creates new form PanelHoaDon
+     * Creates new form PanelPhieuTam
      */
     public PanelPhieuTam() {
         initComponents();
         dchTimTheoNgayDat.setLocale(new Locale("vi", "VN"));
         dchTimTheoNgayNhan.setLocale(new Locale("vi", "VN"));
-        dsPD = dao_PhieuDat.getAll();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblPhieuDat,0);
-        FormatCellRenderer.formatCellRendererRight(tblPhieuDat,5);
+        FormatCellRenderer.formatCellRendererCenter(tblPhieuDat, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblPhieuDat, 1);
+        FormatCellRenderer.formatCellRendererCenter(tblPhieuDat, 2);
+        FormatCellRenderer.formatCellRendererRight(tblPhieuDat, 5);
     }
 
     /**
@@ -66,8 +65,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         txtTimTheoTenKH = new javax.swing.JTextField();
         dchTimTheoNgayDat = new com.toedter.calendar.JDateChooser();
         btnLamMoi = new javax.swing.JButton();
-        lblTimTheoTenNV = new javax.swing.JLabel();
-        txtTimTheoTenNV = new javax.swing.JTextField();
+        lblTimTheoSDTKhachHang = new javax.swing.JLabel();
+        txtTimTheoSDTKhachHang = new javax.swing.JTextField();
         lblTimTheoNgayNhan = new javax.swing.JLabel();
         dchTimTheoNgayNhan = new com.toedter.calendar.JDateChooser();
         srcPhieuDat = new javax.swing.JScrollPane();
@@ -111,14 +110,14 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             }
         });
 
-        lblTimTheoTenNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTimTheoTenNV.setText("Tìm theo tên nhân viên");
+        lblTimTheoSDTKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTimTheoSDTKhachHang.setText("Tìm theo số điện thoại khách hàng");
 
-        txtTimTheoTenNV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTimTheoTenNV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtTimTheoTenNV.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTimTheoSDTKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimTheoSDTKhachHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTimTheoSDTKhachHang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTimTheoTenNVKeyReleased(evt);
+                txtTimTheoSDTKhachHangKeyReleased(evt);
             }
         });
 
@@ -139,13 +138,13 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimHDLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTimTheoTenKH)
-                    .addComponent(lblTimTheoTenNV))
+                .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTimTheoSDTKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTimTheoTenNV)
-                    .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                    .addComponent(txtTimTheoSDTKhachHang)
+                    .addComponent(txtTimTheoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTimTheoNgayNhan)
@@ -153,7 +152,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                    .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLamMoi)
                 .addContainerGap())
@@ -171,8 +170,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                             .addComponent(dchTimTheoNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlTimHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(lblTimTheoTenNV)
-                            .addComponent(txtTimTheoTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTimTheoSDTKhachHang)
+                            .addComponent(txtTimTheoSDTKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dchTimTheoNgayNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,6 +208,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             }
         });
         tblPhieuDat.setRowHeight(50);
+        tblPhieuDat.setShowGrid(true);
         tblPhieuDat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPhieuDatMouseClicked(evt);
@@ -254,8 +254,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
-//        String tenKH = txtTimTheoTenKH.getText();
+        String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -263,7 +262,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        if(pd.getKhachHang().getTenKH().equalsIgnoreCase(tenKH)) {
+                        if (pd.getKhachHang().getTenKH().equalsIgnoreCase(tenKH)) {
                             String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                             String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
@@ -273,7 +272,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                             modelKH.addRow(data);
                         }
                     }
-                    txtTimTheoTenNV.setText("");
+                    txtTimTheoSDTKhachHang.setText("");
                     dchTimTheoNgayDat.setDate(null);
                     dchTimTheoNgayNhan.setDate(null);
                 } else {
@@ -296,7 +295,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     }
 
     private boolean checkRegexTenNV() {
-        String tenNV = txtTimTheoTenNV.getText().trim();
+        String tenNV = txtTimTheoSDTKhachHang.getText().trim();
         if (tenNV.equals("") || !tenNV.matches("^[\\p{L}\\s]+$")) {
             return false;
         } else {
@@ -304,41 +303,48 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         }
     }
 
-    private void txtTimTheoTenNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenNVKeyReleased
-        String tenNV = NameStandard.formatCapitalize(txtTimTheoTenNV.getText());
-//        String tenNV = txtTimTheoTenNV.getText();
+    private void txtTimTheoSDTKhachHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoSDTKhachHangKeyReleased
+        String sdt = txtTimTheoSDTKhachHang.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!tenNV.equals("")) {
-                if (checkRegexTenNV()) {
+            if (!sdt.equals("")) {
+                if (checkRegexSDT()) {
                     ArrayList<PhieuDat> dsPD = dao_PhieuDat.getAll();
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblPhieuDat.getModel();
                     modelKH.setRowCount(0);
                     for (PhieuDat pd : dsPD) {
-                        if(pd.getNhanVien().getTenNV().equalsIgnoreCase(tenNV)) {
+                        if (pd.getKhachHang().getSoDienThoai().equals(sdt)) {
                             String ngayTao = DateStandard.formatDate(pd.getNgayTao());
                             String ngayNhan = DateStandard.formatDate(pd.getNgayNhan());
                             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
                             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
                             String ghiChu = loadGhiChu(pd);
-                            Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
+                            Object[] data = {pd.getMaPhieuDat(), ngayTao, ngayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
                             modelKH.addRow(data);
                         }
-
                     }
                     txtTimTheoTenKH.setText("");
                     dchTimTheoNgayDat.setDate(null);
                     dchTimTheoNgayNhan.setDate(null);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Nhập lại tên nhân viên cần tìm");
+                    JOptionPane.showMessageDialog(this, "Nhập lại số điện thoại cần tìm");
                     loadDataTable();
                 }
             } else {
                 loadDataTable();
             }
         }
-    }//GEN-LAST:event_txtTimTheoTenNVKeyReleased
+    }//GEN-LAST:event_txtTimTheoSDTKhachHangKeyReleased
 
-    private void callFrameChiTietHoaDon() {
+    private boolean checkRegexSDT() {
+        String sdt = txtTimTheoSDTKhachHang.getText().trim();
+        if (sdt.equals("") || !sdt.matches("0[1-9]{1}[0-9]{8}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void callWinChiTietHoaDon() {
         WinChiTietDonDatHang frCTDDH = new WinChiTietDonDatHang(this.getSelectedPhieuDat(), this);
         frCTDDH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTDDH.setResizable(false);
@@ -347,7 +353,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void tblPhieuDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuDatMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameChiTietHoaDon();
+            callWinChiTietHoaDon();
         }
     }//GEN-LAST:event_tblPhieuDatMouseClicked
 
@@ -364,14 +370,14 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     if (ngayNhan == null) {
                         loadDataNgayDat(ngayDat);
                         txtTimTheoTenKH.setText("");
-                        txtTimTheoTenNV.setText("");
+                        txtTimTheoSDTKhachHang.setText("");
                     } else if (ngayNhan.before(ngayDat)) {
                         JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
                         resetDay();
                     } else {
                         loadDataTheo2Ngay(ngayDat, ngayNhan);
                         txtTimTheoTenKH.setText("");
-                        txtTimTheoTenNV.setText("");
+                        txtTimTheoSDTKhachHang.setText("");
                     }
                 }
             }
@@ -387,7 +393,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     if (ngayDat == null) {
                         loadDataNgayNhan(ngayNhan);
                         txtTimTheoTenKH.setText("");
-                        txtTimTheoTenNV.setText("");
+                        txtTimTheoSDTKhachHang.setText("");
                     } else {
                         if (ngayDat.after(ngayNhan)) {
                             JOptionPane.showMessageDialog(null, "Ngày nhận không hợp lệ");
@@ -395,7 +401,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                         } else {
                             loadDataTheo2Ngay(ngayDat, ngayNhan);
                             txtTimTheoTenKH.setText("");
-                            txtTimTheoTenNV.setText("");
+                            txtTimTheoSDTKhachHang.setText("");
                         }
                     }
                 }
@@ -405,7 +411,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         txtTimTheoTenKH.setText("");
-        txtTimTheoTenNV.setText("");
+        txtTimTheoSDTKhachHang.setText("");
         dchTimTheoNgayDat.setDate(null);
         dchTimTheoNgayNhan.setDate(null);
         loadDataTable();
@@ -423,7 +429,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
+            
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -440,7 +447,8 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
+            
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -459,7 +467,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
             String ghiChu = loadGhiChu(pd);
 
-            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "",trangThaiThanhToan, ghiChu};
+            Object[] data = {pd.getMaPhieuDat(), newFormatNgayTao, newFormatNgayNhan, pd.getKhachHang().getTenKH(), pd.getNhanVien().getTenNV(), ttt, pd.getKhuyenMai() != null ? pd.getKhuyenMai().getTenCTKM() : "", trangThaiThanhToan, ghiChu};
             modelPD.addRow(data);
         }
     }
@@ -470,40 +478,52 @@ public class PanelPhieuTam extends javax.swing.JPanel {
         loadDataTable();
     }
 
+    /**
+     * 
+     * @return check tiền cần trả ở WinTraPhieuDatHang
+     */
+    public int getTrangThai() {
+        if (tblPhieuDat.getSelectedRow() == -1) {
+            return -1;
+        } else {
+            String trangThai = (String) tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 7);
+            if (trangThai.equalsIgnoreCase("Chưa thanh toán")) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
     private com.toedter.calendar.JDateChooser dchTimTheoNgayDat;
     private com.toedter.calendar.JDateChooser dchTimTheoNgayNhan;
     private javax.swing.JLabel lblTimTheoNgayDat;
     private javax.swing.JLabel lblTimTheoNgayNhan;
+    private javax.swing.JLabel lblTimTheoSDTKhachHang;
     private javax.swing.JLabel lblTimTheoTenKH;
-    private javax.swing.JLabel lblTimTheoTenNV;
     private javax.swing.JLabel lblTitleDSHoaDon;
     private javax.swing.JPanel pnlTimHD;
     private javax.swing.JScrollPane srcPhieuDat;
     private javax.swing.JTable tblPhieuDat;
+    private javax.swing.JTextField txtTimTheoSDTKhachHang;
     private javax.swing.JTextField txtTimTheoTenKH;
-    private javax.swing.JTextField txtTimTheoTenNV;
     // End of variables declaration//GEN-END:variables
 
     private PhieuDat getSelectedPhieuDat() {
-        String maPD = tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString();
-
         PhieuDat phieuDat = null;
-        
         for (PhieuDat pd : dsPD) {
             if (pd.getMaPhieuDat().equals(tblPhieuDat.getValueAt(tblPhieuDat.getSelectedRow(), 0).toString())) {
                 phieuDat = pd;
             }
         }
-
         if (tblPhieuDat.getSelectedRow() == -1) {
             return null;
         } else {
             return phieuDat;
         }
     }
-
 
     public void loadDataTable() {
         DefaultTableModel modelPD = (DefaultTableModel) this.tblPhieuDat.getModel();
@@ -515,6 +535,9 @@ public class PanelPhieuTam extends javax.swing.JPanel {
             String tenKH = (pd.getKhachHang() == null) ? "Khách vãng lai" : pd.getKhachHang().getTenKH();
             String tenNV = pd.getNhanVien().getTenNV();
             String ttt = loadTongThanhTien(pd.getMaPhieuDat());
+            if(NumberStandard.parseMoney(ttt) == 0) {
+                continue;
+            }
             String khuyenMai = (pd.getKhuyenMai() == null) ? "" : pd.getKhuyenMai().getTenCTKM();
             String trangThaiThanhToan = pd.isThanhToan() ? "Đã thanh toán" : "Chưa thanh toán";
 
@@ -522,7 +545,7 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                 LocalDate ngayNhan = pd.getNgayNhan().toLocalDate();
                 LocalDate ngayHienTai = LocalDate.now();
                 long daysBetween = ChronoUnit.DAYS.between(ngayNhan, ngayHienTai);
-                if (daysBetween>= 0 && daysBetween <= 7) {
+                if (daysBetween >= 0 && daysBetween <= 7) {
                     pd.setTrangThai(PhieuDat.CHO_NHAN_HANG);
                     dao_PhieuDat.update(pd);
                 } else if (daysBetween > 7) {
@@ -535,7 +558,6 @@ public class PanelPhieuTam extends javax.swing.JPanel {
                     }
                 }
             }
-
             String ghiChu = loadGhiChu(pd);
 
             Object[] data = {maPD, dateDat, dateNhan, tenKH, tenNV, ttt, khuyenMai, trangThaiThanhToan, ghiChu};
@@ -546,19 +568,15 @@ public class PanelPhieuTam extends javax.swing.JPanel {
     private String loadTongThanhTien(String pd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietPhieuDat> dsCTPD = new DAO_ChiTietPhieuDat(connection).getAllByID(pd);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietPhieuDat ctpd : dsCTPD) {
-            double tinhThanhTien = ctpd.getGiaBan();
-            tinhTongThanhTien += tinhThanhTien;
-
+            tinhTongThanhTien += ctpd.getGiaBan() * ctpd.getSoLuong();
             if (ctpd.getPhieuDat().getKhuyenMai() != null) {
                 mucGiamGia = (ctpd.getPhieuDat().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
-
-        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
-        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         return tongThanhTien;
     }
 

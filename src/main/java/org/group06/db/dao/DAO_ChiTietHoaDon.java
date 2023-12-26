@@ -42,6 +42,11 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         return dsChiTietHoaDon;
     }
 
+    /**
+     * 
+     * @param maHD 
+     * @return danh sách các sản phẩm đã mua, số lượng, giá bán... trong hóa đơn đó
+     */
     public ArrayList<ChiTietHoaDon> getAllCTQA(String maHD) {
         ArrayList<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
         String sql = "SELECT * FROM ChiTietHoaDon WHERE MAHD = ?";
@@ -52,10 +57,11 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
             while (resultSet.next()) {
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                 chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
-                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
                 chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
                 chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+                chiTietHoaDon.setGhiChu(resultSet.getString("GHICHU"));
                 dsChiTietHoaDon.add(chiTietHoaDon);
             }
         } catch (SQLException e) {
@@ -64,20 +70,68 @@ public class DAO_ChiTietHoaDon implements DAO_Interface<ChiTietHoaDon> {
         return dsChiTietHoaDon;
     }
 
+    /**
+     * 
+     * @param maQA
+     * @return thông tin của quần áo đã chọn 
+     */
+    public ChiTietHoaDon getQA(String maQA, String maHD) {
+        ChiTietHoaDon chiTietHoaDon = null;
+        try {
+            String sql = "SELECT * FROM ChiTietHoaDon WHERE MAQA = ? AND MAHD = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            statement.setString(2, maHD);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                chiTietHoaDon = new ChiTietHoaDon();
+                chiTietHoaDon.setHoaDon(new DAO_HoaDon(connection).getByID(resultSet.getString("MAHD")));
+                chiTietHoaDon.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+                chiTietHoaDon.setQuanAo(new DAO_QuanAo(connection).getByID(resultSet.getString("MAQA")));
+                chiTietHoaDon.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietHoaDon.setGiaBan(resultSet.getDouble("GIABAN"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi lấy danh sách chi tiết hóa đơn");
+        }
+        return chiTietHoaDon;
+    }
+
     @Override
     public boolean add(ChiTietHoaDon cthd) {
         try {
-            String sql = "INSERT INTO ChiTietHoaDon (MAHD, LOINHUAN, MAQA, SOLUONG, GIABAN) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ChiTietHoaDon (MAHD, MAQA, SOLUONG, GIABAN, LOINHUAN) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, cthd.getHoaDon().getMaHoaDon());
-            statement.setDouble(2, cthd.getLoiNhuan());
-            statement.setString(3, cthd.getQuanAo().getMaQA());
-            statement.setInt(4, cthd.getSoLuong());
-            statement.setDouble(5, cthd.getGiaBan());
+            statement.setString(2, cthd.getQuanAo().getMaQA());
+            statement.setInt(3, cthd.getSoLuong());
+            statement.setDouble(4, cthd.getGiaBan());
+            statement.setDouble(5, cthd.getLoiNhuan());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
             System.out.println("Lỗi thêm chi tiết hóa đơn");
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @param cthd
+     * @return cập nhật lại số lượng quần áo và ghi lại lí do trong chi tiết hóa đơn nếu KH trả lại quần áo 
+     */
+    public boolean updateSoLuong(ChiTietHoaDon cthd) {
+        try {
+            String sql = "UPDATE ChiTietHoaDon SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ? AND MAHD = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, cthd.getSoLuong());
+            statement.setString(2, cthd.getGhiChu());
+            statement.setString(3, cthd.getQuanAo().getMaQA());
+            statement.setString(4, cthd.getHoaDon().getMaHoaDon());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

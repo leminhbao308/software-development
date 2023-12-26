@@ -277,14 +277,14 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void callFrameTTNV() {
+    private void callWinTTNV() {
         WinTTNhanVien frTTNV = new WinTTNhanVien(this.getSelectedNV(), this);
         frTTNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTNV.setResizable(false);
         frTTNV.setVisible(true);
     }
 
-    private void callFrameThemNV() {
+    private void callWinThemNV() {
         WinThemNhanVien frThemNV = new WinThemNhanVien(this);
         frThemNV.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frThemNV.setResizable(false);
@@ -293,12 +293,12 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameTTNV();
+            callWinTTNV();
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        callFrameThemNV();
+        callWinThemNV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     public String getMaNV() {
@@ -312,8 +312,8 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
         String tenNV = txtTimTheoTen.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!tenNV.equals("")) {
                 if (checkRegexTenNV()) {
                     ArrayList<NhanVien> dsNV = dao_NhanVien.getAll();
@@ -353,7 +353,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private boolean checkRegexMaNV() {
         String maNV = txtTimTheoMa.getText().trim();
-        if (maNV.equals("") || !maNV.matches("^NV[0-9]{3}")) {
+        if (maNV.equals("") || !maNV.matches("^NV[0-9]{3}") || !maNV.matches("^nv[0-9]{3}")) {
             return false;
         } else {
             return true;
@@ -362,13 +362,13 @@ public class PanelNhanVien extends javax.swing.JPanel {
 
     private void txtTimTheoMaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoMaKeyReleased
         String maNV = txtTimTheoMa.getText();
-        String gt = "Nữ", trangThai = "Đã thôi việc";
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String gt = "Nữ", trangThai = "Đã thôi việc";
             if (!maNV.equals("")) {
                 if (checkRegexMaNV()) {
                     NhanVien nhanVien = dao_NhanVien.getByID(maNV);
-                    DefaultTableModel modelKH = (DefaultTableModel) this.tblNhanVien.getModel();
-                    modelKH.setRowCount(0);
+                    DefaultTableModel modelNV = (DefaultTableModel) this.tblNhanVien.getModel();
+                    modelNV.setRowCount(0);
                     if (nhanVien.isGioiTinh()) {
                         gt = "Nam";
                     }
@@ -377,7 +377,7 @@ public class PanelNhanVien extends javax.swing.JPanel {
                     }
                     Object[] data = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getMatKhau(), gt,
                         nhanVien.getCccd(), nhanVien.getDiaChi(), nhanVien.getSoDienThoai(), trangThai, nhanVien.getChucVu()};
-                    modelKH.addRow(data);
+                    modelNV.addRow(data);
                     txtTimTheoTen.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy, vui lòng nhập lại");

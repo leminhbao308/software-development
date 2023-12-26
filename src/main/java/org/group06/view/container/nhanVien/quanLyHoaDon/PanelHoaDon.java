@@ -11,7 +11,6 @@ import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.DateStandard;
 import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,12 +18,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import org.group06.utils.NumberStandard;
 
 public class PanelHoaDon extends javax.swing.JPanel {
 
@@ -39,8 +38,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
         initComponents();
         dchTimTheoNgay.setLocale(new Locale("vi", "VN"));
         loadDataTable();
-        FormatCellRenderer.formatCellRendererCenter(tblHoaDon,0);
-        FormatCellRenderer.formatCellRendererRight(tblHoaDon,4);
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon, 0);
+        FormatCellRenderer.formatCellRendererCenter(tblHoaDon, 1);
+        FormatCellRenderer.formatCellRendererRight(tblHoaDon, 4);
     }
 
     /**
@@ -208,16 +208,17 @@ public class PanelHoaDon extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimTheoTenKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKHKeyReleased
-//        String tenKH = NameStandard.formatCapitalize(txtTimTheoTenKH.getText());
         String tenKH = txtTimTheoTenKH.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblHoaDon.getModel();
                     modelKH.setRowCount(0);
+                    // trả về ds hóa đơn có khách hàng != null
                     ArrayList<HoaDon> dsHoaDonTheoTenKH = dsHD.parallelStream()
                             .filter(hd -> hd.getKhachHang() != null).filter(hd -> hd.getKhachHang().getTenKH().contains(tenKH))
                             .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                    // trả về ds hóa đơn có khách hàng là khách vãng lai
                     ArrayList<HoaDon> dsHoaDonKhachVangLai = dsHD.parallelStream()
                             .filter(hd -> hd.getKhachHang() == null).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
@@ -258,17 +259,17 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameChiTietHoaDon();
+            callWinChiTietHoaDon();
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
-    private void callFrameChiTietHoaDon() {
+    private void callWinChiTietHoaDon() {
         WinChiTietHoaDon frCTHD = new WinChiTietHoaDon(this.getSelectedHoaDon(), this);
         frCTHD.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frCTHD.setResizable(false);
         frCTHD.setVisible(true);
     }
-    
+
     private void dchTimTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTimTheoNgayPropertyChange
         if (evt.getPropertyName().equals("date")) {
             Date date = (Date) evt.getNewValue();
@@ -321,12 +322,12 @@ public class PanelHoaDon extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private HoaDon getSelectedHoaDon() {
-        String mHD = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
+        String maHD = tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 0).toString();
 
         if (tblHoaDon.getSelectedRow() == -1) {
             return null;
         } else {
-            return dao_HoaDon.getByID(mHD);
+            return dao_HoaDon.getByID(maHD);
         }
     }
 
@@ -380,7 +381,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
 
     public void loadDataTable() {
         DefaultTableModel modelHD = (DefaultTableModel) tblHoaDon.getModel();
-
+        modelHD.setRowCount(0);
         Timer timer = new Timer(300, new ActionListener() {
             private int currentIndex = 0;
             private final int batchSize = 10;
@@ -408,6 +409,7 @@ public class PanelHoaDon extends javax.swing.JPanel {
                                         String tenNV = hd.getNhanVien().getTenNV();
                                         String khuyenMai = (hd.getKhuyenMai() == null) ? "" : hd.getKhuyenMai().getTenCTKM();
                                         String ttt = loadTongThanhTien(hd.getMaHoaDon());
+
                                         Object[] data = {hd.getMaHoaDon(), date, tenKH, tenNV, ttt, khuyenMai};
                                         // Cập nhật bảng
                                         modelHD.addRow(data);
@@ -436,11 +438,9 @@ public class PanelHoaDon extends javax.swing.JPanel {
         timer.start();
     }
 
-
     public String loadTongThanhTien(String hd) {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon(connection).getAllCTQA(hd);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
             tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
             if (cthd.getHoaDon().getKhuyenMai() != null) {
@@ -449,7 +449,11 @@ public class PanelHoaDon extends javax.swing.JPanel {
         }
         double tongTienSauVAT = tinhTongThanhTien * 1.08;
         double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         return tongThanhTien;
+    }
+
+    public void updateGiaTien(double giaTien) {
+        tblHoaDon.setValueAt(NumberStandard.formatMoney(giaTien), tblHoaDon.getSelectedRow(), 4);
     }
 }

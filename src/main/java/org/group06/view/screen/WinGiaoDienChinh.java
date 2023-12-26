@@ -3,6 +3,7 @@ package org.group06.view.screen;
 import org.group06.model.entity.NhanVien;
 import org.group06.utils.ImagePath;
 import org.group06.view.components.panels.ImagePanel;
+import org.group06.view.components.tabbedPane.TabBanHang_DatHang;
 import org.group06.view.container.khachHang.PanelKhachHang;
 import org.group06.view.container.nhanVien.PanelBanHang_DatHang;
 import org.group06.view.container.nhanVien.quanLyHoaDon.PanelHoaDon;
@@ -11,10 +12,7 @@ import org.group06.view.container.nhanVien.quanLyNhanVien.PanelNhanVien;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeDoanhThu;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeKhachHang;
 import org.group06.view.container.nhanVien.thongKe.PanelThongKeQuanAo;
-import org.group06.view.container.quanAo.PanelKhuyenMai;
-import org.group06.view.container.quanAo.PanelLoaiQuanAo;
-import org.group06.view.container.quanAo.PanelNhaCungCap;
-import org.group06.view.container.quanAo.PanelQuanAo;
+import org.group06.view.container.quanAo.*;
 import org.group06.view.container.taiKhoan.WinDoiMatKhau;
 
 import javax.swing.*;
@@ -24,6 +22,9 @@ import java.awt.*;
  * @author Le Minh Bao
  */
 public class WinGiaoDienChinh extends JFrame {
+
+    private JTabbedPane tabDonHang = null;
+    private final NhanVien nv;
 
     // <editor-fold defaultstate="collapsed" desc="Khai báo biến">
     private final JMenuBar mnuMain = new JMenuBar();
@@ -46,10 +47,11 @@ public class WinGiaoDienChinh extends JFrame {
     private final JMenuItem mniQuanLyLoaiQuanAo = new JMenuItem("Quản Lý Loại Quần Áo");
     private final JMenuItem mniQuanLyNhaCungCap = new JMenuItem("Quản Lý Nhà Cung Cấp");
     private final JMenuItem mniQuanLyKhuyenMai = new JMenuItem("Quản Lý Khuyến Mãi");
+    private final JMenuItem mniQuanLyKichThuoc = new JMenuItem("Quản Lý Kích Thước");
 
     //Menu Hoa Don
     private final JMenuItem mniQuanLyHoaDonBanHang = new JMenuItem("Quản Lý Hóa Đơn Bán Hàng");
-    private final JMenuItem mniQuanLyHoaDonDatHang = new JMenuItem("Quản Lý Hóa Đơn Đặt Hàng");
+    private final JMenuItem mniQuanLyHoaDonDatHang = new JMenuItem("Quản Lý Phiếu Đặt Hàng");
 
     //Menu Thong Ke
     private final JMenuItem mniThongKeDoanhThu = new JMenuItem("Thống Kê Doanh Thu");
@@ -58,10 +60,10 @@ public class WinGiaoDienChinh extends JFrame {
 
     //Menu Tai Khoan
     private final JMenuItem mniDoiMatKhau = new JMenuItem("Đổi Mật Khẩu");
+    private final JMenuItem mniCaiDat = new JMenuItem("Cài Đặt");
     private final JMenuItem mniDangXuat = new JMenuItem("Đăng Xuất");
 
     private JPanel pnlContainer;
-    private NhanVien nv;
     // </editor-fold>
 
     public WinGiaoDienChinh(NhanVien nv) {
@@ -74,7 +76,7 @@ public class WinGiaoDienChinh extends JFrame {
         this.setIconImage(ImagePath.loadImage(ImagePath.THUMBNAIL_ICON));
         this.setUndecorated(true);
 
-        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN,1920 , 1080);
+        pnlContainer = new ImagePanel(ImagePath.THUMBNAIL_MAIN, 1920, 1080);
         this.add(pnlContainer, BorderLayout.CENTER);
 
         initMenu();
@@ -93,7 +95,18 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuNhanVien() {
         mniBanHang_DatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
-            pnlContainer = new PanelBanHang_DatHang(nv);
+            if (tabDonHang == null) {
+                pnlContainer = new PanelBanHang_DatHang(nv);
+                tabDonHang = ((PanelBanHang_DatHang) pnlContainer).getTab();
+            } else {
+                // sync data in all tab
+                for (int i = 0; i < tabDonHang.getTabCount(); i++) {
+                    if (tabDonHang.getComponentAt(i) instanceof TabBanHang_DatHang tabBanHangDatHang) {
+                        tabBanHangDatHang.synchronizeData();
+                    }
+                }
+                pnlContainer = new PanelBanHang_DatHang(nv, tabDonHang);
+            }
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -101,6 +114,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyNhanVien.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelNhanVien();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -111,6 +125,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuKhachHang() {
         mniQuanLyKhachHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelKhachHang();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -121,6 +136,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuQuanAo() {
         mniQuanLyQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -129,6 +145,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyLoaiQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelLoaiQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -137,6 +154,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyNhaCungCap.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelNhaCungCap();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -145,7 +163,16 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyKhuyenMai.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelKhuyenMai();
+            getContentPane().add(pnlContainer, BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        });
+        
+        mniQuanLyKichThuoc.addActionListener(e -> {
+            getContentPane().remove(pnlContainer);
+            pnlContainer = new PanelKichThuocQA();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
             this.repaint();
@@ -155,6 +182,7 @@ public class WinGiaoDienChinh extends JFrame {
     private void addActionMenuHoaDon() {
         mniQuanLyHoaDonBanHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelHoaDon();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -163,6 +191,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniQuanLyHoaDonDatHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelPhieuTam();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -171,9 +200,9 @@ public class WinGiaoDienChinh extends JFrame {
     }
 
     private void addActionMenuThongKe() {
-//        TODO: Add Các Panel Thống Kê trước khi thêm action
         mniThongKeDoanhThu.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeDoanhThu();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -182,6 +211,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniThongKeQuanAo.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeQuanAo();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -190,6 +220,7 @@ public class WinGiaoDienChinh extends JFrame {
 
         mniThongKeKhachHang.addActionListener(e -> {
             getContentPane().remove(pnlContainer);
+            tamLuuDonHang();
             pnlContainer = new PanelThongKeKhachHang();
             getContentPane().add(pnlContainer, BorderLayout.CENTER);
             this.revalidate();
@@ -198,7 +229,6 @@ public class WinGiaoDienChinh extends JFrame {
     }
 
     private void addActionMenuTaiKhoan() {
-//        TODO: Add Panel Đổi mật khẩu trước khi thêm action
         mniDoiMatKhau.addActionListener(e -> {
             new WinDoiMatKhau(nv).setVisible(true);
         });
@@ -210,6 +240,12 @@ public class WinGiaoDienChinh extends JFrame {
             WinDangNhap winDangNhap = new WinDangNhap();
             winDangNhap.setVisible(true);
         });
+    }
+
+    private void tamLuuDonHang() {
+        if (pnlContainer instanceof PanelBanHang_DatHang panelBanHangDatHang) {
+            this.tabDonHang = panelBanHangDatHang.getTab();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Tạo Menu với cài đặt font và icon">
@@ -235,6 +271,7 @@ public class WinGiaoDienChinh extends JFrame {
         mniQuanLyLoaiQuanAo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyNhaCungCap.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mniQuanLyKichThuoc.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniQuanLyHoaDonDatHang.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mniThongKeDoanhThu.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -255,6 +292,7 @@ public class WinGiaoDienChinh extends JFrame {
         mniQuanLyLoaiQuanAo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyNhaCungCap.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         mniQuanLyKhuyenMai.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        mniQuanLyKichThuoc.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
         //Menu Hoa Don
         mniQuanLyHoaDonBanHang.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -305,6 +343,7 @@ public class WinGiaoDienChinh extends JFrame {
         mnQuanAo.add(mniQuanLyLoaiQuanAo);
         mnQuanAo.add(mniQuanLyNhaCungCap);
         mnQuanAo.add(mniQuanLyKhuyenMai);
+        mnQuanAo.add(mniQuanLyKichThuoc);
 
         //Menu Hoa Don
         mnHoaDon.add(mniQuanLyHoaDonBanHang);

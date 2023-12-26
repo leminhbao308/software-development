@@ -6,7 +6,10 @@ package org.group06.view.container.nhanVien.thongKe;
 
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ThongKeKhachHang;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_HoaDon;
 import org.group06.utils.NumberStandard;
+import org.group06.utils.FormatCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,7 +21,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Locale;
-
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
 import org.group06.view.components.charts.PieChart;
 import org.group06.view.components.charts.data.PieChartData;
 
@@ -26,12 +30,18 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
     private final Connection connection = DatabaseConstant.getConnection();
     private DAO_ThongKeKhachHang dao_ThongKe = new DAO_ThongKeKhachHang(connection);
+    private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+    private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
 
     /**
      * Creates new form PanelThongKeKhachHang
      */
     public PanelThongKeKhachHang() {
         initComponents();
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 1);
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblTopChi, 3);
+        FormatCellRenderer.formatCellRendererRight(tblTopChi, 4);
     }
 
     @SuppressWarnings("unchecked")
@@ -67,8 +77,6 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         txtTongKH = new javax.swing.JTextField();
         txtKHTT = new javax.swing.JTextField();
         txtKVL = new javax.swing.JTextField();
-        scrTopSanPham = new javax.swing.JScrollPane();
-        tblTopSanPham = new javax.swing.JTable();
         scrTopChi = new javax.swing.JScrollPane();
         tblTopChi = new javax.swing.JTable();
         pnlBieuDo = loadBieuDo();
@@ -426,46 +434,6 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        scrTopSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khách Hàng Mua Nhiều Sản Phẩm Nhất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-
-        tblTopSanPham.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tblTopSanPham.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Tên Khách Hàng", "Số Điện Thoại", "Số Sản Phẩm"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblTopSanPham.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value,
-                    isSelected, hasFocus, row, column);
-                if (column == 2) {
-                    setHorizontalAlignment(JLabel.RIGHT);
-                } else {
-                    setHorizontalAlignment(JLabel.LEFT);
-                }
-                return c;
-            }
-        });
-        tblTopSanPham.setFillsViewportHeight(true);
-        tblTopSanPham.setRowHeight(50);
-        tblTopSanPham.setShowGrid(true);
-        tblTopSanPham.getTableHeader().setResizingAllowed(false);
-        tblTopSanPham.getTableHeader().setReorderingAllowed(false);
-        scrTopSanPham.setViewportView(tblTopSanPham);
-
         scrTopChi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khách Hàng Chi Nhiều Nhất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         tblTopChi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -474,11 +442,11 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên Khách Hàng", "Số Điện Thoại", "Tổng Chi"
+                "Tên Khách Hàng", "Số Điện Thoại", "Điểm Tích Lũy", "Hạng", "Tổng Chi"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -505,6 +473,11 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         tblTopChi.getTableHeader().setResizingAllowed(false);
         tblTopChi.getTableHeader().setReorderingAllowed(false);
         scrTopChi.setViewportView(tblTopChi);
+        if (tblTopChi.getColumnModel().getColumnCount() > 0) {
+            tblTopChi.getColumnModel().getColumn(0).setResizable(false);
+            tblTopChi.getColumnModel().getColumn(2).setResizable(false);
+            tblTopChi.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout pnlBangChiTietLayout = new javax.swing.GroupLayout(pnlBangChiTiet);
         pnlBangChiTiet.setLayout(pnlBangChiTietLayout);
@@ -514,13 +487,9 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBangChiTietLayout.createSequentialGroup()
-                        .addComponent(scrTopSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
-                        .addGap(50, 50, 50)
-                        .addComponent(scrTopChi, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
-                    .addGroup(pnlBangChiTietLayout.createSequentialGroup()
                         .addComponent(pnlTongQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(scrTopChi, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         pnlBangChiTietLayout.setVerticalGroup(
             pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -528,9 +497,7 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(pnlTongQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlBangChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrTopSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(scrTopChi, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(scrTopChi, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -622,12 +589,21 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
 
     private void dchTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchTuNgayPropertyChange
         tinhTheoKhoangTGian();
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchTuNgayPropertyChange
 
     private void dchDenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchDenNgayPropertyChange
         tinhTheoKhoangTGian();
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchDenNgayPropertyChange
 
+    private void dongBoKhoangThoiGian() {
+        if (tabLuaChonThongKe.getSelectedIndex() == 3) {
+            dchTuNgay.setMaxSelectableDate(dchDenNgay.getDate());
+            dchDenNgay.setMinSelectableDate(dchTuNgay.getDate());
+        }
+    }
+    
     /**
      * Tính theo tất cả khoảng thời gian
      */
@@ -637,11 +613,9 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         int tongKVL = dao_ThongKe.getTongKVL().size();
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
-        ArrayList<Object[]> dsTongSP = dao_ThongKe.getAllKhachHangTheoTongSP();
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi();
-        loadDuLieuLenTable(dsTongSP, dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
-
     /**
      * Tính theo ngày tháng năm được chọn
      */
@@ -654,9 +628,8 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         int tongKVL = dao_ThongKe.getTongKVL_TrongNgay(date).size();
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
-        ArrayList<Object[]> dsTongSP = dao_ThongKe.getAllKhachHangTheoTongSP_TrongNgay(date);
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TrongNgay(date);
-        loadDuLieuLenTable(dsTongSP, dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
@@ -671,9 +644,8 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         int tongKVL = dao_ThongKe.getTongKVL_TrongThang(month, year).size();
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
-        ArrayList<Object[]> dsTongSP = dao_ThongKe.getAllKhachHangTheoTongSP_TrongThang(month, year);
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TrongThang(month, year);
-        loadDuLieuLenTable(dsTongSP, dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
@@ -687,9 +659,8 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         int tongKVL = dao_ThongKe.getTongKVL_TrongNam(year).size();
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
-        ArrayList<Object[]> dsTongSP = dao_ThongKe.getAllKhachHangTheoTongSP_TrongNam(year);
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TrongNam(year);
-        loadDuLieuLenTable(dsTongSP, dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
@@ -705,33 +676,23 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         int tongKVL = dao_ThongKe.getTongKVL_TheoKhoangTGian(date1, date2).size();
         loadTongQuanKhachHang(tongKH, tongKHTT, tongKVL);
 
-        ArrayList<Object[]> dsTongSP = dao_ThongKe.getAllKhachHangTheoTongSP_TheoKhoangTGian(date1, date2);
         ArrayList<Object[]> dsTongChi = dao_ThongKe.getAllKhachHangTheoTongChi_TheoKhoangTGian(date1, date2);
-        loadDuLieuLenTable(dsTongSP, dsTongChi);
+        loadDuLieuLenTable(dsTongChi);
     }
 
     /**
      * Load dữ liệu từ 2 Arr lên 2 tabble
      *
-     * @param rowSP
      * @param rowChi
      */
-    private void loadDuLieuLenTable(ArrayList<Object[]> rowSP, ArrayList<Object[]> rowChi) {
-        DefaultTableModel modelSP = (DefaultTableModel) tblTopSanPham.getModel();
+    private void loadDuLieuLenTable(ArrayList<Object[]> rowChi) {
         DefaultTableModel modelChi = (DefaultTableModel) tblTopChi.getModel();
 
-        modelSP.setRowCount(0);
         modelChi.setRowCount(0);
 
-        for (Object[] data : rowSP) {
-            if (((int) data[2]) != 0) {
-                Object[] row = {data[0], data[1], data[2]};
-                modelSP.addRow(row);
-            }
-        }
         for (Object[] data : rowChi) {
-            if (((double) data[2]) != 0) {
-                Object[] row = {data[0], data[1], NumberStandard.formatMoney((double) data[2])};
+            if (((double) data[4]) != 0) {
+                Object[] row = {data[0], data[1], data[2], data[3], NumberStandard.formatMoney((double) data[4])};
                 modelChi.addRow(row);
             }
         }
@@ -749,24 +710,53 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
         this.txtKHTT.setText(NumberStandard.formatInteger(tongKHTT));
         this.txtKVL.setText(NumberStandard.formatInteger(tongKVL));
     }
+
+//    private JPanel loadBieuDo() {
+//        LinkedHashMap<String, Double> tiLeKHTT_KVL = new LinkedHashMap<>();
+//
+//        int tongKHTT = dao_ThongKe.getTongKH().size() - dao_ThongKe.getTongKVL().size();
+//        int tongKVL = dao_ThongKe.getTongKVL().size();
+//
+//        double tileTongKHTT = (tongKHTT * 100.0) / dao_ThongKe.getTongKH().size();
+//        double tileTongKVL = 100 - tileTongKHTT;
+//
+//        tiLeKHTT_KVL.put("Khách hàng thân thiết", tileTongKHTT);
+//        tiLeKHTT_KVL.put("Khách vãng lai", tileTongKVL);
+//
+//        PieChartData data = new PieChartData(tiLeKHTT_KVL);
+//
+//        PieChart chart = null;
+//        try {
+//            chart = new PieChart("Tỉ lệ khách hàng thân thiết và khách vãng lai", data);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return chart;
+//    }
+    
     
     private JPanel loadBieuDo() {
         LinkedHashMap<String, Double> tiLeKHTT_KVL = new LinkedHashMap<>();
 
-        int tongKHTT = dao_ThongKe.getTongKH().size() - dao_ThongKe.getTongKVL().size();
-        int tongKVL = dao_ThongKe.getTongKVL().size();
+        double tongHangNull = dao_ThongKe.getHangNull().size();
+        double tongHangDong = dao_ThongKe.getHangDong().size();
+        double tongHangBac = dao_ThongKe.getHangBac().size();
+        double tongHangVang = dao_ThongKe.getHangVang().size();
+        double tongHangBK = dao_ThongKe.getHangBachKim().size();
+        double tongHangKC = dao_ThongKe.getHangKimCuong().size();
 
-        double tileTongKHTT = (tongKHTT * 100.0) / dao_ThongKe.getTongKH().size();
-        double tileTongKVL = 100 - tileTongKHTT;
-
-        tiLeKHTT_KVL.put("Khách hàng thân thiết", tileTongKHTT);
-        tiLeKHTT_KVL.put("Khách vãng lai", tileTongKVL);
+        tiLeKHTT_KVL.put("Khách vãng lai", tongHangNull);
+        tiLeKHTT_KVL.put("Đồng", tongHangDong);
+        tiLeKHTT_KVL.put("Bạc", tongHangBac);
+        tiLeKHTT_KVL.put("Vàng", tongHangVang);
+        tiLeKHTT_KVL.put("Bạch Kim", tongHangBK);
+        tiLeKHTT_KVL.put("Kim Cương", tongHangKC);
 
         PieChartData data = new PieChartData(tiLeKHTT_KVL);
 
         PieChart chart = null;
         try {
-            chart = new PieChart("Tỉ lệ khách hàng thân thiết và khách vãng lai",data);
+            chart = new PieChart("Tỉ lệ phân hạng", data);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -799,11 +789,9 @@ public class PanelThongKeKhachHang extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTongQuan;
     private javax.swing.JPanel pnlTongQuanDoanhThu;
     private javax.swing.JScrollPane scrTopChi;
-    private javax.swing.JScrollPane scrTopSanPham;
     private javax.swing.JTabbedPane tabLuaChonThongKe;
     private javax.swing.JTabbedPane tabXemThongTin;
     private javax.swing.JTable tblTopChi;
-    private javax.swing.JTable tblTopSanPham;
     private javax.swing.JTextField txtKHTT;
     private javax.swing.JTextField txtKVL;
     private javax.swing.JTextField txtTongKH;

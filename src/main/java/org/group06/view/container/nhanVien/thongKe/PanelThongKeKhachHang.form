@@ -84,17 +84,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="scrTopSanPham" pref="633" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="scrTopChi" pref="556" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="pnlTongQuan" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="scrTopChi" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -104,10 +99,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="pnlTongQuan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrTopSanPham" pref="380" max="32767" attributes="0"/>
-                          <Component id="scrTopChi" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="scrTopChi" pref="380" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -642,63 +634,6 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JScrollPane" name="scrTopSanPham">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Kh&#xe1;ch H&#xe0;ng Mua Nhi&#x1ec1;u S&#x1ea3;n Ph&#x1ea9;m Nh&#x1ea5;t">
-                      <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTable" name="tblTopSanPham">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="0"/>
-                    </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tblTopSanPham.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {&#xa;            @Override&#xa;            public Component getTableCellRendererComponent(JTable table, Object value,&#xa;                boolean isSelected, boolean hasFocus, int row, int column) {&#xa;                Component c = super.getTableCellRendererComponent(table, value,&#xa;                    isSelected, hasFocus, row, column);&#xa;                if (column == 2) {&#xa;                    setHorizontalAlignment(JLabel.RIGHT);&#xa;                } else {&#xa;                    setHorizontalAlignment(JLabel.LEFT);&#xa;                }&#xa;                return c;&#xa;            }&#xa;        });">
-                      <Table columnCount="3" rowCount="0">
-                        <Column editable="false" title="T&#xea;n Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
-                        <Column editable="false" title="S&#x1ed1; &#x110;i&#x1ec7;n Tho&#x1ea1;i" type="java.lang.Object"/>
-                        <Column editable="false" title="S&#x1ed1; S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Object"/>
-                      </Table>
-                    </Property>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
-                    </Property>
-                    <Property name="fillsViewportHeight" type="boolean" value="true"/>
-                    <Property name="rowHeight" type="int" value="50"/>
-                    <Property name="showGrid" type="boolean" value="true"/>
-                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JScrollPane" name="scrTopChi">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -721,20 +656,32 @@
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tblTopChi.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {&#xa;            @Override&#xa;            public Component getTableCellRendererComponent(JTable table, Object value,&#xa;                boolean isSelected, boolean hasFocus, int row, int column) {&#xa;                Component c = super.getTableCellRendererComponent(table, value,&#xa;                    isSelected, hasFocus, row, column);&#xa;                if (column == 2) {&#xa;                    setHorizontalAlignment(JLabel.RIGHT);&#xa;                } else {&#xa;                    setHorizontalAlignment(JLabel.LEFT);&#xa;                }&#xa;                return c;&#xa;            }&#xa;        });">
-                      <Table columnCount="3" rowCount="0">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="T&#xea;n Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
                         <Column editable="false" title="S&#x1ed1; &#x110;i&#x1ec7;n Tho&#x1ea1;i" type="java.lang.Object"/>
+                        <Column editable="false" title="&#x110;i&#x1ec3;m T&#xed;ch L&#x169;y" type="java.lang.Object"/>
+                        <Column editable="false" title="H&#x1ea1;ng" type="java.lang.Object"/>
                         <Column editable="false" title="T&#x1ed5;ng Chi" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>

@@ -148,6 +148,11 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         return dsNhanVien;
     }
 
+    /**
+     * 
+     * @param gioiTinh
+     * @return danh sách các nhân viên theo giới tính
+     */
     public ArrayList<NhanVien> getLocTheoPhai(int gioiTinh) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE GIOITINH = ?";
@@ -174,6 +179,11 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         return dsNhanVien;
     }
 
+    /**
+     * 
+     * @param trangThai
+     * @return danh sách nhân viên theo trạng thái (đã nghỉ hoặc làm việc)
+     */
     public ArrayList<NhanVien> getLocTheoTrangThai(int trangThai) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ?";
@@ -200,6 +210,12 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         return dsNhanVien;
     }
 
+    /**
+     * 
+     * @param trangThai
+     * @param gioiTinh
+     * @return danh sách nhân viên theo giới tính và trạng thái làm việc
+     */
     public ArrayList<NhanVien> getLocTheoTrangThaiVaGioiTinh(int trangThai, int gioiTinh) {
         ArrayList<NhanVien> dsNhanVien = new ArrayList<>();
         String sql = "SELECT * FROM NhanVien WHERE TRANGTHAI = ? AND GIOITINH = ?";
@@ -227,6 +243,10 @@ public class DAO_NhanVien implements DAO_Interface<NhanVien> {
         return dsNhanVien;
     }
 
+    /**
+     * 
+     * @return số lớn nhất trong CSDL để tạo một mã nhân viên mới 
+     */
     public int loadMaNVCount(int countMaNV) {
         String sql = "SELECT MAX(MANV) FROM NhanVien";
         try {

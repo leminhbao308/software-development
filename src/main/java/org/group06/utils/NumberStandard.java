@@ -13,13 +13,15 @@ public class NumberStandard {
         try {
             result = Integer.parseInt(text.replaceAll(",", ""));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.err.println("Lỗi định dạng số nguyên:\n" + e.getMessage() + "\n");
+            System.err.println(e.getStackTrace()[0].toString());
         }
         return result;
     }
 
     /**
      * Định dạng số nguyên
+     *
      * @param tongSoHoaDon Số nguyên cần định dạng
      * @return Chuỗi đã được định dạng
      */
@@ -39,7 +41,8 @@ public class NumberStandard {
         try {
             result = Double.parseDouble(text.replaceAll(",", ""));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.err.println("Lỗi định dạng số thực:\n" + e.getMessage() + "\n");
+            System.err.println(e.getStackTrace()[0].toString());
         }
         return result;
     }
@@ -55,7 +58,8 @@ public class NumberStandard {
         try {
             result = Double.parseDouble(text.replaceAll("%", ""));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.err.println("Lỗi định dạng phần trăm:\n" + e.getMessage() + "\n");
+            System.err.println(e.getStackTrace()[0].toString());
         }
         return result;
     }
@@ -71,7 +75,8 @@ public class NumberStandard {
         try {
             result = Double.parseDouble(text.replaceAll(",", "").replaceAll(" VNĐ", ""));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            System.err.println("Lỗi định dạng tiền:\n" + e.getMessage() + "\n");
+            System.err.println(e.getStackTrace()[0].toString());
         }
         return result;
     }
@@ -93,7 +98,7 @@ public class NumberStandard {
      * @return Chuỗi đã được định dạng
      */
     public static String formatMoney(double money) {
-        return String.format("%,.0f", money) + " VNĐ";
+        return formatMoney(money, true);
     }
 
     /**
@@ -104,10 +109,12 @@ public class NumberStandard {
      * @return Chuỗi đã được định dạng
      */
     public static String formatMoney(double money, boolean hasVND) {
+        String result = String.format("%,.0f", money);
+
         if (hasVND) {
-            return String.format("%,.0f", money) + " VNĐ";
+            return result + " VNĐ";
         } else {
-            return String.format("%,.0f", money);
+            return result;
         }
     }
 

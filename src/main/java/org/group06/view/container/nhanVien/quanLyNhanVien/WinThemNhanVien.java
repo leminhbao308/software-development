@@ -18,14 +18,13 @@ import java.awt.*;
  */
 public class WinThemNhanVien extends javax.swing.JFrame {
 
-    private DAO_NhanVien dao_NhanVien;
+    private DAO_NhanVien dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());;
     private PanelNhanVien pnlNhanVien;
 
     /**
-     * Creates new form FrameThemNhanVien
+     * Creates new form WinThemNhanVien
      */
     public WinThemNhanVien(PanelNhanVien pnlNhanVien) {
-        dao_NhanVien = new DAO_NhanVien(DatabaseConstant.getConnection());
         this.pnlNhanVien = pnlNhanVien;
         initComponents();
     }

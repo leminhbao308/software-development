@@ -7,12 +7,13 @@ package org.group06.view.container.nhanVien.quanLyHoaDon;
 import com.itextpdf.text.DocumentException;
 import org.group06.db.DatabaseConstant;
 import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_QuanAo;
 import org.group06.model.entity.ChiTietHoaDon;
 import org.group06.model.entity.HoaDon;
 import org.group06.utils.FontConstant;
 import org.group06.utils.FormatCellRenderer;
 import org.group06.utils.NumberStandard;
-import org.group06.utils.PDF_Creator;
+import org.group06.utils.PdfCreator;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -20,27 +21,33 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author Dell
  */
 public class WinChiTietHoaDon extends javax.swing.JFrame {
 
+    private Connection connection = DatabaseConstant.getConnection();
     private HoaDon hoaDon;
     private PanelHoaDon pnlHoaDon;
+    private DAO_ChiTietHoaDon dao_ChiTietHoaDon = new DAO_ChiTietHoaDon(connection);
+    private HashMap<String, String> dsSize = new DAO_QuanAo(connection).getAllKichThuocQA();
 
     public WinChiTietHoaDon(HoaDon hoaDon, PanelHoaDon pnlHoaDon) {
         this.hoaDon = hoaDon;
         this.pnlHoaDon = pnlHoaDon;
         initComponents();
         loadDataTable();
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 2);
-        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 4);
-        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 1);
-        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 3);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 3);
+        FormatCellRenderer.formatCellRendererRight(tblChiTietHD, 5);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 2);
+        FormatCellRenderer.formatCellRendererCenter(tblChiTietHD, 4);
     }
 
     /**
@@ -86,7 +93,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
         lblTenKH.setText("Tên khách hàng:");
 
         lblTenCTKM.setFont(FontConstant.FONT_LABEL);
-        lblTenCTKM.setText("Tên chương trình KM (Nếu có):");
+        lblTenCTKM.setText("Tên chương trình khuyến mãi:");
 
         lblNgayTao.setFont(FontConstant.FONT_LABEL);
         lblNgayTao.setText("Ngày lập hóa đơn:");
@@ -156,19 +163,15 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                     .addComponent(lblNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMaCTHD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTongTT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTTHDLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtMaCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlTTHDLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNV, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenCTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(59, 59, 59))
+                    .addComponent(txtMaCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTenCTKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTongTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlTTHDLayout.setVerticalGroup(
             pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +200,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 .addGroup(pnlTTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTongTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -213,11 +216,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền"
+                "Mã quần áo", "Tên quần áo", "Size", "Giá tiền", "Số lượng", "Thành tiền", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -225,6 +228,11 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             }
         });
         tblChiTietHD.setRowHeight(30);
+        tblChiTietHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietHDMouseClicked(evt);
+            }
+        });
         srcChiTietHD.setViewportView(tblChiTietHD);
         if (tblChiTietHD.getColumnModel().getColumnCount() > 0) {
             tblChiTietHD.getColumnModel().getColumn(0).setResizable(false);
@@ -232,18 +240,9 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             tblChiTietHD.getColumnModel().getColumn(2).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(3).setResizable(false);
             tblChiTietHD.getColumnModel().getColumn(4).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(5).setResizable(false);
+            tblChiTietHD.getColumnModel().getColumn(6).setResizable(false);
         }
-
-        javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
-        pnlDSQA.setLayout(pnlDSQALayout);
-        pnlDSQALayout.setHorizontalGroup(
-            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcChiTietHD, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        pnlDSQALayout.setVerticalGroup(
-            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(srcChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-        );
 
         btnInHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInHoaDon.setText("In Hóa Đơn");
@@ -253,32 +252,48 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout pnlDSQALayout = new javax.swing.GroupLayout(pnlDSQA);
+        pnlDSQA.setLayout(pnlDSQALayout);
+        pnlDSQALayout.setHorizontalGroup(
+            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(srcChiTietHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSQALayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlDSQALayout.setVerticalGroup(
+            pnlDSQALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDSQALayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(srcChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnInHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlDSQA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlTTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitleCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(lblTitleCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitleCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                .addComponent(lblTitleCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlDSQA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlDSQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -309,7 +324,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
                 if (response == JOptionPane.YES_OPTION) {
                     // Lưu file
                     try {
-                        PDF_Creator.createInvoice(hoaDon, filePath);
+                        PdfCreator.createInvoice(hoaDon, filePath);
                     } catch (DocumentException | IOException e1) {
                         System.out.println("Lỗi khi lưu file!");
                         JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -327,7 +342,7 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             } else {
                 // Lưu file
                 try {
-                    PDF_Creator.createInvoice(hoaDon, filePath);
+                    PdfCreator.createInvoice(hoaDon, filePath);
                 } catch (DocumentException | IOException e1) {
                     System.out.println("Lỗi khi lưu file!");
                     JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -344,6 +359,38 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
+
+    private void tblChiTietHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietHDMouseClicked
+        if (evt.getClickCount() == 2) {
+            callWinTraHang();
+        }
+    }//GEN-LAST:event_tblChiTietHDMouseClicked
+
+    private void callWinTraHang() {
+        WinTraHang frTH = new WinTraHang(this.getSelectedWinTraHang(), this, this.pnlHoaDon);
+        frTH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frTH.setResizable(false);
+        frTH.setVisible(true);
+    }
+
+    private ChiTietHoaDon getSelectedWinTraHang() {
+        String mQA = tblChiTietHD.getValueAt(tblChiTietHD.getSelectedRow(), 0).toString();
+
+        if (tblChiTietHD.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return dao_ChiTietHoaDon.getQA(mQA, this.hoaDon.getMaHoaDon());
+        }
+    }
+
+    public int getSoLuongDaMua() {
+        if (tblChiTietHD.getSelectedRow() == -1) {
+            return -1;
+        } else {
+            int sl = (int) tblChiTietHD.getValueAt(tblChiTietHD.getSelectedRow(), 4);
+            return sl;
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -367,33 +414,47 @@ public class WinChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextField txtTongTT;
     // End of variables declaration//GEN-END:variables
 
-    private void loadDataTable() {
+    public void loadDataTable() {
         double tinhTongThanhTien = 0, mucGiamGia = 0;
         String hd = hoaDon.getMaHoaDon().toString();
-        ArrayList<ChiTietHoaDon> dsCTHD = new DAO_ChiTietHoaDon((DatabaseConstant.getConnection())).getAllCTQA(hd);
+        ArrayList<ChiTietHoaDon> dsCTHD = dao_ChiTietHoaDon.getAllCTQA(hd);
         DefaultTableModel modelCTHD = (DefaultTableModel) this.tblChiTietHD.getModel();
         modelCTHD.setRowCount(0);
-        DecimalFormat dfMoney = new DecimalFormat("##,### VNĐ");
         for (ChiTietHoaDon cthd : dsCTHD) {
+            String maQA = cthd.getQuanAo().getMaQA();
             String tenQA = cthd.getQuanAo().getTenQA();
-            String size = cthd.getQuanAo().getKichThuoc();
-            String giaBan = dfMoney.format(cthd.getQuanAo().getGiaNhap() + (cthd.getQuanAo().getGiaNhap() * cthd.getQuanAo().getLoiNhuan() / 100));
+            String giaBan = NumberStandard.formatMoney(cthd.getGiaBan());
             int soLuong = cthd.getSoLuong();
-            double tinhThanhTien = cthd.getGiaBan() * soLuong;
-            String thanhTien = dfMoney.format(tinhThanhTien);
-
-            tinhTongThanhTien += tinhThanhTien;
-
-            Object[] data = {tenQA, size, giaBan, soLuong, thanhTien};
+            // tính thành tiền của quần áo đã mua
+            String thanhTien = NumberStandard.formatMoney(cthd.getGiaBan() * soLuong);
+            tinhTongThanhTien += cthd.getGiaBan() * soLuong;
+            
+            // lấy tên kích thước từ mã kích thước có sẵn
+            String size = "";
+            for (Map.Entry<String, String> item : dsSize.entrySet()) {
+                if(item.getKey().equals(cthd.getQuanAo().getMaKichThuoc())) {
+                    size = item.getValue();
+                    break;
+                }
+            }
+            
+            String gc = cthd.getGhiChu();
+            
+            
+            Object[] data = {maQA, tenQA, size, giaBan, soLuong, thanhTien, gc};
             modelCTHD.addRow(data);
 
             if (cthd.getHoaDon().getKhuyenMai() != null) {
                 mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
             }
         }
-        double tongTienSauVAT = tinhTongThanhTien + (tinhTongThanhTien * 0.08);
-        double ttt = (tongTienSauVAT - (tongTienSauVAT * mucGiamGia));
-        String tongThanhTien = dfMoney.format(ttt);
+        double tongTienSauVAT = tinhTongThanhTien * 1.08;
+        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
+        String tongThanhTien = NumberStandard.formatMoney(ttt);
         txtTongTT.setText(tongThanhTien);
+    }
+    
+    public double getGiaTien() {
+        return NumberStandard.parseMoney(txtTongTT.getText());
     }
 }

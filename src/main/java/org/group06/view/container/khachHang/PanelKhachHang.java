@@ -4,26 +4,26 @@
  */
 package org.group06.view.container.khachHang;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import org.group06.db.DatabaseConstant;
+import org.group06.db.dao.DAO_ChiTietHoaDon;
+import org.group06.db.dao.DAO_HoaDon;
 import org.group06.db.dao.DAO_KhachHang;
+import org.group06.model.entity.ChiTietHoaDon;
+import org.group06.model.entity.HoaDon;
 import org.group06.model.entity.KhachHang;
-import org.group06.utils.ColorConstant;
+import org.group06.utils.FormatCellRenderer;
+import org.group06.utils.NumberStandard;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import org.group06.db.dao.DAO_ChiTietHoaDon;
-import org.group06.db.dao.DAO_HoaDon;
-import org.group06.model.entity.ChiTietHoaDon;
-import org.group06.model.entity.HoaDon;
-
-import org.group06.utils.FormatCellRenderer;
-import org.group06.utils.NameStandard;
-import org.group06.utils.NumberStandard;
-//import org.group06.view.components.*;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import org.group06.utils.DateStandard;
 
 /**
  *
@@ -35,6 +35,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     private DAO_KhachHang dao_KhachHang = new DAO_KhachHang(connection);
     private DAO_ChiTietHoaDon dao_CTHD = new DAO_ChiTietHoaDon(connection);
     private DAO_HoaDon dao_HoaDon = new DAO_HoaDon(connection);
+    private ArrayList<KhachHang> dsKH = new ArrayList<>();
     public int soMaKH = 0;
 
     /**
@@ -74,7 +75,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
         lblTitleTTKH.setBackground(new java.awt.Color(0, 0, 0));
         lblTitleTTKH.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblTitleTTKH.setForeground(ColorConstant.BLACK);
         lblTitleTTKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleTTKH.setText("Quản Lý Khách Hàng");
 
@@ -89,11 +89,11 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Điểm tích lũy", "Hạng"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Email", "Điểm tích lũy", "Hạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +121,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(4).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(5).setResizable(false);
         }
 
         pnlTimKH.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tìm Kiếm Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -238,25 +239,36 @@ public class PanelKhachHang extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTimSDTActionPerformed
 
-    private void callFrameTTKhachHang() {
+    private void callWinTTKhachHang() {
         WinTTKhachHang frTTKH = new WinTTKhachHang(this.getSelectedKH(), this);
         frTTKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frTTKH.setResizable(false);
         frTTKH.setVisible(true);
     }
 
+    private void callWinThemKH() {
+        WinThemKH frThemKH = new WinThemKH(this);
+        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frThemKH.setResizable(false);
+        frThemKH.setVisible(true);
+    }
+
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         if (evt.getClickCount() == 2) {
-            callFrameTTKhachHang();
+            callWinTTKhachHang();
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        callFrameThemKH();
+        callWinThemKH();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    /**
+     * 
+     * @return một mã khách hàng mới khi thêm khách hàng
+     */
     public String getMaKH() {
-        int count = new DAO_KhachHang((DatabaseConstant.getConnection())).loadMaKHCount(soMaKH);
+        int count = new DAO_KhachHang(connection).loadMaKHCount(soMaKH);
         count++;
         // Tạo mã khách hàng theo quy tắc và có thứ tự
         String customerID = "KH" + String.format("%03d", count); // Ví dụ: KH001, KH002,...
@@ -265,7 +277,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
     }
 
     private void txtTimTheoTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimTheoTenKeyReleased
-        String tenKH = NameStandard.formatCapitalize(txtTimTheoTen.getText());
+        String tenKH = txtTimTheoTen.getText();
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!tenKH.equals("")) {
                 if (checkRegexTenKH()) {
@@ -274,7 +286,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     modelKH.setRowCount(0);
                     for (KhachHang kh : dsKH) {
                         if (kh.getTenKH().equalsIgnoreCase(tenKH)) {
-                            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
+                            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
                             modelKH.addRow(data);
                         }
                     }
@@ -297,7 +309,7 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     KhachHang kh = dao_KhachHang.getByID(sdt);
                     DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
                     modelKH.setRowCount(0);
-                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getDiemTichLuy(), kh.getHang()};
+                    Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
                     modelKH.addRow(data);
                     txtTimTheoTen.setText("");
                 } else {
@@ -330,13 +342,6 @@ public class PanelKhachHang extends javax.swing.JPanel {
         }
     }
 
-    private void callFrameThemKH() {
-        WinThemKH frThemKH = new WinThemKH(this);
-        frThemKH.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frThemKH.setResizable(false);
-        frThemKH.setVisible(true);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThem;
     private javax.swing.JLabel lblTimTheoSDT;
@@ -358,65 +363,72 @@ public class PanelKhachHang extends javax.swing.JPanel {
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 1).toString(),
                     tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 2).toString(),
-                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3),
-                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4).toString());
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3) != null ? tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 3).toString() : "",
+                    (int) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 4),
+                    tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5) != null ? tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 5).toString() : "");
         }
     }
 
     public void loadDataTable() {
-        ArrayList<KhachHang> dsKH = dao_KhachHang.getAll();
-        DefaultTableModel modelKH = (DefaultTableModel) this.tblKhachHang.getModel();
+        DefaultTableModel modelKH = (DefaultTableModel) tblKhachHang.getModel();
         modelKH.setRowCount(0);
-        for (KhachHang kh : dsKH) {
-            Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), getDiem(kh.getMaKhachHang()), hangKhachHang(kh.getMaKhachHang())};
-            kh.setDiemTichLuy(getDiem(kh.getMaKhachHang()));
-            kh.setHang(hangKhachHang(kh.getMaKhachHang()));
-            if(dao_KhachHang.update(kh)){
-            }
-            modelKH.addRow(data);
-        }
-    }
+        Timer timer = new Timer(300, new ActionListener() {
+            private int currentIndex = 0;
+            private final int batchSize = 10;
 
-    private int getDiem(String maKH) {
-        double tinhTongThanhTien = 0, mucGiamGia = 0;
-        ArrayList<HoaDon> dsHD = dao_HoaDon.getAll();
-        for (HoaDon hd : dsHD) {
-            if (hd.getKhachHang() != null) {
-                if (hd.getKhachHang().getMaKhachHang().equals(maKH)) {
-                    ArrayList<ChiTietHoaDon> dsCTHD = dao_CTHD.getAllCTQA(hd.getMaHoaDon());
-                    for (ChiTietHoaDon cthd : dsCTHD) {
-                        tinhTongThanhTien += cthd.getGiaBan() * cthd.getSoLuong();
-                        if (cthd.getHoaDon().getKhuyenMai() != null) {
-                            mucGiamGia = (cthd.getHoaDon().getKhuyenMai().getMucGiamGia()) / 100;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingWorker<List<KhachHang>, Void> worker = new SwingWorker<List<KhachHang>, Void>() {
+                    @Override
+                    protected List<KhachHang> doInBackground() {
+                        // Thực hiện tải dữ liệu từ currentIndex với kích thước batchSize
+                        return dao_KhachHang.getBatch(currentIndex, batchSize);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            List<KhachHang> khachHangs = get();
+                            if (khachHangs != null && !khachHangs.isEmpty()) {
+                                // Sử dụng synchronized để đảm bảo đồng bộ hóa
+                                synchronized (modelKH) {
+                                    for (KhachHang kh : khachHangs) {
+                                        dsKH.add(kh);
+                                        kh.setHang(kh.tinhHangKhachHang());
+                                        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), kh.getEmail(), kh.getDiemTichLuy(), kh.getHang()};
+                                        dao_KhachHang.update(kh);
+                                        modelKH.addRow(data);
+                                    }
+                                    currentIndex += batchSize;
+                                }
+                                // Kiểm tra xem timer có đang chạy hay không
+                                if (!((Timer) e.getSource()).isRunning()) {
+                                    ((Timer) e.getSource()).stop();
+                                }
+                            } else {
+                                // Dừng timer nếu không còn dữ liệu
+                                ((Timer) e.getSource()).stop();
+                            }
+                        } catch (InterruptedException | ExecutionException ex) {
+                            throw new RuntimeException(ex);
                         }
                     }
-                }
-            }
-        }
-        double tongTienSauVAT = tinhTongThanhTien * 1.08;
-        double ttt = (tongTienSauVAT * (1.0f - mucGiamGia));
-        DecimalFormat df = new DecimalFormat("##,###");
-        String temp = df.format(ttt);
-        int x = NumberStandard.parseInt(temp) / 100000;
-        return x;
-    }
+                };
 
-    private String hangKhachHang(String maKH) {
-        String result;
-        int temp = getDiem(maKH);
-        if (temp < 100) {
-            result = "";
-        } else if (temp < 200) {
-            result = "Đồng";
-        } else if (temp < 300) {
-            result = "Bạc";
-        } else if (temp < 400) {
-            result = "Vàng";
-        } else if (temp < 500) {
-            result = "Bạch Kim";
-        } else {
-            result = "Kim Cương";
-        }
-        return result;
+                // Thực hiện công việc tải dữ liệu trong luồng nền
+                worker.execute();
+            }
+        }); // set delay 0.3s
+
+        timer.start();
+    }
+    
+    public void addRow(KhachHang kh) {
+        DefaultTableModel modelKH = (DefaultTableModel)tblKhachHang.getModel();
+        
+        String email = kh.getEmail() != null ? kh.getEmail() : "";
+        
+        Object[] data = {kh.getMaKhachHang(), kh.getTenKH(), kh.getSoDienThoai(), email, kh.getDiemTichLuy(), kh.getHang()};
+        modelKH.addRow(data);
     }
 }

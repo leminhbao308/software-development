@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
 
-    private Connection connection = DatabaseConstant.getConnection();
-    private DAO_PhieuDat dao_PhieuDat = new DAO_PhieuDat(connection);
-    private DAO_QuanAo dao_QuanAo = new DAO_QuanAo(connection);
+    private Connection connection;
+    private DAO_PhieuDat dao_PhieuDat;
+    private DAO_QuanAo dao_QuanAo;
 
     public DAO_ChiTietPhieuDat(Connection connection) {
         this.connection = connection;
+        dao_PhieuDat = new DAO_PhieuDat(connection);
+        dao_QuanAo = new DAO_QuanAo(connection);
     }
 
     @Override
@@ -41,6 +43,11 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         return dsChiTietPhieuDat;
     }
 
+    /**
+     * 
+     * @param id
+     * @return danh sách các sản phẩm đã đặt, số lượng, giá bán... trong phiếu đặt đó
+     */
     public ArrayList<ChiTietPhieuDat> getAllByID(String id) {
         ArrayList<ChiTietPhieuDat> dsChiTietPhieuDat = new ArrayList<>();
         String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAPHIEUDAT = ?";
@@ -55,6 +62,7 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
                 chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
                 chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
                 chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+                chiTietPhieuDat.setGhiChu(resultSet.getString("GHICHU"));
                 dsChiTietPhieuDat.add(chiTietPhieuDat);
             }
         } catch (SQLException e) {
@@ -62,7 +70,55 @@ public class DAO_ChiTietPhieuDat implements DAO_Interface<ChiTietPhieuDat> {
         }
         return dsChiTietPhieuDat;
     }
-
+    
+    /**
+     * 
+     * @param maQA
+     * @return thông tin của quần áo đã chọn 
+     */
+    public ChiTietPhieuDat getQA(String maQA, String maPD) {
+        ChiTietPhieuDat chiTietPhieuDat = null;
+        try {
+            String sql = "SELECT * FROM ChiTietPhieuDat WHERE MAQA = ? AND MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maQA);
+            statement.setString(2, maPD);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                chiTietPhieuDat = new ChiTietPhieuDat();
+                chiTietPhieuDat.setPhieuDat(dao_PhieuDat.getByID(resultSet.getString("MAPHIEUDAT")));
+                chiTietPhieuDat.setQuanAo(dao_QuanAo.getByID(resultSet.getString("MAQA")));
+                chiTietPhieuDat.setSoLuong(resultSet.getInt("SOLUONG"));
+                chiTietPhieuDat.setGiaBan(resultSet.getDouble("GIABAN"));
+                chiTietPhieuDat.setLoiNhuan(resultSet.getDouble("LOINHUAN"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chiTietPhieuDat;
+    }
+    
+    /**
+     * 
+     * @param ctpd
+     * @return cập nhật lại số lượng quần áo và ghi lại lí do trong chi tiết phiếu đặt nếu KH trả lại quần áo 
+     */
+    public boolean updateSoLuong(ChiTietPhieuDat ctpd) {
+        try {
+            String sql = "UPDATE ChiTietPhieuDat SET SOLUONG = ?, GHICHU = ? WHERE MAQA = ? AND MAPHIEUDAT = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, ctpd.getSoLuong());
+            statement.setString(2, ctpd.getGhiChu());
+            statement.setString(3, ctpd.getQuanAo().getMaQA());
+            statement.setString(4, ctpd.getPhieuDat().getMaPhieuDat());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     @Override
     public ChiTietPhieuDat getByID(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

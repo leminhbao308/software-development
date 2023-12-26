@@ -1,5 +1,7 @@
 package org.group06.model.entity;
 
+import org.group06.utils.ImagePath;
+
 /**
  * @author Le Hoang Nam
  */
@@ -7,7 +9,7 @@ public class QuanAo {
     private String maQA;
     private String tenQA;
     private String loaiQuanAo;
-    private String kichThuoc;
+    private String maKichThuoc;
     private int soLuong;
     private String thuongHieu;
     private double giaNhap;
@@ -21,7 +23,7 @@ public class QuanAo {
         this.maQA = "Chưa xác định";
         this.tenQA = "Chưa xác định";
         this.loaiQuanAo = "Chưa xác định";
-        this.kichThuoc = "Chưa xác định";
+        this.maKichThuoc = "Chưa xác định";
         this.soLuong = 0;
         this.thuongHieu = "Không thương hiệu";
         this.giaNhap = 0;
@@ -35,7 +37,7 @@ public class QuanAo {
      * @param maQA       mã quần áo xử lý tự động phát sinh theo quy tắc đã quy định
      * @param tenQA      tên quần áo, định dạng viết In Hoa chữ cái đầu
      * @param loaiQuanAo loại quần áo
-     * @param kichThuoc  kích thước
+     * @param maKichThuoc  kích thước quần áo
      * @param soLuong    số lượng quần áo
      * @param thuongHieu thương hiệu của quần áo
      * @param giaNhap    giá nhập
@@ -44,12 +46,12 @@ public class QuanAo {
      * @param trangThai  trạng thái của quần áo là còn kinh doanh hay không
      * @param hinhAnh    hinh anh
      */
-    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String kichThuoc, int soLuong, String thuongHieu,
+    public QuanAo(String maQA, String tenQA, String loaiQuanAo, String maKichThuoc, int soLuong, String thuongHieu,
                   double giaNhap, double loiNhuan, NhaCungCap nhaCungCap, boolean trangThai, String hinhAnh) {
         this.setMaQA(maQA);
         this.setTenQA(tenQA);
         this.setLoaiQuanAo(loaiQuanAo);
-        this.setKichThuoc(kichThuoc);
+        this.setMaKichThuoc(maKichThuoc);
         this.setSoLuong(soLuong);
         this.setGiaNhap(giaNhap);
         this.setLoiNhuan(loiNhuan);
@@ -83,12 +85,12 @@ public class QuanAo {
         this.loaiQuanAo = loaiQuanAo;
     }
 
-    public String getKichThuoc() {
-        return kichThuoc;
+    public String getMaKichThuoc() {
+        return maKichThuoc;
     }
 
-    public void setKichThuoc(String kichThuoc) {
-        this.kichThuoc = kichThuoc;
+    public void setMaKichThuoc(String maKichThuoc) {
+        this.maKichThuoc = maKichThuoc;
     }
 
     public int getSoLuong() {
@@ -153,7 +155,7 @@ public class QuanAo {
                 "maQA='" + maQA + '\'' +
                 ", tenQA='" + tenQA + '\'' +
                 ", loaiQuanAo='" + loaiQuanAo + '\'' +
-                ", kichThuoc='" + kichThuoc + '\'' +
+                ", kichThuoc='" + maKichThuoc + '\'' +
                 ", soLuong=" + soLuong +
                 ", thuongHieu='" + thuongHieu + '\'' +
                 ", giaNhap=" + giaNhap +

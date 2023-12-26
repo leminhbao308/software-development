@@ -13,6 +13,7 @@ import java.util.HashMap;
  * @author lehoa
  */
 public class DAO_QuanAo implements DAO_Interface<QuanAo> {
+
     private Connection connection;
 
     public DAO_QuanAo(Connection connection) {
@@ -31,7 +32,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setMaKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
@@ -60,7 +61,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setMaKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
@@ -78,12 +79,12 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean add(QuanAo quanAo) {
         try {
-            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, KICHTHUOC, SOLUONG, THUONGHIEU, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO QuanAo (MAQA, TENQA, MALOAIQA, MAKICHTHUOC, SOLUONG, THUONGHIEU, GIANHAP, LOINHUAN, MANCC, TRANGTHAI, HINHANH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getMaQA());
             statement.setString(2, quanAo.getTenQA());
             statement.setString(3, quanAo.getLoaiQuanAo());
-            statement.setString(4, quanAo.getKichThuoc());
+            statement.setString(4, quanAo.getMaKichThuoc());
             statement.setInt(5, quanAo.getSoLuong());
             statement.setString(6, quanAo.getThuongHieu());
             statement.setDouble(7, quanAo.getGiaNhap());
@@ -102,11 +103,11 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
     @Override
     public boolean update(QuanAo quanAo) {
         try {
-            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, KICHTHUOC = ?, SOLUONG = ?, THUONGHIEU = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
+            String sql = "UPDATE QuanAo SET TENQA = ?, MALOAIQA = ?, MAKICHTHUOC = ?, SOLUONG = ?, THUONGHIEU = ?, GIANHAP = ?, LOINHUAN = ?, MANCC = ?, TRANGTHAI = ?, HINHANH = ? WHERE MAQA = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, quanAo.getTenQA());
             statement.setString(2, quanAo.getLoaiQuanAo());
-            statement.setString(3, quanAo.getKichThuoc());
+            statement.setString(3, quanAo.getMaKichThuoc());
             statement.setInt(4, quanAo.getSoLuong());
             statement.setString(5, quanAo.getThuongHieu());
             statement.setDouble(6, quanAo.getGiaNhap());
@@ -151,7 +152,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
                 quanAo.setMaQA(result.getString("MAQA"));
                 quanAo.setTenQA(result.getString("TENQA"));
                 quanAo.setLoaiQuanAo(result.getString("MALOAIQA"));
-                quanAo.setKichThuoc(result.getString("KICHTHUOC"));
+                quanAo.setMaKichThuoc(result.getString("MAKICHTHUOC"));
                 quanAo.setSoLuong(result.getInt("SOLUONG"));
                 quanAo.setThuongHieu(result.getString("THUONGHIEU"));
                 quanAo.setGiaNhap(result.getDouble("GIANHAP"));
@@ -166,7 +167,7 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         }
         return dsQuanAo;
     }
-
+//    Loại quần áo
     public HashMap<String, String> getAllLoaiQuanAo() {
         HashMap<String, String> dsLoaiQuanAo = new HashMap<>();
         try {
@@ -213,7 +214,51 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
         return success;
     }
 
+    public boolean updateSoLuongQuanAo(String maQA, int soluong, boolean increase) {
+        if (increase) {
+            String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG + ? WHERE MAQA = ?";
+            boolean success = false;
 
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setInt(1, soluong);
+                preparedStatement.setString(2, maQA);
+                success = preparedStatement.executeUpdate() > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return success;
+        } else {
+            String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG - ? WHERE MAQA = ?";
+            boolean success = false;
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setInt(1, soluong);
+                preparedStatement.setString(2, maQA);
+                success = preparedStatement.executeUpdate() > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return success;
+        }
+    }
+
+    public boolean hoanTraQuanAo(String maQA, int soLuong) {
+        String updateQuery = "UPDATE QuanAo SET SOLUONG = SOLUONG + ? WHERE MAQA = ?";
+        boolean success = false;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+            preparedStatement.setInt(1, soLuong);
+            preparedStatement.setString(2, maQA);
+            success = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+    
     public boolean addLoaiQuanAo(String maLoaiQuanAo, String tenLoaiQuanAo) {
         try {
             String sql = "INSERT INTO LoaiQuanAo (MALOAIQA, TENLOAIQA) VALUES (?, ?)";
@@ -234,6 +279,49 @@ public class DAO_QuanAo implements DAO_Interface<QuanAo> {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, tenLoaiQA);
             statement.setString(2, maLoaiQA);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+//   Kích Thước Quần Áo
+    public HashMap<String, String> getAllKichThuocQA() {
+        HashMap<String, String> dsKichThuocQA = new HashMap<>();
+        try {
+            String sql = "SELECT * FROM KichThuocQA";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                dsKichThuocQA.put(result.getString("MAKICHTHUOC"), result.getString("TENKICHTHUOC"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsKichThuocQA;
+    }
+
+    public boolean addKichThuocQA(String maKichThuocQA, String tenKichThuocQA) {
+        try {
+            String sql = "INSERT INTO KichThuocQA (MAKICHTHUOC, TENKICHTHUOC) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, maKichThuocQA);
+            statement.setString(2, tenKichThuocQA);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateKichThuocQA(String maKichThuocQA, String tenKichThuocQA) {
+        try {
+            String sql = "UPDATE KichThuocQA SET TENKICHTHUOC = ? WHERE MAKICHTHUOC = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, tenKichThuocQA);
+            statement.setString(2, maKichThuocQA);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

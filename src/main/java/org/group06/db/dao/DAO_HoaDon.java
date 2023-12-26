@@ -96,6 +96,11 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return false;
     }
 
+    /**
+     * 
+     * @param date
+     * @return danh sách các hóa đơn trong date đã chọn
+     */
     public ArrayList<HoaDon> getByDate(String date) {
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
@@ -119,6 +124,10 @@ public class DAO_HoaDon implements DAO_Interface<HoaDon> {
         return dsHD;
     }
 
+    /**
+     * 
+     * @return số lớn nhất trong CSDL để tạo một mã hóa đơn mới 
+     */
     public int loadMaHDCount() {
         int countMaHD = 0;
         String sql = "SELECT MAX(MAHD) FROM HoaDon";

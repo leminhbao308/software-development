@@ -1,7 +1,9 @@
 package org.group06.view.container.quanAo;
 
 import org.group06.db.DatabaseConstant;
+import org.group06.db.dao.DAO_KhachHang;
 import org.group06.db.dao.DAO_KhuyenMai;
+import org.group06.model.entity.KhachHang;
 import org.group06.model.entity.KhuyenMai;
 import org.group06.utils.*;
 
@@ -9,14 +11,12 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 /**
  * @author lehoangnam
@@ -39,7 +39,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 3);
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 4);
         FormatCellRenderer.formatCellRendererCenter(this.tblKhuyenMai, 5);
-
     }
 
     public void setStatusAllBtnsStart() {
@@ -89,7 +88,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         modelKhuyenMai.setRowCount(0);
         for (KhuyenMai km : this.dsKhuyenMai) {
             Object[] data = {km.getMaKhuyenMai(), km.getTenCTKM(), NumberStandard.formatPercent(km.getMucGiamGia()), km.getSoLuotSuDung(),
-                    DateStandard.formatDate(km.getNgayBatDau()), DateStandard.formatDate(km.getNgayKetThuc())};
+                DateStandard.formatDate(km.getNgayBatDau()), DateStandard.formatDate(km.getNgayKetThuc())};
 //            Thêm dữ liệu vào table
             modelKhuyenMai.addRow(data);
         }
@@ -277,12 +276,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         lblNgayKetThuc.setText("Ngày Kết Thúc:");
 
         dchNgayBatDau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
         dchNgayBatDau.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchNgayBatDau.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchNgayBatDauMouseClicked(evt);
-            }
-        });
         dchNgayBatDau.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dchNgayBatDauPropertyChange(evt);
@@ -290,12 +285,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         });
 
         dchNgayKetThuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
         dchNgayKetThuc.setPreferredSize(new java.awt.Dimension(64, 29));
-        dchNgayKetThuc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dchNgayKetThucMouseClicked(evt);
-            }
-        });
         dchNgayKetThuc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dchNgayKetThucPropertyChange(evt);
@@ -579,14 +570,14 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
         } else if (txtSoLuotSuDung.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Số lượt sử dụng của chương trình khuyến mãi đang trống không thể lưu");
             this.txtSoLuotSuDung.requestFocus();
-        } else if (!ngayKT.isAfter(ngayBD)) {
-            JOptionPane.showMessageDialog(null, "Ngày kết thúc không được là ngày bắt đầu hoặc trước ngày bắt đầu!");
+        } else if (ngayKT.isBefore(ngayBD)) {
+            JOptionPane.showMessageDialog(null, "Ngày kết thúc không được trước ngày bắt đầu!");
             LocalDate nextDay = ngayBD.plusDays(1);
             Instant instant = nextDay.atStartOfDay(ZoneId.systemDefault()).toInstant();
             // Chuyển đổi sang java.util.Date
             java.util.Date utilDate = Date.from(instant);
             this.dchNgayKetThuc.setDate(utilDate);
-        } else if (Pattern.compile("^\\d+\\.{0,1}\\d+$").matcher(txtMucGiamGia.getText().trim()).find() == false) {
+        } else if (!txtMucGiamGia.getText().trim().matches("^[0-9]+\\.?[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "Vui lòng nhập số(sử dụng dấu . với số thực)!");
             this.txtMucGiamGia.selectAll();
@@ -598,7 +589,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     viTri = this.tblKhuyenMai.getSelectedRow();
                     String maCTKM = this.txtMa.getText().trim();
                     String tenCTKM = this.txtTenCTKM.getText().trim();
-                    Double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
+                    double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
                     int soLuotSDCTKM = Integer.parseInt(this.txtSoLuotSuDung.getText().trim());
                     java.sql.Date ngayBatDauCTKM = new java.sql.Date(this.dchNgayBatDau.getDate().getTime());
                     java.sql.Date ngayKetThucCTKM = new java.sql.Date(this.dchNgayKetThuc.getDate().getTime());
@@ -614,6 +605,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     if (this.ctkm_DAO.update(ctkmCapNhat)) {
                         System.out.println("Cập nhật thành công chương trình khuyến mãi!");
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã cập nhật thành công chương trình khuyến mãi " + this.ctkmCapNhat.getTenCTKM());
+//                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã cập nhật
+                        xuLyGuiEmailKhachHang(tenCTKM,ngayBatDauCTKM, ngayKetThucCTKM, soLuotSDCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM));
                     }
 //                    Đổ dữ liệu vừa cập nhật xuống table
                     this.tblKhuyenMai.getModel().setValueAt(tenCTKM, viTri, 1);
@@ -626,7 +619,7 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 //                    Lấy giá trị của fields
                     String maCTKM = this.txtMa.getText().trim();
                     String tenCTKM = this.txtTenCTKM.getText().trim();
-                    Double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
+                    double mucGiamGiaCTKM = Double.parseDouble(this.txtMucGiamGia.getText().trim());
                     int soLuotSDCTKM = Integer.parseInt(this.txtSoLuotSuDung.getText().trim());
                     java.sql.Date ngayBatDauCTKM = new java.sql.Date(this.dchNgayBatDau.getDate().getTime());
                     java.sql.Date ngayKetThucCTKM = new java.sql.Date(this.dchNgayKetThuc.getDate().getTime());
@@ -638,17 +631,18 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                     ctkm.setSoLuotSuDung(soLuotSDCTKM);
                     ctkm.setNgayBatDau(ngayBatDauCTKM);
                     ctkm.setNgayKetThuc(ngayKetThucCTKM);
+                    dsKhuyenMai.add(ctkm);
 //                    Load xuống table
-                    Object[] data = {maCTKM, tenCTKM, mucGiamGiaCTKM, soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
+                    Object[] data = {maCTKM, tenCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM), soLuotSDCTKM, DateStandard.formatDate(ngayBatDauCTKM), DateStandard.formatDate(ngayKetThucCTKM)};
                     DefaultTableModel modelTable = (DefaultTableModel) this.tblKhuyenMai.getModel();
                     modelTable.addRow(data);
 //                    Lưu nhà cung cấp mới vào cơ sở dữ liệu
                     this.themMoiCTKM = new DAO_KhuyenMai(DatabaseConstant.getConnection());
                     if (this.themMoiCTKM.add(ctkm)) {
                         JOptionPane.showMessageDialog(null, "Chúc mừng bạn đã thêm mới thành công chương trình khuyến mãi " + tenCTKM);
-                        System.out.println("Thêm mới thành công loại chương trình khuyến mãi!");
+//                        Xử lý gửi email cho khách hàng về chương trình khuyến mãi đã thêm mới
+                        xuLyGuiEmailKhachHang(tenCTKM,ngayBatDauCTKM, ngayKetThucCTKM, soLuotSDCTKM, NumberStandard.formatPercent(mucGiamGiaCTKM));
                     }
-
                 }
                 setStatusAllBtnsStart();
                 ComponentStatus.emptyField(this.txtMa);
@@ -659,14 +653,36 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 this.txtTenCTKM.setEnabled(false);
                 this.txtMucGiamGia.setEnabled(false);
                 this.txtSoLuotSuDung.setEnabled(false);
-                this.dchNgayBatDau.setEnabled(true);
-                this.dchNgayKetThuc.setEnabled(true);
+                this.dchNgayBatDau.setEnabled(false);
+                this.dchNgayKetThuc.setEnabled(false);
                 this.tblKhuyenMai.clearSelection();
                 this.statusBtnCapNhat = false;
                 this.statusBtnThemMoi = false;
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void xuLyGuiEmailKhachHang(String tenCTKM, java.sql.Date ngayBatDauCTKM, java.sql.Date ngayKetThucCTKM, int soLuotSDCTKM, String mucGiamGia) {
+//        Lấy ngày hiện tại
+        LocalDate currentDate = LocalDate.now();
+//        Ngày bắt đầu chương trình khuyến mãi
+        LocalDate startDate = ngayBatDauCTKM.toLocalDate();
+        if (startDate.isAfter(currentDate) || startDate.isEqual(currentDate)) {
+            for (KhachHang kh : dsKhachHang) {
+                new Thread(() -> {
+                    if (kh.getEmail() != null) {
+                        EmailCreator.sendEmail(kh.getEmail(), tenCTKM, "Thân gửi quý khách hàng thân mến. \n\nCửa hàng chúng tôi cập nhật chương trình khuyến mãi bắt đầu vào ngày: "
+                                + DateStandard.formatDate(ngayBatDauCTKM) +
+                                " kết thúc chương trình vào ngày: " + 
+                                DateStandard.formatDate(ngayKetThucCTKM) + 
+                                "\nVới tổng số lượt áp dụng lên đến " + soLuotSDCTKM + " lượt sử dụng. \nVà mức giảm giá: " + mucGiamGia +
+                                ". Nhằm đưa đến quý khách hàng các sản phẩm chất lượng nhất cùng với giá thành vô cùng ưu đãi.\n"
+                                + " Xin cảm ơn quý khách đã theo dõi chương trình khuyến mãi của cửa hàng AM chúng tôi. Hẹn gặp lại quý khách tại của hàng.");
+                    }
+                }).start();
+            }
+        }
+    }
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Bạn chắn chắn cập nhật?", "Xác nhận hành động", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
@@ -738,10 +754,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblKhuyenMaiMouseClicked
 
-    private void dchNgayBatDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayBatDauMouseClicked
-
-    }//GEN-LAST:event_dchNgayBatDauMouseClicked
-
     private void dchNgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayBatDauPropertyChange
         if (evt.getPropertyName().equals("date")) {
             if (this.statusClickCheckDate == false) {
@@ -755,12 +767,8 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 }
             }
         }
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchNgayBatDauPropertyChange
-
-
-    private void dchNgayKetThucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dchNgayKetThucMouseClicked
-
-    }//GEN-LAST:event_dchNgayKetThucMouseClicked
 
     private void dchNgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayKetThucPropertyChange
         if (evt.getPropertyName().equals("date")) {
@@ -778,7 +786,13 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
                 }
             }
         }
+        dongBoKhoangThoiGian();
     }//GEN-LAST:event_dchNgayKetThucPropertyChange
+
+    private void dongBoKhoangThoiGian() {
+        dchNgayBatDau.setMaxSelectableDate(dchNgayKetThuc.getDate());
+        dchNgayKetThuc.setMinSelectableDate(dchNgayBatDau.getDate());
+    }
 
     private void loadAllTableKhuyenMai(ArrayList<KhuyenMai> dsCTKM) {
         DefaultTableModel modelKhuyenMai = (DefaultTableModel) this.tblKhuyenMai.getModel();
@@ -818,7 +832,6 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
 
     //    Xử lý tìm kiếm chương trình khuyến mãi
     private void txtTimCTKMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimCTKMKeyPressed
-
         xuLyTimKiemCTKM();
     }//GEN-LAST:event_txtTimCTKMKeyPressed
 
@@ -831,11 +844,11 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTieuChiTimKiemActionPerformed
 
     private void txtMucGiamGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMucGiamGiaFocusLost
-        
+
     }//GEN-LAST:event_txtMucGiamGiaFocusLost
 
     private void txtSoLuotSuDungFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuotSuDungFocusLost
-        
+
     }//GEN-LAST:event_txtSoLuotSuDungFocusLost
 
     private void txtMucGiamGiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMucGiamGiaKeyReleased
@@ -897,4 +910,5 @@ public class PanelKhuyenMai extends javax.swing.JPanel {
     private KhuyenMai ctkmCapNhat = null;
     private DAO_KhuyenMai ctkm_DAO = null;
     private DAO_KhuyenMai themMoiCTKM = null;
+    private ArrayList<KhachHang> dsKhachHang = new DAO_KhachHang(DatabaseConstant.getConnection()).getAll();
 }
