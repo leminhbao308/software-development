@@ -23,11 +23,11 @@ trình ra quyết định.
 - Cài đặt Java `JDK 17+ và Maven mới nhất.`
 - Cài đặt Maven `Phiên bản Maven mới nhất.`
 - IDE: `IntelliJ IDEA, Eclipse, hoặc NetBeans.`
-- Hệ quản trị cơ sở dữ liệu: `MongoDB mới nhất.`
+- Hệ quản trị cơ sở dữ liệu: `SQL Server 2019.`
 
 ### Cài đặt:
 
-```
+```shell
 
 git clone https://github.com/leminhbao308/software-development.git
 
@@ -35,7 +35,7 @@ git clone https://github.com/leminhbao308/software-development.git
 
 ### Build Project:
 
-```
+```shell
 
 mvn clean package
 java -jar target/software-development-1.0.0.jar
